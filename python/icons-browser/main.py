@@ -50,6 +50,14 @@ def main(page: Page):
         autofocus=True,
         on_submit=lambda e: display_icons(e.control.value),
     )
+
+    def search_click(e):
+        display_icons(search_txt.value)
+
+    search_query = Row(
+        [search_txt, IconButton(icon=icons.SEARCH, on_click=search_click)]
+    )
+
     search_results = GridView(
         expand=1,
         runs_count=10,
@@ -76,6 +84,9 @@ def main(page: Page):
     def display_icons(search_term: str):
 
         # clean search results
+        search_query.disabled = True
+        page.update()
+
         search_results.clean()
 
         for batch in batches(search_icons(search_term), 200):
@@ -113,13 +124,11 @@ def main(page: Page):
 
         if len(search_results.controls) == 0:
             page.snack_bar = SnackBar(Text("No icons found"), open=True)
-            page.update()
-
-    def search_click(e):
-        display_icons(search_txt.value)
+        search_query.disabled = False
+        page.update()
 
     page.add(
-        Row([search_txt, IconButton(icon=icons.SEARCH, on_click=search_click)]),
+        search_query,
         search_results,
         status_bar,
     )
