@@ -89,7 +89,7 @@ def main(page: Page):
 
         search_results.clean()
 
-        for batch in batches(search_icons(search_term), 200):
+        for batch in batches(search_icons(search_term.lower()), 200):
             with page.lock:
                 for icon_name in batch:
                     icon_key = f"icons.{icon_name.upper()}"
@@ -134,4 +134,4 @@ def main(page: Page):
     )
 
 
-flet.app(port=8080, target=main)
+flet.app(target=main)
