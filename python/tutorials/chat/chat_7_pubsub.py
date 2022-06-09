@@ -21,7 +21,7 @@ from flet import (
 
 pub_sub = {}
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 
 def broadcast(user, message):
@@ -51,11 +51,13 @@ def main(page: Page):
 
     def send_message_click(e):
         broadcast(page.user, message.value)
+        print(page.user, message.value)
         message.value = ""
         message.focus()
         page.update()
 
     def on_message(user, message):
+        print("sdfsfsdfsdsdf")
         messages.controls.append(Text(f"{user}: {message}"))
         page.update()
 
