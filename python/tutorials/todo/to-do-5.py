@@ -4,12 +4,10 @@ from flet import (
     Column,
     FloatingActionButton,
     IconButton,
-    OutlinedButton,
     Page,
     Row,
     Tab,
     Tabs,
-    Text,
     TextField,
     colors,
     icons,
@@ -23,6 +21,7 @@ class Task:
             value=False, label=name, on_change=self.status_changed
         )
         self.edit_name = TextField(expand=1)
+
         self.display_view = Row(
             alignment="spaceBetween",
             vertical_alignment="center",
@@ -45,8 +44,11 @@ class Task:
                 ),
             ],
         )
+
         self.edit_view = Row(
             visible=False,
+            alignment="spaceBetween",
+            vertical_alignment="center",
             controls=[
                 self.edit_name,
                 IconButton(
@@ -66,13 +68,9 @@ class Task:
         self.view.update()
 
     def save_clicked(self, e):
-        if self.edit_name.value != "":
-            self.edit_name.error_text = ""
-            self.display_task.label = self.edit_name.value
-            self.display_view.visible = True
-            self.edit_view.visible = False
-        else:
-            self.edit_name.error_text = "To-Do cannot be blank"
+        self.display_task.label = self.edit_name.value
+        self.display_view.visible = True
+        self.edit_view.visible = False
         self.view.update()
 
     def delete_clicked(self, e):
@@ -87,18 +85,18 @@ class TodoApp:
         self.tasks = []
         self.new_task = TextField(hint_text="Whats needs to be done?", expand=True)
         self.tasks_view = Column()
+
         self.filter = Tabs(
             selected_index=0,
             on_change=self.tabs_changed,
             tabs=[Tab(text="all"), Tab(text="active"), Tab(text="completed")],
         )
-        self.items_left = Text("0 items left")
+
+        # application's root control (i.e. "view") containing all other controls
         self.view = Column(
             width=600,
             controls=[
-                Row([Text(value="Todos", style="headlineMedium")], alignment="center"),
                 Row(
-                    # on_submit=self.add_clicked,
                     controls=[
                         self.new_task,
                         FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
@@ -109,67 +107,46 @@ class TodoApp:
                     controls=[
                         self.filter,
                         self.tasks_view,
-                        Row(
-                            alignment="spaceBetween",
-                            vertical_alignment="center",
-                            controls=[
-                                self.items_left,
-                                OutlinedButton(
-                                    text="Clear completed", on_click=self.clear_clicked
-                                ),
-                            ],
-                        ),
                     ],
                 ),
             ],
         )
 
+    def add_clicked(self, e):
+        task = Task(self, self.new_task.value)
+        self.tasks.append(task)
+        self.tasks_view.controls.append(task.view)
+        self.new_task.value = ""
+        self.view.update()
+
+    def delete_task(self, task):
+        self.tasks.remove(task)
+        self.tasks_view.controls.remove(task.view)
+        self.view.update()
+
     def update(self):
         status = self.filter.tabs[self.filter.selected_index].text
-        count = 0
         for task in self.tasks:
             task.view.visible = (
                 status == "all"
                 or (status == "active" and task.display_task.value == False)
                 or (status == "completed" and task.display_task.value)
             )
-            if task.display_task.value == False:
-                count += 1
-        self.items_left.value = f"{count} active item(s) left"
         self.view.update()
-
-    def add_clicked(self, e):
-        self.new_task.error_text = ""
-        if self.new_task.value != "":
-            task = Task(self, self.new_task.value)
-            self.tasks.append(task)
-            self.tasks_view.controls.append(task.view)
-            self.new_task.value = ""
-        else:
-            self.new_task.error_text = "Please enter To-Do text"
-        self.update()
-
-    def delete_task(self, task):
-        self.tasks.remove(task)
-        self.tasks_view.controls.remove(task.view)
-        self.update()
 
     def tabs_changed(self, e):
         self.update()
-
-    def clear_clicked(self, e):
-        for task in self.tasks[:]:
-            if task.display_task.value == True:
-                self.delete_task(task)
 
 
 def main(page: Page):
     page.title = "ToDo App"
     page.horizontal_alignment = "center"
-    page.scroll = "adaptive"
-    page.theme_mode = "light"
     page.update()
+
+    # create application instance
     app = TodoApp()
+
+    # add application's root control to the page
     page.add(app.view)
 
 
