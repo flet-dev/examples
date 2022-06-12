@@ -208,11 +208,9 @@ class CalcApp:
         )
 
     def button_clicked(self, e):
-        if e.data == "AC":
+        if self.result.value == "Error" or e.data == "AC":
             self.result.value = "0"
-            self.operator = "+"
-            self.operand1 = 0
-            self.new_operand = True
+            self.reset()
 
         elif e.data in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."):
             if self.result.value == "0" or self.new_operand == True:
@@ -226,22 +224,21 @@ class CalcApp:
                 self.operand1, float(self.result.value), self.operator
             )
             self.operator = e.data
-            self.operand1 = float(self.result.value)
+            if self.result.value == "Error":
+                self.operand1 = "0"
+            else:
+                self.operand1 = float(self.result.value)
             self.new_operand = True
 
         elif e.data in ("="):
             self.result.value = self.calculate(
                 self.operand1, float(self.result.value), self.operator
             )
-            self.operator = "+"
-            self.operand1 = 0
-            self.new_operand = True
+            self.reset()
 
         elif e.data in ("%"):
             self.result.value = float(self.result.value) / 100
-            self.operator = "+"
-            self.operand1 = 0
-            self.new_operand = True
+            self.reset()
 
         elif e.data in ("+/-"):
             if float(self.result.value) > 0:
@@ -272,7 +269,15 @@ class CalcApp:
             return self.format_number(operand1 * operand2)
 
         elif operator == "/":
-            return self.format_number(operand1 / operand2)
+            if operand2 == 0:
+                return "Error"
+            else:
+                return self.format_number(operand1 / operand2)
+
+    def reset(self):
+        self.operator = "+"
+        self.operand1 = 0
+        self.new_operand = True
 
 
 def main(page: Page):
