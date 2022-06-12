@@ -13,9 +13,7 @@ from flet import (
 
 class CalcApp:
     def __init__(self):
-        self.operator = "+"
-        self.operand1 = 0
-        self.new_operand = True
+        self.reset()
         self.result = Text(value="0", color=colors.WHITE, size=20)
 
         # application's root control (i.e. "view") containing all other controls
