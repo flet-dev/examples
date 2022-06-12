@@ -44,12 +44,16 @@ class CalcApp:
                                         bgcolor=colors.BLUE_GREY_100,
                                         color=colors.BLACK,
                                         expand=1,
+                                        on_click=self.button_clicked,
+                                        data="+/-",
                                     ),
                                     ElevatedButton(
                                         text="%",
                                         bgcolor=colors.BLUE_GREY_100,
                                         color=colors.BLACK,
                                         expand=1,
+                                        on_click=self.button_clicked,
+                                        data="%",
                                     ),
                                     ElevatedButton(
                                         text="/",
@@ -233,26 +237,42 @@ class CalcApp:
             self.operand1 = 0
             self.new_operand = True
 
+        elif e.data in ("%"):
+            self.result.value = float(self.result.value) / 100
+            self.operator = "+"
+            self.operand1 = 0
+            self.new_operand = True
+
+        elif e.data in ("+/-"):
+            if float(self.result.value) > 0:
+                self.result.value = "-" + str(self.result.value)
+
+            elif float(self.result.value) < 0:
+                self.result.value = str(
+                    self.format_number(abs(float(self.result.value)))
+                )
+
         self.view.update()
 
+    def format_number(self, num):
+        if num % 1 == 0:
+            return int(num)
+        else:
+            return num
+
     def calculate(self, operand1, operand2, operator):
-        def format_number(num):
-            if num % 1 == 0:
-                return int(num)
-            else:
-                return num
 
         if operator == "+":
-            return format_number(operand1 + operand2)
+            return self.format_number(operand1 + operand2)
 
         elif operator == "-":
-            return format_number(operand1 - operand2)
+            return self.format_number(operand1 - operand2)
 
         elif operator == "*":
-            return format_number(operand1 * operand2)
+            return self.format_number(operand1 * operand2)
 
         elif operator == "/":
-            return format_number(operand1 / operand2)
+            return self.format_number(operand1 / operand2)
 
 
 def main(page: Page):
