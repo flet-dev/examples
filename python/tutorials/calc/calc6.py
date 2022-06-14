@@ -13,7 +13,9 @@ from flet import (
 
 class CalcApp:
     def __init__(self):
+
         self.result = Text(value="0", color=colors.WHITE, size=20)
+
         # application's root control (i.e. "view") containing all other controls
         self.view = Container(
             width=300,
@@ -30,6 +32,8 @@ class CalcApp:
                                 bgcolor=colors.BLUE_GREY_100,
                                 color=colors.BLACK,
                                 expand=1,
+                                on_click=self.button_clicked,
+                                data="AC",
                             ),
                             ElevatedButton(
                                 text="+/-",
@@ -114,6 +118,8 @@ class CalcApp:
                                 bgcolor=colors.WHITE24,
                                 color=colors.WHITE,
                                 expand=1,
+                                on_click=self.button_clicked,
+                                data="1",
                             ),
                             ElevatedButton(
                                 text="2",
@@ -160,6 +166,16 @@ class CalcApp:
                 ]
             ),
         )
+
+    def button_clicked(self, e):
+        if e.data == "AC":
+            self.result.value = "0"
+
+        elif e.data == "1":
+            self.result.value = self.result.value + e.data
+
+        # call update() every time controls need to be updated on the page
+        self.view.update()
 
 
 def main(page: Page):
