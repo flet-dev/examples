@@ -11,19 +11,18 @@ from flet import (
 )
 
 
-def main(page: Page):
-    page.title = "Calc App"
-    result = Text(value="0", color=colors.WHITE, size=20)
-
-    page.add(
-        Container(
+class CalcApp:
+    def __init__(self):
+        self.result = Text(value="0", color=colors.WHITE, size=20)
+        # application's root control (i.e. "view") containing all other controls
+        self.view = Container(
             width=300,
             bgcolor=colors.BLACK,
             border_radius=border_radius.all(20),
             padding=20,
             content=Column(
                 controls=[
-                    Row(controls=[result], alignment="end"),
+                    Row(controls=[self.result], alignment="end"),
                     Row(
                         controls=[
                             ElevatedButton(
@@ -161,7 +160,15 @@ def main(page: Page):
                 ]
             ),
         )
-    )
+
+
+def main(page: Page):
+    page.title = "Calc App"
+    # create application instance
+    app = CalcApp()
+
+    # add application's root control to the page
+    page.add(app.view)
 
 
 flet.app(target=main)
