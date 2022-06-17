@@ -6,23 +6,25 @@ from flet import (
     Page,
     Row,
     Text,
+    UserControl,
     border_radius,
     colors,
 )
 
 
-class CalcApp:
-    def __init__(self):
-        self.result = Text(value="0", color=colors.WHITE, size=20)
+class CalculatorApp(UserControl):
+    def build(self):
+        result = Text(value="0", color=colors.WHITE, size=20)
+
         # application's root control (i.e. "view") containing all other controls
-        self.view = Container(
+        return Container(
             width=300,
             bgcolor=colors.BLACK,
             border_radius=border_radius.all(20),
             padding=20,
             content=Column(
                 controls=[
-                    Row(controls=[self.result], alignment="end"),
+                    Row(controls=[result], alignment="end"),
                     Row(
                         controls=[
                             ElevatedButton(
@@ -165,10 +167,10 @@ class CalcApp:
 def main(page: Page):
     page.title = "Calc App"
     # create application instance
-    app = CalcApp()
+    calc = CalculatorApp()
 
     # add application's root control to the page
-    page.add(app.view)
+    page.add(calc)
 
 
 flet.app(target=main)

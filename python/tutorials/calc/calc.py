@@ -6,18 +6,19 @@ from flet import (
     Page,
     Row,
     Text,
+    UserControl,
     border_radius,
     colors,
 )
 
 
-class CalcApp:
-    def __init__(self):
+class CalculatorApp(UserControl):
+    def build(self):
         self.reset()
         self.result = Text(value="0", color=colors.WHITE, size=20)
 
         # application's root control (i.e. "view") containing all other controls
-        self.view = Container(
+        return Container(
             width=300,
             bgcolor=colors.BLACK,
             border_radius=border_radius.all(20),
@@ -243,7 +244,7 @@ class CalcApp:
                     self.format_number(abs(float(self.result.value)))
                 )
 
-        self.view.update()
+        self.update()
 
     def format_number(self, num):
         if num % 1 == 0:
@@ -278,10 +279,10 @@ def main(page: Page):
     page.title = "Calc App"
 
     # create application instance
-    app = CalcApp()
+    calc = CalculatorApp()
 
     # add application's root control to the page
-    page.add(app.view)
+    page.add(calc)
 
 
 flet.app(target=main)
