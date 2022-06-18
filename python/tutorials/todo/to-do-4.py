@@ -7,15 +7,20 @@ from flet import (
     Page,
     Row,
     TextField,
+    UserControl,
     colors,
     icons,
 )
 
 
-class Task:
-    def __init__(self, app, name):
-        self.app = app
-        self.display_task = Checkbox(value=False, label=name)
+class Task(UserControl):
+    def __init__(self, task_name, task_delete):
+        super().__init__()
+        self.task_name = task_name
+        self.task_delete = task_delete
+
+    def build(self):
+        self.display_task = Checkbox(value=False, label=self.task_name)
         self.edit_name = TextField(expand=1)
 
         self.display_view = Row(
@@ -55,32 +60,31 @@ class Task:
                 ),
             ],
         )
-        self.view = Column(controls=[self.display_view, self.edit_view])
+        return Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
         self.display_view.visible = False
         self.edit_view.visible = True
-        self.view.update()
+        self.update()
 
     def save_clicked(self, e):
         self.display_task.label = self.edit_name.value
         self.display_view.visible = True
         self.edit_view.visible = False
-        self.view.update()
+        self.update()
 
     def delete_clicked(self, e):
-        self.app.delete_task(self)
+        self.task_delete(self)
 
 
-class TodoApp:
-    def __init__(self):
-        self.tasks = []
+class TodoApp(UserControl):
+    def build(self):
         self.new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-        self.tasks_view = Column()
+        self.tasks = Column()
 
         # application's root control (i.e. "view") containing all other controls
-        self.view = Column(
+        return Column(
             width=600,
             controls=[
                 Row(
@@ -89,21 +93,19 @@ class TodoApp:
                         FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
                     ],
                 ),
-                self.tasks_view,
+                self.tasks,
             ],
         )
 
     def add_clicked(self, e):
-        task = Task(self, self.new_task.value)
-        self.tasks.append(task)
-        self.tasks_view.controls.append(task.view)
+        task = Task(self.new_task.value, self.task_delete)
+        self.tasks.controls.append(task)
         self.new_task.value = ""
-        self.view.update()
+        self.update()
 
-    def delete_task(self, task):
-        self.tasks.remove(task)
-        self.tasks_view.controls.remove(task.view)
-        self.view.update()
+    def task_delete(self, task):
+        self.tasks.controls.remove(task)
+        self.update()
 
 
 def main(page: Page):
@@ -115,7 +117,7 @@ def main(page: Page):
     app = TodoApp()
 
     # add application's root control to the page
-    page.add(app.view)
+    page.add(app)
 
 
 flet.app(target=main)
