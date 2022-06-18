@@ -4,12 +4,12 @@ from flet import Checkbox, Column, FloatingActionButton, Page, Row, TextField, i
 
 def main(page: Page):
     def add_clicked(e):
-        tasks_view.controls.append(Checkbox(label=new_task.value))
+        tasks.controls.append(Checkbox(label=new_task.value))
         new_task.value = ""
         view.update()
 
     new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-    tasks_view = Column()
+    tasks = Column()
     view = Column(
         width=600,
         controls=[
@@ -19,7 +19,7 @@ def main(page: Page):
                     FloatingActionButton(icon=icons.ADD, on_click=add_clicked),
                 ],
             ),
-            tasks_view,
+            tasks,
         ],
     )
 

@@ -9,16 +9,23 @@ from flet import (
     Tab,
     Tabs,
     TextField,
+    UserControl,
     colors,
     icons,
 )
 
 
-class Task:
-    def __init__(self, app, name):
-        self.app = app
+class Task(UserControl):
+    def __init__(self, task_name, task_status_change, task_delete):
+        super().__init__()
+        self.completed = False
+        self.task_name = task_name
+        self.task_status_change = task_status_change
+        self.task_delete = task_delete
+
+    def build(self):
         self.display_task = Checkbox(
-            value=False, label=name, on_change=self.status_changed
+            value=False, label=self.task_name, on_change=self.status_changed
         )
         self.edit_name = TextField(expand=1)
 
@@ -59,32 +66,32 @@ class Task:
                 ),
             ],
         )
-        self.view = Column(controls=[self.display_view, self.edit_view])
+        return Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
         self.display_view.visible = False
         self.edit_view.visible = True
-        self.view.update()
+        self.update()
 
     def save_clicked(self, e):
         self.display_task.label = self.edit_name.value
         self.display_view.visible = True
         self.edit_view.visible = False
-        self.view.update()
-
-    def delete_clicked(self, e):
-        self.app.delete_task(self)
+        self.update()
 
     def status_changed(self, e):
-        self.app.update()
+        self.completed = self.display_task.value
+        self.task_status_change(self)
+
+    def delete_clicked(self, e):
+        self.task_delete(self)
 
 
-class TodoApp:
-    def __init__(self):
-        self.tasks = []
+class TodoApp(UserControl):
+    def build(self):
         self.new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-        self.tasks_view = Column()
+        self.tasks = Column()
 
         self.filter = Tabs(
             selected_index=0,
@@ -93,7 +100,7 @@ class TodoApp:
         )
 
         # application's root control (i.e. "view") containing all other controls
-        self.view = Column(
+        return Column(
             width=600,
             controls=[
                 Row(
@@ -106,33 +113,34 @@ class TodoApp:
                     spacing=25,
                     controls=[
                         self.filter,
-                        self.tasks_view,
+                        self.tasks,
                     ],
                 ),
             ],
         )
 
     def add_clicked(self, e):
-        task = Task(self, self.new_task.value)
-        self.tasks.append(task)
-        self.tasks_view.controls.append(task.view)
+        task = Task(self.new_task.value, self.task_status_change, self.task_delete)
+        self.tasks.controls.append(task)
         self.new_task.value = ""
-        self.view.update()
+        self.update()
 
-    def delete_task(self, task):
-        self.tasks.remove(task)
-        self.tasks_view.controls.remove(task.view)
-        self.view.update()
+    def task_status_change(self, task):
+        self.update()
+
+    def task_delete(self, task):
+        self.tasks.controls.remove(task)
+        self.update()
 
     def update(self):
         status = self.filter.tabs[self.filter.selected_index].text
-        for task in self.tasks:
-            task.view.visible = (
+        for task in self.tasks.controls:
+            task.visible = (
                 status == "all"
-                or (status == "active" and task.display_task.value == False)
-                or (status == "completed" and task.display_task.value)
+                or (status == "active" and task.completed == False)
+                or (status == "completed" and task.completed)
             )
-        self.view.update()
+        super().update()
 
     def tabs_changed(self, e):
         self.update()
@@ -147,7 +155,7 @@ def main(page: Page):
     app = TodoApp()
 
     # add application's root control to the page
-    page.add(app.view)
+    page.add(app)
 
 
 flet.app(target=main)
