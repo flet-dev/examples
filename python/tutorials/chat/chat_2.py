@@ -1,33 +1,32 @@
+from dataclasses import dataclass
+
 import flet
 from flet import Column, ElevatedButton, Page, Row, Text, TextField
 
-pub_sub = {}
 
-
-def broadcast(user, message):
-    for session_id, handler in pub_sub.items():
-        handler(user, message)
+@dataclass
+class Message:
+    user: str
+    text: str
 
 
 def main(page: Page):
 
-    messages = Column()
-    message = TextField()
+    chat = Column()
+    new_message = TextField()
 
-    def on_message(user, message):
-        messages.controls.append(Text(f"{user}: {message}"))
+    def on_message(message: Message):
+        chat.controls.append(Text(f"{message.user}: {message.text}"))
         page.update()
 
-    pub_sub[page.session_id] = on_message
+    page.pubsub.subscribe(on_message)
 
     def send_click(e):
-        broadcast(page.session_id, message.value)
-        message.value = ""
+        page.pubsub.send_all(Message(page.session_id, new_message.value))
+        new_message.value = ""
         page.update()
 
-    send = ElevatedButton("Send", on_click=send_click)
-    form = Row([message, send])
-    page.add(messages, form)
+    page.add(chat, Row([new_message, ElevatedButton("Send", on_click=send_click)]))
 
 
 flet.app(target=main, view=flet.WEB_BROWSER)

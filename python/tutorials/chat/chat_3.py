@@ -1,28 +1,34 @@
+from dataclasses import dataclass
+
 import flet
-from flet import AlertDialog, Column, ElevatedButton, Page, Row, Text, TextField
-
-pub_sub = {}
+from flet import AlertDialog, Column, ElevatedButton, Page, Row, Text, TextField, colors
 
 
-def broadcast(user, message):
-    for session_id, handler in pub_sub.items():
-        handler(user, message)
+@dataclass
+class Message:
+    user: str
+    text: str
 
 
 def main(page: Page):
 
-    messages = Column()
-    message = TextField()
+    chat = Column()
+    new_message = TextField()
 
-    def on_message(user, message):
-        messages.controls.append(Text(f"{user}: {message}"))
+    def on_message(message: Message):
+        if message.user != None:
+            chat.controls.append(Text(f"{message.user}: {message.text}"))
+        else:
+            chat.controls.append(
+                Text(message.text, italic=True, color=colors.BLACK45, size=12)
+            )
         page.update()
 
-    pub_sub[page.session_id] = on_message
+    page.pubsub.subscribe(on_message)
 
     def send_click(e):
-        broadcast(page.user, message.value)
-        message.value = ""
+        page.pubsub.send_all(Message(page.user, new_message.value))
+        new_message.value = ""
         page.update()
 
     user_name = TextField(label="Enter your name")
@@ -31,14 +37,15 @@ def main(page: Page):
 
     def join_click(e):
         if not user_name.value:
-            user_name.error_message = "Name cannot be blank!"
+            user_name.error_text = "Name cannot be blank!"
             user_name.update()
         else:
             page.user = user_name.value
-            dlg.open = False
+            page.dialog.open = False
+            page.pubsub.send_all(Message(None, f"{page.user} has joined the chat."))
             page.update()
 
-    dlg = AlertDialog(
+    page.dialog = AlertDialog(
         open=True,
         modal=True,
         title=Text("Welcome!"),
@@ -47,9 +54,7 @@ def main(page: Page):
         actions_alignment="end",
     )
 
-    send = ElevatedButton("Send", on_click=send_click)
-    form = Row([message, send])
-    page.add(messages, form, dlg)
+    page.add(chat, Row([new_message, ElevatedButton("Send", on_click=send_click)]))
 
 
 flet.app(target=main, view=flet.WEB_BROWSER)
