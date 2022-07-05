@@ -2,6 +2,7 @@ import flet
 from flet import (
     Column,
     Container,
+    ElevatedButton,
     IconButton,
     Page,
     Row,
@@ -29,16 +30,44 @@ def main(page: Page):
         page.window_always_on_top = always_on_top.value
         page.update()
 
+    def maximize_clicked(e):
+        page.window_maximized = True
+        page.update()
+
+    def minimize_clicked(e):
+        page.window_minimized = True
+        page.update()
+
+    def full_screen_changed(e):
+        page.window_full_screen = full_screen.value
+        maximize.disabled = full_screen.value
+        minimize.disabled = full_screen.value
+        page.update()
+
+    def resizable_changed(e):
+        page.window_resizable = resizable.value
+        maximize.disabled = not resizable.value
+        minimize.disabled = not resizable.value
+        page.update()
+
     always_on_top = Switch(
         label="Always on top", value=False, on_change=always_on_top_changed
     )
+
+    full_screen = Switch(
+        label="Full screen", value=False, on_change=full_screen_changed
+    )
+
+    resizable = Switch(label="Resizable", value=True, on_change=resizable_changed)
+
+    maximize = ElevatedButton(text="Maximize", on_click=maximize_clicked)
+    minimize = ElevatedButton(text="Minimize", on_click=minimize_clicked)
 
     def update_coordinates():
         top.value = f"Top: {page.window_top}"
         left.value = f"Left: {page.window_left}"
 
     def window_changed(e):
-        print("window changed!")
         update_coordinates()
         width.value = f"Width: {page.width}"
         height.value = f"Height: {page.height}"
@@ -68,68 +97,97 @@ def main(page: Page):
 
     # add controls on Page
     page.add(
-        Column(controls=[always_on_top]),
-        Container(
-            width=300,
-            height=300,
-            border=border.all(1, colors.BLACK),
-            padding=padding.all(10),
-            content=Column(
-                alignment="spaceBetween",
-                controls=[
-                    Row(
-                        alignment="center",
-                        controls=[
-                            Container(
-                                bgcolor=colors.LIGHT_BLUE_500,
-                                border_radius=border_radius.all(30),
-                                content=IconButton(
-                                    icon=icons.KEYBOARD_ARROW_UP, on_click=move_up
-                                ),
-                            ),
-                        ],
-                    ),
-                    Row(
+        Row(
+            alignment="spaceBetween",
+            controls=[
+                Container(bgcolor=colors.AMBER_100, content=always_on_top),
+                Container(bgcolor=colors.AMBER_200, content=maximize),
+                Container(bgcolor=colors.AMBER_300, content=full_screen),
+            ],
+        ),
+        Row(
+            alignment="spaceBetween",
+            controls=[
+                Container(bgcolor=colors.AMBER_100, content=Text()),
+                Container(
+                    bgcolor=colors.AMBER_200,
+                    width=300,
+                    height=300,
+                    border=border.all(1, colors.BLACK),
+                    padding=padding.all(10),
+                    content=Column(
                         alignment="spaceBetween",
                         controls=[
-                            Container(
-                                bgcolor=colors.LIGHT_BLUE_500,
-                                border_radius=border_radius.all(30),
-                                content=IconButton(
-                                    icon=icons.KEYBOARD_ARROW_LEFT, on_click=move_left
-                                ),
+                            Row(
+                                alignment="center",
+                                controls=[
+                                    Container(
+                                        bgcolor=colors.LIGHT_BLUE_500,
+                                        border_radius=border_radius.all(30),
+                                        content=IconButton(
+                                            icon=icons.KEYBOARD_ARROW_UP,
+                                            on_click=move_up,
+                                        ),
+                                    ),
+                                ],
                             ),
-                            Container(
-                                bgcolor=colors.LIGHT_BLUE_500,
-                                border_radius=border_radius.all(30),
-                                content=IconButton(
-                                    icon=icons.KEYBOARD_ARROW_RIGHT, on_click=move_right
-                                ),
+                            Row(
+                                alignment="spaceBetween",
+                                controls=[
+                                    Container(
+                                        bgcolor=colors.LIGHT_BLUE_500,
+                                        border_radius=border_radius.all(30),
+                                        content=IconButton(
+                                            icon=icons.KEYBOARD_ARROW_LEFT,
+                                            on_click=move_left,
+                                        ),
+                                    ),
+                                    Container(
+                                        bgcolor=colors.LIGHT_BLUE_500,
+                                        border_radius=border_radius.all(30),
+                                        content=IconButton(
+                                            icon=icons.KEYBOARD_ARROW_RIGHT,
+                                            on_click=move_right,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                            Row(
+                                alignment="center",
+                                controls=[
+                                    Container(
+                                        bgcolor=colors.LIGHT_BLUE_500,
+                                        border_radius=border_radius.all(30),
+                                        content=IconButton(
+                                            icon=icons.KEYBOARD_ARROW_DOWN,
+                                            on_click=move_down,
+                                        ),
+                                    ),
+                                ],
                             ),
                         ],
                     ),
-                    Row(
-                        alignment="center",
-                        controls=[
-                            Container(
-                                bgcolor=colors.LIGHT_BLUE_500,
-                                border_radius=border_radius.all(30),
-                                content=IconButton(
-                                    icon=icons.KEYBOARD_ARROW_DOWN, on_click=move_down
-                                ),
-                            ),
-                        ],
-                    ),
-                ],
-            ),
+                ),
+                Container(bgcolor=colors.AMBER_300, content=resizable),
+            ],
         ),
-        Column(
+        Row(
+            alignment="spaceBetween",
             controls=[
-                Row(alignment="start", controls=[top]),
-                Row(alignment="start", controls=[left]),
-                Row(alignment="start", controls=[width]),
-                Row(alignment="start", controls=[height]),
-            ]
+                Container(
+                    bgcolor=colors.AMBER_100,
+                    content=Column(
+                        controls=[
+                            Row(controls=[top]),
+                            Row(controls=[left]),
+                            Row(controls=[width]),
+                            Row(controls=[height]),
+                        ],
+                    ),
+                ),
+                Container(bgcolor=colors.AMBER_200, content=minimize),
+                Container(bgcolor=colors.AMBER_300, content=Text()),
+            ],
         ),
     )
 
