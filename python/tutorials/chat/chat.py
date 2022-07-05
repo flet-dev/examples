@@ -38,10 +38,32 @@ class ChatMessage(UserControl):
     def get_initials(self):
         return self.username[:1].capitalize()
 
+    def get_avatar_color(self, username: str):
+        colors_lookup = [
+            colors.AMBER,
+            colors.BLUE,
+            colors.BROWN,
+            colors.CYAN,
+            colors.GREEN,
+            colors.INDIGO,
+            colors.LIME,
+            colors.ORANGE,
+            colors.PINK,
+            colors.PURPLE,
+            colors.RED,
+            colors.TEAL,
+            colors.YELLOW,
+        ]
+        return colors_lookup[hash(username) % len(colors_lookup)]
+
     def build(self):
         return Row(
             [
-                CircleAvatar(content=Text(self.get_initials())),
+                CircleAvatar(
+                    content=Text(self.get_initials()),
+                    color=colors.WHITE,
+                    bgcolor=self.get_avatar_color(self.username),
+                ),
                 Column(
                     [
                         Text(self.username, weight="bold"),
@@ -73,6 +95,7 @@ def main(page: Page):
         else:
             page.user = join_user_name.value
             page.dialog.open = False
+            new_message.prefix = Text(f"{page.user}: ")
             page.pubsub.send_all(Message(None, f"{page.user} has joined the chat."))
             page.update()
 
