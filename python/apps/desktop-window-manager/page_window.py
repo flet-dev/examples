@@ -6,6 +6,7 @@ from flet import (
     IconButton,
     Page,
     Row,
+    Slider,
     Switch,
     Text,
     alignment,
@@ -24,8 +25,8 @@ def main(page: Page):
 
     top = Text(f"Top: {page.window_top}")
     left = Text(f"Left: {page.window_left}")
-    width = Text(f"Width: {page.width}")
-    height = Text(f"Height: {page.height}")
+    display_width = Text(f"Width: {page.width}")
+    display_height = Text(f"Height: {page.height}")
 
     def always_on_top_changed(e):
         page.window_always_on_top = always_on_top.value
@@ -43,15 +44,21 @@ def main(page: Page):
         page.window_full_screen = full_screen.value
         maximize.disabled = full_screen.value
         minimize.disabled = full_screen.value
+        width.disabled = full_screen.value
+        height.disabled = full_screen.value
         page.update()
 
     def resizable_changed(e):
         page.window_resizable = resizable.value
         maximize.disabled = not resizable.value
         minimize.disabled = not resizable.value
+        width.disabled = not resizable.value
+        height.disabled = not resizable.value
         page.update()
 
-    always_on_top = Switch(value=False, on_change=always_on_top_changed)
+    always_on_top = Switch(
+        label="Always on top", value=False, on_change=always_on_top_changed
+    )
 
     full_screen = Switch(
         label="Full screen", value=False, on_change=full_screen_changed
@@ -62,14 +69,36 @@ def main(page: Page):
     maximize = ElevatedButton(text="Maximize", on_click=maximize_clicked)
     minimize = ElevatedButton(text="Minimize", on_click=minimize_clicked)
 
+    def width_changed(e):
+        page.window_width = e.control.value
+        window_changed(e)
+        page.update()
+
+    def height_changed(e):
+        page.window_height = e.control.value
+        window_changed(e)
+        page.update()
+
+    width = Slider(
+        min=750,
+        max=1400,
+        value=page.window_width,
+        on_change=width_changed,
+    )
+
+    height = Slider(
+        min=500, max=900, value=page.window_height, on_change=height_changed
+    )
+
     def update_coordinates():
         top.value = f"Top: {page.window_top}"
         left.value = f"Left: {page.window_left}"
 
     def window_changed(e):
         update_coordinates()
-        width.value = f"Width: {page.width}"
-        height.value = f"Height: {page.height}"
+
+        display_width.value = f"Width: {page.window_width:.2f}"
+        display_height.value = f"Height: {page.window_height:.2f}"
         page.update()
 
     def move_up(e):
@@ -100,12 +129,10 @@ def main(page: Page):
             controls=[
                 Container(
                     expand=1,
-                    bgcolor=colors.LIGHT_BLUE_500,
-                    alignment=alignment.center,
                     content=always_on_top,
                 ),
-                Container(expand=1, alignment=alignment.center, content=maximize),
-                Container(expand=1, alignment=alignment.center, content=full_screen),
+                Container(expand=1, alignment=alignment.center_left, content=maximize),
+                Container(expand=1, content=full_screen),
             ],
         ),
         Row(
@@ -180,31 +207,38 @@ def main(page: Page):
             ],
         ),
         Row(
-            # alignment="spaceBetween",
             controls=[
                 Container(
                     expand=1,
                     alignment=alignment.center,
-                    bgcolor=colors.AMBER_100,
                     content=Column(
                         controls=[
                             Row(controls=[top]),
                             Row(controls=[left]),
-                            Row(controls=[width]),
-                            Row(controls=[height]),
+                            Row(controls=[display_width]),
+                            Row(controls=[display_height]),
                         ],
                     ),
                 ),
                 Container(
                     expand=1,
-                    bgcolor=colors.AMBER_200,
                     content=minimize,
-                    alignment=alignment.center,
+                    alignment=alignment.center_left,
                 ),
-                Container(expand=1, bgcolor=colors.AMBER_300, content=Text()),
+                Container(
+                    expand=1,
+                    content=Column(
+                        controls=[
+                            Row(controls=[Text("Width:"), width]),
+                            Row(controls=[Text("Height:"), height]),
+                        ]
+                    ),
+                ),
             ],
         ),
     )
+
+    window_changed(None)
 
 
 flet.app(target=main)
