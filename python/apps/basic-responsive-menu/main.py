@@ -1,3 +1,4 @@
+import unicodedata
 from copy import deepcopy
 
 import flet
@@ -18,12 +19,13 @@ from flet import colors
 from flet import icons
 
 
-class ResponsiveMenu(Row):
+class ResponsiveMenuLayout(Row):
     def __init__(
         self,
         page,
         pages,
         *args,
+        support_routes=True,
         menu_extended=True,
         minimize_to_icons=False,
         landscape_minimize_to_icons=False,
@@ -38,10 +40,12 @@ class ResponsiveMenu(Row):
         self._minimize_to_icons = minimize_to_icons
         self._landscape_minimize_to_icons = landscape_minimize_to_icons
         self._portrait_minimize_to_icons = portrait_minimize_to_icons
+        self._support_routes = support_routes
 
         self.expand = True
 
         self.navigation_items = [navigation_item for navigation_item, _ in pages]
+        self.routes = [f"/{item.pop('route', None) or self.slugify(item['label'])}" for item in self.navigation_items]
         self.navigation_rail = self.build_navigation_rail()
         self.update_destinations()
         self._menu_extended = menu_extended
@@ -60,6 +64,10 @@ class ResponsiveMenu(Row):
         self._panel_visible = self.is_landscape()
 
         self.set_navigation_content()
+
+        if support_routes:
+            self._route_change(page.route)
+            self.page.on_route_change = self._on_route_change
         self._change_displayed_page()
 
         self.page.on_resize = self.handle_resize
@@ -111,15 +119,26 @@ class ResponsiveMenu(Row):
 
     def _navigation_change(self, e):
         self._change_displayed_page()
+        self.check_toggle_on_select()
+        self.page.update()
 
     def _change_displayed_page(self):
-        selected_index = self.navigation_rail.selected_index
-        # page_contents = [page_content for _, page_content in self.pages]
+        page_number = self.navigation_rail.selected_index
+        if self._support_routes:
+            self.page.route = self.routes[page_number]
         for i, content_page in enumerate(self.content_area.controls):
-            content_page.visible = selected_index == i
+            content_page.visible = page_number == i
 
-        self.check_toggle_on_select()
+    def _route_change(self, route):
+        try:
+            page_number = self.routes.index(route)
+        except ValueError:
+            page_number = 0
 
+        self.select_page(page_number)
+
+    def _on_route_change(self, route):
+        self._route_change(route)
         self.page.update()
 
     def build_navigation_rail(self):
@@ -203,6 +222,16 @@ class ResponsiveMenu(Row):
         # Return true if window/display is wide
         return self.page.width > self.page.height
 
+    @staticmethod
+    def slugify(original: str) -> str:
+        slugified = original
+        slugified = " ".join(slugified.split())
+        slugified = slugified.lower()
+        slugified = "".join(character for character in slugified if not unicodedata.category(character).startswith("P"))
+        slugified = slugified.replace(" ", "-")
+
+        return slugified
+
 
 if __name__ == "__main__":
 
@@ -245,7 +274,7 @@ if __name__ == "__main__":
                 ),
                 create_page(
                     "Minimize to icons",
-                    "ResponsiveMenu has a parameter minimize_to_icons. "
+                    "ResponsiveMenuLayout has a parameter minimize_to_icons. "
                     "Set it to True and the menu is shown as icons only, when normally it would be hidden.\n"
                     "\n\n"
                     "Try this with the 'Minimize to icons' toggle in the top bar."
@@ -258,15 +287,29 @@ if __name__ == "__main__":
                 dict(icon=icons.COMPARE_ARROWS_OUTLINED, selected_icon=icons.COMPARE_ARROWS, label="Menu width"),
                 create_page(
                     "Menu width",
-                    "ResponsiveMenu has a parameter manu_extended. "
+                    "ResponsiveMenuLayout has a parameter manu_extended. "
                     "Set it to False to place menu labels under the icons instead of beside them."
                     "\n\n"
                     "Try this with the 'Menu width' toggle in the top bar.",
                 ),
             ),
+            (
+                dict(icon=icons.ROUTE_OUTLINED, selected_icon=icons.ROUTE, label="Route support", route="custom-route"),
+                create_page(
+                    "Route support",
+                    "ResponsiveMenuLayout has a parameter support_routes, which is True by default. "
+                    "\n\n"
+                    "Routes are useful only in the web, where the currently selected page is shown in the url, "
+                    "and you can open the app directly on a specific page with the right url."
+                    "\n\n"
+                    "You can specify a route explicitly with a 'route' item in the menu dict (see this page in code). "
+                    "If you do not specify the route, a slugified version of the page label is used "
+                    "('Menu width' becomes 'menu-width').",
+                ),
+            ),
         ]
 
-        menu_layout = ResponsiveMenu(page, pages)
+        menu_layout = ResponsiveMenuLayout(page, pages)
 
         page.appbar.actions = [
             Row(
@@ -300,12 +343,12 @@ if __name__ == "__main__":
         )
 
 
-    def toggle_icons_only(menu: ResponsiveMenu):
+    def toggle_icons_only(menu: ResponsiveMenuLayout):
         menu.minimize_to_icons = not menu.minimize_to_icons
         menu.page.update()
 
 
-    def toggle_menu_width(menu: ResponsiveMenu):
+    def toggle_menu_width(menu: ResponsiveMenuLayout):
         menu.menu_extended = not menu.menu_extended
         menu.page.update()
 
