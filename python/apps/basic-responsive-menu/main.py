@@ -6,6 +6,7 @@ from flet import AppBar
 from flet import Card
 from flet import Column
 from flet import Container
+from flet import ElevatedButton
 from flet import IconButton
 from flet import NavigationRail
 from flet import NavigationRailDestination
@@ -307,6 +308,21 @@ if __name__ == "__main__":
                     "('Menu width' becomes 'menu-width').",
                 ),
             ),
+            (
+                dict(icon=icons.PLUS_ONE_OUTLINED, selected_icon=icons.PLUS_ONE, label="Fine control"),
+                create_page(
+                    "Adjust navigation rail",
+                    "NavigationRail is accessible via the navigation_rail attribute of the ResponsiveMenuLayout. "
+                    "In this demo it is used to add the leading button control."
+                    "\n\n"
+                    "These NavigationRail attributes are used by the ResponsiveMenuLayout, and changing them directly "
+                    "will probably break it:\n"
+                    "- destinations\n"
+                    "- extended\n"
+                    "- label_type\n"
+                    "- on_change\n",
+                ),
+            ),
         ]
 
         menu_layout = ResponsiveMenuLayout(page, pages)
@@ -321,6 +337,10 @@ if __name__ == "__main__":
                 ]
             )
         ]
+
+        menu_layout.navigation_rail.leading = ElevatedButton(
+            "Add", icon=icons.ADD, expand=True, on_click=lambda e: print("Add clicked")
+        )
 
         page.add(menu_layout)
 
