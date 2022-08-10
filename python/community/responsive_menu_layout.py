@@ -18,6 +18,7 @@ from flet import Text
 from flet import VerticalDivider
 from flet import colors
 from flet import icons
+from flet import slugify
 
 
 class ResponsiveMenuLayout(Row):
@@ -31,7 +32,7 @@ class ResponsiveMenuLayout(Row):
         minimize_to_icons=False,
         landscape_minimize_to_icons=False,
         portrait_minimize_to_icons=False,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(*args, **kwargs)
 
@@ -46,7 +47,7 @@ class ResponsiveMenuLayout(Row):
         self.expand = True
 
         self.navigation_items = [navigation_item for navigation_item, _ in pages]
-        self.routes = [f"/{item.pop('route', None) or self.slugify(item['label'])}" for item in self.navigation_items]
+        self.routes = [f"/{item.pop('route', None) or slugify(item['label'])}" for item in self.navigation_items]
         self.navigation_rail = self.build_navigation_rail()
         self.update_destinations()
         self._menu_extended = menu_extended
@@ -223,16 +224,6 @@ class ResponsiveMenuLayout(Row):
         # Return true if window/display is wide
         return self.page.width > self.page.height
 
-    @staticmethod
-    def slugify(original: str) -> str:
-        slugified = original
-        slugified = " ".join(slugified.split())
-        slugified = slugified.lower()
-        slugified = "".join(character for character in slugified if not unicodedata.category(character).startswith("P"))
-        slugified = slugified.replace(" ", "-")
-
-        return slugified
-
 
 if __name__ == "__main__":
 
@@ -346,7 +337,6 @@ if __name__ == "__main__":
 
         menu_button.on_click = lambda e: menu_layout.toggle_navigation()
 
-
     def create_page(title: str, body: str):
         return Row(
             controls=[
@@ -362,15 +352,12 @@ if __name__ == "__main__":
             expand=True,
         )
 
-
     def toggle_icons_only(menu: ResponsiveMenuLayout):
         menu.minimize_to_icons = not menu.minimize_to_icons
         menu.page.update()
 
-
     def toggle_menu_width(menu: ResponsiveMenuLayout):
         menu.menu_extended = not menu.menu_extended
         menu.page.update()
-
 
     flet.app(target=main)
