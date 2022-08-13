@@ -8,6 +8,11 @@ The AppBar in this demo app is not a part of the ResponsiveMenuLayout component.
 menu button is used to toggle menu visibility, but you can have other toggles, maybe swiping once
 we have gesture support in flet.
 
+You can `from responsive_menu_layout import ResponsiveMenuLayout` to use it as a component in your
+own code, or run the file to see the demo.
+
+## Features
+
 **Basic landscape layout, menu shown by default**
 
 <img width="678" alt="image" src="https://user-images.githubusercontent.com/5179247/182687976-2d13639e-bf67-42de-b8ce-6886415c8730.png">
