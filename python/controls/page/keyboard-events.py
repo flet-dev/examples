@@ -1,6 +1,5 @@
 import flet
-from flet import Container, Page, Row, Text, border, colors
-from flet.page import KeyboardEventData
+from flet import Container, Page, Row, Text, border, colors, KeyboardEvent
 
 
 class ButtonControl(Container):
@@ -15,7 +14,7 @@ class ButtonControl(Container):
 
 
 def main(page: Page):
-    def on_keyboard(e: KeyboardEventData):
+    def on_keyboard(e: KeyboardEvent):
         key.content.value = e.key
         key.visible = True
         shift.visible = e.shift
