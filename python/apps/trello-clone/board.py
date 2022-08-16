@@ -1,4 +1,6 @@
 from flet import (
+    DragTarget,
+    Draggable,
     UserControl,
     Column,
     Row,
@@ -32,23 +34,32 @@ class Board(UserControl):
         self.boardListsHash = {}
         self.switch = Switch(
             label="Horizontal/Veritcal List View", value=False, label_position="left", on_change=self.toggle_view)
-        self.switchVal = 1 if self.switch.value else 0
+        self.add_list_button = FloatingActionButton(
+            icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
         self.boardLists = [
-            FloatingActionButton(
-                icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
+            # if this is an empty array then adding to it and updating component does not render a new list
+            # why is a dummy control needed here? possible bug.
+            Text(visible=False)
         ]
+
+        self.board_list_slots = [
+            DragTarget(group="lists", on_accept=self.drag_accept,
+                       on_leave=self.drag_leave, content=Container(width=200, height=300, bgcolor=colors.WHITE12))
+        ] * 10
+
         self.horizontalWrap = Column(
-            self.boardLists,
+            self.board_list_slots,
             wrap=True,
             visible=False
         )
         self.verticalWrap = Row(
-            self.boardLists,
+            self.board_list_slots,
             vertical_alignment="start",
             wrap=True,
             visible=True
             # width=self.app.page.window_width
         )
+
         self.mainView = Column(
             controls=[
                 self.switch,
@@ -59,7 +70,9 @@ class Board(UserControl):
     def build(self):
         self.view = Column(
             controls=[
-                self.switch,
+                # placing the add list button at the top of the page doesn't solve the toggle behaviour problem
+                # since the lists still need to be placed inside either a row or a column depending on toggle state.
+                Row([self.switch, self.add_list_button]),
                 self.horizontalWrap,
                 self.verticalWrap
             ])
@@ -77,6 +90,12 @@ class Board(UserControl):
         self.verticalWrap.visible = (not self.switch.value)
         self.update()
         # self.app.page.update()
+
+    def drag_accept(e):
+        pass
+
+    def drag_leave(e):
+        pass
 
     def addListDlg(self, e):
 
@@ -118,8 +137,14 @@ class Board(UserControl):
                                 color=colorOptions.data)
 
             self.boardListsHash[e.control.value] = newList
-            self.boardLists.insert(-1, newList)
+            print("boardLists hash length: ", len(self.boardListsHash))
+            # self.boardLists.append(newList)
+            # self.board_list_slots[len(
+            #     self.boardListsHash)].content = newList
 
+            # why is this reverse indexed?
+            self.board_list_slots[0].content = newList
+            print("self.boardLists: ", self.boardLists)
             dialog.open = False
             self.app.page.update()
             self.update()

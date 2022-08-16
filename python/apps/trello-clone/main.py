@@ -191,4 +191,5 @@ def main(page: Page):
     # page.add(Text("Sanity Check"))
 
 
+print("flet version: ", flet.version.version)
 flet.app(target=main)

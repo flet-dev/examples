@@ -1,5 +1,6 @@
 from flet import (
     UserControl,
+    Draggable,
     Column,
     Row,
     Switch,
@@ -98,26 +99,29 @@ class BoardList(UserControl):
         #         "add card", icon=icons.ADD, on_click=addCard)], visible=(not self.horizontal))
         # ])
 
-        self.view = Column([
-            self.header,
-            Container(
-                content=hrztlCardList,
-                # border_radius=border_radius.all(15),
-                bgcolor=self.color if (
-                    self.color != "") else colors.BACKGROUND,
-                padding=padding.all(20),
-                visible=self.horizontal
-            ),
-            Container(
-                content=vrtclCardList,
-                # border_radius=border_radius.all(15),
-                bgcolor=self.color if (
-                    self.color != "") else colors.BACKGROUND,
-                padding=padding.all(20),
-                visible=(not self.horizontal)
-            )
+        self.view = Draggable(
+            group="lists",
+            content=Column([
+                self.header,
+                Container(
+                    content=hrztlCardList,
+                    # border_radius=border_radius.all(15),
+                    bgcolor=self.color if (
+                        self.color != "") else colors.BACKGROUND,
+                    padding=padding.all(20),
+                    visible=self.horizontal
+                ),
+                Container(
+                    content=vrtclCardList,
+                    # border_radius=border_radius.all(15),
+                    bgcolor=self.color if (
+                        self.color != "") else colors.BACKGROUND,
+                    padding=padding.all(20),
+                    visible=(not self.horizontal)
+                )
 
-        ], data=self.title)
+            ], data=self.title)
+        )
 
         return self.view
 
