@@ -45,7 +45,8 @@ class Board(UserControl):
         self.board_list_slots = [
             DragTarget(group="lists", on_accept=self.drag_accept,
                        on_leave=self.drag_leave, content=Container(width=200, height=300, bgcolor=colors.WHITE12))
-        ] * 10
+            for i in range(10)
+        ]
 
         self.horizontalWrap = Column(
             self.board_list_slots,
@@ -91,10 +92,22 @@ class Board(UserControl):
         self.update()
         # self.app.page.update()
 
-    def drag_accept(e):
-        pass
+    def drag_accept(self, e):
+        # grab the list
+        src = self.app.page.get_control(e.data)
+        print("src: ", src, src.content)
+        # reset src content
+        src.content = Container(width=200, height=300, bgcolor=colors.WHITE12)
+        self.update()
+        # fill the slot
+        print("dest: ", e.control)
+        e.control.content = src
+        self.boardLists
+        e.control.update()
 
-    def drag_leave(e):
+        return
+
+    def drag_leave(self, e):
         pass
 
     def addListDlg(self, e):
@@ -133,21 +146,22 @@ class Board(UserControl):
             )
 
         def close_dlg(e):
-            newList = BoardList(self, e.control.value, self.switch.value,
-                                color=colorOptions.data)
-
-            self.boardListsHash[e.control.value] = newList
-            print("boardLists hash length: ", len(self.boardListsHash))
+            new_list = BoardList(self, e.control.value, self.switch.value,
+                                 color=colorOptions.data)
+            # new_list = DragTarget(group="lists", on_accept=self.drag_accept,
+            #                       on_leave=self.drag_leave, content=BoardList(self, e.control.value, self.switch.value, color=colorOptions.data))
             # self.boardLists.append(newList)
             # self.board_list_slots[len(
             #     self.boardListsHash)].content = newList
 
-            # why is this reverse indexed?
-            self.board_list_slots[0].content = newList
-            print("self.boardLists: ", self.boardLists)
+            index = len(self.boardListsHash)
+            self.board_list_slots[index].content = new_list
             dialog.open = False
             self.app.page.update()
             self.update()
+
+            self.boardListsHash[e.control.value] = self.board_list_slots[index]
+            print("boardLists hash: ", self.boardListsHash)
         # colorOptions = self.createColorChoice()
         dialog = AlertDialog(
             title=Text("Name your new list"),
