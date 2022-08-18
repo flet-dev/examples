@@ -31,12 +31,10 @@ class Board(UserControl):
 
         self.app = app
         self.identifier = identifier  # enforce uniqueness?
-        self.boardListsHash = {}
-        self.switch = Switch(
-            label="Horizontal/Veritcal List View", value=False, label_position="left", on_change=self.toggle_view)
+        self.board_lists_hash = {}
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
-        self.boardLists = [
+        self.board_lists = [
             # if this is an empty array then adding to it and updating component does not render a new list
             # why is a dummy control needed here? possible bug.
             Text(visible=False)
@@ -45,64 +43,50 @@ class Board(UserControl):
         self.board_list_slots = [
             DragTarget(group="lists", on_accept=self.drag_accept,
                        on_leave=self.drag_leave, content=Container(width=200, height=300, bgcolor=colors.WHITE12))
-            for i in range(10)
+            for i in range(5)
         ]
 
-        self.horizontalWrap = Column(
-            self.board_list_slots,
+        self.horizontal_wrap = Column(
+            self.board_lists,
             wrap=True,
             visible=False
         )
-        self.verticalWrap = Row(
-            self.board_list_slots,
+        self.list_wrap = Row(
+            self.board_lists,
             vertical_alignment="start",
             wrap=True,
             visible=True
             # width=self.app.page.window_width
         )
 
-        self.mainView = Column(
-            controls=[
-                self.switch,
-                self.horizontalWrap,
-                self.verticalWrap
-            ])
-
     def build(self):
         self.view = Column(
             controls=[
                 # placing the add list button at the top of the page doesn't solve the toggle behaviour problem
                 # since the lists still need to be placed inside either a row or a column depending on toggle state.
-                Row([self.switch, self.add_list_button]),
-                self.horizontalWrap,
-                self.verticalWrap
+                Row([self.add_list_button]),
+                self.list_wrap
             ])
         return self.view
 
-    # this method should ask the BoardLists to change view
-    # for each list in BoardLists list.horizontalView.visible = false, list.verticalView.visible = true
-    def toggle_view(self, e):
-        index = 0
-        for k, v in self.boardListsHash.items():
-            #v.horizontal = self.switch.value
-            v.toggleView()
-            index += 1
-        self.horizontalWrap.visible = (self.switch.value)
-        self.verticalWrap.visible = (not self.switch.value)
-        self.update()
-        # self.app.page.update()
-
     def drag_accept(self, e):
-        # grab the list
+        # grab the draggable list
         src = self.app.page.get_control(e.data)
         print("src: ", src, src.content)
-        # reset src content
-        src.content = Container(width=200, height=300, bgcolor=colors.WHITE12)
+        print("board_list_slots: ", [
+              l.content for l in self.board_list_slots])
+        # find the instance of the list in hash in order to reset src content
+        # matching_slot = next(
+        #   l for l in self.board_list_slots if l.content == src)
+        # print("index: ", matching_slot)
+        src.content = DragTarget(group="lists", on_accept=self.drag_accept,
+                                 on_leave=self.drag_leave, content=Container(
+                                     width=200, height=300, bgcolor=colors.WHITE12))
         self.update()
         # fill the slot
         print("dest: ", e.control)
         e.control.content = src
-        self.boardLists
+
         e.control.update()
 
         return
@@ -112,20 +96,20 @@ class Board(UserControl):
 
     def addListDlg(self, e):
 
-        optionDict = {
-            colors.RED_200: self.colorOptionCreator(colors.RED_200, "red"),
-            colors.LIGHT_GREEN: self.colorOptionCreator(colors.LIGHT_GREEN, "green"),
-            colors.LIGHT_BLUE: self.colorOptionCreator(colors.LIGHT_BLUE, "blue"),
-            colors.ORANGE_300: self.colorOptionCreator(colors.ORANGE_300, "orange"),
-            colors.PINK_300: self.colorOptionCreator(colors.PINK_300, "pink"),
-            colors.YELLOW_400: self.colorOptionCreator(colors.YELLOW_400, "yellow"),
+        option_dict = {
+            colors.RED_200: self.color_option_creator(colors.RED_200, "red"),
+            colors.LIGHT_GREEN: self.color_option_creator(colors.LIGHT_GREEN, "green"),
+            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE, "blue"),
+            colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300, "orange"),
+            colors.PINK_300: self.color_option_creator(colors.PINK_300, "pink"),
+            colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400, "yellow"),
         }
 
         def set_color(e):
-            chosenColor = e.control.data
-            colorOptions.data = chosenColor
-            print("colorOptions.data: ", colorOptions.data)
-            for k, v in optionDict.items():
+            chosen_color = e.control.data
+            color_options.data = chosen_color
+            print("colorOptions.data: ", color_options.data)
+            for k, v in option_dict.items():
                 if k == e.control.data:
                     v.bgcolor = colors.BLACK12
                     # v.border = border.all(3, colors.BLACK26)
@@ -134,10 +118,10 @@ class Board(UserControl):
                     v.bgcolor = None
             dialog.content.update()
 
-        colorOptions = Row(data="")
+        color_options = Row(data="")
 
-        for k, v in optionDict.items():
-            colorOptions.controls.append(
+        for k, v in option_dict.items():
+            color_options.controls.append(
                 TextButton(
                     content=v,
                     on_click=set_color,
@@ -146,73 +130,39 @@ class Board(UserControl):
             )
 
         def close_dlg(e):
-            new_list = BoardList(self, e.control.value, self.switch.value,
-                                 color=colorOptions.data)
-            # new_list = DragTarget(group="lists", on_accept=self.drag_accept,
-            #                       on_leave=self.drag_leave, content=BoardList(self, e.control.value, self.switch.value, color=colorOptions.data))
-            # self.boardLists.append(newList)
-            # self.board_list_slots[len(
-            #     self.boardListsHash)].content = newList
-
-            index = len(self.boardListsHash)
+            new_list = BoardList(self, e.control.value,
+                                 color=color_options.data)
+            index = len(self.board_lists_hash)
+            self.board_lists.append(new_list)
             self.board_list_slots[index].content = new_list
             dialog.open = False
             self.app.page.update()
             self.update()
 
-            self.boardListsHash[e.control.value] = self.board_list_slots[index]
-            print("boardLists hash: ", self.boardListsHash)
+            self.board_lists_hash[e.control.value] = self.board_list_slots[index]
+            print("boardLists hash: ", self.board_lists_hash)
         # colorOptions = self.createColorChoice()
         dialog = AlertDialog(
             title=Text("Name your new list"),
             content=Column(
-                [Container(content=TextField(label="New List Name", on_submit=close_dlg), padding=padding.symmetric(horizontal=5)), colorOptions], tight=True),
+                [Container(content=TextField(label="New List Name", on_submit=close_dlg), padding=padding.symmetric(horizontal=5)), color_options], tight=True),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )
         self.app.page.dialog = dialog
         dialog.open = True
         self.app.page.update()
 
-    def removeList(self, list: BoardList, e):
-        if list.horizontal:
-            index = self.boardListsHorizontal.controls.index(list.view)
-        else:
-            index = self.boardListsVertical.controls.index(list.view)
-        del self.boardListsHorizontal.controls[index]
-        del self.boardListsVertical.controls[index]
-        self.mainView.update()
+    def remove_list(self, list: BoardList, e):
+        # add confirmation ?
+        self.board_lists.remove(list)
+        self.update()
 
-    def editListTitle(self, list: BoardList):
-        print("edit list title: ", list.header)
-        list.header.controls[0] = list.editField
-        list.header.controls[1].visible = False
-        list.header.controls[2].visible = False
-
-        list.view.update()
-
-    def saveListTitle(self, list: BoardList):
-        oldTitle = list.title
-        print("oldTitle: ", oldTitle)
-        list.title = list.editField.controls[0].value
-        print("new editField title: ",
-              list.editField.controls[0].value, list.title)
-        list.header.controls[0] = Text(value=list.title, style="titleMedium")
-        list.header.controls[1].visible = True
-        list.header.controls[2].visible = True
-        # self.boardListsHash[oldTitle][0].title = list.title
-        # self.boardListsHash[oldTitle][1].title = list.title
-        # self.boardListsHash[list.title] = self.boardListsHash[oldTitle]
-        # del self.boardListsHash[oldTitle]
-        # for bl in blTuple:
-        #     bl.title = list.title
-        list.view.update()
-
-    def moveBoard(self, list: BoardList, displacement: int):
+    def move_board(self, list: BoardList, displacement: int):
         i = self.boardList.index(list)
         listToMove = self.boardList.pop(i)
         self.boardList.insert(i + displacement, list)
 
-    def colorOptionCreator(self, color: str, name: str):
+    def color_option_creator(self, color: str, name: str):
         return Container(
             content=Column(
                 [
@@ -234,6 +184,3 @@ class Board(UserControl):
             margin=margin.all(1),
             alignment=alignment.center,
         )
-
-    def createBoardNavDestination(self):
-        pass
