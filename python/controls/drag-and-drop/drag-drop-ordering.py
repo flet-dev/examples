@@ -1,4 +1,5 @@
 import flet
+import copy
 from flet import (
     Page,
     DragTarget,
@@ -27,7 +28,7 @@ class ItemList():
         self.items = []
         self.new_item = TextField(label="new item name", width=200)
         self.view = DragTarget(
-            group="items",
+            group="list",
             content=Container(
                 content=Column([
                     self.new_item,
@@ -43,11 +44,9 @@ class ItemList():
         )
 
     def add_item(self, e):
-        print("add click called")
         new_item = Item(self, self.new_item.value)
         self.view.content.content.controls.append(new_item.view)
         self.items.append(new_item.view)
-        print("self.items: ", self.items)
         self.page.update()
         self.view.update()
 
@@ -61,7 +60,6 @@ class Item():
                 content=Row([
                     Icon(name=icons.CIRCLE_OUTLINED),
                     Text(value=f"{self.item_text}")
-
                 ],
                     alignment="start",
                 ),
@@ -90,21 +88,25 @@ class Item():
     def drag_accept(self, e):
         # this is the item picked up
         src = self.list.page.get_control(e.data)
-        swap = e.control.content.content
+        print("src.content.content: ", src.content.content)
         # this is the drag target, i.e. Item in the list
-        e.control.content.content = src.content.content
+        swap = copy.copy(e.control.content)
+        print("swap: ", swap)
+        e.control.content = copy.copy(src.content.content)
         src.content.content = swap
         e.control.update()
-        src.update
+        # src.update
 
     def drag_will_accept(self, e):
-        e.control.content.elevation = 2 if e.data == "true" else 1
+        # e.control.content.elevation = 2 if e.data == "true" else 1
 
-        e.control.update()
+        # e.control.update()
+        pass
 
     def drag_leave(self, e):
-        e.control.content.border = None
-        e.control.update()
+        # e.control.elevation = 1
+        # e.control.update()
+        pass
 
 
 def main(page: Page):
@@ -112,23 +114,18 @@ def main(page: Page):
 
     page.add(
 
-        Row(
-            [
-                Draggable(
-                    group="items",
-                    content=ItemList(
-                        page, "List 1", colors.DEEP_ORANGE_400).view
-                ),
-                Draggable(
-                    group="items",
-                    content=ItemList(page, "List 2", colors.PINK_400).view
-                ),
-                Draggable(
-                    group="items",
-                    content=ItemList(page, "List 3", colors.CYAN_400).view
-                ),
-            ]
-        )
+        Row([
+            Column([
+                ItemList(page, "List 1", colors.DEEP_ORANGE_400).view
+            ]),
+            Column([
+                ItemList(page, "List 2", colors.PINK_400).view
+            ]),
+            Column([
+                ItemList(page, "List 3", colors.CYAN_400).view
+            ]),
+
+        ])
 
     )
 
