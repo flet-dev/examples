@@ -5,7 +5,7 @@ from flet import AppBar, ElevatedButton, Page, Text, View, colors
 def main(page: Page):
     page.title = "Routes Example"
 
-    def route_change(route):
+    def route_change(e):
         page.views.clear()
         page.views.append(
             View(
@@ -28,7 +28,7 @@ def main(page: Page):
             )
         page.update()
 
-    def view_pop(view):
+    def view_pop(e):
         page.views.pop()
         top_view = page.views[-1]
         page.go(top_view.route)
