@@ -1,3 +1,5 @@
+import logging
+from tokenize import String
 import flet
 import copy
 from flet import (
@@ -18,6 +20,8 @@ from flet import (
     colors,
     padding,
 )
+
+# logging.basicConfig(level=logging.INFO)
 
 
 class ItemList():
@@ -46,14 +50,18 @@ class ItemList():
     def add_item_handler(self, e):
         self.add_item()
 
-    def add_item(self):
-        new_item = Item(self, self.new_item.value)
+    def add_item(self, item: str = None):
+        new_item = Item(self, item) if item else Item(
+            self, self.new_item.value)
         self.items.controls.append(new_item.view)
+        print("self.items: ", self.items.controls)
         self.page.update()
         self.view.update()
 
-    def remove_item(self, item: 'Item'):
-        self.items.controls.remove(item.view)
+    def remove_item(self, item):
+        print("item from remove_item: ", item)
+        print("self.items: ", self.items.controls)
+        self.items.controls.remove(item)
         self.view.update()
         pass
 
@@ -73,38 +81,36 @@ class Item():
                 width=200,
                 padding=10
             ),
-            elevation=1
+            elevation=1,
+            data=self.list
         )
         self.view = Draggable(
             group="items",
             content=DragTarget(
                 group="items",
                 content=self.card_item,
-                # content=Container(
-                #     content=Row([
-                #         Icon(name=icons.CIRCLE_OUTLINED),
-                #         Text(value=f"{self.item_text}")
-                #     ])
-                # ),
                 on_accept=self.drag_accept,
                 on_leave=self.drag_leave,
                 on_will_accept=self.drag_will_accept,
-                data=self.list
-            )
+                # wy can't this be added to this component?
+                # data=self.item_text
+            ),
+            data=self.item_text
 
         )
 
     def drag_accept(self, e):
-        # this is the item picked up
+        # this is the item picked up (Draggable control)
         src = self.list.page.get_control(e.data)
         print("src.content.content: ", src)
         # skip if item is dropped on itself
         if (src.content.content == e.control.content):
             return
+        # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
-        # this is the drag target, i.e. Item in the list
-        e.control.data.add_list(src)
-
+        self.list.add_item(src.data)
+        # remove from the list to which draggable belongs
+        src.content.content.data.remove_item(src)
         e.control.update()
         # src.update
 
