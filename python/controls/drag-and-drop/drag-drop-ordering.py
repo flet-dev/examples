@@ -15,7 +15,6 @@ from flet import (
     Icon,
     TextField,
     Card,
-    Divider,
     icons,
     border_radius,
     border,
@@ -24,6 +23,7 @@ from flet import (
 )
 
 # logging.basicConfig(level=logging.INFO)
+# print("flet version: ", flet.version.version)
 
 
 class ItemList():
@@ -31,9 +31,18 @@ class ItemList():
 
         self.page = page
         self.list_name = list_name
-        #Divider(height=16, thickness=5, color=colors.WHITE, opacity=0.0)
-        self.items = Column(
-            [Icon(name=icons.MINIMIZE_ROUNDED, opacity=0.0)])
+        self.items = Column([
+            Container(
+                bgcolor=colors.BLACK26,
+                #border=border.all(2, colors.BLACK26),
+                border_radius=border_radius.all(30),
+                height=5,
+                width=200,
+                opacity=0.0
+                # expand=True
+
+            )
+        ])
         self.item_name = TextField(label="new item name", width=200)
         self.view = DragTarget(
             group="items",
@@ -72,12 +81,6 @@ class ItemList():
         self.view.update()
 
     def drag_accept(self, e):
-        # self.items.controls.append(
-        #     Container(
-        #         content=Divider(height=9, thickness=3),
-        #         bgcolor=colors.BLACK45
-        #     )
-        # )
         self.items.controls[-1].opacity = 1.0
         self.view.update()
 
