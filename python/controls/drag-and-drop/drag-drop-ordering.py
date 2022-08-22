@@ -30,12 +30,12 @@ class ItemList():
         self.page = page
         self.list_name = list_name
         self.items = Column([])
-        self.new_item = TextField(label="new item name", width=200)
+        self.item_name = TextField(label="new item name", width=200)
         self.view = DragTarget(
             group="list",
             content=Container(
                 content=Column([
-                    self.new_item,
+                    self.item_name,
                     TextButton(
                         "add item", icon=icons.ADD, on_click=self.add_item_handler),
                     self.items
@@ -52,15 +52,23 @@ class ItemList():
 
     def add_item(self, item: str = None):
         new_item = Item(self, item) if item else Item(
-            self, self.new_item.value)
+            self, self.item_name.value)
         self.items.controls.append(new_item.view)
+        self.item_name.value = ""
         print("self.items: ", self.items.controls)
         self.page.update()
         self.view.update()
 
+    def check_item(self, item):
+        print("item: ", item)
+        for c in self.items.controls:
+            print("c.content: ", c.content)
+            if c.content == item:
+                return True
+        return False
+
     def remove_item(self, item):
         print("item from remove_item: ", item)
-        print("self.items: ", self.items.controls)
         self.items.controls.remove(item)
         self.view.update()
         pass
@@ -95,34 +103,40 @@ class Item():
                 # wy can't this be added to this component?
                 # data=self.item_text
             ),
-            data=self.item_text
+            data=self
 
         )
 
     def drag_accept(self, e):
-        # this is the item picked up (Draggable control)
         src = self.list.page.get_control(e.data)
-        print("src.content.content: ", src)
+        # this is the item picked up (Draggable control)
+        print("src: ", src)
+
         # skip if item is dropped on itself
         if (src.content.content == e.control.content):
+            e.control.content.elevation = 1
+            e.control.update()
             return
+
         # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
-        self.list.add_item(src.data)
+
+        self.list.add_item(src.data.item_text)
         # remove from the list to which draggable belongs
-        src.content.content.data.remove_item(src)
+        src.data.list.remove_item(src)
+        e.control.content.elevation = 1
         e.control.update()
-        # src.update
+        # self.list.update()
 
     def drag_will_accept(self, e):
-        # e.control.content.elevation = 2 if e.data == "true" else 1
-        # e.control.update()
-        pass
+        # e.control == self.view.content(dragtarget)
+        # therefore no way to check if target and draggable are the same control.
+        e.control.content.elevation = 20 if e.data == "true" else 1
+        e.control.update()
 
     def drag_leave(self, e):
-        # e.control.elevation = 1
-        # e.control.update()
-        pass
+        e.control.content.elevation = 1
+        e.control.update()
 
 
 def main(page: Page):
