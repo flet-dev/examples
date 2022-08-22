@@ -1,5 +1,6 @@
 import logging
 from tokenize import String
+from turtle import bgcolor
 import flet
 import copy
 from flet import (
@@ -14,6 +15,7 @@ from flet import (
     Icon,
     TextField,
     Card,
+    Divider,
     icons,
     border_radius,
     border,
@@ -29,10 +31,12 @@ class ItemList():
 
         self.page = page
         self.list_name = list_name
-        self.items = Column([])
+        #Divider(height=16, thickness=5, color=colors.WHITE, opacity=0.0)
+        self.items = Column(
+            [Icon(name=icons.MINIMIZE_ROUNDED, opacity=0.0)])
         self.item_name = TextField(label="new item name", width=200)
         self.view = DragTarget(
-            group="list",
+            group="items",
             content=Container(
                 content=Column([
                     self.item_name,
@@ -44,7 +48,9 @@ class ItemList():
                 border_radius=border_radius.all(15),
                 bgcolor=color,
                 padding=padding.all(20)
-            )
+            ),
+            on_will_accept=self.drag_accept,
+            on_leave=self.drag_leave
         )
 
     def add_item_handler(self, e):
@@ -53,25 +59,31 @@ class ItemList():
     def add_item(self, item: str = None):
         new_item = Item(self, item) if item else Item(
             self, self.item_name.value)
-        self.items.controls.append(new_item.view)
+        # self.items.controls.append(new_item.view)
+        self.items.controls.insert(-1, new_item.view)
         self.item_name.value = ""
         print("self.items: ", self.items.controls)
         self.page.update()
         self.view.update()
 
-    def check_item(self, item):
-        print("item: ", item)
-        for c in self.items.controls:
-            print("c.content: ", c.content)
-            if c.content == item:
-                return True
-        return False
-
     def remove_item(self, item):
         print("item from remove_item: ", item)
         self.items.controls.remove(item)
         self.view.update()
-        pass
+
+    def drag_accept(self, e):
+        # self.items.controls.append(
+        #     Container(
+        #         content=Divider(height=9, thickness=3),
+        #         bgcolor=colors.BLACK45
+        #     )
+        # )
+        self.items.controls[-1].opacity = 1.0
+        self.view.update()
+
+    def drag_leave(self, e):
+        self.items.controls[-1].opacity = 0.0
+        self.view.update()
 
 
 class Item():
