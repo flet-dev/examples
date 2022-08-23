@@ -33,47 +33,44 @@ class ItemList():
         self.page = page
         self.list_name: str = list_name
         self.items_hash: dict[Draggable, int] = {}
-        self.items = Column([
-            Container(
-                bgcolor=colors.BLACK26,
-                # border=border.all(2, colors.BLACK26),
-                border_radius=border_radius.all(30),
-                height=3,
-                width=200,
-                opacity=0.0,
-                data=-1
-                # expand=True
-            )
-        ], spacing=1, tight=True)
-        self.item_name = TextField(label="new item name", width=200)
+        self.items = Column([], tight=True, spacing=5)
+        self.end_indicator = Container(
+            bgcolor=colors.BLACK26,
+            # border=border.all(2, colors.BLACK26),
+            border_radius=border_radius.all(30),
+            height=3,
+            width=200,
+            opacity=0.0,
+            data=-1
+        )
+        self.item_name = TextField(
+            label="New Item Name", width=200, height=50, filled=False, bgcolor=colors.WHITE24)
         self.view = DragTarget(
             group="items",
             content=Container(
                 content=Column([
                     self.item_name,
                     TextButton(
-                        "add item", icon=icons.ADD, on_click=self.add_item_handler),
-                    self.items
-                ]),
+                        "Add Item", icon=icons.ADD, on_click=self.add_item_handler),
+                    self.items,
+                    self.end_indicator
+                ], spacing=4, tight=True),
                 border=border.all(2, colors.BLACK12),
                 border_radius=border_radius.all(15),
                 bgcolor=color,
                 padding=padding.all(20)
             ),
-            on_will_accept=self.drag_accept,
+            on_accept=self.drag_accept,
+            on_will_accept=self.drag_will_accept,
             on_leave=self.drag_leave
         )
 
     def add_item_handler(self, e):
         self.add_item()
 
-    def add_item(self, item: str = None, index: int = None):
-        offset_length = len(self.items.controls) - 1
-        new_item = Item(self, item, (offset_length)) if item else Item(
-            self, self.item_name.value, (offset_length))
-        # store new list item in dict with the list as key and the index as value
-        self.items_hash[new_item.view] = index if index else offset_length
-        controls_to_add = Column([
+    def add_item(self, item: str = None, to_index: int = None, from_index: int = None):
+        controls_length = len(self.items.controls)
+        control_to_add = Column([
             Container(
                 bgcolor=colors.BLACK26,
                 border_radius=border_radius.all(30),
@@ -81,25 +78,51 @@ class ItemList():
                 alignment=alignment.center_right,
                 width=200,
                 opacity=0.0
-            ),
-            new_item.view
+            )
         ])
-
-        # insert
-        if (index):
-            self.items.controls.insert(index, controls_to_add)
-        # add new
+        # new_item = Item(self, item, controls_length) if item else Item(
+        #     self, self.item_name.value, controls_length)
+        # store new list item in dict with the draggable list as key and the index as value
+        # rearrange (i.e. drag drop from same list)
+        if (from_index and to_index):
+            print("rearrange: ", to_index, from_index)
+            self.items.controls.insert(
+                to_index, self.items.controls[from_index])
+        # insert (drag from other list to middle of this list)
+        elif (to_index):
+            print("insert: ", to_index)
+            new_item = Item(self, item, to_index)
+            control_to_add.controls.append(new_item.view)
+            self.items.controls.insert(to_index, control_to_add)
+        # add new (drag from other list to end of this list, or use add item button)
         else:
-            self.items.controls.insert(-1, controls_to_add)
-        self.item_name.value = ""
-        print("self.items: ", self.items.controls)
-        self.page.update()
-        self.view.update()
+            print("add new: ", item)
+            new_item = new_item = Item(self, item, controls_length) if item else Item(
+                self, self.item_name.value, controls_length)
+            # controls_to_add = Column([
+            #     Container(
+            #         bgcolor=colors.BLACK26,
+            #         border_radius=border_radius.all(30),
+            #         height=3,
+            #         alignment=alignment.center_right,
+            #         width=200,
+            #         opacity=0.0
+            #     ),
+            #     new_item.view
+            # ])
+            control_to_add.controls.append(new_item.view)
+            self.items.controls.append(control_to_add)
+            self.items_hash[new_item.view] = to_index if to_index else controls_length
+            self.item_name.value = ""
 
-    def set_indicator_opacity(self, target, opacity):
+        print("self.items: ", self.items.controls)
+        self.view.update()
+        self.page.update()
+
+    def set_indicator_opacity(self, index, opacity):
         # print("target: ", target)
         # index = [x.content for x in self.items.controls].index(target)
-        self.items.controls[target].controls[0].opacity = opacity
+        self.items.controls[index].controls[0].opacity = opacity
         self.view.update()
 
     def remove_item(self, item):
@@ -109,11 +132,22 @@ class ItemList():
         self.view.update()
 
     def drag_accept(self, e):
-        self.items.controls[-1].opacity = 1.0
+        src = self.page.get_control(e.data)
+        print("src: ", src, e.control.content)
+        self.add_item(src.data.item_text)
+        src.data.list.remove_item(src)
+        self.end_indicator.opacity = 0.0
+        self.view.update()
+
+    def drag_will_accept(self, e):
+        #self.items.controls[-1].opacity = 1.0
+        print("self.end_indicator: ", self.end_indicator)
+        self.end_indicator.opacity = 1.0
         self.view.update()
 
     def drag_leave(self, e):
-        self.items.controls[-1].opacity = 0.0
+        #self.items.controls[-1].opacity = 0.0
+        self.end_indicator.opacity = 0.0
         self.view.update()
 
 
@@ -162,6 +196,10 @@ class Item():
             e.control.update()
             return
 
+        # its dropped within same list but not on self
+        if (src.data.list == self.list):
+            self.list.add_item(self.item_index, src.data.item_index)
+
         # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
         # index = [x.content for x in self.list.items.controls].index(e.control)
@@ -186,7 +224,7 @@ class Item():
     def drag_leave(self, e):
         # index = self.list.items.controls.index(self.view)
         # self.list.items.controls[index - 1].opacity = 0.0
-        self.list.set_indicator_opacity(e.control, 0.0)
+        self.list.set_indicator_opacity(self.item_index, 0.0)
         e.control.content.elevation = 1
         e.control.update()
 
