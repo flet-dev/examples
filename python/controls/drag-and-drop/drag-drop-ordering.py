@@ -1,5 +1,6 @@
 import logging
 from tokenize import String
+from tracemalloc import start
 from turtle import bgcolor
 import flet
 import copy
@@ -80,20 +81,18 @@ class ItemList():
                 opacity=0.0
             )
         ])
-        # new_item = Item(self, item, controls_length) if item else Item(
-        #     self, self.item_name.value, controls_length)
-        # store new list item in dict with the draggable list as key and the index as value
         # rearrange (i.e. drag drop from same list)
-        if (from_index and to_index):
+        if ((from_index is not None) and (to_index is not None)):
             print("rearrange: ", to_index, from_index)
+            self.items_hash[self.items.controls[from_index]] = to_index
             self.items.controls.insert(
-                to_index, self.items.controls[from_index])
+                to_index-1, self.items.controls[from_index])
         # insert (drag from other list to middle of this list)
-        elif (to_index):
+        elif (to_index is not None):
             print("insert: ", to_index)
             new_item = Item(self, item, to_index)
             control_to_add.controls.append(new_item.view)
-            self.items.controls.insert(to_index, control_to_add)
+            self.items.controls.insert(to_index-1, control_to_add)
         # add new (drag from other list to end of this list, or use add item button)
         else:
             print("add new: ", item)
@@ -112,6 +111,8 @@ class ItemList():
             # ])
             control_to_add.controls.append(new_item.view)
             self.items.controls.append(control_to_add)
+            print("control_to_add index in list", self.items.controls.index(
+                control_to_add), control_to_add.controls[1].item_index)
             self.items_hash[new_item.view] = to_index if to_index else controls_length
             self.item_name.value = ""
 
@@ -128,6 +129,7 @@ class ItemList():
     def remove_item(self, item):
 
         # get the proper index from the hash as value
+        print("remove_item values: ", item, self.items_hash[item])
         del self.items.controls[self.items_hash[item]]
         self.view.update()
 
@@ -140,13 +142,13 @@ class ItemList():
         self.view.update()
 
     def drag_will_accept(self, e):
-        #self.items.controls[-1].opacity = 1.0
+        # self.items.controls[-1].opacity = 1.0
         print("self.end_indicator: ", self.end_indicator)
         self.end_indicator.opacity = 1.0
         self.view.update()
 
     def drag_leave(self, e):
-        #self.items.controls[-1].opacity = 0.0
+        # self.items.controls[-1].opacity = 0.0
         self.end_indicator.opacity = 0.0
         self.view.update()
 
@@ -198,7 +200,11 @@ class Item():
 
         # its dropped within same list but not on self
         if (src.data.list == self.list):
-            self.list.add_item(self.item_index, src.data.item_index)
+            self.list.add_item("", to_index=self.item_index,
+                               from_index=src.data.item_index)
+            self.list.remove_item(src)
+            e.control.update()
+            return
 
         # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
@@ -245,7 +251,7 @@ def main(page: Page):
                 ItemList(page, "List 3", colors.CYAN_400).view
             ]),
 
-        ])
+        ], vertical_alignment="stretch")
 
     )
 
