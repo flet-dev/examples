@@ -31,11 +31,12 @@ class ItemList():
     def __init__(self, page, list_name, color):
 
         self.page = page
-        self.list_name = list_name
+        self.list_name: str = list_name
+        self.items_hash: dict[Draggable, int] = {}
         self.items = Column([
             Container(
                 bgcolor=colors.BLACK26,
-                #border=border.all(2, colors.BLACK26),
+                # border=border.all(2, colors.BLACK26),
                 border_radius=border_radius.all(30),
                 height=3,
                 width=200,
@@ -67,9 +68,11 @@ class ItemList():
         self.add_item()
 
     def add_item(self, item: str = None, index: int = None):
-        new_item = Item(self, item, (len(self.items.controls) - 1)) if item else Item(
-            self, self.item_name.value, (len(self.items.controls) - 1))
-
+        offset_length = len(self.items.controls) - 1
+        new_item = Item(self, item, (offset_length)) if item else Item(
+            self, self.item_name.value, (offset_length))
+        # store new list item in dict with the list as key and the index as value
+        self.items_hash[new_item.view] = index if index else offset_length
         controls_to_add = Column([
             Container(
                 bgcolor=colors.BLACK26,
@@ -81,6 +84,7 @@ class ItemList():
             ),
             new_item.view
         ])
+
         # insert
         if (index):
             self.items.controls.insert(index, controls_to_add)
@@ -93,14 +97,15 @@ class ItemList():
         self.view.update()
 
     def set_indicator_opacity(self, target, opacity):
-        #print("target: ", target)
-        #index = [x.content for x in self.items.controls].index(target)
+        # print("target: ", target)
+        # index = [x.content for x in self.items.controls].index(target)
         self.items.controls[target].controls[0].opacity = opacity
         self.view.update()
 
     def remove_item(self, item):
-        #print("item from remove_item: ", item)
-        self.items.controls.remove(item)
+
+        # get the proper index from the hash as value
+        del self.items.controls[self.items_hash[item]]
         self.view.update()
 
     def drag_accept(self, e):
@@ -159,12 +164,12 @@ class Item():
 
         # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
-        #index = [x.content for x in self.list.items.controls].index(e.control)
+        # index = [x.content for x in self.list.items.controls].index(e.control)
         print("self.item_index: ", self.item_index)
         self.list.add_item(src.data.item_text, self.item_index)
         # remove from the list to which draggable belongs
         src.data.list.remove_item(src)
-        #self.list.set_indicator_opacity(e.control, 0.0)
+        # self.list.set_indicator_opacity(e.control, 0.0)
         self.list.set_indicator_opacity(self.item_index, 0.0)
         e.control.content.elevation = 1
         e.control.update()
@@ -174,7 +179,7 @@ class Item():
         # e.control == self.view.content(dragtarget)
         # therefore no way to check if target and draggable are the same control.
         self.list.set_indicator_opacity(self.item_index, 1.0)
-        #self.list.set_indicator_opacity(e.control, 1.0)
+        # self.list.set_indicator_opacity(e.control, 1.0)
         e.control.content.elevation = 20 if e.data == "true" else 1
         e.control.update()
 
