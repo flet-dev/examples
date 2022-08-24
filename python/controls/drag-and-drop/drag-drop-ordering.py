@@ -1,9 +1,5 @@
 import logging
-from tokenize import String
-from tracemalloc import start
-from turtle import bgcolor
 import flet
-import copy
 from flet import (
     Page,
     DragTarget,
