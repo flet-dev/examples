@@ -7,8 +7,8 @@ def main(page: Page):
 
     print("Initial route:", page.route)
 
-    def route_change(route):
-        print("Route change:", route)
+    def route_change(e):
+        print("Route change:", e.route)
         page.views.clear()
         page.views.append(
             View(
@@ -46,8 +46,8 @@ def main(page: Page):
             )
         page.update()
 
-    def view_pop(view):
-        print("View pop:", view)
+    def view_pop(e):
+        print("View pop:", e.view)
         page.views.pop()
         top_view = page.views[-1]
         page.go(top_view.route)

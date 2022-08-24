@@ -1,4 +1,3 @@
-import unicodedata
 from copy import deepcopy
 
 import flet
@@ -139,8 +138,8 @@ class ResponsiveMenuLayout(Row):
 
         self.select_page(page_number)
 
-    def _on_route_change(self, route):
-        self._route_change(route)
+    def _on_route_change(self, event):
+        self._route_change(event.route)
         self.page.update()
 
     def build_navigation_rail(self):
