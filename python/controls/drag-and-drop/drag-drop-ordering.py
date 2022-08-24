@@ -33,7 +33,7 @@ class ItemList():
 
         self.page = page
         self.list_name: str = list_name
-        self.items_hash: dict[Draggable, int] = {}
+        #self.items_hash: dict[Draggable, int] = {}
         self.items = Column([], tight=True, spacing=5)
         self.end_indicator = Container(
             bgcolor=colors.BLACK26,
@@ -69,8 +69,14 @@ class ItemList():
     def add_item_handler(self, e):
         self.add_item()
 
-    def add_item(self, item: str = None, to_index: int = None, from_index: int = None):
-        controls_length = len(self.items.controls)
+    def add_item(self, item: str = None, chosen_control: Draggable = None, swap_control: Draggable = None):
+        controls_list = [x.controls[1] for x in self.items.controls]
+        to_index = controls_list.index(
+            swap_control) if swap_control in controls_list else None
+        from_index = controls_list.index(
+            chosen_control) if chosen_control in controls_list else None
+        #to_index = self.items_hash[swap_control] if swap_control else None
+        #from_index = self.items_hash[chosen_control] if chosen_control else None
         control_to_add = Column([
             Container(
                 bgcolor=colors.BLACK26,
@@ -84,36 +90,25 @@ class ItemList():
         # rearrange (i.e. drag drop from same list)
         if ((from_index is not None) and (to_index is not None)):
             print("rearrange: ", to_index, from_index)
-            self.items_hash[self.items.controls[from_index]] = to_index
+            #self.items_hash[self.items.controls[from_index]] = to_index
+            #self.items_hash[self.items.controls[to_index]] = from_index
             self.items.controls.insert(
-                to_index-1, self.items.controls[from_index])
+                to_index, self.items.controls.pop(from_index))
         # insert (drag from other list to middle of this list)
         elif (to_index is not None):
             print("insert: ", to_index)
-            new_item = Item(self, item, to_index)
+            new_item = Item(self, item)
             control_to_add.controls.append(new_item.view)
-            self.items.controls.insert(to_index-1, control_to_add)
+            self.items.controls.insert(to_index, control_to_add)
         # add new (drag from other list to end of this list, or use add item button)
         else:
             print("add new: ", item)
-            new_item = new_item = Item(self, item, controls_length) if item else Item(
-                self, self.item_name.value, controls_length)
-            # controls_to_add = Column([
-            #     Container(
-            #         bgcolor=colors.BLACK26,
-            #         border_radius=border_radius.all(30),
-            #         height=3,
-            #         alignment=alignment.center_right,
-            #         width=200,
-            #         opacity=0.0
-            #     ),
-            #     new_item.view
-            # ])
+            new_item = new_item = Item(self, item) if item else Item(
+                self, self.item_name.value)
             control_to_add.controls.append(new_item.view)
             self.items.controls.append(control_to_add)
-            print("control_to_add index in list", self.items.controls.index(
-                control_to_add), control_to_add.controls[1].item_index)
-            self.items_hash[new_item.view] = to_index if to_index else controls_length
+
+            #self.items_hash[new_item.view] = to_index if to_index else controls_length
             self.item_name.value = ""
 
         print("self.items: ", self.items.controls)
@@ -127,10 +122,9 @@ class ItemList():
         self.view.update()
 
     def remove_item(self, item):
-
-        # get the proper index from the hash as value
-        print("remove_item values: ", item, self.items_hash[item])
-        del self.items.controls[self.items_hash[item]]
+        #del self.items.controls[self.items_hash[item]]
+        controls_list = [x.controls[1] for x in self.items.controls]
+        del self.items.controls[controls_list.index(item)]
         self.view.update()
 
     def drag_accept(self, e):
@@ -154,9 +148,9 @@ class ItemList():
 
 
 class Item():
-    def __init__(self, list: ItemList, item_text: str, item_index: int):
+    def __init__(self, list: ItemList, item_text: str):
         self.list = list
-        self.item_index = item_index
+        # self.item_index = item_index
         self.item_text = item_text
         self.card_item = Card(
             content=Container(
@@ -200,17 +194,15 @@ class Item():
 
         # its dropped within same list but not on self
         if (src.data.list == self.list):
-            self.list.add_item("", to_index=self.item_index,
-                               from_index=src.data.item_index)
-            self.list.remove_item(src)
+            self.list.add_item(chosen_control=src,
+                               swap_control=self.view)
+            # self.list.remove_item(src)
             e.control.update()
             return
 
         # this is the drag target, i.e. Item in the list (DragTarget)
         print("e.control: ", e.control)
-        # index = [x.content for x in self.list.items.controls].index(e.control)
-        print("self.item_index: ", self.item_index)
-        self.list.add_item(src.data.item_text, self.item_index)
+        self.list.add_item(src.data.item_text, swap_control=self.view)
         # remove from the list to which draggable belongs
         src.data.list.remove_item(src)
         # self.list.set_indicator_opacity(e.control, 0.0)
