@@ -1,6 +1,5 @@
 import logging
 import os
-from itertools import islice
 from board import Board
 import flet
 from flet import (

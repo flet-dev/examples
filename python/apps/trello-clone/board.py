@@ -26,9 +26,9 @@ from board_list import BoardList
 
 
 class Board(UserControl):
+
     def __init__(self, app, identifier: str):
         super().__init__()
-
         self.app = app
         self.identifier = identifier  # enforce uniqueness?
         self.board_lists_hash = {}
