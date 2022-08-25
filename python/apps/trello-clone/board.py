@@ -130,6 +130,7 @@ class Board(UserControl):
             )
 
         def close_dlg(e):
+            # this new list should be composed of columns of dragtargets
             new_list = BoardList(self, e.control.value,
                                  color=color_options.data)
             index = len(self.board_lists_hash)
