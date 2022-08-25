@@ -30,27 +30,17 @@ class Board(UserControl):
     def __init__(self, app, identifier: str):
         super().__init__()
         self.app = app
-        self.identifier = identifier  # enforce uniqueness?
-        self.board_lists_hash = {}
+        self.visible = True
+        self.identifier = identifier
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
         self.board_lists = [
             # if this is an empty array then adding to it and updating component does not render a new list
             # why is a dummy control needed here? possible bug.
-            Text(visible=False)
+            # Text(visible=False)
+            self.add_list_button
         ]
 
-        self.board_list_slots = [
-            DragTarget(group="lists", on_accept=self.drag_accept,
-                       on_leave=self.drag_leave, content=Container(width=200, height=300, bgcolor=colors.WHITE12))
-            for i in range(5)
-        ]
-
-        self.horizontal_wrap = Column(
-            self.board_lists,
-            wrap=True,
-            visible=False
-        )
         self.list_wrap = Row(
             self.board_lists,
             vertical_alignment="start",
@@ -64,35 +54,10 @@ class Board(UserControl):
             controls=[
                 # placing the add list button at the top of the page doesn't solve the toggle behaviour problem
                 # since the lists still need to be placed inside either a row or a column depending on toggle state.
-                Row([self.add_list_button]),
+                # Row([self.add_list_button]),
                 self.list_wrap
-            ])
+            ], data=self, visible=self.visible)
         return self.view
-
-    def drag_accept(self, e):
-        # grab the draggable list
-        src = self.app.page.get_control(e.data)
-        print("src: ", src, src.content)
-        print("board_list_slots: ", [
-              l.content for l in self.board_list_slots])
-        # find the instance of the list in hash in order to reset src content
-        # matching_slot = next(
-        #   l for l in self.board_list_slots if l.content == src)
-        # print("index: ", matching_slot)
-        src.content = DragTarget(group="lists", on_accept=self.drag_accept,
-                                 on_leave=self.drag_leave, content=Container(
-                                     width=200, height=300, bgcolor=colors.WHITE12))
-        self.update()
-        # fill the slot
-        print("dest: ", e.control)
-        e.control.content = src
-
-        e.control.update()
-
-        return
-
-    def drag_leave(self, e):
-        pass
 
     def addListDlg(self, e):
 
@@ -133,16 +98,14 @@ class Board(UserControl):
             # this new list should be composed of columns of dragtargets
             new_list = BoardList(self, e.control.value,
                                  color=color_options.data)
-            index = len(self.board_lists_hash)
-            self.board_lists.append(new_list)
-            self.board_list_slots[index].content = new_list
+            self.board_lists.insert(-1, new_list)
             dialog.open = False
             self.app.page.update()
             self.update()
 
-            self.board_lists_hash[e.control.value] = self.board_list_slots[index]
-            print("boardLists hash: ", self.board_lists_hash)
-        # colorOptions = self.createColorChoice()
+            # index = len(self.board_lists_hash)
+            # self.board_lists_hash[e.control.value] = self.board_list_slots[index]
+            # print("boardLists hash: ", self.board_lists_hash)
         dialog = AlertDialog(
             title=Text("Name your new list"),
             content=Column(

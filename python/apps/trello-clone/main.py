@@ -63,7 +63,7 @@ class TrelloApp:
                 content=Row(
                     controls=[
                         TextButton("Add new board", icon=icons.ADD,
-                                   on_click=self.addBoard),
+                                   on_click=self.add_board),
                         # Text("Add new board", text_align="center", weight="w500"),
                         # IconButton(icon=icons.ADD, icon_size=20)
                     ]
@@ -81,34 +81,34 @@ class TrelloApp:
         self.boards = [
             Board(self, "Empty Board")
         ]
-        self.currentBoardIndex: int = 0
-        self.currentBoard = self.boards[self.currentBoardIndex]
+        self.current_board_index: int = 0
+        self.current_board = self.boards[self.current_board_index]
         self.view = Row(
             [
                 self.sidebar,
                 VerticalDivider(width=2),
-                self.currentBoard
+                self.current_board
             ],
             expand=True,
         )
 
     def update(self):
-        self.currentBoard = self.boards[self.currentBoardIndex]
+        self.current_board = self.boards[self.current_board_index]
         self.page.update()
         # self.view.update()
 
     def navRail_change(self, e):
-        self.currentBoardIndex = e.control.selected_index
-        if self.currentBoard.mainView in self.view.controls:
-            self.view.controls.remove(self.currentBoard.mainView)
-        self.currentBoard = self.boards[e.control.selected_index]
-        self.view.controls.append(self.currentBoard.mainView)
+        self.current_board_index = e.control.selected_index
+        if self.current_board in self.view.controls:
+            self.view.controls.remove(self.current_board)
+        self.current_board = self.boards[e.control.selected_index]
+        self.view.controls.append(self.current_board)
         #print("Selected destination: ", e.control.selected_index)
         self.view.update()
 
-    def addBoard(self, e):
+    def add_board(self, e):
         def close_dlg(e):
-            self.createNewBoard(e)
+            self.create_new_board(e)
             dialog.open = False
             self.page.update()
         dialog = AlertDialog(
@@ -121,7 +121,7 @@ class TrelloApp:
         dialog.open = True
         self.page.update()
 
-    def createNewBoard(self, e):
+    def create_new_board(self, e):
 
         self.sidebar.destinations.append(
             NavigationRailDestination(
@@ -131,14 +131,16 @@ class TrelloApp:
                 selected_icon=icons.CHEVRON_RIGHT_ROUNDED
             )
         )
-        newBoard = Board(self, e.control.value)
-        self.boards.append(newBoard)
-        self.view.controls.remove(self.boards[self.currentBoardIndex])
-        self.currentBoardIndex = len(self.sidebar.destinations) - 1
-        print("from createNewBoard - currentBoardIndex: ", self.currentBoardIndex)
+        new_board = Board(self, e.control.value)
+        self.boards.append(new_board)
+        # self.view.controls.remove(self.boards[self.current_board_index])
+        self.boards[self.current_board_index]
+        self.current_board_index = len(self.sidebar.destinations) - 1
+        print("from createNewBoard - current_board_index: ",
+              self.current_board_index)
 
-        self.view.controls.append(self.boards[self.currentBoardIndex])
-        self.sidebar.selected_index = self.currentBoardIndex
+        self.view.controls.append(self.boards[self.current_board_index])
+        self.sidebar.selected_index = self.current_board_index
         self.update()
 
 

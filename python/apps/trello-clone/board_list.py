@@ -45,7 +45,7 @@ class BoardList(UserControl):
             opacity=0.0
         )
         self.edit_field = Row([
-            TextField(label=self.title),
+            TextField(label=self.title, width=200, height=50),
             TextButton(text="Save", on_click=self.save_title)
         ])
         self.header = Row(
@@ -109,8 +109,8 @@ class BoardList(UserControl):
 
     def edit_title(self, e):
         self.header.controls[0] = self.edit_field
-        self.header.controls[1].visible = False
-        self.header.controls[2].visible = False
+        self.header.controls[1].controls[0].visible = False
+        self.header.controls[1].controls[0].visible = False
         self.update()
 
     def delete_list(self, e):
@@ -120,8 +120,8 @@ class BoardList(UserControl):
         self.title = self.edit_field.controls[0].value
         self.header.controls[0] = Text(
             value=self.title, style="titleMedium")
-        self.header.controls[1].visible = True
-        self.header.controls[2].visible = True
+        self.header.controls[1].controls[0].visible = True
+        self.header.controls[1].controls[0].visible = True
         self.update()
 
     def add_item_handler(self, e):
