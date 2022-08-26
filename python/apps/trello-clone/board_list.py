@@ -8,6 +8,8 @@ from flet import (
     Checkbox,
     Text,
     FloatingActionButton,
+    PopupMenuButton,
+    PopupMenuItem,
     Container,
     TextButton,
     TextField,
@@ -45,27 +47,28 @@ class BoardList(UserControl):
             opacity=0.0
         )
         self.edit_field = Row([
-            TextField(label=self.title, width=200, height=50),
+            TextField(value=self.title, width=120, height=50),
             TextButton(text="Save", on_click=self.save_title)
         ])
         self.header = Row(
-            # alignment="spaceAround",
+            # alignment="spaceBetween",
             # spacing=150,
             controls=[
-                Text(value=self.title, style="titleMedium"),
+                Text(value=self.title, style="titleMedium",
+                     text_align="left", overflow="clip"),
                 Row([
-                    IconButton(
-                        icon=icons.CREATE_OUTLINED,
-                        tooltip="Edit List Title",
-                        on_click=self.edit_title,
-                    ),
-                    IconButton(
-                        icons.DELETE_OUTLINE,
-                        tooltip="Delete List",
-                        on_click=self.delete_list,
+                    PopupMenuButton(
+                        items=[
+                            PopupMenuItem(
+                                text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
+                            PopupMenuItem(
+                                text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list)
+                        ],
+                        # expand=True
                     )
-                ], alignment="end", tight=True)
-            ]
+                ], expand=True, alignment="end")
+            ],
+
         )
 
         self.view = DragTarget(
@@ -79,12 +82,14 @@ class BoardList(UserControl):
                     self.items,
                     self.end_indicator
                 ], spacing=4, tight=True, data=self.title),
+                width=200,
                 border=border.all(2, colors.BLACK12),
                 border_radius=border_radius.all(5),
                 bgcolor=self.color if (
                     self.color != "") else colors.BACKGROUND,
-                padding=padding.only(bottom=10, right=20, left=20)
+                padding=padding.only(bottom=10, right=10, left=10, top=5)
             ),
+
             on_accept=self.drag_accept,
             on_will_accept=self.drag_will_accept,
             on_leave=self.drag_leave
@@ -107,21 +112,22 @@ class BoardList(UserControl):
         self.end_indicator.opacity = 0.0
         self.view.update()
 
+    def delete_list(self, e):
+        self.board.remove_list(self, e)
+
     def edit_title(self, e):
         self.header.controls[0] = self.edit_field
         self.header.controls[1].controls[0].visible = False
-        self.header.controls[1].controls[0].visible = False
-        self.update()
 
-    def delete_list(self, e):
-        self.board.remove_list(self, e)
+        #self.header.controls[1].content.visible = False
+        self.update()
 
     def save_title(self, e):
         self.title = self.edit_field.controls[0].value
         self.header.controls[0] = Text(
             value=self.title, style="titleMedium")
         self.header.controls[1].controls[0].visible = True
-        self.header.controls[1].controls[0].visible = True
+        #self.header.controls[1].content.visible = True
         self.update()
 
     def add_item_handler(self, e):
