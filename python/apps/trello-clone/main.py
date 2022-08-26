@@ -53,8 +53,20 @@ class TrelloApp:
         self.sidebar = NavigationRail(
             destinations=[
                 NavigationRailDestination(
-                    padding=padding.all(5),
-                    label_content=Text("Empty Board"),
+                    # padding=padding.all(5),
+                    #label_content=Text("Empty Board"),
+                    label_content=TextField(
+                        #label="Full name",
+                        hint_text="Your First Board",
+                        read_only=True,
+                        on_focus=self.board_name_focus,
+                        on_blur=self.board_name_blur,
+                        border="none",
+                        width=150,
+                        height=50,
+                        text_align="start"
+
+                    ),
                     selected_icon=icons.CHEVRON_RIGHT_ROUNDED
                 )
             ],
@@ -73,7 +85,7 @@ class TrelloApp:
                 padding=padding.all(0),
                 margin=margin.all(0)
             ),
-            on_change=self.navRail_change,
+            on_change=self.nav_rail_change,
             selected_index=0,
             extended=True
         )
@@ -97,12 +109,23 @@ class TrelloApp:
         self.page.update()
         # self.view.update()
 
-    def navRail_change(self, e):
+    def board_name_focus(self, e):
+        e.control.read_only = False
+        e.control.border = "outline"
+        e.control.update()
+
+    def board_name_blur(self, e):
+        e.control.read_only = True
+        e.control.border = "none"
+        e.control.update()
+
+    def nav_rail_change(self, e):
         self.current_board_index = e.control.selected_index
         if self.current_board in self.view.controls:
-            self.view.controls.remove(self.current_board)
+            self.current_board.visible = False
         self.current_board = self.boards[e.control.selected_index]
-        self.view.controls.append(self.current_board)
+        self.current_board.visible = True
+        # self.view.controls.append(self.current_board)
         #print("Selected destination: ", e.control.selected_index)
         self.view.update()
 
@@ -125,8 +148,20 @@ class TrelloApp:
 
         self.sidebar.destinations.append(
             NavigationRailDestination(
-                padding=padding.all(5),
-                label_content=Text(e.control.value),
+                # padding=padding.all(5),
+                # label_content=Text(e.control.value),
+                label_content=TextField(
+                    #label="Full name",
+                    hint_text=f"{e.control.value}",
+                    read_only=True,
+                    on_focus=self.board_name_focus,
+                    on_blur=self.board_name_blur,
+                    border="none",
+                    height=50,
+                    width=150,
+                    text_align="start"
+
+                ),
                 label=e.control.value,
                 selected_icon=icons.CHEVRON_RIGHT_ROUNDED
             )
@@ -134,7 +169,7 @@ class TrelloApp:
         new_board = Board(self, e.control.value)
         self.boards.append(new_board)
         # self.view.controls.remove(self.boards[self.current_board_index])
-        self.boards[self.current_board_index]
+        self.boards[self.current_board_index].visible = False
         self.current_board_index = len(self.sidebar.destinations) - 1
         print("from createNewBoard - current_board_index: ",
               self.current_board_index)
@@ -163,9 +198,10 @@ def main(page: Page):
                 content=Row(
                     [
                         TextField(hint_text="Search this board", border="none",
-                                  autofocus=False, on_submit=search_app, content_padding=padding.all(15), filled=False, suffix_icon=icons.SEARCH)
+                                  autofocus=False, on_submit=search_app, content_padding=padding.only(top=4, left=15), filled=False, suffix_icon=icons.SEARCH)
                     ],
-                    alignment="spaceAround"
+                    alignment="spaceAround",
+                    vertical_alignment="center"
                 ),
                 bgcolor=colors.WHITE24,
                 margin=margin.all(15),
