@@ -4,6 +4,7 @@ from board import Board
 import flet
 from flet import (
     UserControl,
+    View,
     AlertDialog,
     Column,
     Container,
@@ -51,6 +52,7 @@ from sidebar import Sidebar
 class TrelloApp:
     def __init__(self, page: Page):
         self.page = page
+        self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = [
             Board(self, "Empty Board")
@@ -61,14 +63,54 @@ class TrelloApp:
         self.routes = []
         self.current_board_index: int = 0
         self.current_board = self.boards[self.current_board_index]
+        self.all_board_cards = Row(controls=[Column([Text(value=b.identifier), IconButton(
+            icon=icons.SETTINGS)], alignment="spaceEvenly") for b in self.boards])
+        self.all_boards = Column([
+            Row([Text(value="Your Boards", style="headlineMedium"), TextButton(
+                "Add new board", icon=icons.ADD, on_click=self.add_board), ]),
+            Row([TextField(hint_text="Search this board", border="none", autofocus=False, on_submit=self.search_boards,
+                content_padding=padding.only(top=4, left=15), filled=False, suffix_icon=icons.SEARCH)]),
+            self.all_board_cards
+        ])
         self.view = Row(
             [
-                self.sidebar.view,
+                self.sidebar,
                 VerticalDivider(width=2),
                 self.current_board
             ],
+            tight=True,
             expand=True,
         )
+
+    # define all routes here
+    # 'boards', 'members', 'board/:id', 'board/:id/:item', 'member/:id'
+    def route_change(self, e):
+        print("changed route: ", e.route)
+        split_route = e.route.split('/')
+        print("split route: ", split_route)
+        self.page.views.clear()
+        self.page.views.append(
+            View(
+                "/",
+                [
+                    self.sidebar,
+                    VerticalDivider(width=2),
+                    self.all_boards
+                ]
+            )
+        )
+        match split_route:
+            case ["board", board_number]:
+                self.page.views.append(
+                    View(
+                        f"/board/{board_number}",
+                        [
+                            self.sidebar,
+                            VerticalDivider(width=2),
+                            self.boards[board_number]
+                        ]
+                    )
+                )
 
     def update(self):
         self.current_board = self.boards[self.current_board_index]
@@ -144,6 +186,9 @@ class TrelloApp:
         self.sidebar.selected_index = self.current_board_index
         self.update()
 
+    def search_boards(self, e):
+        "TODO"
+
 
 if __name__ == "__main__":
 
@@ -196,4 +241,4 @@ if __name__ == "__main__":
         # page.add(Text("Sanity Check"))
 
     print("flet version: ", flet.version.version)
-    flet.app(target=main)
+    flet.app(target=main, view=flet.WEB_BROWSER)
