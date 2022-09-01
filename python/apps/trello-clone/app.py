@@ -8,6 +8,7 @@ from flet import (
     AlertDialog,
     Column,
     Container,
+    Stack,
     GridView,
     Icon,
     IconButton,
@@ -75,7 +76,7 @@ class TrelloApp:
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
-            title=Text("Trolli"),
+            title=Text("Trolli", font_family="Pacifico", size=32),
             center_title=False,
             toolbar_height=75,
             bgcolor=colors.LIGHT_BLUE_ACCENT_700,
@@ -94,21 +95,37 @@ class TrelloApp:
                 )
             ],
         )
+
+        self.toggle_nav_rail_button = IconButton(
+            icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLACK38, selected=False,
+            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail,
+            right=15)
+
+        self.page_divider = Stack([
+            VerticalDivider(width=2),
+            self.toggle_nav_rail_button,
+        ], clip_behavior="none", width=40)
+
         self.members = Column([
             Text("Members area")
         ])
         self.view = Row(
             [
+                # self.appbar,
                 self.sidebar,
-                VerticalDivider(width=2),
+                self.page_divider,
                 self.current_board
             ],
             tight=True,
             expand=True,
         )
 
+    def start(self):
+        self.page.go(self.page.route)
+
     # define all routes here
     # 'boards', 'members', 'board/:id', 'board/:id/:item', 'member/:id'
+
     def route_change(self, e):
         print("changed route: ", e.route)
         split_route = e.route.split('/')
@@ -121,12 +138,14 @@ class TrelloApp:
                     self.appbar,
                     Row([
                         self.sidebar,
-                        VerticalDivider(width=2),
+                        self.page_divider,
                         self.all_boards
                     ], expand=True)
                 ]
             )
         )
+        self.page.update()
+        print("self.page.controls", self.page.controls)
         match split_route[1:]:
             case ["board", board_number]:
                 print("append board number:", board_number)
@@ -137,7 +156,7 @@ class TrelloApp:
                             self.appbar,
                             Row([
                                 self.sidebar,
-                                VerticalDivider(width=2),
+                                self.page_divider,
                                 self.boards[board_number]
                             ], expand=True)
                         ]
@@ -152,7 +171,7 @@ class TrelloApp:
                             self.appbar,
                             Row([
                                 self.sidebar,
-                                VerticalDivider(width=2),
+                                self.page_divider,
                                 self.all_boards
                             ], expand=True)
                         ]
@@ -164,10 +183,12 @@ class TrelloApp:
                     View(
                         "/members",
                         [
-                            # self.sidebar,
-                            # VerticalDivider(width=2),
-                            # self.members
-                            Text("Member area")
+                            self.appbar,
+                            Row([
+                                self.sidebar,
+                                self.page_divider,
+                                self.members
+                            ])
                         ]
                     )
                 )
@@ -187,6 +208,16 @@ class TrelloApp:
         e.control.read_only = True
         e.control.border = "none"
         e.control.update()
+
+    def toggle_nav_rail(self, e):
+        print("hide nav_rail")
+        #self.nav_rail_visible = not self.nav_rail_visible
+        #self.view.visible = not self.view.visible
+        self.sidebar.visible = not self.sidebar.visible
+        self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
+        self.view.update()
+        # self.set_navigation_content()
+        self.page.update()
 
     def nav_rail_change(self, e):
         self.current_board_index = e.control.selected_index
@@ -260,46 +291,15 @@ if __name__ == "__main__":
 
         page.title = "Flet Trello clone"
         page.bgcolor = colors.LIGHT_GREEN_400
-        page.appbar = AppBar(
-            leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
-            leading_width=100,
-            title=Text("Trolli"),
-            center_title=False,
-            toolbar_height=75,
-            bgcolor=colors.LIGHT_BLUE_ACCENT_700,
-            actions=[
-                Container(
-                    content=Row(
-                        [
-                            TextField(hint_text="Search this board", border="none",
-                                      autofocus=False, on_submit=search_app, content_padding=padding.only(top=4, left=15), filled=False, suffix_icon=icons.SEARCH)
-                        ],
-                        alignment="spaceAround",
-                        vertical_alignment="center"
-                    ),
-                    bgcolor=colors.WHITE24,
-                    margin=margin.all(15),
-                    border=border.all(2, colors.WHITE),
-                    border_radius=border_radius.all(30)
-                ),
-                Container(
-                    content=PopupMenuButton(
-                        items=[
-                            PopupMenuItem(text="Profile"),
-                            PopupMenuItem(),  # divider
-                            PopupMenuItem(
-                                text="Synchronize"
-                            )
-                        ]
-                    ),
-                    margin=margin.only(left=50, right=25)
-                )
-            ],
-        )
+        page.fonts = {
+            "Pacifico": "/Pacifico-Regular.ttf"
+        }
         page.update()
         app = TrelloApp(page)
-        page.add(app.view)
+        app.start()
+        # page.add(app.view)
+        # app.page.go(page.route)
         # page.add(Text("Sanity Check"))
 
     print("flet version: ", flet.version.version)
-    flet.app(target=main, view=flet.WEB_BROWSER)
+    flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)

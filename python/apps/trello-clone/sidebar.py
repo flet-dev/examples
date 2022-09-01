@@ -78,9 +78,9 @@ class Sidebar(UserControl):
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
             extended=True,
-            expand=True,
+            # expand=True,
             bgcolor=colors.BLUE_GREY,
-            height=70
+            height=120
         )
         self.bottom_nav_rail = NavigationRail(
             selected_index=None,
@@ -98,8 +98,8 @@ class Sidebar(UserControl):
             content=Column([
                 Row([
                     Text("Workspace"),
-                    Container(content=self.toggle_nav_rail_button,
-                              alignment=alignment.center_right, on_click=self.toggle_nav_rail)
+                    # Container(content=self.toggle_nav_rail_button,
+                    #           alignment=alignment.center_right, on_click=self.toggle_nav_rail)
                 ], alignment="spaceBetween"),
                 # divider
                 Container(
@@ -144,8 +144,11 @@ class Sidebar(UserControl):
         self.nav_rail.selected_index = board_number
 
     def toggle_nav_rail(self, e):
-        self.nav_rail_visible = not self.nav_rail_visible
-        self.set_navigation_content()
+        print("hide nav_rail", self.nav_rail_visible)
+        #self.nav_rail_visible = not self.nav_rail_visible
+        self.view.visible = not self.view.visible
+        self.view.update()
+        # self.set_navigation_content()
         self.page.update()
 
     def board_name_focus(self, e):
