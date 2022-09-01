@@ -72,6 +72,31 @@ class TrelloApp:
                 content_padding=padding.only(top=4, left=15), filled=False, suffix_icon=icons.SEARCH)]),
             self.all_board_cards
         ])
+        self.appbar = AppBar(
+            leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
+            leading_width=100,
+            title=Text("Trolli"),
+            center_title=False,
+            toolbar_height=75,
+            bgcolor=colors.LIGHT_BLUE_ACCENT_700,
+            actions=[
+                Container(
+                    content=PopupMenuButton(
+                        items=[
+                            PopupMenuItem(text="Profile"),
+                            PopupMenuItem(),  # divider
+                            PopupMenuItem(
+                                text="Synchronize"
+                            )
+                        ]
+                    ),
+                    margin=margin.only(left=50, right=25)
+                )
+            ],
+        )
+        self.members = Column([
+            Text("Members area")
+        ])
         self.view = Row(
             [
                 self.sidebar,
@@ -87,30 +112,66 @@ class TrelloApp:
     def route_change(self, e):
         print("changed route: ", e.route)
         split_route = e.route.split('/')
-        print("split route: ", split_route)
+        print("split route: ", split_route[1:])
         self.page.views.clear()
         self.page.views.append(
             View(
                 "/",
                 [
-                    self.sidebar,
-                    VerticalDivider(width=2),
-                    self.all_boards
+                    self.appbar,
+                    Row([
+                        self.sidebar,
+                        VerticalDivider(width=2),
+                        self.all_boards
+                    ], expand=True)
                 ]
             )
         )
-        match split_route:
+        match split_route[1:]:
             case ["board", board_number]:
+                print("append board number:", board_number)
                 self.page.views.append(
                     View(
                         f"/board/{board_number}",
                         [
-                            self.sidebar,
-                            VerticalDivider(width=2),
-                            self.boards[board_number]
+                            self.appbar,
+                            Row([
+                                self.sidebar,
+                                VerticalDivider(width=2),
+                                self.boards[board_number]
+                            ], expand=True)
                         ]
                     )
                 )
+            case ["boards"]:
+                print("append boards")
+                self.page.views.append(
+                    View(
+                        "/boards",
+                        [
+                            self.appbar,
+                            Row([
+                                self.sidebar,
+                                VerticalDivider(width=2),
+                                self.all_boards
+                            ], expand=True)
+                        ]
+                    )
+                )
+            case ["members"]:
+                print("append members")
+                self.page.views.append(
+                    View(
+                        "/members",
+                        [
+                            # self.sidebar,
+                            # VerticalDivider(width=2),
+                            # self.members
+                            Text("Member area")
+                        ]
+                    )
+                )
+        self.page.update()
 
     def update(self):
         self.current_board = self.boards[self.current_board_index]
