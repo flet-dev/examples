@@ -32,9 +32,6 @@ class Sidebar(UserControl):
         super().__init__()
         self.app = app
         self.page = page
-        self.routes_index = {}
-        # self.current_nav_item = 0
-        # self.routes = routes
         self.nav_rail_visible = True
         self.top_nav_items = [
             NavigationRailDestination(
@@ -55,7 +52,6 @@ class Sidebar(UserControl):
             NavigationRailDestination(
                 # padding=padding.all(5),
                 # label_content=Text("Empty Board"),
-                label="Your First Board",
                 label_content=TextField(
                     #label="Your First Board",
                     hint_text="Your First Board",
@@ -69,7 +65,9 @@ class Sidebar(UserControl):
                     text_align="start"
 
                 ),
-                selected_icon=icons.CHEVRON_RIGHT_ROUNDED
+                label="Your First Board",
+                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
+                icon=icons.CHEVRON_RIGHT_OUTLINED
             )
         ]
         self.top_nav_rail = NavigationRail(
@@ -80,7 +78,7 @@ class Sidebar(UserControl):
             extended=True,
             # expand=True,
             bgcolor=colors.BLUE_GREY,
-            height=120
+            height=110
         )
         self.bottom_nav_rail = NavigationRail(
             selected_index=None,
@@ -103,24 +101,23 @@ class Sidebar(UserControl):
                 ], alignment="spaceBetween"),
                 # divider
                 Container(
-                    bgcolor=colors.BLACK54,
+                    bgcolor=colors.BLACK26,
                     border_radius=border_radius.all(30),
                     height=1,
-                    # alignment=alignment.center_right,
-                    width=250
+                    alignment=alignment.center_right,
+                    width=220
                 ),
                 self.top_nav_rail,
                 # divider
                 Container(
-                    bgcolor=colors.BLACK54,
+                    bgcolor=colors.BLACK26,
                     border_radius=border_radius.all(30),
                     height=1,
-                    # alignment=alignment.center_right,
-                    width=250
+                    alignment=alignment.center_right,
+                    width=220
                 ),
                 self.bottom_nav_rail
             ], tight=True),
-            # content=self.nav_rail,
             padding=padding.all(10),
             margin=margin.all(0),
             width=250,
@@ -129,19 +126,37 @@ class Sidebar(UserControl):
             visible=self.nav_rail_visible,
         )
         return self.view
-        # return self.nav_rail
 
-    def select_page(self, index):
-        self.navigation_rail.selected_index = index
-        self.set_visible_content()
+    def add_board_destination(self, board_name):
+        #self.nav_rail.selected_index = board_number
+        self.bottom_nav_items.append(
+            NavigationRailDestination(
+                # padding=padding.all(5),
+                # label_content=Text(e.control.value),
+                label_content=TextField(
+                    # label="Full name",
+                    hint_text=board_name,
+                    text_size=12,
+                    read_only=True,
+                    on_focus=self.board_name_focus,
+                    on_blur=self.board_name_blur,
+                    border="none",
+                    height=50,
+                    width=150,
+                    text_align="start"
 
-    def set_visible_content(self):
-        self.page.route = self.routes[self.nav_rail.selected_index]
+                ),
+                label=board_name,
+                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
+                icon=icons.CHEVRON_RIGHT_OUTLINED
+            )
+        )
+        self.bottom_nav_change(len(self.bottom_nav_items) - 1)
 
-        pass
-
-    def select_board(self, board_number):
-        self.nav_rail.selected_index = board_number
+    def remove_board_destination(self, board_index):
+        self.bottom_nav_items.pop(board_index)
+        # self.page.update()
+        self.page.go("/boards")
 
     def toggle_nav_rail(self, e):
         self.view.visible = not self.view.visible
