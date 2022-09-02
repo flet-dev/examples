@@ -144,8 +144,6 @@ class Sidebar(UserControl):
         self.nav_rail.selected_index = board_number
 
     def toggle_nav_rail(self, e):
-        print("hide nav_rail", self.nav_rail_visible)
-        #self.nav_rail_visible = not self.nav_rail_visible
         self.view.visible = not self.view.visible
         self.view.update()
         # self.set_navigation_content()
@@ -162,75 +160,17 @@ class Sidebar(UserControl):
         e.control.update()
 
     def top_nav_change(self, e):
-        # this should call page change
+        index = e if (type(e) == int) else e.control.selected_index
         self.bottom_nav_rail.selected_index = None
+        self.top_nav_rail.selected_index = index
         self.view.update()
-        route_name = self.top_nav_items[e.control.selected_index].label
+        route_name = self.top_nav_items[index].label
+        print("route_name: ", route_name)
         self.page.go(f"/{slugify(route_name)}")
 
-        # self.app.page_change(self.routes_index[e.control.selected_index])
-        #self.page.route = self.routes[index]
-        #self.app.current_board = self.app.boards[index]
-
     def bottom_nav_change(self, e):
-        # this should call page change
+        index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
+        self.bottom_nav_rail.selected_index = index
         self.view.update()
-        self.page.go(f"/board/{e.control.selected_index}")
-
-        # self.app.page_change(self.routes_index[e.control.selected_index])
-        #self.page.route = self.routes[index]
-        #self.app.current_board = self.app.boards[index]
-
-    # to be implemented on 'Boards' page
-    # def add_board(self, e):
-    #     def close_dlg(e):
-    #         self.create_new_board(e)
-    #         dialog.open = False
-    #         self.page.update()
-    #     dialog = AlertDialog(
-    #         title=Text("Name your new board"),
-    #         content=Column(
-    #             [TextField(label="New Board Name", on_submit=close_dlg)], tight=True),
-    #         on_dismiss=lambda e: print("Modal dialog dismissed!"),
-    #     )
-    #     self.page.dialog = dialog
-    #     dialog.open = True
-    #     self.page.update()
-
-    def create_new_board(self, e):
-
-        self.nav_rail.destinations.append(
-            NavigationRailDestination(
-                # padding=padding.all(5),
-                # label_content=Text(e.control.value),
-                label_content=TextField(
-                    # label="Full name",
-                    hint_text=f"{e.control.value}",
-                    read_only=True,
-                    on_focus=self.board_name_focus,
-                    on_blur=self.board_name_blur,
-                    border="none",
-                    height=50,
-                    width=150,
-                    text_align="start"
-
-                ),
-                label=e.control.value,
-                selected_icon=icons.CHEVRON_RIGHT_ROUNDED
-            )
-        )
-        self.app.routes.append(slugify(e.control.value))
-        self.routes_index[len(self.nav_rail.destinations)
-                          ] = slugify(e.control.value)
-        new_board = Board(self, e.control.value)
-        self.boards.append(new_board)
-        # self.view.controls.remove(self.boards[self.current_board_index])
-        self.boards[self.current_board_index].visible = False
-        self.current_board_index = len(self.sidebar.destinations) - 1
-        print("from createNewBoard - current_board_index: ",
-              self.current_board_index)
-
-        self.view.controls.append(self.boards[self.current_board_index])
-        self.sidebar.selected_index = self.current_board_index
-        self.update()
+        self.page.go(f"/board/{index}")

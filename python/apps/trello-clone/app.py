@@ -35,13 +35,14 @@ from flet import (
     colors,
     icons,
     padding,
+    theme,
     margin,
     border
 )
 from sidebar import Sidebar
-#from dotenv import dotenv_values
+# from dotenv import dotenv_values
 
-#config = dotenv_values(".env.dev")
+# config = dotenv_values(".env.dev")
 
 # trello app
 # MVP  - Boards -> Lists -> Cards
@@ -53,6 +54,7 @@ from sidebar import Sidebar
 class TrelloApp:
     def __init__(self, page: Page):
         self.page = page
+
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = [
@@ -109,16 +111,16 @@ class TrelloApp:
         self.members = Column([
             Text("Members area")
         ])
-        self.view = Row(
-            [
-                # self.appbar,
-                self.sidebar,
-                self.page_divider,
-                self.current_board
-            ],
-            tight=True,
-            expand=True,
-        )
+        # self.view = Row(
+        #     [
+        #         # self.appbar,
+        #         self.sidebar,
+        #         self.page_divider,
+        #         self.current_board
+        #     ],
+        #     tight=True,
+        #     expand=True,
+        # )
 
     def start(self):
         self.page.go(self.page.route)
@@ -141,13 +143,15 @@ class TrelloApp:
                         self.page_divider,
                         self.all_boards
                     ], expand=True)
-                ]
+                ],
+                bgcolor=colors.BLUE_GREY_200
             )
         )
         self.page.update()
         print("self.page.controls", self.page.controls)
         match split_route[1:]:
             case ["board", board_number]:
+                self.sidebar.bottom_nav_change(int(board_number))
                 print("append board number:", board_number)
                 self.page.views.append(
                     View(
@@ -157,12 +161,14 @@ class TrelloApp:
                             Row([
                                 self.sidebar,
                                 self.page_divider,
-                                self.boards[board_number]
+                                self.boards[int(board_number)]
                             ], expand=True)
-                        ]
+                        ],
+                        bgcolor=colors.BLUE_GREY_200
                     )
                 )
             case ["boards"]:
+                self.sidebar.top_nav_change(0)
                 print("append boards")
                 self.page.views.append(
                     View(
@@ -174,10 +180,12 @@ class TrelloApp:
                                 self.page_divider,
                                 self.all_boards
                             ], expand=True)
-                        ]
+                        ],
+                        bgcolor=colors.BLUE_GREY_200
                     )
                 )
             case ["members"]:
+                self.sidebar.top_nav_change(1)
                 print("append members")
                 self.page.views.append(
                     View(
@@ -188,8 +196,9 @@ class TrelloApp:
                                 self.sidebar,
                                 self.page_divider,
                                 self.members
-                            ])
-                        ]
+                            ], expand=True)
+                        ],
+                        bgcolor=colors.BLUE_GREY_200
                     )
                 )
         self.page.update()
@@ -211,11 +220,11 @@ class TrelloApp:
 
     def toggle_nav_rail(self, e):
         print("hide nav_rail")
-        #self.nav_rail_visible = not self.nav_rail_visible
-        #self.view.visible = not self.view.visible
+        # self.nav_rail_visible = not self.nav_rail_visible
+        # self.view.visible = not self.view.visible
         self.sidebar.visible = not self.sidebar.visible
         self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
-        self.view.update()
+        # self.view.update()
         # self.set_navigation_content()
         self.page.update()
 
@@ -226,7 +235,7 @@ class TrelloApp:
         self.current_board = self.boards[e.control.selected_index]
         self.current_board.visible = True
         # self.view.controls.append(self.current_board)
-        #print("Selected destination: ", e.control.selected_index)
+        # print("Selected destination: ", e.control.selected_index)
         self.view.update()
 
     def add_board(self, e):
@@ -251,7 +260,7 @@ class TrelloApp:
                 # padding=padding.all(5),
                 # label_content=Text(e.control.value),
                 label_content=TextField(
-                    #label="Full name",
+                    # label="Full name",
                     hint_text=f"{e.control.value}",
                     read_only=True,
                     on_focus=self.board_name_focus,
@@ -290,16 +299,15 @@ if __name__ == "__main__":
             "TODO"
 
         page.title = "Flet Trello clone"
-        page.bgcolor = colors.LIGHT_GREEN_400
+        # page.bgcolor = colors.LIGHT_GREEN_400
+        page.theme = theme.Theme(
+            color_scheme_seed="green", font_family="Verdana")
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
         page.update()
         app = TrelloApp(page)
         app.start()
-        # page.add(app.view)
-        # app.page.go(page.route)
-        # page.add(Text("Sanity Check"))
 
     print("flet version: ", flet.version.version)
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)
