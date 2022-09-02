@@ -141,8 +141,6 @@ class IconBrowser(UserControl):
 
 def main(page: Page):
     page.title = "Flet icons browser"
-    page.theme_mode = "light"
-
     page.add(IconBrowser(expand=True))
 
 
