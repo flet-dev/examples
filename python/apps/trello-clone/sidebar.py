@@ -62,7 +62,8 @@ class Sidebar(UserControl):
                     text_size=12,
                     width=150,
                     height=50,
-                    text_align="start"
+                    text_align="start",
+                    data=0
 
                 ),
                 label="Your First Board",
@@ -143,7 +144,8 @@ class Sidebar(UserControl):
                     border="none",
                     height=50,
                     width=150,
-                    text_align="start"
+                    text_align="start",
+                    data=len(self.bottom_nav_items)
 
                 ),
                 label=board_name,
@@ -156,7 +158,7 @@ class Sidebar(UserControl):
     def remove_board_destination(self, board_index):
         self.bottom_nav_items.pop(board_index)
         # self.page.update()
-        self.page.go("/boards")
+        # self.page.go("/boards")
 
     def toggle_nav_rail(self, e):
         self.view.visible = not self.view.visible
@@ -170,6 +172,9 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
+        print("e.control: ", e.control.data)
+        self.app.boards[e.control.data].identifier = e.control.value
+        self.app.update()
         e.control.read_only = True
         e.control.border = "none"
         e.control.update()

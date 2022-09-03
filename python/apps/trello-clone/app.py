@@ -144,6 +144,7 @@ class TrelloApp:
             case ["board", board_number]:
                 self.sidebar.bottom_nav_change(int(board_number))
                 print("append board number:", board_number)
+                # check for numbers out of range
                 self.page.views.append(
                     View(
                         f"/board/{board_number}",
@@ -186,7 +187,7 @@ class TrelloApp:
                             Row([
                                 self.sidebar,
                                 self.page_divider,
-                                self.members
+                                Text("Members area")
                             ], expand=True)
                         ],
                         bgcolor=colors.BLUE_GREY_200
@@ -267,7 +268,7 @@ class TrelloApp:
         def close_dlg(e):
             self.create_new_board(e)
             dialog.open = False
-            self.page.update()
+            # self.page.update()
         dialog = AlertDialog(
             title=Text("Name your new board"),
             content=Column(
@@ -284,12 +285,13 @@ class TrelloApp:
         self.sidebar.add_board_destination(e.control.value)
 
     def delete_board(self, e):
-        print("e.control.event: ", e.control.data)
-        self.sidebar.remove_board_destination(
-            self.boards.index(e.control.data))
+        print("e.control.data: ", e.control.data)
+        i = self.boards.index(e.control.data)
+        print("index: ", i)
         self.boards.remove(e.control.data)
-
-        pass
+        self.sidebar.remove_board_destination(i)
+        self.page.update()
+        self.page.go("/")
 
     def search_boards(self, e):
         pass
@@ -303,6 +305,7 @@ if __name__ == "__main__":
         page.theme = theme.Theme(
             # color_scheme_seed="green",
             font_family="Verdana")
+        page.theme.page_transitions.windows = "cupertino"
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
