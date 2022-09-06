@@ -192,5 +192,6 @@ class Sidebar(UserControl):
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
+        self.app.view.controls[1].controls[2] = self.app.boards[index]
         self.view.update()
-        self.page.go(f"/board/{index}")
+        # self.page.go(f"/board/{index}")

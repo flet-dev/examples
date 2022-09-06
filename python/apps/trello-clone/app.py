@@ -113,6 +113,19 @@ class TrelloApp:
             VerticalDivider(width=2),
             self.toggle_nav_rail_button,
         ], clip_behavior="none", width=40)
+        self.page.appbar = self.appbar
+        self.page.update()
+        self.view = Column(
+            [
+
+                Row([
+                    self.sidebar,
+                    self.page_divider,
+                    self.build_all_boards_view()
+                ], expand=True)
+            ],
+            expand=True
+        )
 
     def start(self):
         self.page.go(self.page.route)
@@ -309,9 +322,11 @@ if __name__ == "__main__":
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
-        page.update()
+        page.bgcolor = colors.BLUE_GREY_200
         app = TrelloApp(page)
-        app.start()
+        page.add(app.view)
+        page.update()
+        # app.start()
 
     print("flet version: ", flet.version.version)
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)
