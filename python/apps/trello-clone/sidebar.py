@@ -48,50 +48,7 @@ class Sidebar(UserControl):
             ),
 
         ]
-        self.bottom_nav_items = [
-            NavigationRailDestination(
-                # padding=padding.all(5),
-                # label_content=Text("Empty Board"),
-                label_content=TextField(
-                    #label="Your First Board",
-                    hint_text="Your First Board",
-                    read_only=True,
-                    on_focus=self.board_name_focus,
-                    on_blur=self.board_name_blur,
-                    border="none",
-                    text_size=12,
-                    width=150,
-                    height=50,
-                    text_align="start",
-                    data=0
-
-                ),
-                label="Your First Board",
-                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
-                icon=icons.CHEVRON_RIGHT_OUTLINED
-            ),
-            NavigationRailDestination(
-                # padding=padding.all(5),
-                # label_content=Text("Empty Board"),
-                label_content=TextField(
-                    #label="Your First Board",
-                    hint_text="my second board",
-                    read_only=True,
-                    on_focus=self.board_name_focus,
-                    on_blur=self.board_name_blur,
-                    border="none",
-                    text_size=12,
-                    width=150,
-                    height=50,
-                    text_align="start",
-                    data=0
-
-                ),
-                label="Your First Board",
-                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
-                icon=icons.CHEVRON_RIGHT_OUTLINED
-            )
-        ]
+        self.bottom_nav_items = []
         self.top_nav_rail = NavigationRail(
             selected_index=None,
             label_type="all",
@@ -174,7 +131,9 @@ class Sidebar(UserControl):
                 icon=icons.CHEVRON_RIGHT_OUTLINED
             )
         )
-        self.bottom_nav_change(len(self.bottom_nav_items) - 1)
+        self.app.page.update()
+        if len(self.bottom_nav_items) > 1:
+            self.bottom_nav_change(len(self.bottom_nav_items) - 1)
 
     def remove_board_destination(self, board_index):
         self.bottom_nav_items.pop(board_index)
@@ -207,8 +166,10 @@ class Sidebar(UserControl):
         self.view.update()
         route_name = self.top_nav_items[index].label
         print("route_name: ", route_name)
+        for ctrl in self.app.view.controls[4].controls:
+            ctrl.visible = False
         # set all controls in app.view to visible=False except this index
-        for i, ctrl in enumerate(self.app.view.controls[2:]):
+        for i, ctrl in enumerate(self.app.view.controls[2:4]):
             ctrl.visible = index == i
         # self.app.view.controls[0].controls[2] = self.app.build_all_boards_view() if (
          #   index == 0) else Text("Area for members")
@@ -220,10 +181,11 @@ class Sidebar(UserControl):
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         # self.app.view.controls[1].controls[2] = self.app.boards[index]
-        for i, ctrl in enumerate(self.app.view.controls[2:]):
+        for ctrl in self.app.view.controls[2:4]:
+            ctrl.visible = False
+        for i, ctrl in enumerate(self.app.view.controls[4].controls):
+            ctrl.visible = index == i
             print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
-            ctrl.visible = (index+2) == (i)
-            print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+        # self.app.page.update()
         self.app.view.update()
-        self.view.update()
         # self.page.go(f"/board/{index}")

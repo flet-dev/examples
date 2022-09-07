@@ -57,8 +57,8 @@ class Board(UserControl):
                 # Row([self.add_list_button]),
                 self.list_wrap
             ], data=self, visible=self.visible, expand=True)
-        # return self.view
-        return Text(f"board test {self.identifier}")
+        return self.view
+        # return Text(f"board test {self.identifier}")
 
     def addListDlg(self, e):
 

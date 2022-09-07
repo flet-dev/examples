@@ -61,16 +61,14 @@ class TrelloApp:
 
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
-        self.boards = [
-            Board(self, "Your First Board"),
-            Board(self, "my second board")
-        ]
+        self.boards = Column([])
         # could either be all boards, settings, individual boards. - this is a list of controls
         self.pages = []
         # could be pages as above or edit panes (as in cards for ex.) - this is a list of slugs
         self.routes = []
-        self.current_board_index: int = 0
-        self.current_board = self.boards[self.current_board_index]
+        self.current_board_index: int | None = None
+        self.current_board = None if self.current_board_index == None else self.boards[
+            self.current_board_index]
         self.all_board_cards = Row([
             Container(content=Row([Text(value=b.identifier), IconButton(
                 icon=icons.SETTINGS)], alignment="spaceBetween"),
@@ -79,7 +77,7 @@ class TrelloApp:
                 bgcolor=colors.WHITE60,
                 padding=padding.all(10),
                 width=250,
-            ) for b in self.boards
+            ) for b in self.boards.controls
         ], wrap=True)
 
         self.appbar = AppBar(
@@ -122,13 +120,14 @@ class TrelloApp:
             self.page_divider,
             self.build_all_boards_view(),
             self.members_view,
-            *self.boards
+            self.boards
 
         ], expand=True)
-        print("self.view.controls: ", self.view.controls)
 
     def start(self):
-        self.page.go(self.page.route)
+        # self.page.go(self.page.route)
+        self.create_new_board("my board")
+        print("self.view.controls: ", self.boards.controls)
 
     def change_view_content():
         pass
@@ -261,7 +260,7 @@ class TrelloApp:
                     bgcolor=colors.WHITE60,
                     padding=padding.all(10),
                     width=250,
-                ) for b in self.boards
+                ) for b in self.boards.controls
             ], wrap=True)
         ], expand=True)
 
@@ -282,9 +281,9 @@ class TrelloApp:
 
     def add_board(self, e):
         def close_dlg(e):
-            self.create_new_board(e)
+            self.create_new_board(e.control.value)
             dialog.open = False
-            # self.page.update()
+            self.page.update()
         dialog = AlertDialog(
             title=Text("Name your new board"),
             content=Column(
@@ -295,16 +294,19 @@ class TrelloApp:
         dialog.open = True
         self.page.update()
 
-    def create_new_board(self, e):
-        new_board = Board(self, e.control.value)
-        self.boards.append(new_board)
-        self.sidebar.add_board_destination(e.control.value)
+    def create_new_board(self, board_name):
+        new_board = Board(self, board_name)
+        self.boards.controls.append(new_board)
+        # self.view.update()
+        print("self.view.controls: ", self.view.controls)
+        self.sidebar.add_board_destination(board_name)
+        self.page.update()
 
     def delete_board(self, e):
         print("e.control.data: ", e.control.data)
         i = self.boards.index(e.control.data)
         print("index: ", i)
-        self.boards.remove(e.control.data)
+        self.boards.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
         self.page.update()
         self.page.go("/")
@@ -327,9 +329,9 @@ if __name__ == "__main__":
         }
         page.bgcolor = colors.BLUE_GREY_200
         app = TrelloApp(page)
+        app.start()
         page.add(app.view)
         page.update()
-        # app.start()
 
     print("flet version: ", flet.version.version)
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)
