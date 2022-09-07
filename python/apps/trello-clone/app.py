@@ -63,6 +63,7 @@ class TrelloApp:
         self.sidebar = Sidebar(self, page)
         self.boards = [
             Board(self, "Your First Board"),
+            Board(self, "my second board")
         ]
         # could either be all boards, settings, individual boards. - this is a list of controls
         self.pages = []
@@ -115,20 +116,22 @@ class TrelloApp:
         ], clip_behavior="none", width=40)
         self.page.appbar = self.appbar
         self.page.update()
-        self.view = Column(
-            [
+        self.members_view = Text("members view", visible=False)
+        self.view = Row([
+            self.sidebar,
+            self.page_divider,
+            self.build_all_boards_view(),
+            self.members_view,
+            *self.boards
 
-                Row([
-                    self.sidebar,
-                    self.page_divider,
-                    self.build_all_boards_view()
-                ], expand=True)
-            ],
-            expand=True
-        )
+        ], expand=True)
+        print("self.view.controls: ", self.view.controls)
 
     def start(self):
         self.page.go(self.page.route)
+
+    def change_view_content():
+        pass
 
     # define all routes here
     # 'boards', 'members', 'board/:id', 'board/:id/:item', 'member/:id'

@@ -69,6 +69,27 @@ class Sidebar(UserControl):
                 label="Your First Board",
                 selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
                 icon=icons.CHEVRON_RIGHT_OUTLINED
+            ),
+            NavigationRailDestination(
+                # padding=padding.all(5),
+                # label_content=Text("Empty Board"),
+                label_content=TextField(
+                    #label="Your First Board",
+                    hint_text="my second board",
+                    read_only=True,
+                    on_focus=self.board_name_focus,
+                    on_blur=self.board_name_blur,
+                    border="none",
+                    text_size=12,
+                    width=150,
+                    height=50,
+                    text_align="start",
+                    data=0
+
+                ),
+                label="Your First Board",
+                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
+                icon=icons.CHEVRON_RIGHT_OUTLINED
             )
         ]
         self.top_nav_rail = NavigationRail(
@@ -186,12 +207,23 @@ class Sidebar(UserControl):
         self.view.update()
         route_name = self.top_nav_items[index].label
         print("route_name: ", route_name)
-        self.page.go(f"/{slugify(route_name)}")
+        # set all controls in app.view to visible=False except this index
+        for i, ctrl in enumerate(self.app.view.controls[2:]):
+            ctrl.visible = index == i
+        # self.app.view.controls[0].controls[2] = self.app.build_all_boards_view() if (
+         #   index == 0) else Text("Area for members")
+        self.app.view.update()
+        # self.page.go(f"/{slugify(route_name)}")
 
     def bottom_nav_change(self, e):
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
-        self.app.view.controls[1].controls[2] = self.app.boards[index]
+        # self.app.view.controls[1].controls[2] = self.app.boards[index]
+        for i, ctrl in enumerate(self.app.view.controls[2:]):
+            print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+            ctrl.visible = (index+2) == (i)
+            print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+        self.app.view.update()
         self.view.update()
         # self.page.go(f"/board/{index}")

@@ -30,7 +30,7 @@ class Board(UserControl):
     def __init__(self, app, identifier: str):
         super().__init__()
         self.app = app
-        self.visible = True
+        self.visible = False
         self.identifier = identifier
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
@@ -56,8 +56,9 @@ class Board(UserControl):
                 # since the lists still need to be placed inside either a row or a column depending on toggle state.
                 # Row([self.add_list_button]),
                 self.list_wrap
-            ], data=self, visible=self.visible)
-        return self.view
+            ], data=self, visible=self.visible, expand=True)
+        # return self.view
+        return Text(f"board test {self.identifier}")
 
     def addListDlg(self, e):
 
