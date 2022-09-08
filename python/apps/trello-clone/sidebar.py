@@ -63,7 +63,7 @@ class Sidebar(UserControl):
             selected_index=None,
             label_type="all",
             on_change=self.bottom_nav_change,
-            destinations=self.bottom_nav_items,
+            # destinations=self.bottom_nav_items,
             extended=True,
             expand=True,
             bgcolor=colors.BLUE_GREY,
@@ -107,13 +107,9 @@ class Sidebar(UserControl):
         return self.view
 
     def add_board_destination(self, board_name):
-        #self.nav_rail.selected_index = board_number
         self.bottom_nav_rail.destinations.append(
             NavigationRailDestination(
-                # padding=padding.all(5),
-                # label_content=Text(e.control.value),
                 label_content=TextField(
-                    # label="Full name",
                     hint_text=board_name,
                     text_size=12,
                     read_only=True,
@@ -124,13 +120,14 @@ class Sidebar(UserControl):
                     width=150,
                     text_align="start",
                     data=len(self.bottom_nav_items)
-
                 ),
                 label=board_name,
                 selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
                 icon=icons.CHEVRON_RIGHT_OUTLINED
             )
         )
+        self.app.all_boards_view = self.app.build_all_boards_view()
+        self.app.view.update()
         self.app.page.update()
         if len(self.bottom_nav_rail.destinations) > 1:
             print("call bottom_nav_change")
@@ -139,7 +136,6 @@ class Sidebar(UserControl):
     def remove_board_destination(self, board_index):
         self.bottom_nav_items.pop(board_index)
         # self.page.update()
-        # self.page.go("/boards")
 
     def toggle_nav_rail(self, e):
         self.view.visible = not self.view.visible
@@ -183,6 +179,7 @@ class Sidebar(UserControl):
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         self.view.update()
+
         # self.app.view.controls[1].controls[2] = self.app.boards[index]
         for ctrl in self.app.view.controls[2:4]:
             ctrl.visible = False

@@ -62,13 +62,10 @@ class TrelloApp:
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = Column([])
-        # could either be all boards, settings, individual boards. - this is a list of controls
-        self.pages = []
-        # could be pages as above or edit panes (as in cards for ex.) - this is a list of slugs
-        self.routes = []
         self.current_board_index: int | None = None
         self.current_board = None if self.current_board_index == None else self.boards[
             self.current_board_index]
+
         self.all_board_cards = Row([
             Container(content=Row([Text(value=b.identifier), IconButton(
                 icon=icons.SETTINGS)], alignment="spaceBetween"),
@@ -115,10 +112,11 @@ class TrelloApp:
         self.page.appbar = self.appbar
         self.page.update()
         self.members_view = Text("members view", visible=False)
+        self.all_boards_view = self.build_all_boards_view()
         self.view = Row([
             self.sidebar,
             self.page_divider,
-            self.build_all_boards_view(),
+            self.all_boards_view,
             self.members_view,
             self.boards
 
