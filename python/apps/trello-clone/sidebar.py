@@ -108,7 +108,7 @@ class Sidebar(UserControl):
 
     def add_board_destination(self, board_name):
         #self.nav_rail.selected_index = board_number
-        self.bottom_nav_items.append(
+        self.bottom_nav_rail.destinations.append(
             NavigationRailDestination(
                 # padding=padding.all(5),
                 # label_content=Text(e.control.value),
@@ -132,7 +132,8 @@ class Sidebar(UserControl):
             )
         )
         self.app.page.update()
-        if len(self.bottom_nav_items) > 1:
+        if len(self.bottom_nav_rail.destinations) > 1:
+            print("call bottom_nav_change")
             self.bottom_nav_change(len(self.bottom_nav_items) - 1)
 
     def remove_board_destination(self, board_index):
@@ -164,8 +165,8 @@ class Sidebar(UserControl):
         self.bottom_nav_rail.selected_index = None
         self.top_nav_rail.selected_index = index
         self.view.update()
-        route_name = self.top_nav_items[index].label
-        print("route_name: ", route_name)
+        #route_name = self.top_nav_rail.destinations[index].label
+        #print("route_name: ", route_name)
         for ctrl in self.app.view.controls[4].controls:
             ctrl.visible = False
         # set all controls in app.view to visible=False except this index
@@ -177,15 +178,17 @@ class Sidebar(UserControl):
         # self.page.go(f"/{slugify(route_name)}")
 
     def bottom_nav_change(self, e):
+        print("bottom nav change")
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
+        self.view.update()
         # self.app.view.controls[1].controls[2] = self.app.boards[index]
         for ctrl in self.app.view.controls[2:4]:
             ctrl.visible = False
         for i, ctrl in enumerate(self.app.view.controls[4].controls):
             ctrl.visible = index == i
             print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
-        # self.app.page.update()
+        self.app.page.update()
         self.app.view.update()
         # self.page.go(f"/board/{index}")

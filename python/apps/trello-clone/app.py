@@ -127,7 +127,8 @@ class TrelloApp:
     def start(self):
         # self.page.go(self.page.route)
         self.create_new_board("my board")
-        print("self.view.controls: ", self.boards.controls)
+        self.page.update()
+        print("self.boards.controls: ", self.boards.controls)
 
     def change_view_content():
         pass
