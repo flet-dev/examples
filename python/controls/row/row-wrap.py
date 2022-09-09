@@ -34,9 +34,9 @@ def main(page: Page):
 
     width_slider = Slider(
         min=0,
-        max=page.window_width,
+        max=page.width,
         divisions=20,
-        value=page.window_width,
+        value=page.width,
         label="{value}",
         on_change=slider_change,
     )
@@ -46,7 +46,7 @@ def main(page: Page):
         spacing=10,
         run_spacing=10,
         controls=items(30),
-        width=page.window_width,
+        width=page.width,
     )
 
     page.add(
