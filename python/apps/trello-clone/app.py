@@ -61,7 +61,7 @@ class TrelloApp:
 
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
-        self.boards = Column([])
+        self.boards = []
         self.current_board_index: int | None = None
         self.current_board = None if self.current_board_index == None else self.boards[
             self.current_board_index]
@@ -74,7 +74,7 @@ class TrelloApp:
                 bgcolor=colors.WHITE60,
                 padding=padding.all(10),
                 width=250,
-            ) for b in self.boards.controls
+            ) for b in self.boards
         ], wrap=True)
 
         self.appbar = AppBar(
@@ -112,21 +112,45 @@ class TrelloApp:
         self.page.appbar = self.appbar
         self.page.update()
         self.members_view = Text("members view", visible=False)
-        self.all_boards_view = self.build_all_boards_view()
+        self.all_boards_view = Column([
+            Row([
+                Text(value="Your Boards", style="headlineMedium", expand=True),
+                Container(
+                    TextButton(
+                        "Add new board",
+                        icon=icons.ADD,
+                        on_click=self.add_board,
+                        style=ButtonStyle(
+                            bgcolor={
+                                "": colors.BLUE_200,
+                                "hovered": colors.BLUE_400
+                            },
+                            shape={
+                                "": RoundedRectangleBorder(radius=3)
+                            }
+                        )
+                    ),
+
+                    padding=padding.only(right=50))
+            ]),
+            Row([
+                TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
+                          width=200, height=40, on_submit=self.search_boards, text_size=12,
+                          border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT, suffix_icon=icons.SEARCH)
+            ])
+        ], expand=True)
         self.view = Row([
             self.sidebar,
             self.page_divider,
             self.all_boards_view,
-            self.members_view,
-            self.boards
-
+            self.members_view
         ], expand=True)
 
     def start(self):
         # self.page.go(self.page.route)
         self.create_new_board("my board")
         self.page.update()
-        print("self.boards.controls: ", self.boards.controls)
+        print("self.boards: ", self.boards)
 
     def change_view_content():
         pass
@@ -146,7 +170,7 @@ class TrelloApp:
                     Row([
                         self.sidebar,
                         self.page_divider,
-                        self.build_all_boards_view()
+                        self.all_boards_view
                     ], expand=True)
                 ],
                 bgcolor=colors.BLUE_GREY_200
@@ -214,54 +238,27 @@ class TrelloApp:
         self.page.update()
         # self.view.update()
 
-    def build_all_boards_view(self):
-        return Column([
-            Row([
-                Text(value="Your Boards", style="headlineMedium", expand=True),
-                Container(
-                    TextButton(
-                        "Add new board",
-                        icon=icons.ADD,
-                        on_click=self.add_board,
-                        style=ButtonStyle(
-                            bgcolor={
-                                "": colors.BLUE_200,
-                                "hovered": colors.BLUE_400
-                            },
-                            shape={
-                                "": RoundedRectangleBorder(radius=3)
-                            }
-                        )
-                    ),
+    def populate_all_boards_view(self):
+        self.all_boards_view.controls[-1] = Row([
+            Container(content=Row([Text(value=b.identifier), Container(
+                content=PopupMenuButton(
+                    items=[
+                        PopupMenuItem(content=TextButton(
+                            text="Delete", on_click=self.delete_board, data=b)),
+                        PopupMenuItem(),
+                        PopupMenuItem(text="Archive")
+                    ]
+                ),
 
-                    padding=padding.only(right=50))
-            ]),
-            Row([
-                TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
-                          width=200, height=40, on_submit=self.search_boards, text_size=12,
-                          border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT, suffix_icon=icons.SEARCH)
-            ]),
-            Row([
-                Container(content=Row([Text(value=b.identifier), Container(
-                    content=PopupMenuButton(
-                        items=[
-                            PopupMenuItem(content=TextButton(
-                                text="Delete", on_click=self.delete_board, data=b)),
-                            PopupMenuItem(),
-                            PopupMenuItem(text="Archive")
-                        ]
-                    ),
-
-                    border_radius=border_radius.all(3)
-                )], alignment="spaceBetween"),
-                    border=border.all(1, colors.BLACK38),
-                    border_radius=border_radius.all(5),
-                    bgcolor=colors.WHITE60,
-                    padding=padding.all(10),
-                    width=250,
-                ) for b in self.boards.controls
-            ], wrap=True)
-        ], expand=True)
+                border_radius=border_radius.all(3)
+            )], alignment="spaceBetween"),
+                border=border.all(1, colors.BLACK38),
+                border_radius=border_radius.all(5),
+                bgcolor=colors.WHITE60,
+                padding=padding.all(10),
+                width=250,
+            ) for b in self.boards
+        ], wrap=True)
 
     def toggle_nav_rail(self, e):
         self.sidebar.visible = not self.sidebar.visible
@@ -295,9 +292,11 @@ class TrelloApp:
 
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
-        self.boards.controls.append(new_board)
+        self.boards.append(new_board)
+        self.view.controls.append(new_board)
         # self.view.update()
         print("self.view.controls: ", self.view.controls)
+        self.populate_all_boards_view()
         self.sidebar.add_board_destination(board_name)
         self.page.update()
 

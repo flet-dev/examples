@@ -126,12 +126,12 @@ class Sidebar(UserControl):
                 icon=icons.CHEVRON_RIGHT_OUTLINED
             )
         )
-        self.app.all_boards_view = self.app.build_all_boards_view()
-        self.app.view.update()
+        self.app.populate_all_boards_view()
+        # self.app.view.update()
         self.app.page.update()
         if len(self.bottom_nav_rail.destinations) > 1:
             print("call bottom_nav_change")
-            self.bottom_nav_change(len(self.bottom_nav_items) - 1)
+            self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
 
     def remove_board_destination(self, board_index):
         self.bottom_nav_items.pop(board_index)
@@ -163,7 +163,7 @@ class Sidebar(UserControl):
         self.view.update()
         #route_name = self.top_nav_rail.destinations[index].label
         #print("route_name: ", route_name)
-        for ctrl in self.app.view.controls[4].controls:
+        for ctrl in self.app.view.controls[4:]:
             ctrl.visible = False
         # set all controls in app.view to visible=False except this index
         for i, ctrl in enumerate(self.app.view.controls[2:4]):
@@ -183,7 +183,7 @@ class Sidebar(UserControl):
         # self.app.view.controls[1].controls[2] = self.app.boards[index]
         for ctrl in self.app.view.controls[2:4]:
             ctrl.visible = False
-        for i, ctrl in enumerate(self.app.view.controls[4].controls):
+        for i, ctrl in enumerate(self.app.view.controls[4:]):
             ctrl.visible = index == i
             print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
         self.app.page.update()
