@@ -82,7 +82,7 @@ class BoardList(UserControl):
                     self.items,
                     self.end_indicator
                 ], spacing=4, tight=True, data=self.title),
-                width=200,
+                width=250,
                 border=border.all(2, colors.BLACK12),
                 border_radius=border_radius.all(5),
                 bgcolor=self.color if (

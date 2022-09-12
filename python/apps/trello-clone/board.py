@@ -45,7 +45,8 @@ class Board(UserControl):
             self.board_lists,
             vertical_alignment="start",
             wrap=True,
-            visible=True
+            visible=True,
+            scroll="auto"
             # width=self.app.page.window_width
         )
 

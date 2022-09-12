@@ -173,86 +173,47 @@ class TrelloApp:
         print("changed route: ", e.route)
         split_route = e.route.split('/')
         print("split route: ", split_route[1:])
-        # self.page.views.clear()
-        # self.page.views.append(
-        #     View(
-        #         "/",
-        #         [
-        #             self.appbar,
-        #             Row([
-        #                 self.sidebar,
-        #                 self.page_divider,
-        #                 self.all_boards_view
-        #             ], expand=True)
-        #         ],
-        #         bgcolor=colors.BLUE_GREY_200
-        #     )
-        # )
-        # self.page.update()
         print("self.page.controls", self.page.controls)
         match split_route[1:]:
             case[""]:
                 self.page.go("/boards")
+
             case ["board", board_number]:
                 print("append board number:", board_number)
-                # check for numbers out of range
-                # self.page.views.append(
-                #     View(
-                #         f"/board/{board_number}",
-                #         [
-                #             self.appbar,
-                #             Row([
-                #                 self.sidebar,
-                #                 self.page_divider,
-                #                 self.boards[int(board_number)]
-                #             ], expand=True)
-                #         ],
-                #         bgcolor=colors.BLUE_GREY_200
-                #     )
-                # )
+                if int(board_number) > len(self.boards):
+                    print("board number out of range")
+                    self.page.go("/")
+                    return
                 for ctrl in self.view.controls[2:4]:
                     ctrl.visible = False
                 for i, ctrl in enumerate(self.view.controls[4:]):
                     ctrl.visible = int(board_number) == i
                     print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+                self.sidebar.bottom_nav_rail.selected_index = int(board_number)
+                self.sidebar.top_nav_rail.selected_index = None
+                self.sidebar.update()
             case ["boards"]:
-                print("append boards")
-
-                # self.page.views.append(
-                #     View(
-                #         "/boards",
-                #         [
-                #             self.appbar,
-                #             # Row([
-                #             #     self.sidebar,
-                #             #     self.page_divider,
-                #             #     self.all_boards_view
-                #             # ], expand=True)
-                #             self.view
-                #         ],
-                #         bgcolor=colors.BLUE_GREY_200
-                #     )
-                # )
-                # self.page.update()
-                self.sidebar.top_nav_change(0)
+                for ctrl in self.view.controls[4:]:
+                    ctrl.visible = False
+                # set all controls in app.view to visible=False except this index
+                for i, ctrl in enumerate(self.view.controls[2:4]):
+                    ctrl.visible = i == 0
+                # self.sidebar.top_nav_change(0)
+                self.sidebar.top_nav_rail.selected_index = 0
+                self.sidebar.bottom_nav_rail.selected_index = None
+                self.sidebar.update()
                 self.populate_all_boards_view()
             case ["members"]:
                 self.sidebar.top_nav_change(1)
                 print("append members")
-                self.page.views.append(
-                    View(
-                        "/members",
-                        [
-                            self.appbar,
-                            Row([
-                                self.sidebar,
-                                self.page_divider,
-                                Text("Members area")
-                            ], expand=True)
-                        ],
-                        bgcolor=colors.BLUE_GREY_200
-                    )
-                )
+                for ctrl in self.view.controls[4:]:
+                    ctrl.visible = False
+                # set all controls in app.view to visible=False except this index
+                for i, ctrl in enumerate(self.view.controls[2:4]):
+                    ctrl.visible = i == 1
+                self.sidebar.top_nav_rail.selected_index = 1
+                self.sidebar.bottom_nav_rail.selected_index = None
+                self.sidebar.update()
         self.page.update()
 
     def update(self):
