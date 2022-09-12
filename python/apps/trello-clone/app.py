@@ -147,8 +147,9 @@ class TrelloApp:
         ], expand=True)
 
     def start(self):
-        # self.page.go(self.page.route)
+        # some initialization
         self.create_new_board("my board")
+        self.sidebar.top_nav_rail.selected_index = 0
         self.page.update()
         print("self.boards: ", self.boards)
 
@@ -208,12 +209,13 @@ class TrelloApp:
                             Row([
                                 self.sidebar,
                                 self.page_divider,
-                                self.build_all_boards_view()
+                                self.all_boards_view
                             ], expand=True)
                         ],
                         bgcolor=colors.BLUE_GREY_200
                     )
                 )
+                self.populate_all_boards_view()
             case ["members"]:
                 self.sidebar.top_nav_change(1)
                 print("append members")
@@ -257,8 +259,13 @@ class TrelloApp:
                 bgcolor=colors.WHITE60,
                 padding=padding.all(10),
                 width=250,
+                on_click=self.board_click,
+                data=b
             ) for b in self.boards
         ], wrap=True)
+
+    def board_click(self, e):
+        self.sidebar.bottom_nav_change(self.boards.index(e.control.data))
 
     def toggle_nav_rail(self, e):
         self.sidebar.visible = not self.sidebar.visible

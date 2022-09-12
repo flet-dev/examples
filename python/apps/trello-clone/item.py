@@ -1,3 +1,4 @@
+import textwrap
 import flet
 from flet import (
     DragTarget,
@@ -25,11 +26,15 @@ class Item(UserControl):
         self.item_text = item_text
         # card for now but will switch to more flexible component
         self.card_item = Card(
-            content=Container(
-                content=Checkbox(label=f"{self.item_text}"),
+            content=Row(
+                [Container(
+                    content=Checkbox(label=f"{self.item_text}", width=200),
+                    # width=200,
+                    # height=40,
+                    border_radius=border_radius.all(5))],
                 width=200,
-                height=40,
-                border_radius=border_radius.all(5)
+                # height=40,
+                wrap=True
             ),
             elevation=1,
             data=self.list

@@ -110,6 +110,7 @@ class Sidebar(UserControl):
         self.bottom_nav_rail.destinations.append(
             NavigationRailDestination(
                 label_content=TextField(
+                    value=board_name,
                     hint_text=board_name,
                     text_size=12,
                     read_only=True,
@@ -119,7 +120,7 @@ class Sidebar(UserControl):
                     height=50,
                     width=150,
                     text_align="start",
-                    data=len(self.bottom_nav_items)
+                    data=len(self.bottom_nav_rail.destinations)
                 ),
                 label=board_name,
                 selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
@@ -151,10 +152,12 @@ class Sidebar(UserControl):
     def board_name_blur(self, e):
         print("e.control: ", e.control.data)
         self.app.boards[e.control.data].identifier = e.control.value
-        self.app.update()
+        self.app.populate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"
+        # self.app.view.update()
         e.control.update()
+        self.page.update()
 
     def top_nav_change(self, e):
         index = e if (type(e) == int) else e.control.selected_index
@@ -170,7 +173,8 @@ class Sidebar(UserControl):
             ctrl.visible = index == i
         # self.app.view.controls[0].controls[2] = self.app.build_all_boards_view() if (
          #   index == 0) else Text("Area for members")
-        self.app.view.update()
+        # self.app.view.update()
+        self.page.update()
         # self.page.go(f"/{slugify(route_name)}")
 
     def bottom_nav_change(self, e):
@@ -186,6 +190,6 @@ class Sidebar(UserControl):
         for i, ctrl in enumerate(self.app.view.controls[4:]):
             ctrl.visible = index == i
             print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
-        self.app.page.update()
-        self.app.view.update()
+        self.page.update()
+        # self.app.view.update()
         # self.page.go(f"/board/{index}")

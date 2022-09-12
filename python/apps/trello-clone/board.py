@@ -56,7 +56,7 @@ class Board(UserControl):
                 # since the lists still need to be placed inside either a row or a column depending on toggle state.
                 # Row([self.add_list_button]),
                 self.list_wrap
-            ], data=self, visible=self.visible)
+            ], data=self)
         return self.view
         # return Text(f"board test {self.identifier}")
 
