@@ -183,13 +183,12 @@ class Sidebar(UserControl):
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         self.view.update()
-
-        # self.app.view.controls[1].controls[2] = self.app.boards[index]
-        for ctrl in self.app.view.controls[2:4]:
-            ctrl.visible = False
-        for i, ctrl in enumerate(self.app.view.controls[4:]):
-            ctrl.visible = index == i
-            print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
-        self.page.update()
+        # for ctrl in self.app.view.controls[2:4]:
+        #     ctrl.visible = False
+        # for i, ctrl in enumerate(self.app.view.controls[4:]):
+        #     ctrl.visible = index == i
+        #     print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+        self.page.route = f"/board/{index}"
+        # self.page.update()
         # self.app.view.update()
         # self.page.go(f"/board/{index}")

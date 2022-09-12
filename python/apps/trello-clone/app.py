@@ -150,7 +150,18 @@ class TrelloApp:
         # some initialization
         self.create_new_board("my board")
         self.sidebar.top_nav_rail.selected_index = 0
-        self.page.update()
+        self.page.views.append(
+            View(
+                "/",
+                [
+                    self.appbar,
+                    self.view
+                ],
+                bgcolor=colors.BLUE_GREY_200
+            )
+        )
+        # self.page.go("/")
+        # self.page.update()
         print("self.boards: ", self.boards)
 
     def change_view_content():
@@ -162,59 +173,68 @@ class TrelloApp:
         print("changed route: ", e.route)
         split_route = e.route.split('/')
         print("split route: ", split_route[1:])
-        self.page.views.clear()
-        self.page.views.append(
-            View(
-                "/",
-                [
-                    self.appbar,
-                    Row([
-                        self.sidebar,
-                        self.page_divider,
-                        self.all_boards_view
-                    ], expand=True)
-                ],
-                bgcolor=colors.BLUE_GREY_200
-            )
-        )
-        self.page.update()
+        # self.page.views.clear()
+        # self.page.views.append(
+        #     View(
+        #         "/",
+        #         [
+        #             self.appbar,
+        #             Row([
+        #                 self.sidebar,
+        #                 self.page_divider,
+        #                 self.all_boards_view
+        #             ], expand=True)
+        #         ],
+        #         bgcolor=colors.BLUE_GREY_200
+        #     )
+        # )
+        # self.page.update()
         print("self.page.controls", self.page.controls)
         match split_route[1:]:
+            case[""]:
+                self.page.go("/boards")
             case ["board", board_number]:
-                self.sidebar.bottom_nav_change(int(board_number))
                 print("append board number:", board_number)
                 # check for numbers out of range
-                self.page.views.append(
-                    View(
-                        f"/board/{board_number}",
-                        [
-                            self.appbar,
-                            Row([
-                                self.sidebar,
-                                self.page_divider,
-                                self.boards[int(board_number)]
-                            ], expand=True)
-                        ],
-                        bgcolor=colors.BLUE_GREY_200
-                    )
-                )
+                # self.page.views.append(
+                #     View(
+                #         f"/board/{board_number}",
+                #         [
+                #             self.appbar,
+                #             Row([
+                #                 self.sidebar,
+                #                 self.page_divider,
+                #                 self.boards[int(board_number)]
+                #             ], expand=True)
+                #         ],
+                #         bgcolor=colors.BLUE_GREY_200
+                #     )
+                # )
+                for ctrl in self.view.controls[2:4]:
+                    ctrl.visible = False
+                for i, ctrl in enumerate(self.view.controls[4:]):
+                    ctrl.visible = int(board_number) == i
+                    print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
             case ["boards"]:
-                self.sidebar.top_nav_change(0)
                 print("append boards")
-                self.page.views.append(
-                    View(
-                        "/boards",
-                        [
-                            self.appbar,
-                            Row([
-                                self.sidebar,
-                                self.page_divider,
-                                self.all_boards_view
-                            ], expand=True)
-                        ],
-                        bgcolor=colors.BLUE_GREY_200
-                    )
-                )
+
+                # self.page.views.append(
+                #     View(
+                #         "/boards",
+                #         [
+                #             self.appbar,
+                #             # Row([
+                #             #     self.sidebar,
+                #             #     self.page_divider,
+                #             #     self.all_boards_view
+                #             # ], expand=True)
+                #             self.view
+                #         ],
+                #         bgcolor=colors.BLUE_GREY_200
+                #     )
+                # )
+                # self.page.update()
+                self.sidebar.top_nav_change(0)
                 self.populate_all_boards_view()
             case ["members"]:
                 self.sidebar.top_nav_change(1)
@@ -242,7 +262,7 @@ class TrelloApp:
 
     def populate_all_boards_view(self):
         self.all_boards_view.controls[-1] = Row([
-            Container(content=Row([Text(value=b.identifier), Container(
+            Container(content=Row([Container(content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click), Container(
                 content=PopupMenuButton(
                     items=[
                         PopupMenuItem(content=TextButton(
@@ -259,7 +279,7 @@ class TrelloApp:
                 bgcolor=colors.WHITE60,
                 padding=padding.all(10),
                 width=250,
-                on_click=self.board_click,
+                # on_click=self.board_click,
                 data=b
             ) for b in self.boards
         ], wrap=True)
@@ -305,7 +325,7 @@ class TrelloApp:
         print("self.view.controls: ", self.view.controls)
         self.populate_all_boards_view()
         self.sidebar.add_board_destination(board_name)
-        self.page.update()
+        # self.page.update()
 
     def delete_board(self, e):
         print("e.control.data: ", e.control.data)
@@ -335,7 +355,7 @@ if __name__ == "__main__":
         page.bgcolor = colors.BLUE_GREY_200
         app = TrelloApp(page)
         app.start()
-        page.add(app.view)
+        # page.add(app.view)
         page.update()
 
     print("flet version: ", flet.version.version)
