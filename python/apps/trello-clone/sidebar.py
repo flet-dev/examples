@@ -141,7 +141,6 @@ class Sidebar(UserControl):
     def toggle_nav_rail(self, e):
         self.view.visible = not self.view.visible
         self.view.update()
-        # self.set_navigation_content()
         self.page.update()
 
     def board_name_focus(self, e):
@@ -155,7 +154,6 @@ class Sidebar(UserControl):
         self.app.populate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"
-        # self.app.view.update()
         e.control.update()
         self.page.update()
 
@@ -168,16 +166,6 @@ class Sidebar(UserControl):
             self.page.route = "/boards"
         elif index == 1:
             self.page.route = "/members"
-        #route_name = self.top_nav_rail.destinations[index].label
-        #print("route_name: ", route_name)
-        # for ctrl in self.app.view.controls[4:]:
-        #     ctrl.visible = False
-        # # set all controls in app.view to visible=False except this index
-        # for i, ctrl in enumerate(self.app.view.controls[2:4]):
-        #     ctrl.visible = index == i
-        # self.app.view.controls[0].controls[2] = self.app.build_all_boards_view() if (
-        #   index == 0) else Text("Area for members")
-        # self.app.view.update()
         self.page.update()
         # self.page.go(f"/{slugify(route_name)}")
 
@@ -186,13 +174,7 @@ class Sidebar(UserControl):
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
-        # for ctrl in self.app.view.controls[2:4]:
-        #     ctrl.visible = False
-        # for i, ctrl in enumerate(self.app.view.controls[4:]):
-        #     ctrl.visible = index == i
-        #     print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
         self.page.route = f"/board/{index}"
         self.view.update()
         self.page.update()
-        # self.app.view.update()
         # self.page.go(f"/board/{index}")

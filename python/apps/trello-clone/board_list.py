@@ -51,8 +51,6 @@ class BoardList(UserControl):
             TextButton(text="Save", on_click=self.save_title)
         ])
         self.header = Row(
-            # alignment="spaceBetween",
-            # spacing=150,
             controls=[
                 Text(value=self.title, style="titleMedium",
                      text_align="left", overflow="clip"),
@@ -118,8 +116,6 @@ class BoardList(UserControl):
     def edit_title(self, e):
         self.header.controls[0] = self.edit_field
         self.header.controls[1].controls[0].visible = False
-
-        #self.header.controls[1].content.visible = False
         self.update()
 
     def save_title(self, e):
@@ -127,7 +123,6 @@ class BoardList(UserControl):
         self.header.controls[0] = Text(
             value=self.title, style="titleMedium")
         self.header.controls[1].controls[0].visible = True
-        #self.header.controls[1].content.visible = True
         self.update()
 
     def add_item_handler(self, e):
@@ -155,35 +150,35 @@ class BoardList(UserControl):
 
         # rearrange (i.e. drag drop from same list)
         if ((from_index is not None) and (to_index is not None)):
-            print("rearrange: ", to_index, from_index)
+            #print("rearrange: ", to_index, from_index)
             self.items.controls.insert(
                 to_index, self.items.controls.pop(from_index))
             self.set_indicator_opacity(swap_control, 0.0)
 
         # insert (drag from other list to middle of this list)
         elif (to_index is not None):
-            print("insert: ", to_index)
+            #print("insert: ", to_index)
             new_item = Item(self, item)
             control_to_add.controls.append(new_item)
             self.items.controls.insert(to_index, control_to_add)
 
         # add new (drag from other list to end of this list, or use add item button)
         else:
-            print("add new: ", item)
+            #print("add new: ", item)
             new_item = new_item = Item(self, item) if item else Item(
                 self, self.item_name.value)
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
             self.item_name.value = ""
 
-        print("self.items: ", self.items.controls)
+        #print("self.items: ", self.items.controls)
         self.view.update()
         self.page.update()
 
     def remove_item(self, item):
-        print("item from remove_item: ", item)
+        #print("item from remove_item: ", item)
         controls_list = [x.controls[1] for x in self.items.controls]
-        print("controls_list: ", controls_list)
+        #print("controls_list: ", controls_list)
         del self.items.controls[controls_list.index(item)]
         self.view.update()
 

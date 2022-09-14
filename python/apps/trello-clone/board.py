@@ -44,22 +44,24 @@ class Board(UserControl):
         self.list_wrap = Row(
             self.board_lists,
             vertical_alignment="start",
-            wrap=True,
+            # wrap=True,
             visible=True,
-            scroll="auto"
-            # width=self.app.page.window_width
+            scroll="auto",
+            expand=True,
+            width=(self.app.page.width - 330)
         )
 
     def build(self):
         self.view = Column(
             controls=[
-                # placing the add list button at the top of the page doesn't solve the toggle behaviour problem
-                # since the lists still need to be placed inside either a row or a column depending on toggle state.
-                # Row([self.add_list_button]),
                 self.list_wrap
-            ], data=self)
+            ], data=self, )
         return self.view
-        # return Text(f"board test {self.identifier}")
+
+    def resize(self, width, height):
+        self.list_wrap.width = (width - 330)
+        self.list_wrap.height = height
+        self.list_wrap.update()
 
     def addListDlg(self, e):
 
@@ -110,8 +112,11 @@ class Board(UserControl):
             # print("boardLists hash: ", self.board_lists_hash)
         dialog = AlertDialog(
             title=Text("Name your new list"),
-            content=Column(
-                [Container(content=TextField(label="New List Name", on_submit=close_dlg), padding=padding.symmetric(horizontal=5)), color_options], tight=True),
+            content=Column([
+                Container(content=TextField(label="New List Name", on_submit=close_dlg),
+                          padding=padding.symmetric(horizontal=5)),
+                color_options
+            ], tight=True),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )
         self.app.page.dialog = dialog

@@ -58,24 +58,13 @@ from sidebar import Sidebar
 class TrelloApp:
     def __init__(self, page: Page):
         self.page = page
-
+        self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = []
         self.current_board_index: int | None = None
         self.current_board = None if self.current_board_index == None else self.boards[
             self.current_board_index]
-
-        self.all_board_cards = Row([
-            Container(content=Row([Text(value=b.identifier), IconButton(
-                icon=icons.SETTINGS)], alignment="spaceBetween"),
-                border=border.all(1, colors.BLACK38),
-                border_radius=border_radius.all(5),
-                bgcolor=colors.WHITE60,
-                padding=padding.all(10),
-                width=250,
-            ) for b in self.boards
-        ], wrap=True)
 
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
@@ -102,13 +91,12 @@ class TrelloApp:
 
         self.toggle_nav_rail_button = IconButton(
             icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
-            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail,
-            right=15)
+            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail, right=5)
 
         self.page_divider = Stack([
             VerticalDivider(width=2),
             self.toggle_nav_rail_button,
-        ], clip_behavior="none", width=40)
+        ], clip_behavior="none", width=30)
         self.page.appbar = self.appbar
         self.page.update()
         self.members_view = Text("members view", visible=False)
@@ -144,7 +132,7 @@ class TrelloApp:
             self.page_divider,
             self.all_boards_view,
             self.members_view
-        ], expand=True)
+        ], tight=True, expand=True)
 
     def start(self):
         # some initialization
@@ -164,11 +152,10 @@ class TrelloApp:
         # self.page.update()
         print("self.boards: ", self.boards)
 
-    def change_view_content():
-        pass
+    def page_resize(self, e):
+        for board in self.boards:
+            board.resize(self.page.width, self.page.height)
 
-    # define all routes here
-    # 'boards', 'members', 'board/:id', 'board/:id/:item', 'member/:id'
     def route_change(self, e):
         print("changed route: ", e.route)
         split_route = e.route.split('/')
@@ -270,8 +257,9 @@ class TrelloApp:
             self.page.update()
         dialog = AlertDialog(
             title=Text("Name your new board"),
-            content=Column(
-                [TextField(label="New Board Name", on_submit=close_dlg)], tight=True),
+            content=Column([
+                TextField(label="New Board Name", on_submit=close_dlg)
+            ], tight=True),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )
         self.page.dialog = dialog
