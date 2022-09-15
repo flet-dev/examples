@@ -55,7 +55,7 @@ class Board(UserControl):
         self.view = Column(
             controls=[
                 self.list_wrap
-            ], data=self, )
+            ], data=self, scroll="auto")
         return self.view
 
     def resize(self, width, height):

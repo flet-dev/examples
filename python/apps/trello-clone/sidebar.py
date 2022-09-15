@@ -135,7 +135,8 @@ class Sidebar(UserControl):
             self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
 
     def remove_board_destination(self, board_index):
-        self.bottom_nav_items.pop(board_index)
+        del self.bottom_nav_rail.destinations[board_index]
+        self.view.update()
         # self.page.update()
 
     def toggle_nav_rail(self, e):

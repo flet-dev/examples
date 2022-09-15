@@ -213,8 +213,8 @@ class TrelloApp:
             Container(content=Row([Container(content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click), Container(
                 content=PopupMenuButton(
                     items=[
-                        PopupMenuItem(content=TextButton(
-                            text="Delete", on_click=self.delete_board, data=b)),
+                        PopupMenuItem(
+                            text="Delete", on_click=self.delete_board, data=b),
                         PopupMenuItem(),
                         PopupMenuItem(text="Archive")
                     ]
@@ -277,13 +277,14 @@ class TrelloApp:
         # self.page.update()
 
     def delete_board(self, e):
+        print("e.control: ", e.control)
         print("e.control.data: ", e.control.data)
         i = self.boards.index(e.control.data)
-        print("index: ", i)
-        self.boards.controls.remove(e.control.data)
+        self.boards.remove(e.control.data)
+        self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
+        self.populate_all_boards_view()
         self.page.update()
-        self.page.go("/")
 
     def search_boards(self, e):
         pass
@@ -308,4 +309,5 @@ if __name__ == "__main__":
         page.update()
 
     print("flet version: ", flet.version.version)
+    print("flet path: ", flet.__file__)
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)
