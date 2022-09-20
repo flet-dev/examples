@@ -76,8 +76,6 @@ class TrelloApp:
                     controls=[
                         TextButton("Add new board", icon=icons.ADD,
                                    on_click=self.add_board),
-                        # Text("Add new board", text_align="center", weight="w500"),
-                        # IconButton(icon=icons.ADD, icon_size=20)
                     ]
                 ),
                 border_radius=border_radius.all(35),

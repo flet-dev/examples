@@ -47,7 +47,7 @@ class Board(UserControl):
             # wrap=True,
             visible=True,
             scroll="auto",
-            expand=True,
+            # expand=True,
             width=(self.app.page.width - 330)
         )
 
@@ -55,13 +55,19 @@ class Board(UserControl):
         self.view = Column(
             controls=[
                 self.list_wrap
-            ], data=self, scroll="auto")
+            ],
+            data=self,
+            height=self.app.page.height,
+            # scroll="auto",
+            expand=True
+        )
         return self.view
 
     def resize(self, width, height):
         self.list_wrap.width = (width - 330)
-        self.list_wrap.height = height
+        self.view.height = height
         self.list_wrap.update()
+        self.view.update()
 
     def addListDlg(self, e):
 
