@@ -1,4 +1,5 @@
 import math
+import threading
 import time
 from dataclasses import dataclass
 from dataclasses import field
@@ -96,6 +97,7 @@ class AnimatedMenuButton(Stack):
         self.rotate_on_opening = rotate_on_opening
 
         self._open = False
+        self._lock = threading.Lock()
 
         self.expand = True
         self.menu_button_container = Container(
@@ -171,22 +173,23 @@ class AnimatedMenuButton(Stack):
         was_open = self._open
         self._open = value
 
-        if self._open != was_open:
-            is_curved = self.direction.split()[0] == "curve"
-            if self._open:
-                for button in self.controls[:-1]:
-                    button.content.disabled = False
-                if is_curved:
-                    self._open_animation_curve()
+        with self._lock:
+            if self._open != was_open:
+                is_curved = self.direction.split()[0] == "curve"
+                if self._open:
+                    for button in self.controls[:-1]:
+                        button.content.disabled = False
+                    if is_curved:
+                        self._open_animation_curve()
+                    else:
+                        self._open_animation_linear()
                 else:
-                    self._open_animation_linear()
-            else:
-                for button in self.controls[:-1]:
-                    button.content.disabled = True
-                if is_curved:
-                    self._close_animation_curve()
-                else:
-                    self._close_animation_linear()
+                    for button in self.controls[:-1]:
+                        button.content.disabled = True
+                    if is_curved:
+                        self._close_animation_curve()
+                    else:
+                        self._close_animation_linear()
 
     def toggle(self, event):
         self.open = not self.open
