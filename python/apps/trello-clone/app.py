@@ -153,8 +153,10 @@ class TrelloApp:
         print("self.boards: ", self.boards)
 
     def page_resize(self, e):
+        new_width = (self.page.width -
+                     330) if self.sidebar.visible else (self.page.width - 30)
         for board in self.boards:
-            board.resize(self.page.width, self.page.height)
+            board.resize(new_width, self.page.height)
 
     def route_change(self, e):
         print("changed route: ", e.route)
@@ -167,6 +169,7 @@ class TrelloApp:
 
             case ["board", board_number]:
                 print("append board number:", board_number)
+                self.current_board = self.boards[int(board_number)]
                 if int(board_number) > len(self.boards):
                     print("board number out of range")
                     self.page.go("/")
@@ -214,9 +217,14 @@ class TrelloApp:
                 content=PopupMenuButton(
                     items=[
                         PopupMenuItem(
-                            text="Delete", on_click=self.delete_board, data=b),
+                            content=Text(value="Delete...", style="labelMedium",
+                                         text_align="center"),
+                            on_click=self.delete_board, data=b),
                         PopupMenuItem(),
-                        PopupMenuItem(text="Archive")
+                        PopupMenuItem(
+                            content=Text(value="Archive...", style="labelMedium",
+                                         text_align="center"),
+                        )
                     ]
                 ),
 
@@ -238,17 +246,22 @@ class TrelloApp:
     def toggle_nav_rail(self, e):
         self.sidebar.visible = not self.sidebar.visible
         self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
+        # for board in self.boards:
+        #     board.resize(self.page.width, self.page.height)
+        new_width = (self.page.width -
+                     330) if self.sidebar.visible else (self.page.width - 30)
+        self.current_board.resize(new_width, self.page.height)
         self.page.update()
 
-    def nav_rail_change(self, e):
-        self.current_board_index = e.control.selected_index
-        if self.current_board in self.view.controls:
-            self.current_board.visible = False
-        self.current_board = self.boards[e.control.selected_index]
-        self.current_board.visible = True
-        # self.view.controls.append(self.current_board)
-        # print("Selected destination: ", e.control.selected_index)
-        self.view.update()
+    # def nav_rail_change(self, e):
+    #     self.current_board_index = e.control.selected_index
+    #     if self.current_board in self.view.controls:
+    #         self.current_board.visible = False
+    #     self.current_board = self.boards[e.control.selected_index]
+    #     self.current_board.visible = True
+    #     # self.view.controls.append(self.current_board)
+    #     # print("Selected destination: ", e.control.selected_index)
+    #     self.view.update()
 
     def add_board(self, e):
         def close_dlg(e):

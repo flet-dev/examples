@@ -37,7 +37,7 @@ class BoardList(UserControl):
     def build(self):
 
         self.item_name = TextField(
-            label="new card name", width=200, height=50, bgcolor=colors.WHITE)
+            label="new card name", height=50, bgcolor=colors.WHITE)
         self.items = Column([], tight=True, spacing=4)
         self.end_indicator = Container(
             bgcolor=colors.BLACK26,
@@ -47,24 +47,34 @@ class BoardList(UserControl):
             opacity=0.0
         )
         self.edit_field = Row([
-            TextField(value=self.title, width=120, height=50),
+            TextField(value=self.title, width=200, height=40,
+                      content_padding=padding.only(left=10, bottom=10)),
             TextButton(text="Save", on_click=self.save_title)
         ])
         self.header = Row(
             controls=[
                 Text(value=self.title, style="titleMedium",
-                     text_align="left", overflow="clip"),
-                Row([
-                    PopupMenuButton(
-                        items=[
-                            PopupMenuItem(
-                                text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
-                            PopupMenuItem(
-                                text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list)
-                        ],
-                        # expand=True
-                    )
-                ], expand=True, alignment="end")
+                     text_align="left", overflow="clip", expand=True),
+
+                PopupMenuButton(
+                    items=[
+                        PopupMenuItem(
+                            content=Text(value="Edit...", style="labelMedium",
+                                         text_align="center", color=self.color),
+                            text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
+                        PopupMenuItem(),
+                        PopupMenuItem(
+                            content=Text(value="Delete...", style="labelMedium",
+                                         text_align="center", color=self.color),
+                            text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list),
+                        PopupMenuItem(),
+                        PopupMenuItem(
+                            content=Text(value="Move List...", style="labelMedium",
+                                         text_align="center", color=self.color))
+                    ],
+                    # expand=True
+                )
+                # ], expand=True, alignment="end")
             ],
 
         )
@@ -115,14 +125,15 @@ class BoardList(UserControl):
 
     def edit_title(self, e):
         self.header.controls[0] = self.edit_field
-        self.header.controls[1].controls[0].visible = False
+        self.header.controls[1].visible = False
         self.update()
 
     def save_title(self, e):
         self.title = self.edit_field.controls[0].value
-        self.header.controls[0] = Text(
-            value=self.title, style="titleMedium")
-        self.header.controls[1].controls[0].visible = True
+        self.header.controls[0] = Text(value=self.title, style="titleMedium",
+                                       text_align="left", overflow="clip", expand=True)
+
+        self.header.controls[1].visible = True
         self.update()
 
     def add_item_handler(self, e):

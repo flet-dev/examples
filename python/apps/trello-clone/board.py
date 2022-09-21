@@ -48,23 +48,28 @@ class Board(UserControl):
             visible=True,
             scroll="auto",
             # expand=True,
-            width=(self.app.page.width - 330)
+            width=(self.app.page.width - 330),
+            height=(self.app.page.height - 95)
         )
 
     def build(self):
-        self.view = Column(
-            controls=[
-                self.list_wrap
-            ],
+        self.view = Container(
+            content=Column(
+                controls=[
+                    self.list_wrap
+                ],
+
+                scroll="auto",
+                expand=True
+            ),
             data=self,
+            margin=margin.all(0),
             height=self.app.page.height,
-            # scroll="auto",
-            expand=True
         )
         return self.view
 
     def resize(self, width, height):
-        self.list_wrap.width = (width - 330)
+        self.list_wrap.width = width
         self.view.height = height
         self.list_wrap.update()
         self.view.update()
