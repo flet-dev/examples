@@ -46,7 +46,7 @@ class ColorBrowser(UserControl):
                 list_started = True
             if list_started:
                 # when this bool variable is True, we can start appending the variables in our list
-                colors_list.append(value)
+                colors_list.append(key.lower())
 
         search_txt = TextField(
             expand=1, hint_text="Enter keyword and press search button", autofocus=True,
