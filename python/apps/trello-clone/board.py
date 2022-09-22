@@ -38,6 +38,14 @@ class Board(UserControl):
             # if this is an empty array then adding to it and updating component does not render a new list
             # why is a dummy control needed here? possible bug.
             # Text(visible=False)
+            Container(
+                bgcolor=colors.BLACK26,
+                border_radius=border_radius.all(30),
+                height=100,
+                alignment=alignment.center_right,
+                width=3,
+                opacity=0.0
+            ),
             self.add_list_button
         ]
 
@@ -113,7 +121,16 @@ class Board(UserControl):
             # this new list should be composed of columns of dragtargets
             new_list = BoardList(self, e.control.value,
                                  color=color_options.data)
-            self.board_lists.insert(-1, new_list)
+            divider = Container(
+                bgcolor=colors.BLACK26,
+                border_radius=border_radius.all(30),
+                height=100,
+                alignment=alignment.center_right,
+                width=3,
+                opacity=0.0
+            )
+            #self.board_lists.insert(-1, new_list)
+            self.board_lists[-1:-1] = [new_list, divider]
             dialog.open = False
             self.app.page.update()
             self.update()

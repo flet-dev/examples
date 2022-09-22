@@ -33,12 +33,13 @@ class BoardList(UserControl):
         self.board = board
         self.title = title
         self.color = color
+        self.items = Column([], tight=True, spacing=4)
 
     def build(self):
 
         self.item_name = TextField(
             label="new card name", height=50, bgcolor=colors.WHITE)
-        self.items = Column([], tight=True, spacing=4)
+
         self.end_indicator = Container(
             bgcolor=colors.BLACK26,
             border_radius=border_radius.all(30),
@@ -79,46 +80,80 @@ class BoardList(UserControl):
 
         )
 
-        self.view = DragTarget(
-            group="lists",
-            content=Container(
-                content=Column([
-                    self.header,
-                    self.item_name,
-                    TextButton("add card", icon=icons.ADD,
-                               on_click=self.add_item_handler),
-                    self.items,
-                    self.end_indicator
-                ], spacing=4, tight=True, data=self.title),
-                width=250,
-                border=border.all(2, colors.BLACK12),
-                border_radius=border_radius.all(5),
-                bgcolor=self.color if (
-                    self.color != "") else colors.BACKGROUND,
-                padding=padding.only(bottom=10, right=10, left=10, top=5)
-            ),
-
-            on_accept=self.drag_accept,
-            on_will_accept=self.drag_will_accept,
-            on_leave=self.drag_leave
+        self.view = Draggable(
+            group="board",
+            content=DragTarget(
+                group="lists",
+                content=DragTarget(
+                    group="board",
+                    content=Container(
+                        content=Column([
+                            self.header,
+                            self.item_name,
+                            TextButton("add card", icon=icons.ADD,
+                                       on_click=self.add_item_handler),
+                            self.items,
+                            self.end_indicator
+                        ], spacing=4, tight=True, data=self.title),
+                        width=250,
+                        border=border.all(2, colors.BLACK12),
+                        border_radius=border_radius.all(5),
+                        bgcolor=self.color if (
+                            self.color != "") else colors.BACKGROUND,
+                        padding=padding.only(
+                            bottom=10, right=10, left=10, top=5)
+                    ),
+                    data=self,
+                    on_accept=self.list_drag_accept,
+                    on_will_accept=self.list_will_drag_accept,
+                    on_leave=self.list_drag_leave
+                ),
+                data=self,
+                on_accept=self.item_drag_accept,
+                on_will_accept=self.item_will_drag_accept,
+                on_leave=self.item_drag_leave
+            )
         )
 
         return self.view
 
-    def drag_accept(self, e):
+    def item_drag_accept(self, e):
         src = self.board.app.page.get_control(e.data)
         self.add_item(src.data.item_text)
         src.data.list.remove_item(src.data)
         self.end_indicator.opacity = 0.0
         self.view.update()
 
-    def drag_will_accept(self, e):
+    def item_will_drag_accept(self, e):
         self.end_indicator.opacity = 1.0
         self.view.update()
 
-    def drag_leave(self, e):
+    def item_drag_leave(self, e):
         self.end_indicator.opacity = 0.0
         self.view.update()
+
+    def list_drag_accept(self, e):
+        src = self.board.app.page.get_control(e.data)
+        #print("src items: ", src.items)
+        l = self.board.board_lists
+        to_index = l.index(e.control.data)
+        from_index = l.index(src.content.data)
+        l[to_index+1].opacity = 0.0
+        l[to_index], l[from_index] = l[from_index], l[to_index]
+        print("current board_lists: ", l)
+        self.board.view.update()
+        print("list_drag_accept: ", e.control.data, src.content.data)
+
+    def list_will_drag_accept(self, e):
+        to_index = self.board.board_lists.index(e.control.data)
+        self.board.board_lists[to_index+1].opacity = 1.0
+        self.board.view.update()
+        #print("list_will_drag_accept: ", e.control.data)
+
+    def list_drag_leave(self, e):
+        to_index = self.board.board_lists.index(e.control.data)
+        self.board.board_lists[to_index+1].opacity = 0.0
+        self.board.view.update()
 
     def delete_list(self, e):
         self.board.remove_list(self, e)
@@ -176,7 +211,7 @@ class BoardList(UserControl):
         # add new (drag from other list to end of this list, or use add item button)
         else:
             #print("add new: ", item)
-            new_item = new_item = Item(self, item) if item else Item(
+            new_item = Item(self, item) if item else Item(
                 self, self.item_name.value)
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
