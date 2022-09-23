@@ -39,12 +39,12 @@ Below are some captures I made of the tool in execution.
 
 - _**In a web browser:**_
   - _Dark Mode_
-        <br><br>
+       <br><br>
       ![web_dark](https://user-images.githubusercontent.com/98978078/191587793-68c9f173-d8f9-497a-8bd0-8c88ebf3045d.png)
 
-        <br><br>
+       <br><br>
   - _Light Mode_
-        <br><br>
+       <br><br>
       ![web_light](https://user-images.githubusercontent.com/98978078/191587819-4d4b0770-7f2f-460c-83d3-5c6a518fcac4.png)
     <br><br>
   - **Video**
@@ -53,8 +53,9 @@ Below are some captures I made of the tool in execution.
 
 ### How to get started?
 
-Pretty easy and straight forward!
+**Easiest:** You can just download an archive(for Windows, MacOS and Linux only) from the [releases](https://github.com/ndonkoHenri/Flet-Color-Browser/releases) section, extract this and run the standalone executable file(~25Mo) found in it.
 
+**Hardest:**
 - Start by cloning and unzipping this repo: [how-to](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - Enter the directory
 
