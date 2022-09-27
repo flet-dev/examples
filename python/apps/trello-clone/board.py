@@ -118,26 +118,13 @@ class Board(UserControl):
             )
 
         def close_dlg(e):
-            # this new list should be composed of columns of dragtargets
             new_list = BoardList(self, e.control.value,
                                  color=color_options.data)
-            divider = Container(
-                bgcolor=colors.BLACK26,
-                border_radius=border_radius.all(30),
-                height=100,
-                alignment=alignment.center_right,
-                width=3,
-                opacity=0.0
-            )
-            #self.board_lists.insert(-1, new_list)
-            self.board_lists[-1:-1] = [new_list, divider]
+            self.add_list(new_list)
             dialog.open = False
             self.app.page.update()
             self.update()
 
-            # index = len(self.board_lists_hash)
-            # self.board_lists_hash[e.control.value] = self.board_list_slots[index]
-            # print("boardLists hash: ", self.board_lists_hash)
         dialog = AlertDialog(
             title=Text("Name your new list"),
             content=Column([
@@ -153,8 +140,23 @@ class Board(UserControl):
 
     def remove_list(self, list: BoardList, e):
         # add confirmation ?
-        self.board_lists.remove(list)
+        i = self.board_lists.index(list)
+        # delete both list and divider
+        del self.board_lists[i:i+2]
         self.update()
+
+    def add_list(self, list: BoardList):
+        divider = Container(
+            bgcolor=colors.BLACK26,
+            border_radius=border_radius.all(30),
+            height=100,
+            alignment=alignment.center_right,
+            width=3,
+            opacity=0.0
+        )
+        #self.board_lists.insert(-1, new_list)
+        # insert both list and divider
+        self.board_lists[-1:-1] = [list, divider]
 
     def move_board(self, list: BoardList, displacement: int):
         i = self.boardList.index(list)

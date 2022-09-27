@@ -21,6 +21,7 @@ from flet import (
     Text,
     TextButton,
     IconButton,
+    ElevatedButton,
     ButtonStyle,
     FloatingActionButton,
     NavigationRail,
@@ -44,6 +45,9 @@ from flet import (
     border
 )
 from sidebar import Sidebar
+from user import User
+from store import (BoardRepository, UserRepository)
+
 # from dotenv import dotenv_values
 
 # config = dotenv_values(".env.dev")
@@ -56,16 +60,28 @@ from sidebar import Sidebar
 
 
 class TrelloApp:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, user=None):
         self.page = page
+        self.user = user
+        self.user_repo: UserRepository = UserRepository(page)
         self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
-        self.boards = []
+        self.board_repo: BoardRepository = BoardRepository(page)
+        self.boards = self.board_repo.get_all()
         self.current_board_index: int | None = None
         self.current_board = None if self.current_board_index == None else self.boards[
             self.current_board_index]
 
+        self.login_profile_button = PopupMenuItem(
+            text="Log in", on_click=self.login)
+        self.appbar_items = [
+            self.login_profile_button,
+            PopupMenuItem(),  # divider
+            PopupMenuItem(
+                text="Synchronize"
+            )
+        ]
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
@@ -76,13 +92,7 @@ class TrelloApp:
             actions=[
                 Container(
                     content=PopupMenuButton(
-                        items=[
-                            PopupMenuItem(text="Profile"),
-                            PopupMenuItem(),  # divider
-                            PopupMenuItem(
-                                text="Synchronize"
-                            )
-                        ]
+                        items=self.appbar_items
                     ),
                     margin=margin.only(left=50, right=25)
                 )
@@ -151,6 +161,43 @@ class TrelloApp:
         # self.page.go("/")
         # self.page.update()
         print("self.boards: ", self.boards)
+
+    def login(self, e):
+
+        def close_dlg(e):
+            if user_name.value == "" or password.value == "":
+                user_name.error_text = "Please provide username"
+                password.error_text = "Please provide password"
+                self.page.update()
+                return
+            else:
+                print("name and password: ", user_name.value, password.value)
+                user = User(user_name.value, password.value)
+                self.user_repo.login(user)
+                # if self.page.client_storage.contains_key(user_name.value):
+                #     self.user = user_name.value
+                # else:
+                #     self.page.client_storage.set(
+                #         user_name.value, [password.value, True])
+
+            dialog.open = False
+            self.appbar_items[0] = PopupMenuItem(
+                text=f"{self.page.client_storage.get('current_user')}'s Profile")
+            self.page.update()
+        user_name = TextField(label="User name")
+        password = TextField(label="Password", password=True)
+        dialog = AlertDialog(
+            title=Text("Please enter your login credentials"),
+            content=Column([
+                user_name,
+                password,
+                ElevatedButton(text="Login", on_click=close_dlg),
+            ], tight=True),
+            on_dismiss=lambda e: print("Modal dialog dismissed!"),
+        )
+        self.page.dialog = dialog
+        dialog.open = True
+        self.page.update()
 
     def page_resize(self, e):
         new_width = (self.page.width -
@@ -237,7 +284,7 @@ class TrelloApp:
                 width=250,
                 # on_click=self.board_click,
                 data=b
-            ) for b in self.boards
+            ) for b in self.board_repo.get_all()
         ], wrap=True)
 
     def board_click(self, e):
@@ -281,7 +328,8 @@ class TrelloApp:
 
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
-        self.boards.append(new_board)
+        # self.boards.append(new_board)
+        self.board_repo.add(new_board)
         self.view.controls.append(new_board)
         # self.view.update()
         print("self.view.controls: ", self.view.controls)
@@ -292,8 +340,9 @@ class TrelloApp:
     def delete_board(self, e):
         print("e.control: ", e.control)
         print("e.control.data: ", e.control.data)
-        i = self.boards.index(e.control.data)
-        self.boards.remove(e.control.data)
+        #i = self.boards.index(e.control.data)
+        # self.boards.remove(e.control.data)
+        self.board_repo.remove(e.control.data)
         self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
         self.populate_all_boards_view()
