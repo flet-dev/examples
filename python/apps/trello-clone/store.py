@@ -1,10 +1,11 @@
 from board import Board
 from user import User
 from board_list import BoardList
+from repository import AbstractRepository
 from flet import (Page)
 
 
-class BoardRepository:
+class BoardRepository(AbstractRepository):
     def __init__(self, page: Page):
         self.boards: list[Board] = []
 
@@ -18,7 +19,7 @@ class BoardRepository:
         self.boards.pop(board)
 
 
-class UserRepository:
+class UserRepository(AbstractRepository):
     def __init__(self, page: Page):
         self.page: Page = page
         self.users: list[User] = []
