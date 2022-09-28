@@ -173,12 +173,10 @@ class TrelloApp:
             else:
                 print("name and password: ", user_name.value, password.value)
                 user = User(user_name.value, password.value)
-                self.user_repo.login(user)
-                # if self.page.client_storage.contains_key(user_name.value):
-                #     self.user = user_name.value
-                # else:
-                #     self.page.client_storage.set(
-                #         user_name.value, [password.value, True])
+                if user not in self.user_repo.list():
+                    self.user_repo.add(user)
+                self.user = user_name.value
+                self.page.client_storage.set("current_user", user_name.value)
 
             dialog.open = False
             self.appbar_items[0] = PopupMenuItem(

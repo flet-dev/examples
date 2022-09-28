@@ -24,14 +24,8 @@ class UserRepository(AbstractRepository):
         self.page: Page = page
         self.users: list[User] = []
 
-    def login(self, user: User):
-        if user not in self.users:
-            new_user = self.create(user.name, user.password)
-            self.page.client_storage.set("current_user", new_user.name)
-        else:
-            self.page.client_storage.set("current_user", user.name)
+    def list(self, user: User):
+        return self.users
 
-    def create(self, user_name, password):
-        new_user = User(user_name, password)
-        self.users.append(new_user)
-        return new_user
+    def add(self, user: User):
+        self.users.append(user)
