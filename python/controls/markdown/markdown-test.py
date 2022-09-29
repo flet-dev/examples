@@ -1,5 +1,5 @@
 import flet
-from flet import Markdown, Page
+from flet import ListView, Markdown, Page
 from flet.divider import Divider
 
 md1 = """
@@ -121,20 +121,14 @@ line 3
 
 
 def main(page: Page):
-    def goto_url(e):
-        print("GOTO:", e.data)
-        page.launch_url(e.data)
-
+    page.scroll = "auto"
     page.add(
-        Markdown(md1, on_tap_link=lambda e: page.launch_url(e.data), expand=True),
-        Divider(),
         Markdown(
             md1,
             selectable=True,
             extension_set="gitHubWeb",
-            on_tap_link=goto_url,
-            expand=True,
-        ),
+            on_tap_link=lambda e: page.launch_url(e.data),
+        )
     )
 
 
