@@ -4,7 +4,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/ndonkoHenri/Flet-Color-Browser)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/ndonkoHenri/Flet-Color-Browser?color=ry)
 
-_From my experience, working with colors is not that easy._
+> _From my experience, working with colors is not that easy._
 ## Table of contents:
 - [Introduction](#what-is-this-about-introduction)
 - [Source of Inspiration](#source-of-inspiration)
@@ -26,36 +26,44 @@ This tool is actually a refactored-clone(or fork if you want) of it.
 I just added my personal UI touch and included more comments in the code :) 
 
 ### Screen captures
+This tool has two versions: One using a [GridView](https://flet.dev/docs/controls/gridview) to display the colors, and another using a [ListView](https://flet.dev/docs/controls/listview) in [Tabs](https://flet.dev/docs/controls/tabs). 
+
 Below are some captures I made of the tool in execution.
 
-- _**On PC:**_
+- _**Version 1:**_
   - _Dark Mode_
         <br><br>
-      ![pc_dark](https://user-images.githubusercontent.com/98978078/191587712-3c8fb14d-8ed0-4045-ab97-7759be04791c.png)
+      ![V1 Dark Mode](https://user-images.githubusercontent.com/98978078/193250212-a56477ac-f063-4b45-99e3-7dbb971eee27.JPG)
         <br><br>
   - _Light Mode_
         <br><br>
-      ![pc_light](https://user-images.githubusercontent.com/98978078/191587748-11d44ba2-03f1-4bbc-9abd-233ad8ff3c50.png)
+        ![V1 Light Mode](https://user-images.githubusercontent.com/98978078/193256037-2ee24033-425f-4c9e-958a-f20e3c207917.JPG)
+      
 
-- _**In a web browser:**_
+- _**Version 2:**_
   - _Dark Mode_
        <br><br>
-      ![web_dark](https://user-images.githubusercontent.com/98978078/191587793-68c9f173-d8f9-497a-8bd0-8c88ebf3045d.png)
+      ![V2 Light Mode](https://user-images.githubusercontent.com/98978078/193249865-b626c155-7dc3-4188-9fc7-e7a163357c5d.JPG)
 
        <br><br>
-  - _Light Mode_
-       <br><br>
-      ![web_light](https://user-images.githubusercontent.com/98978078/191587819-4d4b0770-7f2f-460c-83d3-5c6a518fcac4.png)
+    - _Light Mode_
+         <br><br>
+      ![Capture](https://user-images.githubusercontent.com/98978078/193256644-3cf3dec8-ca52-4a6e-a772-f567074891f5.JPG)
     <br><br>
-  - **Video**
+  - **GIF Video**
         <br><br>
-              [Link to video-demo](https://user-images.githubusercontent.com/98978078/191587444-d66a4185-c677-441c-a747-ce6f6f58774e.mp4)
-
+        ![Colors-Browser GIF](https://user-images.githubusercontent.com/98978078/193254404-bef6c113-b71d-4e01-b732-cd5d268619ec.gif)
+  
 ### How to get started?
 
-**Easiest:** You can just download an archive(for Windows, MacOS and Linux only) from the [releases](https://github.com/ndonkoHenri/Flet-Color-Browser/releases) section, extract this and run the standalone executable file(~25Mo) found in it.
+**Easiest Way:** You can [open it on your browser](https://flet-colors-browser.fly.dev/) and install it as a PWA(Progressive Web Application). It would then be found on your desktop(Windows, macOS, Linux.. etc), and you could run it any time. Follow the guide below gotten from a [Post on Medium](https://medium.com/@dhormale/install-pwa-on-windows-desktop-via-google-chrome-browser-6907c01eebe4).
 
-**Hardest:**
+![How to Install as PWA](https://miro.medium.com/max/720/1*BQ5FlcpuLTOBfF5vLvv6Bg.gif)
+
+**Second-Easiest Way:** You can just download an archive(for Windows, macOS and Linux only) from the [releases](https://github.com/ndonkoHenri/Flet-Color-Browser/releases) section, extract this and run the standalone executable file(~25Mo) found in it.
+
+
+**Hardest Way:**
 - Start by cloning and unzipping this repo: [how-to](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - Enter the directory
 
@@ -65,7 +73,6 @@ Below are some captures I made of the tool in execution.
 - Run the `main.py` file
 
       python main.py
-- That's all! Easy and Straight-forward right?
 
 ### How to deploy to Fly.io?
 
