@@ -33,6 +33,7 @@ def main(page: Page):
     # Creating a progress bar that will be used to show the user that the app is busy doing something.
     page.splash = ProgressBar(visible=False)
 
+
     def change_theme(e):
         """
         When the button(to change theme) is clicked, the progress bar is made visible, the theme is changed,

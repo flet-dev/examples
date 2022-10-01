@@ -121,14 +121,26 @@ line 3
 
 
 def main(page: Page):
-    page.scroll = "auto"
+    def goto_url(e):
+        print("GOTO:", e.data)
+        page.launch_url(e.data)
+
     page.add(
-        Markdown(
-            md1,
-            selectable=True,
-            extension_set="gitHubWeb",
-            on_tap_link=lambda e: page.launch_url(e.data),
-        )
+        ListView(
+            [Markdown(md1, on_tap_link=lambda e: page.launch_url(e.data))], expand=True
+        ),
+        Divider(),
+        ListView(
+            [
+                Markdown(
+                    md1,
+                    selectable=True,
+                    extension_set="gitHubWeb",
+                    on_tap_link=goto_url,
+                )
+            ],
+            expand=True,
+        ),
     )
 
 
