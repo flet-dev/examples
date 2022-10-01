@@ -20,15 +20,15 @@ def main(page: Page):
     # page.window_always_on_top = True
 
     # set the minimum width and height of the window.
-    # page.window_min_width = 245
-    # page.window_min_height = 406
+    page.window_min_width = 245
+    page.window_min_height = 406
 
     # Setting the theme of the page to light mode.
     page.theme_mode = "light"
 
     # set the width and height of the window.
-    # page.window_width = 562
-    # page.window_height = 720
+    page.window_width = 562
+    page.window_height = 720
 
     # Creating a progress bar that will be used to show the user that the app is busy doing something.
     page.splash = ProgressBar(visible=False)
