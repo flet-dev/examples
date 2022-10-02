@@ -4,7 +4,9 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/ndonkoHenri/Flet-Color-Browser)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/ndonkoHenri/Flet-Color-Browser?color=ry)
 
-_From my experience, working with colors is not that easy._
+
+> _From my experience, working with colors is not that easy._
+
 ## Table of contents:
 - [Introduction](#what-is-this-about-introduction)
 - [Source of Inspiration](#source-of-inspiration)
@@ -13,6 +15,7 @@ _From my experience, working with colors is not that easy._
 - [How to deploy to Fly.io?](#how-to-deploy-to-flyio)
 - [Issues/Contribution](#issuescontribution)
 
+_**Original Repo's URL:**_ [ndonkoHenri/Flet-Color-Browser](https://github.com/ndonkoHenri/Flet-Color-Browser)
 
 ### What is this about? (Introduction)
 
@@ -26,6 +29,7 @@ This tool is actually a refactored-clone(or fork if you want) of it.
 I just added my personal UI touch and included more comments in the code :) 
 
 ### Screen captures
+
 Below are some captures I made of the tool in execution.
 
 - _**On PC:**_
@@ -56,6 +60,7 @@ Below are some captures I made of the tool in execution.
 **Easiest:** You can just download an archive(for Windows, MacOS and Linux only) from the [releases](https://github.com/ndonkoHenri/Flet-Color-Browser/releases) section, extract this and run the standalone executable file(~25Mo) found in it.
 
 **Hardest:**
+
 - Start by cloning and unzipping this repo: [how-to](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - Enter the directory
 
@@ -65,7 +70,6 @@ Below are some captures I made of the tool in execution.
 - Run the `main.py` file
 
       python main.py
-- That's all! Easy and Straight-forward right?
 
 ### How to deploy to Fly.io?
 
