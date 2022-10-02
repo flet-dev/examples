@@ -76,6 +76,10 @@ class Board(UserControl):
         )
         return self.view
 
+    def construct_board_layout():
+        # retrieve all board_lists from data layer and ensure that they are interspersed with dividers etc.
+        pass
+
     def resize(self, width, height):
         self.list_wrap.width = width
         self.view.height = height

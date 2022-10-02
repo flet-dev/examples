@@ -1,9 +1,12 @@
 from board import Board
 from board_list import BoardList
 from user import User
+from flet import Page
 
 
 class DataStore:
+    def __init__(self, page: Page):
+        self.page = page
 
     def add_board(self, model) -> None:
         raise NotImplementedError
@@ -41,5 +44,5 @@ class DataStore:
     def get_lists_by_board(self, board) -> list[BoardList]:
         raise NotImplementedError
 
-    def remove_list(self, id) -> None:
+    def remove_list(self, board, id) -> None:
         raise NotImplementedError

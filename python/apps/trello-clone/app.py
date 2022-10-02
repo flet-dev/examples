@@ -46,7 +46,7 @@ from flet import (
 )
 from sidebar import Sidebar
 from user import User
-from store import (BoardRepository, UserRepository)
+from memory_store import InMemoryStore
 
 # from dotenv import dotenv_values
 
@@ -63,12 +63,11 @@ class TrelloApp:
     def __init__(self, page: Page, user=None):
         self.page = page
         self.user = user
-        self.user_repo: UserRepository = UserRepository(page)
+        self.store = InMemoryStore(page)
         self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
-        self.board_repo: BoardRepository = BoardRepository(page)
-        self.boards = self.board_repo.get_all()
+        self.boards = self.store.get_boards()
         self.current_board_index: int | None = None
         self.current_board = None if self.current_board_index == None else self.boards[
             self.current_board_index]
@@ -282,7 +281,7 @@ class TrelloApp:
                 width=250,
                 # on_click=self.board_click,
                 data=b
-            ) for b in self.board_repo.get_all()
+            ) for b in self.store.get_boards()
         ], wrap=True)
 
     def board_click(self, e):
@@ -327,7 +326,7 @@ class TrelloApp:
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
         # self.boards.append(new_board)
-        self.board_repo.add(new_board)
+        self.store.add_board(new_board)
         self.view.controls.append(new_board)
         # self.view.update()
         print("self.view.controls: ", self.view.controls)
@@ -338,9 +337,9 @@ class TrelloApp:
     def delete_board(self, e):
         print("e.control: ", e.control)
         print("e.control.data: ", e.control.data)
-        #i = self.boards.index(e.control.data)
+        i = self.store.get_boards().index(e.control.data)
         # self.boards.remove(e.control.data)
-        self.board_repo.remove(e.control.data)
+        self.store.remove_board(e.control.data)
         self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
         self.populate_all_boards_view()

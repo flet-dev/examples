@@ -6,27 +6,30 @@ from flet import (Page)
 
 
 class InMemoryStore(DataStore):
+    def __init__(self, page: Page):
+        self.page = page
+        self.boards: dict[str, Board] = {}
+        self.users: dict[str, User] = {}
+        self.board_lists: dict[str, list[BoardList]] = {}
 
-    # class BoardRepository(AbstractRepository):
-    #     def __init__(self, page: Page):
-    #         self.boards: list[Board] = []
+    def add_board(self, board: Board):
+        self.boards[board.identifier] = board
 
-    #     def add(self, board: Board):
-    #         self.boards.append(board)
+    def get_board(self, id: str):
+        return self.boards[id]
 
-    #     def get_all(self):
-    #         return self.boards
+    def get_boards(self):
+        return [self.boards[b] for b in self.boards]
 
-    #     def remove(self, board: Board):
-    #         self.boards.pop(board)
+    def remove_board(self, id: str):
+        del self.boards[id]
 
-    # class UserRepository(AbstractRepository):
-    #     def __init__(self, page: Page):
-    #         self.page: Page = page
-    #         self.users: list[User] = []
+    def add_list(self, board: str, list: BoardList):
+        self.board_lists[board].append(list)
 
-    #     def list(self, user: User):
-    #         return self.users
+    def get_lists_by_board(self, board: str):
+        return self.board_lists[board]
 
-    #     def add(self, user: User):
-    #         self.users.append(user)
+    def remove_list(self, board: str, id: int):
+        self.board_lists[board] = [
+            l for l in self.board_lists[board] if l.board_list_id == id]
