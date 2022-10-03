@@ -46,6 +46,7 @@ from flet import (
 )
 from sidebar import Sidebar
 from user import User
+from data_store import DataStore
 from memory_store import InMemoryStore
 
 # from dotenv import dotenv_values
@@ -63,7 +64,7 @@ class TrelloApp:
     def __init__(self, page: Page, user=None):
         self.page = page
         self.user = user
-        self.store = InMemoryStore(page)
+        self.store: DataStore = InMemoryStore(page)
         self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
@@ -251,7 +252,8 @@ class TrelloApp:
         self.page.update()
 
     def update(self):
-        self.current_board = self.boards[self.current_board_index]
+        self.boards = self.store.get_boards()
+        #self.current_board = self.boards[self.current_board_index]
         self.page.update()
         # self.view.update()
 
@@ -333,6 +335,7 @@ class TrelloApp:
         self.populate_all_boards_view()
         self.sidebar.add_board_destination(board_name)
         # self.page.update()
+        self.update()
 
     def delete_board(self, e):
         print("e.control: ", e.control)
