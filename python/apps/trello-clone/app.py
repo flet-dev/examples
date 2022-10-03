@@ -1,4 +1,4 @@
-from hashlib import algorithms_available
+import threading
 import logging
 import os
 from board import Board
@@ -61,10 +61,11 @@ from memory_store import InMemoryStore
 
 
 class TrelloApp:
-    def __init__(self, page: Page, user=None):
+    def __init__(self, page: Page, store: DataStore, user=None):
+        #self._lock = threading.Lock()
         self.page = page
         self.user = user
-        self.store: DataStore = InMemoryStore(page)
+        self.store = store
         self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
@@ -258,6 +259,9 @@ class TrelloApp:
         # self.view.update()
 
     def populate_all_boards_view(self):
+        print("all boards: ", self.store.get_boards())
+        for b in self.store.get_boards():
+            print("board title: ", b.identifier)
         self.all_boards_view.controls[-1] = Row([
             Container(content=Row([Container(content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click), Container(
                 content=PopupMenuButton(
@@ -338,12 +342,13 @@ class TrelloApp:
         self.update()
 
     def delete_board(self, e):
+        print("delete board called")
         print("e.control: ", e.control)
         print("e.control.data: ", e.control.data)
         i = self.store.get_boards().index(e.control.data)
         # self.boards.remove(e.control.data)
         self.store.remove_board(e.control.data)
-        self.view.controls.remove(e.control.data)
+        # self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
         self.populate_all_boards_view()
         self.page.update()
@@ -365,11 +370,13 @@ if __name__ == "__main__":
             "Pacifico": "/Pacifico-Regular.ttf"
         }
         page.bgcolor = colors.BLUE_GREY_200
-        app = TrelloApp(page)
+        store = InMemoryStore(page)
+        app = TrelloApp(page, store)
         app.start()
         # page.add(app.view)
         page.update()
 
     print("flet version: ", flet.version.version)
     print("flet path: ", flet.__file__)
+
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)

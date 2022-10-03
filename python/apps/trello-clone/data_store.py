@@ -17,7 +17,10 @@ class DataStore:
     def get_boards(self) -> list[Board]:
         raise NotImplementedError
 
-    def remove_board(self, id) -> None:
+    def update_board(self, model, update):
+        raise NotImplementedError
+
+    def remove_board(self, board) -> None:
         raise NotImplementedError
 
     def add_user(self, model) -> None:

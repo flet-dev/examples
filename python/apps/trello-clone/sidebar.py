@@ -151,7 +151,10 @@ class Sidebar(UserControl):
 
     def board_name_blur(self, e):
         print("e.control: ", e.control.data)
-        self.app.boards[e.control.data].identifier = e.control.value
+        self.app.update()
+        #self.app.boards[e.control.data].identifier = e.control.value
+        self.app.store.update_board(self.app.boards[e.control.data], {
+                                    'identifier': e.control.value})
         self.app.populate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"

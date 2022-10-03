@@ -1,3 +1,4 @@
+from mimetypes import init
 from board import Board
 from user import User
 from board_list import BoardList
@@ -18,11 +19,24 @@ class InMemoryStore(DataStore):
     def get_board(self, id: str):
         return self.boards[id]
 
+    def update_board(self, board: Board, update: dict):
+        print("board to update: ", board)
+        initial_key = board.identifier
+        for k in update:
+            print("update_board: ", k, update[k])
+            setattr(board, k, update[k])
+
+        self.boards[board.identifier] = board
+        del self.boards[initial_key]
+        print("memory store boards: ", self.boards)
+
     def get_boards(self):
         return [self.boards[b] for b in self.boards]
 
-    def remove_board(self, id: str):
-        del self.boards[id]
+    def remove_board(self, board: Board):
+        print("board passed to memory store: ", board, board.identifier)
+        print("memory store boards: ", self.boards)
+        del self.boards[board.identifier]
 
     def add_list(self, board: str, list: BoardList):
         self.board_lists[board].append(list)
