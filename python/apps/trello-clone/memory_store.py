@@ -9,41 +9,44 @@ from flet import (Page)
 class InMemoryStore(DataStore):
     def __init__(self, page: Page):
         self.page = page
-        self.boards: dict[str, Board] = {}
+        self.boards: dict[int, Board] = {}
         self.users: dict[str, User] = {}
-        self.board_lists: dict[str, list[BoardList]] = {}
+        self.board_lists: dict[int, list[BoardList]] = {}
 
     def add_board(self, board: Board):
-        self.boards[board.identifier] = board
+        self.boards[board.board_id] = board
+        # self.board_lists[0] = [BoardList(self.boards[0], "test", "Red"), BoardList(
+        #     self.boards[0], "test2", "Blue")]
 
-    def get_board(self, id: str):
+    def get_board(self, id: int):
         return self.boards[id]
 
     def update_board(self, board: Board, update: dict):
-        print("board to update: ", board)
-        initial_key = board.identifier
+        #initial_key = board.identifier
         for k in update:
-            print("update_board: ", k, update[k])
             setattr(board, k, update[k])
-
-        self.boards[board.identifier] = board
-        del self.boards[initial_key]
-        print("memory store boards: ", self.boards)
+        #self.boards[board.identifier] = board
+        #del self.boards[initial_key]
 
     def get_boards(self):
         return [self.boards[b] for b in self.boards]
 
     def remove_board(self, board: Board):
-        print("board passed to memory store: ", board, board.identifier)
-        print("memory store boards: ", self.boards)
-        del self.boards[board.identifier]
+        del self.boards[board.board_id]
 
-    def add_list(self, board: str, list: BoardList):
-        self.board_lists[board].append(list)
+    def add_list(self, board: int, list: BoardList):
+        if board in self.board_lists:
+            print("already found")
+            self.board_lists[board].append(list)
+        else:
+            print("first time")
+            self.board_lists[board] = [list]
+        print("memory store board_lists: ", self.board_lists)
 
-    def get_lists_by_board(self, board: str):
-        return self.board_lists[board]
+    def get_lists_by_board(self, board: int):
+        return self.board_lists.get(board, [])
 
-    def remove_list(self, board: str, id: int):
+    def remove_list(self, board: int, id: int):
         self.board_lists[board] = [
-            l for l in self.board_lists[board] if l.board_list_id == id]
+            l for l in self.board_lists[board] if not l.board_list_id == id]
+        print("self.board_lists[board]: ", self.board_lists[board])

@@ -161,7 +161,7 @@ class TrelloApp:
         )
         # self.page.go("/")
         # self.page.update()
-        print("self.boards: ", self.boards)
+        #print("self.boards: ", self.boards)
 
     def login(self, e):
 
@@ -205,26 +205,26 @@ class TrelloApp:
             board.resize(new_width, self.page.height)
 
     def route_change(self, e):
-        print("changed route: ", e.route)
+        #print("changed route: ", e.route)
         split_route = e.route.split('/')
-        print("split route: ", split_route[1:])
-        print("self.page.controls", self.page.controls)
+        #print("split route: ", split_route[1:])
+        #print("self.page.controls", self.page.controls)
         match split_route[1:]:
             case[""]:
                 self.page.go("/boards")
 
             case ["board", board_number]:
-                print("append board number:", board_number)
+                #print("append board number:", board_number)
                 self.current_board = self.boards[int(board_number)]
                 if int(board_number) > len(self.boards):
-                    print("board number out of range")
+                    #print("board number out of range")
                     self.page.go("/")
                     return
                 for ctrl in self.view.controls[2:4]:
                     ctrl.visible = False
                 for i, ctrl in enumerate(self.view.controls[4:]):
                     ctrl.visible = int(board_number) == i
-                    print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
+                    #print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
                 self.sidebar.bottom_nav_rail.selected_index = int(board_number)
                 self.sidebar.top_nav_rail.selected_index = None
                 self.sidebar.update()
@@ -259,9 +259,6 @@ class TrelloApp:
         # self.view.update()
 
     def populate_all_boards_view(self):
-        print("all boards: ", self.store.get_boards())
-        for b in self.store.get_boards():
-            print("board title: ", b.identifier)
         self.all_boards_view.controls[-1] = Row([
             Container(content=Row([Container(content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click), Container(
                 content=PopupMenuButton(
@@ -335,15 +332,13 @@ class TrelloApp:
         self.store.add_board(new_board)
         self.view.controls.append(new_board)
         # self.view.update()
-        print("self.view.controls: ", self.view.controls)
+        #print("self.view.controls: ", self.view.controls)
         self.populate_all_boards_view()
         self.sidebar.add_board_destination(board_name)
         # self.page.update()
         self.update()
 
     def delete_board(self, e):
-        print("delete board called")
-        print("e.control: ", e.control)
         print("e.control.data: ", e.control.data)
         i = self.store.get_boards().index(e.control.data)
         # self.boards.remove(e.control.data)
@@ -376,7 +371,7 @@ if __name__ == "__main__":
         # page.add(app.view)
         page.update()
 
-    print("flet version: ", flet.version.version)
-    print("flet path: ", flet.__file__)
+    #print("flet version: ", flet.version.version)
+    #print("flet path: ", flet.__file__)
 
     flet.app(target=main, assets_dir="assets", view=flet.WEB_BROWSER)

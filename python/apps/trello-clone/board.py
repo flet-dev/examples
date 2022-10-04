@@ -1,3 +1,4 @@
+import itertools
 from flet import (
     DragTarget,
     Draggable,
@@ -26,14 +27,18 @@ from board_list import BoardList
 
 
 class Board(UserControl):
+    id_counter = itertools.count()
 
     def __init__(self, app, identifier: str):
         super().__init__()
+        self.board_id = next(BoardList.id_counter)
+        print("board id: ", self.board_id)
         self.app = app
         self.visible = False
         self.identifier = identifier
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
+
         self.board_lists = [
             # if this is an empty array then adding to it and updating component does not render a new list
             # why is a dummy control needed here? possible bug.
@@ -46,8 +51,11 @@ class Board(UserControl):
                 width=3,
                 opacity=0.0
             ),
+
             self.add_list_button
         ]
+        for l in self.app.store.get_lists_by_board(self.board_id):
+            self.add_list(l)
 
         self.list_wrap = Row(
             self.board_lists,
@@ -76,9 +84,20 @@ class Board(UserControl):
         )
         return self.view
 
-    def construct_board_layout():
-        # retrieve all board_lists from data layer and ensure that they are interspersed with dividers etc.
-        pass
+    # def construct_board_layout(self):
+    #     # retrieve all board_lists from data layer and ensure that they are interspersed with dividers etc.
+    #     lists_from_store = self.app.store.get_lists_by_board(self.board_id)
+    #     for i in range(len(lists_from_store)):
+    #         print("list_from_store: ", i, lists_from_store[i])
+    #         self.board_lists.insert(i+1, lists_from_store[i])
+    #         self.board_lists.insert(i+1, Container(
+    #             bgcolor=colors.BLACK26,
+    #             border_radius=border_radius.all(30),
+    #             height=100,
+    #             alignment=alignment.center_right,
+    #             width=3,
+    #             opacity=0.0
+    #         ))
 
     def resize(self, width, height):
         self.list_wrap.width = width
@@ -100,7 +119,7 @@ class Board(UserControl):
         def set_color(e):
             chosen_color = e.control.data
             color_options.data = chosen_color
-            print("colorOptions.data: ", color_options.data)
+            #print("colorOptions.data: ", color_options.data)
             for k, v in option_dict.items():
                 if k == e.control.data:
                     v.bgcolor = colors.BLACK12
@@ -125,6 +144,8 @@ class Board(UserControl):
             new_list = BoardList(self, e.control.value,
                                  color=color_options.data)
             self.add_list(new_list)
+            self.app.store.add_list(self.board_id, new_list)
+            # self.construct_board_layout()
             dialog.open = False
             self.app.page.update()
             self.update()
@@ -147,6 +168,7 @@ class Board(UserControl):
         i = self.board_lists.index(list)
         # delete both list and divider
         del self.board_lists[i:i+2]
+        self.app.store.remove_list(self.board_id, list.board_list_id)
         self.update()
 
     def add_list(self, list: BoardList):
