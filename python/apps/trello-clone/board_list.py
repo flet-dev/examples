@@ -8,6 +8,7 @@ from flet import (
     Switch,
     Checkbox,
     Text,
+    Icon,
     FloatingActionButton,
     PopupMenuButton,
     PopupMenuItem,
@@ -94,7 +95,7 @@ class BoardList(UserControl):
                         content=Column([
                             self.header,
                             self.item_name,
-                            TextButton("add card", icon=icons.ADD,
+                            TextButton(content=Row([Icon(icons.ADD), Text("add card", color=colors.BLACK38)], tight=True),
                                        on_click=self.add_item_handler),
                             self.items,
                             self.end_indicator

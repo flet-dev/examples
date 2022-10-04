@@ -33,6 +33,7 @@ class InMemoryStore(DataStore):
 
     def remove_board(self, board: Board):
         del self.boards[board.board_id]
+        self.board_lists[board.board_id] = []
 
     def add_list(self, board: int, list: BoardList):
         if board in self.board_lists:

@@ -293,22 +293,10 @@ class TrelloApp:
     def toggle_nav_rail(self, e):
         self.sidebar.visible = not self.sidebar.visible
         self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
-        # for board in self.boards:
-        #     board.resize(self.page.width, self.page.height)
         new_width = (self.page.width -
                      330) if self.sidebar.visible else (self.page.width - 30)
         self.current_board.resize(new_width, self.page.height)
         self.page.update()
-
-    # def nav_rail_change(self, e):
-    #     self.current_board_index = e.control.selected_index
-    #     if self.current_board in self.view.controls:
-    #         self.current_board.visible = False
-    #     self.current_board = self.boards[e.control.selected_index]
-    #     self.current_board.visible = True
-    #     # self.view.controls.append(self.current_board)
-    #     # print("Selected destination: ", e.control.selected_index)
-    #     self.view.update()
 
     def add_board(self, e):
         def close_dlg(e):
@@ -343,7 +331,7 @@ class TrelloApp:
         i = self.store.get_boards().index(e.control.data)
         # self.boards.remove(e.control.data)
         self.store.remove_board(e.control.data)
-        # self.view.controls.remove(e.control.data)
+        self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
         self.populate_all_boards_view()
         self.page.update()

@@ -8,6 +8,8 @@ from flet import (
     FloatingActionButton,
     Text,
     Switch,
+    GridView,
+    Image,
     Container,
     TextField,
     TextButton,
@@ -108,37 +110,52 @@ class Board(UserControl):
     def addListDlg(self, e):
 
         option_dict = {
-            colors.RED_200: self.color_option_creator(colors.RED_200, "red"),
             colors.LIGHT_GREEN: self.color_option_creator(colors.LIGHT_GREEN, "green"),
-            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE, "blue"),
-            colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300, "orange"),
+            colors.RED_200: self.color_option_creator(colors.RED_200, "red"),
             colors.PINK_300: self.color_option_creator(colors.PINK_300, "pink"),
+            colors.AMBER_500: self.color_option_creator(colors.AMBER_500, "amber"),
+            colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300, "orange"),
+            colors.DEEP_ORANGE_300: self.color_option_creator(colors.DEEP_ORANGE_300, "orange"),
+            colors.GREEN_400: self.color_option_creator(colors.GREEN_400, "green"),
+            colors.TEAL_500: self.color_option_creator(colors.TEAL_500, "teal"),
             colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400, "yellow"),
+            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE, "blue"),
+            colors.PURPLE_400: self.color_option_creator(colors.PURPLE_400, "purple"),
+            colors.BROWN_300: self.color_option_creator(colors.BROWN_300, "brown"),
+            colors.CYAN_500: self.color_option_creator(colors.CYAN_500, "cyan"),
+            colors.BLUE_GREY_500: self.color_option_creator(colors.BLUE_GREY_500, "blue"),
+            colors.GREEN_500: self.color_option_creator(colors.GREEN_500, "green"),
         }
 
         def set_color(e):
+            print("e.control.data: ", e.control, e.control.data)
             chosen_color = e.control.data
             color_options.data = chosen_color
             #print("colorOptions.data: ", color_options.data)
             for k, v in option_dict.items():
                 if k == e.control.data:
-                    v.bgcolor = colors.BLACK12
-                    # v.border = border.all(3, colors.BLACK26)
-                    v.border_radius = border_radius.all(100)
+                    #v.bgcolor = colors.BLACK12
+                    v.border = border.all(3, colors.BLACK26)
+                    #v.border_radius = border_radius.all(100)
                 else:
-                    v.bgcolor = None
+                    v.border = None
             dialog.content.update()
 
-        color_options = Row(data="")
+        #color_options = Row(data="")
+        color_options = GridView(
+            runs_count=3, max_extent=40, data="", height=150)
 
-        for k, v in option_dict.items():
-            color_options.controls.append(
-                TextButton(
-                    content=v,
-                    on_click=set_color,
-                    data=k
-                )
-            )
+        # for k, v in option_dict.items():
+        #     color_options.controls.append(
+        #         TextButton(
+        #             content=v,
+        #             on_click=set_color,
+        #             data=k
+        #         )
+        #     )
+        for _, v in option_dict.items():
+            v.on_click = set_color
+            color_options.controls.append(v)
 
         def close_dlg(e):
             new_list = BoardList(self, e.control.value,
@@ -156,7 +173,8 @@ class Board(UserControl):
                 Container(content=TextField(label="New List Name", on_submit=close_dlg),
                           padding=padding.symmetric(horizontal=5)),
                 color_options
-            ], tight=True),
+            ], tight=True, alignment="center"),
+
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )
         self.app.page.dialog = dialog
@@ -191,23 +209,11 @@ class Board(UserControl):
 
     def color_option_creator(self, color: str, name: str):
         return Container(
-            content=Column(
-                [
-                    Icon(name=icons.CIRCLE, color=color),
-                    Text(
-                        value=name,
-                        # size=12,
-                        width=50,
-                        no_wrap=True,
-                        text_align="center",
-
-                    ),
-                ],
-                # spacing=5,
-                alignment="center",
-                horizontal_alignment="center",
-            ),
-            padding=padding.all(10),
-            margin=margin.all(1),
+            bgcolor=color,
+            border_radius=border_radius.all(50),
+            height=10,
+            width=10,
+            padding=padding.all(5),
             alignment=alignment.center,
+            data=color
         )
