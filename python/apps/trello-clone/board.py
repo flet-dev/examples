@@ -34,7 +34,6 @@ class Board(UserControl):
     def __init__(self, app, identifier: str):
         super().__init__()
         self.board_id = next(BoardList.id_counter)
-        print("board id: ", self.board_id)
         self.app = app
         self.visible = False
         self.identifier = identifier
@@ -42,9 +41,6 @@ class Board(UserControl):
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
 
         self.board_lists = [
-            # if this is an empty array then adding to it and updating component does not render a new list
-            # why is a dummy control needed here? possible bug.
-            # Text(visible=False)
             Container(
                 bgcolor=colors.BLACK26,
                 border_radius=border_radius.all(30),
@@ -82,6 +78,7 @@ class Board(UserControl):
             ),
             data=self,
             margin=margin.all(0),
+            padding=padding.only(top=10),
             height=self.app.page.height,
         )
         return self.view

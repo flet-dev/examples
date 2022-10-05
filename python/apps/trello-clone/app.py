@@ -102,7 +102,7 @@ class TrelloApp:
 
         self.toggle_nav_rail_button = IconButton(
             icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
-            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail, right=5)
+            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
 
         self.page_divider = Stack([
             VerticalDivider(width=2),
@@ -113,7 +113,10 @@ class TrelloApp:
         self.members_view = Text("members view", visible=False)
         self.all_boards_view = Column([
             Row([
-                Text(value="Your Boards", style="headlineMedium", expand=True),
+                Container(
+                    Text(value="Your Boards", style="headlineMedium"),
+                    expand=True,
+                    padding=padding.only(top=15)),
                 Container(
                     TextButton(
                         "Add new board",
@@ -130,7 +133,7 @@ class TrelloApp:
                         )
                     ),
 
-                    padding=padding.only(right=50))
+                    padding=padding.only(right=50, top=15))
             ]),
             Row([
                 TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
@@ -140,15 +143,17 @@ class TrelloApp:
         ], expand=True)
         self.view = Row([
             self.sidebar,
-            self.page_divider,
+            self.toggle_nav_rail_button,
             self.all_boards_view,
             self.members_view
-        ], tight=True, expand=True)
+        ], tight=True, expand=True, vertical_alignment="start")
 
     def start(self):
         # some initialization
         self.create_new_board("my board")
         self.sidebar.top_nav_rail.selected_index = 0
+        #self.current_board_index = 0
+        # self.update()
         self.page.views.append(
             View(
                 "/",
@@ -156,6 +161,7 @@ class TrelloApp:
                     self.appbar,
                     self.view
                 ],
+                padding=0,
                 bgcolor=colors.BLUE_GREY_200
             )
         )
@@ -235,6 +241,7 @@ class TrelloApp:
                 for i, ctrl in enumerate(self.view.controls[2:4]):
                     ctrl.visible = i == 0
                 # self.sidebar.top_nav_change(0)
+                self.current_board = None
                 self.sidebar.top_nav_rail.selected_index = 0
                 self.sidebar.bottom_nav_rail.selected_index = None
                 self.sidebar.update()
@@ -295,7 +302,8 @@ class TrelloApp:
         self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
         new_width = (self.page.width -
                      330) if self.sidebar.visible else (self.page.width - 30)
-        self.current_board.resize(new_width, self.page.height)
+        if self.current_board != None:
+            self.current_board.resize(new_width, self.page.height)
         self.page.update()
 
     def add_board(self, e):
@@ -319,6 +327,7 @@ class TrelloApp:
         # self.boards.append(new_board)
         self.store.add_board(new_board)
         self.view.controls.append(new_board)
+        self.current_board = new_board
         # self.view.update()
         #print("self.view.controls: ", self.view.controls)
         self.populate_all_boards_view()
@@ -330,6 +339,7 @@ class TrelloApp:
         print("e.control.data: ", e.control.data)
         i = self.store.get_boards().index(e.control.data)
         # self.boards.remove(e.control.data)
+        self.current_board = None
         self.store.remove_board(e.control.data)
         self.view.controls.remove(e.control.data)
         self.sidebar.remove_board_destination(i)
@@ -345,6 +355,7 @@ if __name__ == "__main__":
     def main(page: Page):
 
         page.title = "Flet Trello clone"
+        page.padding = 0
         page.theme = theme.Theme(
             # color_scheme_seed="green",
             font_family="Verdana")
@@ -353,6 +364,7 @@ if __name__ == "__main__":
             "Pacifico": "/Pacifico-Regular.ttf"
         }
         page.bgcolor = colors.BLUE_GREY_200
+        page.update()
         store = InMemoryStore(page)
         app = TrelloApp(page, store)
         app.start()

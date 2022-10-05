@@ -97,7 +97,7 @@ class Sidebar(UserControl):
                 ),
                 self.bottom_nav_rail
             ], tight=True),
-            padding=padding.all(10),
+            padding=padding.all(15),
             margin=margin.all(0),
             width=250,
             expand=True,
@@ -128,10 +128,9 @@ class Sidebar(UserControl):
             )
         )
         self.app.populate_all_boards_view()
-        # self.app.view.update()
         self.app.page.update()
         if len(self.bottom_nav_rail.destinations) > 1:
-            print("call bottom_nav_change")
+            #print("call bottom_nav_change")
             self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
 
     def remove_board_destination(self, board_index):
@@ -150,9 +149,8 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        print("e.control: ", e.control.data)
+        #print("e.control: ", e.control.data)
         self.app.update()
-        #self.app.boards[e.control.data].identifier = e.control.value
         self.app.store.update_board(self.app.boards[e.control.data], {
                                     'identifier': e.control.value})
         self.app.populate_all_boards_view()
@@ -171,14 +169,12 @@ class Sidebar(UserControl):
         elif index == 1:
             self.page.route = "/members"
         self.page.update()
-        # self.page.go(f"/{slugify(route_name)}")
 
     def bottom_nav_change(self, e):
-        print("bottom nav change")
+        #print("bottom nav change")
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         self.page.route = f"/board/{index}"
         self.view.update()
         self.page.update()
-        # self.page.go(f"/board/{index}")

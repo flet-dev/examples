@@ -34,7 +34,6 @@ class BoardList(UserControl):
     def __init__(self, board, title: str, color: str = ""):
         super().__init__()
         self.board_list_id = next(BoardList.id_counter)
-        print("board list id: ", self.board_list_id)
         self.board = board
         self.title = title
         self.color = color
