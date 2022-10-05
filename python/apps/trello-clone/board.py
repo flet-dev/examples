@@ -62,7 +62,7 @@ class Board(UserControl):
             visible=True,
             scroll="auto",
             # expand=True,
-            width=(self.app.page.width - 330),
+            width=(self.app.page.width - 315),
             height=(self.app.page.height - 95)
         )
 
@@ -78,25 +78,10 @@ class Board(UserControl):
             ),
             data=self,
             margin=margin.all(0),
-            padding=padding.only(top=10),
+            padding=padding.only(top=10, right=0),
             height=self.app.page.height,
         )
         return self.view
-
-    # def construct_board_layout(self):
-    #     # retrieve all board_lists from data layer and ensure that they are interspersed with dividers etc.
-    #     lists_from_store = self.app.store.get_lists_by_board(self.board_id)
-    #     for i in range(len(lists_from_store)):
-    #         print("list_from_store: ", i, lists_from_store[i])
-    #         self.board_lists.insert(i+1, lists_from_store[i])
-    #         self.board_lists.insert(i+1, Container(
-    #             bgcolor=colors.BLACK26,
-    #             border_radius=border_radius.all(30),
-    #             height=100,
-    #             alignment=alignment.center_right,
-    #             width=3,
-    #             opacity=0.0
-    #         ))
 
     def resize(self, width, height):
         self.list_wrap.width = width
@@ -113,7 +98,7 @@ class Board(UserControl):
             colors.AMBER_500: self.color_option_creator(colors.AMBER_500, "amber"),
             colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300, "orange"),
             colors.DEEP_ORANGE_300: self.color_option_creator(colors.DEEP_ORANGE_300, "orange"),
-            colors.GREEN_400: self.color_option_creator(colors.GREEN_400, "green"),
+            colors.PURPLE_100: self.color_option_creator(colors.PURPLE_100, "purple"),
             colors.TEAL_500: self.color_option_creator(colors.TEAL_500, "teal"),
             colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400, "yellow"),
             colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE, "blue"),

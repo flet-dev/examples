@@ -161,12 +161,12 @@ class TrelloApp:
                     self.appbar,
                     self.view
                 ],
-                padding=0,
+                padding=padding.all(0),
                 bgcolor=colors.BLUE_GREY_200
             )
         )
         # self.page.go("/")
-        # self.page.update()
+        self.page.update()
         #print("self.boards: ", self.boards)
 
     def login(self, e):
