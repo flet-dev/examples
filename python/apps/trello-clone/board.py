@@ -30,6 +30,7 @@ class Board(UserControl):
         self.app = app
         self.visible = False
         self.identifier = identifier
+        self.nav_rail_index = None
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
 
@@ -101,7 +102,6 @@ class Board(UserControl):
         }
 
         def set_color(e):
-            #print("e.control.data: ", e.control, e.control.data)
             color_options.data = e.control.data
             for k, v in option_dict.items():
                 if k == e.control.data:
@@ -157,7 +157,6 @@ class Board(UserControl):
             width=3,
             opacity=0.0
         )
-        #self.board_lists.insert(-1, new_list)
         # insert both list and divider
         self.board_lists[-1:-1] = [list, divider]
 

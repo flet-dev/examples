@@ -46,10 +46,7 @@ class TrelloApp:
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = self.store.get_boards()
-        #self.current_board_index: int | None = None
-        # if self.current_board_index == None else self.boards[
         self.current_board = None
-        # self.current_board_index]
 
         self.login_profile_button = PopupMenuItem(
             text="Log in", on_click=self.login)
@@ -63,7 +60,8 @@ class TrelloApp:
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
-            title=Text("Trolli", font_family="Pacifico", size=32),
+            title=Text("Trolli", font_family="Pacifico",
+                       size=32, text_align="start"),
             center_title=False,
             toolbar_height=75,
             bgcolor=colors.LIGHT_BLUE_ACCENT_700,
@@ -137,10 +135,10 @@ class TrelloApp:
                 bgcolor=colors.BLUE_GREY_200
             )
         )
+        self.page.update()
         # create an initial board for demonstration
         self.create_new_board("My First Board")
         self.sidebar.top_nav_rail.selected_index = 0
-        self.page.update()
         self.page.go("/")
 
     def login(self, e):
@@ -194,10 +192,8 @@ class TrelloApp:
                 self.page.go("/boards")
 
             case ["board", board_number]:
-                #print("append board number:", board_number)
                 self.current_board = self.store.get_boards()[int(board_number)]
                 if int(board_number) > len(self.store.get_boards()):
-                    #print("board number out of range")
                     self.page.go("/")
                     return
                 for ctrl in self.view.controls[2:4]:
@@ -214,7 +210,6 @@ class TrelloApp:
                 # set all controls in app.view to visible=False except this index
                 for i, ctrl in enumerate(self.view.controls[2:4]):
                     ctrl.visible = i == 0
-                # self.sidebar.top_nav_change(0)
                 self.current_board = None
                 self.sidebar.top_nav_rail.selected_index = 0
                 self.sidebar.bottom_nav_rail.selected_index = None
@@ -235,23 +230,27 @@ class TrelloApp:
 
     def populate_all_boards_view(self):
         self.all_boards_view.controls[-1] = Row([
-            Container(content=Row([Container(content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click), Container(
-                content=PopupMenuButton(
-                    items=[
-                        PopupMenuItem(
-                            content=Text(value="Delete...", style="labelMedium",
-                                         text_align="center"),
-                            on_click=self.delete_board, data=b),
-                        PopupMenuItem(),
-                        PopupMenuItem(
-                            content=Text(value="Archive...", style="labelMedium",
-                                         text_align="center"),
-                        )
-                    ]
-                ),
-
-                border_radius=border_radius.all(3)
-            )], alignment="spaceBetween"),
+            Container(
+                content=Row([
+                    Container(
+                        content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click),
+                    Container(
+                        content=PopupMenuButton(
+                            items=[
+                                PopupMenuItem(
+                                    content=Text(value="Delete...", style="labelMedium",
+                                                 text_align="center"),
+                                    on_click=self.delete_board, data=b),
+                                PopupMenuItem(),
+                                PopupMenuItem(
+                                    content=Text(value="Archive...", style="labelMedium",
+                                                 text_align="center"),
+                                )
+                            ]
+                        ),
+                        padding=padding.only(right=-10),
+                        border_radius=border_radius.all(3)
+                    )], alignment="spaceBetween"),
                 border=border.all(1, colors.BLACK38),
                 border_radius=border_radius.all(5),
                 bgcolor=colors.WHITE60,
@@ -294,26 +293,20 @@ class TrelloApp:
 
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
-        # self.boards.append(new_board)
         self.store.add_board(new_board)
         self.view.controls.append(new_board)
         self.current_board = new_board
-        # self.view.update()
-        #print("self.view.controls: ", self.view.controls)
+        self.sidebar.sync_board_destinations()
+
         self.populate_all_boards_view()
-        self.sidebar.add_board_destination(board_name)
-        # self.page.update()
-        # self.update()
+        self.page.update()
 
     def delete_board(self, e):
         print("e.control.data: ", e.control.data)
-        i = self.store.get_boards().index(e.control.data)
-        print("index from self.store.get_baords: ", i)
-        # self.boards.remove(e.control.data)
         self.current_board = None
         self.store.remove_board(e.control.data)
         self.view.controls.remove(e.control.data)
-        self.sidebar.remove_board_destination(i)
+        self.sidebar.sync_board_destinations()
         self.populate_all_boards_view()
         self.page.update()
 
@@ -339,7 +332,6 @@ if __name__ == "__main__":
         store = InMemoryStore(page)
         app = TrelloApp(page, store)
         app.start()
-        # page.add(app.view)
         page.update()
 
     #print("flet version: ", flet.version.version)

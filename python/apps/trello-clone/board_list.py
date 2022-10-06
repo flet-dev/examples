@@ -47,7 +47,7 @@ class BoardList(UserControl):
             opacity=0.0
         )
         self.edit_field = Row([
-            TextField(value=self.title, width=200, height=40,
+            TextField(value=self.title, width=150, height=40,
                       content_padding=padding.only(left=10, bottom=10)),
             TextButton(text="Save", on_click=self.save_title)
         ])
@@ -56,26 +56,28 @@ class BoardList(UserControl):
                 Text(value=self.title, style="titleMedium",
                      text_align="left", overflow="clip", expand=True),
 
-                PopupMenuButton(
-                    items=[
-                        PopupMenuItem(
-                            content=Text(value="Edit...", style="labelMedium",
-                                         text_align="center", color=self.color),
-                            text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
-                        PopupMenuItem(),
-                        PopupMenuItem(
-                            content=Text(value="Delete...", style="labelMedium",
-                                         text_align="center", color=self.color),
-                            text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list),
-                        PopupMenuItem(),
-                        PopupMenuItem(
-                            content=Text(value="Move List...", style="labelMedium",
-                                         text_align="center", color=self.color))
-                    ],
-                    # expand=True
+                Container(
+                    PopupMenuButton(
+                        items=[
+                            PopupMenuItem(
+                                content=Text(value="Edit...", style="labelMedium",
+                                             text_align="center", color=self.color),
+                                text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
+                            PopupMenuItem(),
+                            PopupMenuItem(
+                                content=Text(value="Delete...", style="labelMedium",
+                                             text_align="center", color=self.color),
+                                text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list),
+                            PopupMenuItem(),
+                            PopupMenuItem(
+                                content=Text(value="Move List...", style="labelMedium",
+                                             text_align="center", color=self.color))
+                        ],
+                    ),
+                    padding=padding.only(right=-10)
                 )
-                # ], expand=True, alignment="end")
             ],
+            alignment="spaceBetween"
 
         )
 
@@ -133,7 +135,6 @@ class BoardList(UserControl):
 
     def list_drag_accept(self, e):
         src = self.board.app.page.get_control(e.data)
-        #print("src items: ", src.items)
         l = self.board.board_lists
         to_index = l.index(e.control.data)
         from_index = l.index(src.content.data)
@@ -147,7 +148,6 @@ class BoardList(UserControl):
         to_index = self.board.board_lists.index(e.control.data)
         self.board.board_lists[to_index+1].opacity = 1.0
         self.board.view.update()
-        #print("list_will_drag_accept: ", e.control.data)
 
     def list_drag_leave(self, e):
         to_index = self.board.board_lists.index(e.control.data)

@@ -75,8 +75,6 @@ class Sidebar(UserControl):
             content=Column([
                 Row([
                     Text("Workspace"),
-                    # Container(content=self.toggle_nav_rail_button,
-                    #           alignment=alignment.center_right, on_click=self.toggle_nav_rail)
                 ], alignment="spaceBetween"),
                 # divider
                 Container(
@@ -106,37 +104,32 @@ class Sidebar(UserControl):
         )
         return self.view
 
-    def add_board_destination(self, board_name):
-        self.bottom_nav_rail.destinations.append(
-            NavigationRailDestination(
-                label_content=TextField(
-                    value=board_name,
-                    hint_text=board_name,
-                    text_size=12,
-                    read_only=True,
-                    on_focus=self.board_name_focus,
-                    on_blur=self.board_name_blur,
-                    border="none",
-                    height=50,
-                    width=150,
-                    text_align="start",
-                    data=len(self.bottom_nav_rail.destinations)
-                ),
-                label=board_name,
-                selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
-                icon=icons.CHEVRON_RIGHT_OUTLINED
+    def sync_board_destinations(self):
+        boards = self.app.store.get_boards()
+        self.bottom_nav_rail.destinations = []
+        for i in range(len(boards)):
+            b = boards[i]
+            self.bottom_nav_rail.destinations.append(
+                NavigationRailDestination(
+                    label_content=TextField(
+                        value=b.identifier,
+                        hint_text=b.identifier,
+                        text_size=12,
+                        read_only=True,
+                        on_focus=self.board_name_focus,
+                        on_blur=self.board_name_blur,
+                        border="none",
+                        height=50,
+                        width=150,
+                        text_align="start",
+                        data=i
+                    ),
+                    label=b.identifier,
+                    selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
+                    icon=icons.CHEVRON_RIGHT_OUTLINED
+                )
             )
-        )
-        self.app.populate_all_boards_view()
-        self.app.page.update()
-        self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
-        # if len(self.bottom_nav_rail.destinations) > 1:
-        #     print("call bottom_nav_change")
-
-    def remove_board_destination(self, board_index):
-        del self.bottom_nav_rail.destinations[board_index]
         self.view.update()
-        # self.page.update()
 
     def toggle_nav_rail(self, e):
         self.view.visible = not self.view.visible
@@ -149,8 +142,6 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        print("e.control: ", e.control.data)
-        # self.app.update()
         self.app.store.update_board(self.app.store.get_boards()[e.control.data], {
                                     'identifier': e.control.value})
         self.app.populate_all_boards_view()
