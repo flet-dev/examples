@@ -1,22 +1,15 @@
 import itertools
 from flet import (
-    DragTarget,
-    Draggable,
     UserControl,
     Column,
     Row,
     FloatingActionButton,
     Text,
-    Switch,
     GridView,
-    Image,
     Container,
     TextField,
-    TextButton,
     AlertDialog,
     Container,
-    Switch,
-    Icon,
     icons,
     border_radius,
     border,
@@ -58,10 +51,8 @@ class Board(UserControl):
         self.list_wrap = Row(
             self.board_lists,
             vertical_alignment="start",
-            # wrap=True,
             visible=True,
             scroll="auto",
-            # expand=True,
             width=(self.app.page.width - 315),
             height=(self.app.page.height - 95)
         )
@@ -92,49 +83,36 @@ class Board(UserControl):
     def addListDlg(self, e):
 
         option_dict = {
-            colors.LIGHT_GREEN: self.color_option_creator(colors.LIGHT_GREEN, "green"),
-            colors.RED_200: self.color_option_creator(colors.RED_200, "red"),
-            colors.PINK_300: self.color_option_creator(colors.PINK_300, "pink"),
-            colors.AMBER_500: self.color_option_creator(colors.AMBER_500, "amber"),
-            colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300, "orange"),
-            colors.DEEP_ORANGE_300: self.color_option_creator(colors.DEEP_ORANGE_300, "orange"),
-            colors.PURPLE_100: self.color_option_creator(colors.PURPLE_100, "purple"),
-            colors.TEAL_500: self.color_option_creator(colors.TEAL_500, "teal"),
-            colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400, "yellow"),
-            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE, "blue"),
-            colors.PURPLE_400: self.color_option_creator(colors.PURPLE_400, "purple"),
-            colors.BROWN_300: self.color_option_creator(colors.BROWN_300, "brown"),
-            colors.CYAN_500: self.color_option_creator(colors.CYAN_500, "cyan"),
-            colors.BLUE_GREY_500: self.color_option_creator(colors.BLUE_GREY_500, "blue"),
-            colors.GREEN_500: self.color_option_creator(colors.GREEN_500, "green"),
+            colors.LIGHT_GREEN: self.color_option_creator(colors.LIGHT_GREEN),
+            colors.RED_200: self.color_option_creator(colors.RED_200),
+            colors.PINK_300: self.color_option_creator(colors.PINK_300),
+            colors.AMBER_500: self.color_option_creator(colors.AMBER_500),
+            colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300),
+            colors.DEEP_ORANGE_300: self.color_option_creator(colors.DEEP_ORANGE_300),
+            colors.PURPLE_100: self.color_option_creator(colors.PURPLE_100),
+            colors.TEAL_500: self.color_option_creator(colors.TEAL_500),
+            colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400),
+            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE),
+            colors.PURPLE_400: self.color_option_creator(colors.PURPLE_400),
+            colors.BROWN_300: self.color_option_creator(colors.BROWN_300),
+            colors.CYAN_500: self.color_option_creator(colors.CYAN_500),
+            colors.BLUE_GREY_500: self.color_option_creator(colors.BLUE_GREY_500),
+            colors.GREEN_500: self.color_option_creator(colors.GREEN_500),
         }
 
         def set_color(e):
-            print("e.control.data: ", e.control, e.control.data)
-            chosen_color = e.control.data
-            color_options.data = chosen_color
-            #print("colorOptions.data: ", color_options.data)
+            #print("e.control.data: ", e.control, e.control.data)
+            color_options.data = e.control.data
             for k, v in option_dict.items():
                 if k == e.control.data:
-                    #v.bgcolor = colors.BLACK12
                     v.border = border.all(3, colors.BLACK26)
-                    #v.border_radius = border_radius.all(100)
                 else:
                     v.border = None
             dialog.content.update()
 
-        #color_options = Row(data="")
         color_options = GridView(
             runs_count=3, max_extent=40, data="", height=150)
 
-        # for k, v in option_dict.items():
-        #     color_options.controls.append(
-        #         TextButton(
-        #             content=v,
-        #             on_click=set_color,
-        #             data=k
-        #         )
-        #     )
         for _, v in option_dict.items():
             v.on_click = set_color
             color_options.controls.append(v)
@@ -144,7 +122,6 @@ class Board(UserControl):
                                  color=color_options.data)
             self.add_list(new_list)
             self.app.store.add_list(self.board_id, new_list)
-            # self.construct_board_layout()
             dialog.open = False
             self.app.page.update()
             self.update()
@@ -189,7 +166,7 @@ class Board(UserControl):
         listToMove = self.boardList.pop(i)
         self.boardList.insert(i + displacement, list)
 
-    def color_option_creator(self, color: str, name: str):
+    def color_option_creator(self, color: str):
         return Container(
             bgcolor=color,
             border_radius=border_radius.all(50),

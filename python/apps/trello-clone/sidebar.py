@@ -129,9 +129,9 @@ class Sidebar(UserControl):
         )
         self.app.populate_all_boards_view()
         self.app.page.update()
-        if len(self.bottom_nav_rail.destinations) > 1:
-            #print("call bottom_nav_change")
-            self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
+        self.bottom_nav_change(len(self.bottom_nav_rail.destinations) - 1)
+        # if len(self.bottom_nav_rail.destinations) > 1:
+        #     print("call bottom_nav_change")
 
     def remove_board_destination(self, board_index):
         del self.bottom_nav_rail.destinations[board_index]
@@ -149,9 +149,9 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        #print("e.control: ", e.control.data)
-        self.app.update()
-        self.app.store.update_board(self.app.boards[e.control.data], {
+        print("e.control: ", e.control.data)
+        # self.app.update()
+        self.app.store.update_board(self.app.store.get_boards()[e.control.data], {
                                     'identifier': e.control.value})
         self.app.populate_all_boards_view()
         e.control.read_only = True
@@ -171,7 +171,7 @@ class Sidebar(UserControl):
         self.page.update()
 
     def bottom_nav_change(self, e):
-        #print("bottom nav change")
+        print("bottom nav change", e)
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index

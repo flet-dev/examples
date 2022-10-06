@@ -29,8 +29,6 @@ class Item(UserControl):
             content=Row(
                 [Container(
                     content=Checkbox(label=f"{self.item_text}", width=200),
-                    # width=200,
-                    # height=40,
                     border_radius=border_radius.all(5))],
                 width=200,
                 # height=40,
