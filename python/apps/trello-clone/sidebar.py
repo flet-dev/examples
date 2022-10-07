@@ -47,6 +47,7 @@ class Sidebar(UserControl):
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
             bgcolor=colors.BLUE_GREY,
+            extended=True,
             height=110
         )
         self.bottom_nav_rail = NavigationRail(
