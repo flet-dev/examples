@@ -153,8 +153,8 @@ class TrelloApp:
             else:
                 print("name and password: ", user_name.value, password.value)
                 user = User(user_name.value, password.value)
-                if user not in self.user_repo.list():
-                    self.user_repo.add(user)
+                if user not in self.store.get_users():
+                    self.store.add_user(user)
                 self.user = user_name.value
                 self.page.client_storage.set("current_user", user_name.value)
 

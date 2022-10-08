@@ -1,19 +1,13 @@
-from board import Board
-import flet
 from flet import (
     UserControl,
-    AlertDialog,
     Column,
     Container,
     IconButton,
-    Page,
     Row,
     Text,
     IconButton,
     NavigationRail,
     NavigationRailDestination,
-    VerticalDivider,
-    Divider,
     TextField,
     alignment,
     border_radius,
@@ -22,7 +16,6 @@ from flet import (
     padding,
     margin,
     border,
-    slugify
 )
 
 
@@ -48,22 +41,19 @@ class Sidebar(UserControl):
             ),
 
         ]
-        self.bottom_nav_items = []
         self.top_nav_rail = NavigationRail(
             selected_index=None,
             label_type="all",
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
-            extended=True,
-            # expand=True,
             bgcolor=colors.BLUE_GREY,
+            extended=True,
             height=110
         )
         self.bottom_nav_rail = NavigationRail(
             selected_index=None,
             label_type="all",
             on_change=self.bottom_nav_change,
-            # destinations=self.bottom_nav_items,
             extended=True,
             expand=True,
             bgcolor=colors.BLUE_GREY,
@@ -162,7 +152,6 @@ class Sidebar(UserControl):
         self.page.update()
 
     def bottom_nav_change(self, e):
-        print("bottom nav change", e)
         index = e if (type(e) == int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
