@@ -116,6 +116,7 @@ class TrelloApp:
                           border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT, suffix_icon=icons.SEARCH)
             ])
         ], expand=True)
+
         self.view = Row([
             self.sidebar,
             self.toggle_nav_rail_button,
@@ -329,7 +330,7 @@ if __name__ == "__main__":
         }
         page.bgcolor = colors.BLUE_GREY_200
         page.update()
-        store = InMemoryStore(page)
+        store = InMemoryStore()
         app = TrelloApp(page, store)
         app.start()
         page.update()

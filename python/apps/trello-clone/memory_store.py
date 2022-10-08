@@ -3,12 +3,10 @@ from board import Board
 from user import User
 from board_list import BoardList
 from data_store import DataStore
-from flet import (Page)
 
 
 class InMemoryStore(DataStore):
-    def __init__(self, page: Page):
-        self.page = page
+    def __init__(self):
         self.boards: dict[int, Board] = {}
         self.users: dict[str, User] = {}
         self.board_lists: dict[int, list[BoardList]] = {}

@@ -5,8 +5,6 @@ from flet import Page
 
 
 class DataStore:
-    def __init__(self, page: Page):
-        self.page = page
 
     def add_board(self, model) -> None:
         raise NotImplementedError
