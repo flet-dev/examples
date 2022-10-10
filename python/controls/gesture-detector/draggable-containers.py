@@ -12,9 +12,6 @@ from flet import (
 
 def main(page: Page):
     def on_pan_update1(e: DragUpdateEvent):
-        print(
-            f"PAN UPDATE - dx: {e.delta_x}, dy: {e.delta_y}, gx: {e.global_x}, gy: {e.global_y}, lx: {e.local_x}, ly: {e.local_y}"
-        )
         c.top = max(0, c.top + e.delta_y)
         c.left = max(0, c.left + e.delta_x)
         c.update()
@@ -27,13 +24,7 @@ def main(page: Page):
     gd = GestureDetector(
         mouse_cursor=MouseCursor.MOVE,
         drag_interval=50,
-        on_pan_start=lambda e: print(
-            f"PAN START - gx: {e.global_x}, gy: {e.global_y}, lx: {e.local_x}, ly: {e.local_y}, kind: {e.kind}"
-        ),
         on_pan_update=on_pan_update1,
-        on_pan_end=lambda e: print(
-            f"PAN END - pv: {e.primary_velocity}, vx: {e.velocity_x}, vy: {e.velocity_y}"
-        ),
     )
 
     c = Container(gd, bgcolor=colors.AMBER, width=50, height=50, left=0, top=0)
