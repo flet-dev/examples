@@ -1,5 +1,15 @@
 import flet
-from flet import Column, Container, Draggable, DragTarget, Page, Row, border, colors
+from flet import (
+    Column,
+    Container,
+    Draggable,
+    DragTarget,
+    DragTargetAcceptEvent,
+    Page,
+    Row,
+    border,
+    colors,
+)
 
 
 def main(page: Page):
@@ -11,8 +21,8 @@ def main(page: Page):
         )
         e.control.update()
 
-    def drag_accept(e):
-        src = page.get_control(e.data)
+    def drag_accept(e: DragTargetAcceptEvent):
+        src = page.get_control(e.src_id)
         e.control.content.bgcolor = src.content.bgcolor
         e.control.content.border = None
         e.control.update()
