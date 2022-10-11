@@ -28,7 +28,7 @@ class Board(UserControl):
         super().__init__()
         self.board_id = next(BoardList.id_counter)
         self.app = app
-        self.visible = False
+        #self.visible = False
         self.identifier = identifier
         self.nav_rail_index = None
         self.add_list_button = FloatingActionButton(
@@ -54,7 +54,7 @@ class Board(UserControl):
             vertical_alignment="start",
             visible=True,
             scroll="auto",
-            width=(self.app.page.width - 315),
+            width=(self.app.page.width - 310),
             height=(self.app.page.height - 95)
         )
 
