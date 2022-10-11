@@ -3,6 +3,7 @@ from board import Board
 import flet
 from flet.buttons import RoundedRectangleBorder
 from flet import (
+    Control,
     View,
     AlertDialog,
     Column,
@@ -34,6 +35,31 @@ from sidebar import Sidebar
 from user import User
 from data_store import DataStore
 from memory_store import InMemoryStore
+
+
+class AppLayout(Row):
+
+    def __init__(
+        self,
+        page: Page,
+        store: DataStore,
+        active_view: Control,
+        *args
+    ):
+        super.__init__(*args)
+        self.page = page
+        self.active_view = active_view
+        self.toggle_nav_rail_button = IconButton(
+            icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
+            selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
+
+        self.sidebar = Sidebar(self, page)
+        self.controls = [self.sidebar,
+                         self.toggle_nav_rail_button, self.active_view]
+
+    def set_content(self, active_view: Control):
+        self.controls[-1] = active_view
+        pass
 
 
 class TrelloApp:
