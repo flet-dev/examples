@@ -21,9 +21,9 @@ from flet import (
 
 class Sidebar(UserControl):
 
-    def __init__(self, app, page):
+    def __init__(self, app_layout, page):
         super().__init__()
-        self.app = app
+        self.app_layout = app_layout
         self.page = page
         self.nav_rail_visible = True
         self.top_nav_items = [
@@ -95,7 +95,7 @@ class Sidebar(UserControl):
         return self.view
 
     def sync_board_destinations(self):
-        boards = self.app.store.get_boards()
+        boards = self.app_layout.store.get_boards()
         self.bottom_nav_rail.destinations = []
         for i in range(len(boards)):
             b = boards[i]
@@ -132,12 +132,12 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        self.app.store.update_board(self.app.store.get_boards()[e.control.data], {
-                                    'identifier': e.control.value})
-        self.app.populate_all_boards_view()
+        self.app_layout.store.update_board(self.app_layout.store.get_boards()[e.control.data], {
+            'identifier': e.control.value})
+        self.app_layout.populate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"
-        e.control.update()
+        # e.control.update()
         self.page.update()
 
     def top_nav_change(self, e):

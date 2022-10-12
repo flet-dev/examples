@@ -75,8 +75,9 @@ class Board(UserControl):
         )
         return self.view
 
-    def resize(self, width, height):
-        self.list_wrap.width = width
+    def resize(self, nav_rail_extended, width, height):
+        self.list_wrap.width = (
+            width - 310) if nav_rail_extended else (width - 20)
         self.view.height = height
         self.list_wrap.update()
         self.view.update()

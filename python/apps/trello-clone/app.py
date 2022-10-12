@@ -38,7 +38,6 @@ from memory_store import InMemoryStore
 
 
 class AppLayout(Row):
-
     def __init__(
         self,
         app,
@@ -102,38 +101,36 @@ class AppLayout(Row):
         self.sidebar.sync_board_destinations()
         self.update()
 
-    # def page_resize(self, e):
-    #     new_width = (self.page.width -
-    #                  310) if self.sidebar.visible else (self.page.width - 30)
-    #     self.active_view.resize(new_width, self.page.height)
     def set_board_view(self, i):
-        #self.active_view = self.store.get_boards()[i]
         self.controls[-1] = self.store.get_boards()[i]
-        self.page.update()
         self.sidebar.bottom_nav_rail.selected_index = i
         self.sidebar.top_nav_rail.selected_index = None
         self.sidebar.update()
+        self.page.update()
+        self.page_resize()
 
     def set_all_boards_view(self):
-        self.active_view = self.all_boards_view
-        self.page.update()
+        self.controls[-1] = self.all_boards_view
         self.populate_all_boards_view()
         self.sidebar.top_nav_rail.selected_index = 0
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
+        self.page.update()
 
     def set_members_view(self):
-        self.active_view = self.members_view
-        self.page.update()
+        self.controls[-1] = self.members_view
         self.sidebar.top_nav_rail.selected_index = 1
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
+        self.page.update()
 
     def page_resize(self, e=None):
-        new_width = (self.page.width -
-                     310) if self.sidebar.visible else (self.page.width - 30)
-        for board in self.store.get_boards():
-            board.resize(new_width, self.page.height)
+        # new_width = (self.page.width -
+        #              310) if self.sidebar.visible else (self.page.width - 30)
+        if type(self.controls[-1]) is Board:
+            self.controls[-1].resize(self.sidebar.visible,
+                                     self.page.width, self.page.height)
+        self.page.update()
 
     def populate_all_boards_view(self):
         self.all_boards_view.controls[-1] = Row([
@@ -167,9 +164,10 @@ class AppLayout(Row):
                 data=b
             ) for b in self.store.get_boards()
         ], wrap=True)
+        self.sidebar.sync_board_destinations()
 
     def board_click(self, e):
-        print("self.boards.index: ", self.store.get_boards().index(e.control.data))
+        #print("self.boards.index: ", self.store.get_boards().index(e.control.data))
         self.sidebar.bottom_nav_change(
             self.store.get_boards().index(e.control.data))
 
@@ -188,7 +186,7 @@ class TrelloApp:
         self.page = page
         self.user = user
         self.store = store
-        self.page.on_resize = self.page_resize
+        #self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = self.store.get_boards()
@@ -220,25 +218,8 @@ class TrelloApp:
                 )
             ],
         )
-
-        # self.toggle_nav_rail_button = IconButton(
-        #     icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
-        #     selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
-
-        # self.page_divider = Stack([
-        #     VerticalDivider(width=2),
-        #     self.toggle_nav_rail_button,
-        # ], clip_behavior="none", width=30)
         self.page.appbar = self.appbar
         self.page.update()
-        # self.members_view = Text("members view", visible=False)
-
-        # self.view = Row([
-        #     self.sidebar,
-        #     self.toggle_nav_rail_button,
-        #     self.all_boards_view,
-        #     self.members_view
-        # ], tight=True, expand=True, vertical_alignment="start")
         self.layout = AppLayout(self, self.page, self.store,
                                 tight=True, expand=True, vertical_alignment="start")
 
@@ -248,7 +229,6 @@ class TrelloApp:
                 "/",
                 [
                     self.appbar,
-                    # self.view
                     self.layout
                 ],
                 padding=padding.all(0),
@@ -258,7 +238,6 @@ class TrelloApp:
         self.page.update()
         # create an initial board for demonstration
         self.create_new_board("My First Board")
-        #self.sidebar.top_nav_rail.selected_index = 0
         self.page.go("/")
 
     def login(self, e):
@@ -296,20 +275,11 @@ class TrelloApp:
         dialog.open = True
         self.page.update()
 
-    def page_resize(self, e):
-        new_width = (self.page.width -
-                     310) if self.sidebar.visible else (self.page.width - 30)
-        for board in self.store.get_boards():
-            board.resize(new_width, self.page.height)
-
-    # def toggle_nav_rail(self, e):
-    #     self.sidebar.visible = not self.sidebar.visible
-    #     self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
+    # def page_resize(self, e):
     #     new_width = (self.page.width -
     #                  310) if self.sidebar.visible else (self.page.width - 30)
-    #     if self.current_board != None:
-    #         self.current_board.resize(new_width, self.page.height)
-    #     self.page.update()
+    #     for board in self.store.get_boards():
+    #         board.resize(new_width, self.page.height)
 
     def route_change(self, e):
         #print("changed route: ", e.route)
@@ -321,45 +291,20 @@ class TrelloApp:
                 self.page.go("/boards")
 
             case ["board", board_number]:
-                print("board")
                 if int(board_number) > len(self.store.get_boards()):
                     self.page.go("/")
                     return
                 self.current_board = self.store.get_boards()[int(board_number)]
                 self.layout.set_board_view(int(board_number))
-                # for ctrl in self.view.controls[2:4]:
-                #     ctrl.visible = False
-                # for i, ctrl in enumerate(self.view.controls[4:]):
-                #     ctrl.visible = int(board_number) == i
-                #     #print("ctrl, i, ctrl.visible: ", ctrl, i, ctrl.visible)
-                # self.sidebar.bottom_nav_rail.selected_index = int(board_number)
-                # self.sidebar.top_nav_rail.selected_index = None
-                # self.sidebar.update()
+
             case ["boards"]:
-                print("boards")
-                # for ctrl in self.view.controls[4:]:
-                #     ctrl.visible = False
-                # # set all controls in app.view to visible=False except this index
-                # for i, ctrl in enumerate(self.view.controls[2:4]):
-                #     ctrl.visible = i == 0
                 self.layout.set_all_boards_view()
                 self.current_board = None
-                # self.sidebar.top_nav_rail.selected_index = 0
-                # self.sidebar.bottom_nav_rail.selected_index = None
-                # self.sidebar.update()
-                # self.populate_all_boards_view()
+
             case ["members"]:
-                # self.sidebar.top_nav_change(1)
-                # for ctrl in self.view.controls[4:]:
-                #     ctrl.visible = False
-                # # set all controls in app.view to visible=False except this index
-                # for i, ctrl in enumerate(self.view.controls[2:4]):
-                #     ctrl.visible = i == 1
                 self.layout.set_members_view()
                 self.current_board = None
-                # self.sidebar.top_nav_rail.selected_index = 1
-                # self.sidebar.bottom_nav_rail.selected_index = None
-                # self.sidebar.update()
+
         self.page.update()
 
     def add_board(self, e):
@@ -381,23 +326,14 @@ class TrelloApp:
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
         self.store.add_board(new_board)
-        # self.view.controls.append(new_board)
         self.current_board = new_board
         self.layout.active_view = new_board
-        # self.sidebar.sync_board_destinations()
-
         self.layout.populate_all_boards_view()
-        self.page.update()
 
     def delete_board(self, e):
-        print("e.control.data: ", e.control.data)
         self.current_board = None
         self.store.remove_board(e.control.data)
-        # self.view.controls.remove(e.control.data)
-        # self.sidebar.sync_board_destinations()
-        #self.layout.active_view = self.all_boards_view
         self.layout.set_all_boards_view()
-        self.page.update()
 
     def search_boards(self, e):
         pass
