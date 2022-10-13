@@ -160,11 +160,7 @@ class Board(UserControl):
         )
         # insert both list and divider
         self.board_lists[-1:-1] = [list, divider]
-
-    def move_board(self, list: BoardList, displacement: int):
-        i = self.boardList.index(list)
-        listToMove = self.boardList.pop(i)
-        self.boardList.insert(i + displacement, list)
+        self.app.store.add_list(self.board_id, list)
 
     def color_option_creator(self, color: str):
         return Container(

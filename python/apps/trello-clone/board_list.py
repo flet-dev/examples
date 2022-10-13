@@ -140,9 +140,9 @@ class BoardList(UserControl):
         from_index = l.index(src.content.data)
         l[to_index+1].opacity = 0.0
         l[to_index], l[from_index] = l[from_index], l[to_index]
-        print("current board_lists: ", l)
+        #print("current board_lists: ", l)
         self.board.view.update()
-        print("list_drag_accept: ", e.control.data, src.content.data)
+        #print("list_drag_accept: ", e.control.data, src.content.data)
 
     def list_will_drag_accept(self, e):
         to_index = self.board.board_lists.index(e.control.data)
