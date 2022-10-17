@@ -5,6 +5,7 @@ from flet import (
     View,
     AlertDialog,
     Column,
+    Row,
     Container,
     Icon,
     Page,
@@ -151,13 +152,21 @@ class TrelloApp:
 
     def add_board(self, e):
         def close_dlg(e):
-            self.create_new_board(e.control.value)
+            if (hasattr(e.control, "text") and not e.control.text == "Cancel") or type(e.control) is TextField:
+                self.create_new_board(dialog_text.value)
             dialog.open = False
             self.page.update()
+        dialog_text = TextField(label="New Board Name", on_submit=close_dlg)
         dialog = AlertDialog(
             title=Text("Name your new board"),
             content=Column([
-                TextField(label="New Board Name", on_submit=close_dlg)
+                dialog_text,
+                Row([
+                    ElevatedButton(
+                        text="Cancel", on_click=close_dlg),
+                    ElevatedButton(
+                        text="Create", bgcolor=colors.BLUE_200, on_click=close_dlg)
+                ], alignment="spaceBetween")
             ], tight=True),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )

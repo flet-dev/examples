@@ -4,6 +4,7 @@ from flet import (
     Column,
     Row,
     FloatingActionButton,
+    ElevatedButton,
     Text,
     GridView,
     Container,
@@ -119,20 +120,28 @@ class Board(UserControl):
             color_options.controls.append(v)
 
         def close_dlg(e):
-            new_list = BoardList(self, e.control.value,
-                                 color=color_options.data)
-            self.add_list(new_list)
-            self.app.store.add_list(self.board_id, new_list)
+            print("e.control: ", e.control)
+            if (hasattr(e.control, "text") and not e.control.text == "Cancel") or type(e.control) is TextField:
+                new_list = BoardList(self, dialog_text.value,
+                                     color=color_options.data)
+                self.add_list(new_list)
+                self.app.store.add_list(self.board_id, new_list)
             dialog.open = False
             self.app.page.update()
             self.update()
-
+        dialog_text = TextField(label="New List Name", on_submit=close_dlg)
         dialog = AlertDialog(
             title=Text("Name your new list"),
             content=Column([
-                Container(content=TextField(label="New List Name", on_submit=close_dlg),
+                Container(content=dialog_text,
                           padding=padding.symmetric(horizontal=5)),
-                color_options
+                color_options,
+                Row([
+                    ElevatedButton(
+                        text="Cancel", on_click=close_dlg),
+                    ElevatedButton(
+                        text="Create", bgcolor=colors.BLUE_200, on_click=close_dlg)
+                ], alignment="spaceBetween")
             ], tight=True, alignment="center"),
 
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
