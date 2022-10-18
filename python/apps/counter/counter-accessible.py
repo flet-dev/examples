@@ -1,6 +1,6 @@
 import flet
 from flet import IconButton, Page, Row, Semantics, Text, TextField, icons
-from flet.page import KeyboardEventData
+from flet.page import KeyboardEvent
 
 
 def main(page: Page):
@@ -9,7 +9,7 @@ def main(page: Page):
     page.horizontal_alignment = "center"
     page.spacing = 50
 
-    def on_keyboard(e: KeyboardEventData):
+    def on_keyboard(e: KeyboardEvent):
         print(e)
         if e.key == "S" and e.ctrl:
             page.show_semantics_debugger = not page.show_semantics_debugger
