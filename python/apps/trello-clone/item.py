@@ -1,5 +1,6 @@
 import textwrap
 import flet
+import itertools
 from flet import (
     DragTarget,
     Draggable,
@@ -20,8 +21,11 @@ from flet import (
 
 
 class Item(UserControl):
+    id_counter = itertools.count()
+
     def __init__(self, list, item_text: str):
         super().__init__()
+        self.item_id = next(Item.id_counter)
         self.list = list
         self.item_text = item_text
         # card for now but will switch to more flexible component

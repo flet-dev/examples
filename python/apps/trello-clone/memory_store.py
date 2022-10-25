@@ -1,6 +1,6 @@
-from mimetypes import init
 from board import Board
 from user import User
+from item import Item
 from board_list import BoardList
 from data_store import DataStore
 
@@ -10,6 +10,7 @@ class InMemoryStore(DataStore):
         self.boards: dict[int, Board] = {}
         self.users: dict[str, User] = {}
         self.board_lists: dict[int, list[BoardList]] = {}
+        self.items: dict[int, list[Item]] = {}
 
     def add_board(self, board: Board):
         self.boards[board.board_id] = board
@@ -46,3 +47,16 @@ class InMemoryStore(DataStore):
 
     def get_users(self):
         return [self.users[u] for u in self.users]
+
+    def add_item(self, board_list: int, item: Item):
+        if board_list in self.items:
+            self.items[board_list].append(item)
+        else:
+            self.items[board_list] = [item]
+
+    def get_items(self, board_list: int):
+        return self.items.get(board_list, [])
+
+    def remove_item(self, board_list: int, id: int):
+        self.items[board_list] = [
+            i for i in self.items[board_list] if not i.item_id == id]

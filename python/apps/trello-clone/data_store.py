@@ -1,5 +1,6 @@
 from board import Board
 from board_list import BoardList
+from item import Item
 from user import User
 from flet import Page
 
@@ -46,4 +47,19 @@ class DataStore:
         raise NotImplementedError
 
     def remove_list(self, board, id) -> None:
+        raise NotImplementedError
+
+    def add_item(self, board_list, model) -> None:
+        raise NotImplementedError
+
+    def get_items(self, board_list) -> list[Item]:
+        raise NotImplementedError
+
+    def get_item(self, id) -> Item:
+        raise NotImplementedError
+
+    def get_items_by_board(self, board) -> list[Item]:
+        raise NotImplementedError
+
+    def remove_item(self, board_list, id) -> None:
         raise NotImplementedError

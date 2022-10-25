@@ -27,7 +27,7 @@ class Board(UserControl):
 
     def __init__(self, app, identifier: str):
         super().__init__()
-        self.board_id = next(BoardList.id_counter)
+        self.board_id = next(Board.id_counter)
         self.app = app
         #self.visible = False
         self.identifier = identifier
