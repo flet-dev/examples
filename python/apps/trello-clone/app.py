@@ -25,16 +25,17 @@ from flet import (
 from sidebar import Sidebar
 from user import User
 from data_store import DataStore
-from memory_store import InMemoryStore
+#from memory_store import InMemoryStore
+from memory_store import store
 from app_layout import AppLayout
 
 
 class TrelloApp:
-    def __init__(self, page: Page, store: DataStore, user=None):
+    def __init__(self, page: Page, user=None):
         #self._lock = threading.Lock()
         self.page = page
         self.user = user
-        self.store = store
+        self.store: DataStore = store
         #self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
@@ -205,8 +206,8 @@ if __name__ == "__main__":
         }
         page.bgcolor = colors.BLUE_GREY_200
         page.update()
-        store = InMemoryStore()
-        app = TrelloApp(page, store)
+        #store = InMemoryStore()
+        app = TrelloApp(page)
         app.start()
         page.update()
 

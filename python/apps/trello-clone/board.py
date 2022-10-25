@@ -20,6 +20,8 @@ from flet import (
     margin
 )
 from board_list import BoardList
+import memory_store
+from data_store import DataStore
 
 
 class Board(UserControl):
@@ -28,6 +30,7 @@ class Board(UserControl):
     def __init__(self, app, identifier: str):
         super().__init__()
         self.board_id = next(Board.id_counter)
+        self.store: DataStore = memory_store.store
         self.app = app
         #self.visible = False
         self.identifier = identifier
@@ -47,7 +50,7 @@ class Board(UserControl):
 
             self.add_list_button
         ]
-        for l in self.app.store.get_lists_by_board(self.board_id):
+        for l in self.store.get_lists_by_board(self.board_id):
             self.add_list(l)
 
         self.list_wrap = Row(
@@ -124,8 +127,8 @@ class Board(UserControl):
             if (hasattr(e.control, "text") and not e.control.text == "Cancel") or type(e.control) is TextField:
                 new_list = BoardList(self, dialog_text.value,
                                      color=color_options.data)
-                self.add_list(new_list)
-                self.app.store.add_list(self.board_id, new_list)
+                # self.add_list(new_list)
+                self.store.add_list(self.board_id, new_list)
             dialog.open = False
             self.app.page.update()
             self.update()
@@ -155,7 +158,7 @@ class Board(UserControl):
         i = self.board_lists.index(list)
         # delete both list and divider
         del self.board_lists[i:i+2]
-        self.app.store.remove_list(self.board_id, list.board_list_id)
+        self.store.remove_list(self.board_id, list.board_list_id)
         self.update()
 
     def add_list(self, list: BoardList):
@@ -169,7 +172,7 @@ class Board(UserControl):
         )
         # insert both list and divider
         self.board_lists[-1:-1] = [list, divider]
-        self.app.store.add_list(self.board_id, list)
+        self.store.add_list(self.board_id, list)
 
     def color_option_creator(self, color: str):
         return Container(

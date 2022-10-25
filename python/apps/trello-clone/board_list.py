@@ -21,6 +21,8 @@ from flet import (
     margin
 )
 from item import Item
+import memory_store
+from data_store import DataStore
 
 
 class BoardList(UserControl):
@@ -29,10 +31,12 @@ class BoardList(UserControl):
     def __init__(self, board, title: str, color: str = ""):
         super().__init__()
         self.board_list_id = next(BoardList.id_counter)
+        self.store: DataStore = memory_store.store
         self.board = board
         self.title = title
         self.color = color
         self.items = Column([], tight=True, spacing=4)
+        self.items.controls = self.store.get_items(self.board_list_id)
 
     def build(self):
 
@@ -214,17 +218,19 @@ class BoardList(UserControl):
                 self, self.item_name.value)
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
+            self.store.add_item(self.board_list_id, new_item)
             self.item_name.value = ""
 
         #print("self.items: ", self.items.controls)
         self.view.update()
         self.page.update()
 
-    def remove_item(self, item):
+    def remove_item(self, item: Item):
         #print("item from remove_item: ", item)
         controls_list = [x.controls[1] for x in self.items.controls]
         #print("controls_list: ", controls_list)
         del self.items.controls[controls_list.index(item)]
+        self.store.remove_item(self.board_list_id, item.item_id)
         self.view.update()
 
     def set_indicator_opacity(self, item, opacity):
