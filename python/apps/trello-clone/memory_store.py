@@ -64,5 +64,16 @@ class InMemoryStore(DataStore):
         self.items[board_list] = [
             i for i in self.items[board_list] if not i.item_id == id]
 
+    def data_snapshot(self, e):
+        print("boards->")
+        for k, v in self.boards.items():
+            print(f"{k}: {v}")
+        print("board_lists->")
+        for k, v in self.board_lists.items():
+            print(f"{k}: {v}")
+        print("items->")
+        for k, v in self.items.items():
+            print(f"{k}: {v}")
+
 
 store = InMemoryStore()

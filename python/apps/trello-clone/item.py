@@ -18,6 +18,8 @@ from flet import (
     padding,
 )
 #from main import app
+from memory_store import store
+from data_store import DataStore
 
 
 class Item(UserControl):
@@ -26,6 +28,7 @@ class Item(UserControl):
     def __init__(self, list, item_text: str):
         super().__init__()
         self.item_id = next(Item.id_counter)
+        self.store: DataStore = store
         self.list = list
         self.item_text = item_text
         # card for now but will switch to more flexible component

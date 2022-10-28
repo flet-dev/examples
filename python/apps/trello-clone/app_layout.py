@@ -146,7 +146,7 @@ class AppLayout(Row):
                 bgcolor=colors.WHITE60,
                 padding=padding.all(10),
                 width=250,
-                on_click=self.board_click,
+                # on_click=self.board_click,
                 data=b
             ) for b in self.store.get_boards()
         ], wrap=True)

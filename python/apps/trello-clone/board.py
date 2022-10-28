@@ -20,7 +20,7 @@ from flet import (
     margin
 )
 from board_list import BoardList
-import memory_store
+from memory_store import store
 from data_store import DataStore
 
 
@@ -30,7 +30,7 @@ class Board(UserControl):
     def __init__(self, app, identifier: str):
         super().__init__()
         self.board_id = next(Board.id_counter)
-        self.store: DataStore = memory_store.store
+        self.store: DataStore = store
         self.app = app
         #self.visible = False
         self.identifier = identifier
@@ -127,8 +127,8 @@ class Board(UserControl):
             if (hasattr(e.control, "text") and not e.control.text == "Cancel") or type(e.control) is TextField:
                 new_list = BoardList(self, dialog_text.value,
                                      color=color_options.data)
-                # self.add_list(new_list)
-                self.store.add_list(self.board_id, new_list)
+                self.add_list(new_list)
+                #self.store.add_list(self.board_id, new_list)
             dialog.open = False
             self.app.page.update()
             self.update()

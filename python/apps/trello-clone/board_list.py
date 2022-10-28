@@ -21,7 +21,7 @@ from flet import (
     margin
 )
 from item import Item
-import memory_store
+from memory_store import store
 from data_store import DataStore
 
 
@@ -31,7 +31,7 @@ class BoardList(UserControl):
     def __init__(self, board, title: str, color: str = ""):
         super().__init__()
         self.board_list_id = next(BoardList.id_counter)
-        self.store: DataStore = memory_store.store
+        self.store: DataStore = store
         self.board = board
         self.title = title
         self.color = color

@@ -48,7 +48,7 @@ class TrelloApp:
             self.login_profile_button,
             PopupMenuItem(),  # divider
             PopupMenuItem(
-                text="Synchronize"
+                text="Data snapshot", on_click=self.store.data_snapshot
             )
         ]
         self.appbar = AppBar(
