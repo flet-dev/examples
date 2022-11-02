@@ -61,8 +61,7 @@ class Item(UserControl):
         return self.view
 
     def drag_accept(self, e):
-        # item.Item
-        src = self.list.board.app.page.get_control(e.data)
+        src = self.list.board.app.page.get_control(e.src_id)
 
         # skip if item is dropped on itself
         if (src.content.content == e.control.content):

@@ -123,7 +123,7 @@ class BoardList(UserControl):
         return self.view
 
     def item_drag_accept(self, e):
-        src = self.board.app.page.get_control(e.data)
+        src = self.board.app.page.get_control(e.src_id)
         self.add_item(src.data.item_text)
         src.data.list.remove_item(src.data)
         self.end_indicator.opacity = 0.0
@@ -138,7 +138,8 @@ class BoardList(UserControl):
         self.view.update()
 
     def list_drag_accept(self, e):
-        src = self.board.app.page.get_control(e.data)
+        print("event from drag accept: ", e)
+        src = self.board.app.page.get_control(e.src_id)
         l = self.board.board_lists
         to_index = l.index(e.control.data)
         from_index = l.index(src.content.data)
