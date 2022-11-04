@@ -36,11 +36,9 @@ class TrelloApp:
         self.page = page
         self.user = user
         self.store: DataStore = store
-        #self.page.on_resize = self.page_resize
         self.page.on_route_change = self.route_change
         self.sidebar = Sidebar(self, page)
         self.boards = self.store.get_boards()
-        self.current_board = None
 
         self.login_profile_button = PopupMenuItem(
             text="Log in", on_click=self.login)
@@ -128,8 +126,6 @@ class TrelloApp:
     def route_change(self, e):
         #print("changed route: ", e.route)
         split_route = e.route.split('/')
-        #print("split route: ", split_route[1:])
-        #print("self.page.controls", self.page.controls)
         match split_route[1:]:
             case[""]:
                 self.page.go("/boards")
@@ -138,16 +134,13 @@ class TrelloApp:
                 if int(board_number) > len(self.store.get_boards()):
                     self.page.go("/")
                     return
-                self.current_board = self.store.get_boards()[int(board_number)]
                 self.layout.set_board_view(int(board_number))
 
             case ["boards"]:
                 self.layout.set_all_boards_view()
-                self.current_board = None
 
             case ["members"]:
                 self.layout.set_members_view()
-                self.current_board = None
 
         self.page.update()
 
@@ -178,12 +171,10 @@ class TrelloApp:
     def create_new_board(self, board_name):
         new_board = Board(self, board_name)
         self.store.add_board(new_board)
-        self.current_board = new_board
-        self.layout.active_view = new_board
-        self.layout.populate_all_boards_view()
+        #self.layout.active_view = new_board
+        self.layout.hydrate_all_boards_view()
 
     def delete_board(self, e):
-        self.current_board = None
         self.store.remove_board(e.control.data)
         self.layout.set_all_boards_view()
 
@@ -198,7 +189,6 @@ if __name__ == "__main__":
         page.title = "Flet Trello clone"
         page.padding = 0
         page.theme = theme.Theme(
-            # color_scheme_seed="green",
             font_family="Verdana")
         page.theme.page_transitions.windows = "cupertino"
         page.fonts = {
@@ -206,7 +196,6 @@ if __name__ == "__main__":
         }
         page.bgcolor = colors.BLUE_GREY_200
         page.update()
-        #store = InMemoryStore()
         app = TrelloApp(page)
         app.start()
         page.update()

@@ -17,12 +17,15 @@ from flet import (
     margin,
     border,
 )
+from data_store import DataStore
+from memory_store import store
 
 
 class Sidebar(UserControl):
 
     def __init__(self, app_layout, page):
         super().__init__()
+        self.store: DataStore = store
         self.app_layout = app_layout
         self.page = page
         self.nav_rail_visible = True
@@ -95,7 +98,7 @@ class Sidebar(UserControl):
         return self.view
 
     def sync_board_destinations(self):
-        boards = self.app_layout.store.get_boards()
+        boards = self.store.get_boards()
         self.bottom_nav_rail.destinations = []
         for i in range(len(boards)):
             b = boards[i]
@@ -132,9 +135,9 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        self.app_layout.store.update_board(self.app_layout.store.get_boards()[e.control.data], {
+        self.store.update_board(self.store.get_boards()[e.control.data], {
             'identifier': e.control.value})
-        self.app_layout.populate_all_boards_view()
+        self.app_layout.hydrate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"
         # e.control.update()

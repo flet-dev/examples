@@ -71,7 +71,8 @@ class AppLayout(Row):
                 TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
                           width=200, height=40, on_submit=self.app.search_boards, text_size=12,
                           border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT, suffix_icon=icons.SEARCH)
-            ])
+            ]),
+            Row([Text("No Boards to Display")])
         ], expand=True)
         self._active_view: Control = self.all_boards_view
 
@@ -85,11 +86,12 @@ class AppLayout(Row):
     @active_view.setter
     def active_view(self, view):
         self._active_view = view
+        self.controls[-1] = self._active_view
         self.sidebar.sync_board_destinations()
         self.update()
 
     def set_board_view(self, i):
-        self.controls[-1] = self.store.get_boards()[i]
+        self.active_view = self.store.get_boards()[i]
         self.sidebar.bottom_nav_rail.selected_index = i
         self.sidebar.top_nav_rail.selected_index = None
         self.sidebar.update()
@@ -97,15 +99,15 @@ class AppLayout(Row):
         self.page_resize()
 
     def set_all_boards_view(self):
-        self.controls[-1] = self.all_boards_view
-        self.populate_all_boards_view()
+        self.active_view = self.all_boards_view
+        self.hydrate_all_boards_view()
         self.sidebar.top_nav_rail.selected_index = 0
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
         self.page.update()
 
     def set_members_view(self):
-        self.controls[-1] = self.members_view
+        self.active_view = self.members_view
         self.sidebar.top_nav_rail.selected_index = 1
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
@@ -118,7 +120,7 @@ class AppLayout(Row):
                                     self.page.width, self.page.height)
         self.page.update()
 
-    def populate_all_boards_view(self):
+    def hydrate_all_boards_view(self):
         self.all_boards_view.controls[-1] = Row([
             Container(
                 content=Row([
