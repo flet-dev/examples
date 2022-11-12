@@ -1,50 +1,49 @@
-import flet
-from flet import Container, Page, ResponsiveRow, Text, TextField, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def page_resize(e):
         pw.value = f"{page.width} px"
         pw.update()
 
     page.on_resize = page_resize
 
-    pw = Text(bottom=50, right=50, style="displaySmall")
+    pw = ft.Text(bottom=50, right=50, style="displaySmall")
     page.overlay.append(pw)
     page.add(
-        ResponsiveRow(
+        ft.ResponsiveRow(
             [
-                Container(
-                    Text("Column 1"),
+                ft.Container(
+                    ft.Text("Column 1"),
                     padding=5,
-                    bgcolor=colors.YELLOW,
+                    bgcolor=ft.colors.YELLOW,
                     col={"sm": 6, "md": 4, "xl": 2},
                 ),
-                Container(
-                    Text("Column 2"),
+                ft.Container(
+                    ft.Text("Column 2"),
                     padding=5,
-                    bgcolor=colors.GREEN,
+                    bgcolor=ft.colors.GREEN,
                     col={"sm": 6, "md": 4, "xl": 2},
                 ),
-                Container(
-                    Text("Column 3"),
+                ft.Container(
+                    ft.Text("Column 3"),
                     padding=5,
-                    bgcolor=colors.BLUE,
+                    bgcolor=ft.colors.BLUE,
                     col={"sm": 6, "md": 4, "xl": 2},
                 ),
-                Container(
-                    Text("Column 4"),
+                ft.Container(
+                    ft.Text("Column 4"),
                     padding=5,
-                    bgcolor=colors.PINK_300,
+                    bgcolor=ft.colors.PINK_300,
                     col={"sm": 6, "md": 4, "xl": 2},
                 ),
             ],
         ),
-        ResponsiveRow(
+        ft.ResponsiveRow(
             [
-                TextField(label="TextField 1", col={"md": 4}),
-                TextField(label="TextField 2", col={"md": 4}),
-                TextField(label="TextField 3", col={"md": 4}),
+                ft.TextField(label="TextField 1", col={"md": 4}),
+                ft.TextField(label="TextField 2", col={"md": 4}),
+                ft.TextField(label="TextField 3", col={"md": 4}),
             ],
             run_spacing={"xs": 10},
         ),
@@ -52,4 +51,4 @@ def main(page: Page):
     page_resize(None)
 
 
-flet.app(target=main, port=8550, view=flet.FLET_APP)
+ft.app(target=main)

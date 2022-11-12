@@ -1,8 +1,7 @@
-import flet
-from flet import BottomSheet, Column, Container, ElevatedButton, Page, Text
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def bs_dismissed(e):
         print("Dismissed!")
 
@@ -14,12 +13,12 @@ def main(page: Page):
         bs.open = False
         bs.update()
 
-    bs = BottomSheet(
-        Container(
-            Column(
+    bs = ft.BottomSheet(
+        ft.Container(
+            ft.Column(
                 [
-                    Text("This is content!"),
-                    ElevatedButton("Close bottom sheet", on_click=close_bs),
+                    ft.Text("This is sheet's content!"),
+                    ft.ElevatedButton("Close bottom sheet", on_click=close_bs),
                 ],
                 tight=True,
             ),
@@ -29,7 +28,7 @@ def main(page: Page):
         on_dismiss=bs_dismissed,
     )
     page.overlay.append(bs)
-    page.add(ElevatedButton("Display bottom sheet", on_click=show_bs))
+    page.add(ft.ElevatedButton("Display bottom sheet", on_click=show_bs))
 
 
-flet.app(target=main)
+ft.app(target=main)

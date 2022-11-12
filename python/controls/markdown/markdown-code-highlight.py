@@ -1,6 +1,4 @@
-import flet
-from flet import Markdown, Page
-from flet.text_style import TextStyle
+import flet as ft
 
 table = """
 
@@ -154,7 +152,7 @@ Coming soon.
         """
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.scroll = "auto"
 
     page.fonts = {
@@ -162,15 +160,15 @@ def main(page: Page):
     }
 
     page.add(
-        Markdown(
+        ft.Markdown(
             table,
             selectable=True,
             extension_set="gitHubWeb",
             code_theme="atom-one-dark",
-            code_style=TextStyle(font_family="Roboto Mono"),
+            code_style=ft.TextStyle(font_family="Roboto Mono"),
             on_tap_link=lambda e: page.launch_url(e.data),
         )
     )
 
 
-flet.app(target=main, assets_dir="assets")
+ft.app(target=main, assets_dir="assets")

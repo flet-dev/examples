@@ -1,13 +1,12 @@
-import flet
-from flet import Page, Slider, Text, Theme
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.fonts = {
         "RobotoSlab": "https://github.com/google/fonts/raw/main/apache/robotoslab/RobotoSlab%5Bwght%5D.ttf"
     }
 
-    t = Text(
+    t = ft.Text(
         "This is rendered with Roboto Slab",
         size=30,
         font_family="RobotoSlab",
@@ -20,7 +19,7 @@ def main(page: Page):
 
     page.add(
         t,
-        Slider(
+        ft.Slider(
             min=100,
             max=900,
             divisions=8,
@@ -31,4 +30,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
