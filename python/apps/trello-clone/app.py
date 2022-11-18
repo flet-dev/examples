@@ -31,13 +31,13 @@ from app_layout import AppLayout
 
 
 class TrelloApp:
-    def __init__(self, page: Page, user=None):
+    def __init__(self, page: Page):
         #self._lock = threading.Lock()
         self.page = page
-        self.user = user
+        #self.user = user
         self.store: DataStore = store
         self.page.on_route_change = self.route_change
-        self.sidebar = Sidebar(self, page)
+        #self.sidebar = Sidebar(self, page)
         self.boards = self.store.get_boards()
 
         self.login_profile_button = PopupMenuItem(
@@ -71,7 +71,7 @@ class TrelloApp:
         self.layout = AppLayout(self, self.page, self.store,
                                 tight=True, expand=True, vertical_alignment="start")
 
-    def start(self):
+    def initialize(self):
         self.page.views.append(
             View(
                 "/",
@@ -178,9 +178,6 @@ class TrelloApp:
         self.store.remove_board(e.control.data)
         self.layout.set_all_boards_view()
 
-    def search_boards(self, e):
-        pass
-
 
 if __name__ == "__main__":
 
@@ -197,7 +194,7 @@ if __name__ == "__main__":
         page.bgcolor = colors.BLUE_GREY_200
         page.update()
         app = TrelloApp(page)
-        app.start()
+        app.initialize()
         page.update()
 
     #print("flet version: ", flet.version.version)

@@ -22,6 +22,7 @@ from flet import (
 from board import Board
 from sidebar import Sidebar
 from data_store import DataStore
+from memory_store import store
 
 
 class AppLayout(Row):
@@ -29,7 +30,7 @@ class AppLayout(Row):
         self,
         app,
         page: Page,
-        store: DataStore,
+        # store: DataStore,
         *args,
         **kwargs
     ):
@@ -37,7 +38,7 @@ class AppLayout(Row):
         self.app = app
         self.page = page
         self.page.on_resize = self.page_resize
-        self.store = store
+        self.store: DataStore = store
         self.toggle_nav_rail_button = IconButton(
             icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
             selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
@@ -69,7 +70,7 @@ class AppLayout(Row):
             ]),
             Row([
                 TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
-                          width=200, height=40, on_submit=self.app.search_boards, text_size=12,
+                          width=200, height=40, text_size=12,
                           border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT, suffix_icon=icons.SEARCH)
             ]),
             Row([Text("No Boards to Display")])
@@ -114,7 +115,7 @@ class AppLayout(Row):
         self.page.update()
 
     def page_resize(self, e=None):
-        self.active_view = self.controls[-1]
+        #self.active_view = self.controls[-1]
         if type(self.active_view) is Board:
             self.active_view.resize(self.sidebar.visible,
                                     self.page.width, self.page.height)
@@ -125,7 +126,7 @@ class AppLayout(Row):
             Container(
                 content=Row([
                     Container(
-                        content=Text(value=b.identifier), data=b, expand=True, on_click=self.board_click),
+                        content=Text(value=b.name), data=b, expand=True, on_click=self.board_click),
                     Container(
                         content=PopupMenuButton(
                             items=[

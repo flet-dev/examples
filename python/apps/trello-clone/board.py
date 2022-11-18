@@ -27,16 +27,16 @@ from data_store import DataStore
 class Board(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, app, identifier: str):
+    def __init__(self, app, name: str):
         super().__init__()
         self.board_id = next(Board.id_counter)
         self.store: DataStore = store
         self.app = app
-        #self.visible = False
-        self.identifier = identifier
-        self.nav_rail_index = None
+        # self.visible = False
+        self.name = name
+        # self.nav_rail_index = None
         self.add_list_button = FloatingActionButton(
-            icon=icons.ADD, text="add a list", height=30, on_click=self.addListDlg)
+            icon=icons.ADD, text="add a list", height=30, on_click=self.create_list)
 
         self.board_lists = [
             Container(
@@ -86,24 +86,24 @@ class Board(UserControl):
         self.list_wrap.update()
         self.view.update()
 
-    def addListDlg(self, e):
+    def create_list(self, e):
 
         option_dict = {
             colors.LIGHT_GREEN: self.color_option_creator(colors.LIGHT_GREEN),
             colors.RED_200: self.color_option_creator(colors.RED_200),
-            colors.PINK_300: self.color_option_creator(colors.PINK_300),
             colors.AMBER_500: self.color_option_creator(colors.AMBER_500),
+            colors.PINK_300: self.color_option_creator(colors.PINK_300),
             colors.ORANGE_300: self.color_option_creator(colors.ORANGE_300),
+            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE),
             colors.DEEP_ORANGE_300: self.color_option_creator(colors.DEEP_ORANGE_300),
             colors.PURPLE_100: self.color_option_creator(colors.PURPLE_100),
+            colors.RED_700: self.color_option_creator(colors.RED_700),
             colors.TEAL_500: self.color_option_creator(colors.TEAL_500),
             colors.YELLOW_400: self.color_option_creator(colors.YELLOW_400),
-            colors.LIGHT_BLUE: self.color_option_creator(colors.LIGHT_BLUE),
             colors.PURPLE_400: self.color_option_creator(colors.PURPLE_400),
             colors.BROWN_300: self.color_option_creator(colors.BROWN_300),
             colors.CYAN_500: self.color_option_creator(colors.CYAN_500),
             colors.BLUE_GREY_500: self.color_option_creator(colors.BLUE_GREY_500),
-            colors.GREEN_500: self.color_option_creator(colors.GREEN_500),
         }
 
         def set_color(e):
@@ -128,9 +128,9 @@ class Board(UserControl):
                 new_list = BoardList(self, dialog_text.value,
                                      color=color_options.data)
                 self.add_list(new_list)
-                #self.store.add_list(self.board_id, new_list)
+                # self.store.add_list(self.board_id, new_list)
             dialog.open = False
-            self.app.page.update()
+            self.page.update()
             self.update()
         dialog_text = TextField(label="New List Name", on_submit=close_dlg)
         dialog = AlertDialog(
@@ -149,9 +149,9 @@ class Board(UserControl):
 
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
         )
-        self.app.page.dialog = dialog
+        self.page.dialog = dialog
         dialog.open = True
-        self.app.page.update()
+        self.page.update()
 
     def remove_list(self, list: BoardList, e):
         # add confirmation ?

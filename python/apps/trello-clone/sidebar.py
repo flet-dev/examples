@@ -27,7 +27,7 @@ class Sidebar(UserControl):
         super().__init__()
         self.store: DataStore = store
         self.app_layout = app_layout
-        self.page = page
+        #self.page = page
         self.nav_rail_visible = True
         self.top_nav_items = [
             NavigationRailDestination(
@@ -105,8 +105,8 @@ class Sidebar(UserControl):
             self.bottom_nav_rail.destinations.append(
                 NavigationRailDestination(
                     label_content=TextField(
-                        value=b.identifier,
-                        hint_text=b.identifier,
+                        value=b.name,
+                        hint_text=b.name,
                         text_size=12,
                         read_only=True,
                         on_focus=self.board_name_focus,
@@ -117,7 +117,7 @@ class Sidebar(UserControl):
                         text_align="start",
                         data=i
                     ),
-                    label=b.identifier,
+                    label=b.name,
                     selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
                     icon=icons.CHEVRON_RIGHT_OUTLINED
                 )
@@ -136,7 +136,7 @@ class Sidebar(UserControl):
 
     def board_name_blur(self, e):
         self.store.update_board(self.store.get_boards()[e.control.data], {
-            'identifier': e.control.value})
+            'name': e.control.value})
         self.app_layout.hydrate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"
