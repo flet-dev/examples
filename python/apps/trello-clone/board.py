@@ -39,15 +39,6 @@ class Board(UserControl):
             icon=icons.ADD, text="add a list", height=30, on_click=self.create_list)
 
         self.board_lists = [
-            Container(
-                bgcolor=colors.BLACK26,
-                border_radius=border_radius.all(30),
-                height=100,
-                alignment=alignment.center_right,
-                width=3,
-                opacity=0.0
-            ),
-
             self.add_list_button
         ]
         for l in self.store.get_lists_by_board(self.board_id):
@@ -154,24 +145,12 @@ class Board(UserControl):
         self.page.update()
 
     def remove_list(self, list: BoardList, e):
-        # add confirmation ?
-        i = self.board_lists.index(list)
-        # delete both list and divider
-        del self.board_lists[i:i+2]
+        self.board_lists.remove(list)
         self.store.remove_list(self.board_id, list.board_list_id)
         self.update()
 
     def add_list(self, list: BoardList):
-        divider = Container(
-            bgcolor=colors.BLACK26,
-            border_radius=border_radius.all(30),
-            height=100,
-            alignment=alignment.center_right,
-            width=3,
-            opacity=0.0
-        )
-        # insert both list and divider
-        self.board_lists[-1:-1] = [list, divider]
+        self.board_lists.insert(-1, list)
         self.store.add_list(self.board_id, list)
 
     def color_option_creator(self, color: str):

@@ -1,3 +1,6 @@
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from board import Board
 import itertools
 from flet import (
     UserControl,
@@ -28,7 +31,7 @@ from data_store import DataStore
 class BoardList(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, board, title: str, color: str = ""):
+    def __init__(self, board: "Board", title: str, color: str = ""):
         super().__init__()
         self.board_list_id = next(BoardList.id_counter)
         self.store: DataStore = store
@@ -40,7 +43,7 @@ class BoardList(UserControl):
 
     def build(self):
 
-        self.item_name = TextField(
+        self.new_item_field = TextField(
             label="new card name", height=50, bgcolor=colors.WHITE)
 
         self.end_indicator = Container(
@@ -85,79 +88,76 @@ class BoardList(UserControl):
 
         )
 
-        self.view = Draggable(
-            group="board",
-            content=DragTarget(
+        self.inner_list = Container(
+            content=Column([
+                self.header,
+                self.new_item_field,
+                TextButton(content=Row([Icon(icons.ADD), Text("add card", color=colors.BLACK38)], tight=True),
+                           on_click=self.add_item_handler),
+                self.items,
+                self.end_indicator
+            ], spacing=4, tight=True, data=self.title),
+            width=250,
+            border=border.all(2, colors.BLACK12),
+            border_radius=border_radius.all(5),
+            bgcolor=self.color if (
+                self.color != "") else colors.BACKGROUND,
+            padding=padding.only(
+                bottom=10, right=10, left=10, top=5)
+        )
+        self.view = DragTarget(
+            group="items",
+            content=Draggable(
                 group="lists",
                 content=DragTarget(
-                    group="board",
-                    content=Container(
-                        content=Column([
-                            self.header,
-                            self.item_name,
-                            TextButton(content=Row([Icon(icons.ADD), Text("add card", color=colors.BLACK38)], tight=True),
-                                       on_click=self.add_item_handler),
-                            self.items,
-                            self.end_indicator
-                        ], spacing=4, tight=True, data=self.title),
-                        width=250,
-                        border=border.all(2, colors.BLACK12),
-                        border_radius=border_radius.all(5),
-                        bgcolor=self.color if (
-                            self.color != "") else colors.BACKGROUND,
-                        padding=padding.only(
-                            bottom=10, right=10, left=10, top=5)
-                    ),
+                    group="lists",
+                    content=self.inner_list,
                     data=self,
                     on_accept=self.list_drag_accept,
                     on_will_accept=self.list_will_drag_accept,
                     on_leave=self.list_drag_leave
-                ),
-                data=self,
-                on_accept=self.item_drag_accept,
-                on_will_accept=self.item_will_drag_accept,
-                on_leave=self.item_drag_leave
-            )
+                )
+            ),
+            data=self,
+            on_accept=self.item_drag_accept,
+            on_will_accept=self.item_will_drag_accept,
+            on_leave=self.item_drag_leave
         )
 
         return self.view
 
     def item_drag_accept(self, e):
-        src = self.board.app.page.get_control(e.src_id)
+        src = self.page.get_control(e.src_id)
         self.add_item(src.data.item_text)
         src.data.list.remove_item(src.data)
         self.end_indicator.opacity = 0.0
-        self.view.update()
+        self.update()
 
     def item_will_drag_accept(self, e):
         self.end_indicator.opacity = 1.0
-        self.view.update()
+        self.update()
 
     def item_drag_leave(self, e):
         self.end_indicator.opacity = 0.0
-        self.view.update()
+        self.update()
 
     def list_drag_accept(self, e):
-        print("event from drag accept: ", e)
-        src = self.board.app.page.get_control(e.src_id)
+        src = self.page.get_control(e.src_id)
         l = self.board.board_lists
         to_index = l.index(e.control.data)
         from_index = l.index(src.content.data)
-        l[to_index+1].opacity = 0.0
         l[to_index], l[from_index] = l[from_index], l[to_index]
-        #print("current board_lists: ", l)
-        self.board.view.update()
-        #print("list_drag_accept: ", e.control.data, src.content.data)
+        self.inner_list.border = border.all(2, colors.BLACK12)
+        self.board.update()
+        self.update()
 
     def list_will_drag_accept(self, e):
-        to_index = self.board.board_lists.index(e.control.data)
-        self.board.board_lists[to_index+1].opacity = 1.0
-        self.board.view.update()
+        self.inner_list.border = border.all(2, colors.BLACK)
+        self.update()
 
     def list_drag_leave(self, e):
-        to_index = self.board.board_lists.index(e.control.data)
-        self.board.board_lists[to_index+1].opacity = 0.0
-        self.board.view.update()
+        self.inner_list.border = border.all(2, colors.BLACK12)
+        self.update()
 
     def delete_list(self, e):
         self.board.remove_list(self, e)
@@ -176,7 +176,7 @@ class BoardList(UserControl):
         self.update()
 
     def add_item_handler(self, e):
-        if self.item_name.value == "":
+        if self.new_item_field.value == "":
             return
         self.add_item()
 
@@ -216,11 +216,11 @@ class BoardList(UserControl):
         else:
             #print("add new: ", item)
             new_item = Item(self, item) if item else Item(
-                self, self.item_name.value)
+                self, self.new_item_field.value)
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
             self.store.add_item(self.board_list_id, new_item)
-            self.item_name.value = ""
+            self.new_item_field.value = ""
 
         #print("self.items: ", self.items.controls)
         self.view.update()

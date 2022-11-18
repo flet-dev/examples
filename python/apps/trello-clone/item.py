@@ -1,5 +1,6 @@
-import textwrap
-import flet
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from board_list import BoardList
 import itertools
 from flet import (
     DragTarget,
@@ -25,7 +26,7 @@ from data_store import DataStore
 class Item(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, list, item_text: str):
+    def __init__(self, list: "BoardList", item_text: str):
         super().__init__()
         self.item_id = next(Item.id_counter)
         self.store: DataStore = store
@@ -48,9 +49,9 @@ class Item(UserControl):
     def build(self):
 
         self.view = Draggable(
-            group="lists",
+            group="items",
             content=DragTarget(
-                group="lists",
+                group="items",
                 content=self.card_item,
                 on_accept=self.drag_accept,
                 on_leave=self.drag_leave,
@@ -61,7 +62,7 @@ class Item(UserControl):
         return self.view
 
     def drag_accept(self, e):
-        src = self.list.board.app.page.get_control(e.src_id)
+        src = self.page.get_control(e.src_id)
 
         # skip if item is dropped on itself
         if (src.content.content == e.control.content):
