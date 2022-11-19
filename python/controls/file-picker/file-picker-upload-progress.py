@@ -23,10 +23,10 @@ def main(page: Page):
     upload_button = Ref[ElevatedButton]()
 
     def file_picker_result(e: FilePickerResultEvent):
-        upload_button.current.disabled = True if e.files == None else False
+        upload_button.current.disabled = True if e.files is None else False
         prog_bars.clear()
         files.current.controls.clear()
-        if e.files != None:
+        if e.files is not None:
             for f in e.files:
                 prog = ProgressRing(value=0, bgcolor="#eeeeee", width=20, height=20)
                 prog_bars[f.name] = prog
@@ -41,7 +41,7 @@ def main(page: Page):
 
     def upload_files(e):
         uf = []
-        if file_picker.result != None and file_picker.result.files != None:
+        if file_picker.result is not None and file_picker.result.files is not None:
             for f in file_picker.result.files:
                 uf.append(
                     FilePickerUploadFile(
