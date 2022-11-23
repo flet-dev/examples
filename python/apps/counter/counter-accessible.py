@@ -21,7 +21,9 @@ def main(page: Page):
     sem = Semantics(txt_number, label="Current number: 0")
 
     def button_click(e):
-        txt_number.value = int(txt_number.value) + (1 if e.control.data == "+" else -1)
+        txt_number.value = str(
+            int(txt_number.value) + (1 if e.control.data == "+" else -1)
+        )
         sem.label = f"Current number: {txt_number.value}"
         page.update()
 
