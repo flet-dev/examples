@@ -1,48 +1,47 @@
-import flet
-from flet import Column, Container, Page, Row, Text, alignment, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def items(count):
         items = []
         for i in range(1, count + 1):
             items.append(
-                Container(
-                    content=Text(value=i),
-                    alignment=alignment.center,
+                ft.Container(
+                    content=ft.Text(value=str(i)),
+                    alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=colors.AMBER_500,
+                    bgcolor=ft.colors.AMBER_500,
                 )
             )
         return items
 
-    def column_with_alignment(align):
-        return Column(
+    def column_with_alignment(align: ft.MainAxisAlignment):
+        return ft.Column(
             [
-                Text(align, size=16),
-                Container(
-                    content=Column(items(3), alignment=align),
-                    bgcolor=colors.AMBER_100,
+                ft.Text(str(align), size=10),
+                ft.Container(
+                    content=ft.Column(items(3), alignment=align),
+                    bgcolor=ft.colors.AMBER_100,
                     height=400,
                 ),
             ]
         )
 
     page.add(
-        Row(
+        ft.Row(
             [
-                column_with_alignment("start"),
-                column_with_alignment("center"),
-                column_with_alignment("end"),
-                column_with_alignment("spaceBetween"),
-                column_with_alignment("spaceAround"),
-                column_with_alignment("spaceEvenly"),
+                column_with_alignment(ft.MainAxisAlignment.START),
+                column_with_alignment(ft.MainAxisAlignment.CENTER),
+                column_with_alignment(ft.MainAxisAlignment.END),
+                column_with_alignment(ft.MainAxisAlignment.SPACE_BETWEEN),
+                column_with_alignment(ft.MainAxisAlignment.SPACE_AROUND),
+                column_with_alignment(ft.MainAxisAlignment.SPACE_EVENLY),
             ],
             spacing=30,
-            alignment="start",
+            alignment=ft.MainAxisAlignment.START,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
