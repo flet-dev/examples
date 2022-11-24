@@ -1,39 +1,38 @@
-import flet
-from flet import Column, Container, Page, Row, Text, alignment, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def items(count):
         items = []
         for i in range(1, count + 1):
             items.append(
-                Container(
-                    content=Text(value=i),
-                    alignment=alignment.center,
+                ft.Container(
+                    content=ft.Text(value=str(i)),
+                    alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=colors.AMBER_500,
+                    bgcolor=ft.colors.AMBER_500,
                 )
             )
         return items
 
-    def row_with_vertical_alignment(align):
-        return Column(
+    def row_with_vertical_alignment(align: ft.CrossAxisAlignment):
+        return ft.Column(
             [
-                Text(align, size=16),
-                Container(
-                    content=Row(items(3), vertical_alignment=align),
-                    bgcolor=colors.AMBER_100,
+                ft.Text(str(align), size=16),
+                ft.Container(
+                    content=ft.Row(items(3), vertical_alignment=align),
+                    bgcolor=ft.colors.AMBER_100,
                     height=150,
                 ),
             ]
         )
 
     page.add(
-        row_with_vertical_alignment("start"),
-        row_with_vertical_alignment("center"),
-        row_with_vertical_alignment("end"),
+        row_with_vertical_alignment(ft.CrossAxisAlignment.START),
+        row_with_vertical_alignment(ft.CrossAxisAlignment.CENTER),
+        row_with_vertical_alignment(ft.CrossAxisAlignment.END),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
