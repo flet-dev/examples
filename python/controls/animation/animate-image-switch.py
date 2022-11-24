@@ -1,32 +1,31 @@
 import time
 
-import flet
-from flet import AnimatedSwitcher, ElevatedButton, Image, Page
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    i = Image(src="https://picsum.photos/200/300", width=200, height=300)
+    i = ft.Image(src="https://picsum.photos/200/300", width=200, height=300)
 
     def animate(e):
-        sw.content = Image(
+        sw.content = ft.Image(
             src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
         )
         page.update()
 
-    sw = AnimatedSwitcher(
+    sw = ft.AnimatedSwitcher(
         i,
-        transition="scale",
+        transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
         reverse_duration=100,
-        switch_in_curve="bounceOut",
-        switch_out_curve="bounceIn",
+        switch_in_curve=ft.AnimationCurve.BOUNCE_OUT,
+        switch_out_curve=ft.AnimationCurve.BOUNCE_IN,
     )
 
     page.add(
         sw,
-        ElevatedButton("Animate!", on_click=animate),
+        ft.ElevatedButton("Animate!", on_click=animate),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
