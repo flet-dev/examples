@@ -1,5 +1,3 @@
-from typing import Text
-
 import flet
 from flet import Container, ElevatedButton, OutlinedButton, Page, Text, colors
 

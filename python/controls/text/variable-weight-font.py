@@ -10,7 +10,7 @@ def main(page: ft.Page):
         "This is rendered with Roboto Slab",
         size=30,
         font_family="RobotoSlab",
-        weight="w100",
+        weight=ft.FontWeight.W_100,
     )
 
     def width_changed(e):

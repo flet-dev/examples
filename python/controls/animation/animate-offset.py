@@ -1,25 +1,24 @@
-import flet
-from flet import ElevatedButton, Image, Page, animation, transform
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c = Image(
+    c = ft.Image(
         src="https://picsum.photos/200/300?1",
         width=200,
         height=300,
-        offset=transform.Offset(-2, 0),
-        animate_offset=animation.Animation(300, "bounceOut"),
+        offset=ft.transform.Offset(-2, 0),
+        animate_offset=ft.animation.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):
-        c.offset = transform.Offset(0, 0)
+        c.offset = ft.transform.Offset(0, 0)
         c.update()
 
     page.add(
         c,
-        ElevatedButton("Reveal the image!", on_click=animate),
+        ft.ElevatedButton("Reveal the image!", on_click=animate),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

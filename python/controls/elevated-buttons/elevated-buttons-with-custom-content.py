@@ -1,45 +1,34 @@
-import flet
-from flet import (
-    Column,
-    Container,
-    ElevatedButton,
-    Icon,
-    Page,
-    Row,
-    Text,
-    icons,
-    padding,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Elevated buttons with custom content"
     page.add(
-        ElevatedButton(
+        ft.ElevatedButton(
             width=150,
-            content=Row(
+            content=ft.Row(
                 [
-                    Icon(name=icons.FAVORITE, color="pink"),
-                    Icon(name=icons.AUDIOTRACK, color="green"),
-                    Icon(name=icons.BEACH_ACCESS, color="blue"),
+                    ft.Icon(name=ft.icons.FAVORITE, color="pink"),
+                    ft.Icon(name=ft.icons.AUDIOTRACK, color="green"),
+                    ft.Icon(name=ft.icons.BEACH_ACCESS, color="blue"),
                 ],
-                alignment="spaceAround",
+                alignment=ft.MainAxisAlignment.SPACE_AROUND,
             ),
         ),
-        ElevatedButton(
-            content=Container(
-                content=Column(
+        ft.ElevatedButton(
+            content=ft.Container(
+                content=ft.Column(
                     [
-                        Text(value="Compound button", size=20),
-                        Text(value="This is secondary text"),
+                        ft.Text(value="Compound button", size=20),
+                        ft.Text(value="This is secondary text"),
                     ],
-                    alignment="center",
+                    alignment=ft.MainAxisAlignment.CENTER,
                     spacing=5,
                 ),
-                padding=padding.all(10),
+                padding=ft.padding.all(10),
             ),
         ),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

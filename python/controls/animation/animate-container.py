@@ -1,43 +1,31 @@
-import flet
-from flet import (
-    Container,
-    ElevatedButton,
-    LinearGradient,
-    Page,
-    RadialGradient,
-    Text,
-    alignment,
-    animation,
-    border,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    g1 = LinearGradient(
-        begin=alignment.top_center,
-        end=alignment.bottom_center,
-        colors=[colors.GREEN, colors.TRANSPARENT],
+    g1 = ft.LinearGradient(
+        begin=ft.alignment.top_center,
+        end=ft.alignment.bottom_center,
+        colors=[ft.colors.GREEN, ft.colors.TRANSPARENT],
         stops=[0.5, 1.0],
     )
 
-    g2 = RadialGradient(
-        center=alignment.top_left,
+    g2 = ft.RadialGradient(
+        center=ft.alignment.top_left,
         radius=1.0,
-        colors=[colors.YELLOW, colors.DEEP_ORANGE_900],
-        tile_mode="clamp",
+        colors=[ft.colors.YELLOW, ft.colors.DEEP_ORANGE_900],
+        tile_mode=ft.GradientTileMode.CLAMP,
     )
 
-    c = Container(
-        Text("Animate me!"),
+    c = ft.Container(
+        ft.Text("Animate me!"),
         width=200,
         height=200,
         bgcolor="red",
         gradient=g1,
-        alignment=alignment.top_left,
-        animate=animation.Animation(1000, "bounceOut"),
-        border=border.all(2, "blue"),
+        alignment=ft.alignment.top_left,
+        animate=ft.animation.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
+        border=ft.border.all(2, "blue"),
         border_radius=10,
         padding=10,
         margin=10,
@@ -48,17 +36,17 @@ def main(page: Page):
         c.height = 100 if c.height == 200 else 200
         c.bgcolor = "blue" if c.bgcolor == "red" else "red"
         c.gradient = g2 if c.gradient == g1 else g1
-        if c.alignment == alignment.top_left:
-            c.alignment = alignment.bottom_right
+        if c.alignment == ft.alignment.top_left:
+            c.alignment = ft.alignment.bottom_right
         else:
-            c.alignment = alignment.top_left
+            c.alignment = ft.alignment.top_left
         c.border_radius = 30 if c.border_radius == 10 else 10
-        c.border = border.all(4, "black")
+        c.border = ft.border.all(4, "black")
         c.padding = 50
         c.margin = 50
         c.update()
 
-    page.add(c, ElevatedButton("Animate container", on_click=animate_container))
+    page.add(c, ft.ElevatedButton("Animate container", on_click=animate_container))
 
 
-flet.app(target=main)
+ft.app(target=main)

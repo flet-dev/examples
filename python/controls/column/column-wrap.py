@@ -1,31 +1,20 @@
-import flet
-from flet import (
-    Column,
-    Container,
-    Page,
-    Row,
-    Slider,
-    Text,
-    alignment,
-    border_radius,
-    colors,
-)
+import flet as ft
 
 HEIGHT = 400
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def items(count):
         items = []
         for i in range(1, count + 1):
             items.append(
-                Container(
-                    content=Text(value=i),
-                    alignment=alignment.center,
+                ft.Container(
+                    content=ft.Text(value=str(i)),
+                    alignment=ft.alignment.center,
                     width=30,
                     height=30,
-                    bgcolor=colors.AMBER,
-                    border_radius=border_radius.all(5),
+                    bgcolor=ft.colors.AMBER,
+                    border_radius=ft.border_radius.all(5),
                 )
             )
         return items
@@ -34,7 +23,7 @@ def main(page: Page):
         col.height = float(e.control.value)
         col.update()
 
-    width_slider = Slider(
+    width_slider = ft.Slider(
         min=0,
         max=HEIGHT,
         divisions=20,
@@ -44,7 +33,7 @@ def main(page: Page):
         on_change=slider_change,
     )
 
-    col = Column(
+    col = ft.Column(
         wrap=True,
         spacing=10,
         run_spacing=10,
@@ -53,16 +42,16 @@ def main(page: Page):
     )
 
     page.add(
-        Column(
+        ft.Column(
             [
-                Text(
+                ft.Text(
                     "Change the column height to see how child items wrap onto multiple columns:"
                 ),
                 width_slider,
             ]
         ),
-        Container(content=col, bgcolor=colors.AMBER_100),
+        ft.Container(content=col, bgcolor=ft.colors.AMBER_100),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

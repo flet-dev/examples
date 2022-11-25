@@ -1,19 +1,16 @@
-import logging
-
-import flet
-from flet import Column, ElevatedButton, Image, Page, animation
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c = Image(
+    c = ft.Image(
         src="icons/icon-192.png",
         width=100,
         height=100,
         scale=1.0,
-        animate_scale=animation.Animation(300, "easeInQuint"),
+        animate_scale=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
         opacity=1.0,
-        animate_opacity=animation.Animation(300, "easeInQuint"),
+        animate_opacity=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
     )
 
     def animate(e):
@@ -21,14 +18,14 @@ def main(page: Page):
         c.opacity = 0
         c.update()
 
-    page.vertical_alignment = "center"
-    page.horizontal_alignment = "center"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(
-        Column(
-            [c, ElevatedButton("Boom!", on_click=animate)],
-            horizontal_alignment="center",
+        ft.Column(
+            [c, ft.ElevatedButton("Boom!", on_click=animate)],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

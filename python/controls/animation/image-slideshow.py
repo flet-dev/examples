@@ -1,16 +1,15 @@
-import flet
-from flet import ElevatedButton, Image, Page, Stack, animation
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    i1 = Image(
+    i1 = ft.Image(
         src="https://picsum.photos/200/300?1",
-        animate_position=animation.Animation(300, "bounceOut"),
+        animate_position=ft.animation.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
     )
-    i2 = Image(
+    i2 = ft.Image(
         src="https://picsum.photos/200/300?2",
-        animate_position=animation.Animation(300, "bounceOut"),
+        animate_position=ft.animation.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
         left=-400,
     )
 
@@ -20,7 +19,7 @@ def main(page: Page):
         page.update()
 
     page.add(
-        Stack(
+        ft.Stack(
             [
                 i1,
                 i2,
@@ -28,8 +27,8 @@ def main(page: Page):
             width=200,
             height=300,
         ),
-        ElevatedButton("Slide!", on_click=animate),
+        ft.ElevatedButton("Slide!", on_click=animate),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

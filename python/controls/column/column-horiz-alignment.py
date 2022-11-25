@@ -1,47 +1,48 @@
-import flet
-from flet import Column, Container, Page, Row, Text, alignment, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def items(count):
         items = []
         for i in range(1, count + 1):
             items.append(
-                Container(
-                    content=Text(value=i),
-                    alignment=alignment.center,
+                ft.Container(
+                    content=ft.Text(value=str(i)),
+                    alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=colors.AMBER_500,
+                    bgcolor=ft.colors.AMBER_500,
                 )
             )
         return items
 
-    def column_with_horiz_alignment(align):
-        return Column(
+    def column_with_horiz_alignment(align: ft.CrossAxisAlignment):
+        return ft.Column(
             [
-                Text(align, size=16),
-                Container(
-                    content=Column(
-                        items(3), alignment="start", horizontal_alignment=align
+                ft.Text(str(align), size=16),
+                ft.Container(
+                    content=ft.Column(
+                        items(3),
+                        alignment=ft.MainAxisAlignment.START,
+                        horizontal_alignment=align,
                     ),
-                    bgcolor=colors.AMBER_100,
+                    bgcolor=ft.colors.AMBER_100,
                     width=100,
                 ),
             ]
         )
 
     page.add(
-        Row(
+        ft.Row(
             [
-                column_with_horiz_alignment("start"),
-                column_with_horiz_alignment("center"),
-                column_with_horiz_alignment("end"),
+                column_with_horiz_alignment(ft.CrossAxisAlignment.START),
+                column_with_horiz_alignment(ft.CrossAxisAlignment.CENTER),
+                column_with_horiz_alignment(ft.CrossAxisAlignment.END),
             ],
             spacing=30,
-            alignment="start",
+            alignment=ft.MainAxisAlignment.START,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
