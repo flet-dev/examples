@@ -32,11 +32,11 @@ def main(page):
         filled=True,
         border_color=ft.colors.TRANSPARENT,
         bgcolor=ft.colors.BLACK12,
-        focused_bgcolor=colors.BLUE_100,
+        focused_bgcolor=ft.colors.BLUE_100,
         alignment=ft.alignment.center_right,
     )
 
-    dd1_5 = Dropdown(
+    dd1_5 = ft.Dropdown(
         options=[
             ft.dropdown.Option("a", "Item A"),
             ft.dropdown.Option("b", "Item B"),

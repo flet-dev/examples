@@ -18,7 +18,7 @@ summary = "The Real First Universal Charset Detector. Open, modern and actively 
 
 [[package]]
 name = "flet"
-version = "0.2.0.dev871"
+version = "0.2.0.dev875"
 requires_python = ">=3.7"
 summary = "Flet for Python - easily build interactive multi-platform apps in Python"
 dependencies = [
@@ -110,17 +110,17 @@ content_hash = "sha256:b1343f2804ef0f13e648e89742d15df5f57ebaef8591c0b2314a77cb6
     {url = "https://files.pythonhosted.org/packages/a1/34/44964211e5410b051e4b8d2869c470ae8a68ae274953b1c7de6d98bbcf94/charset-normalizer-2.1.1.tar.gz", hash = "sha256:5a3d016c7c547f69d6f81fb0db9449ce888b418b5b9952cc5e6e66843e9dd845"},
     {url = "https://files.pythonhosted.org/packages/db/51/a507c856293ab05cdc1db77ff4bc1268ddd39f29e7dc4919aa497f0adbec/charset_normalizer-2.1.1-py3-none-any.whl", hash = "sha256:83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f"},
 ]
-"flet 0.2.0.dev871" = [
-    {url = "https://files.pythonhosted.org/packages/04/58/91dd9a72ea91797f2fd4d66954bc68a1213307bed4b1a65680ae8212005d/flet-0.2.0.dev871-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:b98725e56a682bc7ff4d54a178a8e2b0375235a75e3508291bdfc81e959aed10"},
-    {url = "https://files.pythonhosted.org/packages/07/77/8219f06ba50eba18e37da79a30044322da2241867bd44439e447b5b79d80/flet-0.2.0.dev871-py3-none-win32.whl", hash = "sha256:73f66d55331fd2be8772b1f56522403e500f63d367175555106d0717c546fdd0"},
-    {url = "https://files.pythonhosted.org/packages/38/80/44c98055b6deacc4c294dbf8d9d4c0820bde7723ed6eba830b2afb561768/flet-0.2.0.dev871-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cc13a9d45b955f1961c94192e7ca04eb2dbce484dc39f81516a16f0e0b661838"},
-    {url = "https://files.pythonhosted.org/packages/39/93/8b20010afaf4e113cfbf62d9e54a3cdf652314b2f1895f057885830e652e/flet-0.2.0.dev871-py3-none-win_amd64.whl", hash = "sha256:5c69d81813dee69cac595fadf9b775bd0679f8b24c8f98095a9ade83fb9bdf0b"},
-    {url = "https://files.pythonhosted.org/packages/54/1d/1bfab8e40101f0f65bccaf4941869c08dfdefc6388393705bfe8eef29a21/flet-0.2.0.dev871.tar.gz", hash = "sha256:3d61ddd14bd2e32dede2bdeccd2863febbc82cb90625f442978c5156bfd4877a"},
-    {url = "https://files.pythonhosted.org/packages/7b/b4/f5dab98c1284decdec2110d2f4f17bb715b3213076191f0de9715866172b/flet-0.2.0.dev871-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:5f8fa5af38ace022f826f8c1d063b0859fd3ee109e9fb2b04992d6498730d81d"},
-    {url = "https://files.pythonhosted.org/packages/86/85/58379338e9a88429e7c9be69129ec4aabf75566136e3fe1b1c564f351e2a/flet-0.2.0.dev871-py3-none-any.whl", hash = "sha256:26b6d47510bfc4cadf65657620e881943f8f8c09c2b6695eb676cd3a0a6f1285"},
-    {url = "https://files.pythonhosted.org/packages/8c/b9/31e6bb5764e3aac7951e01f4d4eff101062c67580348509828943577d7df/flet-0.2.0.dev871-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:4f6bea6222263c5c9e99c0d429ba68455fab70f0a627a1452634d452dda93660"},
-    {url = "https://files.pythonhosted.org/packages/a8/e1/4622451ce59979a07680780a05e0e0ef92a9f716716e9f9c70f2ab44187a/flet-0.2.0.dev871-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6d596c5d47e1809b34b062990c5d9503e917c5c09e7368e1f899fc9d5cdb1a54"},
-    {url = "https://files.pythonhosted.org/packages/f9/93/7d7a5212da4b7fe36b0857285635a491927090b0fabf556536e0e43d9a8b/flet-0.2.0.dev871-py3-none-macosx_12_0_arm64.whl", hash = "sha256:ef959c6593c6cd0310e314110dbf2f7d62199b4d43cf1cb05f3f54e8bea5e669"},
+"flet 0.2.0.dev875" = [
+    {url = "https://files.pythonhosted.org/packages/07/ae/adc4a7e32e9842b37a5383f2371ad41cd34e2f52c3d3fb8cb3d521754be9/flet-0.2.0.dev875-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:6fe24984f8a22b6355c2563336756c605d7188e1f29a07cf6b0181b477123884"},
+    {url = "https://files.pythonhosted.org/packages/09/13/73d770b05c6579e54bf239d3e9f2f9d5b3a88573437892da284db76cb05f/flet-0.2.0.dev875-py3-none-macosx_12_0_arm64.whl", hash = "sha256:9b5017ac77ea92b2bd812a0c101afd5648484a4e5bff3ca1a3a4c73726ee5904"},
+    {url = "https://files.pythonhosted.org/packages/3c/c3/822f672d2f96ca7c5fbc325341158e359de16005befb14db80d077901049/flet-0.2.0.dev875-py3-none-win_amd64.whl", hash = "sha256:6b4c0890f0851077a5ab15c39c9cb910e8d2c3fd98d25031de66abf44bc9c4ee"},
+    {url = "https://files.pythonhosted.org/packages/65/9d/ae4f938a8c1f77d0fabe225332e54b6e5b78cddc1df68413c6a0d6cd5a26/flet-0.2.0.dev875-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6023de2b0f7059c930392c8f73310ec70ad6a0e8b55989249bd089a03fa2e9de"},
+    {url = "https://files.pythonhosted.org/packages/6b/22/a538fe40e921ccea2dcda5d482957ab742aec8c75805d6ce9fef633b97be/flet-0.2.0.dev875-py3-none-any.whl", hash = "sha256:7b9df17c16e6d5fd03f084ba4ec6248638bc750bd92064ed2aa0bb7f4accb472"},
+    {url = "https://files.pythonhosted.org/packages/6c/d3/eb48d0f3608ed93ccbfcc594db116dd27d8aafee2045d3ba5ce25d87c762/flet-0.2.0.dev875-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:e3e9b7afb6e80a05a5f2e12a846d36e845b7741ee2665d7e0199b1d06c3a5c4e"},
+    {url = "https://files.pythonhosted.org/packages/71/4f/7ee2556aab6f36cf34c7e4598a536aa5a45eae277615bf19bc3d2c0e1dd2/flet-0.2.0.dev875-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:6140acc202021c56a54e854f19e9d6bd16854e279cb4a492daea9605cb08dd73"},
+    {url = "https://files.pythonhosted.org/packages/7f/33/55eb897bc4a465f040a6c5b17d101721c5bd21e07b3dfd7639bbd06a639b/flet-0.2.0.dev875.tar.gz", hash = "sha256:c3687818b185f3037f6f7c28133a05d6e372da5d7bd0224a500dd9111fdac5eb"},
+    {url = "https://files.pythonhosted.org/packages/f0/57/15baf9ffc1609668ee330a776a48011e9fcb174f1211ca7bb20596fa67e4/flet-0.2.0.dev875-py3-none-win32.whl", hash = "sha256:8cfaa12d44ac0b5ff24624802f9aaac9c5b8c5a0ad87c16effb39ebcdbfefe83"},
+    {url = "https://files.pythonhosted.org/packages/fc/85/532faee87ff56893a87e5dcf05c69deadbcbeb8eaf295ba4d3786592993c/flet-0.2.0.dev875-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d8efa91f85cfbf51f6c1517c08176ae8f37daaa73d0eadc9a55478c64aaa3996"},
 ]
 "idna 3.4" = [
     {url = "https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
