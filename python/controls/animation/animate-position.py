@@ -1,16 +1,15 @@
-import flet
-from flet import Container, ElevatedButton, Page, Stack
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c1 = Container(width=50, height=50, bgcolor="red", animate_position=1000)
+    c1 = ft.Container(width=50, height=50, bgcolor="red", animate_position=1000)
 
-    c2 = Container(
+    c2 = ft.Container(
         width=50, height=50, bgcolor="green", top=60, left=0, animate_position=500
     )
 
-    c3 = Container(
+    c3 = ft.Container(
         width=50, height=50, bgcolor="blue", top=120, left=0, animate_position=1000
     )
 
@@ -24,9 +23,9 @@ def main(page: Page):
         page.update()
 
     page.add(
-        Stack([c1, c2, c3], height=400),
-        ElevatedButton("Animate!", on_click=animate_container),
+        ft.Stack([c1, c2, c3], height=400),
+        ft.ElevatedButton("Animate!", on_click=animate_container),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
