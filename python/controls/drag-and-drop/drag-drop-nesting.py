@@ -41,11 +41,14 @@ class OuterContainer(UserControl):
                     group="outer",
                     content=Container(
                         # expand=False,
-                        content=InnerContainer(self).view,
+                        content=Column([
+                            InnerContainer(self).view,
+                        ], tight=True,  horizontal_alignment="center"),
                         width=200,
                         height=200,
                         bgcolor=self.container_color,
                         border_radius=5,
+                        alignment=alignment.center,
                         border=border.all(2, colors.BLACK12),
                     ),
                     data=self,
@@ -97,21 +100,31 @@ class InnerContainer():
 
     def __init__(self, outer: OuterContainer):
         self.outer = outer
-        self.control = Row([Container(
-            width=50,
-            height=50,
-            expand=False,
-            content=Row([Text("Drag Me!!")], width=50, height=50),
+        self.control = Card(
+            content=Container(
+                # expand=False,
+                content=Row([Text("Drag Me!!")],
+                            vertical_alignment="center", expand=False),
+                bgcolor=colors.BLUE_GREY,
+                border_radius=5,
+                alignment=alignment.center
+            ),
+            elevation=1,
+            data=self.outer
+        )
+        self.test_control = Container(
+            content=Text("Drag Me!!"),
             bgcolor=colors.BLUE_GREY,
             border_radius=5,
-            alignment=alignment.center
-        )]
+            alignment=alignment.center,
+            expand=False
         )
+
         self.view = Draggable(
             group="inner",
             content=DragTarget(
                 group="inner",
-                content=self.control,
+                content=self.test_control,
 
                 on_accept=self.drag_accept,
                 on_leave=self.drag_leave,
