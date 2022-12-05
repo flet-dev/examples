@@ -55,32 +55,30 @@ class OuterContainer(UserControl):
         return self.view
 
     def drag_accept(self, e):
-        #print("lists_drag_accept: ", e)
-        self.outer_container.border = border.all(4, colors.BLACK12)
+        if e.data == 'true':
+            self.outer_container.border = border.all(4, colors.BLACK12)
         self.view.update()
 
     def drag_will_accept(self, e):
-        #print("lists_drag_will_accept: ", e)
-        self.outer_container.border = border.all(4, colors.BLACK54)
+        if e.data == 'true':
+            self.outer_container.border = border.all(4, colors.BLACK54)
         self.view.update()
 
     def drag_leave(self, e):
-        #print("lists_drag_leave: ", e)
         self.outer_container.border = border.all(4, colors.BLACK12)
         self.view.update()
 
     def inner_drag_accept(self, e):
-        #print("items_drag_accept: ", e)
-        self.outer_container.border_radius = 5
+        if e.data == 'true':
+            self.outer_container.border_radius = 5
         self.update()
 
     def inner_drag_will_accept(self, e):
-        #print("items_will_drag_accept: ", e)
-        self.outer_container.border_radius = 25
+        if e.data == 'true':
+            self.outer_container.border_radius = 25
         self.update()
 
     def inner_drag_leave(self, e):
-        #print("items_drag_leave: ", e)
         self.outer_container.border_radius = 5
         self.update()
 
@@ -114,11 +112,13 @@ class InnerContainer():
         self.view.update()
 
     def drag_accept(self, e):
-        self.change_color(colors.WHITE54)
+        if e.data == 'true':
+            self.change_color(colors.WHITE54)
         print("inner_drag_accept")
 
     def drag_will_accept(self, e):
-        self.change_color(colors.BLUE_GREY)
+        if e.data == "true":
+            self.change_color(colors.BLUE_GREY)
         self.view.update()
 
     def drag_leave(self, e):
