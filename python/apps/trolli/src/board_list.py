@@ -43,7 +43,7 @@ class BoardList(UserControl):
     def build(self):
 
         self.new_item_field = TextField(
-            label="new card name", height=50, bgcolor=colors.WHITE)
+            label="new card name", height=50, bgcolor=colors.WHITE, on_submit=self.add_item_handler)
 
         self.end_indicator = Container(
             bgcolor=colors.BLACK26,
