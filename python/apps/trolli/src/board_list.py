@@ -68,12 +68,12 @@ class BoardList(UserControl):
                             PopupMenuItem(
                                 content=Text(value="Edit", style="labelMedium",
                                              text_align="center", color=self.color),
-                                text="Edit", icon=icons.CREATE_ROUNDED, on_click=self.edit_title),
+                                on_click=self.edit_title),
                             PopupMenuItem(),
                             PopupMenuItem(
                                 content=Text(value="Delete", style="labelMedium",
                                              text_align="center", color=self.color),
-                                text="Delete", icon=icons.DELETE_ROUNDED, on_click=self.delete_list),
+                                on_click=self.delete_list),
                             PopupMenuItem(),
                             PopupMenuItem(
                                 content=Text(value="Move List", style="labelMedium",
