@@ -20,15 +20,13 @@ from flet import (
     margin
 )
 from board_list import BoardList
-#from memory_store import store
-from memory_store import InMemoryStore
 from data_store import DataStore
 
 
 class Board(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, app, store: InMemoryStore, name: str):
+    def __init__(self, app, store: DataStore, name: str):
         super().__init__()
         self.board_id = next(Board.id_counter)
         self.store: DataStore = store

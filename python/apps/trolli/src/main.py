@@ -25,13 +25,12 @@ from flet import (
 )
 from user import User
 from data_store import DataStore
-#from memory_store import store
 from memory_store import InMemoryStore
 from app_layout import AppLayout
 
 
 class TrelloApp(UserControl):
-    def __init__(self, page: Page, store: InMemoryStore):
+    def __init__(self, page: Page, store: DataStore):
         super().__init__()
         self.page = page
         self.store: DataStore = store
@@ -63,7 +62,7 @@ class TrelloApp(UserControl):
         )
         self.page.appbar = self.appbar
         self.page.update()
-    
+
     def build(self):
         self.layout = AppLayout(self, self.page, self.store,
                                 tight=True, expand=True, vertical_alignment="start")

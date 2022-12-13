@@ -22,8 +22,6 @@ from flet import (
 from board import Board
 from sidebar import Sidebar
 from data_store import DataStore
-#from memory_store import store
-from memory_store import InMemoryStore
 
 
 class AppLayout(Row):
@@ -31,7 +29,7 @@ class AppLayout(Row):
         self,
         app,
         page: Page,
-        store: InMemoryStore,
+        store: DataStore,
         *args,
         **kwargs
     ):

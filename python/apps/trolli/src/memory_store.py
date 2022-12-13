@@ -63,6 +63,3 @@ class InMemoryStore(DataStore):
     def remove_item(self, board_list: int, id: int):
         self.items[board_list] = [
             i for i in self.items[board_list] if not i.item_id == id]
-
-
-#store = InMemoryStore()
