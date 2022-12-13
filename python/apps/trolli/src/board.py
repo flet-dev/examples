@@ -20,14 +20,15 @@ from flet import (
     margin
 )
 from board_list import BoardList
-from memory_store import store
+#from memory_store import store
+from memory_store import InMemoryStore
 from data_store import DataStore
 
 
 class Board(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, app, name: str):
+    def __init__(self, app, store: InMemoryStore, name: str):
         super().__init__()
         self.board_id = next(Board.id_counter)
         self.store: DataStore = store
@@ -113,7 +114,7 @@ class Board(UserControl):
 
         def close_dlg(e):
             if (hasattr(e.control, "text") and not e.control.text == "Cancel") or (type(e.control) is TextField and e.control.value != ""):
-                new_list = BoardList(self, dialog_text.value,
+                new_list = BoardList(self, self.store, dialog_text.value,
                                      color=color_options.data)
                 self.add_list(new_list)
             dialog.open = False

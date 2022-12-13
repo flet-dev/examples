@@ -12,14 +12,15 @@ from flet import (
     Card,
     border_radius,
 )
-from memory_store import store
+#from memory_store import store
+from memory_store import InMemoryStore
 from data_store import DataStore
 
 
 class Item(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, list: "BoardList", item_text: str):
+    def __init__(self, list: "BoardList", store: InMemoryStore, item_text: str):
         super().__init__()
         self.item_id = next(Item.id_counter)
         self.store: DataStore = store

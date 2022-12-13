@@ -23,14 +23,15 @@ from flet import (
     padding,
 )
 from item import Item
-from memory_store import store
+#from memory_store import store
+from memory_store import InMemoryStore
 from data_store import DataStore
 
 
 class BoardList(UserControl):
     id_counter = itertools.count()
 
-    def __init__(self, board: "Board", title: str, color: str = ""):
+    def __init__(self, board: "Board", store: InMemoryStore, title: str, color: str = ""):
         super().__init__()
         self.board_list_id = next(BoardList.id_counter)
         self.store: DataStore = store
@@ -207,14 +208,14 @@ class BoardList(UserControl):
 
         # insert (drag from other list to middle of this list)
         elif (to_index is not None):
-            new_item = Item(self, item)
+            new_item = Item(self, self.store, item)
             control_to_add.controls.append(new_item)
             self.items.controls.insert(to_index, control_to_add)
 
         # add new (drag from other list to end of this list, or use add item button)
         else:
-            new_item = Item(self, item) if item else Item(
-                self, self.new_item_field.value)
+            new_item = Item(self, self.store, item) if item else Item(
+                self, self.store, self.new_item_field.value)
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
             self.store.add_item(self.board_list_id, new_item)

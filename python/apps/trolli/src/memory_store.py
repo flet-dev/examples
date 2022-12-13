@@ -65,4 +65,4 @@ class InMemoryStore(DataStore):
             i for i in self.items[board_list] if not i.item_id == id]
 
 
-store = InMemoryStore()
+#store = InMemoryStore()

@@ -17,12 +17,13 @@ from flet import (
     margin,
 )
 from data_store import DataStore
-from memory_store import store
+#from memory_store import store
+from memory_store import InMemoryStore
 
 
 class Sidebar(UserControl):
 
-    def __init__(self, app_layout, page):
+    def __init__(self, app_layout, store: InMemoryStore, page):
         super().__init__()
         self.store: DataStore = store
         self.app_layout = app_layout
