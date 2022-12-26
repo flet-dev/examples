@@ -92,7 +92,10 @@ class Task(UserControl):
 
 class TodoApp(UserControl):
     def build(self):
-        self.new_task = TextField(hint_text="What needs to be done?", expand=True)
+        self.new_task = TextField(
+            hint_text="What needs to be done?",
+            on_submit=self.add_clicked,
+            expand=True)
         self.tasks = Column()
 
         self.filter = Tabs(
@@ -139,6 +142,7 @@ class TodoApp(UserControl):
             task = Task(self.new_task.value, self.task_status_change, self.task_delete)
             self.tasks.controls.append(task)
             self.new_task.value = ""
+            self.new_task.focus()
             self.update()
 
     def task_status_change(self, task):
