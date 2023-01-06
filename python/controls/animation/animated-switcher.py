@@ -1,38 +1,29 @@
-import flet
-from flet import (
-    AnimatedSwitcher,
-    Container,
-    ElevatedButton,
-    Page,
-    Text,
-    alignment,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c1 = Container(
-        Text("Hello!", style="headlineMedium"),
-        alignment=alignment.center,
+    c1 = ft.Container(
+        ft.Text("Hello!", style=ft.TextThemeStyle.HEADLINE_MEDIUM),
+        alignment=ft.alignment.center,
         width=200,
         height=200,
-        bgcolor=colors.GREEN,
+        bgcolor=ft.colors.GREEN,
     )
-    c2 = Container(
-        Text("Bye!", size=50),
-        alignment=alignment.center,
+    c2 = ft.Container(
+        ft.Text("Bye!", size=50),
+        alignment=ft.alignment.center,
         width=200,
         height=200,
-        bgcolor=colors.YELLOW,
+        bgcolor=ft.colors.YELLOW,
     )
-    c = AnimatedSwitcher(
+    c = ft.AnimatedSwitcher(
         c1,
-        transition="scale",
+        transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
         reverse_duration=100,
-        switch_in_curve="bounceOut",
-        switch_out_curve="bounceIn",
+        switch_in_curve=ft.AnimationCurve.BOUNCE_OUT,
+        switch_out_curve=ft.AnimationCurve.BOUNCE_IN,
     )
 
     def animate(e):
@@ -41,8 +32,8 @@ def main(page: Page):
 
     page.add(
         c,
-        ElevatedButton("Animate!", on_click=animate),
+        ft.ElevatedButton("Animate!", on_click=animate),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

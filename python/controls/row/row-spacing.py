@@ -1,29 +1,18 @@
-import flet
-from flet import (
-    Column,
-    Container,
-    Page,
-    Row,
-    Slider,
-    Text,
-    alignment,
-    border_radius,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def items(count):
         items = []
         for i in range(1, count + 1):
             items.append(
-                Container(
-                    content=Text(value=i),
-                    alignment=alignment.center,
+                ft.Container(
+                    content=ft.Text(value=str(i)),
+                    alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=colors.AMBER,
-                    border_radius=border_radius.all(5),
+                    bgcolor=ft.colors.AMBER,
+                    border_radius=ft.border_radius.all(5),
                 )
             )
         return items
@@ -32,7 +21,7 @@ def main(page: Page):
         row.spacing = int(e.control.value)
         row.update()
 
-    gap_slider = Slider(
+    gap_slider = ft.Slider(
         min=0,
         max=50,
         divisions=50,
@@ -41,9 +30,9 @@ def main(page: Page):
         on_change=gap_slider_change,
     )
 
-    row = Row(spacing=0, controls=items(10))
+    row = ft.Row(spacing=0, controls=items(10))
 
-    page.add(Column([Text("Spacing between items"), gap_slider]), row)
+    page.add(ft.Column([ft.Text("Spacing between items"), gap_slider]), row)
 
 
-flet.app(target=main)
+ft.app(target=main)

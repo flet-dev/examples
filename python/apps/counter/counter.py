@@ -1,31 +1,30 @@
-import flet
-from flet import IconButton, Page, Row, TextField, icons
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Flet counter example"
-    page.vertical_alignment = "center"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-    txt_number = TextField(value="0", text_align="right", width=100)
+    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
 
     def minus_click(e):
-        txt_number.value = int(txt_number.value) - 1
+        txt_number.value = str(int(txt_number.value) - 1)
         page.update()
 
     def plus_click(e):
-        txt_number.value = int(txt_number.value) + 1
+        txt_number.value = str(int(txt_number.value) + 1)
         page.update()
 
     page.add(
-        Row(
+        ft.Row(
             [
-                IconButton(icons.REMOVE, on_click=minus_click),
+                ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
                 txt_number,
-                IconButton(icons.ADD, on_click=plus_click),
+                ft.IconButton(ft.icons.ADD, on_click=plus_click),
             ],
-            alignment="center",
+            alignment=ft.MainAxisAlignment.CENTER,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

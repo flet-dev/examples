@@ -1,24 +1,13 @@
 from math import pi
 
-import flet
-from flet import (
-    Column,
-    Container,
-    ElevatedButton,
-    Icon,
-    Page,
-    alignment,
-    animation,
-    icons,
-    transform,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c2 = Container(
-        content=Container(
-            Icon(icons.ROCKET, size=40, color="black"),
+    c2 = ft.Container(
+        content=ft.Container(
+            ft.Icon(ft.icons.ROCKET, size=40, color="black"),
             scale=1.0,
             animate_scale=1000,
             opacity=1.0,
@@ -26,9 +15,9 @@ def main(page: Page):
         ),
         width=120,
         height=70,
-        alignment=alignment.center_right,
-        rotate=transform.Rotate(0, alignment=alignment.center_left),
-        animate_rotation=animation.Animation(duration=1000),
+        alignment=ft.alignment.center_right,
+        rotate=ft.transform.Rotate(0, alignment=ft.alignment.center_left),
+        animate_rotation=ft.animation.Animation(duration=1000),
     )
 
     def animate(e):
@@ -37,19 +26,19 @@ def main(page: Page):
         c2.content.opacity = 0.4 if c2.content.scale == 1.0 else 1.0
         page.update()
 
-    page.vertical_alignment = "center"
-    page.horizontal_alignment = "center"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     page.add(
-        Column(
+        ft.Column(
             [
                 c2,
-                ElevatedButton("Launch!", on_click=animate),
+                ft.ElevatedButton("Launch!", on_click=animate),
             ],
-            alignment="spaceBetween",
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             height=300,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

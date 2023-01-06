@@ -1,13 +1,12 @@
-import flet
-from flet import ElevatedButton, Page
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def animate(e):
         b1.rotate = 0.1 if e.data == "true" else 0
         page.update()
 
-    b1 = ElevatedButton(
+    b1 = ft.ElevatedButton(
         "Hover me, I'm animated!",
         rotate=0,
         animate_rotation=100,
@@ -19,4 +18,4 @@ def main(page: Page):
     page.add(b1)
 
 
-flet.app(target=main)
+ft.app(target=main)

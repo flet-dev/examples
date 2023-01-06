@@ -1,38 +1,25 @@
-import logging
-
-import flet
-from flet import (
-    ElevatedButton,
-    Image,
-    Page,
-    RadialGradient,
-    ShaderMask,
-    Stack,
-    alignment,
-    animation,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    c1 = ShaderMask(
-        Image(
+    c1 = ft.ShaderMask(
+        ft.Image(
             src="https://picsum.photos/140/100?1",
             width=140,
             height=100,
-            fit="fill",
+            fit=ft.ImageFit.FILL,
         ),
-        blend_mode="colorBurn",
-        shader=RadialGradient(
-            center=alignment.top_left,
+        blend_mode=ft.BlendMode.COLOR_BURN,
+        shader=ft.RadialGradient(
+            center=ft.alignment.top_left,
             radius=1.0,
-            colors=[colors.YELLOW, colors.DEEP_ORANGE_900],
-            tile_mode="clamp",
+            colors=[ft.colors.YELLOW, ft.colors.DEEP_ORANGE_900],
+            tile_mode=ft.GradientTileMode.CLAMP,
         ),
         border_radius=5,
         animate_rotation=300,
-        animate_scale=animation.Animation(600, "bounceOut"),
+        animate_scale=ft.animation.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):
@@ -41,9 +28,9 @@ def main(page: Page):
         page.update()
 
     page.add(
-        Stack([c1], width=600, height=600),
-        ElevatedButton("Animate!", on_click=animate),
+        ft.Stack([c1], width=600, height=600),
+        ft.ElevatedButton("Animate!", on_click=animate),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
