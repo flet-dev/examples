@@ -17,7 +17,7 @@ from flet import Text
 from flet import VerticalDivider
 from flet import colors
 from flet import icons
-from flet import slugify
+from flet.utils import slugify
 
 
 class ResponsiveMenuLayout(Row):
@@ -46,7 +46,10 @@ class ResponsiveMenuLayout(Row):
         self.expand = True
 
         self.navigation_items = [navigation_item for navigation_item, _ in pages]
-        self.routes = [f"/{item.pop('route', None) or slugify(item['label'])}" for item in self.navigation_items]
+        self.routes = [
+            f"/{item.pop('route', None) or slugify(item['label'])}"
+            for item in self.navigation_items
+        ]
         self.navigation_rail = self.build_navigation_rail()
         self.update_destinations()
         self._menu_extended = menu_extended
@@ -79,7 +82,9 @@ class ResponsiveMenuLayout(Row):
 
     @property
     def minimize_to_icons(self) -> bool:
-        return self._minimize_to_icons or (self._landscape_minimize_to_icons and self._portrait_minimize_to_icons)
+        return self._minimize_to_icons or (
+            self._landscape_minimize_to_icons and self._portrait_minimize_to_icons
+        )
 
     @minimize_to_icons.setter
     def minimize_to_icons(self, value: bool):
@@ -113,7 +118,9 @@ class ResponsiveMenuLayout(Row):
         self._menu_extended = value
 
         dimension_minimized = (
-            self.landscape_minimize_to_icons if self.is_landscape() else self.portrait_minimize_to_icons
+            self.landscape_minimize_to_icons
+            if self.is_landscape()
+            else self.portrait_minimize_to_icons
         )
         if not dimension_minimized or self._panel_visible:
             self.navigation_rail.extended = value
@@ -156,7 +163,9 @@ class ResponsiveMenuLayout(Row):
             for item in navigation_items:
                 item.pop("label")
 
-        self.navigation_rail.destinations = [NavigationRailDestination(**nav_specs) for nav_specs in navigation_items]
+        self.navigation_rail.destinations = [
+            NavigationRailDestination(**nav_specs) for nav_specs in navigation_items
+        ]
         self.navigation_rail.label_type = "none" if icons_only else "all"
 
     def handle_resize(self, e):
@@ -207,9 +216,16 @@ class ResponsiveMenuLayout(Row):
                     expand=True,
                     on_click=self.toggle_navigation,
                 )
-                self.controls = [Stack(controls=[self.content_area, dismiss_shield, self.menu_panel], expand=True)]
+                self.controls = [
+                    Stack(
+                        controls=[self.content_area, dismiss_shield, self.menu_panel],
+                        expand=True,
+                    )
+                ]
             else:
-                self.controls = [Stack(controls=[self.content_area, self.menu_panel], expand=True)]
+                self.controls = [
+                    Stack(controls=[self.content_area, self.menu_panel], expand=True)
+                ]
             self.update_destinations()
             self.navigation_rail.extended = self.menu_extended
             self.menu_panel.visible = self._panel_visible
@@ -240,7 +256,11 @@ if __name__ == "__main__":
 
         pages = [
             (
-                dict(icon=icons.LANDSCAPE_OUTLINED, selected_icon=icons.LANDSCAPE, label="Menu in landscape"),
+                dict(
+                    icon=icons.LANDSCAPE_OUTLINED,
+                    selected_icon=icons.LANDSCAPE,
+                    label="Menu in landscape",
+                ),
                 create_page(
                     "Menu in landscape",
                     "Menu in landscape is by default shown, side by side with the main content, but can be "
@@ -248,7 +268,11 @@ if __name__ == "__main__":
                 ),
             ),
             (
-                dict(icon=icons.PORTRAIT_OUTLINED, selected_icon=icons.PORTRAIT, label="Menu in portrait"),
+                dict(
+                    icon=icons.PORTRAIT_OUTLINED,
+                    selected_icon=icons.PORTRAIT,
+                    label="Menu in portrait",
+                ),
                 create_page(
                     "Menu in portrait",
                     "Menu in portrait is mainly expected to be used on a smaller mobile device."
@@ -261,7 +285,9 @@ if __name__ == "__main__":
             ),
             (
                 dict(
-                    icon=icons.INSERT_EMOTICON_OUTLINED, selected_icon=icons.INSERT_EMOTICON, label="Minimize to icons"
+                    icon=icons.INSERT_EMOTICON_OUTLINED,
+                    selected_icon=icons.INSERT_EMOTICON,
+                    label="Minimize to icons",
                 ),
                 create_page(
                     "Minimize to icons",
@@ -275,7 +301,11 @@ if __name__ == "__main__":
                 ),
             ),
             (
-                dict(icon=icons.COMPARE_ARROWS_OUTLINED, selected_icon=icons.COMPARE_ARROWS, label="Menu width"),
+                dict(
+                    icon=icons.COMPARE_ARROWS_OUTLINED,
+                    selected_icon=icons.COMPARE_ARROWS,
+                    label="Menu width",
+                ),
                 create_page(
                     "Menu width",
                     "ResponsiveMenuLayout has a parameter manu_extended. "
@@ -285,7 +315,12 @@ if __name__ == "__main__":
                 ),
             ),
             (
-                dict(icon=icons.ROUTE_OUTLINED, selected_icon=icons.ROUTE, label="Route support", route="custom-route"),
+                dict(
+                    icon=icons.ROUTE_OUTLINED,
+                    selected_icon=icons.ROUTE,
+                    label="Route support",
+                    route="custom-route",
+                ),
                 create_page(
                     "Route support",
                     "ResponsiveMenuLayout has a parameter support_routes, which is True by default. "
@@ -299,7 +334,11 @@ if __name__ == "__main__":
                 ),
             ),
             (
-                dict(icon=icons.PLUS_ONE_OUTLINED, selected_icon=icons.PLUS_ONE, label="Fine control"),
+                dict(
+                    icon=icons.PLUS_ONE_OUTLINED,
+                    selected_icon=icons.PLUS_ONE,
+                    label="Fine control",
+                ),
                 create_page(
                     "Adjust navigation rail",
                     "NavigationRail is accessible via the navigation_rail attribute of the ResponsiveMenuLayout. "
@@ -323,7 +362,9 @@ if __name__ == "__main__":
                     Text("Minimize\nto icons"),
                     Switch(on_change=lambda e: toggle_icons_only(menu_layout)),
                     Text("Menu\nwidth"),
-                    Switch(value=True, on_change=lambda e: toggle_menu_width(menu_layout)),
+                    Switch(
+                        value=True, on_change=lambda e: toggle_menu_width(menu_layout)
+                    ),
                 ]
             )
         ]
