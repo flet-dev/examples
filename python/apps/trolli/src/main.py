@@ -69,6 +69,7 @@ class TrelloApp(UserControl):
         return self.layout
 
     def initialize(self):
+        self.page.views.clear()
         self.page.views.append(
             View(
                 "/",

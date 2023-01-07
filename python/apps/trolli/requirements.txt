@@ -1,2 +1,2 @@
-flet>=0.1.63
+flet>=0.3.2
 python-dotenv>=0.20.0
