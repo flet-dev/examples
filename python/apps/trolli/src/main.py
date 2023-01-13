@@ -86,13 +86,21 @@ class TrelloApp(UserControl):
         if e.error:
             raise Exception(e.error)
 
-        # save token in a client storage
         jt = self.page.auth.token.to_json()
         ejt = encrypt(jt, self.encryption_key)
         self.page.client_storage.set("trolli_token", ejt)
 
-        # change login button text and Workspace visibility
+        self.set_login_state()
+        print("self.page.auth.user: ", self.page.auth.user)
         self.page.update()
+
+    def set_login_state(self):
+        print("set_login_state")
+        self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
+        if self.login_profile_button.text == "Log in":
+            self.login_profile_button.text = "Log out"
+        else:
+            self.login_profile_button.text = "Log in"
 
     def initialize(self):
         self.page.views.clear()
@@ -115,37 +123,6 @@ class TrelloApp(UserControl):
 
     def login(self, e):
 
-        # def close_dlg(e):
-        #     if user_name.value == "" or password.value == "":
-        #         user_name.error_text = "Please provide username"
-        #         password.error_text = "Please provide password"
-        #         self.page.update()
-        #         return
-        #     else:
-        #         user = User(user_name.value, password.value)
-        #         if user not in self.store.get_users():
-        #             self.store.add_user(user)
-        #         self.user = user_name.value
-        #         self.page.client_storage.set("current_user", user_name.value)
-
-        #     dialog.open = False
-        #     self.appbar_items[0] = PopupMenuItem(
-        #         text=f"{self.page.client_storage.get('current_user')}'s Profile")
-        #     self.page.update()
-        # user_name = TextField(label="User name")
-        # password = TextField(label="Password", password=True)
-        # dialog = AlertDialog(
-        #     title=Text("Please enter your login credentials"),
-        #     content=Column([
-        #         user_name,
-        #         password,
-        #         ElevatedButton(text="Login", on_click=close_dlg),
-        #     ], tight=True),
-        #     on_dismiss=lambda e: print("Modal dialog dismissed!"),
-        # )
-        # self.page.dialog = dialog
-        # dialog.open = True
-        # self.page.update()
         saved_token = None
         ejt = self.page.client_storage.get("trolli.token")
         if ejt:
