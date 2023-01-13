@@ -2,8 +2,7 @@ import logging
 from time import sleep
 
 import flet
-from flet import Icon, Page, Tab, Tabs, Text, alignment, icons
-from flet.container import Container
+from flet import Container, Icon, Page, Tab, Tabs, Text, alignment, icons
 
 logging.basicConfig(level=logging.DEBUG)
 

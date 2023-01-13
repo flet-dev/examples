@@ -1,6 +1,5 @@
 import flet
-from flet import CircleAvatar, Icon, Stack, Text, alignment, colors, icons
-from flet.container import Container
+from flet import CircleAvatar, Container, Icon, Stack, Text, alignment, colors, icons
 
 
 def main(page):

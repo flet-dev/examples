@@ -11,10 +11,9 @@ from flet import (
     Page,
     Row,
     Text,
+    VerticalDivider,
     icons,
 )
-from flet.divider import Divider
-from flet.vertical_divider import VerticalDivider
 
 logging.basicConfig(level=logging.DEBUG)
 
