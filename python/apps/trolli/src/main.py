@@ -39,8 +39,10 @@ class TrelloApp(UserControl):
         self.store: DataStore = store
         self.page.on_route_change = self.route_change
         self.boards = self.store.get_boards()
+        self.logged_in_user = ""
         self.login_profile_button = PopupMenuItem(
             text="Log in", on_click=self.login)
+        self.logout_button = PopupMenuItem(text=f"Log out {self.logged_in_user}", on_click=self.logout)
         self.appbar_items = [
             self.login_profile_button,
             PopupMenuItem(),  # divider
@@ -73,6 +75,7 @@ class TrelloApp(UserControl):
         )
 
         page.on_login = self.on_login
+        page.on_logout = self.on_logout
         self.page.update()
 
     # def login_click(self, e):
@@ -89,18 +92,27 @@ class TrelloApp(UserControl):
         jt = self.page.auth.token.to_json()
         ejt = encrypt(jt, self.encryption_key)
         self.page.client_storage.set("trolli_token", ejt)
-
-        self.set_login_state()
-        print("self.page.auth.user: ", self.page.auth.user)
+        self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
+        self.logged_in_user = self.page.auth.user["nickname"]
+        self.set_login_button()
+        #print("self.page.auth.user: ", self.page.auth.user)
         self.page.update()
 
-    def set_login_state(self):
+    def on_logout(self, e): 
+        print("on logout")
+        self.layout.sidebar.set_workspace_user()
+        self.set_login_button()
+        self.page.update()
+
+
+    def set_login_button(self):
         print("set_login_state")
-        self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
-        if self.login_profile_button.text == "Log in":
-            self.login_profile_button.text = "Log out"
+        if self.page.auth is None:
+            self.appbar_items[0] = self.login_profile_button
         else:
-            self.login_profile_button.text = "Log in"
+            self.appbar_items[0] = self.logout_button
+
+        
 
     def initialize(self):
         self.page.views.clear()
@@ -122,13 +134,18 @@ class TrelloApp(UserControl):
         self.page.go("/")
 
     def login(self, e):
-
         saved_token = None
         ejt = self.page.client_storage.get("trolli.token")
         if ejt:
             saved_token = decrypt(ejt, self.encryption_key)
         if e is not None or saved_token is not None:
             self.page.login(self.provider, saved_token=saved_token)
+    
+    def logout(self, e):
+        print("logout called")
+        self.page.client_storage.remove("trolli.token")
+        self.page.logout()
+
 
     def route_change(self, e):
         troute = TemplateRoute(self.page.route)
