@@ -42,7 +42,8 @@ class TrelloApp(UserControl):
         self.logged_in_user = ""
         self.login_profile_button = PopupMenuItem(
             text="Log in", on_click=self.login)
-        self.logout_button = PopupMenuItem(text=f"Log out {self.logged_in_user}", on_click=self.logout)
+        self.logout_button = PopupMenuItem(
+            text="Log out", on_click=self.logout)
         self.appbar_items = [
             self.login_profile_button,
             PopupMenuItem(),  # divider
@@ -98,21 +99,18 @@ class TrelloApp(UserControl):
         #print("self.page.auth.user: ", self.page.auth.user)
         self.page.update()
 
-    def on_logout(self, e): 
-        print("on logout")
+    def on_logout(self, e):
         self.layout.sidebar.set_workspace_user()
         self.set_login_button()
         self.page.update()
 
-
     def set_login_button(self):
-        print("set_login_state")
         if self.page.auth is None:
             self.appbar_items[0] = self.login_profile_button
         else:
+            self.logout_button.text = f"Log out {self.logged_in_user}"
             self.appbar_items[0] = self.logout_button
-
-        
+            self.appbar.update()
 
     def initialize(self):
         self.page.views.clear()
@@ -135,17 +133,15 @@ class TrelloApp(UserControl):
 
     def login(self, e):
         saved_token = None
-        ejt = self.page.client_storage.get("trolli.token")
+        ejt = self.page.client_storage.get("trolli_token")
         if ejt:
             saved_token = decrypt(ejt, self.encryption_key)
         if e is not None or saved_token is not None:
-            self.page.login(self.provider, saved_token=saved_token)
-    
-    def logout(self, e):
-        print("logout called")
-        self.page.client_storage.remove("trolli.token")
-        self.page.logout()
+            self.page.login(self.provider)
 
+    def logout(self, e):
+        self.page.client_storage.remove("trolli_token")
+        self.page.logout()
 
     def route_change(self, e):
         troute = TemplateRoute(self.page.route)

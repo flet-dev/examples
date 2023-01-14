@@ -96,7 +96,7 @@ class Sidebar(UserControl):
 
     def set_workspace_user(self, name=None):
         if name is not None:
-            self.workspace_title.controls[0].value = f"{name}'s workspace"
+            self.workspace_title.controls[0].value = f"{name}'s Workspace"
         else:
             self.workspace_title.controls[0].value = "Workspace"
 
