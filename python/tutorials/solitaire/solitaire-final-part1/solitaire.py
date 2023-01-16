@@ -30,10 +30,10 @@ class Solitaire(ft.Stack):
 
     def create_card_deck(self):
         suites = [
-            Suite("Hearts", "RED"),
-            Suite("Diamonds", "RED"),
-            Suite("Clubs", "BLACK"),
-            Suite("Spades", "BLACK"),
+            Suite("hearts", "RED"),
+            Suite("diamonds", "RED"),
+            Suite("clubs", "BLACK"),
+            Suite("spades", "BLACK"),
         ]
         ranks = [
             Rank("Ace", 1),
