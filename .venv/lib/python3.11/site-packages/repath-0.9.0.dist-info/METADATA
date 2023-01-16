@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: repath
+Version: 0.9.0
+Summary: Generate regular expressions form ExpressJS path patterns
+Home-page: https://github.com/nickcoutsos/python-repath
+Author: Nikolaos Coutsos
+Author-email: ncoutsos@gmail.com
+License: MIT
+Keywords: url path pattern regex express route
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Dist: six (>=1.9.0)
+
+A port of the pathToRegexp node module to Python. Parses express-style paths to PCRE regular expression patterns, taking advantage of Python's named capture groups.
+
+

@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: flet
+Version: 0.3.2
+Summary: Flet for Python - easily build interactive multi-platform apps in Python
+License: MIT
+Author-email: Appveyor Systems Inc. <hello@flet.dev>
+Requires-Python: >=3.7
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Dist: beartype>=0.9.1
+Requires-Dist: oauthlib>=3.2.0
+Requires-Dist: packaging>=22.0
+Requires-Dist: repath>=0.9.0
+Requires-Dist: requests>=2.28.1
+Requires-Dist: typing_extensions; python_version < "3.8"
+Requires-Dist: watchdog>=2.1.9
+Requires-Dist: websocket-client>=1.2.1
+Project-URL: documentation, https://flet.dev/docs/
+Project-URL: repository, https://github.com/flet-dev/flet
+Description-Content-Type: text/markdown
+
+# Flet - quickly build interactive apps for web, desktop and mobile in Python
+
+[Flet](https://flet.dev) is a rich User Interface (UI) framework to quickly build interactive web, desktop and mobile apps in Python without prior knowledge of web technologies like HTTP, HTML, CSS or JavaSscript. You build UI with [controls](https://flet.dev/docs/controls) based on [Flutter](https://flutter.dev/) widgets to ensure your programs look cool and professional.
+
+## Requirements
+
+* Python 3.7 or above on Windows, Linux or macOS
+
+## Installation
+
+```
+pip install flet
+```
+
+## Hello, world!
+
+```python
+import flet
+from flet import Page, Text
+
+def main(page: Page):
+    page.add(Text("Hello, world!"))
+
+flet.app(target=main)
+```
+
+Run the sample above and the app will be started in a native OS window:
+
+![Sample app in a browser](https://flet.dev//img/docs/getting-started/flet-counter-macos.png "Sample app in a native window")
+
+Continue with [Python guide](https://flet.dev/docs/getting-started/python) to learn how to make a real app.
+
+Browse for more [Flet examples](https://github.com/flet-dev/examples/tree/main/python).
+
+Join to a conversation on [Flet Discord server](https://discord.gg/dzWXP8SHG8).
+

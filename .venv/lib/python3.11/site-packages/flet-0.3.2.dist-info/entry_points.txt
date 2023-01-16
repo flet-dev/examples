@@ -1,0 +1,6 @@
+[console_scripts]
+flet=flet.cli.cli:main
+
+[pyinstaller40]
+hook-dirs=flet.__pyinstaller:get_hook_dirs
+
