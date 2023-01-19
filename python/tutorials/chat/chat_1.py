@@ -1,19 +1,17 @@
-import flet
-from flet import Column, ElevatedButton, Page, Row, Text, TextField
+import flet as ft
 
-
-def main(page: Page):
-    chat = Column()
-    new_message = TextField()
+def main(page: ft.Page):
+    chat = ft.Column()
+    new_message = ft.TextField()
 
     def send_click(e):
-        chat.controls.append(Text(new_message.value))
+        chat.controls.append(ft.Text(new_message.value))
         new_message.value = ""
         page.update()
 
     page.add(
-        chat, Row(controls=[new_message, ElevatedButton("Send", on_click=send_click)])
+        chat, ft.Row(controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)])
     )
 
 
-flet.app("chat", target=main)
+ft.app("chat", target=main)
