@@ -1,0 +1,18 @@
+[project]
+name = "Flet Python examples"
+version = "1.0.0"
+description = ""
+authors = [
+    {name = "Appveyor Systems Inc.", email = "hello@flet.dev"},
+]
+dependencies = [
+    "flet>=0.2.0.dev859",
+]
+requires-python = ">=3.7"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
+
+[tool.pdm]
