@@ -1,32 +1,28 @@
-from dataclasses import dataclass
+import flet as ft
 
-import flet
-from flet import Column, ElevatedButton, Page, Row, Text, TextField
+class Message():
+    def __init__(self, user: str, text: str):
+        self.user = user
+        self.text = text
+
+def main(page: ft.Page):
+
+    chat = ft.Column()
+    new_message = ft.TextField()
 
 
-@dataclass
-class Message:
-    user: str
-    text: str
-
-
-def main(page: Page):
-
-    chat = Column()
-    new_message = TextField()
 
     def on_message(message: Message):
-        chat.controls.append(Text(f"{message.user}: {message.text}"))
+        chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
         page.update()
 
     page.pubsub.subscribe(on_message)
 
     def send_click(e):
-        page.pubsub.send_all(Message(page.session_id, new_message.value))
+        page.pubsub.send_all(Message(user=page.session_id, text=new_message.value))
         new_message.value = ""
         page.update()
 
-    page.add(chat, Row([new_message, ElevatedButton("Send", on_click=send_click)]))
+    page.add(chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)]))
 
-
-flet.app(target=main, view=flet.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER)
