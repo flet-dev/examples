@@ -22,6 +22,7 @@ from flet import (
 from board import Board
 from sidebar import Sidebar
 from data_store import DataStore
+from landing_page import LandingPage
 
 
 class AppLayout(Row):

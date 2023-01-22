@@ -30,7 +30,7 @@ from user import User
 from data_store import DataStore
 from memory_store import InMemoryStore
 from app_layout import AppLayout
-
+from landing_page import LandingPage
 
 class TrelloApp(UserControl):
     def __init__(self, page: Page, store: DataStore):
@@ -77,19 +77,30 @@ class TrelloApp(UserControl):
 
         page.on_login = self.on_login
         page.on_logout = self.on_logout
+        self.app_layout = AppLayout(self, self.page, self.store,
+                                tight=True, expand=True, vertical_alignment="start")
+        self.landing_page = Container(
+                content = LandingPage(self, self.page, alignment=flet.MainAxisAlignment.CENTER, 
+                                vertical_alignment=flet.CrossAxisAlignment.CENTER, height=self.page.height),
+                expand=True
+            )
         self.page.update()
 
-    # def login_click(self, e):
 
     def build(self):
-        self.layout = AppLayout(self, self.page, self.store,
-                                tight=True, expand=True, vertical_alignment="start")
+        self.layout = self.app_layout if self.page.auth is not None else self.landing_page
         return self.layout
 
+    def set_authorized(self):
+        self.layout = self.app_layout
+        self.update()
+    
     def on_login(self, e):
+        # what to do with data created while logged out? merge with user's existing data? stash? 
+
         if e.error:
             raise Exception(e.error)
-
+        self.initialize()
         jt = self.page.auth.token.to_json()
         ejt = encrypt(jt, self.encryption_key)
         self.page.client_storage.set("trolli_token", ejt)
@@ -221,7 +232,7 @@ if __name__ == "__main__":
 
         page.add(app)
         page.update()
-        app.initialize()
+        
 
     flet.app(target=main, port=8088,
              assets_dir="../assets", view=flet.WEB_BROWSER)
