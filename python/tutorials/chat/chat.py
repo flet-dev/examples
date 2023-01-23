@@ -6,11 +6,27 @@ class Message():
         self.text = text
         self.message_type = message_type
 
-class ChatMessage(ft.UserControl):
+class ChatMessage(ft.Row):
     def __init__(self, username: str, text: str):
         super().__init__()
         self.username = username
         self.text = text
+        self.vertical_alignment="start"
+        self.controls=[
+                ft.CircleAvatar(
+                    content=ft.Text(self.get_initials()),
+                    color=ft.colors.WHITE,
+                    bgcolor=self.get_avatar_color(self.username),
+                ),
+                ft.Column(
+                    [
+                        ft.Text(self.username, weight="bold"),
+                        ft.Text(self.text, selectable=True),
+                    ],
+                    tight=True,
+                    spacing=5,
+                ),
+            ]
 
     def get_initials(self):
         return self.username[:1].capitalize()
@@ -33,25 +49,25 @@ class ChatMessage(ft.UserControl):
         ]
         return colors_lookup[hash(username) % len(colors_lookup)]
 
-    def build(self):
-        return ft.Row(
-            [
-                ft.CircleAvatar(
-                    content=ft.Text(self.get_initials()),
-                    color=ft.colors.WHITE,
-                    bgcolor=self.get_avatar_color(self.username),
-                ),
-                ft.Column(
-                    [
-                        ft.Text(self.username, weight="bold"),
-                        ft.Text(self.text, selectable=True),
-                    ],
-                    tight=True,
-                    spacing=5,
-                ),
-            ],
-            vertical_alignment="start",
-        )
+    # def build(self):
+    #     return ft.Row(
+    #         [
+    #             ft.CircleAvatar(
+    #                 content=ft.Text(self.get_initials()),
+    #                 color=ft.colors.WHITE,
+    #                 bgcolor=self.get_avatar_color(self.username),
+    #             ),
+    #             ft.Column(
+    #                 [
+    #                     ft.Text(self.username, weight="bold"),
+    #                     ft.Text(self.text, selectable=True),
+    #                 ],
+    #                 tight=True,
+    #                 spacing=5,
+    #             ),
+    #         ],
+    #         vertical_alignment="start",
+    #     )
 
 def main(page: ft.Page):
     page.horizontal_alignment = "stretch"
