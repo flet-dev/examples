@@ -15,7 +15,7 @@ def main(page: ft.Page):
     def on_message(message: Message):
         if message.message_type == "chat_message":
             chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
-        else:
+        elif message.message_type == "login_message":
             chat.controls.append(
                 ft.Text(message.text, italic=True, color=ft.colors.BLACK45, size=12)
             )
