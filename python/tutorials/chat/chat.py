@@ -1,35 +1,12 @@
-import logging
-from dataclasses import dataclass
+import flet as ft
 
-import flet
-from flet import (
-    AlertDialog,
-    CircleAvatar,
-    Column,
-    Container,
-    ElevatedButton,
-    IconButton,
-    ListView,
-    Page,
-    Row,
-    Text,
-    TextField,
-    UserControl,
-    border,
-    colors,
-    icons,
-)
+class Message():
+    def __init__(self, user: str, text: str, message_type: str):
+        self.user = user
+        self.text = text
+        self.message_type = message_type
 
-logging.basicConfig(level=logging.DEBUG)
-
-
-@dataclass
-class Message:
-    user: str
-    text: str
-
-
-class ChatMessage(UserControl):
+class ChatMessage(ft.UserControl):
     def __init__(self, username: str, text: str):
         super().__init__()
         self.username = username
@@ -40,34 +17,34 @@ class ChatMessage(UserControl):
 
     def get_avatar_color(self, username: str):
         colors_lookup = [
-            colors.AMBER,
-            colors.BLUE,
-            colors.BROWN,
-            colors.CYAN,
-            colors.GREEN,
-            colors.INDIGO,
-            colors.LIME,
-            colors.ORANGE,
-            colors.PINK,
-            colors.PURPLE,
-            colors.RED,
-            colors.TEAL,
-            colors.YELLOW,
+            ft.colors.AMBER,
+            ft.colors.BLUE,
+            ft.colors.BROWN,
+            ft.colors.CYAN,
+            ft.colors.GREEN,
+            ft.colors.INDIGO,
+            ft.colors.LIME,
+            ft.colors.ORANGE,
+            ft.colors.PINK,
+            ft.colors.PURPLE,
+            ft.colors.RED,
+            ft.colors.TEAL,
+            ft.colors.YELLOW,
         ]
         return colors_lookup[hash(username) % len(colors_lookup)]
 
     def build(self):
-        return Row(
+        return ft.Row(
             [
-                CircleAvatar(
-                    content=Text(self.get_initials()),
-                    color=colors.WHITE,
+                ft.CircleAvatar(
+                    content=ft.Text(self.get_initials()),
+                    color=ft.colors.WHITE,
                     bgcolor=self.get_avatar_color(self.username),
                 ),
-                Column(
+                ft.Column(
                     [
-                        Text(self.username, weight="bold"),
-                        Text(self.text, selectable=True),
+                        ft.Text(self.username, weight="bold"),
+                        ft.Text(self.text, selectable=True),
                     ],
                     tight=True,
                     spacing=5,
@@ -77,69 +54,63 @@ class ChatMessage(UserControl):
         )
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.horizontal_alignment = "stretch"
     page.title = "Flet Chat"
-    page.user = page.session_id
-
-    def user_exited(e):
-        print("A user left the chat")
-        page.pubsub.unsubscribe_all()
-
-    page.on_close = user_exited
+    #page.user = page.session_id
 
     def join_chat_click(e):
         if not join_user_name.value:
             join_user_name.error_text = "Name cannot be blank!"
             join_user_name.update()
         else:
-            page.user = join_user_name.value
+            page.session.set("user_name", join_user_name.value)
             page.dialog.open = False
-            new_message.prefix = Text(f"{page.user}: ")
-            page.pubsub.send_all(Message(None, f"{page.user} has joined the chat."))
+            new_message.prefix = ft.Text(f"{join_user_name.value}: ")
+            page.pubsub.send_all(Message(user=join_user_name.value, text=f"{join_user_name.value} has joined the chat.", message_type="login_message"))
             page.update()
 
     def send_message_click(e):
         if new_message.value != "":
-            page.pubsub.send_all(Message(page.user, new_message.value))
+            page.pubsub.send_all(Message(page.session.get("user_name"), new_message.value, message_type="chat_message"))
             new_message.value = ""
             new_message.focus()
             page.update()
 
     def on_message(message: Message):
-        if message.user != None:
+        if message.message_type == "chat_message":
             m = ChatMessage(message.user, message.text)
-        else:
-            m = Text(message.text, italic=True, color=colors.BLACK45, size=12)
+        elif message.message_type == "login_message":
+            m = ft.Text(message.text, italic=True, color=ft.colors.BLACK45, size=12)
         chat.controls.append(m)
         page.update()
 
     page.pubsub.subscribe(on_message)
 
     # A dialog asking for a user display name
-    join_user_name = TextField(
+    join_user_name = ft.TextField(
         label="Enter your name to join the chat",
         autofocus=True,
         on_submit=join_chat_click,
     )
-    page.dialog = AlertDialog(
+    page.dialog = ft.AlertDialog(
         open=True,
         modal=True,
-        title=Text("Welcome!"),
-        content=Column([join_user_name], width=300, height=70, tight=True),
-        actions=[ElevatedButton(text="Join chat", on_click=join_chat_click)],
+        title=ft.Text("Welcome!"),
+        content=ft.Column([join_user_name], width=300, height=70, tight=True),
+        actions=[ft.ElevatedButton(text="Join chat", on_click=join_chat_click)],
         actions_alignment="end",
     )
 
     # Chat messages
-    chat = ListView(
+    chat = ft.ListView(
         expand=True,
         spacing=10,
         auto_scroll=True,
     )
 
     # A new message entry form
-    new_message = TextField(
+    new_message = ft.TextField(
         hint_text="Write a message...",
         autofocus=True,
         shift_enter=True,
@@ -152,18 +123,18 @@ def main(page: Page):
 
     # Add everything to the page
     page.add(
-        Container(
+        ft.Container(
             content=chat,
-            border=border.all(1, colors.OUTLINE),
+            border=ft.border.all(1, ft.colors.OUTLINE),
             border_radius=5,
             padding=10,
             expand=True,
         ),
-        Row(
+        ft.Row(
             [
                 new_message,
-                IconButton(
-                    icon=icons.SEND_ROUNDED,
+                ft.IconButton(
+                    icon=ft.icons.SEND_ROUNDED,
                     tooltip="Send message",
                     on_click=send_message_click,
                 ),
@@ -171,5 +142,4 @@ def main(page: Page):
         ),
     )
 
-
-flet.app(port=8550, target=main, view=flet.WEB_BROWSER)
+ft.app(port=8550, target=main, view=ft.WEB_BROWSER)
