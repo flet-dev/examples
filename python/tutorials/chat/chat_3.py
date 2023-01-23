@@ -1,60 +1,54 @@
-from dataclasses import dataclass
+import flet as ft
 
-import flet
-from flet import AlertDialog, Column, ElevatedButton, Page, Row, Text, TextField, colors
-
-
-@dataclass
-class Message:
-    user: str
-    text: str
+class Message():
+    def __init__(self, user: str, text: str, message_type: str):
+        self.user = user
+        self.text = text
+        self.message_type = message_type
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    chat = Column()
-    new_message = TextField()
+    chat = ft.Column()
+    new_message = ft.TextField()
 
     def on_message(message: Message):
-        if message.user != None:
-            chat.controls.append(Text(f"{message.user}: {message.text}"))
+        if message.message_type == "chat_message":
+            chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
         else:
             chat.controls.append(
-                Text(message.text, italic=True, color=colors.BLACK45, size=12)
+                ft.Text(message.text, italic=True, color=ft.colors.BLACK45, size=12)
             )
         page.update()
 
     page.pubsub.subscribe(on_message)
 
     def send_click(e):
-        page.pubsub.send_all(Message(page.user, new_message.value))
+        page.pubsub.send_all(Message(user=page.session.get('user_name'), text=new_message.value, message_type="chat_message"))
         new_message.value = ""
         page.update()
 
-    user_name = TextField(label="Enter your name")
-
-    page.user = page.session_id
+    user_name = ft.TextField(label="Enter your name")
 
     def join_click(e):
         if not user_name.value:
             user_name.error_text = "Name cannot be blank!"
             user_name.update()
         else:
-            page.user = user_name.value
+            page.session.set("user_name", user_name.value)
             page.dialog.open = False
-            page.pubsub.send_all(Message(None, f"{page.user} has joined the chat."))
+            page.pubsub.send_all(Message(user=user_name.value, text=f"{user_name.value} has joined the chat.", message_type="login_message"))
             page.update()
 
-    page.dialog = AlertDialog(
+    page.dialog = ft.AlertDialog(
         open=True,
         modal=True,
-        title=Text("Welcome!"),
-        content=Column([user_name], tight=True),
-        actions=[ElevatedButton(text="Join chat", on_click=join_click)],
+        title=ft.Text("Welcome!"),
+        content=ft.Column([user_name], tight=True),
+        actions=[ft.ElevatedButton(text="Join chat", on_click=join_click)],
         actions_alignment="end",
     )
 
-    page.add(chat, Row([new_message, ElevatedButton("Send", on_click=send_click)]))
+    page.add(chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)]))
 
-
-flet.app(target=main, view=flet.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER)

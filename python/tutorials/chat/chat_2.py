@@ -10,8 +10,6 @@ def main(page: ft.Page):
     chat = ft.Column()
     new_message = ft.TextField()
 
-
-
     def on_message(message: Message):
         chat.controls.append(ft.Text(f"{message.user}: {message.text}"))
         page.update()
