@@ -1,37 +1,35 @@
 import flet as ft
 
 class Message():
-    def __init__(self, user: str, text: str, message_type: str):
-        self.user = user
+    def __init__(self, user_name: str, text: str, message_type: str):
+        self.user_name = user_name
         self.text = text
         self.message_type = message_type
 
 class ChatMessage(ft.Row):
-    def __init__(self, username: str, text: str):
+    def __init__(self, message):
         super().__init__()
-        self.username = username
-        self.text = text
         self.vertical_alignment="start"
         self.controls=[
                 ft.CircleAvatar(
-                    content=ft.Text(self.get_initials()),
+                    content=ft.Text(self.get_initials(message.user_name)),
                     color=ft.colors.WHITE,
-                    bgcolor=self.get_avatar_color(self.username),
+                    bgcolor=self.get_avatar_color(message.user_name),
                 ),
                 ft.Column(
                     [
-                        ft.Text(self.username, weight="bold"),
-                        ft.Text(self.text, selectable=True),
+                        ft.Text(message.user_name, weight="bold"),
+                        ft.Text(message.text, selectable=True),
                     ],
                     tight=True,
                     spacing=5,
                 ),
             ]
 
-    def get_initials(self):
-        return self.username[:1].capitalize()
+    def get_initials(self, user_name: str):
+        return user_name[:1].capitalize()
 
-    def get_avatar_color(self, username: str):
+    def get_avatar_color(self, user_name: str):
         colors_lookup = [
             ft.colors.AMBER,
             ft.colors.BLUE,
@@ -47,27 +45,8 @@ class ChatMessage(ft.Row):
             ft.colors.TEAL,
             ft.colors.YELLOW,
         ]
-        return colors_lookup[hash(username) % len(colors_lookup)]
-
-    # def build(self):
-    #     return ft.Row(
-    #         [
-    #             ft.CircleAvatar(
-    #                 content=ft.Text(self.get_initials()),
-    #                 color=ft.colors.WHITE,
-    #                 bgcolor=self.get_avatar_color(self.username),
-    #             ),
-    #             ft.Column(
-    #                 [
-    #                     ft.Text(self.username, weight="bold"),
-    #                     ft.Text(self.text, selectable=True),
-    #                 ],
-    #                 tight=True,
-    #                 spacing=5,
-    #             ),
-    #         ],
-    #         vertical_alignment="start",
-    #     )
+        print(hash(user_name))
+        return colors_lookup[hash(user_name) % len(colors_lookup)]
 
 def main(page: ft.Page):
     page.horizontal_alignment = "stretch"
@@ -81,7 +60,7 @@ def main(page: ft.Page):
             page.session.set("user_name", join_user_name.value)
             page.dialog.open = False
             new_message.prefix = ft.Text(f"{join_user_name.value}: ")
-            page.pubsub.send_all(Message(user=join_user_name.value, text=f"{join_user_name.value} has joined the chat.", message_type="login_message"))
+            page.pubsub.send_all(Message(user_name=join_user_name.value, text=f"{join_user_name.value} has joined the chat.", message_type="login_message"))
             page.update()
 
     def send_message_click(e):
@@ -93,7 +72,7 @@ def main(page: ft.Page):
 
     def on_message(message: Message):
         if message.message_type == "chat_message":
-            m = ChatMessage(message.user, message.text)
+            m = ChatMessage(message)
         elif message.message_type == "login_message":
             m = ft.Text(message.text, italic=True, color=ft.colors.BLACK45, size=12)
         chat.controls.append(m)
