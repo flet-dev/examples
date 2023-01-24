@@ -32,6 +32,7 @@ from memory_store import InMemoryStore
 from app_layout import AppLayout
 from landing_page import LandingPage
 
+
 class TrelloApp(UserControl):
     def __init__(self, page: Page, store: DataStore):
         super().__init__()
@@ -78,12 +79,11 @@ class TrelloApp(UserControl):
         page.on_login = self.on_login
         page.on_logout = self.on_logout
         self.app_layout = AppLayout(self, self.page, self.store,
-                                tight=True, expand=True, vertical_alignment="start")
-        self.landing_page = LandingPage(self, self.page, alignment=flet.MainAxisAlignment.CENTER, 
-                                vertical_alignment=flet.CrossAxisAlignment.CENTER, height=(self.page.height-75))
+                                    tight=True, expand=True, vertical_alignment="start")
+        self.landing_page = LandingPage(self, self.page, alignment=flet.MainAxisAlignment.CENTER,
+                                        vertical_alignment=flet.CrossAxisAlignment.CENTER, height=(self.page.height-75))
 
         self.page.update()
-
 
     def build(self):
         self.layout = self.app_layout if self.page.auth is not None else self.landing_page
@@ -92,9 +92,9 @@ class TrelloApp(UserControl):
     def set_authorized(self):
         self.layout = self.app_layout
         self.update()
-    
+
     def on_login(self, e):
-        # what to do with data created while logged out? merge with user's existing data? stash? 
+
         def close_dlg(e):
             self.login(e)
         dialog = AlertDialog(
@@ -105,13 +105,15 @@ class TrelloApp(UserControl):
                         text="Email verified", on_click=close_dlg)
                 ], alignment="center")
             ], tight=True),
-            modal=True 
+            modal=True
         )
-        
+        dialog.open = False
+
         if e.error:
             raise Exception(e.error)
 
         if self.page.auth.user['email_verified'] is False:
+
             print("not verified")
             self.page.dialog = dialog
             dialog.open = True
@@ -124,7 +126,8 @@ class TrelloApp(UserControl):
             #jt = self.page.auth.token.to_json()
             #ejt = encrypt(jt, self.encryption_key)
             #self.page.client_storage.set("trolli_token", ejt)
-            self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
+            self.layout.sidebar.set_workspace_user(
+                self.page.auth.user["nickname"])
             self.logged_in_user = self.page.auth.user["nickname"]
             self.set_login_button()
             print("self.page.auth.user: ", self.page.auth.user)
@@ -252,7 +255,6 @@ if __name__ == "__main__":
         app = TrelloApp(page, InMemoryStore())
         page.add(app)
         page.update()
-        
 
     flet.app(target=main, port=8088,
              assets_dir="../assets", view=flet.WEB_BROWSER)
