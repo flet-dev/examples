@@ -8,7 +8,6 @@ from flet import (
     colors,
 )
 
-
 class LandingPage(Row):
     def __init__(
         self,
@@ -31,8 +30,9 @@ class LandingPage(Row):
                                     },
                                     shape={
                                         "": RoundedRectangleBorder(radius=3)
-                                    }
-                                )
+                                    }                                    
+                                ),
+                                width=200
                             )
         self.signup_button = TextButton(
                                     "Create account",
@@ -45,16 +45,18 @@ class LandingPage(Row):
                                         shape={
                                             "": RoundedRectangleBorder(radius=3)
                                         }
-                                    )
+                                    ),
+                                    width=200
                                 )
         self.controls = [self.try_button, self.signup_button]
 
 
-    def try_button_click(self, i):
+    def try_button_click(self, e):
         #redirect to no auth live site.
         pass
 
-    def signup_button_click(self, i):
-        pass
+    def signup_button_click(self, e):
+        print("signup button clicked")
+        self.app.login(e)
 
     

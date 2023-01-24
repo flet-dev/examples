@@ -79,11 +79,9 @@ class TrelloApp(UserControl):
         page.on_logout = self.on_logout
         self.app_layout = AppLayout(self, self.page, self.store,
                                 tight=True, expand=True, vertical_alignment="start")
-        self.landing_page = Container(
-                content = LandingPage(self, self.page, alignment=flet.MainAxisAlignment.CENTER, 
-                                vertical_alignment=flet.CrossAxisAlignment.CENTER, height=self.page.height),
-                expand=True
-            )
+        self.landing_page = LandingPage(self, self.page, alignment=flet.MainAxisAlignment.CENTER, 
+                                vertical_alignment=flet.CrossAxisAlignment.CENTER, height=(self.page.height-75))
+
         self.page.update()
 
 
@@ -97,18 +95,40 @@ class TrelloApp(UserControl):
     
     def on_login(self, e):
         # what to do with data created while logged out? merge with user's existing data? stash? 
-
+        def close_dlg(e):
+            self.login(e)
+        dialog = AlertDialog(
+            title=Text("Please verify your email to continue"),
+            content=Column([
+                Row([
+                    ElevatedButton(
+                        text="Email verified", on_click=close_dlg)
+                ], alignment="center")
+            ], tight=True),
+            modal=True 
+        )
+        
         if e.error:
             raise Exception(e.error)
-        self.initialize()
-        jt = self.page.auth.token.to_json()
-        ejt = encrypt(jt, self.encryption_key)
-        self.page.client_storage.set("trolli_token", ejt)
-        self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
-        self.logged_in_user = self.page.auth.user["nickname"]
-        self.set_login_button()
-        #print("self.page.auth.user: ", self.page.auth.user)
-        self.page.update()
+
+        if self.page.auth.user['email_verified'] is False:
+            print("not verified")
+            self.page.dialog = dialog
+            dialog.open = True
+            self.page.update()
+        else:
+            self.layout = self.app_layout
+            self.update()
+
+            self.initialize()
+            #jt = self.page.auth.token.to_json()
+            #ejt = encrypt(jt, self.encryption_key)
+            #self.page.client_storage.set("trolli_token", ejt)
+            self.layout.sidebar.set_workspace_user(self.page.auth.user["nickname"])
+            self.logged_in_user = self.page.auth.user["nickname"]
+            self.set_login_button()
+            print("self.page.auth.user: ", self.page.auth.user)
+            self.page.update()
 
     def on_logout(self, e):
         self.layout.sidebar.set_workspace_user()
@@ -143,6 +163,7 @@ class TrelloApp(UserControl):
         self.page.go("/")
 
     def login(self, e):
+        self.page.client_storage.clear()
         saved_token = None
         ejt = self.page.client_storage.get("trolli_token")
         if ejt:
@@ -229,7 +250,6 @@ if __name__ == "__main__":
         }
         page.bgcolor = colors.BLUE_GREY_200
         app = TrelloApp(page, InMemoryStore())
-
         page.add(app)
         page.update()
         
