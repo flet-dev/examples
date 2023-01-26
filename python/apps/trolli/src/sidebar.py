@@ -28,9 +28,8 @@ class Sidebar(UserControl):
         self.store: DataStore = store
         self.app_layout = app_layout
         self.nav_rail_visible = True
-        self.workspace_dd = Dropdown(border_width=1)
-        self.selected_workspace = Row(
-            [self.workspace_dd], alignment="spaceBetween", visible=False)
+        self.workspace_dd = Dropdown(border_radius=1)
+        #self.workspace_dd = Row(alignment="spaceBetween", visible=False)
         self.top_nav_items = [
             NavigationRailDestination(
                 label_content=Text("Boards"),
@@ -98,12 +97,16 @@ class Sidebar(UserControl):
         return self.view
 
     def set_workspace_user(self, name=None):
+        print("set_workspace_user called", name)
         if name is not None:
-            self.workspace_dd.options.append(dropdown.Option(f"{name}'s Workspace")) 
+            self.workspace_dd.visible = True
+            self.workspace_dd.options.append(
+                dropdown.Option(text=f"{name}'s Workspace", key=name))
+            self.workspace_dd.value = name
         else:
-            self.workspace_dd.controls[0].value = "Workspace"
-
-        self.view.update()
+            self.workspace_dd.visible = False
+            self.workspace_dd.options.clear()
+        self.update()
 
     def sync_board_destinations(self):
         boards = self.store.get_boards()

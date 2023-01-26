@@ -74,6 +74,7 @@ class TrelloApp(UserControl):
             client_id=os.getenv("AUTH0_CLIENT_ID"),
             client_secret=os.getenv("AUTH0_CLIENT_SECRET"),
             redirect_url="http://localhost:8088/api/oauth/redirect",
+
         )
 
         page.on_login = self.on_login
@@ -96,7 +97,10 @@ class TrelloApp(UserControl):
     def on_login(self, e):
 
         def close_dlg(e):
-            self.login(e)
+            dialog.open = False
+            self.page.update()
+            self.page.login(self.provider)
+
         dialog = AlertDialog(
             title=Text("Please verify your email to continue"),
             content=Column([
@@ -107,7 +111,6 @@ class TrelloApp(UserControl):
             ], tight=True),
             modal=True
         )
-        dialog.open = False
 
         if e.error:
             raise Exception(e.error)
@@ -128,12 +131,14 @@ class TrelloApp(UserControl):
             #self.page.client_storage.set("trolli_token", ejt)
             self.layout.sidebar.set_workspace_user(
                 self.page.auth.user["nickname"])
+            self.layout.update()
             self.logged_in_user = self.page.auth.user["nickname"]
             self.set_login_button()
             print("self.page.auth.user: ", self.page.auth.user)
             self.page.update()
 
     def on_logout(self, e):
+        self.provider.query_params = "?prompt=login"
         self.layout.sidebar.set_workspace_user()
         self.set_login_button()
         self.page.update()
