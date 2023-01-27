@@ -7,7 +7,7 @@ class Message():
         self.message_type = message_type
 
 class ChatMessage(ft.Row):
-    def __init__(self, message):
+    def __init__(self, message: Message):
         super().__init__()
         self.vertical_alignment="start"
         self.controls=[
@@ -45,7 +45,6 @@ class ChatMessage(ft.Row):
             ft.colors.TEAL,
             ft.colors.YELLOW,
         ]
-        print(hash(user_name))
         return colors_lookup[hash(user_name) % len(colors_lookup)]
 
 def main(page: ft.Page):
