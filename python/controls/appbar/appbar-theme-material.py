@@ -1,12 +1,20 @@
 from time import sleep
 
 import flet
-from flet import ElevatedButton, Page, Text, colors, icons, theme
-from flet.app_bar import AppBar
-from flet.icon import Icon
-from flet.icon_button import IconButton
-from flet.popup_menu_button import PopupMenuButton, PopupMenuItem
-from flet.row import Row
+from flet import (
+    AppBar,
+    ElevatedButton,
+    Icon,
+    IconButton,
+    Page,
+    PopupMenuButton,
+    PopupMenuItem,
+    Row,
+    Text,
+    colors,
+    icons,
+    theme,
+)
 
 LIGHT_SEED_COLOR = colors.DEEP_ORANGE
 DARK_SEED_COLOR = colors.INDIGO

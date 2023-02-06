@@ -1,16 +1,17 @@
-import logging
-from cmath import exp
-from datetime import datetime
-from time import sleep
-
 import flet
 from flet import (
+    Checkbox,
     Column,
+    Container,
     Dropdown,
     ElevatedButton,
     Image,
     Page,
+    Radio,
+    RadioGroup,
     Row,
+    Slider,
+    Switch,
     Text,
     Theme,
     border,
@@ -18,18 +19,6 @@ from flet import (
     dropdown,
     padding,
 )
-from flet.border_radius import BorderRadius
-from flet.checkbox import Checkbox
-from flet.container import Container
-from flet.icon import Icon
-from flet.list_view import ListView
-from flet.radio import Radio
-from flet.radio_group import RadioGroup
-from flet.slider import Slider
-from flet.stack import Stack
-from flet.switch import Switch
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 def main(page: Page):

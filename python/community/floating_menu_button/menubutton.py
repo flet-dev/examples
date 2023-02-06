@@ -1,23 +1,23 @@
 import math
 import threading
 import time
-from dataclasses import dataclass
-from dataclasses import field
-from typing import Callable
-from typing import Optional
+from dataclasses import dataclass, field
+from typing import Callable, Optional
 
 import flet
 from beartype.typing import List
-from flet import ButtonStyle
-from flet import Container
-from flet import ElevatedButton
-from flet import FilledButton
-from flet import Page
-from flet import Stack
-from flet import Vector
-from flet import colors
-from flet import icons
-from flet.stack import ClipBehavior
+from flet import (
+    ButtonStyle,
+    ClipBehavior,
+    Container,
+    ElevatedButton,
+    FilledButton,
+    Page,
+    Stack,
+    Vector,
+    colors,
+    icons,
+)
 
 try:
     from typing import Literal
@@ -101,7 +101,9 @@ class AnimatedMenuButton(Stack):
 
         self.expand = True
         self.menu_button_container = Container(
-            FilledButton(icon=menu_button_icon, style=menu_button_style, on_click=self.toggle),
+            FilledButton(
+                icon=menu_button_icon, style=menu_button_style, on_click=self.toggle
+            ),
             width=self.menu_item_size,
             height=self.menu_item_size,
             border_radius=self.menu_item_size / 2,
@@ -128,7 +130,9 @@ class AnimatedMenuButton(Stack):
             width = height = self._radius_to_fit_items + self.menu_item_size
         else:
             width = self.menu_item_size
-            height = (len(self.menu_items) + 1) * self.menu_item_size + len(self.menu_items) * self.menu_item_gap
+            height = (len(self.menu_items) + 1) * self.menu_item_size + len(
+                self.menu_items
+            ) * self.menu_item_gap
 
             if self.direction == "horizontal":
                 width, height = height, width
@@ -206,7 +210,11 @@ class AnimatedMenuButton(Stack):
         setattr(self.menu_button_container, distance_attribute, distance_to_move)
         self.menu_button_container.update()
         for i, menu_item in enumerate(self.controls[:-1]):
-            setattr(menu_item, distance_attribute, i * (self.menu_item_size + self.menu_item_gap))
+            setattr(
+                menu_item,
+                distance_attribute,
+                i * (self.menu_item_size + self.menu_item_gap),
+            )
             menu_item.opacity = 1
             menu_item.update()
             time.sleep(self.menu_open_duration / 1000.0 / len(self.controls))
@@ -225,7 +233,11 @@ class AnimatedMenuButton(Stack):
 
     def _open_animation_curve(self):
         corner_and_direction_key = f"{self.corner} {self.direction.split()[1]}"
-        angle_multiplier, delta_multiplier, rotation_multiplier = self._curve_parameters[corner_and_direction_key]
+        (
+            angle_multiplier,
+            delta_multiplier,
+            rotation_multiplier,
+        ) = self._curve_parameters[corner_and_direction_key]
 
         if self.rotate_on_opening:
             self.menu_button_container.rotate = rotation_multiplier * math.pi / 2
@@ -237,7 +249,8 @@ class AnimatedMenuButton(Stack):
         vertical_attribute, horizontal_attribute = self.corner.split()
         for i, menu_item in enumerate(self.controls[:-1]):
             vector_to_menu_item = Vector.polar(
-                starting_angle + delta_multiplier * i * self._angle_between_items, self._radius_to_fit_items
+                starting_angle + delta_multiplier * i * self._angle_between_items,
+                self._radius_to_fit_items,
             )
             setattr(menu_item, horizontal_attribute, vector_to_menu_item.x)
             setattr(menu_item, vertical_attribute, vector_to_menu_item.y)
@@ -265,7 +278,9 @@ class AnimatedMenuButton(Stack):
         distance_to_move = (len(self.controls) - 1) * (self.menu_item_size + 5)
         radius = self.menu_item_size / 2
         distance_to_roll = 2 * math.pi * radius / 4
-        time_to_roll = int(distance_to_roll / distance_to_move * self.menu_open_duration)
+        time_to_roll = int(
+            distance_to_roll / distance_to_move * self.menu_open_duration
+        )
         self.menu_button_container.animate_rotation = time_to_roll
 
         return distance_to_move
@@ -291,16 +306,24 @@ if __name__ == "__main__":
             MenuItem(icon=icons.EDIT_OUTLINED, handler=dummy_menu_handler),
             MenuItem(icon=icons.INFO_OUTLINED, handler=dummy_menu_handler),
             MenuItem(
-                icon=icons.DELETE_OUTLINE, handler=dummy_menu_handler, style=ButtonStyle(bgcolor=colors.ERROR_CONTAINER)
+                icon=icons.DELETE_OUTLINE,
+                handler=dummy_menu_handler,
+                style=ButtonStyle(bgcolor=colors.ERROR_CONTAINER),
             ),
         ]
 
         page.overlay.extend(
             [
                 AnimatedMenuButton(menu_items),
-                AnimatedMenuButton(menu_items, corner="top right", direction="curve down"),
-                AnimatedMenuButton(menu_items, corner="bottom left", direction="horizontal"),
-                AnimatedMenuButton(menu_items, corner="bottom right", direction="curve up"),
+                AnimatedMenuButton(
+                    menu_items, corner="top right", direction="curve down"
+                ),
+                AnimatedMenuButton(
+                    menu_items, corner="bottom left", direction="horizontal"
+                ),
+                AnimatedMenuButton(
+                    menu_items, corner="bottom right", direction="curve up"
+                ),
             ]
         )
 

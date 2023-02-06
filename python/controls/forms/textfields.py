@@ -2,8 +2,6 @@ from time import sleep
 
 import flet
 from flet import Column, Page, ProgressBar, Text, TextField, icons, padding
-from flet.progress_bar import ProgressBar
-from flet.textfield import TextField
 
 
 def main(page: Page):

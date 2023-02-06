@@ -1,6 +1,5 @@
 import flet
-from flet import ListView, Markdown, Page
-from flet.divider import Divider
+from flet import Divider, ListView, Markdown, Page
 
 md1 = """
 # Markdown Example
