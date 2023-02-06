@@ -1,7 +1,12 @@
 import flet
-from flet import ButtonStyle, ElevatedButton, Page, colors
-from flet.border import BorderSide
-from flet.buttons import RoundedRectangleBorder
+from flet import (
+    BorderSide,
+    ButtonStyle,
+    ElevatedButton,
+    Page,
+    RoundedRectangleBorder,
+    colors,
+)
 
 
 def main(page: Page):

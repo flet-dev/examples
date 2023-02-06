@@ -2,6 +2,7 @@ from typing import Dict
 
 import flet
 from flet import (
+    Column,
     ElevatedButton,
     FilePicker,
     FilePickerResultEvent,
@@ -14,7 +15,6 @@ from flet import (
     Text,
     icons,
 )
-from flet.column import Column
 
 
 def main(page: Page):

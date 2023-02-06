@@ -1,9 +1,11 @@
 import flet
-from flet import ButtonStyle, FilledButton, Page
-from flet.buttons import (
+from flet import (
     BeveledRectangleBorder,
+    ButtonStyle,
     CircleBorder,
     CountinuosRectangleBorder,
+    FilledButton,
+    Page,
     RoundedRectangleBorder,
     StadiumBorder,
 )

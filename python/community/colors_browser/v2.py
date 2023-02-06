@@ -1,8 +1,26 @@
 import time
+
 import flet
-from flet import (colors, icons, Container, Text, SnackBar, ProgressBar, ButtonStyle, IconButton, AppBar, Tabs,
-                  ListView, Tab, Page, UserControl, Column, TextField, Ref)
-from flet.control_event import ControlEvent
+from flet import (
+    AppBar,
+    ButtonStyle,
+    Column,
+    Container,
+    ControlEvent,
+    IconButton,
+    ListView,
+    Page,
+    ProgressBar,
+    Ref,
+    SnackBar,
+    Tab,
+    Tabs,
+    Text,
+    TextField,
+    UserControl,
+    colors,
+    icons,
+)
 
 
 # It's a container(or list-item) that has a descriptive text in it, and when clicked,
@@ -10,7 +28,12 @@ from flet.control_event import ControlEvent
 class Tile(Container):
     def __init__(self, tile_text, color, page):
         super().__init__()
-        self.text = Text(tile_text, text_align="center", weight="bold", italic=True, )
+        self.text = Text(
+            tile_text,
+            text_align="center",
+            weight="bold",
+            italic=True,
+        )
         self.color_text = f"colors.{tile_text}"
         self.bgcolor = color
         self.expand = True
@@ -28,7 +51,9 @@ class Tile(Container):
             """
             print("Copied to clipboard:", self.color_text)
             self.page.set_clipboard(self.color_text)
-            self.page.show_snack_bar(SnackBar(Text(f"Copied {self.color_text}!"), open=True))
+            self.page.show_snack_bar(
+                SnackBar(Text(f"Copied {self.color_text}!"), open=True)
+            )
 
         self.on_click = click_event
 
@@ -57,11 +82,28 @@ class ColorBrowser2(UserControl):
         self.displayed_tabs = Ref[Tabs]()
 
         # A list of colors that will be used to create the tabs.
-        self.original_tab_names = ['RED', "BLACK", "WHITE", 'PINK', 'PURPLE', 'DEEP_PURPLE', 'INDIGO', 'BLUE',
-                                   'LIGHT_BLUE',
-                                   'CYAN', 'TEAL', 'GREEN', 'LIGHT_GREEN', 'LIME', 'YELLOW', 'AMBER', "ORANGE",
-                                   'DEEP_ORANGE',
-                                   'BROWN', 'BLUE_GREY']
+        self.original_tab_names = [
+            "RED",
+            "BLACK",
+            "WHITE",
+            "PINK",
+            "PURPLE",
+            "DEEP_PURPLE",
+            "INDIGO",
+            "BLUE",
+            "LIGHT_BLUE",
+            "CYAN",
+            "TEAL",
+            "GREEN",
+            "LIGHT_GREEN",
+            "LIME",
+            "YELLOW",
+            "AMBER",
+            "ORANGE",
+            "DEEP_ORANGE",
+            "BROWN",
+            "BLUE_GREY",
+        ]
 
     def build(self):
 
@@ -98,11 +140,20 @@ class ColorBrowser2(UserControl):
 
                 # Add a tab with the name of the color and the content of the tab is a list of tiles.
                 # Also remove underscores from the tab's name.
-                created_tabs.append(Tab(tab_name.replace("_", " "), content=tab_content, ))
+                created_tabs.append(
+                    Tab(
+                        tab_name.replace("_", " "),
+                        content=tab_content,
+                    )
+                )
 
             # Creating a tab called "OTHERS" and adding all the colors that were not added to any other tab to it.
             others = [i for i in all_flet_colors if i not in found]
-            others_content = ListView(controls=[Tile(x, x.lower().replace("_", ""), self.page) for x in others])
+            others_content = ListView(
+                controls=[
+                    Tile(x, x.lower().replace("_", ""), self.page) for x in others
+                ]
+            )
             created_tabs.append(Tab("OTHERS", content=others_content))
 
             return created_tabs
@@ -126,7 +177,11 @@ class ColorBrowser2(UserControl):
                 filtered_tab_names = self.original_tab_names
             else:
                 for tab_name in self.original_tab_names:
-                    if search_field.value and search_field.value.lower().strip() in tab_name.lower().replace("_", " "):
+                    if (
+                        search_field.value
+                        and search_field.value.lower().strip()
+                        in tab_name.lower().replace("_", " ")
+                    ):
                         filtered_tab_names.append(tab_name)
 
             if filtered_tab_names:
@@ -149,17 +204,32 @@ class ColorBrowser2(UserControl):
             self.page.update()
 
         # creating a field which will t=help the user search for specific tabs
-        search_field = TextField(label="Search Tabs...", prefix_icon=icons.SEARCH, on_submit=filter_tabs,
-                                 border_radius=50, suffix=IconButton(icon=icons.CHECK, bgcolor=colors.INVERSE_PRIMARY,
-                                                                     icon_color=colors.ERROR, on_click=filter_tabs),
-                                 helper_text="Tip: Enter 'ALL' to show all the tabs", height=70, width=450,
-                                 keyboard_type="text", capitalization="characters", )
+        search_field = TextField(
+            label="Search Tabs...",
+            prefix_icon=icons.SEARCH,
+            on_submit=filter_tabs,
+            border_radius=50,
+            suffix=IconButton(
+                icon=icons.CHECK,
+                bgcolor=colors.INVERSE_PRIMARY,
+                icon_color=colors.ERROR,
+                on_click=filter_tabs,
+            ),
+            helper_text="Tip: Enter 'ALL' to show all the tabs",
+            height=70,
+            width=450,
+            keyboard_type="text",
+            capitalization="characters",
+        )
 
         return Column(
             controls=[
                 search_field,
-                Tabs(ref=self.displayed_tabs, expand=True,
-                     tabs=create_tabs(self.original_tab_names))
+                Tabs(
+                    ref=self.displayed_tabs,
+                    expand=True,
+                    tabs=create_tabs(self.original_tab_names),
+                ),
             ]
         )
 
@@ -198,22 +268,31 @@ def main(page: Page):
         page.update()
 
     # button to change theme_mode (from dark to light mode, or the reverse)
-    theme_icon_button = IconButton(icons.DARK_MODE, selected_icon=icons.LIGHT_MODE, icon_color=colors.BLACK,
-                                   icon_size=35, tooltip="change theme",
-                                   on_click=change_theme,
-                                   style=ButtonStyle(color={"": colors.BLACK, "selected": colors.WHITE}, ), )
+    theme_icon_button = IconButton(
+        icons.DARK_MODE,
+        selected_icon=icons.LIGHT_MODE,
+        icon_color=colors.BLACK,
+        icon_size=35,
+        tooltip="change theme",
+        on_click=change_theme,
+        style=ButtonStyle(
+            color={"": colors.BLACK, "selected": colors.WHITE},
+        ),
+    )
 
     # Creating an AppBar object and assigning it to the page.appbar attribute.
-    page.appbar = AppBar(title=Text("Colors Browser V2", color="white"), center_title=True, bgcolor="blue",
-                         actions=[theme_icon_button], )
+    page.appbar = AppBar(
+        title=Text("Colors Browser V2", color="white"),
+        center_title=True,
+        bgcolor="blue",
+        actions=[theme_icon_button],
+    )
 
     # Creating an instance of the ColorBrowser2 class and passing the page object to it.
     version_2 = ColorBrowser2(page)
 
     # adds the color browser to the page
-    page.add(
-        version_2
-    )
+    page.add(version_2)
 
 
 # (running the app)

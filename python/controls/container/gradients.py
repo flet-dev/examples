@@ -6,12 +6,13 @@ from flet import (
     Container,
     LinearGradient,
     Page,
+    RadialGradient,
     Row,
+    SweepGradient,
     Text,
     alignment,
     colors,
 )
-from flet.gradients import RadialGradient, SweepGradient
 
 
 def main(page: Page):

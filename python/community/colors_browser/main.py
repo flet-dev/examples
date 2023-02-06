@@ -1,10 +1,23 @@
-import flet
 import time
-from flet import colors, icons, Text, ProgressBar, ButtonStyle, IconButton, AppBar, Page, TextButton, Row
-from flet.control_event import ControlEvent
+
+import flet
+from flet import (
+    AppBar,
+    ButtonStyle,
+    ControlEvent,
+    IconButton,
+    Page,
+    ProgressBar,
+    Row,
+    Text,
+    TextButton,
+    colors,
+    icons,
+)
 
 # importing version 1
 from v1 import ColorBrowser1
+
 # importing version 2
 from v2 import ColorBrowser2
 
@@ -32,7 +45,6 @@ def main(page: Page):
 
     # Creating a progress bar that will be used to show the user that the app is busy doing something.
     page.splash = ProgressBar(visible=False)
-
 
     def change_theme(e):
         """
@@ -62,7 +74,11 @@ def main(page: Page):
             page.controls.insert(0, version_1)
 
         # Changing the text of the button to "Move to Version 2" if the text is "Move to Version 1", and vice versa.
-        e.control.text = "Move to Version 2" if e.control.text == "Move to Version 1" else "Move to Version 1"
+        e.control.text = (
+            "Move to Version 2"
+            if e.control.text == "Move to Version 1"
+            else "Move to Version 1"
+        )
 
         # Making the progress bar invisible, waiting for 1.2 seconds, then updating the page.
         page.splash.visible = False
@@ -70,15 +86,32 @@ def main(page: Page):
         page.update()
 
     # button to change theme_mode (from dark to light mode, or the reverse)
-    theme_icon_button = IconButton(icons.DARK_MODE, selected_icon=icons.LIGHT_MODE, icon_color=colors.BLACK,
-                                   icon_size=35, tooltip="change theme", on_click=change_theme,
-                                   style=ButtonStyle(color={"": colors.BLACK, "selected": colors.WHITE}, ), )
+    theme_icon_button = IconButton(
+        icons.DARK_MODE,
+        selected_icon=icons.LIGHT_MODE,
+        icon_color=colors.BLACK,
+        icon_size=35,
+        tooltip="change theme",
+        on_click=change_theme,
+        style=ButtonStyle(
+            color={"": colors.BLACK, "selected": colors.WHITE},
+        ),
+    )
 
-    moveto_button = TextButton("Move to Version 1", on_click=moveto_callback, tooltip="change version",
-                               icon=icons.KEYBOARD_BACKSPACE_ROUNDED, icon_color=colors.ERROR, )
+    moveto_button = TextButton(
+        "Move to Version 1",
+        on_click=moveto_callback,
+        tooltip="change version",
+        icon=icons.KEYBOARD_BACKSPACE_ROUNDED,
+        icon_color=colors.ERROR,
+    )
 
-    page.appbar = AppBar(title=Text("Colors Browser", color="white"), center_title=True, bgcolor="blue",
-                         actions=[theme_icon_button], )
+    page.appbar = AppBar(
+        title=Text("Colors Browser", color="white"),
+        center_title=True,
+        bgcolor="blue",
+        actions=[theme_icon_button],
+    )
 
     # Creating two versions of the page, one with the colors in a grid, and the other with the colors in a list.
     version_1 = ColorBrowser1()
@@ -86,7 +119,10 @@ def main(page: Page):
 
     page.add(
         version_2,
-        Row([moveto_button], alignment="start", )
+        Row(
+            [moveto_button],
+            alignment="start",
+        ),
     )
 
 

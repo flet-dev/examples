@@ -9,7 +9,7 @@ GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 assert GITHUB_CLIENT_SECRET, "set GITHUB_CLIENT_SECRET environment variable"
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
 
     provider = GitHubOAuthProvider(
         client_id=GITHUB_CLIENT_ID,
@@ -17,16 +17,16 @@ def main(page: ft.Page):
         redirect_url="http://localhost:8550/api/oauth/redirect",
     )
 
-    def login_click(e):
-        page.login(provider)
+    async def login_click(e):
+        await page.login_async(provider)
 
-    def on_login(e):
+    async def on_login(e):
         print("Login error:", e.error)
         print("Access token:", page.auth.token.access_token)
         print("User ID:", page.auth.user.id)
 
     page.on_login = on_login
-    page.add(ft.ElevatedButton("Login with GitHub", on_click=login_click))
+    await page.add_async(ft.ElevatedButton("Login with GitHub", on_click=login_click))
 
 
 ft.app(target=main, port=8550, view=ft.WEB_BROWSER)
