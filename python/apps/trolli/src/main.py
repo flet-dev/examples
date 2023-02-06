@@ -193,19 +193,18 @@ class TrelloApp(UserControl):
         self.layout.set_all_boards_view()
 
 
-if __name__ == "__main__":
+def main(page: Page):
 
-    def main(page: Page):
+    page.title = "Flet Trello clone"
+    page.padding = 0
+    page.theme = theme.Theme(font_family="Verdana")
+    page.theme.page_transitions.windows = "cupertino"
+    page.fonts = {"Pacifico": "/Pacifico-Regular.ttf"}
+    page.bgcolor = colors.BLUE_GREY_200
+    app = TrelloApp(page, InMemoryStore())
+    page.add(app)
+    page.update()
+    app.initialize()
 
-        page.title = "Flet Trello clone"
-        page.padding = 0
-        page.theme = theme.Theme(font_family="Verdana")
-        page.theme.page_transitions.windows = "cupertino"
-        page.fonts = {"Pacifico": "/Pacifico-Regular.ttf"}
-        page.bgcolor = colors.BLUE_GREY_200
-        app = TrelloApp(page, InMemoryStore())
-        page.add(app)
-        page.update()
-        app.initialize()
 
-    flet.app(target=main, assets_dir="../assets")
+flet.app(target=main, assets_dir="../assets")
