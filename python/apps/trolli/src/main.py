@@ -199,7 +199,7 @@ def main(page: Page):
     page.padding = 0
     page.theme = theme.Theme(font_family="Verdana")
     page.theme.page_transitions.windows = "cupertino"
-    page.fonts = {"Pacifico": "/Pacifico-Regular.ttf"}
+    page.fonts = {"Pacifico": "Pacifico-Regular.ttf"}
     page.bgcolor = colors.BLUE_GREY_200
     app = TrelloApp(page, InMemoryStore())
     page.add(app)
