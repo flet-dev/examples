@@ -8,5 +8,5 @@ flet publish python/apps/trolli/src/main.py --distpath python/dist/trolli --base
 flet publish python/apps/routing-navigation/home-store.py --distpath python/dist/simple-routing --base-url simple-routing --pre --route-url-strategy "hash" --app-name "Flet routing example" --app-description "An example of routing in Flet."
 flet publish python/apps/counter/counter.py --distpath python/dist/counter --base-url counter --pre --app-name "Counter" --app-description "Counter to get an idea of Flet."
 flet publish python/apps/flet-animation/main.py --distpath python/dist/flet-animation --base-url flet-animation --pre --app-name "Flet animation" --app-description "An example of implicit animations in Flet."
-flet publish python/apps/greeter/greeter.py --distpath python/dist/greeter --base-url greeter --pre --app-name "Greeter" --app-description "Say hello app!"
+flet publish python/apps/greeter/greeter.py --distpath python/dist/greeter --base-url greeter --pre --app-name "Greeter" --app-description "A basic example of interactive forms in Flet."
 flet publish python/apps/hello-world/hello.py --distpath python/dist/hello-world --base-url hello-world --pre --app-name "Hello, world!" --app-description "A very minimal example of Flet app."
