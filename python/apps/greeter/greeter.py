@@ -1,8 +1,7 @@
-import flet
-from flet import ElevatedButton, Text, TextField
+import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     def btn_click(e):
         if not txt_name.value:
             txt_name.error_text = "Please enter your name"
@@ -10,11 +9,11 @@ def main(page):
         else:
             name = txt_name.value
             page.clean()
-            page.add(Text(f"Hello, {name}!"))
+            page.add(ft.Text(f"Hello, {name}!"))
 
-    txt_name = TextField(label="Your name")
+    txt_name = ft.TextField(label="Your name")
 
-    page.add(txt_name, ElevatedButton("Say hello!", on_click=btn_click))
+    page.add(txt_name, ft.ElevatedButton("Say hello!", on_click=btn_click))
 
 
-flet.app(target=main)
+ft.app(main)
