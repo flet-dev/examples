@@ -141,4 +141,4 @@ def main(page: Page):
     page.add(canvas, go_button, again_button)
 
 
-flet.app(target=main)
+flet.app(main)
