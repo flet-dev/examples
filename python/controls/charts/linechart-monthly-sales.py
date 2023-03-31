@@ -21,7 +21,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(13, 1.8),
             ],
             stroke_width=8,
-            color="0xFF3BFF49",
+            color=ft.colors.LIGHT_GREEN,
             curved=True,
             stroke_cap_round=True,
         ),
@@ -34,8 +34,8 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(12, 2.6),
                 ft.LineChartDataPoint(13, 3.9),
             ],
-            color="0xFFFF3AF2",
-            below_line_bgcolor="0x00FF3AF2",
+            color=ft.colors.PINK,
+            below_line_bgcolor=ft.colors.with_opacity(0, ft.colors.PINK),
             stroke_width=8,
             curved=True,
             stroke_cap_round=True,
@@ -48,7 +48,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(10, 1.3),
                 ft.LineChartDataPoint(13, 2.5),
             ],
-            color="0xFF50E4FF",
+            color=ft.colors.CYAN,
             stroke_width=8,
             curved=True,
             stroke_cap_round=True,
@@ -67,7 +67,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(13, 1.8),
             ],
             stroke_width=4,
-            color="0x7F3BFF49",
+            color=ft.colors.with_opacity(0.5, ft.colors.LIGHT_GREEN),
             stroke_cap_round=True,
         ),
         ft.LineChartData(
@@ -79,8 +79,8 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(12, 2.6),
                 ft.LineChartDataPoint(13, 3.9),
             ],
-            color="0x7FFF3AF2",
-            below_line_bgcolor="0x12FF3AF2",
+            color=ft.colors.with_opacity(0.5, ft.colors.PINK),
+            below_line_bgcolor=ft.colors.with_opacity(0.2, ft.colors.PINK),
             stroke_width=4,
             curved=True,
             stroke_cap_round=True,
@@ -93,7 +93,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(10, 3.3),
                 ft.LineChartDataPoint(13, 4.5),
             ],
-            color="0x7F50E4FF",
+            color=ft.colors.with_opacity(0.5, ft.colors.CYAN),
             stroke_width=4,
             stroke_cap_round=True,
         ),
@@ -101,7 +101,9 @@ def main(page: ft.Page):
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.Border(bottom=ft.BorderSide(4, ft.colors.GREY_200)),
+        border=ft.Border(
+            bottom=ft.BorderSide(4, ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE))
+        ),
         left_axis=ft.LineChartAxis(
             labels=[
                 ft.LineChartAxisLabel(
@@ -136,27 +138,43 @@ def main(page: ft.Page):
                 ft.LineChartAxisLabel(
                     value=2,
                     label=ft.Container(
-                        ft.Text("SEP", size=16, weight=ft.FontWeight.BOLD),
+                        ft.Text(
+                            "SEP",
+                            size=16,
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                        ),
                         margin=ft.margin.only(top=10),
                     ),
                 ),
                 ft.LineChartAxisLabel(
                     value=7,
                     label=ft.Container(
-                        ft.Text("OCT", size=16, weight=ft.FontWeight.BOLD),
+                        ft.Text(
+                            "OCT",
+                            size=16,
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                        ),
                         margin=ft.margin.only(top=10),
                     ),
                 ),
                 ft.LineChartAxisLabel(
                     value=12,
                     label=ft.Container(
-                        ft.Text("DEC", size=16, weight=ft.FontWeight.BOLD),
+                        ft.Text(
+                            "DEC",
+                            size=16,
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                        ),
                         margin=ft.margin.only(top=10),
                     ),
                 ),
             ],
             labels_size=32,
         ),
+        tooltip_bgcolor=ft.colors.with_opacity(0.8, ft.colors.BLUE_GREY),
         min_y=0,
         max_y=4,
         min_x=0,
@@ -174,10 +192,11 @@ def main(page: ft.Page):
         else:
             chart.data_series = data_1
             chart.max_y = 4
-            chart.interactive = False
+            chart.interactive = True
         s.toggle = not s.toggle
         chart.update()
 
+    # page.theme_mode = ft.ThemeMode.DARK
     page.add(ft.IconButton(ft.icons.REFRESH, on_click=toggle_data), chart)
 
 
