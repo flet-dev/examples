@@ -104,38 +104,38 @@ def main(page: ft.Page):
         border=ft.Border(
             bottom=ft.BorderSide(4, ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE))
         ),
-        left_axis=ft.LineChartAxis(
+        left_axis=ft.ChartAxis(
             labels=[
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=1,
                     label=ft.Text("1m", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=2,
                     label=ft.Text("2m", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=3,
                     label=ft.Text("3m", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=4,
                     label=ft.Text("4m", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=5,
                     label=ft.Text("5m", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=6,
                     label=ft.Text("6m", size=14, weight=ft.FontWeight.BOLD),
                 ),
             ],
             labels_size=40,
         ),
-        bottom_axis=ft.LineChartAxis(
+        bottom_axis=ft.ChartAxis(
             labels=[
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=2,
                     label=ft.Container(
                         ft.Text(
@@ -147,7 +147,7 @@ def main(page: ft.Page):
                         margin=ft.margin.only(top=10),
                     ),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=7,
                     label=ft.Container(
                         ft.Text(
@@ -159,7 +159,7 @@ def main(page: ft.Page):
                         margin=ft.margin.only(top=10),
                     ),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=12,
                     label=ft.Container(
                         ft.Text(
@@ -200,4 +200,4 @@ def main(page: ft.Page):
     page.add(ft.IconButton(ft.icons.REFRESH, on_click=toggle_data), chart)
 
 
-ft.app(main, view=ft.FLET_APP)
+ft.app(main)

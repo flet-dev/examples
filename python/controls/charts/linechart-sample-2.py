@@ -47,33 +47,33 @@ def main(page: ft.Page):
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.border.all(1, ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE)),
+        border=ft.border.all(3, ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE)),
         horizontal_grid_lines=ft.ChartGridLines(
             interval=1, color=ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE), width=1
         ),
         vertical_grid_lines=ft.ChartGridLines(
             interval=1, color=ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE), width=1
         ),
-        left_axis=ft.LineChartAxis(
+        left_axis=ft.ChartAxis(
             labels=[
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=1,
                     label=ft.Text("10K", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=3,
                     label=ft.Text("30K", size=14, weight=ft.FontWeight.BOLD),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=5,
                     label=ft.Text("50K", size=14, weight=ft.FontWeight.BOLD),
                 ),
             ],
             labels_size=40,
         ),
-        bottom_axis=ft.LineChartAxis(
+        bottom_axis=ft.ChartAxis(
             labels=[
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=2,
                     label=ft.Container(
                         ft.Text(
@@ -85,7 +85,7 @@ def main(page: ft.Page):
                         margin=ft.margin.only(top=10),
                     ),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=5,
                     label=ft.Container(
                         ft.Text(
@@ -97,7 +97,7 @@ def main(page: ft.Page):
                         margin=ft.margin.only(top=10),
                     ),
                 ),
-                ft.LineChartAxisLabel(
+                ft.ChartAxisLabel(
                     value=8,
                     label=ft.Container(
                         ft.Text(
@@ -131,8 +131,7 @@ def main(page: ft.Page):
         s.toggle = not s.toggle
         chart.update()
 
-    # page.theme_mode = ft.ThemeMode.DARK
     page.add(ft.ElevatedButton("avg", on_click=toggle_data), chart)
 
 
-ft.app(main, view=ft.FLET_APP)
+ft.app(main)
