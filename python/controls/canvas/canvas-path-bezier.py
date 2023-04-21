@@ -24,7 +24,7 @@ def main(page: ft.Page):
             ),
             cv.Path(
                 [
-                    cv.Path.Path(
+                    cv.Path.SubPath(
                         [
                             cv.Path.MoveTo(75, 40),
                             cv.Path.CubicTo(75, 37, 70, 25, 50, 25),
