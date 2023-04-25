@@ -14,7 +14,12 @@ def main(page: ft.Page):
                 100,
                 "Rotated",
                 ft.TextStyle(weight=ft.FontWeight.BOLD, size=30),
-                spans=[ft.TextSpan("around top_center", ft.TextStyle(italic=True))],
+                spans=[
+                    ft.TextSpan(
+                        "around top_center",
+                        ft.TextStyle(italic=True, color=ft.colors.GREEN, size=20),
+                    )
+                ],
                 alignment=ft.alignment.top_center,
                 rotate=math.pi * 0.15,
             ),
