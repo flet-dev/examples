@@ -5,8 +5,8 @@ import flet.canvas as cv
 
 
 def main(page: ft.Page):
-    stroke_paint = paint = ft.Paint(stroke_width=2, style=ft.PaintingStyle.STROKE)
-    fill_paint = paint = ft.Paint(style=ft.PaintingStyle.FILL)
+    stroke_paint = ft.Paint(stroke_width=2, style=ft.PaintingStyle.STROKE)
+    fill_paint = ft.Paint(style=ft.PaintingStyle.FILL)
     cp = cv.Canvas(
         [
             cv.Circle(100, 100, 50, stroke_paint),
