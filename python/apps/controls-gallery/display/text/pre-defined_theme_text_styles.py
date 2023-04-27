@@ -4,7 +4,8 @@ name = "Pre-defined theme text styles"
 
 def example():
     
-    return ft.ListView(controls=[
+    return ft.Column(
+        controls=[
         ft.Text("Display Large", style=ft.TextThemeStyle.DISPLAY_LARGE),
         ft.Text("Display Medium", style=ft.TextThemeStyle.DISPLAY_MEDIUM),
         ft.Text("Display Small", style=ft.TextThemeStyle.DISPLAY_SMALL),
