@@ -56,11 +56,9 @@ def main(page: ft.Page):
                     weight=ft.FontWeight.BOLD,
                     size=100,
                     foreground=ft.Paint(
-                        gradient=ft.PaintLinearGradient(
-                            (200, 200),
-                            (300, 300),
-                            colors=[ft.colors.YELLOW, ft.colors.RED],
-                        ),
+                        color=ft.colors.PINK,
+                        stroke_width=6,
+                        style=ft.PaintingStyle.STROKE,
                         stroke_join=ft.StrokeJoin.ROUND,
                         stroke_cap=ft.StrokeCap.ROUND,
                     ),
@@ -74,9 +72,11 @@ def main(page: ft.Page):
                     weight=ft.FontWeight.BOLD,
                     size=100,
                     foreground=ft.Paint(
-                        color=ft.colors.PINK,
-                        stroke_width=6,
-                        style=ft.PaintingStyle.STROKE,
+                        gradient=ft.PaintLinearGradient(
+                            (200, 200),
+                            (300, 300),
+                            colors=[ft.colors.YELLOW, ft.colors.RED],
+                        ),
                         stroke_join=ft.StrokeJoin.ROUND,
                         stroke_cap=ft.StrokeCap.ROUND,
                     ),
