@@ -46,8 +46,8 @@ class GalleryData:
         ControlGroup(
             name="navigation",
             label="Navigation",
-            icon=ft.icons.MENU,
-            selected_icon=ft.icons.MENU,
+            icon=ft.icons.MENU_SHARP,
+            selected_icon=ft.icons.MENU_SHARP,
         ),
         ControlGroup(
             name="display",
@@ -58,27 +58,32 @@ class GalleryData:
         ControlGroup(
             name="buttons",
             label="Buttons",
-            icon=ft.icons.SMART_BUTTON,
-            selected_icon=ft.icons.SMART_BUTTON,
+            icon=ft.icons.SMART_BUTTON_SHARP,
+            selected_icon=ft.icons.SMART_BUTTON_SHARP,
         ),
         ControlGroup(
             name="input",
             label="Input",
-            icon=ft.icons.GRID_VIEW,
-            selected_icon=ft.icons.GRID_VIEW_SHARP,
+            icon=ft.icons.INPUT_SHARP,
+            selected_icon=ft.icons.INPUT_OUTLINED,
         ),
         ControlGroup(
             name="dialogs",
             label="Dialogs",
-            icon=ft.icons.INPUT,
-            selected_icon=ft.icons.INPUT,
+            icon=ft.icons.MESSAGE_OUTLINED,
+            selected_icon=ft.icons.MESSAGE_SHARP,
         ),
-        # ControlGroup(name='charts', label='Charts', icon=ft.icons.MESSAGE_OUTLINED, selected_icon=ft.icons.MESSAGE_SHARP),
+        ControlGroup(
+            name='charts', 
+            label='Charts', 
+            icon=ft.icons.INSERT_CHART_OUTLINED, 
+            selected_icon=ft.icons.INSERT_CHART_SHARP,
+        ),
         ControlGroup(
             name="animations",
             label="Animations",
-            icon=ft.icons.ANIMATION,
-            selected_icon=ft.icons.ANIMATION,
+            icon=ft.icons.ANIMATION_SHARP,
+            selected_icon=ft.icons.ANIMATION_SHARP,
         ),
         ControlGroup(
             name="utility",
