@@ -108,7 +108,7 @@ class GalleryData:
         file_path = os.path.join(
             str(Path(__file__).parent), control_group_dir, control_dir
         )
-        example_files = [f for f in os.listdir(file_path) if f not in ["__pycache__"]]
+        example_files = [f for f in os.listdir(file_path) if not f.startswith("_")]
         return example_files
 
     def import_modules(self):
@@ -132,7 +132,6 @@ ft.app(target=main)
 
         for control_group_dir in self.destinations_list:
             for control_dir in self.list_control_dirs(control_group_dir.name):
-
                 grid_item = GridItem(control_dir)
 
                 for file in self.list_example_files(
@@ -145,6 +144,7 @@ ft.app(target=main)
                         print(f"{module_name!r} already in sys.modules")
                     else:
                         file_path = os.path.join(str(Path(__file__).parent), file_name)
+
                         spec = importlib.util.spec_from_file_location(
                             module_name, file_path
                         )
