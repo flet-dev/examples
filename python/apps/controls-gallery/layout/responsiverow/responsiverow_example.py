@@ -3,5 +3,4 @@ import flet as ft
 name = "ResponsiveRow Example"
 
 def example():
-    #TBD
-    pass
+    return ft.Text("This example is under construction.")
