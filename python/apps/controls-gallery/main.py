@@ -10,8 +10,7 @@ gallery = GalleryData()
 
 
 def main(page: ft.Page):
-
-    ft.page.fonts = {
+    page.fonts = {
         "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
     }
 
@@ -75,12 +74,11 @@ def main(page: ft.Page):
                             padding=5,
                             border_radius=5,
                         ),
-                        ft.Row(
-                            controls=[
-                                ft.Container(content=example.example()),
-                            ]
+                        ft.Container(
+                            content=example.example(),
+                            clip_behavior=ft.ClipBehavior.NONE,
                         ),
-                    ]
+                    ],
                 )
             )
 
@@ -206,7 +204,7 @@ def main(page: ft.Page):
                     ),
                 ]
             ),
-        ]
+        ],
     )
     grid = ft.GridView(
         expand=1,
@@ -273,4 +271,4 @@ def main(page: ft.Page):
     page.go(page.route)
 
 
-ft.app(target=main, assets_dir="images", view=ft.WEB_BROWSER)
+ft.app(target=main, assets_dir="assets", view=ft.WEB_BROWSER)
