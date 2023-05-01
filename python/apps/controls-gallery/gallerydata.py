@@ -11,7 +11,7 @@ class GridItem:
     def __init__(self, id):
         self.id = id
         self.name = None
-        self.image_file_name = None
+        #self.image_file_name = None
         self.examples = []
         self.description = None
 
@@ -159,7 +159,7 @@ ft.app(target=main)
                         print(f"{module_name!r} has been imported")
                         if file == "index.py":
                             grid_item.name = module.name
-                            grid_item.image_file_name = module.image_file
+                            #grid_item.image_file_name = module.image_file
                             grid_item.description = module.description
                         else:
                             example_item = ExampleItem()
