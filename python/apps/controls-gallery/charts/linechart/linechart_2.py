@@ -1,6 +1,6 @@
 import flet as ft
 
-name = "Line Chart 2"
+name = "LineChart 2"
 
 def example():
 
