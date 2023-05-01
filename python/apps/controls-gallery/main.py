@@ -99,7 +99,7 @@ def main(page: ft.Page):
                     data=grid_item,
                     bgcolor=ft.colors.SECONDARY_CONTAINER,
                     border_radius=5,
-                    padding=10,
+                    padding=15,
                     content=ft.Row(
                         alignment=ft.MainAxisAlignment.START,
                         vertical_alignment=ft.MainAxisAlignment.CENTER,
@@ -107,7 +107,6 @@ def main(page: ft.Page):
                             ft.Icon(name=ft.icons.FOLDER_OPEN),
                             ft.Text(
                                 value=grid_item.name,
-                                #style=ft.TextThemeStyle.TITLE_SMALL,
                                 weight=ft.FontWeight.W_500,
                                 size=14
                                 )
@@ -231,12 +230,16 @@ def main(page: ft.Page):
     )
 
     page.appbar = ft.AppBar(
-        leading=ft.Image(src=f"logo.svg"),
+        leading=ft.Container(padding=5, content=ft.Image(src=f"logo.svg")),
         leading_width=40,
         title=ft.Text("Flet Controls Gallery"),
         center_title=True,
         bgcolor=ft.colors.INVERSE_PRIMARY,
-        actions=[ft.Text(f"Flet version: {flet.version.version}")]
+        actions=[
+            ft.Container(
+                padding=10,
+                content=ft.Text(f"Flet version: {flet.version.version}"))
+            ]
     )
 
     def copy_to_clipboard(e):
