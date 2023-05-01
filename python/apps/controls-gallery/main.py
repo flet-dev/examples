@@ -99,17 +99,21 @@ def main(page: ft.Page):
                     data=grid_item,
                     bgcolor=ft.colors.SECONDARY_CONTAINER,
                     border_radius=5,
-                    content=ft.Column(
-                        alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    padding=10,
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.START,
+                        vertical_alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            # ft.Image(src=grid_item.image_file_name, width=40),
+                            ft.Icon(name=ft.icons.FOLDER_OPEN),
                             ft.Text(
                                 value=grid_item.name,
-                                style=ft.TextThemeStyle.TITLE_SMALL,
-                            )
-                        ],
-                    ),
+                                #style=ft.TextThemeStyle.TITLE_SMALL,
+                                weight=ft.FontWeight.W_500,
+                                size=14
+                                )
+                    
+                        ]
+                    )
                 )
             )
         page.update()
@@ -210,10 +214,10 @@ def main(page: ft.Page):
     grid = ft.GridView(
         expand=1,
         runs_count=5,
-        max_extent=150,
-        child_aspect_ratio=1.0,
-        spacing=5,
-        run_spacing=5,
+        max_extent=250,
+        child_aspect_ratio=3.0,
+        spacing=10,
+        run_spacing=10,
     )
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
