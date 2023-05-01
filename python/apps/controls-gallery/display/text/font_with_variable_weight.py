@@ -3,29 +3,37 @@ import flet as ft
 name = "Font with variable weight"
 
 def example():
-    ft.page.fonts = {
-        "RobotoSlab": "https://github.com/google/fonts/raw/main/apache/robotoslab/RobotoSlab%5Bwght%5D.ttf"
-    }
 
-    t = ft.Text(
-        "This is rendered with Roboto Slab",
-        size=30,
-        font_family="RobotoSlab",
-        weight=ft.FontWeight.W_100,
-    )
+    class Example(ft.Column):
+        def __init__(self):
+            super().__init__()
+            self.t = ft.Text(
+                "This is rendered with Roboto Slab",
+                size=30,
+                font_family="RobotoSlab",
+                weight=ft.FontWeight.W_100,)
+            self.controls = [
+                self.t,
+                ft.Slider(
+                    min=100,
+                    max=900,
+                    divisions=8,
+                    label="{value}",
+                    width=500,
+                    on_change=self.width_changed,
+                ),
+                ]
 
-    def width_changed(e):
-        t.weight = f"w{int(e.control.value)}"
-        t.update()
+        # happens when example is added to the page (when user chooses the Text control from the grid)
+        def did_mount(self):
+            self.page.fonts["RobotoSlab"] = "RobotoSlab[wght].ttf"
+            self.page.update()
+        
+        def width_changed(self, e):
+            self.t.weight = f"w{int(e.control.value)}"
+            self.t.update()
+
     
-    return ft.Column(controls=[
-        t,
-        ft.Slider(
-            min=100,
-            max=900,
-            divisions=8,
-            label="{value}",
-            width=500,
-            on_change=width_changed,
-        )
-    ])
+    example = Example()
+    
+    return example

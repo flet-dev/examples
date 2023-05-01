@@ -4,7 +4,7 @@ name = "Custom text styles"
 
 def example():
     
-    return ft.ListView(controls=[
+    return ft.Column(controls=[
         ft.Text("Size 10", size=10),
         ft.Text("Size 30, Italic", size=20, color="pink600", italic=True),
         ft.Text(
