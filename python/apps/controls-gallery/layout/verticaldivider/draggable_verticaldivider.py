@@ -5,8 +5,16 @@ name = "Draggable VerticalDivider"
 def example():
 
     def move_vertical_divider(e: ft.DragUpdateEvent):
-        c.width += e.delta_x
+        if e.delta_x > 0:
+            if c.width < 390:
+                c.width += e.delta_x
+        else:
+            c.width += e.delta_x
         c.update()
+
+    def show_draggable_cursor(e: ft.HoverEvent):
+        e.control.mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
+        e.control.update()
 
     c = ft.Container(
                     bgcolor=ft.colors.ORANGE_300,
@@ -20,7 +28,9 @@ def example():
                 c,
                 ft.GestureDetector(
                     content=ft.VerticalDivider(),
-                    on_pan_update=move_vertical_divider),
+                    drag_interval=10,
+                    on_pan_update=move_vertical_divider,
+                    on_hover=show_draggable_cursor),
                 ft.Container(
                     bgcolor=ft.colors.BROWN_400,
                     alignment=ft.alignment.center,
