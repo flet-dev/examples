@@ -1,6 +1,7 @@
 import logging
 
 import flet as ft
+import flet.version
 from gallerydata import GalleryData
 from popup_color_item import PopupColorItem
 
@@ -231,6 +232,7 @@ def main(page: ft.Page):
         title=ft.Text("Flet Controls Gallery"),
         center_title=True,
         bgcolor=ft.colors.INVERSE_PRIMARY,
+        actions=[ft.Text(f"Flet version: {flet.version.version}")]
     )
 
     def copy_to_clipboard(e):
