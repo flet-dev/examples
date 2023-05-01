@@ -1,6 +1,7 @@
 import logging
 
 import flet as ft
+import flet.version
 from gallerydata import GalleryData
 from popup_color_item import PopupColorItem
 
@@ -98,17 +99,20 @@ def main(page: ft.Page):
                     data=grid_item,
                     bgcolor=ft.colors.SECONDARY_CONTAINER,
                     border_radius=5,
-                    content=ft.Column(
-                        alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    padding=15,
+                    content=ft.Row(
+                        alignment=ft.MainAxisAlignment.START,
+                        vertical_alignment=ft.MainAxisAlignment.CENTER,
                         controls=[
-                            # ft.Image(src=grid_item.image_file_name, width=40),
+                            ft.Icon(name=ft.icons.FOLDER_OPEN),
                             ft.Text(
                                 value=grid_item.name,
-                                style=ft.TextThemeStyle.TITLE_SMALL,
-                            )
-                        ],
-                    ),
+                                weight=ft.FontWeight.W_500,
+                                size=14
+                                )
+                    
+                        ]
+                    )
                 )
             )
         page.update()
@@ -209,15 +213,15 @@ def main(page: ft.Page):
     grid = ft.GridView(
         expand=1,
         runs_count=5,
-        max_extent=150,
-        child_aspect_ratio=1.0,
-        spacing=5,
-        run_spacing=5,
+        max_extent=250,
+        child_aspect_ratio=3.0,
+        spacing=10,
+        run_spacing=10,
     )
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
     control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
-    listview = ft.ListView(expand=True, spacing=10, padding=20, auto_scroll=False)
+    listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
 
     examples = ft.Column(
         visible=False,
@@ -226,11 +230,16 @@ def main(page: ft.Page):
     )
 
     page.appbar = ft.AppBar(
-        leading=ft.Image(src=f"logo.svg"),
+        leading=ft.Container(padding=5, content=ft.Image(src=f"logo.svg")),
         leading_width=40,
         title=ft.Text("Flet Controls Gallery"),
         center_title=True,
         bgcolor=ft.colors.INVERSE_PRIMARY,
+        actions=[
+            ft.Container(
+                padding=10,
+                content=ft.Text(f"Flet version: {flet.version.version}"))
+            ]
     )
 
     def copy_to_clipboard(e):
