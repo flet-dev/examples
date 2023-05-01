@@ -1,6 +1,6 @@
 import flet as ft
 
-name = "Bar Chart 2"
+name = "BarChart 2"
 
 def example():
     class SampleRod(ft.BarChartRod):
