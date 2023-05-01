@@ -5,10 +5,7 @@ name = "Draggable VerticalDivider"
 def example():
 
     def move_vertical_divider(e: ft.DragUpdateEvent):
-        if e.delta_x > 0:
-            if c.width < 390:
-                c.width += e.delta_x
-        else:
+        if (e.delta_x > 0 and c.width < 300) or (e.delta_x < 0 and c.width > 100):    
             c.width += e.delta_x
         c.update()
 
