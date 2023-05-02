@@ -50,8 +50,8 @@ class GalleryData:
             selected_icon=ft.icons.MENU_SHARP,
         ),
         ControlGroup(
-            name="display",
-            label="Display",
+            name="displays",
+            label="Displays",
             icon=ft.icons.INFO_OUTLINED,
             selected_icon=ft.icons.INFO_SHARP,
         ),
