@@ -27,7 +27,22 @@ def example():
         ColorSwatch(name="red", display_name="RED"),
         ColorSwatch(name="pink", display_name="PINK"),
         ColorSwatch(name="purple", display_name="PURPLE"),
-        ColorSwatch(name="grey", display_name="GREY", accent=False)
+        ColorSwatch(name="deeppurple", display_name="DEEP_PURPLE"),
+        ColorSwatch(name="indigo", display_name="INDIGO"),
+        ColorSwatch(name="blue", display_name="BLUE"),
+        ColorSwatch(name="lightblue", display_name="LIGHT_BLUE"),
+        ColorSwatch(name="cyan", display_name="CYAN"),
+        ColorSwatch(name="teal", display_name="TEAL"),
+        ColorSwatch(name="green", display_name="GREEN"),
+        ColorSwatch(name="lightgreen", display_name="LIGHT_GREEN"),
+        ColorSwatch(name="lime", display_name="LIME"),
+        ColorSwatch(name="yellow", display_name="YELLOW"),
+        ColorSwatch(name="amber", display_name="AMBER"),
+        ColorSwatch(name="orange", display_name="ORANGE"),
+        ColorSwatch(name="deeporange", display_name="DEEP_ORANGE"),
+        ColorSwatch(name="brown", display_name="BROWN", accent=False),
+        ColorSwatch(name="grey", display_name="GREY", accent=False),
+        ColorSwatch(name="bluegrey", display_name="BLUE_GREY", accent=False)
         ]
     
     def generate_color_names(swatch):
