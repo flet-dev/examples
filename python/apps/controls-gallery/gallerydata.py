@@ -19,6 +19,7 @@ class GridItem:
 class ExampleItem:
     def __init__(self):
         self.name = None
+        self.order = None
         self.example = None
         self.source_code = None
 
@@ -170,5 +171,7 @@ ft.app(target=main)
                                 example_item.source_code = code_text
                             example_item.example = module.example
                             example_item.name = module.name
+                            example_item.order = file[:2] #first 2 characters of example file name (e.g. '01')
                             grid_item.examples.append(example_item)
+                grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)
