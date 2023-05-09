@@ -12,12 +12,16 @@ def example():
 
     class Color():
         def __init__(self, swatch, shade="", accent=False):
-            if not accent:
-                self.name = f"{swatch.name}{shade}"
-                self.display_name = f"{swatch.display_name}_{shade}"
+            if shade=="":
+                self.name = swatch.name
+                self.display_name = swatch.display_name
             else:
-                self.name = f"{swatch.name}accent{shade}"
-                self.display_name = f"{swatch.display_name}_ACCENT_{shade}"
+                if not accent:
+                    self.name = f"{swatch.name}{shade}"
+                    self.display_name = f"{swatch.display_name}_{shade}"
+                else:
+                    self.name = f"{swatch.name}accent{shade}"
+                    self.display_name = f"{swatch.display_name}_ACCENT_{shade}"
 
             
     SHADES = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
