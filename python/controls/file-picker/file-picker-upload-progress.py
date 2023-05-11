@@ -71,4 +71,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main, upload_dir="uploads")
+flet.app(target=main, upload_dir="uploads", view=flet.WEB_BROWSER)

@@ -8,8 +8,10 @@ logging.basicConfig(level=logging.DEBUG)
 def main(page: ft.Page):
     page.add(
         ft.Text("Plain text with default style"),
+        ft.Text("Selectable plain text with default style", selectable=True),
         ft.Text(
             "Some text",
+            selectable=True,
             size=30,
             spans=[
                 ft.TextSpan(
