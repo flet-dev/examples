@@ -1,20 +1,23 @@
-import flet
-from flet import Checkbox, Page
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.add(
-        Checkbox(label="Checkbox with default style"),
-        Checkbox(
+        ft.Checkbox(label="Checkbox with default style"),
+        ft.Checkbox(
             label="Checkbox with constant fill color",
             fill_color="red",
             check_color="yellow",
         ),
-        Checkbox(
+        ft.Checkbox(
             label="Checkbox with dynamic fill color",
-            fill_color={"hovered": "blue", "selected": "green", "": "red"},
+            fill_color={
+                ft.MaterialState.HOVERED: "blue",
+                ft.MaterialState.SELECTED: "green",
+                ft.MaterialState.DEFAULT: "red",
+            },
         ),
     )
 
 
-flet.app(target=main)
+ft.app(main)

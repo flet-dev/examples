@@ -3,7 +3,6 @@ from flet import Container, Image, Page, colors
 
 
 def main(page: Page):
-
     svg_content = """
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
@@ -28,7 +27,7 @@ def main(page: Page):
 </svg>"""
     page.add(
         Image(
-            src=f"https://raw.githubusercontent.com/dnfield/flutter_svg/master/example/assets/wikimedia/Firefox_Logo_2017.svg",
+            src=f"https://raw.githubusercontent.com/dnfield/flutter_svg/master/packages/flutter_svg/example/assets/wikimedia/Firefox_Logo_2017.svg",
             width=200,
             height=200,
         ),
