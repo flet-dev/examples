@@ -63,20 +63,18 @@ def example():
         return colors
 
 
-    grid = ft.GridView(
-        expand=1,
-        runs_count=5,
-        max_extent=500,
-        child_aspect_ratio=0.5,
-        spacing=10,
+    responsive_row = ft.ResponsiveRow(
         run_spacing=10,
+        vertical_alignment=ft.CrossAxisAlignment.START
     )
     
-    grid.controls = []
+    responsive_row.controls = []
     
     for swatch in swatches:
         swatch_colors = ft.Column(spacing=0, controls=[])
-        grid.controls.append(ft.Column([ft.Container(border_radius=10, content=swatch_colors)]))
+        responsive_row.controls.append(ft.Column(
+            [ft.Container(border_radius=10, content=swatch_colors)],
+            col={"sm": 6, "md": 4, "xl": 2}))
         for color in generate_color_names(swatch):
             swatch_colors.controls.append(ft.Container(
                 height=50,
@@ -84,28 +82,5 @@ def example():
                 bgcolor=color.name,
                 content=ft.Text(color.display_name, weight=ft.FontWeight.W_500)))
 
-    # for color in ft.colors:
-    #         grid.controls.append(
-    #             ft.Container(
-    #                 #on_click=grid_item_clicked,
-    #                 #data=grid_item,
-    #                 bgcolor=color,
-    #                 border_radius=5,
-    #                 padding=15,
-    #                 content=ft.Row(
-    #                     alignment=ft.MainAxisAlignment.START,
-    #                     vertical_alignment=ft.MainAxisAlignment.CENTER,
-    #                     controls=[
-    #                         ft.Icon(name=ft.icons.FOLDER_OPEN),
-    #                         ft.Text(
-    #                             value=color,
-    #                             weight=ft.FontWeight.W_500,
-    #                             size=14
-    #                             )
-                    
-    #                     ]
-    #                 )
-    #             )
-    #         )
 
-    return grid
+    return responsive_row
