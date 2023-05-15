@@ -26,7 +26,9 @@ def example():
             
     SHADES = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
     ACCENT_SHADES = ['100', '200', '400', '700']
-
+    WHITE_SHADES = ['10', '12', '24', '30', '38', '54', '70']
+    BLACK_SHADES = ['12', '26', '38', '45', '54', '87']
+    
     swatches = [
         ColorSwatch(name="red", display_name="RED"),
         ColorSwatch(name="pink", display_name="PINK"),
@@ -46,13 +48,25 @@ def example():
         ColorSwatch(name="deeporange", display_name="DEEP_ORANGE"),
         ColorSwatch(name="brown", display_name="BROWN", accent=False),
         ColorSwatch(name="grey", display_name="GREY", accent=False),
-        ColorSwatch(name="bluegrey", display_name="BLUE_GREY", accent=False)
+        ColorSwatch(name="bluegrey", display_name="BLUE_GREY", accent=False),
+        ColorSwatch(name="white", display_name="WHITE"),
+        ColorSwatch(name="black", display_name="BLACK")
         ]
     
     def generate_color_names(swatch):
         colors = []
         base_color = Color(swatch=swatch)
         colors.append(base_color)
+        if swatch.name == "white":
+            for shade in WHITE_SHADES:
+                color = Color(swatch=swatch, shade = shade)
+                colors.append(color)
+            return colors
+        if swatch.name == "black":
+            for shade in BLACK_SHADES:
+                color = Color(swatch=swatch, shade = shade)
+                colors.append(color)
+            return colors
         for shade in SHADES:
             color = Color(swatch=swatch, shade=shade)
             colors.append(color)
