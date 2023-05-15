@@ -4,252 +4,73 @@ name = "Theme colors"
 
 
 def example():
-    return ft.Container(
-        bgcolor=ft.colors.GREY_200,
-        border_radius=10,
-        padding=10,
-        content=ft.ResponsiveRow(
-            columns=12,
-            run_spacing=10,
-            vertical_alignment=ft.CrossAxisAlignment.START,
-            controls=[
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.PRIMARY,
-                                content=ft.Text("PRIMARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_PRIMARY,
-                                content=ft.Text("ON_PRIMARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.PRIMARY_CONTAINER,
-                                content=ft.Text("PRIMARY_CONTAINER"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_PRIMARY_CONTAINER,
-                                content=ft.Text("ON_PRIMARY_CONTAINER", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
 
+    class Color():
+        def __init__(self, display_name, name, is_dark=False):
+            self.name = name
+            self.display_name = display_name
+            self.is_dark = is_dark
+    
 
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.SECONDARY,
-                                content=ft.Text("SECONDARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_SECONDARY,
-                                content=ft.Text("ON_SECONDARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.SECONDARY_CONTAINER,
-                                content=ft.Text("SECONDARY_CONTAINER"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_SECONDARY_CONTAINER,
-                                content=ft.Text("ON_SECONDARY_CONTAINER", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.TERTIARY,
-                                content=ft.Text("TERTIARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_TERTIARY,
-                                content=ft.Text("ON_TERTIARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.TERTIARY_CONTAINER,
-                                content=ft.Text("TERTIARY_CONTAINER"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_TERTIARY_CONTAINER,
-                                content=ft.Text("ON_TERTIARY_CONTAINER", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ERROR,
-                                content=ft.Text("ERROR"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_ERROR,
-                                content=ft.Text("ON_ERROR"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ERROR_CONTAINER,
-                                content=ft.Text("ERROR_CONTAINER"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_ERROR_CONTAINER,
-                                content=ft.Text("ON_ERROR_CONTAINER", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.BACKGROUND,
-                                content=ft.Text("BACKGROUND"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_BACKGROUND,
-                                content=ft.Text("ON_BACKGROUND", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.SURFACE,
-                                content=ft.Text("SURFACE"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_SURFACE,
-                                content=ft.Text("ON_SURFACE", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                            
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.SURFACE_VARIANT,
-                                content=ft.Text("SURFACE_VARIANT"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_SURFACE_VARIANT,
-                                content=ft.Text("ON_SURFACE_VARIANT", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-
-                ft.Container(
-                    border_radius=10, 
-                    content=ft.Column(
-                        spacing=0, 
-                        controls=[
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.SHADOW,
-                                content=ft.Text("SHADOW", color=ft.colors.WHITE30),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.INVERSE_SURFACE,
-                                content=ft.Text("INVERSE_SURFACE", color=ft.colors.SURFACE),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.ON_INVERSE_SURFACE,
-                                content=ft.Text("ON_INVERSE_SURFACE"),
-                                alignment=ft.alignment.center,
-                            ),
-                            ft.Container(
-                                height=50,
-                                bgcolor=ft.colors.INVERSE_PRIMARY,
-                                content=ft.Text("INVERSE_PRIMARY"),
-                                alignment=ft.alignment.center,
-                            ),
-                        ]),
-                    #col={"sm": 6, "md": 4, "xl": 3}),
-                    col={"sm": 6}),
-            ]
-
-    ))
+    theme_colors = [
+        Color("PRIMARY", "primary"),
+        Color("ON_PRIMARY", "onprimary"),
+        Color("PRIMARY_CONTAINER", "primarycontainer"),
+        Color("ON_PRIMARY_CONTAINER", "onprimarycontainer", True),
+        Color("SECONDARY", "secondary"),
+        Color("ON_SECONDARY", "onsecondary"),
+        Color("SECONDARY_CONTAINER", "secondarycontainer"),
+        Color("ON_SECONDARY_CONTAINER", "onsecondarycontainer", True),    
+        Color("TERTIARY", "tertiary"),
+        Color("ON_TERTIARY", "ontertiary"),
+        Color("TERTIARY_CONTAINER", "tertiarycontainer"),
+        Color("ON_TERTIARY_CONTAINER", "ontertiarycontainer", True),
+        Color("ERROR", "error"),
+        Color("ON_ERROR", "onerror"),
+        Color("ERROR_CONTAINER", "errorcontainer"),
+        Color("ON_ERROR_CONTAINER", "onerrorcontainer", True),
+        Color("OUTLINE", "outline"),
+        Color("OUTLINE_VARIANT", "outlinevariant", True),
+        Color("BACKGROUND", "background"),
+        Color("ON_BACKGROUND", "onbackground", True),
+        Color("SURFACE", "surface"),
+        Color("ON_SURFACE", "onsurface", True),
+        Color("SURFACE_TINT", "surfacetint"),
+        Color("SURFACE_VARIANT", "surfacevariant"),
+        Color("ON_SURFACE_VARIANT", "onsurfacevariant", True),
+        Color("INVERSE_SURFACE", "inversesurface", True),
+        Color("ON_INVERSE_SURFACE", "oninversesurface"),
+        Color("INVERSE_PRIMARY", "inverseprimary"),
+        Color("SHADOW", "shadow", True),
+        Color("SCRIM", "scrim", True)]
 
 
 
-# OUTLINE = "outline"
-# OUTLINE_VARIANT = "outlinevariant"
-# BACKGROUND = "background"
-# ON_BACKGROUND = "onbackground"
-# SURFACE = "surface"
-# ON_SURFACE = "onsurface"
-# SURFACE_TINT = "surfacetint"
-# SURFACE_VARIANT = "surfacevariant"
-# ON_SURFACE_VARIANT = "onsurfacevariant"
-# INVERSE_SURFACE = "inversesurface"
-# ON_INVERSE_SURFACE = "oninversesurface"
-# INVERSE_PRIMARY = "inverseprimary"
-# SHADOW = "shadow"
-# SCRIM = "scrim"
+    def copy_to_clipboard(e):
+        source_code = e.control.content.value
+        e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
+        e.control.page.show_snack_bar(
+            ft.SnackBar(ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"), open=True)
+        )
+    
+    theme_colors_column = ft.Column(spacing=0, width=400)
+
+    theme_colors_column.controls = []
+
+    for color in theme_colors:
+
+        if color.is_dark:
+            text_color=ft.colors.SURFACE
+        else:
+            text_color=ft.colors.ON_SURFACE
+
+        theme_colors_column.controls.append(
+            ft.Container(
+                height=50,
+                bgcolor=color.name,
+                content=ft.Text(color.display_name, color=text_color),
+                alignment=ft.alignment.center,
+                on_click=copy_to_clipboard
+))
+   
+    return ft.Container(border_radius=10, content=theme_colors_column)

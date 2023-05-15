@@ -242,7 +242,7 @@ def main(page: ft.Page):
             ]
     )
 
-    def copy_to_clipboard(e):
+    def copy_source_code_to_clipboard(e):
         source_code = dlg.data
         page.set_clipboard(source_code)
         page.show_snack_bar(
@@ -258,7 +258,7 @@ def main(page: ft.Page):
     dlg = ft.AlertDialog(
         title=code_example_name,
         actions=[
-            ft.FilledButton("Copy to clipboard", on_click=copy_to_clipboard),
+            ft.FilledButton("Copy to clipboard", on_click=copy_source_code_to_clipboard),
             ft.TextButton("Close", on_click=close_dlg),
         ],
         actions_alignment=ft.MainAxisAlignment.END,

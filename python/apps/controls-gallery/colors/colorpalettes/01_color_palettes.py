@@ -69,6 +69,13 @@ def example():
     )
     
     responsive_row.controls = []
+
+    def copy_to_clipboard(e):
+        source_code = e.control.content.value
+        e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
+        e.control.page.show_snack_bar(
+            ft.SnackBar(ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"), open=True)
+        )
     
     for swatch in swatches:
         swatch_colors = ft.Column(spacing=0, controls=[])
@@ -80,6 +87,7 @@ def example():
                 height=50,
                 alignment=ft.alignment.center,
                 bgcolor=color.name,
+                on_click=copy_to_clipboard,
                 content=ft.Text(color.display_name, weight=ft.FontWeight.W_500)))
 
 
