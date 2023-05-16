@@ -221,7 +221,8 @@ def main(page: ft.Page):
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
     control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
-    listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
+    #listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
+    listview = ft.Column(expand=True, spacing=10, scroll=ft.ScrollMode.AUTO)
 
     examples = ft.Column(
         visible=False,
