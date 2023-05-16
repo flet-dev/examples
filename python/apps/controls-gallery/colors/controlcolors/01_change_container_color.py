@@ -1,6 +1,6 @@
 import flet as ft
 
-name = "Change container bgcolor"
+name = "Change container bgcolor property"
 
 def example():
     
