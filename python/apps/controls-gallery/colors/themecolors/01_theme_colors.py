@@ -4,13 +4,11 @@ name = "Theme colors"
 
 
 def example():
-
-    class Color():
+    class Color:
         def __init__(self, display_name, name, is_dark=False):
             self.name = name
             self.display_name = display_name
             self.is_dark = is_dark
-    
 
     theme_colors = [
         Color("PRIMARY", "primary"),
@@ -20,7 +18,7 @@ def example():
         Color("SECONDARY", "secondary"),
         Color("ON_SECONDARY", "onsecondary"),
         Color("SECONDARY_CONTAINER", "secondarycontainer"),
-        Color("ON_SECONDARY_CONTAINER", "onsecondarycontainer", True),    
+        Color("ON_SECONDARY_CONTAINER", "onsecondarycontainer", True),
         Color("TERTIARY", "tertiary"),
         Color("ON_TERTIARY", "ontertiary"),
         Color("TERTIARY_CONTAINER", "tertiarycontainer"),
@@ -42,27 +40,28 @@ def example():
         Color("ON_INVERSE_SURFACE", "oninversesurface"),
         Color("INVERSE_PRIMARY", "inverseprimary"),
         Color("SHADOW", "shadow", True),
-        Color("SCRIM", "scrim", True)]
-
-
+        Color("SCRIM", "scrim", True),
+    ]
 
     def copy_to_clipboard(e):
         source_code = e.control.content.value
         e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
         e.control.page.show_snack_bar(
-            ft.SnackBar(ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"), open=True)
+            ft.SnackBar(
+                ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"),
+                open=True,
+            )
         )
-    
-    theme_colors_column = ft.Column(spacing=0, width=400)
+
+    theme_colors_column = ft.Column(spacing=0)
 
     theme_colors_column.controls = []
 
     for color in theme_colors:
-
         if color.is_dark:
-            text_color=ft.colors.SURFACE
+            text_color = ft.colors.SURFACE
         else:
-            text_color=ft.colors.ON_SURFACE
+            text_color = ft.colors.ON_SURFACE
 
         theme_colors_column.controls.append(
             ft.Container(
@@ -70,7 +69,8 @@ def example():
                 bgcolor=color.name,
                 content=ft.Text(color.display_name, color=text_color),
                 alignment=ft.alignment.center,
-                on_click=copy_to_clipboard
-))
-   
+                on_click=copy_to_clipboard,
+            )
+        )
+
     return ft.Container(border_radius=10, content=theme_colors_column)
