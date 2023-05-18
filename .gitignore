@@ -2,4 +2,3 @@
 .DS_Store
 .vscode/
 .venv/
-python/apps/controls-gallery/colors/colorpalettes/palette_test.py
