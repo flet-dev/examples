@@ -11,7 +11,7 @@ class GridItem:
     def __init__(self, id):
         self.id = id
         self.name = None
-        #self.image_file_name = None
+        # self.image_file_name = None
         self.examples = []
         self.description = None
 
@@ -75,9 +75,9 @@ class GalleryData:
             selected_icon=ft.icons.MESSAGE_SHARP,
         ),
         ControlGroup(
-            name='charts', 
-            label='Charts', 
-            icon=ft.icons.INSERT_CHART_OUTLINED, 
+            name="charts",
+            label="Charts",
+            icon=ft.icons.INSERT_CHART_OUTLINED,
             selected_icon=ft.icons.INSERT_CHART_SHARP,
         ),
         ControlGroup(
@@ -97,6 +97,12 @@ class GalleryData:
             label="Colors",
             icon=ft.icons.FORMAT_PAINT_OUTLINED,
             selected_icon=ft.icons.FORMAT_PAINT_SHARP,
+        ),
+        ControlGroup(
+            name="contrib",
+            label="Contrib",
+            icon=ft.icons.MY_LIBRARY_ADD_OUTLINED,
+            selected_icon=ft.icons.LIBRARY_ADD_SHARP,
         ),
     ]
 
@@ -160,7 +166,7 @@ ft.app(target=main)
                         print(f"{module_name!r} has been imported")
                         if file == "index.py":
                             grid_item.name = module.name
-                            #grid_item.image_file_name = module.image_file
+                            # grid_item.image_file_name = module.image_file
                             grid_item.description = module.description
                         else:
                             example_item = ExampleItem()
@@ -171,7 +177,9 @@ ft.app(target=main)
                                 example_item.source_code = code_text
                             example_item.example = module.example
                             example_item.name = module.name
-                            example_item.order = file[:2] #first 2 characters of example file name (e.g. '01')
+                            example_item.order = file[
+                                :2
+                            ]  # first 2 characters of example file name (e.g. '01')
                             grid_item.examples.append(example_item)
                 grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)
