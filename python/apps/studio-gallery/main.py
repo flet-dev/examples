@@ -1,4 +1,16 @@
 import flet as ft
+import counter
+
+examples = {"counter": counter.example}
+
+
+class Example:
+    def __init__(self, name, control):
+        self.name = name
+        self.control = control
+
+
+# examples = [Example("Counter", counter.example())]
 
 
 class AppButton(ft.Container):
@@ -6,6 +18,7 @@ class AppButton(ft.Container):
         super().__init__()
         self.height = 70
         self.padding = 10
+        # self.ref_to_control = ref_to_control
         self.border_radius = 5
         self.bgcolor = ft.colors.SURFACE_VARIANT
         self.content = ft.Row([ft.Text(name)])
@@ -13,15 +26,18 @@ class AppButton(ft.Container):
         self.data = name
 
     def app_button_clicked(self, e):
-        e.control.page.views.append(
-            ft.View(
-                controls=[
-                    ft.AppBar(title=ft.Text(f"{e.control.data} app")),
-                    ft.Text(f"{e.control.data} app"),
-                ]
+        if e.control.data == "Counter":
+            e.control.page.views.append(
+                ft.View(
+                    controls=[
+                        ft.AppBar(title=ft.Text("Counter app")),
+                        examples["counter"](),
+                    ]
+                )
+                # ft.View("/", [ft.Text("Counter text")])
             )
-        )
-        e.control.page.update()
+            print(len(e.control.page.views))
+            e.control.page.update()
 
 
 def main(page: ft.Page):
