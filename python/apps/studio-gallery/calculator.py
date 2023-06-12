@@ -301,6 +301,8 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Flet calculator example"
+    page.window_width = 390
+    page.window_height = 844
     page.add(example())
 
 

@@ -15,7 +15,7 @@ class AppTile(ft.ListTile):
         e.control.page.views.append(
             ft.View(
                 controls=[
-                    ft.AppBar(title=ft.Text(f"{e.control.name} app")),
+                    ft.AppBar(title=ft.Text(f"{e.control.name}")),
                     e.control.view,
                 ],
             )

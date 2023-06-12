@@ -170,6 +170,8 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Flet to_do example"
+    page.window_width = 390
+    page.window_height = 844
     page.add(
         ft.Row(
             [ft.Text(value="Todos", style="headlineMedium")],

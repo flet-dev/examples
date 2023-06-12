@@ -46,6 +46,8 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Free-hand drawing tool"
+    page.window_width = 390
+    page.window_height = 844
     page.add(example())
 
 
