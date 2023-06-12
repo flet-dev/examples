@@ -102,10 +102,6 @@ def example():
                 expand=True,
                 controls=[
                     ft.Row(
-                        [ft.Text(value="Todos", style="headlineMedium")],
-                        alignment="center",
-                    ),
-                    ft.Row(
                         controls=[
                             self.new_task,
                             ft.FloatingActionButton(
@@ -174,8 +170,13 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Flet to_do example"
-    # page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.add(example())
+    page.add(
+        ft.Row(
+            [ft.Text(value="Todos", style="headlineMedium")],
+            alignment="center",
+        ),
+        example(),
+    )
 
 
 if __name__ == "__main__":
