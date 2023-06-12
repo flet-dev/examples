@@ -111,24 +111,37 @@ def example():
                             ),
                         ],
                     ),
-                    ft.Column(
-                        spacing=25,
+                    self.filter,
+                    self.tasks,
+                    ft.Row(
+                        alignment="spaceBetween",
+                        vertical_alignment="center",
                         controls=[
-                            self.filter,
-                            self.tasks,
-                            ft.Row(
-                                alignment="spaceBetween",
-                                vertical_alignment="center",
-                                controls=[
-                                    self.items_left,
-                                    ft.OutlinedButton(
-                                        text="Clear completed",
-                                        on_click=self.clear_clicked,
-                                    ),
-                                ],
+                            self.items_left,
+                            ft.OutlinedButton(
+                                text="Clear completed",
+                                on_click=self.clear_clicked,
                             ),
                         ],
                     ),
+                    # ft.Column(
+                    #     spacing=25,
+                    #     controls=[
+                    #         self.filter,
+                    #         self.tasks,
+                    #         ft.Row(
+                    #             alignment="spaceBetween",
+                    #             vertical_alignment="center",
+                    #             controls=[
+                    #                 self.items_left,
+                    #                 ft.OutlinedButton(
+                    #                     text="Clear completed",
+                    #                     on_click=self.clear_clicked,
+                    #                 ),
+                    #             ],
+                    #         ),
+                    #     ],
+                    # ),
                 ],
             )
 
