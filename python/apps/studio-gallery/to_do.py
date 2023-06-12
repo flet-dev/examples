@@ -97,7 +97,6 @@ def example():
 
             # application's root control (i.e. "view") containing all other controls
             return ft.Column(
-                width=600,
                 controls=[
                     ft.Row(
                         [ft.Text(value="Todos", style="headlineMedium")],
@@ -177,7 +176,7 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Flet to_do example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    # page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.add(example())
 
 

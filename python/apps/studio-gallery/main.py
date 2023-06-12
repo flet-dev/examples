@@ -18,10 +18,11 @@ class AppTile(ft.ListTile):
     def app_button_clicked(self, e):
         e.control.page.views.append(
             ft.View(
+                scroll=ft.ScrollMode.AUTO,
                 controls=[
                     ft.AppBar(title=ft.Text(f"{e.control.name} app")),
                     e.control.view,
-                ]
+                ],
             )
         )
         e.control.page.update()
