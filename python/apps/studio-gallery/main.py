@@ -2,15 +2,15 @@ import flet as ft
 import counter
 
 
-class AppButton(ft.Container):
+class AppTile(ft.ListTile):
     def __init__(self, name, view):
         super().__init__()
-        self.height = 70
-        self.padding = 10
+        # self.height = 70
+        # self.padding = 10
         self.view = view
-        self.border_radius = 5
+        # self.border_radius = 5
         self.bgcolor = ft.colors.SURFACE_VARIANT
-        self.content = ft.Row([ft.Text(name)])
+        self.title = ft.Text(name)
         self.on_click = self.app_button_clicked
         self.name = name
 
@@ -27,11 +27,11 @@ class AppButton(ft.Container):
 
 
 def main(page: ft.Page):
-    counter_button = AppButton("Counter", view=counter.example())
+    counter_tile = AppTile("Counter", view=counter.example())
 
     # to_do = AppButton("To-Do")
 
-    page.add(ft.Column(controls=[counter_button]))
+    page.add(ft.ListView(controls=[counter_tile]))
 
     def view_pop(view):
         page.views.pop()
