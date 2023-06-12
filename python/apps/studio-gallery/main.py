@@ -1,17 +1,11 @@
 import flet as ft
-import counter
-import to_do
-import calculator
-import drawing_tool, buttons
+import counter, to_do, calculator, drawing_tool, buttons
 
 
 class AppTile(ft.ListTile):
     def __init__(self, name, view):
         super().__init__()
-        # self.height = 70
-        # self.padding = 10
         self.view = view
-        # self.border_radius = 5
         self.bgcolor = ft.colors.SURFACE_VARIANT
         self.title = ft.Text(name)
         self.on_click = self.app_button_clicked
