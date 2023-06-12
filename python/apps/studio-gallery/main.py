@@ -2,7 +2,7 @@ import flet as ft
 import counter
 import to_do
 import calculator
-import drawing_tool
+import drawing_tool, buttons
 
 
 class AppTile(ft.ListTile):
@@ -34,9 +34,18 @@ def main(page: ft.Page):
     to_do_tile = AppTile("To-Do", view=to_do.example())
     calc_tile = AppTile("Calculator", view=calculator.example())
     drawing_tool_tile = AppTile("Drawing Tool", view=drawing_tool.example())
+    buttons_tile = AppTile("Buttons", view=buttons.example())
 
     page.add(
-        ft.ListView(controls=[counter_tile, to_do_tile, calc_tile, drawing_tool_tile])
+        ft.ListView(
+            controls=[
+                counter_tile,
+                to_do_tile,
+                calc_tile,
+                drawing_tool_tile,
+                buttons_tile,
+            ]
+        )
     )
 
     def view_pop(view):
@@ -45,7 +54,8 @@ def main(page: ft.Page):
         page.go(top_view.route)
 
     page.on_view_pop = view_pop
-
+    page.window_width = 390
+    page.window_height = 844
     page.update()
 
 
