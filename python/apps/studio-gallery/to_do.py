@@ -76,12 +76,13 @@ def example():
 
     class TodoApp(ft.UserControl):
         def build(self):
+            self.expand = True
             self.new_task = ft.TextField(
                 hint_text="What needs to be done?",
                 on_submit=self.add_clicked,
                 expand=True,
             )
-            self.tasks = ft.Column()
+            self.tasks = ft.Column(expand=True, scroll=ft.ScrollMode.AUTO)
 
             self.filter = ft.Tabs(
                 selected_index=0,
@@ -98,6 +99,7 @@ def example():
 
             # application's root control (i.e. "view") containing all other controls
             return ft.Column(
+                expand=True,
                 controls=[
                     ft.Row(
                         [ft.Text(value="Todos", style="headlineMedium")],
@@ -124,24 +126,6 @@ def example():
                             ),
                         ],
                     ),
-                    # ft.Column(
-                    #     spacing=25,
-                    #     controls=[
-                    #         self.filter,
-                    #         self.tasks,
-                    #         ft.Row(
-                    #             alignment="spaceBetween",
-                    #             vertical_alignment="center",
-                    #             controls=[
-                    #                 self.items_left,
-                    #                 ft.OutlinedButton(
-                    #                     text="Clear completed",
-                    #                     on_click=self.clear_clicked,
-                    #                 ),
-                    #             ],
-                    #         ),
-                    #     ],
-                    # ),
                 ],
             )
 
