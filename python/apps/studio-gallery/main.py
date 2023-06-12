@@ -1,5 +1,6 @@
 import flet as ft
 import counter
+import to_do
 
 
 class AppTile(ft.ListTile):
@@ -28,10 +29,9 @@ class AppTile(ft.ListTile):
 
 def main(page: ft.Page):
     counter_tile = AppTile("Counter", view=counter.example())
+    to_do_tile = AppTile("To-Do", view=to_do.example())
 
-    # to_do = AppButton("To-Do")
-
-    page.add(ft.ListView(controls=[counter_tile]))
+    page.add(ft.ListView(controls=[counter_tile, to_do_tile]))
 
     def view_pop(view):
         page.views.pop()
