@@ -85,6 +85,7 @@ def example():
 
             self.filter = ft.Tabs(
                 selected_index=0,
+                scrollable=False,
                 on_change=self.tabs_changed,
                 tabs=[
                     ft.Tab(text="all"),
