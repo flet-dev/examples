@@ -3,7 +3,6 @@ from flet import (
     Column,
     Container,
     ElevatedButton,
-    Page,
     Row,
     Text,
     UserControl,
