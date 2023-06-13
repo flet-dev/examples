@@ -135,17 +135,38 @@ def example(page):
 
     randomize(None)
 
-    return ft.Column(
-        # expand=True,
-        # alignment=ft.MainAxisAlignment.CENTER,
-        controls=[canvas, go_button, again_button],
+    # return ft.Column(
+    #     expand=True,
+    #     alignment=ft.MainAxisAlignment.CENTER,
+    #     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    #     tight=True,
+    #     controls=[
+    #         canvas,
+    #         go_button,
+    #         again_button,
+    #     ],
+    # )
+
+    return ft.Container(
+        expand=True,
+        alignment=ft.alignment.center,
+        content=ft.Column(
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            tight=True,
+            controls=[
+                canvas,
+                go_button,
+                again_button,
+            ],
+        ),
     )
 
 
 def main(page: ft.Page):
     page.title = "Flet animation example"
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
+    # page.horizontal_alignment = "center"
+    # page.vertical_alignment = "center"
     page.spacing = 30
     page.window_width = 390
     page.window_height = 844
