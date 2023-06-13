@@ -1,5 +1,5 @@
 import flet as ft
-import counter, to_do, calculator, drawing_tool, buttons, entry_form
+import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts
 
 
 class AppTile(ft.ListTile):
@@ -24,22 +24,16 @@ class AppTile(ft.ListTile):
 
 
 def main(page: ft.Page):
-    counter_tile = AppTile("Counter", view=counter.example())
-    to_do_tile = AppTile("To-Do", view=to_do.example())
-    calc_tile = AppTile("Calculator", view=calculator.example())
-    drawing_tool_tile = AppTile("Drawing Tool", view=drawing_tool.example())
-    buttons_tile = AppTile("Buttons", view=buttons.example())
-    entry_form_tile = AppTile("Entry form", view=entry_form.example())
-
     page.add(
         ft.ListView(
             controls=[
-                counter_tile,
-                to_do_tile,
-                calc_tile,
-                drawing_tool_tile,
-                buttons_tile,
-                entry_form_tile,
+                AppTile("Counter", view=counter.example()),
+                AppTile("To-Do", view=to_do.example()),
+                AppTile("Calculator", view=calculator.example()),
+                AppTile("Drawing Tool", view=drawing_tool.example()),
+                AppTile("Buttons", view=buttons.example()),
+                AppTile("Entry form", view=entry_form.example()),
+                AppTile("Charts", view=charts.example()),
             ]
         )
     )
