@@ -30,7 +30,25 @@ def example():
     sunday = ft.Checkbox(label="Sunday", value=False)
 
     def submit_form(e):
+        e.control.page.dialog = dlg
+        dlg.open = True
+        e.control.page.update()
         print("Submit form")
+
+    def close_dlg(e):
+        dlg.open = False
+        e.control.page.update()
+
+    dlg = ft.AlertDialog(
+        # modal=True,
+        # title=ft.Text("Form submitted"),
+        content=ft.Text("Thank you for submitting the form!"),
+        actions=[
+            ft.TextButton("OK", on_click=close_dlg),
+        ],
+        actions_alignment=ft.MainAxisAlignment.CENTER,
+        on_dismiss=lambda e: print("Modal dialog dismissed!"),
+    )
 
     submit = ft.FilledButton("Submit", on_click=submit_form)
 
