@@ -2,11 +2,12 @@ import flet as ft
 
 
 def example():
-    over_18 = ft.RadioGroup(
+    gender = ft.RadioGroup(
         content=ft.Row(
             [
-                ft.Radio(value="yes", label="Yes"),
-                ft.Radio(value="no", label="No"),
+                ft.Radio(value="female", label="Female"),
+                ft.Radio(value="male", label="Male"),
+                ft.Radio(value="not_specified", label="Not specified"),
             ]
         )
     )
@@ -28,15 +29,21 @@ def example():
     saturday = ft.Checkbox(label="Saturday", value=False)
     sunday = ft.Checkbox(label="Sunday", value=False)
 
+    def submit_form(e):
+        print("Submit form")
+
+    submit = ft.FilledButton("Submit", on_click=submit_form)
+
     return ft.Column(
         expand=True,
-        alignment=ft.MainAxisAlignment.CENTER,
+        # alignment=ft.MainAxisAlignment.CENTER,
         controls=[
-            ft.TextField(label="First name"),
-            ft.TextField(label="Last name"),
-            ft.Divider(thickness=1),
-            ft.Text("Are you over 18?"),
-            over_18,
+            ft.TextField(label="First name", keyboard_type=ft.KeyboardType.NAME),
+            ft.TextField(label="Last name", keyboard_type=ft.KeyboardType.NAME),
+            ft.TextField(label="Email", keyboard_type=ft.KeyboardType.EMAIL),
+            ft.TextField(label="Age", keyboard_type=ft.KeyboardType.NUMBER),
+            ft.Text("Gender:"),
+            gender,
             ft.Divider(thickness=1),
             choice_of_instrument,
             ft.Text("Pick days for classes:"),
@@ -45,8 +52,7 @@ def example():
             wednesday,
             thursday,
             friday,
-            saturday,
-            sunday,
+            ft.Row(controls=[submit], alignment=ft.MainAxisAlignment.CENTER),
         ],
     )
 
