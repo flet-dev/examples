@@ -1,13 +1,11 @@
 import random
 from math import pi
 
-import flet
+import flet as ft
 from flet import Container, ElevatedButton, Page, Stack, colors
 
 
-def main(page: Page):
-    # size = 40
-    # gap = 6
+def example():
     size = 15
     gap = 3
     duration = 2000
@@ -77,7 +75,7 @@ def main(page: Page):
 
     width = 16 * (size + gap)
     # height = 5 * (size + gap)
-    height = 10 * (size + gap)
+    height = 15 * (size + gap)
 
     canvas = Stack(
         width=width,
@@ -112,7 +110,7 @@ def main(page: Page):
         canvas.opacity = 0.3
         go_button.visible = True
         again_button.visible = False
-        page.update()
+        e.control.page.update()
 
     def assemble(e):
         i = 0
@@ -130,19 +128,26 @@ def main(page: Page):
         canvas.opacity = 1
         go_button.visible = False
         again_button.visible = True
-        page.update()
+        e.control.page.update()
 
-    go_button = ElevatedButton("Go!", on_click=assemble)
-    again_button = ElevatedButton("Again!", on_click=randomize)
+    go_button = ElevatedButton("Go!", on_click=assemble, visible=True)
+    again_button = ElevatedButton("Again!", on_click=randomize, visible=False)
 
-    randomize(None)
+    # randomize(None)
 
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
-    page.spacing = 30
+    return ft.Column(
+        # expand=True,
+        # alignment=ft.MainAxisAlignment.CENTER,
+        controls=[canvas, go_button, again_button],
+    )
+
+
+def main(page: ft.Page):
+    page.title = "Flet animation example"
     page.window_width = 390
     page.window_height = 844
-    page.add(canvas, go_button, again_button)
+    page.add(example())
 
 
-flet.app(main)
+if __name__ == "__main__":
+    ft.app(target=main)
