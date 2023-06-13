@@ -1,5 +1,5 @@
 import flet as ft
-import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts
+import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts, flet_animation
 
 
 class AppTile(ft.ListTile):
@@ -34,6 +34,7 @@ def main(page: ft.Page):
                 AppTile("Buttons", view=buttons.example()),
                 AppTile("Entry form", view=entry_form.example()),
                 AppTile("Charts", view=charts.example()),
+                AppTile("Flet Animation", view=flet_animation.example(page=page)),
             ]
         )
     )

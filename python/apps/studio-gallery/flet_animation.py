@@ -5,7 +5,7 @@ import flet as ft
 from flet import Container, ElevatedButton, Page, Stack, colors
 
 
-def example():
+def example(page):
     size = 15
     gap = 3
     duration = 2000
@@ -110,7 +110,7 @@ def example():
         canvas.opacity = 0.3
         go_button.visible = True
         again_button.visible = False
-        e.control.page.update()
+        page.update()
 
     def assemble(e):
         i = 0
@@ -128,12 +128,12 @@ def example():
         canvas.opacity = 1
         go_button.visible = False
         again_button.visible = True
-        e.control.page.update()
+        page.update()
 
     go_button = ElevatedButton("Go!", on_click=assemble, visible=True)
     again_button = ElevatedButton("Again!", on_click=randomize, visible=False)
 
-    # randomize(None)
+    randomize(None)
 
     return ft.Column(
         # expand=True,
@@ -144,9 +144,12 @@ def example():
 
 def main(page: ft.Page):
     page.title = "Flet animation example"
+    page.horizontal_alignment = "center"
+    page.vertical_alignment = "center"
+    page.spacing = 30
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page=page))
 
 
 if __name__ == "__main__":
