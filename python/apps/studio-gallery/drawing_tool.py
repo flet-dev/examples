@@ -9,6 +9,12 @@ def example():
 
     state = State()
 
+    colors = ["red", "yellow", "blue", "green", "orange", "purple"]
+
+    color_button = ft.Container(
+        width=30, height=30, border_radius=30, bgcolor=colors[0]
+    )
+
     def pan_start(e: ft.DragStartEvent):
         state.x = e.local_x
         state.y = e.local_y
@@ -41,7 +47,10 @@ def example():
         expand=False,
     )
 
-    return ft.Container(cp, border_radius=5, expand=True)
+    return ft.Column(
+        expand=True,
+        controls=[color_button, ft.Container(cp, border_radius=5, expand=True)],
+    )
 
 
 def main(page: ft.Page):
