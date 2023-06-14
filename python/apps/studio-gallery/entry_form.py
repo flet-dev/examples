@@ -39,6 +39,11 @@ def example():
         dlg.open = False
         e.control.page.update()
 
+    def validate_required_text_field(e):
+        if e.control.value == "":
+            e.control.error_text = "The field is required"
+            e.control.update()
+
     dlg = ft.AlertDialog(
         # modal=True,
         # title=ft.Text("Form submitted"),
@@ -56,10 +61,26 @@ def example():
         expand=True,
         # alignment=ft.MainAxisAlignment.CENTER,
         controls=[
-            ft.TextField(label="First name", keyboard_type=ft.KeyboardType.NAME),
-            ft.TextField(label="Last name", keyboard_type=ft.KeyboardType.NAME),
-            ft.TextField(label="Email", keyboard_type=ft.KeyboardType.EMAIL),
-            ft.TextField(label="Age", keyboard_type=ft.KeyboardType.NUMBER),
+            ft.TextField(
+                label="First name",
+                keyboard_type=ft.KeyboardType.NAME,
+                on_blur=validate_required_text_field,
+            ),
+            ft.TextField(
+                label="Last name",
+                keyboard_type=ft.KeyboardType.NAME,
+                on_blur=validate_required_text_field,
+            ),
+            ft.TextField(
+                label="Email",
+                keyboard_type=ft.KeyboardType.EMAIL,
+                on_blur=validate_required_text_field,
+            ),
+            ft.TextField(
+                label="Age",
+                keyboard_type=ft.KeyboardType.NUMBER,
+                on_blur=validate_required_text_field,
+            ),
             ft.Text("Gender:"),
             gender,
             ft.Divider(thickness=1),
