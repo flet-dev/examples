@@ -8,6 +8,7 @@ def example():
         y: float
 
     state = State()
+    state.color = "black"
 
     colors = [
         "red",
@@ -18,13 +19,28 @@ def example():
         "purple",
         "pink",
         "lime",
-        "teal",
+        "black",
     ]
 
     color_buttons = []
+
+    def color_changed(e):
+        state.color = e.control.bgcolor
+        for color_button in color_buttons:
+            color_button.border = None
+            color_button.update()
+        e.control.border = ft.border.all(2)
+        e.control.update()
+
     for color in colors:
         color_buttons.append(
-            ft.Container(width=30, height=30, border_radius=30, bgcolor=color)
+            ft.Container(
+                width=30,
+                height=30,
+                border_radius=30,
+                bgcolor=color,
+                on_click=color_changed,
+            )
         )
 
     def pan_start(e: ft.DragStartEvent):
@@ -34,7 +50,11 @@ def example():
     def pan_update(e: ft.DragUpdateEvent):
         cp.shapes.append(
             cv.Line(
-                state.x, state.y, e.local_x, e.local_y, paint=ft.Paint(stroke_width=3)
+                state.x,
+                state.y,
+                e.local_x,
+                e.local_y,
+                paint=ft.Paint(stroke_width=3, color=state.color),
             )
         )
         cp.update()
