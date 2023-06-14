@@ -4,25 +4,6 @@ import flet as ft
 def example():
     url = "https://github.com/mdn/webaudio-examples/blob/main/audio-analyser/viper.mp3?raw=true"
 
-    class Track(ft.GestureDetector):
-        def __init__(self):
-            super().__init__()
-            self.content = ft.Stack(
-                expand=True,
-                height=6,
-                controls=[
-                    ft.Container(expand=True, border_radius=3, bgcolor=ft.colors.BLACK)
-                ],
-            )
-            self.on_tap = self.seek
-            self.on_hover = self.change_cursor
-
-        def seek(self, e):
-            print("Seek")
-
-        def change_cursor(self, e):
-            print("Change cursor")
-
     class Example(ft.Column):
         def __init__(self):
             super().__init__()
@@ -37,9 +18,8 @@ def example():
                 on_state_changed=lambda e: print("State changed:", e.data),
                 on_seek_complete=lambda _: print("Seek complete"),
             )
-            self.track = Track()
+
             self.controls = [
-                self.track,
                 ft.ElevatedButton("Play", on_click=lambda _: self.audio1.play()),
                 ft.ElevatedButton("Pause", on_click=lambda _: self.audio1.pause()),
                 ft.ElevatedButton("Resume", on_click=lambda _: self.audio1.resume()),
