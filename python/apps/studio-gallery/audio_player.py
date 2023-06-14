@@ -8,35 +8,12 @@ def example():
 
     def convertMillis(millis):
         seconds = int(millis / 1000) % 60
+        if seconds < 10:
+            seconds_str = f"0{seconds}"
+        else:
+            seconds_str = f"{seconds}"
         minutes = int(millis / (1000 * 60)) % 60
-        return f"{minutes}:{seconds}"
-
-    class Track(ft.GestureDetector):
-        def __init__(self, audio):
-            super().__init__()
-            self.content = ft.Stack(
-                expand=True,
-                height=6,
-                controls=[
-                    ft.Container(expand=True, border_radius=3, bgcolor=ft.colors.BLACK)
-                ],
-            )
-            self.audio = audio
-            # self.duration = duration
-            self.on_pan_start = self.find_position
-            self.on_hover = self.change_cursor
-
-        def find_position(self, e: ft.DragStartEvent):
-            print(f"Total track width: {self.content.width}")
-            print(f"Total track duration: {convertMillis(self.audio.get_duration())}")
-            print(
-                f"Position: {convertMillis(self.audio.get_duration()*e.local_x/e.control.page.width)}"
-            )
-            print(e.control.content.controls[0].width)
-
-        def change_cursor(self, e: ft.HoverEvent):
-            e.control.mouse_cursor = ft.MouseCursor.CLICK
-            e.control.update()
+        return f"{minutes}:{seconds_str}"
 
     class TrackCanvas(ft.GestureDetector):
         def __init__(self, audio):
@@ -73,8 +50,9 @@ def example():
             print(f"Total track width: {self.content.width}")
             print(f"Total track duration: {convertMillis(self.audio.get_duration())}")
             print(
-                f"Position: {convertMillis(self.audio.get_duration()*e.local_x/e.control.page.width)}"
+                f"Position: {convertMillis(self.audio.get_duration()*e.local_x/self.track_width)}"
             )
+            return self.audio.get_duration() * e.local_x / self.track_width
             # print(e.control.content.controls[0].width)
 
         def change_cursor(self, e: ft.HoverEvent):
@@ -96,12 +74,28 @@ def example():
                 on_seek_complete=lambda _: print("Seek complete"),
             )
             self.track_canvas = TrackCanvas(audio=self.audio1)
-            self.track = Track(audio=self.audio1)
+            self.play_button = ft.IconButton(
+                icon=ft.icons.PLAY_ARROW,
+                visible=False,
+                on_click=self.play,
+            )
+            self.pause_button = ft.IconButton(
+                icon=ft.icons.PAUSE,
+                visible=False,
+                on_click=lambda _: self.audio1.pause(),
+            )
+            self.position_duration = ft.Text()
             self.controls = [
                 self.track_canvas,
-                # self.track,
-                ft.ElevatedButton("Play", on_click=lambda _: self.audio1.play()),
-                ft.ElevatedButton("Pause", on_click=lambda _: self.audio1.pause()),
+                ft.Row(
+                    controls=[
+                        self.play_button,
+                        self.pause_button,
+                        self.position_duration,
+                    ]
+                ),
+                # ft.ElevatedButton("Play", on_click=lambda _: self.audio1.play()),
+                # ft.ElevatedButton("Pause", on_click=lambda _: self.audio1.pause()),
                 ft.ElevatedButton("Resume", on_click=lambda _: self.audio1.resume()),
                 ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
                 ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
@@ -133,10 +127,21 @@ def example():
         def did_mount(self):
             self.page.overlay.append(self.audio1)
             self.page.update()
+            self.position_duration.value = (
+                f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
+            )
+            self.play_button.visible = True
+            self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
         def will_unmount(self):
             self.page.overlay.remove(self.audio1)
+            self.page.update()
+
+        def play(self, e):
+            self.audio1.play()
+            self.play_button.visible = False
+            self.pause_button.visible = True
             self.page.update()
 
         def volume_down(self, _):
