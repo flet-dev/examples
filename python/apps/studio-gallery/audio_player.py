@@ -16,7 +16,7 @@ def example():
         return f"{minutes}:{seconds_str}"
 
     class TrackCanvas(ft.GestureDetector):
-        def __init__(self, audio):
+        def __init__(self, audio, on_change_position):
             super().__init__()
             self.content = ft.Container(
                 content=cv.Canvas(
@@ -39,6 +39,7 @@ def example():
             # self.duration = duration
             self.on_pan_start = self.find_position
             self.on_hover = self.change_cursor
+            self.on_change_position = on_change_position
 
         def canvas_resized(self, e: cv.CanvasResizeEvent):
             print("On resize:", e.width, e.height)
@@ -52,7 +53,8 @@ def example():
             print(
                 f"Position: {convertMillis(self.audio.get_duration()*e.local_x/self.track_width)}"
             )
-            return self.audio.get_duration() * e.local_x / self.track_width
+            position = int(self.audio.get_duration() * e.local_x / self.track_width)
+            self.on_change_position(position)
             # print(e.control.content.controls[0].width)
 
         def change_cursor(self, e: ft.HoverEvent):
@@ -74,7 +76,9 @@ def example():
                 on_seek_complete=lambda _: print("Seek complete"),
             )
             self.state = None
-            self.track_canvas = TrackCanvas(audio=self.audio1)
+            self.track_canvas = TrackCanvas(
+                audio=self.audio1, on_change_position=self.seek_position
+            )
             self.play_button = ft.IconButton(
                 icon=ft.icons.PLAY_ARROW,
                 visible=False,
@@ -155,6 +159,10 @@ def example():
 
         def state_changed(self, e):
             self.state = e.data
+
+        def seek_position(self, position):
+            self.audio1.seek(position)
+            self.page.update()
 
         def change_position(self, e):
             print("Position changed:", e.data)
