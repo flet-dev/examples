@@ -16,7 +16,7 @@ def example():
         return f"{minutes}:{seconds_str}"
 
     class VolumeSlider(ft.GestureDetector):
-        def __init__(self, audio):
+        def __init__(self, audio, on_change_volume):
             super().__init__()
             self.visible = False
             self.audio = audio
@@ -54,6 +54,7 @@ def example():
             self.on_hover = self.change_cursor
             self.on_pan_start = self.change_volume
             self.on_pan_update = self.change_volume
+            self.on_change_volume = on_change_volume
 
         def change_audio_volume(self, volume):
             self.audio.volume = volume
@@ -67,6 +68,7 @@ def example():
                 self.change_audio_volume(e.local_x / self.content.width)
                 self.content.content.shapes[1].width = e.local_x  ## New volume
                 self.content.content.shapes[2].x = e.local_x  ## Thumb
+                self.on_change_volume()
                 self.page.update()
 
         def mute(self):
@@ -167,7 +169,9 @@ def example():
             )
             self.position_duration = ft.Text()
 
-            self.volume_slider = VolumeSlider(audio=self.audio1)
+            self.volume_slider = VolumeSlider(
+                audio=self.audio1, on_change_volume=self.check_mute
+            )
             self.volume_icon = ft.IconButton(
                 icon=ft.icons.VOLUME_UP,
                 visible=False,
@@ -256,6 +260,13 @@ def example():
                 e.control.icon = ft.icons.VOLUME_UP
                 self.volume_slider.unmute()
             e.control.page.update()
+
+        def check_mute(self):
+            print(self.audio1.volume)
+            if self.audio1.volume == 0:
+                self.volume_icon.icon = ft.icons.VOLUME_OFF
+                self.volume_slider.mute()
+                self.volume_icon.update()
 
     example_column = AudioPlayer(url=url)
 
