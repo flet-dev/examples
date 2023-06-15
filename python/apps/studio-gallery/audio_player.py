@@ -80,6 +80,7 @@ def example():
                 on_seek_complete=lambda _: print("Seek complete"),
             )
             self.state = None
+            self.position = 0
             self.track_canvas = TrackCanvas(
                 audio=self.audio1, on_change_position=self.seek_position
             )
@@ -146,7 +147,8 @@ def example():
 
         def play(self, e):
             print(self.state)
-            if self.state == "paused":
+            print(self.position)
+            if self.position != 0:
                 self.audio1.resume()
 
             else:
@@ -163,6 +165,10 @@ def example():
 
         def state_changed(self, e):
             self.state = e.data
+            print(e.data)
+            if e.data == "completed":
+                self.play_button.visible = True
+                self.pause_button.visible = False
 
         def seek_position(self, position):
             self.audio1.seek(position)
@@ -170,6 +176,7 @@ def example():
 
         def change_position(self, e):
             print("Position changed:", e.data)
+            self.position = e.data
             duration = self.audio1.get_duration()
             self.position_duration.value = (
                 f"{convertMillis(int(e.data))} / {convertMillis(duration)}"
