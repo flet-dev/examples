@@ -85,6 +85,7 @@ def example():
     class Track(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
             super().__init__()
+            self.visible = False
             self.content = ft.Container(
                 content=cv.Canvas(
                     on_resize=self.canvas_resized,
@@ -223,6 +224,7 @@ def example():
             self.page.update()
 
         def audio_loaded(self, e):
+            self.track_canvas.visible = True
             self.position_duration.value = (
                 f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
             )
@@ -258,7 +260,6 @@ def example():
             self.page.update()
 
         def change_position(self, e):
-            print("Position changed:", e.data)
             self.position = e.data
             duration = self.audio1.get_duration()
             self.position_duration.value = (

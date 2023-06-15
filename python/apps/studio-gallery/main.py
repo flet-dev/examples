@@ -1,5 +1,5 @@
 import flet as ft
-import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts, flet_animation
+import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts, flet_animation, audio_player
 
 
 class AppTile(ft.ListTile):
@@ -87,6 +87,12 @@ def main(page: ft.Page):
                     file_name="flet_animation.py",
                     view=flet_animation.example(page=page),
                     icon_name=ft.icons.ANIMATION,
+                ),
+                AppTile(
+                    name="Audio Player",
+                    file_name="audio_player.py",
+                    view=audio_player.example(),
+                    icon_name=ft.icons.AUDIOTRACK,
                 ),
             ]
         )
