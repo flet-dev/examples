@@ -54,12 +54,16 @@ def example():
             self.on_pan_start = self.change_volume
             self.on_pan_update = self.change_volume
 
+        def change_audio_volume(self, volume):
+            self.audio.volume = volume
+
         def change_cursor(self, e: ft.HoverEvent):
             e.control.mouse_cursor = ft.MouseCursor.CLICK
             e.control.update()
 
         def change_volume(self, e):
-            self.audio.volume = e.local_x / self.content.width
+            # self.audio.volume = e.local_x / self.content.width
+            self.change_audio_volume(e.local_x / self.content.width)
             self.content.content.shapes[1].width = e.local_x  ## New volume
             self.content.content.shapes[2].x = e.local_x  ## Thumb
             self.page.update()
@@ -145,7 +149,13 @@ def example():
                 on_click=self.pause,
             )
             self.position_duration = ft.Text()
+
             self.volume_slider = VolumeSlider(audio=self.audio1)
+            self.volume_icon = ft.IconButton(
+                icon=ft.icons.VOLUME_UP,
+                visible=False,
+                on_click=self.volume_icon_clicked,
+            )
             self.controls = [
                 self.track_canvas,
                 ft.Row(
@@ -156,7 +166,7 @@ def example():
                         self.position_duration,
                         ft.Row(
                             [
-                                ft.IconButton(icon=ft.icons.VOLUME_UP, visible=False),
+                                self.volume_icon,
                                 self.volume_slider,
                             ]
                         ),
@@ -205,6 +215,7 @@ def example():
             )
             self.play_button.visible = True
             self.volume_slider.visible = True
+            self.volume_icon.visible = True
             self.track_canvas.audio_duration = self.audio1.get_duration()
             self.page.update()
 
@@ -247,6 +258,13 @@ def example():
             self.track_canvas.content.content.shapes[1].width = (
                 int(e.data) / duration * self.track_canvas.track_width
             )
+            e.control.page.update()
+
+        def volume_icon_clicked(self, e):
+            if e.control.icon == ft.icons.VOLUME_UP:
+                e.control.icon = ft.icons.VOLUME_OFF
+            else:
+                e.control.icon = ft.icons.VOLUME_UP
             e.control.page.update()
 
         def volume_down(self, _):
