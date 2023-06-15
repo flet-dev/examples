@@ -23,7 +23,6 @@ def example():
             self.content = ft.Container(
                 width=100,
                 height=5,
-                # bgcolor=ft.colors.YELLOW,
                 content=cv.Canvas(
                     shapes=[
                         cv.Rect(
@@ -53,12 +52,13 @@ def example():
             )
             self.on_hover = self.change_cursor
             self.on_pan_start = self.change_volume
+            self.on_pan_update = self.change_volume
 
         def change_cursor(self, e: ft.HoverEvent):
             e.control.mouse_cursor = ft.MouseCursor.CLICK
             e.control.update()
 
-        def change_volume(self, e: ft.DragStartEvent):
+        def change_volume(self, e):
             self.audio.volume = e.local_x / self.content.width
             self.content.content.shapes[1].width = e.local_x  ## New volume
             self.content.content.shapes[2].x = e.local_x  ## Thumb
