@@ -21,6 +21,8 @@ def example():
             self.visible = False
             self.content = ft.Container(
                 width=100,
+                height=5,
+                # bgcolor=ft.colors.YELLOW,
                 content=cv.Canvas(
                     shapes=[
                         cv.Rect(
@@ -41,10 +43,17 @@ def example():
                 ),
             )
             self.on_hover = self.change_cursor
+            self.on_pan_start = self.change_volume
 
         def change_cursor(self, e: ft.HoverEvent):
             e.control.mouse_cursor = ft.MouseCursor.CLICK
             e.control.update()
+
+        def change_volume(self, e: ft.DragStartEvent):
+            volume = float(1 * e.local_x / self.content.width)
+            print(volume)
+            # self.content.content.shapes[1].width = e.local_x
+            self.update()
 
     class TrackCanvas(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
@@ -130,7 +139,7 @@ def example():
             self.controls = [
                 self.track_canvas,
                 ft.Row(
-                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    alignment=ft.MainAxisAlignment.SPACE_AROUND,
                     controls=[
                         self.play_button,
                         self.pause_button,
