@@ -126,7 +126,9 @@ def example():
 
         def find_position(self, e):
             position = int(self.audio_duration * e.local_x / self.track_width)
-            self.content.content.shapes[1].width = e.local_x
+            self.content.content.shapes[1].width = max(
+                0, min(e.local_x, self.track_width)
+            )
             self.update()
             self.on_change_position(position)
 
@@ -186,30 +188,6 @@ def example():
                         ),
                     ],
                 ),
-                # ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
-                # ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
-                # ft.Row(
-                #     [
-                #         ft.ElevatedButton("Volume down", on_click=self.volume_down),
-                #         ft.ElevatedButton("Volume up", on_click=self.volume_up),
-                #     ]
-                # ),
-                # ft.Row(
-                #     [
-                #         ft.ElevatedButton("Balance left", on_click=self.balance_left),
-                #         ft.ElevatedButton("Balance right", on_click=self.balance_right),
-                #     ]
-                # ),
-                # ft.ElevatedButton(
-                #     "Get duration",
-                #     on_click=lambda _: print("Duration:", self.audio1.get_duration()),
-                # ),
-                # ft.ElevatedButton(
-                #     "Get current position",
-                #     on_click=lambda _: print(
-                #         "Current position:", self.audio1.get_duration()
-                #     ),
-                # ),
             ]
 
         # happens when example is added to the page (when user chooses the Audio control from the grid)
@@ -261,12 +239,11 @@ def example():
 
         def change_position(self, e):
             self.position = e.data
-            duration = self.audio1.get_duration()
-            self.position_duration.value = (
-                f"{convertMillis(int(e.data))} / {convertMillis(duration)}"
-            )
+            self.position_duration.value = f"{convertMillis(int(e.data))} / {convertMillis(self.track_canvas.audio_duration)}"
             self.track_canvas.content.content.shapes[1].width = (
-                int(e.data) / duration * self.track_canvas.track_width
+                int(e.data)
+                / self.track_canvas.audio_duration
+                * self.track_canvas.track_width
             )
             e.control.page.update()
 
@@ -278,23 +255,6 @@ def example():
                 e.control.icon = ft.icons.VOLUME_UP
                 self.volume_slider.unmute()
             e.control.page.update()
-
-        def volume_down(self, _):
-            print(self.audio.volume)
-            self.audio1.volume -= 0.1
-            self.audio1.update()
-
-        def volume_up(self, _):
-            self.audio1.volume += 0.1
-            self.audio1.update()
-
-        def balance_left(self, _):
-            self.audio1.balance -= 0.1
-            self.audio1.update()
-
-        def balance_right(self, _):
-            self.audio1.balance += 0.1
-            self.audio1.update()
 
     example_column = AudioPlayer(url=url)
 
