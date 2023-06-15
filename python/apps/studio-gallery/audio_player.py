@@ -27,7 +27,7 @@ def example():
                             y=0,
                             height=5,
                             border_radius=3,
-                            paint=ft.Paint(color="black"),
+                            paint=ft.Paint(color=ft.colors.GREY_500),
                             width=100,
                         ),
                         cv.Rect(
@@ -35,7 +35,7 @@ def example():
                             y=0,
                             height=5,
                             border_radius=3,
-                            paint=ft.Paint(color="red"),
+                            paint=ft.Paint(color=ft.colors.GREY_900),
                             width=0,
                         ),
                     ],
@@ -170,7 +170,13 @@ def example():
 
         def change_position(self, e):
             print("Position changed:", e.data)
-            self.position_duration.value = f"{convertMillis(int(e.data))} / {convertMillis(self.audio1.get_duration())}"
+            duration = self.audio1.get_duration()
+            self.position_duration.value = (
+                f"{convertMillis(int(e.data))} / {convertMillis(duration)}"
+            )
+            self.track_canvas.content.content.shapes[1].width = (
+                int(e.data) / duration * self.track_canvas.track_width
+            )
             e.control.page.update()
 
         def volume_down(self, _):
