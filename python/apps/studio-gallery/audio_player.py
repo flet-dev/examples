@@ -29,7 +29,15 @@ def example():
                             border_radius=3,
                             paint=ft.Paint(color="black"),
                             width=100,
-                        )
+                        ),
+                        cv.Rect(
+                            x=0,
+                            y=0,
+                            height=5,
+                            border_radius=3,
+                            paint=ft.Paint(color="red"),
+                            width=0,
+                        ),
                     ],
                 ),
                 height=10,
@@ -48,14 +56,10 @@ def example():
             e.control.update()
 
         def find_position(self, e: ft.DragStartEvent):
-            print(f"Total track width: {self.content.width}")
-            print(f"Total track duration: {convertMillis(self.audio.get_duration())}")
-            print(
-                f"Position: {convertMillis(self.audio.get_duration()*e.local_x/self.track_width)}"
-            )
             position = int(self.audio.get_duration() * e.local_x / self.track_width)
+            self.content.content.shapes[1].width = e.local_x
+            self.update()
             self.on_change_position(position)
-            # print(e.control.content.controls[0].width)
 
         def change_cursor(self, e: ft.HoverEvent):
             e.control.mouse_cursor = ft.MouseCursor.CLICK
