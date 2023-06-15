@@ -63,10 +63,11 @@ def example():
             e.control.update()
 
         def change_volume(self, e):
-            self.change_audio_volume(e.local_x / self.content.width)
-            self.content.content.shapes[1].width = e.local_x  ## New volume
-            self.content.content.shapes[2].x = e.local_x  ## Thumb
-            self.page.update()
+            if e.local_x >= 0 and e.local_x <= self.content.width:
+                self.change_audio_volume(e.local_x / self.content.width)
+                self.content.content.shapes[1].width = e.local_x  ## New volume
+                self.content.content.shapes[2].x = e.local_x  ## Thumb
+                self.page.update()
 
         def mute(self):
             self.previous_volume = self.audio.volume
