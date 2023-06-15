@@ -20,6 +20,7 @@ def example():
             super().__init__()
             self.visible = False
             self.audio = audio
+            self.previous_volume = 1
             self.content = ft.Container(
                 width=100,
                 height=5,
@@ -68,9 +69,17 @@ def example():
             self.page.update()
 
         def mute(self):
-            print("Mute")
+            self.previous_volume = self.audio.volume
+            self.content.content.shapes[1].width = 0
+            self.content.content.shapes[2].x = 0
+            self.audio.volume = 0
 
         def unmute(self):
+            self.audio.volume = self.previous_volume
+            self.content.content.shapes[1].width = (
+                self.content.width * self.audio.volume
+            )
+            self.content.content.shapes[2].x = self.content.width * self.audio.volume
             print("Unmute")
 
     class TrackCanvas(ft.GestureDetector):
