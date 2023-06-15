@@ -15,6 +15,37 @@ def example():
         minutes = int(millis / (1000 * 60)) % 60
         return f"{minutes}:{seconds_str}"
 
+    class VolumeSlider(ft.GestureDetector):
+        def __init__(self, audio):
+            super().__init__()
+            self.visible = False
+            self.content = ft.Container(
+                width=100,
+                content=cv.Canvas(
+                    shapes=[
+                        cv.Rect(
+                            x=0,
+                            y=0,
+                            height=4,
+                            border_radius=3,
+                            paint=ft.Paint(color=ft.colors.GREY_900),
+                            width=100,
+                        ),
+                        cv.Circle(
+                            x=100,
+                            y=2,
+                            radius=5,
+                            paint=ft.Paint(color=ft.colors.GREY_900),
+                        ),
+                    ]
+                ),
+            )
+            self.on_hover = self.change_cursor
+
+        def change_cursor(self, e: ft.HoverEvent):
+            e.control.mouse_cursor = ft.MouseCursor.CLICK
+            e.control.update()
+
     class TrackCanvas(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
             super().__init__()
@@ -73,7 +104,7 @@ def example():
                 autoplay=False,
                 volume=1,
                 balance=0,
-                on_loaded=lambda _: print("Loaded"),
+                on_loaded=self.loaded,
                 on_duration_changed=lambda e: print("Duration changed:", e.data),
                 on_position_changed=self.change_position,
                 on_state_changed=self.state_changed,
@@ -95,54 +126,65 @@ def example():
                 on_click=self.pause,
             )
             self.position_duration = ft.Text()
+            self.volume_slider = VolumeSlider(audio=self.audio1)
             self.controls = [
                 self.track_canvas,
                 ft.Row(
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                     controls=[
                         self.play_button,
                         self.pause_button,
                         self.position_duration,
-                    ]
+                        self.volume_slider,
+                    ],
                 ),
-                ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
-                ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
-                ft.Row(
-                    [
-                        ft.ElevatedButton("Volume down", on_click=self.volume_down),
-                        ft.ElevatedButton("Volume up", on_click=self.volume_up),
-                    ]
-                ),
-                ft.Row(
-                    [
-                        ft.ElevatedButton("Balance left", on_click=self.balance_left),
-                        ft.ElevatedButton("Balance right", on_click=self.balance_right),
-                    ]
-                ),
-                ft.ElevatedButton(
-                    "Get duration",
-                    on_click=lambda _: print("Duration:", self.audio1.get_duration()),
-                ),
-                ft.ElevatedButton(
-                    "Get current position",
-                    on_click=lambda _: print(
-                        "Current position:", self.audio1.get_duration()
-                    ),
-                ),
+                # ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
+                # ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
+                # ft.Row(
+                #     [
+                #         ft.ElevatedButton("Volume down", on_click=self.volume_down),
+                #         ft.ElevatedButton("Volume up", on_click=self.volume_up),
+                #     ]
+                # ),
+                # ft.Row(
+                #     [
+                #         ft.ElevatedButton("Balance left", on_click=self.balance_left),
+                #         ft.ElevatedButton("Balance right", on_click=self.balance_right),
+                #     ]
+                # ),
+                # ft.ElevatedButton(
+                #     "Get duration",
+                #     on_click=lambda _: print("Duration:", self.audio1.get_duration()),
+                # ),
+                # ft.ElevatedButton(
+                #     "Get current position",
+                #     on_click=lambda _: print(
+                #         "Current position:", self.audio1.get_duration()
+                #     ),
+                # ),
             ]
 
         # happens when example is added to the page (when user chooses the Audio control from the grid)
         def did_mount(self):
             self.page.overlay.append(self.audio1)
             self.page.update()
-            self.position_duration.value = (
-                f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
-            )
-            self.play_button.visible = True
-            self.page.update()
+            # self.position_duration.value = (
+            #     f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
+            # )
+            # self.play_button.visible = True
+            # self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
         def will_unmount(self):
             self.page.overlay.remove(self.audio1)
+            self.page.update()
+
+        def loaded(self, e):
+            self.position_duration.value = (
+                f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
+            )
+            self.play_button.visible = True
+            self.volume_slider.visible = True
             self.page.update()
 
         def play(self, e):
@@ -187,6 +229,7 @@ def example():
             e.control.page.update()
 
         def volume_down(self, _):
+            print(self.audio.volume)
             self.audio1.volume -= 0.1
             self.audio1.update()
 
