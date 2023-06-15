@@ -69,10 +69,11 @@ def example():
                 balance=0,
                 on_loaded=lambda _: print("Loaded"),
                 on_duration_changed=lambda e: print("Duration changed:", e.data),
-                on_position_changed=lambda e: print("Position changed:", e.data),
-                on_state_changed=lambda e: print("State changed:", e.data),
+                on_position_changed=self.change_position,
+                on_state_changed=self.state_changed,
                 on_seek_complete=lambda _: print("Seek complete"),
             )
+            self.state = None
             self.track_canvas = TrackCanvas(audio=self.audio1)
             self.play_button = ft.IconButton(
                 icon=ft.icons.PLAY_ARROW,
@@ -82,7 +83,7 @@ def example():
             self.pause_button = ft.IconButton(
                 icon=ft.icons.PAUSE,
                 visible=False,
-                on_click=lambda _: self.audio1.pause(),
+                on_click=self.pause,
             )
             self.position_duration = ft.Text()
             self.controls = [
@@ -94,9 +95,6 @@ def example():
                         self.position_duration,
                     ]
                 ),
-                # ft.ElevatedButton("Play", on_click=lambda _: self.audio1.play()),
-                # ft.ElevatedButton("Pause", on_click=lambda _: self.audio1.pause()),
-                ft.ElevatedButton("Resume", on_click=lambda _: self.audio1.resume()),
                 ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
                 ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
                 ft.Row(
@@ -139,10 +137,29 @@ def example():
             self.page.update()
 
         def play(self, e):
-            self.audio1.play()
+            print(self.state)
+            if self.state == "paused":
+                self.audio1.resume()
+
+            else:
+                self.audio1.play()
             self.play_button.visible = False
             self.pause_button.visible = True
             self.page.update()
+
+        def pause(self, e):
+            self.audio1.pause()
+            self.play_button.visible = True
+            self.pause_button.visible = False
+            self.page.update()
+
+        def state_changed(self, e):
+            self.state = e.data
+
+        def change_position(self, e):
+            print("Position changed:", e.data)
+            self.position_duration.value = f"{convertMillis(int(e.data))} / {convertMillis(self.audio1.get_duration())}"
+            e.control.page.update()
 
         def volume_down(self, _):
             self.audio1.volume -= 0.1
