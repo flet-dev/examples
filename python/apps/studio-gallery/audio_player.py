@@ -31,6 +31,14 @@ def example():
                             y=0,
                             height=4,
                             border_radius=3,
+                            paint=ft.Paint(color=ft.colors.GREY_500),
+                            width=100,
+                        ),
+                        cv.Rect(
+                            x=0,
+                            y=0,
+                            height=4,
+                            border_radius=3,
                             paint=ft.Paint(color=ft.colors.GREY_900),
                             width=100,
                         ),
@@ -51,11 +59,9 @@ def example():
             e.control.update()
 
         def change_volume(self, e: ft.DragStartEvent):
-            volume = float(1 * e.local_x / self.content.width)
-            print(volume)
-            self.audio.volume = volume
-            self.content.content.shapes[1].x = e.local_x
-            # self.content.content.shapes[1].width = e.local_x
+            self.audio.volume = e.local_x / self.content.width
+            self.content.content.shapes[1].width = e.local_x  ## New volume
+            self.content.content.shapes[2].x = e.local_x  ## Thumb
             self.page.update()
 
     class TrackCanvas(ft.GestureDetector):
