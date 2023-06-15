@@ -82,7 +82,7 @@ def example():
             self.content.content.shapes[2].x = self.content.width * self.audio.volume
             print("Unmute")
 
-    class TrackCanvas(ft.GestureDetector):
+    class Track(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
             super().__init__()
             self.content = ft.Container(
@@ -133,8 +133,8 @@ def example():
             e.control.mouse_cursor = ft.MouseCursor.CLICK
             e.control.update()
 
-    class Example(ft.Column):
-        def __init__(self):
+    class AudioPlayer(ft.Column):
+        def __init__(self, url):
             super().__init__()
             self.audio1 = ft.Audio(
                 src=url,
@@ -149,7 +149,7 @@ def example():
             )
             self.state = None
             self.position = 0
-            self.track_canvas = TrackCanvas(
+            self.track_canvas = Track(
                 audio=self.audio1, on_change_position=self.seek_position
             )
             self.play_button = ft.IconButton(
@@ -300,7 +300,7 @@ def example():
             self.audio1.balance += 0.1
             self.audio1.update()
 
-    example_column = Example()
+    example_column = AudioPlayer(url=url)
 
     return example_column
 
@@ -309,6 +309,7 @@ def main(page: ft.Page):
     page.title = "Flet audio player example"
     page.window_width = 390
     page.window_height = 844
+
     page.add(example())
 
 
