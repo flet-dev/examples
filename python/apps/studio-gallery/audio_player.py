@@ -45,7 +45,7 @@ def example():
                         cv.Circle(
                             x=100,
                             y=2,
-                            radius=5,
+                            radius=6,
                             paint=ft.Paint(color=ft.colors.GREY_900),
                         ),
                     ]
@@ -65,7 +65,7 @@ def example():
 
         def change_volume(self, e):
             if e.local_x >= 0 and e.local_x <= self.content.width:
-                self.change_audio_volume(e.local_x / self.content.width)
+                self.change_audio_volume((e.local_x) / self.content.width)
                 self.content.content.shapes[1].width = e.local_x  ## New volume
                 self.content.content.shapes[2].x = e.local_x  ## Thumb
                 self.on_change_volume()
@@ -262,10 +262,19 @@ def example():
             e.control.page.update()
 
         def check_mute(self):
-            print(self.audio1.volume)
-            if self.audio1.volume == 0:
+            if (
+                int(self.audio1.volume * 100) == 0
+                and self.volume_icon.icon == ft.icons.VOLUME_UP
+            ):
                 self.volume_icon.icon = ft.icons.VOLUME_OFF
                 self.volume_slider.mute()
+                self.volume_icon.update()
+            elif (
+                int(self.audio1.volume * 100) != 0
+                and self.volume_icon.icon == ft.icons.VOLUME_OFF
+            ):
+                self.volume_icon.icon = ft.icons.VOLUME_UP
+                self.volume_slider.unmute()
                 self.volume_icon.update()
 
     example_column = AudioPlayer(url=url)
