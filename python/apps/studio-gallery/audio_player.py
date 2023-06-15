@@ -147,7 +147,6 @@ def example():
                 on_state_changed=self.state_changed,
                 on_seek_complete=lambda _: print("Seek complete"),
             )
-            self.state = None
             self.position = 0
             self.track_canvas = Track(
                 audio=self.audio1, on_change_position=self.seek_position
@@ -234,8 +233,6 @@ def example():
             self.page.update()
 
         def play(self, e):
-            print(self.state)
-            print(self.position)
             if self.position != 0:
                 self.audio1.resume()
 
@@ -252,8 +249,6 @@ def example():
             self.page.update()
 
         def state_changed(self, e):
-            self.state = e.data
-            print(e.data)
             if e.data == "completed":
                 self.play_button.visible = True
                 self.pause_button.visible = False
