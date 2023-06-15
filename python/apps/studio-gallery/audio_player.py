@@ -93,8 +93,9 @@ def example():
                 width=float("inf"),
             )
             self.audio = audio
-            # self.duration = duration
+            self.audio_duration = None
             self.on_pan_start = self.find_position
+            self.on_pan_update = self.find_position
             self.on_hover = self.change_cursor
             self.on_change_position = on_change_position
 
@@ -104,8 +105,8 @@ def example():
             e.control.shapes[0].width = e.width
             e.control.update()
 
-        def find_position(self, e: ft.DragStartEvent):
-            position = int(self.audio.get_duration() * e.local_x / self.track_width)
+        def find_position(self, e):
+            position = int(self.audio_duration * e.local_x / self.track_width)
             self.content.content.shapes[1].width = e.local_x
             self.update()
             self.on_change_position(position)
@@ -153,10 +154,14 @@ def example():
                         self.play_button,
                         self.pause_button,
                         self.position_duration,
-                        self.volume_slider,
+                        ft.Row(
+                            [
+                                ft.IconButton(icon=ft.icons.VOLUME_UP, visible=False),
+                                self.volume_slider,
+                            ]
+                        ),
                     ],
                 ),
-                ft.Slider(width=200),
                 # ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
                 # ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
                 # ft.Row(
@@ -186,6 +191,7 @@ def example():
         # happens when example is added to the page (when user chooses the Audio control from the grid)
         def did_mount(self):
             self.page.overlay.append(self.audio1)
+            # self.track_canvas.audio_duration = self.audio1.get_duration()
             self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
@@ -199,6 +205,7 @@ def example():
             )
             self.play_button.visible = True
             self.volume_slider.visible = True
+            self.track_canvas.audio_duration = self.audio1.get_duration()
             self.page.update()
 
         def play(self, e):
