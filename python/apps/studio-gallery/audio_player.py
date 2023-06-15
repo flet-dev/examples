@@ -62,11 +62,16 @@ def example():
             e.control.update()
 
         def change_volume(self, e):
-            # self.audio.volume = e.local_x / self.content.width
             self.change_audio_volume(e.local_x / self.content.width)
             self.content.content.shapes[1].width = e.local_x  ## New volume
             self.content.content.shapes[2].x = e.local_x  ## Thumb
             self.page.update()
+
+        def mute(self):
+            print("Mute")
+
+        def unmute(self):
+            print("Unmute")
 
     class TrackCanvas(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
@@ -263,8 +268,10 @@ def example():
         def volume_icon_clicked(self, e):
             if e.control.icon == ft.icons.VOLUME_UP:
                 e.control.icon = ft.icons.VOLUME_OFF
+                self.volume_slider.mute()
             else:
                 e.control.icon = ft.icons.VOLUME_UP
+                self.volume_slider.unmute()
             e.control.page.update()
 
         def volume_down(self, _):
