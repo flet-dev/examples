@@ -19,6 +19,7 @@ def example():
         def __init__(self, audio):
             super().__init__()
             self.visible = False
+            self.audio = audio
             self.content = ft.Container(
                 width=100,
                 height=5,
@@ -52,8 +53,10 @@ def example():
         def change_volume(self, e: ft.DragStartEvent):
             volume = float(1 * e.local_x / self.content.width)
             print(volume)
+            self.audio.volume = volume
+            self.content.content.shapes[1].x = e.local_x
             # self.content.content.shapes[1].width = e.local_x
-            self.update()
+            self.page.update()
 
     class TrackCanvas(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
@@ -113,7 +116,7 @@ def example():
                 autoplay=False,
                 volume=1,
                 balance=0,
-                on_loaded=self.loaded,
+                on_loaded=self.audio_loaded,
                 on_duration_changed=lambda e: print("Duration changed:", e.data),
                 on_position_changed=self.change_position,
                 on_state_changed=self.state_changed,
@@ -147,6 +150,7 @@ def example():
                         self.volume_slider,
                     ],
                 ),
+                ft.Slider(width=200),
                 # ft.ElevatedButton("Release", on_click=lambda _: self.audio1.release()),
                 # ft.ElevatedButton("Seek 2s", on_click=lambda _: self.audio1.seek(2000)),
                 # ft.Row(
@@ -177,18 +181,13 @@ def example():
         def did_mount(self):
             self.page.overlay.append(self.audio1)
             self.page.update()
-            # self.position_duration.value = (
-            #     f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
-            # )
-            # self.play_button.visible = True
-            # self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
         def will_unmount(self):
             self.page.overlay.remove(self.audio1)
             self.page.update()
 
-        def loaded(self, e):
+        def audio_loaded(self, e):
             self.position_duration.value = (
                 f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
             )
