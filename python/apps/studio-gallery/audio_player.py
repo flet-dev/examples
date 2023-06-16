@@ -199,7 +199,6 @@ def example():
         def did_mount(self):
             self.page.overlay.append(self.audio1)
             print("Audio added to overlay")
-            # self.track_canvas.audio_duration = self.audio1.get_duration()
             self.page.update()
 
         # happens when example is removed from the page (when user chooses to go back to the gallery)
@@ -209,14 +208,13 @@ def example():
             self.page.update()
 
         def audio_loaded(self, e):
+            self.track_canvas.audio_duration = self.audio1.get_duration()
             self.track_canvas.visible = True
-            self.position_duration.value = (
-                f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
-            )
+            self.position_duration.value = f"{convertMillis(0)} / {convertMillis(self.track_canvas.audio_duration)}"
             self.play_button.visible = True
             self.volume_slider.visible = True
             self.volume_icon.visible = True
-            self.track_canvas.audio_duration = self.audio1.get_duration()
+
             self.page.update()
 
         def play(self, e):
