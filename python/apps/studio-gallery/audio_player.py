@@ -18,7 +18,6 @@ def example():
     class VolumeSlider(ft.GestureDetector):
         def __init__(self, audio, on_change_volume):
             super().__init__()
-            self.visible = False
             self.audio = audio
             self.previous_volume = 1
             self.content = ft.Container(
@@ -88,7 +87,6 @@ def example():
     class Track(ft.GestureDetector):
         def __init__(self, audio, on_change_position):
             super().__init__()
-            self.visible = False
             self.content = ft.Container(
                 content=cv.Canvas(
                     on_resize=self.canvas_resized,
@@ -142,6 +140,7 @@ def example():
     class AudioPlayer(ft.Column):
         def __init__(self, url):
             super().__init__()
+            self.visible = False
             self.audio1 = ft.Audio(
                 src=url,
                 autoplay=False,
@@ -154,12 +153,9 @@ def example():
                 on_seek_complete=lambda _: print("Seek complete"),
             )
             self.position = 0
-            self.track_canvas = Track(
-                audio=self.audio1, on_change_position=self.seek_position
-            )
+            self.track = Track(audio=self.audio1, on_change_position=self.seek_position)
             self.play_button = ft.IconButton(
                 icon=ft.icons.PLAY_ARROW,
-                visible=False,
                 on_click=self.play,
             )
             self.pause_button = ft.IconButton(
@@ -174,11 +170,10 @@ def example():
             )
             self.volume_icon = ft.IconButton(
                 icon=ft.icons.VOLUME_UP,
-                visible=False,
                 on_click=self.volume_icon_clicked,
             )
             self.controls = [
-                self.track_canvas,
+                self.track,
                 ft.Row(
                     alignment=ft.MainAxisAlignment.SPACE_AROUND,
                     controls=[
@@ -208,14 +203,12 @@ def example():
             self.page.update()
 
         def audio_loaded(self, e):
-            self.track_canvas.audio_duration = self.audio1.get_duration()
-            self.track_canvas.visible = True
-            self.position_duration.value = f"{convertMillis(0)} / {convertMillis(self.track_canvas.audio_duration)}"
-            self.play_button.visible = True
-            self.volume_slider.visible = True
-            self.volume_icon.visible = True
-
-            self.page.update()
+            self.track.audio_duration = self.audio1.get_duration()
+            self.position_duration.value = (
+                f"{convertMillis(0)} / {convertMillis(self.track.audio_duration)}"
+            )
+            self.visible = True
+            self.update()
 
         def play(self, e):
             if self.position != 0:
@@ -244,11 +237,9 @@ def example():
 
         def change_position(self, e):
             self.position = e.data
-            self.position_duration.value = f"{convertMillis(int(e.data))} / {convertMillis(self.track_canvas.audio_duration)}"
-            self.track_canvas.content.content.shapes[1].width = (
-                int(e.data)
-                / self.track_canvas.audio_duration
-                * self.track_canvas.track_width
+            self.position_duration.value = f"{convertMillis(int(e.data))} / {convertMillis(self.track.audio_duration)}"
+            self.track.content.content.shapes[1].width = (
+                int(e.data) / self.track.audio_duration * self.track.track_width
             )
             e.control.page.update()
 
