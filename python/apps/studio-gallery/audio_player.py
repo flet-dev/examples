@@ -195,15 +195,17 @@ def example():
                 ),
             ]
 
-        # happens when example is added to the page (when user chooses the Audio control from the grid)
+        # happens when example is added to the page (when user chooses the Audio player from the gallery)
         def did_mount(self):
             self.page.overlay.append(self.audio1)
+            print("Audio added to overlay")
             # self.track_canvas.audio_duration = self.audio1.get_duration()
             self.page.update()
 
-        # happens when example is removed from the page (when user chooses different control group on the navigation rail)
+        # happens when example is removed from the page (when user chooses to go back to the gallery)
         def will_unmount(self):
             self.page.overlay.remove(self.audio1)
+            print("Audio removed from overlay")
             self.page.update()
 
         def audio_loaded(self, e):
