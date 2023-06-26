@@ -15,7 +15,10 @@ def main(page: ft.Page):
                 5,
                 ft.Paint(
                     gradient=ft.PaintLinearGradient(
-                        (0, 10), (0, 100), colors=[ft.colors.BLUE, ft.colors.YELLOW]
+                        (0, 10),
+                        (100, 50),
+                        colors=[ft.colors.BLUE, ft.colors.YELLOW],
+                        # rotation=math.pi / 2,
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),
@@ -32,20 +35,17 @@ def main(page: ft.Page):
                 ),
             ),
             cv.Path(
-                [
-                    cv.Path.MoveTo(60, 230),
-                    cv.Path.LineTo(110, 330),
-                    cv.Path.LineTo(10, 330),
-                    cv.Path.Close(),
-                ],
+                [cv.Path.Arc(10, 230, 100, 100, 3 * math.pi / 4, 3 * math.pi / 2)],
                 ft.Paint(
                     gradient=ft.PaintSweepGradient(
                         (60, 280),
-                        colors=[ft.colors.YELLOW, ft.colors.BLUE],
+                        colors=[ft.colors.YELLOW, ft.colors.PURPLE],
+                        color_stops=[0.0, 1.0],
                         start_angle=0,
                         end_angle=math.pi * 2,
+                        rotation=3 * math.pi / 4,
                     ),
-                    stroke_width=5,
+                    stroke_width=15,
                     stroke_join=ft.StrokeJoin.ROUND,
                     style=ft.PaintingStyle.STROKE,
                 ),
