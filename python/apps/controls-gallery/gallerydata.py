@@ -11,7 +11,7 @@ class GridItem:
     def __init__(self, id):
         self.id = id
         self.name = None
-        self.image_file_name = None
+        # self.image_file_name = None
         self.examples = []
         self.description = None
 
@@ -19,6 +19,7 @@ class GridItem:
 class ExampleItem:
     def __init__(self):
         self.name = None
+        self.order = None
         self.example = None
         self.source_code = None
 
@@ -46,39 +47,44 @@ class GalleryData:
         ControlGroup(
             name="navigation",
             label="Navigation",
-            icon=ft.icons.MENU,
-            selected_icon=ft.icons.MENU,
+            icon=ft.icons.MENU_SHARP,
+            selected_icon=ft.icons.MENU_SHARP,
         ),
         ControlGroup(
-            name="display",
-            label="Display",
+            name="displays",
+            label="Displays",
             icon=ft.icons.INFO_OUTLINED,
             selected_icon=ft.icons.INFO_SHARP,
         ),
         ControlGroup(
             name="buttons",
             label="Buttons",
-            icon=ft.icons.SMART_BUTTON,
-            selected_icon=ft.icons.SMART_BUTTON,
+            icon=ft.icons.SMART_BUTTON_SHARP,
+            selected_icon=ft.icons.SMART_BUTTON_SHARP,
         ),
         ControlGroup(
             name="input",
             label="Input",
-            icon=ft.icons.GRID_VIEW,
-            selected_icon=ft.icons.GRID_VIEW_SHARP,
+            icon=ft.icons.INPUT_SHARP,
+            selected_icon=ft.icons.INPUT_OUTLINED,
         ),
         ControlGroup(
             name="dialogs",
             label="Dialogs",
-            icon=ft.icons.INPUT,
-            selected_icon=ft.icons.INPUT,
+            icon=ft.icons.MESSAGE_OUTLINED,
+            selected_icon=ft.icons.MESSAGE_SHARP,
         ),
-        # ControlGroup(name='charts', label='Charts', icon=ft.icons.MESSAGE_OUTLINED, selected_icon=ft.icons.MESSAGE_SHARP),
+        ControlGroup(
+            name="charts",
+            label="Charts",
+            icon=ft.icons.INSERT_CHART_OUTLINED,
+            selected_icon=ft.icons.INSERT_CHART_SHARP,
+        ),
         ControlGroup(
             name="animations",
             label="Animations",
-            icon=ft.icons.ANIMATION,
-            selected_icon=ft.icons.ANIMATION,
+            icon=ft.icons.ANIMATION_SHARP,
+            selected_icon=ft.icons.ANIMATION_SHARP,
         ),
         ControlGroup(
             name="utility",
@@ -91,6 +97,12 @@ class GalleryData:
             label="Colors",
             icon=ft.icons.FORMAT_PAINT_OUTLINED,
             selected_icon=ft.icons.FORMAT_PAINT_SHARP,
+        ),
+        ControlGroup(
+            name="contrib",
+            label="Contrib",
+            icon=ft.icons.MY_LIBRARY_ADD_OUTLINED,
+            selected_icon=ft.icons.LIBRARY_ADD_SHARP,
         ),
     ]
 
@@ -108,7 +120,7 @@ class GalleryData:
         file_path = os.path.join(
             str(Path(__file__).parent), control_group_dir, control_dir
         )
-        example_files = [f for f in os.listdir(file_path) if f not in ["__pycache__"]]
+        example_files = [f for f in os.listdir(file_path) if not f.startswith("_")]
         return example_files
 
     def import_modules(self):
@@ -132,7 +144,6 @@ ft.app(target=main)
 
         for control_group_dir in self.destinations_list:
             for control_dir in self.list_control_dirs(control_group_dir.name):
-
                 grid_item = GridItem(control_dir)
 
                 for file in self.list_example_files(
@@ -145,6 +156,7 @@ ft.app(target=main)
                         print(f"{module_name!r} already in sys.modules")
                     else:
                         file_path = os.path.join(str(Path(__file__).parent), file_name)
+
                         spec = importlib.util.spec_from_file_location(
                             module_name, file_path
                         )
@@ -154,7 +166,7 @@ ft.app(target=main)
                         print(f"{module_name!r} has been imported")
                         if file == "index.py":
                             grid_item.name = module.name
-                            grid_item.image_file_name = module.image_file
+                            # grid_item.image_file_name = module.image_file
                             grid_item.description = module.description
                         else:
                             example_item = ExampleItem()
@@ -165,5 +177,9 @@ ft.app(target=main)
                                 example_item.source_code = code_text
                             example_item.example = module.example
                             example_item.name = module.name
+                            example_item.order = file[
+                                :2
+                            ]  # first 2 characters of example file name (e.g. '01')
                             grid_item.examples.append(example_item)
+                grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)

@@ -1,49 +1,39 @@
-import flet
-from flet import (
-    BeveledRectangleBorder,
-    ButtonStyle,
-    CircleBorder,
-    CountinuosRectangleBorder,
-    FilledButton,
-    Page,
-    RoundedRectangleBorder,
-    StadiumBorder,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.padding = 30
     page.spacing = 30
     page.add(
-        FilledButton(
+        ft.ElevatedButton(
             "Stadium",
-            style=ButtonStyle(
-                shape=StadiumBorder(),
+            style=ft.ButtonStyle(
+                shape=ft.StadiumBorder(),
             ),
         ),
-        FilledButton(
+        ft.ElevatedButton(
             "Rounded rectangle",
-            style=ButtonStyle(
-                shape=RoundedRectangleBorder(radius=10),
+            style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(radius=10),
             ),
         ),
-        FilledButton(
+        ft.ElevatedButton(
             "Continuous rectangle",
-            style=ButtonStyle(
-                shape=CountinuosRectangleBorder(radius=30),
+            style=ft.ButtonStyle(
+                shape=ft.CountinuosRectangleBorder(radius=30),
             ),
         ),
-        FilledButton(
+        ft.ElevatedButton(
             "Beveled rectangle",
-            style=ButtonStyle(
-                shape=BeveledRectangleBorder(radius=10),
+            style=ft.ButtonStyle(
+                shape=ft.BeveledRectangleBorder(radius=10),
             ),
         ),
-        FilledButton(
+        ft.ElevatedButton(
             "Circle",
-            style=ButtonStyle(shape=CircleBorder(), padding=30),
+            style=ft.ButtonStyle(shape=ft.CircleBorder(), padding=30),
         ),
     )
 
 
-flet.app(target=main)
+ft.app(main)
