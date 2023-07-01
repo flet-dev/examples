@@ -1,4 +1,4 @@
-app = "flet-icons-browser"
+app = "flet-counter-test-ios"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
