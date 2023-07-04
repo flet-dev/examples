@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def example():
+def example(page):
     class Task(ft.UserControl):
         def __init__(self, task_name, task_status_change, task_delete):
             super().__init__()
@@ -165,7 +165,7 @@ def example():
             super().update()
 
     app = TodoApp()
-    return app
+    return ft.SafeArea(app, expand=True)
 
 
 def main(page: ft.Page):
@@ -175,9 +175,9 @@ def main(page: ft.Page):
     page.add(
         ft.Row(
             [ft.Text(value="Todos", style="headlineMedium")],
-            alignment="center",
+            alignment=ft.MainAxisAlignment.CENTER,
         ),
-        example(),
+        example(page),
     )
 
 

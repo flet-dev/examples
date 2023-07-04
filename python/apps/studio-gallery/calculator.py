@@ -293,7 +293,7 @@ class CalculatorApp(UserControl):
         self.new_operand = True
 
 
-def example():
+def example(page):
     calc = CalculatorApp()
 
     return calc
@@ -303,7 +303,7 @@ def main(page: ft.Page):
     page.title = "Flet calculator example"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":
