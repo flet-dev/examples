@@ -1,7 +1,7 @@
 import os
 
 import flet as ft
-from flet.auth.providers.github_oauth_provider import GitHubOAuthProvider
+from flet.auth.providers import GitHubOAuthProvider
 
 GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
 assert GITHUB_CLIENT_ID, "set GITHUB_CLIENT_ID environment variable"
@@ -10,7 +10,6 @@ assert GITHUB_CLIENT_SECRET, "set GITHUB_CLIENT_SECRET environment variable"
 
 
 def main(page: ft.Page):
-
     provider = GitHubOAuthProvider(
         client_id=GITHUB_CLIENT_ID,
         client_secret=GITHUB_CLIENT_SECRET,
