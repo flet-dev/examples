@@ -1,10 +1,11 @@
 import flet as ft
 
 
-def example():
+def example(page):
     return ft.Column(
-        expand=True,
+        scroll=ft.ScrollMode.AUTO,
         spacing=20,
+        expand=True,
         # alignment=ft.MainAxisAlignment.CENTER,
         controls=[
             ft.Row(
@@ -97,7 +98,7 @@ def main(page: ft.Page):
     page.title = "Flet buttons example"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":

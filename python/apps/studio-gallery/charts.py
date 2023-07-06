@@ -285,8 +285,9 @@ def bar_chart():
         max_y=110,
         interactive=True,
         # expand=True,
-        width=700,
-        height=500,
+        # width=700,
+        # height=500,
+        aspect_ratio=1,
     )
 
     # return chart
@@ -381,13 +382,14 @@ def pie_chart():
     )
 
 
-def example():
+def example(page):
     def tabs_changed(e):
         print(f"Tabs changed to{e.control.selected_index}")
 
     charts = ft.Tabs(
         selected_index=0,
         scrollable=False,
+        expand=True,
         # on_change=tabs_changed,
         tabs=[
             ft.Tab(text="LineChart", content=line_chart()),
@@ -407,7 +409,7 @@ def main(page: ft.Page):
     page.title = "Flet charts example"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-pip install flet --pre
+pip install flet
 flet --version
 flet publish python/apps/todo/todo.py --distpath python/dist/todo --base-url todo --pre --app-name "Flet To-Do" --app-description "A classic To-Do app inspired by TodoMVC project."
 flet publish python/apps/icons-browser/main.py --distpath python/dist/icons-browser --base-url icons-browser --pre --app-name "Flet Icons Browser" --app-description "Quickly search through icons collection to use in your app."

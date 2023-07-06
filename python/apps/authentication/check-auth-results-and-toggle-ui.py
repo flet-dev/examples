@@ -2,11 +2,10 @@ import os
 
 import flet
 from flet import ElevatedButton, LoginEvent, Page
-from flet.auth.providers.github_oauth_provider import GitHubOAuthProvider
+from flet.auth.providers import GitHubOAuthProvider
 
 
 def main(page: Page):
-
     provider = GitHubOAuthProvider(
         client_id=os.getenv("GITHUB_CLIENT_ID"),
         client_secret=os.getenv("GITHUB_CLIENT_SECRET"),

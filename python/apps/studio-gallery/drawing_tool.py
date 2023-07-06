@@ -2,7 +2,7 @@ import flet as ft
 import flet.canvas as cv
 
 
-def example():
+def example(page):
     class State:
         x: float
         y: float
@@ -20,6 +20,7 @@ def example():
         "pink",
         "lime",
         "black",
+        "white",
     ]
 
     color_buttons = []
@@ -27,9 +28,9 @@ def example():
     def color_changed(e):
         state.color = e.control.bgcolor
         for color_button in color_buttons:
-            color_button.border = None
+            color_button.border = ft.border.all(1, ft.colors.BLACK12)
             color_button.update()
-        e.control.border = ft.border.all(2)
+        e.control.border = ft.border.all(3)
         e.control.update()
 
     for color in colors:
@@ -39,6 +40,7 @@ def example():
                 height=30,
                 border_radius=30,
                 bgcolor=color,
+                border=ft.border.all(1, ft.colors.BLACK12),
                 on_click=color_changed,
             )
         )
@@ -54,7 +56,12 @@ def example():
                 state.y,
                 e.local_x,
                 e.local_y,
-                paint=ft.Paint(stroke_width=3, color=state.color),
+                paint=ft.Paint(
+                    stroke_width=5,
+                    color=state.color,
+                    stroke_cap=ft.StrokeCap.ROUND,
+                    stroke_join=ft.StrokeJoin.ROUND,
+                ),
             )
         )
         cp.update()
@@ -63,30 +70,34 @@ def example():
 
     cp = cv.Canvas(
         [
-            cv.Fill(
-                ft.Paint(
-                    gradient=ft.PaintLinearGradient(
-                        (0, 0), (600, 600), colors=[ft.colors.CYAN_50, ft.colors.GREY]
-                    )
-                )
-            ),
+            cv.Fill(ft.Paint(color=ft.colors.WHITE)),
         ],
-        content=ft.GestureDetector(
-            on_pan_start=pan_start,
-            on_pan_update=pan_update,
-            drag_interval=10,
+        content=ft.Container(
+            ft.GestureDetector(
+                on_pan_start=pan_start,
+                on_pan_update=pan_update,
+                drag_interval=10,
+            ),
+            border_radius=5,
+            border=ft.border.all(2, ft.colors.BLACK38),
         ),
         expand=False,
     )
 
-    return ft.Column(
+    return ft.SafeArea(
+        ft.Column(
+            controls=[
+                ft.Row(
+                    controls=color_buttons, alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+                ),
+                ft.Container(
+                    cp,
+                    border_radius=5,
+                    expand=True,
+                ),
+            ],
+        ),
         expand=True,
-        controls=[
-            ft.Row(
-                controls=color_buttons, alignment=ft.MainAxisAlignment.SPACE_BETWEEN
-            ),
-            ft.Container(cp, border_radius=5, expand=True),
-        ],
     )
 
 
@@ -94,7 +105,7 @@ def main(page: ft.Page):
     page.title = "Free-hand drawing tool"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def example():
+def example(page):
     gender = ft.RadioGroup(
         content=ft.Row(
             [
@@ -57,42 +57,45 @@ def example():
 
     submit = ft.FilledButton("Submit", on_click=submit_form)
 
-    return ft.Column(
+    return ft.SafeArea(
+        ft.Column(
+            scroll=ft.ScrollMode.AUTO,
+            # alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.TextField(
+                    label="First name",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField(
+                    label="Last name",
+                    keyboard_type=ft.KeyboardType.NAME,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField(
+                    label="Email",
+                    keyboard_type=ft.KeyboardType.EMAIL,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.TextField(
+                    label="Age",
+                    keyboard_type=ft.KeyboardType.NUMBER,
+                    on_blur=validate_required_text_field,
+                ),
+                ft.Text("Gender:"),
+                gender,
+                ft.Divider(thickness=1),
+                choice_of_instrument,
+                ft.Text("Pick days for classes:"),
+                monday,
+                tuesday,
+                wednesday,
+                thursday,
+                friday,
+                ft.Row(controls=[submit], alignment=ft.MainAxisAlignment.CENTER),
+            ],
+        ),
         expand=True,
-        # alignment=ft.MainAxisAlignment.CENTER,
-        controls=[
-            ft.TextField(
-                label="First name",
-                keyboard_type=ft.KeyboardType.NAME,
-                on_blur=validate_required_text_field,
-            ),
-            ft.TextField(
-                label="Last name",
-                keyboard_type=ft.KeyboardType.NAME,
-                on_blur=validate_required_text_field,
-            ),
-            ft.TextField(
-                label="Email",
-                keyboard_type=ft.KeyboardType.EMAIL,
-                on_blur=validate_required_text_field,
-            ),
-            ft.TextField(
-                label="Age",
-                keyboard_type=ft.KeyboardType.NUMBER,
-                on_blur=validate_required_text_field,
-            ),
-            ft.Text("Gender:"),
-            gender,
-            ft.Divider(thickness=1),
-            choice_of_instrument,
-            ft.Text("Pick days for classes:"),
-            monday,
-            tuesday,
-            wednesday,
-            thursday,
-            friday,
-            ft.Row(controls=[submit], alignment=ft.MainAxisAlignment.CENTER),
-        ],
     )
 
 
@@ -100,7 +103,7 @@ def main(page: ft.Page):
     page.title = "Flet entry form example"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(main))
 
 
 if __name__ == "__main__":

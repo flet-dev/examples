@@ -1,5 +1,13 @@
+import audio_player
+import buttons
+import calculator
+import charts
+import counter
+import drawing_tool
+import entry_form
 import flet as ft
-import counter, to_do, calculator, drawing_tool, buttons, entry_form, charts, flet_animation, audio_player
+import flet_animation
+import to_do
 
 
 class AppTile(ft.ListTile):
@@ -43,55 +51,55 @@ def main(page: ft.Page):
                 AppTile(
                     name="Counter",
                     file_name="counter.py",
-                    view=counter.example(),
+                    view=counter.example(page),
                     icon_name=ft.icons.ADD,
                 ),
                 AppTile(
                     name="To-Do",
                     file_name="to_do.py",
-                    view=to_do.example(),
+                    view=to_do.example(page),
                     icon_name=ft.icons.CHECK_BOX_OUTLINED,
                 ),
                 AppTile(
                     name="Calculator",
                     file_name="calculator.py",
-                    view=calculator.example(),
+                    view=calculator.example(page),
                     icon_name=ft.icons.CALCULATE_OUTLINED,
                 ),
                 AppTile(
                     name="Drawing Tool",
                     file_name="drawing_tool.py",
-                    view=drawing_tool.example(),
+                    view=drawing_tool.example(page),
                     icon_name=ft.icons.DRAW_OUTLINED,
                 ),
                 AppTile(
                     name="Buttons",
                     file_name="buttons.py",
-                    view=buttons.example(),
+                    view=buttons.example(page),
                     icon_name=ft.icons.SMART_BUTTON_OUTLINED,
                 ),
                 AppTile(
                     name="Entry Form",
                     file_name="entry_form.py",
-                    view=entry_form.example(),
+                    view=entry_form.example(page),
                     icon_name=ft.icons.LOGIN,
                 ),
                 AppTile(
                     name="Charts",
                     file_name="charts.py",
-                    view=charts.example(),
+                    view=charts.example(page),
                     icon_name=ft.icons.INSERT_CHART_OUTLINED,
                 ),
                 AppTile(
                     name="Flet Animation",
                     file_name="flet_animation.py",
-                    view=flet_animation.example(page=page),
+                    view=flet_animation.example(page),
                     icon_name=ft.icons.ANIMATION,
                 ),
                 AppTile(
                     name="Audio Player",
                     file_name="audio_player.py",
-                    view=audio_player.example(),
+                    view=audio_player.example(page),
                     icon_name=ft.icons.AUDIOTRACK,
                 ),
             ]
