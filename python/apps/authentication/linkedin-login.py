@@ -2,11 +2,10 @@ import os
 
 import flet
 from flet import ElevatedButton, Page
-from flet.auth.oauth_provider import OAuthProvider
+from flet.auth import OAuthProvider
 
 
 def main(page: Page):
-
     provider = OAuthProvider(
         client_id=os.getenv("LINKEDIN_CLIENT_ID"),
         client_secret=os.getenv("LINKEDIN_CLIENT_SECRET"),

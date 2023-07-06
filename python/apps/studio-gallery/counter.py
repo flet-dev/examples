@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def example():
+def example(page):
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
 
     def minus_click(e):
@@ -32,7 +32,7 @@ def main(page: ft.Page):
     page.title = "Flet counter example"
     page.window_width = 390
     page.window_height = 844
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":

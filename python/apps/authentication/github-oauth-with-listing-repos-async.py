@@ -1,9 +1,9 @@
 import json
 import os
 
-import httpx
 import flet as ft
-from flet.auth.providers.github_oauth_provider import GitHubOAuthProvider
+import httpx
+from flet.auth.providers import GitHubOAuthProvider
 from flet.security import decrypt, encrypt
 
 MY_APP_SECRET_KEY = os.getenv("MY_APP_SECRET_KEY")

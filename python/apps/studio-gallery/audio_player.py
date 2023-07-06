@@ -1,7 +1,9 @@
+import time
+
 import flet as ft
 
 
-def example():
+def example(page):
     import flet.canvas as cv
 
     url = "https://github.com/mdn/webaudio-examples/blob/main/audio-analyser/viper.mp3?raw=true"
@@ -141,7 +143,7 @@ def example():
 
     class AudioPlayer(ft.Column):
         def __init__(self, url):
-            super().__init__()
+            super().__init__(tight=True)
             self.audio1 = ft.Audio(
                 src=url,
                 autoplay=False,
@@ -207,6 +209,7 @@ def example():
             self.page.update()
 
         def audio_loaded(self, e):
+            time.sleep(0.1)
             self.track_canvas.visible = True
             self.position_duration.value = (
                 f"{convertMillis(0)} / {convertMillis(self.audio1.get_duration())}"
@@ -277,9 +280,9 @@ def example():
                 self.volume_slider.unmute()
                 self.volume_icon.update()
 
-    example_column = AudioPlayer(url=url)
+    player = AudioPlayer(url=url)
 
-    return example_column
+    return ft.Container(player, alignment=ft.alignment.center, expand=True)
 
 
 def main(page: ft.Page):
@@ -287,7 +290,7 @@ def main(page: ft.Page):
     page.window_width = 390
     page.window_height = 844
 
-    page.add(example())
+    page.add(example(page))
 
 
 if __name__ == "__main__":
