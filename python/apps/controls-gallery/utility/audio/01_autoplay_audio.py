@@ -2,27 +2,34 @@ import flet as ft
 
 name = "Autoplay Audio"
 
+
 def example():
     class Example(ft.Column):
         def __init__(self):
             super().__init__()
             self.audio1 = ft.Audio(
-                src="https://luan.xyz/files/audio/ambient_c_motion.mp3", autoplay=True)
-            
-            self.controls = [ft.Text("This is an app with background audio. Note: this example doesn't work in Safari browser."),
-        ft.ElevatedButton("Stop playing", on_click=lambda _: self.audio1.pause())]
-            
+                src="https://luan.xyz/files/audio/ambient_c_motion.mp3", autoplay=True
+            )
+
+            self.controls = [
+                ft.Text(
+                    "This is an app with background audio. Note: this example doesn't work in Safari browser."
+                ),
+                ft.ElevatedButton(
+                    "Stop playing", on_click=lambda _: self.audio1.pause()
+                ),
+            ]
 
         # happens when example is added to the page (when user chooses the Audio control from the grid)
-        def did_mount(self):
+        async def did_mount_async(self):
             self.page.overlay.append(self.audio1)
-            self.page.update()
-        
+            await self.page.update_async()
+
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        def will_unmount(self):
+        async def will_unmount_async(self):
             self.page.overlay.remove(self.audio1)
-            self.page.update()
-  
+            await self.page.update_async()
+
     audio_example = Example()
-    
+
     return audio_example

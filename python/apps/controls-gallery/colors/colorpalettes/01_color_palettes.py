@@ -4,15 +4,15 @@ name = "Color palettes"
 
 
 def example():
-    class ColorSwatch():
+    class ColorSwatch:
         def __init__(self, name, display_name, accent=True):
             self.name = name
             self.display_name = display_name
             self.accent = accent
 
-    class Color():
+    class Color:
         def __init__(self, swatch, shade="", accent=False):
-            if shade=="":
+            if shade == "":
                 self.name = swatch.name
                 self.display_name = swatch.display_name
             else:
@@ -23,12 +23,11 @@ def example():
                     self.name = f"{swatch.name}accent{shade}"
                     self.display_name = f"{swatch.display_name}_ACCENT_{shade}"
 
-            
-    SHADES = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
-    ACCENT_SHADES = ['100', '200', '400', '700']
-    WHITE_SHADES = ['10', '12', '24', '30', '38', '54', '70']
-    BLACK_SHADES = ['12', '26', '38', '45', '54', '87']
-    
+    SHADES = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"]
+    ACCENT_SHADES = ["100", "200", "400", "700"]
+    WHITE_SHADES = ["10", "12", "24", "30", "38", "54", "70"]
+    BLACK_SHADES = ["12", "26", "38", "45", "54", "87"]
+
     swatches = [
         ColorSwatch(name="red", display_name="RED"),
         ColorSwatch(name="pink", display_name="PINK"),
@@ -50,21 +49,21 @@ def example():
         ColorSwatch(name="grey", display_name="GREY", accent=False),
         ColorSwatch(name="bluegrey", display_name="BLUE_GREY", accent=False),
         ColorSwatch(name="white", display_name="WHITE"),
-        ColorSwatch(name="black", display_name="BLACK")
-        ]
-    
+        ColorSwatch(name="black", display_name="BLACK"),
+    ]
+
     def generate_color_names(swatch):
         colors = []
         base_color = Color(swatch=swatch)
         colors.append(base_color)
         if swatch.name == "white":
             for shade in WHITE_SHADES:
-                color = Color(swatch=swatch, shade = shade)
+                color = Color(swatch=swatch, shade=shade)
                 colors.append(color)
             return colors
         if swatch.name == "black":
             for shade in BLACK_SHADES:
-                color = Color(swatch=swatch, shade = shade)
+                color = Color(swatch=swatch, shade=shade)
                 colors.append(color)
             return colors
         for shade in SHADES:
@@ -76,33 +75,38 @@ def example():
                 colors.append(color)
         return colors
 
-
     responsive_row = ft.ResponsiveRow(
-        run_spacing=10,
-        vertical_alignment=ft.CrossAxisAlignment.START
+        run_spacing=10, vertical_alignment=ft.CrossAxisAlignment.START
     )
-    
+
     responsive_row.controls = []
 
-    def copy_to_clipboard(e):
-        source_code = e.control.content.value
-        e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
-        e.control.page.show_snack_bar(
-            ft.SnackBar(ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"), open=True)
+    async def copy_to_clipboard(e):
+        await e.control.page.set_clipboard_async(f"ft.colors.{e.control.content.value}")
+        await e.control.page.show_snack_bar_async(
+            ft.SnackBar(
+                ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"),
+                open=True,
+            )
         )
-    
+
     for swatch in swatches:
         swatch_colors = ft.Column(spacing=0, controls=[])
-        responsive_row.controls.append(ft.Column(
-            [ft.Container(border_radius=10, content=swatch_colors)],
-            col={"sm": 6, "md": 4, "xl": 2}))
+        responsive_row.controls.append(
+            ft.Column(
+                [ft.Container(border_radius=10, content=swatch_colors)],
+                col={"sm": 6, "md": 4, "xl": 2},
+            )
+        )
         for color in generate_color_names(swatch):
-            swatch_colors.controls.append(ft.Container(
-                height=50,
-                alignment=ft.alignment.center,
-                bgcolor=color.name,
-                on_click=copy_to_clipboard,
-                content=ft.Text(color.display_name, weight=ft.FontWeight.W_500)))
-
+            swatch_colors.controls.append(
+                ft.Container(
+                    height=50,
+                    alignment=ft.alignment.center,
+                    bgcolor=color.name,
+                    on_click=copy_to_clipboard,
+                    content=ft.Text(color.display_name, weight=ft.FontWeight.W_500),
+                )
+            )
 
     return responsive_row

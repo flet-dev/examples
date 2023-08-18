@@ -2,8 +2,8 @@ import flet as ft
 
 name = "PieChart 2"
 
-def example():
 
+def example():
     normal_radius = 50
     hover_radius = 60
     normal_title_style = ft.TextStyle(
@@ -16,7 +16,7 @@ def example():
         shadow=ft.BoxShadow(blur_radius=2, color=ft.colors.BLACK54),
     )
 
-    def on_chart_event(e: ft.PieChartEvent):
+    async def on_chart_event(e: ft.PieChartEvent):
         for idx, section in enumerate(chart.sections):
             if idx == e.section_index:
                 section.radius = hover_radius
@@ -24,7 +24,7 @@ def example():
             else:
                 section.radius = normal_radius
                 section.title_style = normal_title_style
-        chart.update()
+        await chart.update_async()
 
     chart = ft.PieChart(
         sections=[
@@ -62,5 +62,5 @@ def example():
         on_chart_event=on_chart_event,
         expand=True,
     )
-    
+
     return chart

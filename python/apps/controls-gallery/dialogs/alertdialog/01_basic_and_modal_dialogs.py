@@ -2,16 +2,15 @@ import flet as ft
 
 name = "Basic and modal dialogs"
 
+
 def example():
-
-
     dlg = ft.AlertDialog(
         title=ft.Text("Hello, you!"), on_dismiss=lambda e: print("Dialog dismissed!")
     )
 
-    def close_dlg(e):
+    async def close_dlg(e):
         dlg_modal.open = False
-        e.control.page.update()
+        await e.control.page.update_async()
 
     dlg_modal = ft.AlertDialog(
         modal=True,
@@ -25,19 +24,19 @@ def example():
         on_dismiss=lambda e: print("Modal dialog dismissed!"),
     )
 
-    def open_dlg(e):
+    async def open_dlg(e):
         e.control.page.dialog = dlg
         dlg.open = True
-        e.control.page.update()
+        await e.control.page.update_async()
 
-    def open_dlg_modal(e):
+    async def open_dlg_modal(e):
         e.control.page.dialog = dlg_modal
         dlg_modal.open = True
-        e.control.page.update()
-    
+        await e.control.page.update_async()
+
     return ft.Column(
-            [
-                ft.ElevatedButton("Open dialog", on_click=open_dlg),
-                ft.ElevatedButton("Open modal dialog", on_click=open_dlg_modal)
-            ]
-        )
+        [
+            ft.ElevatedButton("Open dialog", on_click=open_dlg),
+            ft.ElevatedButton("Open modal dialog", on_click=open_dlg_modal),
+        ]
+    )

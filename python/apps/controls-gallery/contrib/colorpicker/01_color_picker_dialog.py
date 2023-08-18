@@ -2,26 +2,26 @@ import flet as ft
 
 name = "ColorPicker dialog"
 
-def example():
 
+def example():
     from flet_contrib.color_picker import ColorPicker
 
-    def open_color_picker(e):
+    async def open_color_picker(e):
         e.control.page.dialog = d
         d.open = True
-        e.control.page.update()
+        await e.control.page.update_async()
 
     color_picker = ColorPicker(color="#c8df6f", width=300)
     color_icon = ft.IconButton(icon=ft.icons.BRUSH, on_click=open_color_picker)
 
-    def change_color(e):
+    async def change_color(e):
         color_icon.icon_color = color_picker.color
         d.open = False
-        e.control.page.update()
+        await e.control.page.update_async()
 
-    def close_dialog(e):
+    async def close_dialog(e):
         d.open = False
-        d.update()
+        await d.update_async()
 
     d = ft.AlertDialog(
         content=color_picker,
@@ -32,5 +32,5 @@ def example():
         actions_alignment=ft.MainAxisAlignment.END,
         on_dismiss=change_color,
     )
-    
+
     return color_icon

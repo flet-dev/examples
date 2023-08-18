@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Row wrapping"
 
-def example():
 
+def example():
     def items(count):
         items = []
         for i in range(1, count + 1):
@@ -19,9 +19,9 @@ def example():
             )
         return items
 
-    def slider_change(e):
+    async def slider_change(e):
         row.width = float(e.control.value)
-        row.update()
+        await row.update_async()
 
     width_slider = ft.Slider(
         min=0,
@@ -41,11 +41,11 @@ def example():
     )
 
     return ft.Column(
-            [
-                ft.Text(
-                    "Change the row width to see how child items wrap onto multiple rows:"
-                ),
-                width_slider,
-                row
-            ]
-        )
+        [
+            ft.Text(
+                "Change the row width to see how child items wrap onto multiple rows:"
+            ),
+            width_slider,
+            row,
+        ]
+    )
