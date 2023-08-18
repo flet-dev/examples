@@ -212,14 +212,14 @@ websockets = ">=11.0.3,<12.0.0"
 
 [[package]]
 name = "flet-contrib"
-version = "2023.8.9"
+version = "2023.8.18"
 description = "Flet controls by the community"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "flet_contrib-2023.8.9-py3-none-any.whl", hash = "sha256:b8c4a59457206d80db4e673fedf994ba44f3775f896e03e95d36629efac77e87"},
-    {file = "flet_contrib-2023.8.9.tar.gz", hash = "sha256:0deeca7ff6e4d3b3cf51d2ae198e626d3a3bd6d8c0b812060785f5d5013aac6c"},
+    {file = "flet_contrib-2023.8.18-py3-none-any.whl", hash = "sha256:92fd1b73aeff2077c451feac9abea97ce0f4da5fe6e8428cd75bdd162fe509c6"},
+    {file = "flet_contrib-2023.8.18.tar.gz", hash = "sha256:3e18e04f22b34fd576ed76948c5bf1774d4b73382c1abc8317699cf816e41211"},
 ]
 
 [package.dependencies]
