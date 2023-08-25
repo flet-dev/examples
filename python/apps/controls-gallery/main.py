@@ -1,7 +1,9 @@
 import logging
+from pathlib import Path
 
 import flet as ft
 import flet.version
+import flet_fastapi
 from gallerydata import GalleryData
 from popup_color_item import PopupColorItem
 
@@ -11,6 +13,8 @@ logging.basicConfig(level=logging.INFO)
 
 
 async def main(page: ft.Page):
+    page.title = "Flet controls gallery"
+
     page.fonts = {
         "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
     }
@@ -282,4 +286,10 @@ async def main(page: ft.Page):
     await page.go_async(page.route)
 
 
-ft.app(target=main, assets_dir="assets", view=ft.AppView.FLET_APP)
+app = flet_fastapi.app(
+    main, assets_dir=str(Path(__file__).resolve().parent.joinpath("assets"))
+)
+
+
+if __name__ == "__main__":
+    ft.app(main, assets_dir="assets")

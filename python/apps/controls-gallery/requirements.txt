@@ -1,2 +1,4 @@
-flet==0.9.0
+flet-fastapi
 flet-contrib
+gunicorn
+uvicorn
