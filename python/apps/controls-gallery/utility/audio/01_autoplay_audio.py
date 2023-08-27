@@ -11,13 +11,14 @@ def example():
                 src="https://luan.xyz/files/audio/ambient_c_motion.mp3", autoplay=True
             )
 
+            async def pause_audio(e):
+                await self.audio1.pause_async()
+
             self.controls = [
                 ft.Text(
                     "This is an app with background audio. Note: this example doesn't work in Safari browser."
                 ),
-                ft.ElevatedButton(
-                    "Stop playing", on_click=lambda _: self.audio1.pause()
-                ),
+                ft.ElevatedButton("Stop playing", on_click=pause_audio),
             ]
 
         # happens when example is added to the page (when user chooses the Audio control from the grid)
