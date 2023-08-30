@@ -2,17 +2,17 @@ import flet as ft
 
 name = "PieChart 1"
 
-def example():
 
+def example():
     normal_border = ft.BorderSide(0, ft.colors.with_opacity(0, ft.colors.WHITE))
     hovered_border = ft.BorderSide(6, ft.colors.WHITE)
 
-    def on_chart_event(e: ft.PieChartEvent):
+    async def on_chart_event(e: ft.PieChartEvent):
         for idx, section in enumerate(chart.sections):
             section.border_side = (
                 hovered_border if idx == e.section_index else normal_border
             )
-        chart.update()
+        await chart.update_async()
 
     chart = ft.PieChart(
         sections=[
@@ -46,5 +46,5 @@ def example():
         on_chart_event=on_chart_event,
         expand=True,
     )
-    
+
     return chart

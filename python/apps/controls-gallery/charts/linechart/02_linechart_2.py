@@ -2,8 +2,8 @@ import flet as ft
 
 name = "LineChart 2"
 
-def example():
 
+def example():
     class State:
         toggle = True
 
@@ -120,10 +120,10 @@ def example():
         # animate=5000,
         # expand=True,
         width=700,
-        height=500
+        height=500,
     )
 
-    def toggle_data(e):
+    async def toggle_data(e):
         if s.toggle:
             chart.data_series = data_2
             chart.interactive = False
@@ -131,9 +131,6 @@ def example():
             chart.data_series = data_1
             chart.interactive = True
         s.toggle = not s.toggle
-        chart.update()
-    
-    return ft.Column(controls=[
-        ft.ElevatedButton("avg", on_click=toggle_data), 
-        chart
-    ])
+        await chart.update_async()
+
+    return ft.Column(controls=[ft.ElevatedButton("avg", on_click=toggle_data), chart])

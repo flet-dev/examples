@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Row spacing"
 
-def example():
 
+def example():
     def items(count):
         items = []
         for i in range(1, count + 1):
@@ -19,9 +19,9 @@ def example():
             )
         return items
 
-    def gap_slider_change(e):
+    async def gap_slider_change(e):
         row.spacing = int(e.control.value)
-        row.update()
+        await row.update_async()
 
     gap_slider = ft.Slider(
         min=0,
@@ -34,4 +34,4 @@ def example():
 
     row = ft.Row(spacing=0, controls=items(10))
 
-    return ft.Column([ft.Column([ ft.Text("Spacing between items"), gap_slider]), row])
+    return ft.Column([ft.Column([ft.Text("Spacing between items"), gap_slider]), row])

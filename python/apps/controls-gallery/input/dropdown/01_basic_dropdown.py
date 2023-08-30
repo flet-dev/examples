@@ -2,11 +2,11 @@ import flet as ft
 
 name = "Basic dropdown"
 
-def example():
 
-    def button_clicked(e):
+def example():
+    async def button_clicked(e):
         t.value = f"Dropdown value is:  {dd.value}"
-        t.update()
+        await t.update_async()
 
     t = ft.Text()
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
@@ -18,5 +18,5 @@ def example():
             ft.dropdown.Option("Blue"),
         ],
     )
-    
+
     return ft.Column(controls=[dd, b, t])

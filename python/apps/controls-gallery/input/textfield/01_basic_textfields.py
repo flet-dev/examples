@@ -2,11 +2,11 @@ import flet as ft
 
 name = "Basic TextFields"
 
-def example():
 
-    def button_clicked(e):
+def example():
+    async def button_clicked(e):
         t.value = f"Textboxes values are:  '{tb1.value}', '{tb2.value}', '{tb3.value}', '{tb4.value}', '{tb5.value}'."
-        t.update()
+        await t.update_async()
 
     t = ft.Text()
     tb1 = ft.TextField(label="Standard")
@@ -15,8 +15,5 @@ def example():
     tb4 = ft.TextField(label="With placeholder", hint_text="Please enter text here")
     tb5 = ft.TextField(label="With an icon", icon=ft.icons.EMOJI_EMOTIONS)
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
-    
-    return ft.Column(controls=[
-        tb1, tb2, tb3, tb4, tb5, b, t
-        ]
-        )
+
+    return ft.Column(controls=[tb1, tb2, tb3, tb4, tb5, b, t])

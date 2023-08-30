@@ -2,24 +2,24 @@ import flet as ft
 
 name = "Infinite scroll list"
 
-def example():
 
+def example():
     import threading
 
     class State:
-            i = 0
+        i = 0
 
     s = State()
     sem = threading.Semaphore()
 
-    def on_scroll(e: ft.OnScrollEvent):
+    async def on_scroll(e: ft.OnScrollEvent):
         if e.pixels >= e.max_scroll_extent - 100:
             if sem.acquire(blocking=False):
                 try:
                     for i in range(0, 10):
                         cl.controls.append(ft.Text(f"Text line {s.i}", key=str(s.i)))
                         s.i += 1
-                    cl.update()
+                    await cl.update_async()
                 finally:
                     sem.release()
 

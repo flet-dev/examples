@@ -1,38 +1,42 @@
+import asyncio
+
 import flet as ft
 
 name = "ProgressBar Example"
 
-def example():
-    from time import sleep
 
+def example():
     t = ft.Text(value="Click the button...")
     pb = ft.ProgressBar(width=400, value=0)
-    
 
-    def button_clicked(e):
+    async def button_clicked(e):
         t.value = "Doing something..."
-        t.update()
+        await t.update_async()
         b.disabled = True
-        b.update()
+        await b.update_async()
         for i in range(0, 101):
             pb.value = i * 0.01
-            sleep(0.1)
-            pb.update()
+            await asyncio.sleep(0.1)
+            await pb.update_async()
         t.value = "Click the button..."
-        t.update()
+        await t.update_async()
         b.disabled = False
-        b.update()
+        await b.update_async()
 
     b = ft.FilledTonalButton("Start", on_click=button_clicked)
-    
+
     return ft.Column(
-            [
-                ft.Text("Linear progress indicator", style="headlineSmall"),
-                ft.Column([t, pb]),
-                ft.Text("Indeterminate progress bar", style="headlineSmall"),
-                ft.ProgressBar(width=400, color="amber", bgcolor="#eeeeee"),
-                b
-            ],
-            width=400,
-            height=400
-        )
+        [
+            ft.Text(
+                "Linear progress indicator", style=ft.TextThemeStyle.HEADLINE_SMALL
+            ),
+            ft.Column([t, pb]),
+            ft.Text(
+                "Indeterminate progress bar", style=ft.TextThemeStyle.HEADLINE_SMALL
+            ),
+            ft.ProgressBar(width=400, color="amber", bgcolor="#eeeeee"),
+            b,
+        ],
+        width=400,
+        height=400,
+    )

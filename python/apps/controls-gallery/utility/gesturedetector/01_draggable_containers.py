@@ -2,17 +2,17 @@ import flet as ft
 
 name = "Draggable containers"
 
-def example():
 
-    def on_pan_update1(e: ft.DragUpdateEvent):
+def example():
+    async def on_pan_update1(e: ft.DragUpdateEvent):
         c.top = max(0, c.top + e.delta_y)
         c.left = max(0, c.left + e.delta_x)
-        c.update()
+        await c.update_async()
 
-    def on_pan_update2(e: ft.DragUpdateEvent):
+    async def on_pan_update2(e: ft.DragUpdateEvent):
         e.control.top = max(0, e.control.top + e.delta_y)
         e.control.left = max(0, e.control.left + e.delta_x)
-        e.control.update()
+        await e.control.update_async()
 
     gd = ft.GestureDetector(
         mouse_cursor=ft.MouseCursor.MOVE,
@@ -30,5 +30,5 @@ def example():
         top=100,
         content=ft.Container(bgcolor=ft.colors.BLUE, width=50, height=50),
     )
-    
+
     return ft.Stack([c, gd1], width=1000, height=500)

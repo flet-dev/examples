@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Animate container"
 
-def example():
 
+def example():
     c = ft.Container(
         width=200,
         height=200,
@@ -11,13 +11,12 @@ def example():
         animate=ft.animation.Animation(1000, "bounceOut"),
     )
 
-    def animate_container(e):
+    async def animate_container(e):
         c.width = 100 if c.width == 200 else 200
         c.height = 100 if c.height == 200 else 200
         c.bgcolor = "blue" if c.bgcolor == "red" else "red"
-        c.update()
+        await c.update_async()
 
-    return ft.Column(controls=[
-        c, ft.ElevatedButton("Animate container", on_click=animate_container)
-        ]
+    return ft.Column(
+        controls=[c, ft.ElevatedButton("Animate container", on_click=animate_container)]
     )

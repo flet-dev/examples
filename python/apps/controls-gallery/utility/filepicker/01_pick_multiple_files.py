@@ -2,40 +2,42 @@ import flet as ft
 
 name = "Pick multiple files"
 
+
 def example():
     class Example(ft.Row):
         def __init__(self):
             super().__init__()
             self.pick_files_dialog = ft.FilePicker(on_result=self.pick_files_result)
             self.selected_files = ft.Text()
+
+            async def pick_files(_):
+                await self.pick_files_dialog.pick_files_async(allow_multiple=True)
+
             self.controls = [
                 ft.ElevatedButton(
                     "Pick files",
                     icon=ft.icons.UPLOAD_FILE,
-                    on_click=lambda _: self.pick_files_dialog.pick_files(
-                        allow_multiple=True
-                    ),
+                    on_click=pick_files,
                 ),
                 self.selected_files,
-                ]
-    
+            ]
 
-        def pick_files_result(self, e: ft.FilePickerResultEvent):
+        async def pick_files_result(self, e: ft.FilePickerResultEvent):
             self.selected_files.value = (
-            ", ".join(map(lambda f: f.name, e.files)) if e.files else "Cancelled!"
-        )
-            self.selected_files.update()
-        
+                ", ".join(map(lambda f: f.name, e.files)) if e.files else "Cancelled!"
+            )
+            await self.selected_files.update_async()
+
         # happens when example is added to the page (when user chooses the FilePicker control from the grid)
-        def did_mount(self):
+        async def did_mount_async(self):
             self.page.overlay.append(self.pick_files_dialog)
-            self.page.update()
-        
+            await self.page.update_async()
+
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        def will_unmount(self):
+        async def will_unmount_async(self):
             self.page.overlay.remove(self.pick_files_dialog)
-            self.page.update()
-  
+            await self.page.update_async()
+
     filepicker_example = Example()
 
     return filepicker_example

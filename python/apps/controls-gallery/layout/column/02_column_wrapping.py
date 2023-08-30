@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Column wrapping"
 
+
 def example():
     HEIGHT = 400
 
@@ -20,9 +21,9 @@ def example():
             )
         return items
 
-    def slider_change(e):
+    async def slider_change(e):
         col.height = float(e.control.value)
-        col.update()
+        await col.update_async()
 
     width_slider = ft.Slider(
         min=0,
@@ -42,12 +43,16 @@ def example():
         height=HEIGHT,
     )
 
-    return ft.Column([ft.Column(
-            [
-                ft.Text(
-                    "Change the column height to see how child items wrap onto multiple columns:"
-                ),
-                width_slider,
-            ]
-        ),
-        ft.Container(content=col, bgcolor=ft.colors.AMBER_100)])
+    return ft.Column(
+        [
+            ft.Column(
+                [
+                    ft.Text(
+                        "Change the column height to see how child items wrap onto multiple columns:"
+                    ),
+                    width_slider,
+                ]
+            ),
+            ft.Container(content=col, bgcolor=ft.colors.AMBER_100),
+        ]
+    )

@@ -8,7 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-flet = "^0.8.0"
+flet = "^0.9.0"
+flet-contrib = "^2023.8.9"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Controlling scroll position for Column"
 
+
 def example():
-        
     cl = ft.Column(
         spacing=10,
         height=180,
@@ -41,33 +41,45 @@ def example():
         ],
     )
 
+    async def scroll_to_a(_):
+        await cl.scroll_to_async(key="A", duration=1000)
+
+    async def scroll_to_b(_):
+        await cl.scroll_to_async(key="B", duration=1000)
+
+    async def scroll_to_c(_):
+        await cl.scroll_to_async(key="C", duration=1000)
+
+    async def scroll_to_d(_):
+        await cl.scroll_to_async(key="D", duration=1000)
+
     return ft.Column(
         [
-        ft.Container(cl, border=ft.border.all(1)),
-        ft.Column(
-            [
-                ft.Text("Scroll to:"),
-                ft.Row(
-                    [
-                        ft.ElevatedButton(
-                            "Section A",
-                            on_click=lambda _: cl.scroll_to(key="A", duration=1000),
-                        ),
-                        ft.ElevatedButton(
-                            "Section B",
-                            on_click=lambda _: cl.scroll_to(key="B", duration=1000),
-                        ),
-                        ft.ElevatedButton(
-                            "Section C",
-                            on_click=lambda _: cl.scroll_to(key="C", duration=1000),
-                        ),
-                        ft.ElevatedButton(
-                            "Section D",
-                            on_click=lambda _: cl.scroll_to(key="D", duration=1000),
-                        ),
-                    ]
-                ),
-            ]
-        ),
+            ft.Container(cl, border=ft.border.all(1)),
+            ft.Column(
+                [
+                    ft.Text("Scroll to:"),
+                    ft.Row(
+                        [
+                            ft.ElevatedButton(
+                                "Section A",
+                                on_click=scroll_to_a,
+                            ),
+                            ft.ElevatedButton(
+                                "Section B",
+                                on_click=scroll_to_b,
+                            ),
+                            ft.ElevatedButton(
+                                "Section C",
+                                on_click=scroll_to_c,
+                            ),
+                            ft.ElevatedButton(
+                                "Section D",
+                                on_click=scroll_to_d,
+                            ),
+                        ]
+                    ),
+                ]
+            ),
         ]
     )
