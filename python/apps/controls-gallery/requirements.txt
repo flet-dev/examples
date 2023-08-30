@@ -1,2 +1,5 @@
-flet
+flet-fastapi==0.10.0.dev1662
 flet-contrib
+gunicorn
+uvicorn
+hypercorn

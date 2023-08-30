@@ -2,13 +2,13 @@ import flet as ft
 
 name = "LineChart 1"
 
-def example():
 
+def example():
     class State:
         toggle = True
 
     s = State()
-    
+
     data_1 = [
         ft.LineChartData(
             data_points=[
@@ -180,12 +180,12 @@ def example():
         min_x=0,
         max_x=14,
         # animate=5000,
-        #expand=True,
+        # expand=True,
         width=700,
-        height=500
+        height=500,
     )
 
-    def toggle_data(e):
+    async def toggle_data(e):
         if s.toggle:
             chart.data_series = data_2
             chart.data_series[2].point = True
@@ -196,9 +196,8 @@ def example():
             chart.max_y = 4
             chart.interactive = True
         s.toggle = not s.toggle
-        chart.update()
+        await chart.update_async()
 
-    return ft.Column(controls=[
-        ft.IconButton(ft.icons.REFRESH, on_click=toggle_data),
-        chart
-    ])
+    return ft.Column(
+        controls=[ft.IconButton(ft.icons.REFRESH, on_click=toggle_data), chart]
+    )

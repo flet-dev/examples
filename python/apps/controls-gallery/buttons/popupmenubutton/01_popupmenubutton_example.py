@@ -2,11 +2,11 @@ import flet as ft
 
 name = "PopupMenuButton example"
 
-def example():
 
-    def check_item_clicked(e):
+def example():
+    async def check_item_clicked(e):
         e.control.checked = not e.control.checked
-        e.control.update()
+        await e.control.update_async()
 
     pb = ft.PopupMenuButton(
         items=[
@@ -27,5 +27,5 @@ def example():
             ),
         ]
     )
-    
+
     return pb

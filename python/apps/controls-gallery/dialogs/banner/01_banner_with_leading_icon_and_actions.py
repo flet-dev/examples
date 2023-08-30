@@ -2,12 +2,11 @@ import flet as ft
 
 name = "Banner with leading icon and actions"
 
+
 def example():
-
-
-    def close_banner(e):
+    async def close_banner(e):
         e.control.page.banner.open = False
-        e.control.page.update()
+        await e.control.page.update_async()
 
     banner = ft.Banner(
         bgcolor=ft.colors.AMBER_100,
@@ -22,9 +21,9 @@ def example():
         ],
     )
 
-    def show_banner_click(e):
+    async def show_banner_click(e):
         e.control.page.banner = banner
         e.control.page.banner.open = True
-        e.control.page.update()
-    
+        await e.control.page.update_async()
+
     return ft.ElevatedButton("Show Banner", on_click=show_banner_click)

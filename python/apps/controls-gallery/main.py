@@ -1,16 +1,20 @@
 import logging
+from pathlib import Path
 
 import flet as ft
 import flet.version
+import flet_fastapi
 from gallerydata import GalleryData
 from popup_color_item import PopupColorItem
 
 gallery = GalleryData()
 
-# logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
+    page.title = "Flet controls gallery"
+
     page.fonts = {
         "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
     }
@@ -19,14 +23,14 @@ def main(page: ft.Page):
         route_list = [item for item in route.split("/") if item != ""]
         return route_list
 
-    def route_change(e):
+    async def route_change(e):
         route_list = get_route_list(page.route)
         if len(route_list) == 0:
-            page.go("/layout")
+            await page.go_async("/layout")
         elif len(route_list) == 1:
-            display_control_group(route_list[0])
+            await display_control_group(route_list[0])
         elif len(route_list) == 2:
-            display_control_examples(route_list[0], route_list[1])
+            await display_control_examples(route_list[0], route_list[1])
         else:
             print("Invalid route")
 
@@ -41,7 +45,7 @@ def main(page: ft.Page):
             if grid_item.id == control_id:
                 return grid_item
 
-    def display_control_examples(control_group_name, control_id):
+    async def display_control_examples(control_group_name, control_id):
         control_group = find_control_group_object(control_group_name)
         rail.selected_index = gallery.destinations_list.index(control_group)
         grid_item = find_grid_object(control_group_name, control_id)
@@ -83,9 +87,9 @@ def main(page: ft.Page):
                 )
             )
 
-        page.update()
+        await page.update_async()
 
-    def display_control_group(control_group_name):
+    async def display_control_group(control_group_name):
         control_group = find_control_group_object(control_group_name)
         rail.selected_index = gallery.destinations_list.index(control_group)
         grid.visible = True
@@ -108,31 +112,30 @@ def main(page: ft.Page):
                             ft.Text(
                                 value=grid_item.name,
                                 weight=ft.FontWeight.W_500,
-                                size=14
-                                )
-                    
-                        ]
-                    )
+                                size=14,
+                            ),
+                        ],
+                    ),
                 )
             )
-        page.update()
+        await page.update_async()
 
-    def control_group_selected(e):
+    async def control_group_selected(e):
         control_group_name = gallery.destinations_list[e.control.selected_index].name
-        page.go(f"/{control_group_name}")
+        await page.go_async(f"/{control_group_name}")
 
-    def grid_item_clicked(e):
+    async def grid_item_clicked(e):
         route = f"{page.route}/{e.control.data.id}"
-        page.go(route)
+        await page.go_async(route)
 
-    def show_code(e):
+    async def show_code(e):
         dlg.open = True
         code_example_name.value = e.control.data.name
         code_text = ft.Text(value=e.control.data.source_code, selectable=True)
 
         dlg.content = ft.Column(controls=[code_text], scroll="always")
         dlg.data = e.control.data.source_code
-        page.update()
+        await page.update_async()
 
     def get_destinations():
         destinations = []
@@ -146,14 +149,14 @@ def main(page: ft.Page):
             )
         return destinations
 
-    def theme_changed(e):
+    async def theme_changed(e):
         if page.theme_mode == ft.ThemeMode.LIGHT:
             page.theme_mode = ft.ThemeMode.DARK
             dark_light_text.value = "Dark theme"
         else:
             page.theme_mode = ft.ThemeMode.LIGHT
             dark_light_text.value = "Light theme"
-        page.update()
+        await page.update_async()
 
     dark_light_text = ft.Text("Light theme")
 
@@ -221,7 +224,7 @@ def main(page: ft.Page):
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
     control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
-    #listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
+    # listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
     listview = ft.Column(expand=True, spacing=10, scroll=ft.ScrollMode.AUTO)
 
     examples = ft.Column(
@@ -238,28 +241,30 @@ def main(page: ft.Page):
         bgcolor=ft.colors.INVERSE_PRIMARY,
         actions=[
             ft.Container(
-                padding=10,
-                content=ft.Text(f"Flet version: {flet.version.version}"))
-            ]
+                padding=10, content=ft.Text(f"Flet version: {flet.version.version}")
+            )
+        ],
     )
 
-    def copy_source_code_to_clipboard(e):
+    async def copy_source_code_to_clipboard(e):
         source_code = dlg.data
-        page.set_clipboard(source_code)
-        page.show_snack_bar(
+        await page.set_clipboard_async(source_code)
+        await page.show_snack_bar_async(
             ft.SnackBar(ft.Text(f"Example source code copied to clipboard"), open=True)
         )
 
-    def close_dlg(e):
+    async def close_dlg(e):
         dlg.open = False
-        page.update()
+        await page.update_async()
 
     code_example_name = ft.Text("Example")
 
     dlg = ft.AlertDialog(
         title=code_example_name,
         actions=[
-            ft.FilledButton("Copy to clipboard", on_click=copy_source_code_to_clipboard),
+            ft.FilledButton(
+                "Copy to clipboard", on_click=copy_source_code_to_clipboard
+            ),
             ft.TextButton("Close", on_click=close_dlg),
         ],
         actions_alignment=ft.MainAxisAlignment.END,
@@ -269,7 +274,7 @@ def main(page: ft.Page):
 
     page.theme_mode = ft.ThemeMode.LIGHT
 
-    page.add(
+    await page.add_async(
         ft.Row(
             [left_nav, ft.VerticalDivider(width=1), grid, examples],
             expand=True,
@@ -278,7 +283,13 @@ def main(page: ft.Page):
 
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")
-    page.go(page.route)
+    await page.go_async(page.route)
 
 
-ft.app(target=main, assets_dir="assets", view=ft.WEB_BROWSER)
+app = flet_fastapi.app(
+    main, assets_dir=str(Path(__file__).resolve().parent.joinpath("assets"))
+)
+
+
+if __name__ == "__main__":
+    ft.app(main, assets_dir="assets")

@@ -2,12 +2,12 @@ import flet as ft
 
 name = "Receiving scroll notifications"
 
+
 def example():
-    
-    def on_column_scroll(e: ft.OnScrollEvent):
+    async def on_column_scroll(e: ft.OnScrollEvent):
         notification = f"Type: {e.event_type}, pixels: {e.pixels}, min_scroll_extent: {e.min_scroll_extent}, max_scroll_extent: {e.max_scroll_extent}"
         notification_text.value = notification
-        notification_text.update()
+        await notification_text.update_async()
 
     cl = ft.Column(
         spacing=10,

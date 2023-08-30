@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Simple BottomSheet"
 
-def example():
 
+def example():
     class Example(ft.ElevatedButton):
         def __init__(self):
             super().__init__()
@@ -12,11 +12,13 @@ def example():
             self.bs = ft.BottomSheet(
                 ft.Container(
                     ft.Column(
-                    [
-                        ft.Text("This is sheet's content!"),
-                        ft.ElevatedButton("Close bottom sheet", on_click=self.close_bs),
-                    ],
-                    tight=True,
+                        [
+                            ft.Text("This is sheet's content!"),
+                            ft.ElevatedButton(
+                                "Close bottom sheet", on_click=self.close_bs
+                            ),
+                        ],
+                        tight=True,
                     ),
                     padding=10,
                 ),
@@ -27,24 +29,24 @@ def example():
         def bs_dismissed(self, e):
             print("Dismissed!")
 
-        def show_bs(self, e):
+        async def show_bs(self, e):
             self.bs.open = True
-            self.bs.update()
+            await self.bs.update_async()
 
-        def close_bs(self, e):
+        async def close_bs(self, e):
             self.bs.open = False
-            self.bs.update()
+            await self.bs.update_async()
 
         # happens when example is added to the page (when user chooses the BottomSheet control from the grid)
-        def did_mount(self):
+        async def did_mount_async(self):
             self.page.overlay.append(self.bs)
-            self.page.update()
-        
+            await self.page.update_async()
+
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        def will_unmount(self):
+        async def will_unmount_async(self):
             self.page.overlay.remove(self.bs)
-            self.page.update()
-  
+            await self.page.update_async()
+
     bs_example = Example()
-    
+
     return bs_example

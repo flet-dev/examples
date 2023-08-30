@@ -2,6 +2,7 @@ import flet as ft
 
 name = "BarChart 2"
 
+
 def example():
     class SampleRod(ft.BarChartRod):
         def __init__(self, y: float, hovered: bool = False):
@@ -25,14 +26,13 @@ def example():
             self.color = ft.colors.WHITE
             self.bg_to_y = 20
             self.bg_color = ft.colors.GREEN_300
-    
-    def on_chart_event(e: ft.BarChartEvent):
+
+    async def on_chart_event(e: ft.BarChartEvent):
         for group_index, group in enumerate(chart.bar_groups):
             for rod_index, rod in enumerate(group.bar_rods):
                 rod.hovered = e.group_index == group_index and e.rod_index == rod_index
-        chart.update()
+        await chart.update_async()
 
-    
     chart = ft.BarChart(
         bar_groups=[
             ft.BarChartGroup(
@@ -78,13 +78,13 @@ def example():
         on_chart_event=on_chart_event,
         interactive=True,
     )
-    
+
     return ft.Container(
-            chart, 
-            bgcolor=ft.colors.GREEN_200, 
-            padding=10, 
-            border_radius=5, 
-            #expand=True
-            width=700,
-            height=400
-        )
+        chart,
+        bgcolor=ft.colors.GREEN_200,
+        padding=10,
+        border_radius=5,
+        # expand=True
+        width=700,
+        height=400,
+    )
