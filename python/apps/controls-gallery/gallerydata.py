@@ -170,7 +170,7 @@ ft.app(target=main)
                             grid_item.description = module.description
                         else:
                             example_item = ExampleItem()
-                            with open(file=file_path) as file_to_read:
+                            with open(file=file_path, encoding="utf-8") as file_to_read:
                                 code_text = format_code(
                                     file_to_read.read(), module.name
                                 )
