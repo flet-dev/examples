@@ -181,7 +181,6 @@ ft.app(target=main)
                             example_item.file_name = (
                                 module_name.replace(".", "/") + ".py"
                             )
-                            print(example_item.file_name)
                             example_item.name = module.name
                             example_item.order = file[
                                 :2
