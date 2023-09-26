@@ -177,10 +177,10 @@ ft.app(target=main)
                                 )
                                 example_item.source_code = code_text
                             example_item.example = module.example
-                            try:
-                                example_item.file_name = module.file_name
-                            except:
-                                example_item.file_name = "no_name.py"
+
+                            example_item.file_name = (
+                                module_name.replace(".", "/") + ".py"
+                            )
                             print(example_item.file_name)
                             example_item.name = module.name
                             example_item.order = file[
