@@ -19,6 +19,7 @@ class GridItem:
 class ExampleItem:
     def __init__(self):
         self.name = None
+        self.file_name = None
         self.order = None
         self.example = None
         self.source_code = None
@@ -124,24 +125,6 @@ class GalleryData:
         return example_files
 
     def import_modules(self):
-        def format_code(code_text, example_name):
-            new_str = code_text.split("def example():")
-            # print(new_str[1])
-            middle_code = new_str[1].replace("return ", "page.add(")
-            start_code = f"""import flet as ft
-
-def main(page: ft.Page):
-    page.title = "{example_name}"            
-"""
-
-            end_code = f"""
-    )
-ft.app(target=main)            
-"""
-            # new_code = "\n```python\n" + start_code + middle_code + end_code + "\n```\n"
-            new_code = start_code + middle_code + end_code
-            return new_code
-
         for control_group_dir in self.destinations_list:
             for control_dir in self.list_control_dirs(control_group_dir.name):
                 grid_item = GridItem(control_dir)
@@ -166,16 +149,14 @@ ft.app(target=main)
                         print(f"{module_name!r} has been imported")
                         if file == "index.py":
                             grid_item.name = module.name
-                            # grid_item.image_file_name = module.image_file
                             grid_item.description = module.description
                         else:
                             example_item = ExampleItem()
-                            with open(file=file_path, encoding="utf-8") as file_to_read:
-                                code_text = format_code(
-                                    file_to_read.read(), module.name
-                                )
-                                example_item.source_code = code_text
                             example_item.example = module.example
+
+                            example_item.file_name = (
+                                module_name.replace(".", "/") + ".py"
+                            )
                             example_item.name = module.name
                             example_item.order = file[
                                 :2
