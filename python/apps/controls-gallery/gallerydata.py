@@ -19,6 +19,7 @@ class GridItem:
 class ExampleItem:
     def __init__(self):
         self.name = None
+        self.file_name = None
         self.order = None
         self.example = None
         self.source_code = None
@@ -176,6 +177,11 @@ ft.app(target=main)
                                 )
                                 example_item.source_code = code_text
                             example_item.example = module.example
+                            try:
+                                example_item.file_name = module.file_name
+                            except:
+                                example_item.file_name = "no_name.py"
+                            print(example_item.file_name)
                             example_item.name = module.name
                             example_item.order = file[
                                 :2

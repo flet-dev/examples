@@ -69,9 +69,15 @@ async def main(page: ft.Page):
                                         weight=ft.FontWeight.W_500,
                                     ),
                                     ft.IconButton(
-                                        icon=ft.icons.CODE,
-                                        on_click=show_code,
-                                        data=example,
+                                        content=ft.Image(
+                                            src="github-mark.svg",
+                                            width=24,
+                                            height=24,
+                                            color=ft.colors.ON_SURFACE,
+                                        ),
+                                        # url=f"https://github.com/flet-dev/examples/tree/main/python/apps/studio-gallery/{self.file_name}",
+                                        url=f"https://github.com/flet-dev/examples/blob/main/python/apps/controls-gallery/{example.file_name}",
+                                        url_target="_blank",
                                     ),
                                 ],
                             ),
