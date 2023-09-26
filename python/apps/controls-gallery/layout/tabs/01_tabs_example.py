@@ -2,8 +2,8 @@ import flet as ft
 
 name = "Tabs example"
 
-def example():
 
+def example():
     return ft.Tabs(
         selected_index=1,
         animation_duration=300,
@@ -25,5 +25,5 @@ def example():
             ),
         ],
         width=400,
-        height=400
+        height=400,
     )
