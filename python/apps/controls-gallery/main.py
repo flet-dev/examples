@@ -133,15 +133,6 @@ async def main(page: ft.Page):
         route = f"{page.route}/{e.control.data.id}"
         await page.go_async(route)
 
-    async def show_code(e):
-        dlg.open = True
-        code_example_name.value = e.control.data.name
-        code_text = ft.Text(value=e.control.data.source_code, selectable=True)
-
-        dlg.content = ft.Column(controls=[code_text], scroll="always")
-        dlg.data = e.control.data.source_code
-        await page.update_async()
-
     def get_destinations():
         destinations = []
         for destination in gallery.destinations_list:
@@ -229,7 +220,6 @@ async def main(page: ft.Page):
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
     control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
-    # listview = ft.ListView(expand=True, spacing=10, padding=0, auto_scroll=False)
     listview = ft.Column(expand=True, spacing=10, scroll=ft.ScrollMode.AUTO)
 
     examples = ft.Column(
@@ -250,32 +240,6 @@ async def main(page: ft.Page):
             )
         ],
     )
-
-    async def copy_source_code_to_clipboard(e):
-        source_code = dlg.data
-        await page.set_clipboard_async(source_code)
-        await page.show_snack_bar_async(
-            ft.SnackBar(ft.Text(f"Example source code copied to clipboard"), open=True)
-        )
-
-    async def close_dlg(e):
-        dlg.open = False
-        await page.update_async()
-
-    code_example_name = ft.Text("Example")
-
-    dlg = ft.AlertDialog(
-        title=code_example_name,
-        actions=[
-            ft.FilledButton(
-                "Copy to clipboard", on_click=copy_source_code_to_clipboard
-            ),
-            ft.TextButton("Close", on_click=close_dlg),
-        ],
-        actions_alignment=ft.MainAxisAlignment.END,
-    )
-
-    page.dialog = dlg
 
     page.theme_mode = ft.ThemeMode.LIGHT
 
