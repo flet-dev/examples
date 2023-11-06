@@ -92,9 +92,10 @@ class Card(ft.GestureDetector):
                         for card in cards_to_drag:
                             card.place(slot)
                         # reveal top card in old tableau slot if exists
-                        #if len(old_slot.pile) > 0 and old_slot.type == "tableau":
-                        #    old_slot.get_top_card().turn_face_up()
-                        self.solitaire.display_waste()
+                        if len(old_slot.pile) > 0 and old_slot.type == "tableau":
+                           old_slot.get_top_card().turn_face_up()
+                        # elif old_slot.type == 'waste' and len(self.solitaire.waste.pile) == 0:
+                            # self.solitaire.display_waste()
                         self.solitaire.update()
 
                         return
@@ -115,7 +116,7 @@ class Card(ft.GestureDetector):
                         self.place(slot)
                         #if len(old_slot.pile) > 0:
                             #old_slot.get_top_card().turn_face_up()
-                        self.solitaire.display_waste()
+                        # self.solitaire.display_waste()
                         self.solitaire.update()
                         return
 
