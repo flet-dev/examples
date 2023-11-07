@@ -143,8 +143,8 @@ class Solitaire(ft.Stack):
             self.controls.remove(card)
             self.controls.append(card)
         self.update()
-    
-    
+
+
     def bounce_back(self, cards):
         i = 0
         for card in cards:
@@ -155,17 +155,8 @@ class Solitaire(ft.Stack):
             i += 1
 
     def display_waste(self):
-        for card in self.waste.pile:
-            card.visible = False
-        visible_cards_number = min(self.settings.waste_size, len(self.waste.pile))
-        for i in range(visible_cards_number):
-            self.waste.pile[
-                len(self.waste.pile) - i - 1
-            ].left = self.waste.left + self.card_offset * (visible_cards_number - i - 1)
-            self.waste.pile[len(self.waste.pile) - i - 1].visible = True
-            #print(
-            #    f"waste card number {len(self.waste.pile)-i-1}, offset = {self.card_offset * (visible_cards_number - i - 1)}"
-            #)
+        if self.settings.waste_size == 3:
+            self.waste.fan_top_three()
         self.update()
 
     def restart_stock(self):
@@ -174,7 +165,7 @@ class Solitaire(ft.Stack):
             card = self.waste.pile[0]
             card.turn_face_down()
             card.place(self.stock)
-        self.update
+        self.update()
 
     def check_foundation_rules(self, current_card, top_card=None):
         if top_card is not None:

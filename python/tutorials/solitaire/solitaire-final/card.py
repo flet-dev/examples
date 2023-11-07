@@ -93,9 +93,9 @@ class Card(ft.GestureDetector):
                             card.place(slot)
                         # reveal top card in old tableau slot if exists
                         if len(old_slot.pile) > 0 and old_slot.type == "tableau":
-                           old_slot.get_top_card().turn_face_up()
-                        # elif old_slot.type == 'waste' and len(self.solitaire.waste.pile) == 0:
-                            # self.solitaire.display_waste()
+                            old_slot.get_top_card().turn_face_up()
+                        elif old_slot.type == 'waste':
+                            self.solitaire.display_waste()
                         self.solitaire.update()
 
                         return
@@ -122,6 +122,10 @@ class Card(ft.GestureDetector):
 
     def click(self, e):
         if self.slot.type == "stock":
+            # first, set the current top 3 cards to invisible
+            for card in self.solitaire.waste.get_top_three_cards():
+                card.visible = False
+
             for i in range(
                 min(self.solitaire.settings.waste_size, len(self.solitaire.stock.pile))
             ):
@@ -146,8 +150,6 @@ class Card(ft.GestureDetector):
         # remove the card form the old slot's pile if exists
 
         if self.slot is not None:
-            # if self.slot.type == 'waste':
-            #    self.solitaire.update_waste()
             self.slot.pile.remove(self)
 
         # set card's slot as new slot
