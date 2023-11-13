@@ -27,7 +27,10 @@ class ChatMessage(ft.Row):
             ]
 
     def get_initials(self, user_name: str):
-        return user_name[:1].capitalize()
+        if user_name:
+            return user_name[:1].capitalize()
+        else:
+            return "Unknown"  # or any default value you prefer
 
     def get_avatar_color(self, user_name: str):
         colors_lookup = [
