@@ -6,6 +6,7 @@ import flet.version
 import flet_fastapi
 from gallerydata import GalleryData
 from left_navigation_menu import LeftNavigationMenu
+from controls_grid import ControlsGrid
 
 gallery = GalleryData()
 
@@ -33,6 +34,40 @@ async def main(page: ft.Page):
             await display_control_examples(route_list[0], route_list[1])
         else:
             print("Invalid route")
+
+    async def display_control_group(control_group_name):
+        grid.display(control_group_name=control_group_name)
+        # control_group = find_control_group_object(control_group_name)
+        left_nav.rail.selected_index = gallery.destinations_list.index(
+            grid.control_group
+        )
+        # grid.visible = True
+        examples.visible = False
+        # grid.controls = []
+        listview.controls = []
+        # for grid_item in control_group.grid_items:
+        #     grid.controls.append(
+        #         ft.Container(
+        #             on_click=grid_item_clicked,
+        #             data=grid_item,
+        #             bgcolor=ft.colors.SECONDARY_CONTAINER,
+        #             border_radius=5,
+        #             padding=15,
+        #             content=ft.Row(
+        #                 alignment=ft.MainAxisAlignment.START,
+        #                 vertical_alignment=ft.MainAxisAlignment.CENTER,
+        #                 controls=[
+        #                     ft.Icon(name=ft.icons.FOLDER_OPEN),
+        #                     ft.Text(
+        #                         value=grid_item.name,
+        #                         weight=ft.FontWeight.W_500,
+        #                         size=14,
+        #                     ),
+        #                 ],
+        #             ),
+        #         )
+        #     )
+        await page.update_async()
 
     def find_control_group_object(control_group_name):
         for control_group in gallery.destinations_list:
@@ -94,7 +129,7 @@ async def main(page: ft.Page):
 
         await page.update_async()
 
-    async def display_control_group(control_group_name):
+    async def display_control_group_old(control_group_name):
         control_group = find_control_group_object(control_group_name)
         left_nav.rail.selected_index = gallery.destinations_list.index(control_group)
         grid.visible = True
@@ -130,14 +165,8 @@ async def main(page: ft.Page):
         await page.go_async(route)
 
     left_nav = LeftNavigationMenu(gallery=gallery)
-    grid = ft.GridView(
-        expand=1,
-        runs_count=5,
-        max_extent=250,
-        child_aspect_ratio=3.0,
-        spacing=10,
-        run_spacing=10,
-    )
+
+    grid = ControlsGrid(gallery=gallery)
 
     control_name = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
     control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
