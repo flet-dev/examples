@@ -5,7 +5,7 @@ import flet as ft
 import flet.version
 import flet_fastapi
 from gallerydata import GalleryData
-from popup_color_item import PopupColorItem
+from left_navigation_menu import LeftNavigationMenu
 
 gallery = GalleryData()
 
@@ -47,7 +47,7 @@ async def main(page: ft.Page):
 
     async def display_control_examples(control_group_name, control_id):
         control_group = find_control_group_object(control_group_name)
-        rail.selected_index = gallery.destinations_list.index(control_group)
+        left_nav.rail.selected_index = gallery.destinations_list.index(control_group)
         grid_item = find_grid_object(control_group_name, control_id)
         grid.visible = False
         examples.visible = True
@@ -96,7 +96,7 @@ async def main(page: ft.Page):
 
     async def display_control_group(control_group_name):
         control_group = find_control_group_object(control_group_name)
-        rail.selected_index = gallery.destinations_list.index(control_group)
+        left_nav.rail.selected_index = gallery.destinations_list.index(control_group)
         grid.visible = True
         examples.visible = False
         grid.controls = []
@@ -125,90 +125,11 @@ async def main(page: ft.Page):
             )
         await page.update_async()
 
-    async def control_group_selected(e):
-        control_group_name = gallery.destinations_list[e.control.selected_index].name
-        await page.go_async(f"/{control_group_name}")
-
     async def grid_item_clicked(e):
         route = f"{page.route}/{e.control.data.id}"
         await page.go_async(route)
 
-    def get_destinations():
-        destinations = []
-        for destination in gallery.destinations_list:
-            destinations.append(
-                ft.NavigationRailDestination(
-                    icon=destination.icon,
-                    selected_icon=destination.selected_icon,
-                    label=destination.label,
-                )
-            )
-        return destinations
-
-    async def theme_changed(e):
-        if page.theme_mode == ft.ThemeMode.LIGHT:
-            page.theme_mode = ft.ThemeMode.DARK
-            dark_light_text.value = "Dark theme"
-        else:
-            page.theme_mode = ft.ThemeMode.LIGHT
-            dark_light_text.value = "Light theme"
-        await page.update_async()
-
-    dark_light_text = ft.Text("Light theme")
-
-    rail = ft.NavigationRail(
-        extended=True,
-        expand=True,
-        selected_index=0,
-        min_width=100,
-        min_extended_width=200,
-        group_alignment=-0.9,
-        destinations=get_destinations(),
-        on_change=control_group_selected,
-    )
-
-    left_nav = ft.Column(
-        controls=[
-            rail,
-            ft.Column(
-                controls=[
-                    ft.Row(
-                        controls=[
-                            ft.IconButton(
-                                icon=ft.icons.BRIGHTNESS_2_OUTLINED,
-                                tooltip="Toggle brightness",
-                                on_click=theme_changed,
-                            ),
-                            dark_light_text,
-                        ]
-                    ),
-                    ft.Row(
-                        controls=[
-                            ft.PopupMenuButton(
-                                icon=ft.icons.COLOR_LENS_OUTLINED,
-                                items=[
-                                    PopupColorItem(
-                                        color="deeppurple", name="Deep purple"
-                                    ),
-                                    PopupColorItem(color="indigo", name="Indigo"),
-                                    PopupColorItem(color="blue", name="Blue (default)"),
-                                    PopupColorItem(color="teal", name="Teal"),
-                                    PopupColorItem(color="green", name="Green"),
-                                    PopupColorItem(color="yellow", name="Yellow"),
-                                    PopupColorItem(color="orange", name="Orange"),
-                                    PopupColorItem(
-                                        color="deeporange", name="Deep orange"
-                                    ),
-                                    PopupColorItem(color="pink", name="Pink"),
-                                ],
-                            ),
-                            ft.Text("Seed color"),
-                        ]
-                    ),
-                ]
-            ),
-        ],
-    )
+    left_nav = LeftNavigationMenu(gallery=gallery)
     grid = ft.GridView(
         expand=1,
         runs_count=5,
@@ -259,7 +180,6 @@ async def main(page: ft.Page):
 app = flet_fastapi.app(
     main, assets_dir=str(Path(__file__).resolve().parent.joinpath("assets"))
 )
-
 
 if __name__ == "__main__":
     ft.app(main, assets_dir="assets")
