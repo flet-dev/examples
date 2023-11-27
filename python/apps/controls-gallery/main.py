@@ -242,6 +242,7 @@ async def main(page: ft.Page):
     )
 
     page.theme_mode = ft.ThemeMode.LIGHT
+    page.on_error = lambda e: print("Page error:", e.data)
 
     await page.add_async(
         ft.Row(
