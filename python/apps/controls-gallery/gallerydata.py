@@ -14,6 +14,7 @@ class GridItem:
         # self.image_file_name = None
         self.examples = []
         self.description = None
+        self.parent = None
 
 
 class ExampleItem:
@@ -150,6 +151,7 @@ class GalleryData:
                         if file == "index.py":
                             grid_item.name = module.name
                             grid_item.description = module.description
+                            grid_item.parent = control_group_dir
                         else:
                             example_item = ExampleItem()
                             example_item.example = module.example
