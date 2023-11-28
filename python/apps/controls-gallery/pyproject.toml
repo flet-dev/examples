@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "controls-gallery"
+version = "0.1.0"
+description = "Control gallery app"
+authors = ["InesaFitsner <inesa@appveyor.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "controls_gallery"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flet = "^0.13.0"
+flet-contrib = "^2023.8.18"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
