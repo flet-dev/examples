@@ -13,17 +13,17 @@ class ControlsGrid(ft.GridView):
         self.gallery = gallery
         self.control_group = self.gallery.destinations_list[0]
 
-    def find_control_group_object(self):
+    def find_control_group_object(self, control_group_name):
         for control_group in self.gallery.destinations_list:
-            if control_group.name == self.control_group_name:
-                return control_group
+            if control_group.name == control_group_name:
+                self.control_group = control_group
 
     async def grid_item_clicked(self, e):
         route = f"{self.page.route}/{e.control.data.id}"
         await self.page.go_async(route)
 
-    def display(self):
-        self.control_group = self.find_control_group_object()
+    def display(self, control_group_name):
+        self.find_control_group_object(control_group_name)
         # left_nav.rail.selected_index = gallery.destinations_list.index(control_group)
         self.visible = True
         # examples.visible = False
