@@ -11,7 +11,7 @@ class ControlsGrid(ft.GridView):
         self.spacing = 10
         self.run_spacing = 10
         self.gallery = gallery
-        self.control_group_name = self.gallery.destinations_list[0]
+        self.control_group = self.gallery.destinations_list[0]
 
     def find_control_group_object(self):
         for control_group in self.gallery.destinations_list:
@@ -23,13 +23,13 @@ class ControlsGrid(ft.GridView):
         await self.page.go_async(route)
 
     def display(self):
-        self.control_group_name = self.find_control_group_object()
+        self.control_group = self.find_control_group_object()
         # left_nav.rail.selected_index = gallery.destinations_list.index(control_group)
         self.visible = True
         # examples.visible = False
         self.controls = []
         # listview.controls = []
-        for grid_item in self.control_group_name.grid_items:
+        for grid_item in self.control_group.grid_items:
             self.controls.append(
                 ft.Container(
                     on_click=self.grid_item_clicked,

@@ -24,8 +24,8 @@ class ExamplesView(ft.Column):
                 return control_group
 
     def find_grid_object(self):
-        control_group = self.find_control_group_object()
-        for grid_item in control_group.grid_items:
+        self.control_group = self.find_control_group_object()
+        for grid_item in self.control_group.grid_items:
             if grid_item.id == self.control_name:
                 return grid_item
 

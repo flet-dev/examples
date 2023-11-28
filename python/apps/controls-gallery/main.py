@@ -27,10 +27,12 @@ async def main(page: ft.Page):
 
     async def route_change(e):
         route_list = get_route_list(page.route)
+        print(route_list)
         if len(route_list) == 0:
             await page.go_async("/layout")
         elif len(route_list) == 1:
             controls_grid.control_group_name = route_list[0]
+            # left_nav.rail.selected_index = 0
             await display_controls_grid()
         elif len(route_list) == 2:
             examples_view.control_group_name = route_list[0]
@@ -41,18 +43,18 @@ async def main(page: ft.Page):
 
     async def display_controls_grid():
         controls_grid.display()
-        # left_nav.rail.selected_index = gallery.destinations_list.index(
-        #     controls_grid.control_group_name
-        # )
+        left_nav.rail.selected_index = gallery.destinations_list.index(
+            controls_grid.control_group
+        )
         examples_view.visible = False
         examples_view.examples.controls = []
         await page.update_async()
 
     async def display_control_examples():
         examples_view.display()
-        # left_nav.rail.selected_index = gallery.destinations_list.index(
-        #     examples_view.control_group_name
-        # )
+        left_nav.rail.selected_index = gallery.destinations_list.index(
+            examples_view.control_group
+        )
         controls_grid.visible = False
 
         await page.update_async()
