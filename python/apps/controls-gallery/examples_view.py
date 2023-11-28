@@ -27,6 +27,7 @@ class ExamplesView(ft.Column):
         self.control_group = self.find_control_group_object()
         for grid_item in self.control_group.grid_items:
             if grid_item.id == self.control_name:
+                print(grid_item.name, grid_item.parent.name)
                 return grid_item
 
     def display(self):

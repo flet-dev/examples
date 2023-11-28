@@ -30,7 +30,7 @@ async def main(page: ft.Page):
         if len(route_list) == 0:
             await page.go_async("/layout")
         elif len(route_list) == 1:
-            await display_controls_grid(route_list[0])
+            await display_controls_grid(control_group_name=route_list[0])
         elif len(route_list) == 2:
             examples_view.control_group_name = route_list[0]
             examples_view.control_name = route_list[1]
