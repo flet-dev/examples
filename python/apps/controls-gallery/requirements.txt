@@ -1,4 +1,4 @@
-flet-fastapi==0.13.0
+flet-fastapi==0.18.0
 flet-contrib
 gunicorn
 uvicorn
