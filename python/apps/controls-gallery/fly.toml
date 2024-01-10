@@ -7,33 +7,14 @@ processes = []
 [env]
   FLET_SESSION_TIMEOUT = "60"
 
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
 
-[[services]]
-  http_checks = []
-  internal_port = 8000
-  processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
-
-  [services.concurrency]
-    hard_limit = 250
-    soft_limit = 200
+  [http_service.concurrency]
     type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+    soft_limit = 200
+    hard_limit = 250
