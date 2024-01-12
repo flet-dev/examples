@@ -31,6 +31,8 @@ def example():
 
 2. Replace `ft.Column()` with the control you want to display.
 
+Note: Controls Gallery is an [async app](https://flet.dev/docs/guides/python/async-apps). If an event handler calls any async methods such as `update_async`, it should be `async` as well.
+
 Submit Pull Request (PR) with your changes.
 
 When the contribution is tested by Flet team/community a new Flet Controls Gallery release will be published.
