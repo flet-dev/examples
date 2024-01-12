@@ -8,6 +8,8 @@ Contributions are welcome!
 
 Fork this repo.
 
+Install Python SDK as described [here](https://github.com/flet-dev/flet/blob/main/CONTRIBUTING.md#python-sdk).
+
 ## To add a new Control to an existing Control Group:
 1. Create a new folder within the Control Group folder with the name of the Control
 2. Create index.py file with the following contents:
@@ -24,12 +26,12 @@ import flet as ft
 
 name = "<Example name>"
 
-
 def example():
-    return ft.Column()
+    
+    return ft.Text("This example is under construction")
 ```
 
-2. Replace `ft.Column()` with the control you want to display.
+2. Replace `Text` control with the control you want to display.
 
 Note: Controls Gallery is an [async app](https://flet.dev/docs/guides/python/async-apps). If an event handler calls any async methods such as `update_async`, it should be `async` as well.
 
