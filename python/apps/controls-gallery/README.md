@@ -13,6 +13,7 @@ Install Python SDK as described [here](https://github.com/flet-dev/flet/blob/mai
 ## To add a new Control to an existing Control Group:
 1. Create a new folder within the Control Group folder with the name of the Control
 2. Create index.py file with the following contents:
+
 ```
 name = "<Control name>"
 description = """<Control description>"""
@@ -27,7 +28,6 @@ import flet as ft
 name = "<Example name>"
 
 def example():
-    
     return ft.Text("This example is under construction")
 ```
 
@@ -38,5 +38,3 @@ Note: Controls Gallery is an [async app](https://flet.dev/docs/guides/python/asy
 Submit Pull Request (PR) with your changes.
 
 When the contribution is tested by Flet team/community a new Flet Controls Gallery release will be published.
-
- 
