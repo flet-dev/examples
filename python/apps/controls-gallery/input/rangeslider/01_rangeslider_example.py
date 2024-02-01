@@ -11,6 +11,9 @@ def example():
         divisions=10,
         end_value=20,
         label="{value}%",
+        on_change=lambda _: print(
+            "Range slider change:", range_slider.start_value, range_slider.end_value
+        ),
     )
 
     return ft.Column(
