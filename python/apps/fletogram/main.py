@@ -23,9 +23,17 @@ def main(page: ft.Page):
     
     def on_chat_clicked(chat):
         print(f"Display messages for {chat.name}")
-        messages_view = ft.Column()
+        messages_view = ft.ListView()
         for message in chat.messages:
-            messages_view.controls.append(message)
+            if message.is_logged_user:
+                alignment = ft.MainAxisAlignment.END
+            else:
+                alignment = ft.MainAxisAlignment.START
+            messages_view.controls.append(ft.Row([message], 
+                                                 alignment=alignment,
+                                                 width=250,
+                                                 )
+                                                 )
             print(message.body)
         
         page.views.append(

@@ -5,15 +5,22 @@ class Message(ft.Container):
         super().__init__()
         self.author = author
         self.body = body
+        #self.width=250
         self.is_logged_user = is_logged_user
         self.content = ft.Column()
+        self.border = ft.border.all(1, ft.colors.BLACK)
         self.bgcolor = ft.colors.GREEN_200
+        self.padding = 10
         self.generate_message_display()
     
     def generate_message_display(self):
         if self.is_logged_user==False:
-            self.content.controls.append(ft.Text(self.author.display_name))
+            self.content.controls.append(ft.Text(self.author.display_name, weight=ft.FontWeight.BOLD))
+            self.border_radius = ft.border_radius.only(top_left=10, top_right=10, bottom_left=0, bottom_right=10)
+        else:
+            self.border_radius = ft.border_radius.only(top_left=10, top_right=10, bottom_left=10, bottom_right=0)
         self.content.controls.append(ft.Text(self.body))
+        #self.content = ft.Text(self.body)
 
 class Organization():
     def __init__(self, id, name):
