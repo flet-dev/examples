@@ -1,9 +1,19 @@
 import flet as ft
 
-class Message():
-    def __init__(self, author, body):
+class Message(ft.Container):
+    def __init__(self, author, body, is_logged_user):
+        super().__init__()
         self.author = author
-        self.body=body
+        self.body = body
+        self.is_logged_user = is_logged_user
+        self.content = ft.Column()
+        self.bgcolor = ft.colors.GREEN_200
+        self.generate_message_display()
+    
+    def generate_message_display(self):
+        if self.is_logged_user==False:
+            self.content.controls.append(ft.Text(self.author.display_name))
+        self.content.controls.append(ft.Text(self.body))
 
 class Organization():
     def __init__(self, id, name):

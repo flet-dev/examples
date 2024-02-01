@@ -23,12 +23,9 @@ def main(page: ft.Page):
     
     def on_chat_clicked(chat):
         print(f"Display messages for {chat.name}")
-        #contacts_view.visible = False
-        #chats_view.visible = False
-        #messages_view.visible = True
-        messages_view.controls = []
+        messages_view = ft.Column()
         for message in chat.messages:
-            messages_view.controls.append(ft.Text(message.body))
+            messages_view.controls.append(message)
             print(message.body)
         
         page.views.append(
@@ -36,7 +33,6 @@ def main(page: ft.Page):
                 "/chat",
                 [
                     ft.AppBar(title=ft.Text("Messages"), bgcolor=ft.colors.SURFACE_VARIANT),
-                    #ft.ElevatedButton("Visit Store", on_click=lambda _: page.go("/store")),
                     messages_view
                 ],
             )
@@ -46,16 +42,6 @@ def main(page: ft.Page):
     fletogram = Fletogram(on_chat_clicked=on_chat_clicked)
 
     def destination_changed(e):
-        # if e.control.selected_index==0:
-        #     contacts_view.visible = True
-        #     chats_view.visible = False
-        #     messages_view.visible = False
-        #     e.control.page.appbar = contacts_appbar
-        # if e.control.selected_index==1:
-        #     contacts_view.visible = False
-        #     messages_view.visible = False
-        #     chats_view.visible = True
-        #     e.control.page.appbar = chats_appbar
         page.views.clear()
         page.views.append(tabs[e.control.selected_index])
         page.update()
@@ -76,28 +62,8 @@ def main(page: ft.Page):
     
     tabs = [contacts_view, chats_view, settings_view]
 
-
-    
-
-
-
-
-    #page.appbar = chats_appbar
-    #page.navigation_bar = bottom_navigation_bar
     page.window_width = 393
     page.window_height = 852
-
-
-    chats_view = ft.View("/", appbar=chats_appbar, controls=[ft.ListView(controls=fletogram.chats)], navigation_bar=bottom_navigation_bar)
-    #chats = ft.ListView(controls=fletogram.chats)
-    #contacts_view = ft.ListView(controls=fletogram.users, visible=False)
-    messages_view = ft.Column(controls=[])
-
-    # page.add(
-    #     chats,
-    #     #contacts_view,
-    #     #messages_view
-    # )
     
     def view_pop(view):
         page.views.pop()
