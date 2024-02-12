@@ -11,8 +11,6 @@ def main(page: ft.Page):
 
     # page.platform = ft.PagePlatform.ANDROID
 
-    # page.adaptive = True
-
     fletogram = Fletogram(page=page)
 
 

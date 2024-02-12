@@ -15,7 +15,7 @@ class ChatView(ft.View):
         self.fletogram = fletogram
         self.controls = [
             ft.ListView(
-                spacing=5,
+                spacing=0,
                 controls=self.fletogram.chats,
             )
         ]
