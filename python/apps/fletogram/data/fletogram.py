@@ -37,8 +37,20 @@ class Fletogram:
         self.generate_individual_chats()
         self.generate_tabs()
 
+    def view_pop(self, view):
+        self.page.views.pop()
+        top_view = self.page.views[-1]
+        self.page.go(top_view.route)
+
     def generate_tabs(self):
         self.tabs = [ContactsView(self), ChatView(self), SettingsView(self)]
+        self.page.adaptive = True
+        self.page.window_width = 393
+        self.page.window_height = 852
+        self.page.on_view_pop = self.view_pop
+        self.page.views.clear()
+        self.page.views.append(self.tabs[1])
+        self.page.update()
 
     def view_changed(self, e):
         self.page.views.clear()
