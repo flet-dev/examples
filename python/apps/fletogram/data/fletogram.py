@@ -1,15 +1,49 @@
-from chat import Chat, Message, User
+import flet as ft
+
+from data.chat import Chat, ChatMessage
+from data.user import User
+from views.chats_view import ChatView
+from views.contacts_view import ContactsView
+from views.settings_view import SettingsView
 
 
 class Fletogram:
-    def __init__(self, on_chat_clicked):
+    def __init__(self, page, on_chat_clicked):
         super().__init__()
         self.chats = []
         self.users = []
+        self.page = page
+        self.navigation_bar = ft.NavigationBar(
+            selected_index=1,
+            destinations=[
+                ft.NavigationDestination(
+                    icon=ft.icons.CONTACT_EMERGENCY,
+                    label="Contacts",
+                ),
+                ft.NavigationDestination(
+                    icon=ft.icons.CHAT,
+                    label="Chats",
+                ),
+                ft.NavigationDestination(
+                    icon=ft.icons.SETTINGS,
+                    label="Settings",
+                ),
+            ],
+            on_change=self.view_changed,
+        )
         self.on_chat_clicked = on_chat_clicked
         self.generate_users()
         self.generate_group_chats()
         self.generate_individual_chats()
+        self.generate_tabs()
+
+    def generate_tabs(self):
+        self.tabs = [ContactsView(self), ChatView(self), SettingsView(self)]
+
+    def view_changed(self, e):
+        self.page.views.clear()
+        self.page.views.append(self.tabs[self.navigation_bar.selected_index])
+        self.page.update()
 
     def generate_users(self):
         self.users = [
@@ -27,13 +61,13 @@ class Fletogram:
                 name="work",
                 display_name="Flet developers",
                 messages=[
-                    Message(
+                    ChatMessage(
                         author=self.users[0],
                         body="I have a question about adaptive design",
                         is_logged_user=True,
                     ),
-                    Message(author=self.users[1], body="?", is_logged_user=False),
-                    Message(
+                    ChatMessage(author=self.users[1], body="?", is_logged_user=False),
+                    ChatMessage(
                         author=self.users[0],
                         body="What if it looks ugly?",
                         is_logged_user=True,
@@ -45,17 +79,17 @@ class Fletogram:
                 name="Inesa",
                 display_name="Inesa's stories",
                 messages=[
-                    Message(
+                    ChatMessage(
                         author=self.users[0],
                         body="Inesa Message 1 title is very long and boring",
                         is_logged_user=True,
                     ),
-                    Message(
+                    ChatMessage(
                         author=self.users[0],
                         body="Inesa Message 1 title is very long and boring",
                         is_logged_user=True,
                     ),
-                    Message(
+                    ChatMessage(
                         author=self.users[0],
                         body="Inesa Message 1 title is very long and boring and wouldn't fit into one line it will also not fit into two lines unfortunately",
                         is_logged_user=True,
