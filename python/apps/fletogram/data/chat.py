@@ -54,7 +54,34 @@ class Chat(ft.ListTile):
     def chat_clicked(self, e):
         """Shows the latest message"""
         print("Chat clicked")
-        self.fletogram.on_chat_clicked(self)
+        messages_view = ft.ListView(spacing=5)
+        for message in self.messages:
+            if message.is_logged_user:
+                alignment = ft.MainAxisAlignment.END
+            else:
+                alignment = ft.MainAxisAlignment.START
+            messages_view.controls.append(
+                ft.Row(
+                    [message],
+                    alignment=alignment,
+                )
+            )
+            print(message.body)
+
+        self.page.views.append(
+            ft.View(
+                "/chat",
+                [
+                    ft.AppBar(
+                        title=ft.Text(self.display_name),
+                        bgcolor=ft.colors.SURFACE_VARIANT,
+                    ),
+                    messages_view,
+                ],
+            )
+        )
+        self.page.update()
+        # self.fletogram.on_chat_clicked(self)
 
     def generate_subtitle(self):
         """Show the body of the latest message"""

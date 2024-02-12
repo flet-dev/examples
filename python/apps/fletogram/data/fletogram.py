@@ -8,7 +8,7 @@ from views.settings_view import SettingsView
 
 
 class Fletogram:
-    def __init__(self, page, on_chat_clicked):
+    def __init__(self, page):
         super().__init__()
         self.chats = []
         self.users = []
@@ -31,7 +31,7 @@ class Fletogram:
             ],
             on_change=self.view_changed,
         )
-        self.on_chat_clicked = on_chat_clicked
+        # self.on_chat_clicked = on_chat_clicked
         self.generate_users()
         self.generate_group_chats()
         self.generate_individual_chats()
