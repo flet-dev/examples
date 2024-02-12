@@ -4,7 +4,7 @@ import flet as ft
 class ContactsView(ft.View):
     def __init__(self, fletogram):
         super().__init__()
-        self.route = ("/",)
+        self.route = "/"
         self.appbar = ft.AppBar(  # adaptive=True,
             leading=ft.TextButton("Edit"),
             title=ft.Text("Contacts"),
