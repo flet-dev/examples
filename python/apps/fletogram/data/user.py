@@ -21,6 +21,7 @@ class User(ft.ListTile):
         self.title = ft.Text(display_name)
         self.leading = ft.CircleAvatar(
             content=ft.Text(get_initials(self.display_name)),
+            foreground_image_url="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
             color=ft.colors.WHITE,
             bgcolor=get_avatar_color(self.display_name),
         )

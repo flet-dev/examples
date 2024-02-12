@@ -14,4 +14,4 @@ def main(page: ft.Page):
     fletogram = Fletogram(page=page)
 
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
