@@ -1,32 +1,6 @@
 import flet as ft
 
-
-class MessagesView(ft.View):
-    def __init__(self, chat):
-        super().__init__()
-        self.route = "/chat"
-        self.chat = chat
-        self.appbar = ft.AppBar(
-            title=ft.Text(self.chat.display_name),
-            bgcolor=ft.colors.SURFACE_VARIANT,
-        )
-        self.generate_messages_view()
-
-    def generate_messages_view(self):
-        messages_view = ft.ListView(spacing=5)
-        for message in self.chat.messages:
-            if message.is_logged_user:
-                alignment = ft.MainAxisAlignment.END
-            else:
-                alignment = ft.MainAxisAlignment.START
-            messages_view.controls.append(
-                ft.Row(
-                    [message],
-                    alignment=alignment,
-                )
-            )
-            print(message.body)
-        self.controls = [messages_view]
+from views.messages_view import MessagesView
 
 
 class ChatMessage(ft.Container):
@@ -36,8 +10,6 @@ class ChatMessage(ft.Container):
         self.body = body
         self.is_logged_user = is_logged_user
         self.content = ft.Column()
-        # self.border = ft.border.all(1, ft.colors.BLACK)
-        # self.bgcolor = ft.colors.GREEN_200
         self.padding = 10
         self.expand = True
         self.expand_loose = True
@@ -58,13 +30,11 @@ class ChatMessage(ft.Container):
                 top_left=10, top_right=10, bottom_left=10, bottom_right=0
             )
         self.content.controls.append(ft.Text(self.body))
-        # self.content = ft.Text(self.body)
 
 
 class Chat(ft.ListTile):
     def __init__(self, name, display_name, fletogram, messages=[], group_chat=True):
         super().__init__()
-        # self.adaptive=True
         self.name = name
         self.display_name = display_name
         self.title = ft.Text(display_name)
@@ -111,36 +81,9 @@ class Chat(ft.ListTile):
     def chat_clicked(self, e):
         """Shows the latest message"""
         print("Chat clicked")
-        # messages_view = ft.ListView(spacing=5)
-        # for message in self.messages:
-        #     if message.is_logged_user:
-        #         alignment = ft.MainAxisAlignment.END
-        #     else:
-        #         alignment = ft.MainAxisAlignment.START
-        #     messages_view.controls.append(
-        #         ft.Row(
-        #             [message],
-        #             alignment=alignment,
-        #         )
-        #     )
-        #     print(message.body)
         messages_view = MessagesView(self)
         self.page.views.append(messages_view)
-
-        # self.page.views.append(
-        #     ft.View(
-        #         route="/chat",
-        #         appbar=ft.AppBar(
-        #             title=ft.Text(self.display_name),
-        #             bgcolor=ft.colors.SURFACE_VARIANT,
-        #         ),
-        #         controls=[
-        #             messages_view,
-        #         ],
-        #     )
-        # )
         self.page.update()
-        # self.fletogram.on_chat_clicked(self)
 
     def generate_subtitle(self):
         """Show the body of the latest message"""

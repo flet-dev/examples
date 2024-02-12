@@ -31,7 +31,6 @@ class Fletogram:
             ],
             on_change=self.view_changed,
         )
-        # self.on_chat_clicked = on_chat_clicked
         self.generate_users()
         self.generate_group_chats()
         self.generate_individual_chats()
