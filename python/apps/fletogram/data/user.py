@@ -1,5 +1,7 @@
 import flet as ft
 
+from utils.generate_avatar import get_avatar_color, get_initials
+
 
 class Organization:
     def __init__(self, id, name):
@@ -18,9 +20,9 @@ class User(ft.ListTile):
         self.last_name = last_name
         self.title = ft.Text(display_name)
         self.leading = ft.CircleAvatar(
-            content=ft.Text(self.get_initials(self.display_name)),
+            content=ft.Text(get_initials(self.display_name)),
             color=ft.colors.WHITE,
-            bgcolor=self.get_avatar_color(self.display_name),
+            bgcolor=get_avatar_color(self.display_name),
         )
 
     def get_initials(self, user_name: str):

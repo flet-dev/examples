@@ -1,5 +1,6 @@
 import flet as ft
 
+from utils.generate_avatar import get_avatar_color, get_initials
 from views.messages_view import MessagesView
 
 
@@ -39,9 +40,9 @@ class Chat(ft.ListTile):
         self.display_name = display_name
         self.title = ft.Text(display_name)
         self.leading = ft.CircleAvatar(
-            content=ft.Text(self.get_initials(self.display_name)),
+            content=ft.Text(get_initials(self.display_name)),
             color=ft.colors.WHITE,
-            bgcolor=self.get_avatar_color(self.display_name),
+            bgcolor=get_avatar_color(self.display_name),
         )
         self.messages = messages
         self.fletogram = fletogram
@@ -49,30 +50,6 @@ class Chat(ft.ListTile):
         self.members = []
         self.generate_subtitle()
         self.on_click = self.chat_clicked
-
-    def get_initials(self, user_name: str):
-        if user_name:
-            return user_name[:1].capitalize()
-        else:
-            return "Unknown"  # or any default value you prefer
-
-    def get_avatar_color(self, user_name: str):
-        colors_lookup = [
-            ft.colors.AMBER,
-            ft.colors.BLUE,
-            ft.colors.BROWN,
-            ft.colors.CYAN,
-            ft.colors.GREEN,
-            ft.colors.INDIGO,
-            ft.colors.LIME,
-            ft.colors.ORANGE,
-            ft.colors.PINK,
-            ft.colors.PURPLE,
-            ft.colors.RED,
-            ft.colors.TEAL,
-            ft.colors.YELLOW,
-        ]
-        return colors_lookup[hash(user_name) % len(colors_lookup)]
 
     def add_message(self):
         """Adds message to the channel"""
