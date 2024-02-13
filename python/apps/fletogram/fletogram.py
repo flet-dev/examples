@@ -2,7 +2,7 @@ import flet as ft
 
 from data.chat import Chat, ChatMessage
 from data.user import User
-from views.chats_view import ChatView
+from views.chats import Chats
 from views.contacts_view import ContactsView
 from views.settings_view import SettingsView
 
@@ -42,7 +42,7 @@ class Fletogram:
         self.page.go(top_view.route)
 
     def generate_views(self):
-        self.tabs = [ContactsView(self), ChatView(self), SettingsView(self)]
+        self.tabs = [ContactsView(self), Chats(self), SettingsView(self)]
         self.page.theme_mode = ft.ThemeMode.LIGHT
         self.page.adaptive = True
         self.page.window_width = 393

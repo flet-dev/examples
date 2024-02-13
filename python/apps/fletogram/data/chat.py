@@ -1,7 +1,8 @@
 import flet as ft
 
-from utils.generate_avatar import get_avatar_color, get_initials
-from views.messages_view import MessagesView
+# from utils.generate_avatar import get_avatar_color, get_initials
+
+# from views.messages_view import MessagesView
 
 
 class ChatMessage(ft.Container):
@@ -33,48 +34,15 @@ class ChatMessage(ft.Container):
         self.content.controls.append(ft.Text(self.body))
 
 
-class Chat(ft.ListTile):
+class Chat:
     def __init__(self, name, display_name, fletogram, messages=[], group_chat=True):
-        super().__init__()
         self.name = name
         self.display_name = display_name
-        self.title = ft.Text(display_name)
-        self.leading = ft.CircleAvatar(
-            content=ft.Text(get_initials(self.display_name)),
-            color=ft.colors.WHITE,
-            bgcolor=get_avatar_color(self.display_name),
-        )
         self.messages = messages
         self.fletogram = fletogram
         self.group_chat = group_chat
         self.members = []
-        self.generate_subtitle()
-        self.on_click = self.chat_clicked
 
     def add_message(self):
         """Adds message to the channel"""
         pass
-
-    def chat_clicked(self, e):
-        """Shows the latest message"""
-        print("Chat clicked")
-        messages_view = MessagesView(self)
-        self.page.views.append(messages_view)
-        self.page.update()
-
-    def generate_subtitle(self):
-        """Show the body of the latest message"""
-        if len(self.messages) > 0:
-            self.subtitle = ft.Text(
-                max_lines=1,
-                spans=[
-                    ft.TextSpan(
-                        text=f"{self.messages[-1].author.display_name}: ",
-                        style=ft.TextStyle(weight=ft.FontWeight.BOLD),
-                    ),
-                    ft.TextSpan(text=self.messages[-1].body),
-                ],
-            )
-
-        else:
-            self.subtitle = ft.Text("No messages yet.")
