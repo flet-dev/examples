@@ -34,15 +34,16 @@ class Fletogram:
         self.generate_users()
         self.generate_group_chats()
         self.generate_individual_chats()
-        self.generate_tabs()
+        self.generate_views()
 
     def view_pop(self, view):
         self.page.views.pop()
         top_view = self.page.views[-1]
         self.page.go(top_view.route)
 
-    def generate_tabs(self):
+    def generate_views(self):
         self.tabs = [ContactsView(self), ChatView(self), SettingsView(self)]
+        self.page.theme_mode = ft.ThemeMode.LIGHT
         self.page.adaptive = True
         self.page.window_width = 393
         self.page.window_height = 852
