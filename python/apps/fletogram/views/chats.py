@@ -15,10 +15,11 @@ class ChatTile(ft.ListTile):
         )
         self.title = ft.Text(chat.display_name)
         self.on_click = self.chat_tile_clicked
+        self.generate_subtitle()
 
     def chat_tile_clicked(self, e):
         print("Chat clicked")
-        messages_view = MessagesView(self)
+        messages_view = MessagesView(self.chat)
         e.control.page.views.append(messages_view)
         e.control.page.update()
 

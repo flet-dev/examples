@@ -1,6 +1,6 @@
 import flet as ft
 
-from data.chat import Chat, ChatMessage
+from data.entities import Chat, ChatMessage
 from data.user import User
 from views.chats import Chats
 from views.contacts_view import ContactsView
