@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class SettingsView(ft.View):
+class Settings(ft.View):
     def __init__(self, fletogram):
         super().__init__()
         self.route = "/"

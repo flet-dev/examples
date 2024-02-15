@@ -1,7 +1,7 @@
 import flet as ft
 
 from utils.generate_avatar import get_avatar_color, get_initials
-from views.messages_view import MessagesView
+from views.messages import Messages
 
 
 class ChatTile(ft.ListTile):
@@ -19,7 +19,7 @@ class ChatTile(ft.ListTile):
 
     def chat_tile_clicked(self, e):
         print("Chat clicked")
-        messages_view = MessagesView(self.chat)
+        messages_view = Messages(self.chat)
         e.control.page.views.append(messages_view)
         e.control.page.update()
 

@@ -7,11 +7,6 @@ class ContactTile(ft.ListTile):
     def __init__(self, user):
         super().__init__()
         self.user = user
-        # self.adaptive = (True,)
-        # self.id = id
-        # self.display_name = display_name
-        # self.first_name = first_name
-        # self.last_name = last_name
         self.title = ft.Text(user.display_name)
         self.leading = ft.CircleAvatar(
             content=ft.Text(get_initials(self.user.display_name)),
@@ -21,11 +16,11 @@ class ContactTile(ft.ListTile):
         )
 
 
-class ContactsView(ft.View):
+class Contacts(ft.View):
     def __init__(self, fletogram):
         super().__init__()
         self.route = "/"
-        self.appbar = ft.AppBar(  # adaptive=True,
+        self.appbar = ft.AppBar(
             leading=ft.TextButton("Edit"),
             title=ft.Text("Contacts"),
             actions=[
