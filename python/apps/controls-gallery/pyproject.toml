@@ -9,7 +9,7 @@ packages = [{include = "controls_gallery"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flet = "^0.19.0"
+flet = "^0.20.0"
 flet-contrib = "^2024.1.24"
 
 
