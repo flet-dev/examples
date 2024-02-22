@@ -27,15 +27,15 @@ class Card(ft.GestureDetector):
     def turn_face_up(self):
         self.face_up = True
         self.content.content.src=f"/images/{self.rank.name}_{self.suite.name}.svg"
-        self.update()
+        self.solitaire.update()
 
-    
+
     def turn_face_down(self):
         self.face_up = False
         #self.content.content.src=f"/images/card_back.svg"
         self.content.content.src=self.solitaire.settings.card_back
-        self.update()
-    
+        self.solitaire.update()
+
     def can_be_moved(self):
         if self.face_up and self.slot.type != 'waste':
             return True
@@ -51,7 +51,7 @@ class Card(ft.GestureDetector):
             # remember card original position to return it back if needed
             self.solitaire.current_top = e.control.top
             self.solitaire.current_left = e.control.left
-            # self.page.update()
+            self.solitaire.update()
 
     def drag(self, e: ft.DragUpdateEvent):
         if self.can_be_moved():
@@ -62,7 +62,7 @@ class Card(ft.GestureDetector):
                     card.top += i * self.solitaire.card_offset
                 card.left = max(0, self.left + e.delta_x)
                 i += 1
-                card.update()
+            self.solitaire.update()
 
     def drop(self, e: ft.DragEndEvent):
         if self.can_be_moved():
@@ -74,7 +74,7 @@ class Card(ft.GestureDetector):
                 if (
                     abs(self.top - slot.upper_card_top()) < 40
                     and abs(self.left - slot.left) < 40
-                ):  
+                ):
                     if (
                         slot.type == "tableau"
                         and self.solitaire.check_tableau_rules(
@@ -92,16 +92,17 @@ class Card(ft.GestureDetector):
                         for card in cards_to_drag:
                             card.place(slot)
                         # reveal top card in old tableau slot if exists
-                        #if len(old_slot.pile) > 0 and old_slot.type == "tableau":
-                        #    old_slot.get_top_card().turn_face_up()
-                        self.solitaire.display_waste()
-                        self.page.update()
+                        if len(old_slot.pile) > 0 and old_slot.type == "tableau":
+                            old_slot.get_top_card().turn_face_up()
+                        elif old_slot.type == 'waste':
+                            self.solitaire.display_waste()
+                        self.solitaire.update()
 
                         return
 
             # return card to original position
             self.solitaire.bounce_back(cards_to_drag)
-            self.page.update()
+            self.solitaire.update()
 
     def doubleclick(self, e):
         if self.slot.type in ("waste", "tableau"):
@@ -115,12 +116,16 @@ class Card(ft.GestureDetector):
                         self.place(slot)
                         #if len(old_slot.pile) > 0:
                             #old_slot.get_top_card().turn_face_up()
-                        self.solitaire.display_waste()
-                        self.page.update()
+                        # self.solitaire.display_waste()
+                        self.solitaire.update()
                         return
 
     def click(self, e):
         if self.slot.type == "stock":
+            # first, set the current top 3 cards to invisible
+            for card in self.solitaire.waste.get_top_three_cards():
+                card.visible = False
+
             for i in range(
                 min(self.solitaire.settings.waste_size, len(self.solitaire.stock.pile))
             ):
@@ -130,7 +135,7 @@ class Card(ft.GestureDetector):
                 top_card.place(self.solitaire.waste)
                 top_card.turn_face_up()
             self.solitaire.display_waste()
-            self.page.update()
+            self.solitaire.update()
 
         if self.slot.type == "tableau":
             if self.face_up == False and len(self.slot.pile)-1 == self.slot.pile.index(self):
@@ -145,8 +150,6 @@ class Card(ft.GestureDetector):
         # remove the card form the old slot's pile if exists
 
         if self.slot is not None:
-            # if self.slot.type == 'waste':
-            #    self.solitaire.update_waste()
             self.slot.pile.remove(self)
 
         # set card's slot as new slot
@@ -157,7 +160,7 @@ class Card(ft.GestureDetector):
         self.solitaire.move_on_top([self])
         if self.solitaire.check_if_you_won():
             self.solitaire.on_win()
-        self.update()
+        self.solitaire.update()
 
     def get_cards_to_move(self):
         """returns list of cards that will be dragged together, starting with the current card"""
