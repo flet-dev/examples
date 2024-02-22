@@ -16,7 +16,7 @@ def main(page: ft.Page):
         page.update()
 
     def on_win():
-        page.add(ft.AlertDialog(title=ft.Text("YOU WIN!"), open=True))
+        page.add(ft.AlertDialog(title=ft.Text("YOU WIN!"), open=True, on_dismiss=lambda e: page.controls.pop()))
         print("You win")
         page.update()
 

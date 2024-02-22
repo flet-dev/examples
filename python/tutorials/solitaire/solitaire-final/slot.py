@@ -18,6 +18,15 @@ class Slot(ft.Container):
         if len(self.pile) > 0:
             return self.pile[-1]
 
+    def get_top_three_cards(self):
+        n = len(self.pile)
+        return self.pile[max(0, n-3):]
+
+    def fan_top_three(self):
+        for i, card in enumerate(self.get_top_three_cards()):
+            card.left = self.left + self.solitaire.card_offset * i
+            card.visible = True
+
     def upper_card_top(self):
         if self.type == "tableau":
             if len(self.pile) > 1:
