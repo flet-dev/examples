@@ -25,7 +25,7 @@ def main(page: Page):
         ),
         Text(
             "Size 60, Bold, Italic",
-            size=50,
+            size=60,
             color=colors.WHITE,
             bgcolor=colors.GREEN_700,
             weight="bold",
