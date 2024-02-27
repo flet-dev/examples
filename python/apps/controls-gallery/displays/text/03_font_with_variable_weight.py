@@ -26,9 +26,9 @@ def example():
             ]
 
         # happens when example is added to the page (when user chooses the Text control from the grid)
-        async def did_mount_async(self):
+        def did_mount(self):
             self.page.fonts["RobotoSlab"] = "RobotoSlab[wght].ttf"
-            await self.page.update_async()
+            self.page.update()
 
         async def width_changed(self, e):
             self.t.weight = f"w{int(e.control.value)}"

@@ -33,14 +33,14 @@ def example():
             await e.control.page.update_async()
 
         # happens when example is added to the page (when user chooses the DatePicker control from the grid)
-        async def did_mount_async(self):
+        def did_mount(self):
             self.page.overlay.append(self.datepicker)
-            await self.page.update_async()
+            self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        async def will_unmount_async(self):
+        def will_unmount(self):
             self.page.overlay.remove(self.datepicker)
-            await self.page.update_async()
+            self.page.update()
 
     datepicker_example = Example()
 

@@ -22,14 +22,14 @@ def example():
             ]
 
         # happens when example is added to the page (when user chooses the Audio control from the grid)
-        async def did_mount_async(self):
+        def did_mount(self):
             self.page.overlay.append(self.audio1)
-            await self.page.update_async()
+            self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        async def will_unmount_async(self):
+        def will_unmount(self):
             self.page.overlay.remove(self.audio1)
-            await self.page.update_async()
+            self.page.update()
 
     audio_example = Example()
 

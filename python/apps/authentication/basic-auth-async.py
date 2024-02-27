@@ -17,7 +17,7 @@ async def main(page: ft.Page):
     )
 
     async def login_click(e):
-        await page.login_async(provider)
+        page.login(provider)
 
     async def on_login(e):
         print("Login error:", e.error)
@@ -25,7 +25,7 @@ async def main(page: ft.Page):
         print("User ID:", page.auth.user.id)
 
     page.on_login = on_login
-    await page.add_async(ft.ElevatedButton("Login with GitHub", on_click=login_click))
+    page.add(ft.ElevatedButton("Login with GitHub", on_click=login_click))
 
 
 ft.app(target=main, port=8550, view=ft.WEB_BROWSER)
