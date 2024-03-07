@@ -117,7 +117,7 @@ def example(page):
                 width=float("inf"),
             )
             self.audio = audio
-            self.audio_duration = None
+            self.audio_duration = 0
             self.on_pan_start = self.find_position
             self.on_pan_update = self.find_position
             self.on_hover = self.change_cursor

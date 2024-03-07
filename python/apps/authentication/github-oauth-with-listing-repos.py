@@ -1,5 +1,8 @@
 import json
+import logging
 import os
+
+logging.basicConfig(level=logging.INFO)
 
 import flet as ft
 import httpx
@@ -22,7 +25,7 @@ def main(page: ft.Page):
     provider = GitHubOAuthProvider(
         client_id=GITHUB_CLIENT_ID,
         client_secret=GITHUB_CLIENT_SECRET,
-        redirect_url="http://localhost:8550/api/oauth/redirect",
+        redirect_url="http://localhost:8550/oauth_callback",
     )
 
     # client storage keys
@@ -93,4 +96,4 @@ def main(page: ft.Page):
     page.add(ft.Row([logged_user, login_button, logout_button]), repos_view)
 
 
-ft.app(target=main, port=8550, view=ft.WEB_BROWSER)
+ft.app(main)

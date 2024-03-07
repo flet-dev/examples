@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8080", "main:app"]
+CMD ["python", "main.py"]

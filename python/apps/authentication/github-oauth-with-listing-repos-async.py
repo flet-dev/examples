@@ -1,5 +1,8 @@
 import json
+import logging
 import os
+
+logging.basicConfig(level=logging.INFO)
 
 import flet as ft
 import httpx
@@ -22,7 +25,7 @@ async def main(page: ft.Page):
     provider = GitHubOAuthProvider(
         client_id=GITHUB_CLIENT_ID,
         client_secret=GITHUB_CLIENT_SECRET,
-        redirect_url="http://localhost:8550/api/oauth/redirect",
+        redirect_url="http://localhost:8550/oauth_callback",
     )
 
     # client storage keys
@@ -35,9 +38,7 @@ async def main(page: ft.Page):
         if ejt:
             saved_token = decrypt(ejt, secret_key)
         if e is not None or saved_token is not None:
-            await page.login_async(
-                provider, saved_token=saved_token, scope=["public_repo"]
-            )
+            page.login(provider, saved_token=saved_token, scope=["public_repo"])
 
     async def on_login(e: ft.LoginEvent):
         if e.error:
@@ -51,7 +52,7 @@ async def main(page: ft.Page):
         logged_user.value = f"Hello, {page.auth.user['name']}!"
         toggle_login_buttons()
         await list_github_repositories()
-        await page.update_async()
+        page.update()
 
     async def list_github_repositories():
         repos_view.controls.clear()
@@ -76,12 +77,12 @@ async def main(page: ft.Page):
 
     async def logout_button_click(e):
         await page.client_storage.remove_async(AUTH_TOKEN_KEY)
-        await page.logout_async()
+        page.logout()
 
     async def on_logout(e):
         toggle_login_buttons()
         await list_github_repositories()
-        await page.update_async()
+        page.update()
 
     def toggle_login_buttons():
         login_button.visible = page.auth is None
@@ -95,7 +96,7 @@ async def main(page: ft.Page):
     page.on_logout = on_logout
     toggle_login_buttons()
     await perform_login(None)
-    await page.add_async(ft.Row([logged_user, login_button, logout_button]), repos_view)
+    page.add(ft.Row([logged_user, login_button, logout_button]), repos_view)
 
 
-ft.app(target=main, port=8550, view=ft.WEB_BROWSER)
+ft.app(main)

@@ -1,5 +1,2 @@
-flet-fastapi==0.20.0
+flet==0.21.1
 flet-contrib
-gunicorn
-uvicorn
-hypercorn

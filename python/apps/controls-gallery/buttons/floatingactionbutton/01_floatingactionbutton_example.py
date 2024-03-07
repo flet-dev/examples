@@ -10,19 +10,19 @@ def example():
             self.content = ft.Column()
 
         # happens when example is added to the page (when user chooses the FloatingActionButton control from the grid)
-        async def did_mount_async(self):
+        def did_mount(self):
             self.page.floating_action_button = ft.FloatingActionButton(
                 icon=ft.icons.ADD,
                 bgcolor=ft.colors.LIME_300,
                 data=0,
                 on_click=fab_pressed,
             )
-            await self.page.update_async()
+            self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        async def will_unmount_async(self):
+        def will_unmount(self):
             self.page.floating_action_button = None
-            await self.page.update_async()
+            self.page.update()
 
     async def fab_pressed(e):
         fab_example.content.controls.append(
