@@ -3,11 +3,11 @@ from pathlib import Path
 
 import flet as ft
 import flet.version
-import flet_fastapi
-from gallerydata import GalleryData
-from left_navigation_menu import LeftNavigationMenu
+
 from controls_grid import ControlsGrid
 from examples_view import ExamplesView
+from gallerydata import GalleryData
+from left_navigation_menu import LeftNavigationMenu
 
 gallery = GalleryData()
 
@@ -90,9 +90,4 @@ async def main(page: ft.Page):
     await page.go_async(page.route)
 
 
-app = flet_fastapi.app(
-    main, assets_dir=str(Path(__file__).resolve().parent.joinpath("assets"))
-)
-
-if __name__ == "__main__":
-    ft.app(main, assets_dir="assets")
+ft.app(main)
