@@ -90,5 +90,4 @@ async def main(page: ft.Page):
     await page.go_async(page.route)
 
 
-if __name__ == "__main__":
-    ft.app(main, assets_dir="assets")
+ft.app(main)
