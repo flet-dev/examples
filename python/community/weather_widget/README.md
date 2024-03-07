@@ -4,6 +4,8 @@
 
 To use `Weather` control, create an API key on https://home.openweathermap.org/ and save it as `OWM_API_KEY` environment variable. 
 
+`WetherAsync` is prefereable to `Weather` in multi-user web apps to avoid creating multiple threads. 
+
 ## Examples
 
 ### Weather widget 

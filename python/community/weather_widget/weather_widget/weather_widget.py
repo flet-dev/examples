@@ -48,6 +48,7 @@ class Weather(ft.Container):
 
     def did_mount(self):
         self.running = True
+        # update_weather calls sync requests.get() and time.sleep() and therefore has to be run in a separate thread
         self.page.run_thread(self.update_weather)
 
     def will_unmount(self):
@@ -117,15 +118,14 @@ class WeatherAsync(ft.Container):
     def did_mount(self):
         self.running = True
         print(self.uid)
+        # update_weather uses async httpx and and asyncio.sleep(60) and therefore should be run as async task
         self.page.run_task(self.update_weather)
-        # self.page.run_thread(self.update_weather)
 
     def will_unmount(self):
         self.running = False
 
     async def update_weather(self):
         while self.running:
-            # response = requests.get(self.OWM_Endpoint, params=self.get_weather_params())
             async with httpx.AsyncClient() as client:
                 response = await client.get(
                     self.OWM_Endpoint, params=self.get_weather_params()
