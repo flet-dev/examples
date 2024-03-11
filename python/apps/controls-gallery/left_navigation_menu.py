@@ -5,26 +5,48 @@ from popup_color_item import PopupColorItem
 
 
 class NavigationItem(ft.TextButton):
-    def __init__(self, destination):
+    def __init__(self, destination, item_clicked):
         super().__init__()
-        # self.deselected_icon = destination.icon
         self.destination = destination
-        self.selected_icon = destination.selected_icon
         self.icon = destination.icon
         self.text = destination.label
-        self.on_click = self.navigation_item_selected
-        self.index = destination.index
+        self.on_click = item_clicked
 
-    def navigation_item_selected(self, e):
-        control_group_name = self.destination.name
-        self.icon = self.selected_icon
-        e.control.page.go(f"/{control_group_name}")
+
+class NavigationColumn(ft.Column):
+    def __init__(self, gallery):
+        super().__init__()
+        self.expand = 4
+        self.scroll = ft.ScrollMode.ALWAYS
+        self.width = 200
+        self.gallery = gallery
+        self.selected_index = 0
+        self.controls = self.get_navigation_items()
+
+    def get_navigation_items(self):
+        navigation_items = []
+        for destination in self.gallery.destinations_list:
+            navigation_items.append(
+                NavigationItem(destination, item_clicked=self.item_clicked)
+            )
+        return navigation_items
+
+    def item_clicked(self, e):
+        e.control.icon = (
+            e.control.destination.selected_icon
+        )  # change icon to selected_icon
+        self.controls[self.selected_index].icon = self.controls[
+            self.selected_index
+        ].destination.icon  # change selected_icon to icon for previously selected item
+        self.selected_index = e.control.destination.index
+        self.page.go(f"/{e.control.destination.name}")
 
 
 class LeftNavigationMenu(ft.Column):
     def __init__(self, gallery):
         super().__init__()
         self.gallery = gallery
+        # self.expand = True
         # self.rail = ft.NavigationRail(
         #     extended=True,
         #     expand=True,
@@ -35,15 +57,17 @@ class LeftNavigationMenu(ft.Column):
         #     destinations=self.get_destinations(),
         #     on_change=self.control_group_selected,
         # )
-        self.rail = ft.Column(
-            controls=self.get_navigation_items(),
-        )
+        # self.rail = ft.Column(
+        #     controls=self.get_navigation_items(),
+        # )
+        self.rail = NavigationColumn(gallery=gallery)
 
         self.dark_light_text = ft.Text("Light theme")
 
         self.controls = [
             self.rail,
             ft.Column(
+                expand=1,
                 controls=[
                     ft.Row(
                         controls=[
@@ -78,7 +102,7 @@ class LeftNavigationMenu(ft.Column):
                             ft.Text("Seed color"),
                         ]
                     ),
-                ]
+                ],
             ),
         ]
 
@@ -94,11 +118,11 @@ class LeftNavigationMenu(ft.Column):
     #         )
     #     return destinations
 
-    def get_navigation_items(self):
-        navigation_items = []
-        for destination in self.gallery.destinations_list:
-            navigation_items.append(NavigationItem(destination))
-        return navigation_items
+    # def get_navigation_items(self):
+    #     navigation_items = []
+    #     for destination in self.gallery.destinations_list:
+    #         navigation_items.append(NavigationItem(destination))
+    #     return navigation_items
 
     # async def control_group_selected(self, e):
     #     control_group_name = self.gallery.destinations_list[
