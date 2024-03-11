@@ -4,12 +4,16 @@ from gallerydata import GalleryData
 from popup_color_item import PopupColorItem
 
 
-class NavigationItem(ft.TextButton):
+class NavigationItem(ft.Container):
     def __init__(self, destination, item_clicked):
         super().__init__()
+        self.ink = True
+        self.padding = 10
+        self.border_radius = 5
         self.destination = destination
         self.icon = destination.icon
         self.text = destination.label
+        self.content = ft.Row([ft.Icon(self.icon), ft.Text(self.text)])
         self.on_click = item_clicked
 
 
@@ -17,6 +21,7 @@ class NavigationColumn(ft.Column):
     def __init__(self, gallery):
         super().__init__()
         self.expand = 4
+        self.spacing = 0
         self.scroll = ft.ScrollMode.ALWAYS
         self.width = 200
         self.gallery = gallery
@@ -32,12 +37,19 @@ class NavigationColumn(ft.Column):
         return navigation_items
 
     def item_clicked(self, e):
-        e.control.icon = (
+        e.control.content.controls[0].name = (
             e.control.destination.selected_icon
         )  # change icon to selected_icon
-        self.controls[self.selected_index].icon = self.controls[
+        e.control.bgcolor = (
+            ft.colors.SECONDARY_CONTAINER
+        )  # change container bgcolor to "selected" color
+        self.controls[self.selected_index].content.controls[0].name = self.controls[
             self.selected_index
         ].destination.icon  # change selected_icon to icon for previously selected item
+
+        self.controls[self.selected_index].bgcolor = (
+            None  # change container color to no color for previously selected item
+        )
         self.selected_index = e.control.destination.index
         self.page.go(f"/{e.control.destination.name}")
 
