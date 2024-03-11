@@ -43,6 +43,7 @@ def main(page: ft.Page):
         left_nav.rail.selected_index = gallery.destinations_list.index(
             controls_grid.control_group
         )
+        left_nav.rail.update_selected_item()
         examples_view.visible = False
         examples_view.examples.controls = []
         page.update()
@@ -52,6 +53,7 @@ def main(page: ft.Page):
         left_nav.rail.selected_index = gallery.destinations_list.index(
             examples_view.control_group
         )
+        left_nav.rail.update_selected_item()
         controls_grid.visible = False
 
         page.update()

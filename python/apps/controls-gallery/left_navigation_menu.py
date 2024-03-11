@@ -53,6 +53,12 @@ class NavigationColumn(ft.Column):
         self.selected_index = e.control.destination.index
         self.page.go(f"/{e.control.destination.name}")
 
+    def update_selected_item(self):
+        for item in self.controls:
+            item.bgcolor = None
+        self.controls[self.selected_index].bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.update()
+
 
 class LeftNavigationMenu(ft.Column):
     def __init__(self, gallery):
