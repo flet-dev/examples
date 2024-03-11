@@ -1,9 +1,5 @@
 import flet as ft
 
-from gallerydata import GalleryData
-
-# from popup_color_item import PopupColorItem
-
 
 class PopupColorItem(ft.PopupMenuItem):
     def __init__(self, color, name):
@@ -17,11 +13,11 @@ class PopupColorItem(ft.PopupMenuItem):
         self.on_click = self.seed_color_changed
         self.data = color
 
-    async def seed_color_changed(self, e):
+    def seed_color_changed(self, e):
         self.page.theme = self.page.dark_theme = ft.theme.Theme(
             color_scheme_seed=self.data
         )
-        await self.page.update_async()
+        self.page.update()
 
 
 class NavigationItem(ft.Container):
@@ -57,26 +53,19 @@ class NavigationColumn(ft.Column):
         return navigation_items
 
     def item_clicked(self, e):
-        e.control.content.controls[0].name = (
-            e.control.destination.selected_icon
-        )  # change icon to selected_icon
-        e.control.bgcolor = (
-            ft.colors.SECONDARY_CONTAINER
-        )  # change container bgcolor to "selected" color
-        self.controls[self.selected_index].content.controls[0].name = self.controls[
-            self.selected_index
-        ].destination.icon  # change selected_icon to icon for previously selected item
-
-        self.controls[self.selected_index].bgcolor = (
-            None  # change container color to no color for previously selected item
-        )
         self.selected_index = e.control.destination.index
+        self.update_selected_item()
         self.page.go(f"/{e.control.destination.name}")
 
     def update_selected_item(self):
         for item in self.controls:
             item.bgcolor = None
+            item.content.controls[0].name = item.destination.icon
         self.controls[self.selected_index].bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.controls[self.selected_index].content.controls[0].name = self.controls[
+            self.selected_index
+        ].destination.selected_icon
+
         self.update()
 
 
@@ -88,6 +77,11 @@ class LeftNavigationMenu(ft.Column):
         self.rail = NavigationColumn(gallery=gallery)
 
         self.dark_light_text = ft.Text("Light theme")
+        self.dark_light_icon = ft.IconButton(
+            icon=ft.icons.BRIGHTNESS_2_OUTLINED,
+            tooltip="Toggle brightness",
+            on_click=self.theme_changed,
+        )
 
         self.controls = [
             self.rail,
@@ -96,11 +90,7 @@ class LeftNavigationMenu(ft.Column):
                 controls=[
                     ft.Row(
                         controls=[
-                            ft.IconButton(
-                                icon=ft.icons.BRIGHTNESS_2_OUTLINED,
-                                tooltip="Toggle brightness",
-                                on_click=self.theme_changed,
-                            ),
+                            self.dark_light_icon,
                             self.dark_light_text,
                         ]
                     ),
@@ -131,11 +121,13 @@ class LeftNavigationMenu(ft.Column):
             ),
         ]
 
-    async def theme_changed(self, e):
+    def theme_changed(self, e):
         if self.page.theme_mode == ft.ThemeMode.LIGHT:
             self.page.theme_mode = ft.ThemeMode.DARK
             self.dark_light_text.value = "Dark theme"
+            self.dark_light_icon.icon = ft.icons.BRIGHTNESS_HIGH
         else:
             self.page.theme_mode = ft.ThemeMode.LIGHT
             self.dark_light_text.value = "Light theme"
-        await self.page.update_async()
+            self.dark_light_icon.icon = ft.icons.BRIGHTNESS_2
+        self.page.update()
