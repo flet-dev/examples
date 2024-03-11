@@ -14,7 +14,7 @@ gallery = GalleryData()
 logging.basicConfig(level=logging.INFO)
 
 
-async def main(page: ft.Page):
+def main(page: ft.Page):
     page.title = "Flet controls gallery"
 
     page.fonts = {
@@ -25,36 +25,36 @@ async def main(page: ft.Page):
         route_list = [item for item in route.split("/") if item != ""]
         return route_list
 
-    async def route_change(e):
+    def route_change(e):
         route_list = get_route_list(page.route)
         if len(route_list) == 0:
-            await page.go_async("/layout")
+            page.go("/layout")
         elif len(route_list) == 1:
-            await display_controls_grid(control_group_name=route_list[0])
+            display_controls_grid(control_group_name=route_list[0])
         elif len(route_list) == 2:
             examples_view.control_group_name = route_list[0]
             examples_view.control_name = route_list[1]
-            await display_control_examples()
+            display_control_examples()
         else:
             print("Invalid route")
 
-    async def display_controls_grid(control_group_name):
+    def display_controls_grid(control_group_name):
         controls_grid.display(control_group_name)
         left_nav.rail.selected_index = gallery.destinations_list.index(
             controls_grid.control_group
         )
         examples_view.visible = False
         examples_view.examples.controls = []
-        await page.update_async()
+        page.update()
 
-    async def display_control_examples():
+    def display_control_examples():
         examples_view.display()
         left_nav.rail.selected_index = gallery.destinations_list.index(
             examples_view.control_group
         )
         controls_grid.visible = False
 
-        await page.update_async()
+        page.update()
 
     left_nav = LeftNavigationMenu(gallery=gallery)
 
@@ -78,7 +78,7 @@ async def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
     page.on_error = lambda e: print("Page error:", e.data)
 
-    await page.add_async(
+    page.add(
         ft.Row(
             [left_nav, ft.VerticalDivider(width=1), controls_grid, examples_view],
             expand=True,
@@ -87,7 +87,7 @@ async def main(page: ft.Page):
 
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")
-    await page.go_async(page.route)
+    page.go(page.route)
 
 
 ft.app(main)
