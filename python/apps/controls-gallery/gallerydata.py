@@ -27,12 +27,13 @@ class ExampleItem:
 
 
 class ControlGroup:
-    def __init__(self, name, label, icon, selected_icon):
+    def __init__(self, name, label, icon, selected_icon, index):
         self.name = name
         self.label = label
         self.icon = icon
         self.selected_icon = selected_icon
         self.grid_items = []
+        self.index = index
 
 
 class GalleryData:
@@ -45,66 +46,77 @@ class GalleryData:
             label="Layout",
             icon=ft.icons.GRID_VIEW,
             selected_icon=ft.icons.GRID_VIEW_SHARP,
+            index=0,
         ),
         ControlGroup(
             name="navigation",
             label="Navigation",
             icon=ft.icons.MENU_SHARP,
             selected_icon=ft.icons.MENU_SHARP,
+            index=1,
         ),
         ControlGroup(
             name="displays",
             label="Displays",
             icon=ft.icons.INFO_OUTLINED,
             selected_icon=ft.icons.INFO_SHARP,
+            index=2,
         ),
         ControlGroup(
             name="buttons",
             label="Buttons",
             icon=ft.icons.SMART_BUTTON_SHARP,
             selected_icon=ft.icons.SMART_BUTTON_SHARP,
+            index=3,
         ),
         ControlGroup(
             name="input",
             label="Input",
             icon=ft.icons.INPUT_SHARP,
             selected_icon=ft.icons.INPUT_OUTLINED,
+            index=4,
         ),
         ControlGroup(
             name="dialogs",
             label="Dialogs",
             icon=ft.icons.MESSAGE_OUTLINED,
             selected_icon=ft.icons.MESSAGE_SHARP,
+            index=5,
         ),
         ControlGroup(
             name="charts",
             label="Charts",
             icon=ft.icons.INSERT_CHART_OUTLINED,
             selected_icon=ft.icons.INSERT_CHART_SHARP,
+            index=6,
         ),
         ControlGroup(
             name="animations",
             label="Animations",
             icon=ft.icons.ANIMATION_SHARP,
             selected_icon=ft.icons.ANIMATION_SHARP,
+            index=7,
         ),
         ControlGroup(
             name="utility",
             label="Utility",
             icon=ft.icons.PAN_TOOL_OUTLINED,
             selected_icon=ft.icons.PAN_TOOL_SHARP,
+            index=8,
         ),
         ControlGroup(
             name="colors",
             label="Colors",
             icon=ft.icons.FORMAT_PAINT_OUTLINED,
             selected_icon=ft.icons.FORMAT_PAINT_SHARP,
+            index=9,
         ),
         ControlGroup(
             name="contrib",
             label="Contrib",
             icon=ft.icons.MY_LIBRARY_ADD_OUTLINED,
             selected_icon=ft.icons.LIBRARY_ADD_SHARP,
+            index=10,
         ),
     ]
 
