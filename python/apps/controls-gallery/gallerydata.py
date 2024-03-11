@@ -35,6 +35,22 @@ class ControlGroup:
         self.grid_items = []
         self.index = index
 
+    def sort_grid_items(self):
+        controls_list = []
+        sorted_grid_items = []
+        for grid_item in self.grid_items:
+            controls_list.append(grid_item.name)
+        controls_list.sort()
+        for item in controls_list:
+            sorted_grid_items.append(self.find_grid_item(item))
+
+        self.grid_items = sorted_grid_items
+
+    def find_grid_item(self, name):
+        for grid_item in self.grid_items:
+            if grid_item.name == name:
+                return grid_item
+
 
 class GalleryData:
     def __init__(self):

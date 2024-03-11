@@ -29,6 +29,7 @@ class ControlsGrid(ft.GridView):
         # examples.visible = False
         self.controls = []
         # listview.controls = []
+        self.control_group.sort_grid_items()
         for grid_item in self.control_group.grid_items:
             self.controls.append(
                 ft.Container(
