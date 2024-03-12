@@ -30,7 +30,7 @@ def main(page: ft.Page):
         if len(route_list) == 0:
             page.go("/layout")
         elif len(route_list) == 1:
-            display_controls_grid(control_group_name=route_list[0])
+            display_controls_grid(route_list[0])
         elif len(route_list) == 2:
             examples_view.control_group_name = route_list[0]
             examples_view.control_name = route_list[1]
@@ -39,11 +39,11 @@ def main(page: ft.Page):
             print("Invalid route")
 
     def display_controls_grid(control_group_name):
-        controls_grid.display(control_group_name)
+        controls_grid.control_group = gallery.get_control_group(control_group_name)
+        controls_grid.display()
         left_nav.rail.selected_index = gallery.destinations_list.index(
             controls_grid.control_group
         )
-        left_nav.rail.update_selected_item()
         examples_view.visible = False
         examples_view.examples.controls = []
         page.update()
@@ -53,7 +53,7 @@ def main(page: ft.Page):
         left_nav.rail.selected_index = gallery.destinations_list.index(
             examples_view.control_group
         )
-        left_nav.rail.update_selected_item()
+        # left_nav.rail.update_selected_item()
         controls_grid.visible = False
 
         page.update()

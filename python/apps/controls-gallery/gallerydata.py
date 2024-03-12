@@ -136,6 +136,11 @@ class GalleryData:
         ]
         self.import_modules()
 
+    def get_control_group(self, control_group_name):
+        for control_group in self.destinations_list:
+            if control_group.name == control_group_name:
+                return control_group
+
     def list_control_dirs(self, dir):
         file_path = os.path.join(str(Path(__file__).parent), dir)
         control_dirs = [

@@ -44,6 +44,10 @@ class NavigationColumn(ft.Column):
         self.selected_index = 0
         self.controls = self.get_navigation_items()
 
+    def before_update(self):
+        super().before_update()
+        self.update_selected_item()
+
     def get_navigation_items(self):
         navigation_items = []
         for destination in self.gallery.destinations_list:
@@ -66,7 +70,7 @@ class NavigationColumn(ft.Column):
             self.selected_index
         ].destination.selected_icon
 
-        self.update()
+        # self.update()
 
 
 class LeftNavigationMenu(ft.Column):
