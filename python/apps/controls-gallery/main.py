@@ -27,37 +27,29 @@ def main(page: ft.Page):
 
     def route_change(e):
         route_list = get_route_list(page.route)
+
         if len(route_list) == 0:
             page.go("/layout")
         elif len(route_list) == 1:
-            display_controls_grid(route_list[0])
+            gallery.selected_control_group = gallery.get_control_group(route_list[0])
+            display_controls_grid()
         elif len(route_list) == 2:
-            # examples_view.control_group_name = route_list[0]
-            # examples_view.control_name = route_list[1]
-            display_control_examples(route_list[0], route_list[1])
+            gallery.selected_control_group = gallery.get_control_group(route_list[0])
+            display_control_examples(route_list[1])
         else:
             print("Invalid route")
 
-    def display_controls_grid(control_group_name):
-        controls_grid.control_group = gallery.get_control_group(control_group_name)
+    def display_controls_grid():
         controls_grid.display()
-        left_nav.rail.selected_index = gallery.destinations_list.index(
-            controls_grid.control_group
-        )
         examples_view.visible = False
         examples_view.examples.controls = []
         page.update()
 
-    def display_control_examples(control_group_name, control_name):
-        examples_view.control_group = gallery.get_control_group(control_group_name)
-        examples_view.control = gallery.get_control(control_group_name, control_name)
-        examples_view.display(examples_view.control)
-        left_nav.rail.selected_index = gallery.destinations_list.index(
-            examples_view.control_group
+    def display_control_examples(control_name):
+        examples_view.display(
+            gallery.get_control(gallery.selected_control_group.name, control_name)
         )
-        # left_nav.rail.update_selected_item()
         controls_grid.visible = False
-
         page.update()
 
     left_nav = LeftNavigationMenu(gallery=gallery)

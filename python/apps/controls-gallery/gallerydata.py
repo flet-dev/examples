@@ -135,6 +135,7 @@ class GalleryData:
             ),
         ]
         self.import_modules()
+        self.selected_control_group = self.destinations_list[0]
 
     def get_control_group(self, control_group_name):
         for control_group in self.destinations_list:

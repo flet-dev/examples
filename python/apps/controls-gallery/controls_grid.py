@@ -11,7 +11,6 @@ class ControlsGrid(ft.GridView):
         self.spacing = 10
         self.run_spacing = 10
         self.gallery = gallery
-        self.control_group = self.gallery.destinations_list[0]
 
     def grid_item_clicked(self, e):
         route = f"{self.page.route}/{e.control.data.id}"
@@ -20,8 +19,7 @@ class ControlsGrid(ft.GridView):
     def display(self):
         self.visible = True
         self.controls = []
-        self.control_group.sort_grid_items()
-        for grid_item in self.control_group.grid_items:
+        for grid_item in self.gallery.selected_control_group.grid_items:
             self.controls.append(
                 ft.Container(
                     on_click=self.grid_item_clicked,
