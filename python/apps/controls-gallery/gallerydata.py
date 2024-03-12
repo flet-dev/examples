@@ -147,7 +147,7 @@ class GalleryData:
                 return grid_item
 
     def list_control_dirs(self, dir):
-        file_path = os.path.join(str(Path(__file__).parent), dir)
+        file_path = os.path.join(str(Path(__file__).parent), "examples", dir)
         control_dirs = [
             f
             for f in os.listdir(file_path)
@@ -158,7 +158,7 @@ class GalleryData:
 
     def list_example_files(self, control_group_dir, control_dir):
         file_path = os.path.join(
-            str(Path(__file__).parent), control_group_dir, control_dir
+            str(Path(__file__).parent), "examples", control_group_dir, control_dir
         )
         example_files = [f for f in os.listdir(file_path) if not f.startswith("_")]
         return example_files
@@ -177,7 +177,9 @@ class GalleryData:
                     if module_name in sys.modules:
                         print(f"{module_name!r} already in sys.modules")
                     else:
-                        file_path = os.path.join(str(Path(__file__).parent), file_name)
+                        file_path = os.path.join(
+                            str(Path(__file__).parent), "examples", file_name
+                        )
 
                         spec = importlib.util.spec_from_file_location(
                             module_name, file_path
