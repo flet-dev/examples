@@ -141,6 +141,13 @@ class GalleryData:
             if control_group.name == control_group_name:
                 return control_group
 
+    def get_control(self, control_group_name, control_name):
+        control_group = self.get_control_group(control_group_name)
+        for grid_item in control_group.grid_items:
+            if grid_item.id == control_name:
+                print(grid_item.name, grid_item.parent.name)
+                return grid_item
+
     def list_control_dirs(self, dir):
         file_path = os.path.join(str(Path(__file__).parent), dir)
         control_dirs = [

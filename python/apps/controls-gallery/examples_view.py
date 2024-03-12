@@ -17,6 +17,8 @@ class ExamplesView(ft.Column):
         ]
         self.control_group_name = None
         self.control_name = None
+        self.control_group = None
+        self.control = None
 
     def find_control_group_object(self):
         for control_group in self.gallery.destinations_list:
@@ -30,8 +32,9 @@ class ExamplesView(ft.Column):
                 print(grid_item.name, grid_item.parent.name)
                 return grid_item
 
-    def display(self):
-        grid_item = self.find_grid_object()
+    def display(self, control):
+        # grid_item = self.find_grid_object()
+        grid_item = control
         self.visible = True
         self.examples.controls = []
         self.control_name_text.value = grid_item.name
