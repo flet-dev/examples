@@ -53,7 +53,7 @@ class ControlGroup:
 class GalleryData:
     def __init__(self):
 
-        self.destinations_list = [
+        self.control_groups = [
             ControlGroup(
                 name="layout",
                 label="Layout",
@@ -133,10 +133,10 @@ class GalleryData:
             ),
         ]
         self.import_modules()
-        self.selected_control_group = self.destinations_list[0]
+        self.selected_control_group = self.control_groups[0]
 
     def get_control_group(self, control_group_name):
-        for control_group in self.destinations_list:
+        for control_group in self.control_groups:
             if control_group.name == control_group_name:
                 return control_group
 
@@ -164,7 +164,7 @@ class GalleryData:
         return example_files
 
     def import_modules(self):
-        for control_group_dir in self.destinations_list:
+        for control_group_dir in self.control_groups:
             for control_dir in self.list_control_dirs(control_group_dir.name):
                 grid_item = GridItem(control_dir)
 

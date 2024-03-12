@@ -50,7 +50,7 @@ class NavigationColumn(ft.Column):
 
     def get_navigation_items(self):
         navigation_items = []
-        for destination in self.gallery.destinations_list:
+        for destination in self.gallery.control_groups:
             navigation_items.append(
                 NavigationItem(destination, item_clicked=self.item_clicked)
             )
@@ -62,7 +62,7 @@ class NavigationColumn(ft.Column):
         self.page.go(f"/{e.control.destination.name}")
 
     def update_selected_item(self):
-        self.selected_index = self.gallery.destinations_list.index(
+        self.selected_index = self.gallery.control_groups.index(
             self.gallery.selected_control_group
         )
         for item in self.controls:
