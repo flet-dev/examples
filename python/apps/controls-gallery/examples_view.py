@@ -16,8 +16,7 @@ class ExamplesView(ft.Column):
             self.examples,
         ]
 
-    def display(self, control):
-        grid_item = control
+    def display(self, grid_item):
         self.visible = True
         self.examples.controls = []
         self.control_name_text.value = grid_item.name

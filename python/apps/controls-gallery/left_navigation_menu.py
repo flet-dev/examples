@@ -73,8 +73,6 @@ class NavigationColumn(ft.Column):
             self.selected_index
         ].destination.selected_icon
 
-        # self.update()
-
 
 class LeftNavigationMenu(ft.Column):
     def __init__(self, gallery):

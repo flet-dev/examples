@@ -30,19 +30,18 @@ def main(page: ft.Page):
 
         if len(route_list) == 0:
             page.go("/layout")
-        elif len(route_list) == 1:
-            gallery.selected_control_group = gallery.get_control_group(route_list[0])
-            display_controls_grid()
-        elif len(route_list) == 2:
-            gallery.selected_control_group = gallery.get_control_group(route_list[0])
-            display_control_examples(route_list[1])
         else:
-            print("Invalid route")
+            gallery.selected_control_group = gallery.get_control_group(route_list[0])
+            if len(route_list) == 1:
+                display_controls_grid()
+            elif len(route_list) == 2:
+                display_control_examples(route_list[1])
+            else:
+                print("Invalid route")
 
     def display_controls_grid():
         controls_grid.display()
         examples_view.visible = False
-        examples_view.examples.controls = []
         page.update()
 
     def display_control_examples(control_name):

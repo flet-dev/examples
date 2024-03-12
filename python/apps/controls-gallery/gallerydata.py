@@ -11,10 +11,8 @@ class GridItem:
     def __init__(self, id):
         self.id = id
         self.name = None
-        # self.image_file_name = None
         self.examples = []
         self.description = None
-        self.parent = None
 
 
 class ExampleItem:
@@ -146,7 +144,6 @@ class GalleryData:
         control_group = self.get_control_group(control_group_name)
         for grid_item in control_group.grid_items:
             if grid_item.id == control_name:
-                print(grid_item.name, grid_item.parent.name)
                 return grid_item
 
     def list_control_dirs(self, dir):
@@ -192,7 +189,6 @@ class GalleryData:
                         if file == "index.py":
                             grid_item.name = module.name
                             grid_item.description = module.description
-                            grid_item.parent = control_group_dir
                         else:
                             example_item = ExampleItem()
                             example_item.example = module.example
@@ -207,3 +203,4 @@ class GalleryData:
                             grid_item.examples.append(example_item)
                 grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)
+            control_group_dir.sort_grid_items()
