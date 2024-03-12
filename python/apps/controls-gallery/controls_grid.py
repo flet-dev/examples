@@ -13,9 +13,9 @@ class ControlsGrid(ft.GridView):
         self.gallery = gallery
         self.control_group = self.gallery.destinations_list[0]
 
-    async def grid_item_clicked(self, e):
+    def grid_item_clicked(self, e):
         route = f"{self.page.route}/{e.control.data.id}"
-        await self.page.go_async(route)
+        self.page.go(route)
 
     def display(self):
         self.visible = True
