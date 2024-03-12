@@ -34,23 +34,11 @@ def main(page: ft.Page):
         else:
             gallery.selected_control_group = gallery.get_control_group(route_list[0])
             if len(route_list) == 1:
-                display_controls_grid()
+                gallery_view.display_controls_grid()
             elif len(route_list) == 2:
-                display_control_examples(route_list[1])
+                gallery_view.display_control_examples(route_list[1])
             else:
                 print("Invalid route")
-
-    def display_controls_grid():
-        gallery_view.controls_grid.display()
-        gallery_view.examples_view.visible = False
-        page.update()
-
-    def display_control_examples(control_name):
-        gallery_view.examples_view.display(
-            gallery.get_control(gallery.selected_control_group.name, control_name)
-        )
-        gallery_view.controls_grid.visible = False
-        page.update()
 
     gallery_view = GalleryView(gallery)
 
