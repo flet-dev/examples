@@ -4,10 +4,11 @@ from pathlib import Path
 import flet as ft
 import flet.version
 
-from controls_grid import ControlsGrid
-from examples_view import ExamplesView
+from components.controls_grid import ControlsGrid
+from components.examples_view import ExamplesView
+from components.gallery_view import GalleryView
+from components.left_navigation_menu import LeftNavigationMenu
 from gallerydata import GalleryData
-from left_navigation_menu import LeftNavigationMenu
 
 gallery = GalleryData()
 
@@ -40,22 +41,18 @@ def main(page: ft.Page):
                 print("Invalid route")
 
     def display_controls_grid():
-        controls_grid.display()
-        examples_view.visible = False
+        gallery_view.controls_grid.display()
+        gallery_view.examples_view.visible = False
         page.update()
 
     def display_control_examples(control_name):
-        examples_view.display(
+        gallery_view.examples_view.display(
             gallery.get_control(gallery.selected_control_group.name, control_name)
         )
-        controls_grid.visible = False
+        gallery_view.controls_grid.visible = False
         page.update()
 
-    left_nav = LeftNavigationMenu(gallery=gallery)
-
-    controls_grid = ControlsGrid(gallery=gallery)
-
-    examples_view = ExamplesView(gallery=gallery)
+    gallery_view = GalleryView(gallery)
 
     page.appbar = ft.AppBar(
         leading=ft.Container(padding=5, content=ft.Image(src=f"logo.svg")),
@@ -73,13 +70,7 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
     page.on_error = lambda e: print("Page error:", e.data)
 
-    page.add(
-        ft.Row(
-            [left_nav, ft.VerticalDivider(width=1), controls_grid, examples_view],
-            expand=True,
-        )
-    )
-
+    page.add(gallery_view)
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")
     page.go(page.route)
