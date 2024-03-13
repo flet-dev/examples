@@ -21,18 +21,19 @@ def example():
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
         def will_unmount(self):
+            print("Will unmount happens")
             self.page.floating_action_button = None
             self.page.update()
 
-    async def fab_pressed(e):
+    def fab_pressed(e):
         fab_example.content.controls.append(
             ft.ListTile(title=ft.Text(f"Tile {e.control.data}"))
         )
-        await e.control.page.show_snack_bar_async(
+        e.control.page.show_snack_bar(
             ft.SnackBar(ft.Text("Tile was added successfully!"), open=True)
         )
         e.control.data += 1
-        await fab_example.update_async()
+        fab_example.update()
 
     fab_example = Example()
 

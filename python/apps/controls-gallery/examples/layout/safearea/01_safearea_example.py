@@ -33,6 +33,7 @@ def example():
         # happens when example is removed from the page (when user chooses different control group on the menu)
         def will_unmount(self):
             self.page.floating_action_button = None
+            print("Removing FAB")
             self.page.update()
 
     def fab_pressed(e):
