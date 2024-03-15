@@ -1,6 +1,6 @@
 import flet as ft
 
-name = "CupertinoBottomSheet Example"
+name = "CupertinoBottomSheet with CupertinoActionSheet Example"
 
 
 def example():
