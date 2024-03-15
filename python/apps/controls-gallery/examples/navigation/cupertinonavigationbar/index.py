@@ -1,3 +1,3 @@
 name = "CupertinoNavigationBar"
 
-description = """An iOS-styled bottom navigation tab bar."""
+description = """An iOS-style bottom navigation tab bar."""
