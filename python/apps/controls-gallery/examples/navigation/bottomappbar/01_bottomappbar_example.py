@@ -28,14 +28,14 @@ def example():
                 ),
             ]
 
-        async def show_bottom_app_bar(self, e):
+        def show_bottom_app_bar(self, e):
             e.control.page.bottom_appbar = self.bottom_app_bar
-            await e.control.page.update_async()
+            e.control.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        async def will_unmount_async(self):
+        def will_unmount(self):
             self.page.bottom_appbar = None
-            await self.page.update_async()
+            self.page.update()
 
     bottom_app_bar_example = Example()
 
