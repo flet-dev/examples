@@ -25,14 +25,14 @@ def example():
                 ),
             ]
 
-        async def show_navigation_bar(self, e):
+        def show_navigation_bar(self, e):
             e.control.page.navigation_bar = self.navigation_bar
-            await e.control.page.update_async()
+            e.control.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        async def will_unmount_async(self):
+        def will_unmount(self):
             self.page.navigation_bar = None
-            await self.page.update_async()
+            self.page.update()
 
     navigation_bar_example = Example()
 

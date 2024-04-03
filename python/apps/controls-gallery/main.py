@@ -1,13 +1,9 @@
 import logging
-from pathlib import Path
 
 import flet as ft
 import flet.version
 
-from components.controls_grid import ControlsGrid
-from components.examples_view import ExamplesView
 from components.gallery_view import GalleryView
-from components.left_navigation_menu import LeftNavigationMenu
 from gallerydata import GalleryData
 
 gallery = GalleryData()

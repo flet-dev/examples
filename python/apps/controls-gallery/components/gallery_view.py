@@ -22,6 +22,7 @@ class GalleryView(ft.Row):
 
     def display_controls_grid(self):
         self.controls_grid.display()
+        self.examples_view.examples.controls = []
         self.examples_view.visible = False
         self.page.update()
 
