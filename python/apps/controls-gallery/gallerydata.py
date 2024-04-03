@@ -21,7 +21,7 @@ class ExampleItem:
         self.file_name = None
         self.order = None
         self.example = None
-        self.source_code = None
+        # self.source_code = None
 
 
 class ControlGroup:
@@ -33,21 +33,10 @@ class ControlGroup:
         self.grid_items = []
         self.index = index
 
-    def sort_grid_items(self):
-        controls_list = []
-        sorted_grid_items = []
-        for grid_item in self.grid_items:
-            controls_list.append(grid_item.name)
-        controls_list.sort()
-        for item in controls_list:
-            sorted_grid_items.append(self.find_grid_item(item))
-
-        self.grid_items = sorted_grid_items
-
-    def find_grid_item(self, name):
-        for grid_item in self.grid_items:
-            if grid_item.name == name:
-                return grid_item
+    # def find_grid_item(self, name):
+    #     for grid_item in self.grid_items:
+    #         if grid_item.name == name:
+    #             return grid_item
 
 
 class GalleryData:
@@ -205,4 +194,4 @@ class GalleryData:
                             grid_item.examples.append(example_item)
                 grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)
-            control_group_dir.sort_grid_items()
+            control_group_dir.grid_items.sort(key=lambda x: x.name)

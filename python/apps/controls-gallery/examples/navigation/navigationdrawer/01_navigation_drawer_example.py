@@ -22,15 +22,15 @@ def example():
         ],
     )
 
-    async def open_end_drawer(e):
+    def open_end_drawer(e):
         e.control.page.end_drawer = end_drawer
         end_drawer.open = True
-        await e.control.page.update_async()
+        e.control.page.update()
 
-    async def open_drawer(e):
+    def open_drawer(e):
         e.control.page.drawer = drawer
         drawer.open = True
-        await e.control.page.update_async()
+        e.control.page.update()
 
     return ft.Column(
         [

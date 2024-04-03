@@ -4,9 +4,9 @@ name = "CupertinoAlertDialog example"
 
 
 def example():
-    async def dismiss_dialog(e):
+    def dismiss_dialog(e):
         cupertino_alert_dialog.open = False
-        await e.control.page.update_async()
+        e.control.page.update()
 
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
