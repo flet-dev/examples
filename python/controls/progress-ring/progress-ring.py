@@ -10,7 +10,7 @@ def main(page: Page):
     page.add(
         Text("Circular progress indicator", style="headlineSmall"),
         Row([pr, Text("Wait for the completion...")]),
-        Text("Indeterminate cicrular progress", style="headlineSmall"),
+        Text("Indeterminate circular progress", style="headlineSmall"),
         Column(
             [ProgressRing(), Text("I'm going to run for ages...")],
             horizontal_alignment="center",
