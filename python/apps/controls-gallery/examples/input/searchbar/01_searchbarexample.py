@@ -4,13 +4,13 @@ name = "SearchBar example"
 
 
 def example():
-    async def close_anchor(e):
+    def close_anchor(e):
         text = f"Color {e.control.data}"
         print(f"closing view from {text}")
-        await anchor.close_view_async(text)
+        anchor.close_view(text)
 
-    async def open_anchor(e):
-        await anchor.open_view_async()
+    def open_anchor(e):
+        anchor.open_view()
 
     def handle_change(e):
         print(f"handle_change e.data: {e.data}")
