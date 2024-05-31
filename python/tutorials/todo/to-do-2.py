@@ -1,30 +1,29 @@
-import flet
-from flet import Checkbox, Column, FloatingActionButton, Page, Row, TextField, icons
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def add_clicked(e):
-        tasks.controls.append(Checkbox(label=new_task.value))
+        tasks_view.controls.append(ft.Checkbox(label=new_task.value))
         new_task.value = ""
         view.update()
 
-    new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-    tasks = Column()
-    view = Column(
+    new_task = ft.TextField(hint_text="What needs to be done?", expand=True)
+    tasks_view = ft.Column()
+    view = ft.Column(
         width=600,
         controls=[
-            Row(
+            ft.Row(
                 controls=[
                     new_task,
-                    FloatingActionButton(icon=icons.ADD, on_click=add_clicked),
+                    ft.FloatingActionButton(icon=ft.icons.ADD, on_click=add_clicked),
                 ],
             ),
-            tasks,
+            tasks_view,
         ],
     )
 
-    page.horizontal_alignment = "center"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(view)
 
 
-flet.app(target=main)
+ft.app(target=main)
