@@ -34,8 +34,8 @@ class Task(ft.Column):
 
         self.edit_view = ft.Row(
             visible=False,
-            alignment="spaceBetween",
-            vertical_alignment="center",
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
                 self.edit_name,
                 ft.IconButton(
