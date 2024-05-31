@@ -1,29 +1,21 @@
-import flet
-from flet import (
-    Checkbox,
-    Column,
-    FloatingActionButton,
-    Page,
-    Row,
-    TextField,
-    UserControl,
-    icons,
-)
+import flet as ft
 
 
-class TodoApp(UserControl):
+class TodoApp(ft.UserControl):
     def build(self):
-        self.new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-        self.tasks_view = Column()
+        self.new_task = ft.TextField(hint_text="What needs to be done?", expand=True)
+        self.tasks_view = ft.Column()
 
         # application's root control (i.e. "view") containing all other controls
-        return Column(
+        return ft.Column(
             width=600,
             controls=[
-                Row(
+                ft.Row(
                     controls=[
                         self.new_task,
-                        FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
+                        ft.FloatingActionButton(
+                            icon=ft.icons.ADD, on_click=self.add_clicked
+                        ),
                     ],
                 ),
                 self.tasks_view,
@@ -31,13 +23,13 @@ class TodoApp(UserControl):
         )
 
     def add_clicked(self, e):
-        self.tasks_view.controls.append(Checkbox(label=self.new_task.value))
+        self.tasks_view.controls.append(ft.Checkbox(label=self.new_task.value))
         self.new_task.value = ""
         self.update()
 
 
-def main(page: Page):
-    page.title = "ToDo App"
+def main(page: ft.Page):
+    page.title = "To-Do App"
     page.horizontal_alignment = "center"
     page.update()
 
@@ -48,4 +40,4 @@ def main(page: Page):
     page.add(todo)
 
 
-flet.app(target=main)
+ft.app(target=main)
