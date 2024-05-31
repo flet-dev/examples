@@ -105,28 +105,6 @@ class TodoApp(ft.Column):
             ),
         ]
 
-        # application's root control (i.e. "view") containing all other controls
-        # return ft.Column(
-        #     width=600,
-        #     controls=[
-        #         ft.Row(
-        #             controls=[
-        #                 self.new_task,
-        #                 ft.FloatingActionButton(
-        #                     icon=ft.icons.ADD, on_click=self.add_clicked
-        #                 ),
-        #             ],
-        #         ),
-        #         ft.Column(
-        #             spacing=25,
-        #             controls=[
-        #                 self.filter,
-        #                 self.tasks,
-        #             ],
-        #         ),
-        #     ],
-        # )
-
     def add_clicked(self, e):
         task = Task(self.new_task.value, self.task_status_change, self.task_delete)
         self.tasks.controls.append(task)
@@ -148,7 +126,6 @@ class TodoApp(ft.Column):
                 or (status == "active" and task.completed == False)
                 or (status == "completed" and task.completed)
             )
-        # super().update()
 
     def tabs_changed(self, e):
         self.update()
