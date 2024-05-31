@@ -6,14 +6,12 @@ class Task(ft.Column):
         super().__init__()
         self.task_name = task_name
         self.task_delete = task_delete
-
-        # def build(self):
         self.display_task = ft.Checkbox(value=False, label=self.task_name)
         self.edit_name = ft.TextField(expand=1)
 
         self.display_view = ft.Row(
-            alignment="spaceBetween",
-            vertical_alignment="center",
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
                 self.display_task,
                 ft.Row(
@@ -49,7 +47,6 @@ class Task(ft.Column):
             ],
         )
         self.controls = [self.display_view, self.edit_view]
-        # return ft.Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
@@ -98,7 +95,7 @@ class TodoApp(ft.Column):
 
 
 def main(page: ft.Page):
-    page.title = "ToDo App"
+    page.title = "To-Do App"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.update()
 
