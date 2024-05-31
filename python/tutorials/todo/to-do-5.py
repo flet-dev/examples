@@ -66,7 +66,7 @@ class Task(ft.Column):
 
     def status_changed(self, e):
         self.completed = self.display_task.value
-        self.task_status_change(self)
+        self.task_status_change()
 
     def delete_clicked(self, e):
         self.task_delete(self)
@@ -109,7 +109,7 @@ class TodoApp(ft.Column):
         self.new_task.value = ""
         self.update()
 
-    def task_status_change(self, task):
+    def task_status_change(self):
         self.update()
 
     def task_delete(self, task):
