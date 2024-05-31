@@ -135,7 +135,7 @@ class TodoApp(ft.UserControl):
         self.tasks.controls.remove(task)
         self.update()
 
-    def update(self):
+    def before_update(self):
         status = self.filter.tabs[self.filter.selected_index].text
         for task in self.tasks.controls:
             task.visible = (
@@ -143,7 +143,7 @@ class TodoApp(ft.UserControl):
                 or (status == "active" and task.completed == False)
                 or (status == "completed" and task.completed)
             )
-        super().update()
+        # super().update()
 
     def tabs_changed(self, e):
         self.update()
