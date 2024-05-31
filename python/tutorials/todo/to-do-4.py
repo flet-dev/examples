@@ -1,43 +1,44 @@
-import flet
-from flet import (
-    Checkbox,
-    Column,
-    FloatingActionButton,
-    IconButton,
-    Page,
-    Row,
-    TextField,
-    UserControl,
-    colors,
-    icons,
-)
+import flet as ft
+
+# from flet import (
+#     Checkbox,
+#     Column,
+#     FloatingActionButton,
+#     IconButton,
+#     Page,
+#     Row,
+#     TextField,
+#     UserControl,
+#     colors,
+#     icons,
+# )
 
 
-class Task(UserControl):
+class Task(ft.UserControl):
     def __init__(self, task_name, task_delete):
         super().__init__()
         self.task_name = task_name
         self.task_delete = task_delete
 
     def build(self):
-        self.display_task = Checkbox(value=False, label=self.task_name)
-        self.edit_name = TextField(expand=1)
+        self.display_task = ft.Checkbox(value=False, label=self.task_name)
+        self.edit_name = ft.TextField(expand=1)
 
-        self.display_view = Row(
+        self.display_view = ft.Row(
             alignment="spaceBetween",
             vertical_alignment="center",
             controls=[
                 self.display_task,
-                Row(
+                ft.Row(
                     spacing=0,
                     controls=[
-                        IconButton(
-                            icon=icons.CREATE_OUTLINED,
+                        ft.IconButton(
+                            icon=ft.icons.CREATE_OUTLINED,
                             tooltip="Edit To-Do",
                             on_click=self.edit_clicked,
                         ),
-                        IconButton(
-                            icons.DELETE_OUTLINE,
+                        ft.IconButton(
+                            ft.icons.DELETE_OUTLINE,
                             tooltip="Delete To-Do",
                             on_click=self.delete_clicked,
                         ),
@@ -46,21 +47,21 @@ class Task(UserControl):
             ],
         )
 
-        self.edit_view = Row(
+        self.edit_view = ft.Row(
             visible=False,
             alignment="spaceBetween",
             vertical_alignment="center",
             controls=[
                 self.edit_name,
-                IconButton(
-                    icon=icons.DONE_OUTLINE_OUTLINED,
-                    icon_color=colors.GREEN,
+                ft.IconButton(
+                    icon=ft.icons.DONE_OUTLINE_OUTLINED,
+                    icon_color=ft.colors.GREEN,
                     tooltip="Update To-Do",
                     on_click=self.save_clicked,
                 ),
             ],
         )
-        return Column(controls=[self.display_view, self.edit_view])
+        return ft.Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
@@ -78,19 +79,21 @@ class Task(UserControl):
         self.task_delete(self)
 
 
-class TodoApp(UserControl):
+class TodoApp(ft.UserControl):
     def build(self):
-        self.new_task = TextField(hint_text="Whats needs to be done?", expand=True)
-        self.tasks = Column()
+        self.new_task = ft.TextField(hint_text="Whats needs to be done?", expand=True)
+        self.tasks = ft.Column()
 
         # application's root control (i.e. "view") containing all other controls
-        return Column(
+        return ft.Column(
             width=600,
             controls=[
-                Row(
+                ft.Row(
                     controls=[
                         self.new_task,
-                        FloatingActionButton(icon=icons.ADD, on_click=self.add_clicked),
+                        ft.FloatingActionButton(
+                            icon=ft.icons.ADD, on_click=self.add_clicked
+                        ),
                     ],
                 ),
                 self.tasks,
@@ -108,9 +111,9 @@ class TodoApp(UserControl):
         self.update()
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "ToDo App"
-    page.horizontal_alignment = "center"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.update()
 
     # create application instance
@@ -120,4 +123,4 @@ def main(page: Page):
     page.add(app)
 
 
-flet.app(target=main)
+ft.app(target=main)
