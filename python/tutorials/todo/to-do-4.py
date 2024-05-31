@@ -1,26 +1,13 @@
 import flet as ft
 
-# from flet import (
-#     Checkbox,
-#     Column,
-#     FloatingActionButton,
-#     IconButton,
-#     Page,
-#     Row,
-#     TextField,
-#     UserControl,
-#     colors,
-#     icons,
-# )
 
-
-class Task(ft.UserControl):
+class Task(ft.Column):
     def __init__(self, task_name, task_delete):
         super().__init__()
         self.task_name = task_name
         self.task_delete = task_delete
 
-    def build(self):
+        # def build(self):
         self.display_task = ft.Checkbox(value=False, label=self.task_name)
         self.edit_name = ft.TextField(expand=1)
 
@@ -61,7 +48,8 @@ class Task(ft.UserControl):
                 ),
             ],
         )
-        return ft.Column(controls=[self.display_view, self.edit_view])
+        self.controls = [self.display_view, self.edit_view]
+        # return ft.Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
