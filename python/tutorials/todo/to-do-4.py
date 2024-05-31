@@ -79,26 +79,41 @@ class Task(ft.UserControl):
         self.task_delete(self)
 
 
-class TodoApp(ft.UserControl):
-    def build(self):
-        self.new_task = ft.TextField(hint_text="Whats needs to be done?", expand=True)
+class TodoApp(ft.Column):
+    # application's root control is a Column containing all other controls
+    def __init__(self):
+        super().__init__()
+        # def build(self):
+        self.new_task = ft.TextField(hint_text="What needs to be done?", expand=True)
         self.tasks = ft.Column()
+        self.width = 600
+        self.controls = [
+            ft.Row(
+                controls=[
+                    self.new_task,
+                    ft.FloatingActionButton(
+                        icon=ft.icons.ADD, on_click=self.add_clicked
+                    ),
+                ],
+            ),
+            self.tasks,
+        ]
 
         # application's root control (i.e. "view") containing all other controls
-        return ft.Column(
-            width=600,
-            controls=[
-                ft.Row(
-                    controls=[
-                        self.new_task,
-                        ft.FloatingActionButton(
-                            icon=ft.icons.ADD, on_click=self.add_clicked
-                        ),
-                    ],
-                ),
-                self.tasks,
-            ],
-        )
+        # return ft.Column(
+        #     width=600,
+        #     controls=[
+        #         ft.Row(
+        #             controls=[
+        #                 self.new_task,
+        #                 ft.FloatingActionButton(
+        #                     icon=ft.icons.ADD, on_click=self.add_clicked
+        #                 ),
+        #             ],
+        #         ),
+        #         self.tasks,
+        #     ],
+        # )
 
     def add_clicked(self, e):
         task = Task(self.new_task.value, self.task_delete)
