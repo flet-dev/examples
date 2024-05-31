@@ -1,20 +1,5 @@
 import flet as ft
 
-# from flet import (
-#     Checkbox,
-#     Column,
-#     FloatingActionButton,
-#     IconButton,
-#     Page,
-#     Row,
-#     Tab,
-#     Tabs,
-#     TextField,
-#     UserControl,
-#     colors,
-#     icons,
-# )
-
 
 class Task(ft.UserControl):
     def __init__(self, task_name, task_status_change, task_delete):
@@ -89,8 +74,10 @@ class Task(ft.UserControl):
         self.task_delete(self)
 
 
-class TodoApp(ft.UserControl):
-    def build(self):
+class TodoApp(ft.Column):
+    # application's root control is a Column containing all other controls
+    def __init__(self):
+        super().__init__()
         self.new_task = ft.TextField(hint_text="Whats needs to be done?", expand=True)
         self.tasks = ft.Column()
 
@@ -99,28 +86,46 @@ class TodoApp(ft.UserControl):
             on_change=self.tabs_changed,
             tabs=[ft.Tab(text="all"), ft.Tab(text="active"), ft.Tab(text="completed")],
         )
+        self.width = 600
+        self.controls = [
+            ft.Row(
+                controls=[
+                    self.new_task,
+                    ft.FloatingActionButton(
+                        icon=ft.icons.ADD, on_click=self.add_clicked
+                    ),
+                ],
+            ),
+            ft.Column(
+                spacing=25,
+                controls=[
+                    self.filter,
+                    self.tasks,
+                ],
+            ),
+        ]
 
         # application's root control (i.e. "view") containing all other controls
-        return ft.Column(
-            width=600,
-            controls=[
-                ft.Row(
-                    controls=[
-                        self.new_task,
-                        ft.FloatingActionButton(
-                            icon=ft.icons.ADD, on_click=self.add_clicked
-                        ),
-                    ],
-                ),
-                ft.Column(
-                    spacing=25,
-                    controls=[
-                        self.filter,
-                        self.tasks,
-                    ],
-                ),
-            ],
-        )
+        # return ft.Column(
+        #     width=600,
+        #     controls=[
+        #         ft.Row(
+        #             controls=[
+        #                 self.new_task,
+        #                 ft.FloatingActionButton(
+        #                     icon=ft.icons.ADD, on_click=self.add_clicked
+        #                 ),
+        #             ],
+        #         ),
+        #         ft.Column(
+        #             spacing=25,
+        #             controls=[
+        #                 self.filter,
+        #                 self.tasks,
+        #             ],
+        #         ),
+        #     ],
+        # )
 
     def add_clicked(self, e):
         task = Task(self.new_task.value, self.task_status_change, self.task_delete)
