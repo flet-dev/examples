@@ -1,33 +1,34 @@
-import flet
-from flet import ElevatedButton, Page, Text
+import flet as ft
+
+# from flet import ElevatedButton, Page, Text
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Calc App"
-    result = Text(value="0")
+    result = ft.Text(value="0")
 
     page.add(
         result,
-        ElevatedButton(text="AC"),
-        ElevatedButton(text="+/-"),
-        ElevatedButton(text="%"),
-        ElevatedButton(text="/"),
-        ElevatedButton(text="7"),
-        ElevatedButton(text="8"),
-        ElevatedButton(text="9"),
-        ElevatedButton(text="*"),
-        ElevatedButton(text="4"),
-        ElevatedButton(text="5"),
-        ElevatedButton(text="6"),
-        ElevatedButton(text="-"),
-        ElevatedButton(text="1"),
-        ElevatedButton(text="2"),
-        ElevatedButton(text="3"),
-        ElevatedButton(text="+"),
-        ElevatedButton(text="0"),
-        ElevatedButton(text="."),
-        ElevatedButton(text="="),
+        ft.ElevatedButton(text="AC"),
+        ft.ElevatedButton(text="+/-"),
+        ft.ElevatedButton(text="%"),
+        ft.ElevatedButton(text="/"),
+        ft.ElevatedButton(text="7"),
+        ft.ElevatedButton(text="8"),
+        ft.ElevatedButton(text="9"),
+        ft.ElevatedButton(text="*"),
+        ft.ElevatedButton(text="4"),
+        ft.ElevatedButton(text="5"),
+        ft.ElevatedButton(text="6"),
+        ft.ElevatedButton(text="-"),
+        ft.ElevatedButton(text="1"),
+        ft.ElevatedButton(text="2"),
+        ft.ElevatedButton(text="3"),
+        ft.ElevatedButton(text="+"),
+        ft.ElevatedButton(text="0"),
+        ft.ElevatedButton(text="."),
+        ft.ElevatedButton(text="="),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
