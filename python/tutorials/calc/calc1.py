@@ -1,7 +1,5 @@
 import flet as ft
 
-# from flet import ElevatedButton, Page, Text
-
 
 def main(page: ft.Page):
     page.title = "Calc App"
