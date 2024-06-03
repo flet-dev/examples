@@ -149,7 +149,7 @@ class TodoApp(ft.UserControl):
             if task.completed:
                 self.task_delete(task)
 
-    def update(self):
+    def before_update(self):
         status = self.filter.tabs[self.filter.selected_index].text
         count = 0
         for task in self.tasks.controls:
@@ -161,7 +161,6 @@ class TodoApp(ft.UserControl):
             if not task.completed:
                 count += 1
         self.items_left.value = f"{count} active item(s) left"
-        super().update()
 
 
 def main(page: ft.Page):
