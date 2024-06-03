@@ -1,161 +1,80 @@
-import flet
-from flet import (
-    Column,
-    Container,
-    ElevatedButton,
-    Page,
-    Row,
-    Text,
-    border_radius,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Calc App"
-    result = Text(value="0", color=colors.WHITE, size=20)
+    result = ft.Text(value="0", color=ft.colors.WHITE, size=20)
+
+    class CalcButton(ft.ElevatedButton):
+        def __init__(self, text, expand=1):
+            super().__init__()
+            self.text = text
+            self.expand = expand
+
+    class DigitButton(CalcButton):
+        def __init__(self, text, expand=1):
+            CalcButton.__init__(self, text, expand)
+            self.bgcolor = ft.colors.WHITE24
+            self.color = ft.colors.WHITE
+
+    class ActionButton(CalcButton):
+        def __init__(self, text):
+            CalcButton.__init__(self, text)
+            self.bgcolor = ft.colors.ORANGE
+            self.color = ft.colors.WHITE
+
+    class ExtraActionButton(CalcButton):
+        def __init__(self, text):
+            CalcButton.__init__(self, text)
+            self.bgcolor = ft.colors.BLUE_GREY_100
+            self.color = ft.colors.BLACK
 
     page.add(
-        Container(
-            width=300,
-            bgcolor=colors.BLACK,
-            border_radius=border_radius.all(20),
+        ft.Container(
+            width=350,
+            bgcolor=ft.colors.BLACK,
+            border_radius=ft.border_radius.all(20),
             padding=20,
-            content=Column(
+            content=ft.Column(
                 controls=[
-                    Row(controls=[result], alignment="end"),
-                    Row(
+                    ft.Row(controls=[result], alignment="end"),
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
-                                text="AC",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="+/-",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="%",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="/",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
+                            ExtraActionButton(text="AC"),
+                            ExtraActionButton(text="+/-"),
+                            ExtraActionButton(text="%"),
+                            ActionButton(text="/"),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
-                                text="7",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="8",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="9",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="*",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
+                            DigitButton(text="7"),
+                            DigitButton(text="8"),
+                            DigitButton(text="9"),
+                            ActionButton(text="*"),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
-                                text="4",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="5",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="6",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="-",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
+                            DigitButton(text="4"),
+                            DigitButton(text="5"),
+                            DigitButton(text="6"),
+                            ActionButton(text="-"),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
-                                text="1",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="2",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="3",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="+",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
+                            DigitButton(text="1"),
+                            DigitButton(text="2"),
+                            DigitButton(text="3"),
+                            ActionButton(text="+"),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
-                                text="0",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=2,
-                            ),
-                            ElevatedButton(
-                                text=".",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
-                            ElevatedButton(
-                                text="=",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
-                                expand=1,
-                            ),
+                            DigitButton(text="0", expand=2),
+                            DigitButton(text="."),
+                            ActionButton(text="="),
                         ]
                     ),
                 ]
@@ -164,4 +83,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

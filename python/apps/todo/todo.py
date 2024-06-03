@@ -1,15 +1,13 @@
 import flet as ft
 
 
-class Task(ft.UserControl):
+class Task(ft.Column):
     def __init__(self, task_name, task_status_change, task_delete):
         super().__init__()
         self.completed = False
         self.task_name = task_name
         self.task_status_change = task_status_change
         self.task_delete = task_delete
-
-    def build(self):
         self.display_task = ft.Checkbox(
             value=False, label=self.task_name, on_change=self.status_changed
         )
@@ -52,30 +50,32 @@ class Task(ft.UserControl):
                 ),
             ],
         )
-        return ft.Column(controls=[self.display_view, self.edit_view])
+        self.controls = [self.display_view, self.edit_view]
 
-    async def edit_clicked(self, e):
+    def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
         self.display_view.visible = False
         self.edit_view.visible = True
-        await self.update_async()
+        self.update()
 
-    async def save_clicked(self, e):
+    def save_clicked(self, e):
         self.display_task.label = self.edit_name.value
         self.display_view.visible = True
         self.edit_view.visible = False
-        await self.update_async()
+        self.update()
 
-    async def status_changed(self, e):
+    def status_changed(self, e):
         self.completed = self.display_task.value
-        await self.task_status_change(self)
+        self.task_status_change(self)
 
-    async def delete_clicked(self, e):
-        await self.task_delete(self)
+    def delete_clicked(self, e):
+        self.task_delete(self)
 
 
-class TodoApp(ft.UserControl):
-    def build(self):
+class TodoApp(ft.Column):
+    # application's root control is a Column containing all other controls
+    def __init__(self):
+        super().__init__()
         self.new_task = ft.TextField(
             hint_text="What needs to be done?", on_submit=self.add_clicked, expand=True
         )
@@ -90,66 +90,63 @@ class TodoApp(ft.UserControl):
 
         self.items_left = ft.Text("0 items left")
 
-        # application's root control (i.e. "view") containing all other controls
-        return ft.Column(
-            width=600,
-            controls=[
-                ft.Row(
-                    [ft.Text(value="Todos", style=ft.TextThemeStyle.HEADLINE_MEDIUM)],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                ft.Row(
-                    controls=[
-                        self.new_task,
-                        ft.FloatingActionButton(
-                            icon=ft.icons.ADD, on_click=self.add_clicked
-                        ),
-                    ],
-                ),
-                ft.Column(
-                    spacing=25,
-                    controls=[
-                        self.filter,
-                        self.tasks,
-                        ft.Row(
-                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                            vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                            controls=[
-                                self.items_left,
-                                ft.OutlinedButton(
-                                    text="Clear completed", on_click=self.clear_clicked
-                                ),
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        )
+        self.width = 600
+        self.controls = [
+            ft.Row(
+                [ft.Text(value="Todos", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM)],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            ft.Row(
+                controls=[
+                    self.new_task,
+                    ft.FloatingActionButton(
+                        icon=ft.icons.ADD, on_click=self.add_clicked
+                    ),
+                ],
+            ),
+            ft.Column(
+                spacing=25,
+                controls=[
+                    self.filter,
+                    self.tasks,
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        controls=[
+                            self.items_left,
+                            ft.OutlinedButton(
+                                text="Clear completed", on_click=self.clear_clicked
+                            ),
+                        ],
+                    ),
+                ],
+            ),
+        ]
 
-    async def add_clicked(self, e):
+    def add_clicked(self, e):
         if self.new_task.value:
             task = Task(self.new_task.value, self.task_status_change, self.task_delete)
             self.tasks.controls.append(task)
             self.new_task.value = ""
-            await self.new_task.focus_async()
-            await self.update_async()
+            self.new_task.focus()
+            self.update()
 
-    async def task_status_change(self, task):
-        await self.update_async()
+    def task_status_change(self, task):
+        self.update()
 
-    async def task_delete(self, task):
+    def task_delete(self, task):
         self.tasks.controls.remove(task)
-        await self.update_async()
+        self.update()
 
-    async def tabs_changed(self, e):
-        await self.update_async()
+    def tabs_changed(self, e):
+        self.update()
 
-    async def clear_clicked(self, e):
+    def clear_clicked(self, e):
         for task in self.tasks.controls[:]:
             if task.completed:
-                await self.task_delete(task)
+                self.task_delete(task)
 
-    async def update_async(self):
+    def before_update(self):
         status = self.filter.tabs[self.filter.selected_index].text
         count = 0
         for task in self.tasks.controls:
@@ -161,16 +158,15 @@ class TodoApp(ft.UserControl):
             if not task.completed:
                 count += 1
         self.items_left.value = f"{count} active item(s) left"
-        await super().update_async()
 
 
-async def main(page: ft.Page):
+def main(page: ft.Page):
     page.title = "ToDo App"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.scroll = ft.ScrollMode.ADAPTIVE
 
     # create app control and add it to the page
-    await page.add_async(TodoApp())
+    page.add(TodoApp())
 
 
 ft.app(main)
