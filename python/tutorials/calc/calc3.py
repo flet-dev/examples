@@ -1,159 +1,160 @@
-import flet
-from flet import (
-    Column,
-    Container,
-    ElevatedButton,
-    Page,
-    Row,
-    Text,
-    border_radius,
-    colors,
-)
+import flet as ft
+
+# from flet import (
+#     Column,
+#     Container,
+#     ElevatedButton,
+#     Page,
+#     Row,
+#     Text,
+#     border_radius,
+#     colors,
+# )
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Calc App"
-    result = Text(value="0", color=colors.WHITE, size=20)
+    result = ft.Text(value="0", color=ft.colors.WHITE, size=20)
 
     page.add(
-        Container(
+        ft.Container(
             width=300,
-            bgcolor=colors.BLACK,
-            border_radius=border_radius.all(20),
+            bgcolor=ft.colors.BLACK,
+            border_radius=ft.border_radius.all(20),
             padding=20,
-            content=Column(
+            content=ft.Column(
                 controls=[
-                    Row(controls=[result], alignment="end"),
-                    Row(
+                    ft.Row(controls=[result], alignment="end"),
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="AC",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
+                                bgcolor=ft.colors.BLUE_GREY_100,
+                                color=ft.colors.BLACK,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="+/-",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
+                                bgcolor=ft.colors.BLUE_GREY_100,
+                                color=ft.colors.BLACK,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="%",
-                                bgcolor=colors.BLUE_GREY_100,
-                                color=colors.BLACK,
+                                bgcolor=ft.colors.BLUE_GREY_100,
+                                color=ft.colors.BLACK,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="/",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.ORANGE,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="7",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="8",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="9",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="*",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.ORANGE,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="4",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="5",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="6",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="-",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.ORANGE,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="1",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="2",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="3",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="+",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.ORANGE,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
                         ]
                     ),
-                    Row(
+                    ft.Row(
                         controls=[
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="0",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=2,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text=".",
-                                bgcolor=colors.WHITE24,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.WHITE24,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
-                            ElevatedButton(
+                            ft.ElevatedButton(
                                 text="=",
-                                bgcolor=colors.ORANGE,
-                                color=colors.WHITE,
+                                bgcolor=ft.colors.ORANGE,
+                                color=ft.colors.WHITE,
                                 expand=1,
                             ),
                         ]
@@ -164,4 +165,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(target=main)
