@@ -30,7 +30,6 @@ class ExtraActionButton(CalcButton):
 
 
 class CalculatorApp(ft.Container):
-    # def build(self):
     # application's root control (i.e. "view") containing all other controls
     def __init__(self):
         super().__init__()
