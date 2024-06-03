@@ -1,9 +1,8 @@
-import flet
-from flet import Page, Text
+import flet as ft
 
 
-def main(page: Page):
-    page.add(Text(value="Hello, world!"))
+def main(page: ft.Page):
+    page.add(ft.Text(value="Hello, world!"))
 
 
-flet.app(target=main)
+ft.app(target=main)
