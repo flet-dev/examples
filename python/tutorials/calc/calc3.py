@@ -1,16 +1,5 @@
 import flet as ft
 
-# from flet import (
-#     Column,
-#     Container,
-#     ElevatedButton,
-#     Page,
-#     Row,
-#     Text,
-#     border_radius,
-#     colors,
-# )
-
 
 def main(page: ft.Page):
     page.title = "Calc App"
