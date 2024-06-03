@@ -8,8 +8,6 @@ class Task(ft.Column):
         self.task_name = task_name
         self.task_status_change = task_status_change
         self.task_delete = task_delete
-
-        # def build(self):
         self.display_task = ft.Checkbox(
             value=False, label=self.task_name, on_change=self.status_changed
         )
@@ -53,7 +51,6 @@ class Task(ft.Column):
             ],
         )
         self.controls = [self.display_view, self.edit_view]
-        # return ft.Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
@@ -75,8 +72,10 @@ class Task(ft.Column):
         self.task_delete(self)
 
 
-class TodoApp(ft.UserControl):
-    def build(self):
+class TodoApp(ft.Column):
+    # application's root control is a Column containing all other controls
+    def __init__(self):
+        super().__init__()
         self.new_task = ft.TextField(
             hint_text="What needs to be done?", on_submit=self.add_clicked, expand=True
         )
@@ -91,41 +90,38 @@ class TodoApp(ft.UserControl):
 
         self.items_left = ft.Text("0 items left")
 
-        # application's root control (i.e. "view") containing all other controls
-        return ft.Column(
-            width=600,
-            controls=[
-                ft.Row(
-                    [ft.Text(value="Todos", style=ft.TextThemeStyle.HEADLINE_MEDIUM)],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                ft.Row(
-                    controls=[
-                        self.new_task,
-                        ft.FloatingActionButton(
-                            icon=ft.icons.ADD, on_click=self.add_clicked
-                        ),
-                    ],
-                ),
-                ft.Column(
-                    spacing=25,
-                    controls=[
-                        self.filter,
-                        self.tasks,
-                        ft.Row(
-                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                            vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                            controls=[
-                                self.items_left,
-                                ft.OutlinedButton(
-                                    text="Clear completed", on_click=self.clear_clicked
-                                ),
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        )
+        self.width = 600
+        self.controls = [
+            ft.Row(
+                [ft.Text(value="Todos", style=ft.TextThemeStyle.HEADLINE_MEDIUM)],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            ft.Row(
+                controls=[
+                    self.new_task,
+                    ft.FloatingActionButton(
+                        icon=ft.icons.ADD, on_click=self.add_clicked
+                    ),
+                ],
+            ),
+            ft.Column(
+                spacing=25,
+                controls=[
+                    self.filter,
+                    self.tasks,
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        controls=[
+                            self.items_left,
+                            ft.OutlinedButton(
+                                text="Clear completed", on_click=self.clear_clicked
+                            ),
+                        ],
+                    ),
+                ],
+            ),
+        ]
 
     def add_clicked(self, e):
         if self.new_task.value:
