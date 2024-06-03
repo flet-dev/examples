@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class Task(ft.UserControl):
+class Task(ft.Column):
     def __init__(self, task_name, task_status_change, task_delete):
         super().__init__()
         self.completed = False
@@ -9,7 +9,7 @@ class Task(ft.UserControl):
         self.task_status_change = task_status_change
         self.task_delete = task_delete
 
-    def build(self):
+        # def build(self):
         self.display_task = ft.Checkbox(
             value=False, label=self.task_name, on_change=self.status_changed
         )
@@ -52,7 +52,8 @@ class Task(ft.UserControl):
                 ),
             ],
         )
-        return ft.Column(controls=[self.display_view, self.edit_view])
+        self.controls = [self.display_view, self.edit_view]
+        # return ft.Column(controls=[self.display_view, self.edit_view])
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
