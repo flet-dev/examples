@@ -99,7 +99,6 @@ class Card(ft.GestureDetector):
         if self.face_up:
             self.get_draggable_pile()
             self.move_on_top()
-            self.solitaire.update()
 
     def drag(self, e: ft.DragUpdateEvent):
         if self.face_up:
@@ -134,21 +133,20 @@ class Card(ft.GestureDetector):
             self.bounce_back()
 
     def click(self, e):
+        self.get_draggable_pile()
         if self.slot in self.solitaire.tableau:
             if not self.face_up and self == self.slot.get_top_card():
                 self.turn_face_up()
-                self.solitaire.update()
         elif self.slot == self.solitaire.stock:
             self.move_on_top()
             self.place(self.solitaire.waste)
             self.turn_face_up()
-            self.solitaire.update()
 
     def doubleclick(self, e):
-        if self.face_up:
+        self.get_draggable_pile()
+        if self.face_up and len(self.draggable_pile) == 1:
             self.move_on_top()
             for slot in self.solitaire.foundations:
                 if self.solitaire.check_foundations_rules(self, slot):
                     self.place(slot)
-                    self.solitaire.update()
                     return
