@@ -1,30 +1,32 @@
 import flet as ft
 
-class Message():
+
+class Message:
     def __init__(self, user_name: str, text: str, message_type: str):
         self.user_name = user_name
         self.text = text
         self.message_type = message_type
 
+
 class ChatMessage(ft.Row):
     def __init__(self, message: Message):
         super().__init__()
-        self.vertical_alignment="start"
-        self.controls=[
-                ft.CircleAvatar(
-                    content=ft.Text(self.get_initials(message.user_name)),
-                    color=ft.colors.WHITE,
-                    bgcolor=self.get_avatar_color(message.user_name),
-                ),
-                ft.Column(
-                    [
-                        ft.Text(message.user_name, weight="bold"),
-                        ft.Text(message.text, selectable=True),
-                    ],
-                    tight=True,
-                    spacing=5,
-                ),
-            ]
+        self.vertical_alignment = "start"
+        self.controls = [
+            ft.CircleAvatar(
+                content=ft.Text(self.get_initials(message.user_name)),
+                color=ft.colors.WHITE,
+                bgcolor=self.get_avatar_color(message.user_name),
+            ),
+            ft.Column(
+                [
+                    ft.Text(message.user_name, weight="bold"),
+                    ft.Text(message.text, selectable=True),
+                ],
+                tight=True,
+                spacing=5,
+            ),
+        ]
 
     def get_initials(self, user_name: str):
         if user_name:
@@ -50,6 +52,7 @@ class ChatMessage(ft.Row):
         ]
         return colors_lookup[hash(user_name) % len(colors_lookup)]
 
+
 def main(page: ft.Page):
     page.horizontal_alignment = "stretch"
     page.title = "Flet Chat"
@@ -62,12 +65,24 @@ def main(page: ft.Page):
             page.session.set("user_name", join_user_name.value)
             page.dialog.open = False
             new_message.prefix = ft.Text(f"{join_user_name.value}: ")
-            page.pubsub.send_all(Message(user_name=join_user_name.value, text=f"{join_user_name.value} has joined the chat.", message_type="login_message"))
+            page.pubsub.send_all(
+                Message(
+                    user_name=join_user_name.value,
+                    text=f"{join_user_name.value} has joined the chat.",
+                    message_type="login_message",
+                )
+            )
             page.update()
 
     def send_message_click(e):
         if new_message.value != "":
-            page.pubsub.send_all(Message(page.session.get("user_name"), new_message.value, message_type="chat_message"))
+            page.pubsub.send_all(
+                Message(
+                    page.session.get("user_name"),
+                    new_message.value,
+                    message_type="chat_message",
+                )
+            )
             new_message.value = ""
             new_message.focus()
             page.update()
@@ -137,4 +152,5 @@ def main(page: ft.Page):
         ),
     )
 
-ft.app(main)
+
+ft.app(target=main)
