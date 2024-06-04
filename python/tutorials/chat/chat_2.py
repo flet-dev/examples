@@ -1,9 +1,11 @@
 import flet as ft
 
-class Message():
+
+class Message:
     def __init__(self, user: str, text: str):
         self.user = user
         self.text = text
+
 
 def main(page: ft.Page):
 
@@ -21,6 +23,9 @@ def main(page: ft.Page):
         new_message.value = ""
         page.update()
 
-    page.add(chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)]))
+    page.add(
+        chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)])
+    )
 
-ft.app(target=main, view=ft.WEB_BROWSER)
+
+ft.app(target=main)
