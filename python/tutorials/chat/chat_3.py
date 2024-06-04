@@ -1,6 +1,7 @@
 import flet as ft
 
-class Message():
+
+class Message:
     def __init__(self, user: str, text: str, message_type: str):
         self.user = user
         self.text = text
@@ -24,7 +25,13 @@ def main(page: ft.Page):
     page.pubsub.subscribe(on_message)
 
     def send_click(e):
-        page.pubsub.send_all(Message(user=page.session.get('user_name'), text=new_message.value, message_type="chat_message"))
+        page.pubsub.send_all(
+            Message(
+                user=page.session.get("user_name"),
+                text=new_message.value,
+                message_type="chat_message",
+            )
+        )
         new_message.value = ""
         page.update()
 
@@ -37,7 +44,13 @@ def main(page: ft.Page):
         else:
             page.session.set("user_name", user_name.value)
             page.dialog.open = False
-            page.pubsub.send_all(Message(user=user_name.value, text=f"{user_name.value} has joined the chat.", message_type="login_message"))
+            page.pubsub.send_all(
+                Message(
+                    user=user_name.value,
+                    text=f"{user_name.value} has joined the chat.",
+                    message_type="login_message",
+                )
+            )
             page.update()
 
     page.dialog = ft.AlertDialog(
@@ -49,6 +62,9 @@ def main(page: ft.Page):
         actions_alignment="end",
     )
 
-    page.add(chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)]))
+    page.add(
+        chat, ft.Row([new_message, ft.ElevatedButton("Send", on_click=send_click)])
+    )
 
-ft.app(target=main, view=ft.WEB_BROWSER)
+
+ft.app(target=main)

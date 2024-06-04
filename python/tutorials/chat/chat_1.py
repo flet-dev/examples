@@ -1,5 +1,6 @@
 import flet as ft
 
+
 def main(page: ft.Page):
     chat = ft.Column()
     new_message = ft.TextField()
@@ -10,8 +11,9 @@ def main(page: ft.Page):
         page.update()
 
     page.add(
-        chat, ft.Row(controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)])
+        chat,
+        ft.Row(controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)]),
     )
 
 
-ft.app("chat", target=main, view=ft.WEB_BROWSER)
+ft.app(target=main)
