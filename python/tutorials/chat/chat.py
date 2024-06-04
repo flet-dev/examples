@@ -11,7 +11,7 @@ class Message:
 class ChatMessage(ft.Row):
     def __init__(self, message: Message):
         super().__init__()
-        self.vertical_alignment = "start"
+        self.vertical_alignment = ft.CrossAxisAlignment.START
         self.controls = [
             ft.CircleAvatar(
                 content=ft.Text(self.get_initials(message.user_name)),
@@ -54,7 +54,7 @@ class ChatMessage(ft.Row):
 
 
 def main(page: ft.Page):
-    page.horizontal_alignment = "stretch"
+    page.horizontal_alignment = ft.CrossAxisAlignment.STRETCH
     page.title = "Flet Chat"
 
     def join_chat_click(e):
@@ -109,7 +109,7 @@ def main(page: ft.Page):
         title=ft.Text("Welcome!"),
         content=ft.Column([join_user_name], width=300, height=70, tight=True),
         actions=[ft.ElevatedButton(text="Join chat", on_click=join_chat_click)],
-        actions_alignment="end",
+        actions_alignment=ft.MainAxisAlignment.END,
     )
 
     # Chat messages
