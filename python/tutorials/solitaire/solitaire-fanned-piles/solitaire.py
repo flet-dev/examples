@@ -1,19 +1,20 @@
-#CARD_OFFSET = 20
+# CARD_OFFSET = 20
 SOLITAIRE_WIDTH = 1000
 SOLITAIRE_HEIGHT = 500
 
 import flet as ft
-from slot import Slot
 from card import Card
+from slot import Slot
+
 
 class Solitaire(ft.Stack):
     def __init__(self):
         super().__init__()
-        #self.start_top = 0
-        #self.start_left = 0
+        # self.start_top = 0
+        # self.start_left = 0
         self.controls = []
         self.slots = []
-        #self.card_offset = CARD_OFFSET
+        # self.card_offset = CARD_OFFSET
         self.width = SOLITAIRE_WIDTH
         self.height = SOLITAIRE_HEIGHT
 
@@ -26,7 +27,8 @@ class Solitaire(ft.Stack):
         card1 = Card(self, color="GREEN")
         card2 = Card(self, color="YELLOW")
         card3 = Card(self, color="RED")
-        self.cards = [card1, card2, card3]
+        card4 = Card(self, color="BLUE")
+        self.cards = [card1, card2, card3, card4]
 
     def create_slots(self):
         self.slots.append(Slot(top=0, left=0))
@@ -37,6 +39,7 @@ class Solitaire(ft.Stack):
 
     def deal_cards(self):
         self.controls.extend(self.cards)
+
         for card in self.cards:
             card.place(self.slots[0])
         self.update()
