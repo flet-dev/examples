@@ -135,7 +135,7 @@ class Card(ft.GestureDetector):
     def click(self, e):
         self.get_draggable_pile()
         if self.slot in self.solitaire.tableau:
-            if not self.face_up and self == self.slot.get_top_card():
+            if not self.face_up and len(self.draggable_pile) == 1:
                 self.turn_face_up()
         elif self.slot == self.solitaire.stock:
             self.move_on_top()
