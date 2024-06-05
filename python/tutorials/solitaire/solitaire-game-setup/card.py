@@ -27,25 +27,25 @@ class Card(ft.GestureDetector):
             border_radius=ft.border_radius.all(6),
             content=ft.Image(src="/images/card_back.png"),
         )
+        self.draggable_pile = [self]
 
     def turn_face_up(self):
         """Reveals card"""
         self.face_up = True
         self.content.content.src = f"/images/{self.rank.name}_{self.suite.name}.svg"
-        self.update()
+        self.solitaire.update()
 
     def move_on_top(self):
         """Brings draggable card pile to the top of the stack"""
 
-        for card in self.get_draggable_pile():
+        for card in self.draggable_pile:
             self.solitaire.controls.remove(card)
             self.solitaire.controls.append(card)
         self.solitaire.update()
 
     def bounce_back(self):
         """Returns draggable pile to its original position"""
-        draggable_pile = self.get_draggable_pile()
-        for card in draggable_pile:
+        for card in self.draggable_pile:
             if card.slot in self.solitaire.tableau:
                 card.top = card.slot.top + card.slot.pile.index(card) * CARD_OFFSET
             else:
@@ -56,9 +56,7 @@ class Card(ft.GestureDetector):
     def place(self, slot):
         """Place draggable pile to the slot"""
 
-        draggable_pile = self.get_draggable_pile()
-
-        for card in draggable_pile:
+        for card in self.draggable_pile:
             if slot in self.solitaire.tableau:
                 card.top = slot.top + len(slot.pile) * CARD_OFFSET
             else:
@@ -80,21 +78,23 @@ class Card(ft.GestureDetector):
     def get_draggable_pile(self):
         """returns list of cards that will be dragged together, starting with the current card"""
         if self.slot is not None:
-            return self.slot.pile[self.slot.pile.index(self) :]
-        return [self]
+            self.draggable_pile = self.slot.pile[self.slot.pile.index(self) :]
+        else:  # slot == None when the cards are dealed and need to be place in slot for the first time
+            self.draggable_pile = [self]
 
     def start_drag(self, e: ft.DragStartEvent):
+        self.get_draggable_pile()
         self.move_on_top()
-        self.update()
+        self.solitaire.update()
 
     def drag(self, e: ft.DragUpdateEvent):
-        draggable_pile = self.get_draggable_pile()
-        for card in draggable_pile:
+        for card in self.draggable_pile:
             card.top = (
-                max(0, self.top + e.delta_y) + draggable_pile.index(card) * CARD_OFFSET
+                max(0, self.top + e.delta_y)
+                + self.draggable_pile.index(card) * CARD_OFFSET
             )
             card.left = max(0, self.left + e.delta_x)
-            card.update()
+            self.solitaire.update()
 
     def drop(self, e: ft.DragEndEvent):
         for slot in self.solitaire.tableau:
@@ -104,7 +104,7 @@ class Card(ft.GestureDetector):
                 and abs(self.left - slot.left) < DROP_PROXIMITY
             ):
                 self.place(slot)
-                self.update()
+                self.solitaire.update()
                 return
         for slot in self.solitaire.foundations:
             if (
@@ -112,8 +112,7 @@ class Card(ft.GestureDetector):
                 and abs(self.left - slot.left) < DROP_PROXIMITY
             ):
                 self.place(slot)
-                self.update()
+                self.solitaire.update()
                 return
 
         self.bounce_back()
-        self.update()
