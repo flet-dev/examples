@@ -1,20 +1,24 @@
 SOLITAIRE_WIDTH = 1000
 SOLITAIRE_HEIGHT = 500
 
-import flet as ft
-from slot import Slot
-from card import Card
 import random
+
+import flet as ft
+from card import Card
+from slot import Slot
+
 
 class Suite:
     def __init__(self, suite_name, suite_color):
         self.name = suite_name
         self.color = suite_color
 
+
 class Rank:
     def __init__(self, card_name, card_value):
         self.name = card_name
         self.value = card_value
+
 
 class Solitaire(ft.Stack):
     def __init__(self):
@@ -65,7 +69,9 @@ class Solitaire(ft.Stack):
         self.foundations = []
         x = 300
         for i in range(4):
-            self.foundations.append(Slot(solitaire=self, top=0, left=x, border=ft.border.all(1, "outline")))
+            self.foundations.append(
+                Slot(solitaire=self, top=0, left=x, border=ft.border.all(1, "outline"))
+            )
             x += 100
 
         self.tableau = []
@@ -80,21 +86,20 @@ class Solitaire(ft.Stack):
         self.controls.extend(self.tableau)
         self.update()
 
-
     def deal_cards(self):
         random.shuffle(self.cards)
         self.controls.extend(self.cards)
-        
+
         # deal to tableau
         first_slot = 0
         remaining_cards = self.cards
-        
+
         while first_slot < len(self.tableau):
             for slot in self.tableau[first_slot:]:
                 top_card = remaining_cards[0]
                 top_card.place(slot)
                 remaining_cards.remove(top_card)
-            first_slot +=1
+            first_slot += 1
 
         # place remaining cards to stock pile
         for card in remaining_cards:
@@ -105,9 +110,9 @@ class Solitaire(ft.Stack):
 
         for slot in self.tableau:
             slot.get_top_card().turn_face_up()
-        
+
         self.update()
-    
+
     def check_foundations_rules(self, card, slot):
         top_card = slot.get_top_card()
         if top_card is not None:
@@ -129,16 +134,12 @@ class Solitaire(ft.Stack):
         else:
             return card.rank.name == "King"
 
-    # def check_tableau_rules(self, card, slot):
-    #     return True
-
     def restart_stock(self):
         while len(self.waste.pile) > 0:
             card = self.waste.get_top_card()
             card.turn_face_down()
             card.move_on_top()
-            card.place(self.stock)    
-        self.update
+            card.place(self.stock)
 
     def check_win(self):
         cards_num = 0
@@ -149,11 +150,13 @@ class Solitaire(ft.Stack):
         return False
 
     def winning_sequence(self):
-        for slot in self.foundations:    
+        for slot in self.foundations:
             for card in slot.pile:
-                card.animate_position=2000
+                card.animate_position = 2000
                 card.move_on_top()
                 card.top = random.randint(0, SOLITAIRE_HEIGHT)
                 card.left = random.randint(0, SOLITAIRE_WIDTH)
                 self.update()
-        self.controls.append(ft.AlertDialog(title=ft.Text("Congratulations! You won!"), open=True))
+        self.controls.append(
+            ft.AlertDialog(title=ft.Text("Congratulations! You won!"), open=True)
+        )
