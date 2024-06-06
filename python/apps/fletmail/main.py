@@ -1,0 +1,86 @@
+MOBILE_MAX_WIDTH = 640
+import flet as ft
+from fletmail import FletMail
+
+
+def main(page: ft.Page):
+    # print(page.window_width)
+
+    page.window_width = 800
+
+    fletmail = FletMail()
+
+    nav_rail_destinations = []
+    nav_destinations = []
+
+    def create_navigation_destinations(fletmail):
+
+        for destination in fletmail.actions:
+            nav_rail_destinations.append(
+                ft.NavigationRailDestination(
+                    label=destination.label, icon=destination.icon
+                )
+            )
+            nav_destinations.append(ft.NavigationDestination(icon=destination.icon))
+
+    create_navigation_destinations(fletmail)
+
+    compose_button = ft.FloatingActionButton(icon=ft.icons.CREATE, text="Compose")
+
+    def do_action(e):
+        print(f"Selected action: {e.control.selected_index}")
+        fletmail.actions[e.control.selected_index].on_click()
+
+    rail = ft.NavigationRail(
+        selected_index=0,
+        label_type=ft.NavigationRailLabelType.ALL,
+        bgcolor=ft.colors.PRIMARY_CONTAINER,
+        # extended=True,
+        min_width=100,
+        min_extended_width=400,
+        leading=compose_button,
+        group_alignment=-0.9,
+        destinations=nav_rail_destinations,
+        on_change=do_action,
+    )
+
+    bar = ft.NavigationBar(destinations=nav_destinations, on_change=do_action)
+
+    page.add(
+        ft.Row(
+            [
+                rail,
+                ft.Column(
+                    [ft.Text("Body!")],
+                    alignment=ft.MainAxisAlignment.START,
+                    expand=True,
+                ),
+            ],
+            expand=True,
+        )
+    )
+
+    def display_mobile_layout():
+        page.navigation_bar = bar
+        page.floating_action_button = compose_button
+        rail.visible = False
+        page.update()
+
+    def display_web_layout():
+        page.navigation_bar = None
+        page.floating_action_button = None
+        rail.visible = True
+        page.update()
+
+    def page_resize(e):
+        size = page.window_width
+        print("New page size:", page.window_width, page.window_height)
+        if (size != None) and (size > MOBILE_MAX_WIDTH):
+            display_web_layout()
+        else:
+            display_mobile_layout()
+
+    page.on_resize = page_resize
+
+
+ft.app(main)
