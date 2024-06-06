@@ -1,20 +1,38 @@
 MOBILE_MAX_WIDTH = 640
 import flet as ft
 from fletmail import FletMail
-from mail_menu import MailMenuMobile, MailMenuWeb
+from secondary_menu import SecondaryMenuMobile, SecondaryMenuWeb
 
 
 def main(page: ft.Page):
-    # print(page.window_width)
 
-    page.window_width = 800
+    if page.window_width != None and page.window_width > 650:
+        mobile_view = False
+    else:
+        mobile_view = True
 
     fletmail = FletMail()
 
     nav_rail_destinations = []
     nav_destinations = []
 
-    mail_secondary_menu_web = MailMenuWeb()
+    mail_secondary_menu_web = SecondaryMenuWeb()
+
+    def open_close_mobile_clicked(e):
+        page.drawer.open = True
+        page.drawer.update()
+
+    mobile_header = ft.Container(
+        visible=False,
+        content=ft.Row(
+            [
+                ft.IconButton(
+                    icon=fletmail.open_close_menu.icon,
+                    on_click=open_close_mobile_clicked,
+                )
+            ]
+        ),
+    )
 
     def create_navigation_destinations(fletmail):
 
@@ -61,7 +79,7 @@ def main(page: ft.Page):
     )
 
     bar = ft.NavigationBar(destinations=nav_destinations, on_change=do_action)
-    secondary_menu_drawer = MailMenuMobile()
+    secondary_menu_drawer = SecondaryMenuMobile()
 
     page.add(
         ft.Row(
@@ -69,7 +87,7 @@ def main(page: ft.Page):
                 rail,
                 mail_secondary_menu_web,
                 ft.Column(
-                    [ft.Text("Body!")],
+                    [mobile_header, ft.Text("Body!")],
                     alignment=ft.MainAxisAlignment.START,
                     expand=True,
                 ),
@@ -84,6 +102,7 @@ def main(page: ft.Page):
         mail_secondary_menu_web.visible = False
         page.drawer = secondary_menu_drawer
         rail.visible = False
+        mobile_header.visible = True
         page.update()
 
     def display_web_layout():
@@ -91,7 +110,13 @@ def main(page: ft.Page):
         page.floating_action_button = None
         page.drawer = None
         rail.visible = True
+        mobile_header.visible = False
         page.update()
+
+    if mobile_view:
+        display_mobile_layout()
+    else:
+        display_web_layout()
 
     def page_resize(e):
         size = page.window_width
