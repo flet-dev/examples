@@ -1,6 +1,7 @@
 MOBILE_MAX_WIDTH = 640
 import flet as ft
 from fletmail import FletMail
+from mail_menu import MailMenuMobile, MailMenuWeb
 
 
 def main(page: ft.Page):
@@ -13,7 +14,15 @@ def main(page: ft.Page):
     nav_rail_destinations = []
     nav_destinations = []
 
+    mail_secondary_menu_web = MailMenuWeb()
+
     def create_navigation_destinations(fletmail):
+
+        nav_rail_destinations.append(
+            ft.NavigationRailDestination(
+                icon=fletmail.open_close_menu.icon,
+            )
+        )
 
         for destination in fletmail.actions:
             nav_rail_destinations.append(
@@ -29,7 +38,14 @@ def main(page: ft.Page):
 
     def do_action(e):
         print(f"Selected action: {e.control.selected_index}")
-        fletmail.actions[e.control.selected_index].on_click()
+        if e.control.selected_index == 0:
+            fletmail.open_close_menu.on_click()
+
+            mail_secondary_menu_web.visible = not mail_secondary_menu_web.visible
+            page.update()
+
+        else:
+            fletmail.actions[e.control.selected_index - 1].on_click()
 
     rail = ft.NavigationRail(
         selected_index=0,
@@ -38,18 +54,20 @@ def main(page: ft.Page):
         # extended=True,
         min_width=100,
         min_extended_width=400,
-        leading=compose_button,
+        # leading=compose_button,
         group_alignment=-0.9,
         destinations=nav_rail_destinations,
         on_change=do_action,
     )
 
     bar = ft.NavigationBar(destinations=nav_destinations, on_change=do_action)
+    secondary_menu_drawer = MailMenuMobile()
 
     page.add(
         ft.Row(
             [
                 rail,
+                mail_secondary_menu_web,
                 ft.Column(
                     [ft.Text("Body!")],
                     alignment=ft.MainAxisAlignment.START,
@@ -63,12 +81,15 @@ def main(page: ft.Page):
     def display_mobile_layout():
         page.navigation_bar = bar
         page.floating_action_button = compose_button
+        mail_secondary_menu_web.visible = False
+        page.drawer = secondary_menu_drawer
         rail.visible = False
         page.update()
 
     def display_web_layout():
         page.navigation_bar = None
         page.floating_action_button = None
+        page.drawer = None
         rail.visible = True
         page.update()
 

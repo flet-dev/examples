@@ -11,6 +11,9 @@ class MainAction:
 class FletMail:
     def __init__(self) -> None:
         self.create_actions()
+        self.open_close_menu = MainAction(
+            label="Menu", icon=ft.icons.MENU, on_click=self.secondary_menu_clicked
+        )
 
     def create_actions(self):
         action1 = MainAction(
@@ -38,6 +41,9 @@ class FletMail:
 
     def action3_clicked(self):
         print("Action3 clicked")
+
+    def secondary_menu_clicked(self):
+        print("Secondary Menu Clicked")
 
     def compose_action(self):
         print("Compose!")
