@@ -13,6 +13,18 @@ class SecondaryMenuWeb(ft.Container):
         super().__init__()
         self.width = 150
         self.bgcolor = ft.colors.GREY_100
+        self.mail_actions = [
+            SecondaryAction(text="Inbox"),
+            SecondaryAction(text="Starred"),
+        ]
+        self.chat_actions = [
+            SecondaryAction(text="Chat1"),
+            SecondaryAction(text="Chat2"),
+        ]
+        self.meet_actions = [
+            SecondaryAction(text="Meet1"),
+            SecondaryAction(text="Meet2"),
+        ]
         self.content = ft.Column(
             controls=[SecondaryAction(text="Inbox"), SecondaryAction(text="Starred")]
         )
