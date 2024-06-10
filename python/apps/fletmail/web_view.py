@@ -28,6 +28,7 @@ class WebView(ft.View):
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
             min_width=100,
+            # width=100,
             min_extended_width=400,
             leading=self.open_menu_button,
             expand=True,
@@ -61,11 +62,25 @@ class WebView(ft.View):
                             self.rail,
                         ],
                     ),
-                    self.secondary_menu,
-                    ft.Column(
-                        [ft.Text("Body!")],
-                        alignment=ft.MainAxisAlignment.START,
+                    ft.Container(
+                        content=ft.Row(
+                            controls=[
+                                self.secondary_menu,
+                                ft.Column(
+                                    controls=[
+                                        ft.TextField(),
+                                        ft.Container(
+                                            content=ft.Text("Body!"),
+                                            bgcolor=ft.colors.WHITE,
+                                            expand=True,
+                                        ),
+                                    ],
+                                ),
+                            ]
+                        ),
+                        bgcolor=ft.colors.GREY_100,
                         expand=True,
+                        padding=20,
                     ),
                 ],
                 expand=True,
