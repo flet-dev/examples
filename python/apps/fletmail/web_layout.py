@@ -57,10 +57,6 @@ class WebLayout(ft.Column):
                 [
                     ft.Column(
                         controls=[
-                            # ft.Row(
-                            #     controls=[self.open_menu_button],
-                            #     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                            # ),
                             self.rail,
                         ],
                     ),
@@ -74,6 +70,11 @@ class WebLayout(ft.Column):
                 expand=True,
             )
         ]
+
+    def build(self):
+        self.page.appbar = None
+        self.page.navigation_bar = None
+        self.page.drawer = None
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
