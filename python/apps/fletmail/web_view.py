@@ -13,7 +13,7 @@ class SecondaryMenuWeb(ft.Container):
         self.content = ft.Column(controls=self.chat_actions)
 
 
-class WebLayout(ft.View):
+class WebView(ft.View):
     def __init__(self):
         super().__init__()
         self.nav_rail_destinations = [
@@ -49,7 +49,13 @@ class WebLayout(ft.View):
         self.compose_button = ft.FloatingActionButton(
             icon=ft.icons.CREATE, text="Compose"
         )
-        self.secondary_menu = SecondaryMenuWeb()
+        self.compose_button = ft.FloatingActionButton(
+            icon=ft.icons.CREATE, text="Compose"
+        )
+        self.secondary_menu = ft.Column([self.compose_button, SecondaryMenuWeb()])
+        self.compose_button = ft.FloatingActionButton(
+            icon=ft.icons.CREATE, text="Compose"
+        )
         self.expand = True
 
         self.controls = [
@@ -60,6 +66,7 @@ class WebLayout(ft.View):
                             self.rail,
                         ],
                     ),
+                    # ft.Column(controls=[self.compose_button, self.secondary_menu]),
                     self.secondary_menu,
                     ft.Column(
                         [ft.Text("Body!")],

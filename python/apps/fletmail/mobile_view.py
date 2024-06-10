@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class MobileLayout(ft.View):
+class MobileView(ft.View):
     def __init__(self):
         super().__init__()
         self.nav_bar_destinations = [
@@ -24,6 +24,10 @@ class MobileLayout(ft.View):
         )
         self.navigation_bar = ft.NavigationBar(
             destinations=self.nav_bar_destinations, on_change=self.nav_bar_changed
+        )
+
+        self.floating_action_button = ft.FloatingActionButton(
+            icon=ft.icons.CREATE, text="Compose"
         )
 
         self.drawer = ft.NavigationDrawer(

@@ -1,7 +1,7 @@
 MOBILE_MAX_WIDTH = 640
 import flet as ft
-from mobile_layout import MobileLayout
-from web_layout import WebLayout
+from mobile_view import MobileView
+from web_view import WebView
 
 
 def main(page: ft.Page):
@@ -9,8 +9,8 @@ def main(page: ft.Page):
 
     # compose_button = ft.FloatingActionButton(icon=ft.icons.CREATE, text="Compose")
 
-    web_layout = WebLayout()
-    mobile_layout = MobileLayout()
+    web_view = WebView()
+    mobile_view = MobileView()
 
     def get_page_design():
         size = page.window_width
@@ -29,8 +29,8 @@ def main(page: ft.Page):
 
     page.design = get_page_design()
 
-    page.views.append(mobile_layout)
-    page.views.append(web_layout)
+    page.views.append(mobile_view)
+    page.views.append(web_view)
     if page.design == "mobile":
         switch_view()
 
