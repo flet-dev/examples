@@ -42,7 +42,13 @@ def main(page: ft.Page):
             switch_view()
             page.design = new_design
 
+    def view_pop(view):
+        page.views.pop()
+        top_view = page.views[-1]
+        page.go(top_view.route)
+
     page.on_resize = page_resize
+    page.on_view_pop = view_pop
 
 
 ft.app(main)

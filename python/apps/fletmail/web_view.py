@@ -1,6 +1,7 @@
 from typing import List
 
 import flet as ft
+from new_message_view import NewMessageWebView
 
 
 class SecondaryMenuWeb(ft.Container):
@@ -36,8 +37,6 @@ class WebView(ft.View):
         self.rail = ft.NavigationRail(
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
-            # bgcolor=ft.colors.PRIMARY_CONTAINER,
-            # extended=True,
             min_width=100,
             min_extended_width=400,
             leading=self.open_menu_button,
@@ -50,12 +49,10 @@ class WebView(ft.View):
             icon=ft.icons.CREATE, text="Compose"
         )
         self.compose_button = ft.FloatingActionButton(
-            icon=ft.icons.CREATE, text="Compose"
+            icon=ft.icons.CREATE, text="Compose", on_click=self.compose_clicked
         )
         self.secondary_menu = ft.Column([self.compose_button, SecondaryMenuWeb()])
-        self.compose_button = ft.FloatingActionButton(
-            icon=ft.icons.CREATE, text="Compose"
-        )
+
         self.expand = True
 
         self.controls = [
@@ -66,7 +63,6 @@ class WebView(ft.View):
                             self.rail,
                         ],
                     ),
-                    # ft.Column(controls=[self.compose_button, self.secondary_menu]),
                     self.secondary_menu,
                     ft.Column(
                         [ft.Text("Body!")],
@@ -89,3 +85,8 @@ class WebView(ft.View):
         print("Open secondary menu or close secondary menu")
         self.secondary_menu.visible = not self.secondary_menu.visible
         self.update()
+
+    def compose_clicked(self, e):
+        print("Open new message dialog")
+        self.page.views.append(NewMessageWebView())
+        self.page.update()

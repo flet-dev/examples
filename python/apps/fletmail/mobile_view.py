@@ -1,4 +1,5 @@
 import flet as ft
+from new_message_view import NewMessageMobileView
 
 
 class MobileView(ft.View):
@@ -27,7 +28,7 @@ class MobileView(ft.View):
         )
 
         self.floating_action_button = ft.FloatingActionButton(
-            icon=ft.icons.CREATE, text="Compose"
+            icon=ft.icons.CREATE, text="Compose", on_click=self.compose_clicked
         )
 
         self.drawer = ft.NavigationDrawer(
@@ -46,3 +47,8 @@ class MobileView(ft.View):
         print("Open secondary menu")
         self.drawer.open = True
         self.drawer.update()
+
+    def compose_clicked(self, e):
+        print("Open new message dialog")
+        self.page.views.append(NewMessageMobileView())
+        self.page.update()
