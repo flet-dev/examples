@@ -7,6 +7,9 @@ from new_message_view import NewMessageWebView
 class WebView(ft.View):
     def __init__(self):
         super().__init__()
+        self.logo = ft.Container(
+            padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
+        )
         self.nav_rail_destinations = [
             ft.NavigationRailDestination(
                 label="Mail",
@@ -50,9 +53,11 @@ class WebView(ft.View):
             ]
         )
         self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
-        self.secondary_menu = ft.Column([self.compose_button, self.mail_actions])
+        self.secondary_menu = ft.Column(
+            [self.compose_button, self.mail_actions], width=150
+        )
 
-        self.expand = True
+        # self.expand = True
 
         self.controls = [
             ft.Row(
@@ -63,25 +68,64 @@ class WebView(ft.View):
                         ],
                     ),
                     ft.Container(
-                        content=ft.Row(
+                        content=ft.Column(
                             controls=[
-                                self.secondary_menu,
-                                ft.Column(
+                                ft.Row(
                                     controls=[
-                                        ft.TextField(),
-                                        ft.Container(
-                                            content=ft.Text("Body!"),
-                                            bgcolor=ft.colors.WHITE,
-                                            expand=True,
+                                        self.logo,
+                                        ft.Text(
+                                            "FletMail",
+                                            width=100,
+                                            style=ft.TextStyle(
+                                                size=20, weight=ft.FontWeight.BOLD
+                                            ),
                                         ),
-                                    ],
+                                        ft.TextField(),
+                                    ]
                                 ),
-                            ]
+                                ft.Row(
+                                    controls=[
+                                        self.secondary_menu,
+                                        ft.Container(
+                                            content=ft.Text("Body"),
+                                            expand=True,
+                                            bgcolor=ft.colors.WHITE,
+                                        ),
+                                    ]
+                                ),
+                            ],
                         ),
                         bgcolor=ft.colors.GREY_100,
                         expand=True,
                         padding=20,
+                        margin=0,
                     ),
+                    # ft.Column(
+                    #     controls=[
+                    #         ft.Row(controls=[]),
+                    #         ft.Row(controls=[]),
+                    #     ],
+                    # ),
+                    # ft.Container(
+                    #     content=ft.Row(
+                    #         controls=[
+                    #             self.secondary_menu,
+                    #             ft.Column(
+                    #                 controls=[
+                    #                     ft.TextField(),
+                    #                     ft.Container(
+                    #                         content=ft.Text("Body!"),
+                    #                         bgcolor=ft.colors.WHITE,
+                    #                         expand=True,
+                    #                     ),
+                    #                 ],
+                    #             ),
+                    #         ]
+                    #     ),
+                    #     bgcolor=ft.colors.GREY_100,
+                    #     expand=True,
+                    #     padding=20,
+                    # ),
                 ],
                 expand=True,
             )

@@ -5,9 +5,7 @@ from web_view import WebView
 
 
 def main(page: ft.Page):
-    # page.window_width = 500
-
-    # compose_button = ft.FloatingActionButton(icon=ft.icons.CREATE, text="Compose")
+    # page.window_width = 500 # Initial layout is "mobile"
 
     web_view = WebView()
     mobile_view = MobileView()
@@ -27,8 +25,8 @@ def main(page: ft.Page):
         page.views[2] = temp
         page.update()
 
+    # Initial layout
     page.design = get_page_design()
-
     page.views.append(mobile_view)
     page.views.append(web_view)
     if page.design == "mobile":
@@ -38,6 +36,7 @@ def main(page: ft.Page):
 
     def page_resize(e):
         new_design = get_page_design()
+        # check if if page layout needs to be changed
         if page.design != new_design:
             switch_view()
             page.design = new_design
@@ -48,7 +47,7 @@ def main(page: ft.Page):
         page.go(top_view.route)
 
     page.on_resize = page_resize
-    page.on_view_pop = view_pop
+    page.on_view_pop = view_pop  # triggered when clicking on "X" for New Message view
 
 
 ft.app(main)
