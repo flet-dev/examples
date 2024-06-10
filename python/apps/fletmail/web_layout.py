@@ -13,7 +13,7 @@ class SecondaryMenuWeb(ft.Container):
         self.content = ft.Column(controls=self.chat_actions)
 
 
-class WebLayout(ft.Column):
+class WebLayout(ft.View):
     def __init__(self):
         super().__init__()
         self.nav_rail_destinations = [
@@ -70,11 +70,6 @@ class WebLayout(ft.Column):
                 expand=True,
             )
         ]
-
-    def build(self):
-        self.page.appbar = None
-        self.page.navigation_bar = None
-        self.page.drawer = None
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")

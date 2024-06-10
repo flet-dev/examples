@@ -1,7 +1,7 @@
 import flet as ft
 
 
-class MobileLayout(ft.Column):
+class MobileLayout(ft.View):
     def __init__(self):
         super().__init__()
         self.nav_bar_destinations = [
@@ -22,19 +22,14 @@ class MobileLayout(ft.Column):
         self.open_menu_button = ft.IconButton(
             icon=ft.icons.MENU, on_click=self.open_close_secondary_menu
         )
-        self.nav_bar = ft.NavigationBar(
+        self.navigation_bar = ft.NavigationBar(
             destinations=self.nav_bar_destinations, on_change=self.nav_bar_changed
         )
 
-        self.nav_drawer = ft.NavigationDrawer(
+        self.drawer = ft.NavigationDrawer(
             controls=[ft.Text("Inbox"), ft.Text("Starred")]
         )
         self.appbar = ft.AppBar(leading=self.open_menu_button)
-
-    def build(self):
-        self.page.appbar = self.appbar
-        self.page.navigation_bar = self.nav_bar
-        self.page.drawer = self.nav_drawer
 
     def nav_bar_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
@@ -45,5 +40,5 @@ class MobileLayout(ft.Column):
 
     def open_close_secondary_menu(self, e):
         print("Open secondary menu")
-        self.page.drawer.open = True
-        self.page.drawer.update()
+        self.drawer.open = True
+        self.drawer.update()
