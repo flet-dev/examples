@@ -32,7 +32,11 @@ class MobileView(ft.View):
         )
 
         self.drawer = ft.NavigationDrawer(
-            controls=[ft.Text("Inbox"), ft.Text("Starred")]
+            controls=[
+                ft.TextButton("Inbox"),
+                ft.TextButton("Starred"),
+                ft.TextButton("Spam"),
+            ]
         )
         self.appbar = ft.AppBar(leading=self.open_menu_button)
 

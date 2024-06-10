@@ -4,16 +4,6 @@ import flet as ft
 from new_message_view import NewMessageWebView
 
 
-class SecondaryMenuWeb(ft.Container):
-    def __init__(self):
-        super().__init__()
-        self.width = 150
-        self.bgcolor = ft.colors.GREY_100
-        self.mail_actions = [ft.Text("Inbox"), ft.Text("Starred"), ft.Text("Spam")]
-        self.chat_actions: List[ft.Control] = [ft.Text("Chat1"), ft.Text("Chat2")]
-        self.content = ft.Column(controls=self.chat_actions)
-
-
 class WebView(ft.View):
     def __init__(self):
         super().__init__()
@@ -51,7 +41,15 @@ class WebView(ft.View):
         self.compose_button = ft.FloatingActionButton(
             icon=ft.icons.CREATE, text="Compose", on_click=self.compose_clicked
         )
-        self.secondary_menu = ft.Column([self.compose_button, SecondaryMenuWeb()])
+        self.mail_actions = ft.Column(
+            [
+                ft.TextButton("Inbox"),
+                ft.TextButton("Starred"),
+                ft.TextButton("Spam"),
+            ]
+        )
+        self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
+        self.secondary_menu = ft.Column([self.compose_button, self.mail_actions])
 
         self.expand = True
 
@@ -78,8 +76,11 @@ class WebView(ft.View):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
             print("Open Mail Menu")
+            self.secondary_menu.controls[1] = self.mail_actions
         if e.control.selected_index == 1:
             print("Open Chat Menu")
+            self.secondary_menu.controls[1] = self.chat_actions
+        self.update()
 
     def open_close_secondary_menu(self, e):
         print("Open secondary menu or close secondary menu")
