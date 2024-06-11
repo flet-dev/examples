@@ -5,13 +5,12 @@ from web_view import WebView
 
 
 def main(page: ft.Page):
-    # page.window_width = 500 # Initial layout is "mobile"
+    # page.width = 500 # Initial layout is "mobile"
 
     web_view = WebView()
     mobile_view = MobileView()
 
     def get_page_design():
-        # size = page.window_width
         size = page.width
         print("Page size:", page.width, page.height)
         if (size != None) and (size > MOBILE_MAX_WIDTH):
@@ -50,7 +49,19 @@ def main(page: ft.Page):
     page.on_resize = page_resize
     page.on_view_pop = view_pop  # triggered when clicking on "X" for New Message view
 
-    print(page.route)
+    def get_route_list(route):
+        route_list = [item for item in route.split("/") if item != ""]
+        return route_list
+
+    def route_change(e):
+        route_list = get_route_list(page.route)
+
+        if len(route_list) == 0:
+            page.go("/inbox")
+
+    page.on_route_change = route_change
+    print(f"Initial route: {page.route}")
+    page.go(page.route)
 
 
 ft.app(main)
