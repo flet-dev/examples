@@ -162,6 +162,7 @@ class WebView(ft.View):
     def open_close_secondary_menu(self, e):
         print("Open secondary menu or close secondary menu")
         self.mail_menu.visible = not self.mail_menu.visible
+        self.chat_menu.visible = not self.chat_menu.visible
         self.update()
 
     def compose_clicked(self, e):
