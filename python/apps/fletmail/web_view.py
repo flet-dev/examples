@@ -130,7 +130,7 @@ class WebView(ft.View):
 
     def get_messages(self):
         messages_list = []
-        id = 1
+        id = 1001
         for message in messages:
             message_title = message["title"]
             message_text = message["message"]

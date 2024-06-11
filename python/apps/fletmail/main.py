@@ -11,8 +11,9 @@ def main(page: ft.Page):
     mobile_view = MobileView()
 
     def get_page_design():
-        size = page.window_width
-        print("Page size:", page.window_width, page.window_height)
+        # size = page.window_width
+        size = page.width
+        print("Page size:", page.width, page.height)
         if (size != None) and (size > MOBILE_MAX_WIDTH):
             return "web"
         else:
@@ -48,6 +49,8 @@ def main(page: ft.Page):
 
     page.on_resize = page_resize
     page.on_view_pop = view_pop  # triggered when clicking on "X" for New Message view
+
+    print(page.route)
 
 
 ft.app(main)
