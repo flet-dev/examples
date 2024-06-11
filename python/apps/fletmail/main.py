@@ -55,11 +55,11 @@ def main(page: ft.Page):
         if len(route_list) == 1:
             print(route_list)
             if route_list[0] == ("inbox"):
-                web_view.display_inbox()
+                page.views[0].display_inbox()
             elif route_list[0] == ("chat"):
-                web_view.display_chat()
+                page.views[0].display_chat()
             elif route_list[0] == ("meet"):
-                web_view.display_meet()
+                page.views[0].display_meet()
             else:
                 print("Invalid route")
 

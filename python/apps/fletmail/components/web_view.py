@@ -1,13 +1,14 @@
 from typing import List
 
 import flet as ft
+from components.app_view import AppView
 from components.new_message_view import NewMessageWebView
 from model.messages import messages
 
 
-class WebView(ft.View):
+class WebView(AppView):
     def __init__(self):
-        super().__init__(route="/")
+        super().__init__()
         self.logo = ft.Container(
             padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
         )

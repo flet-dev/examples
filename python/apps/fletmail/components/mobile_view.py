@@ -1,11 +1,13 @@
 import flet as ft
+from components.app_view import AppView
 from components.new_message_view import NewMessageMobileView
 from model.messages import messages
 
 
-class MobileView(ft.View):
+class MobileView(AppView):
     def __init__(self):
-        super().__init__(route="/")
+        # super().__init__(route="/")
+        super().__init__()
         self.nav_bar_destinations = [
             ft.NavigationDestination(
                 label="Mail",
