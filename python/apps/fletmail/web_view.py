@@ -54,12 +54,22 @@ class WebView(ft.View):
             ]
         )
         self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
-        self.secondary_menu = ft.Column(
-            [self.compose_button, self.mail_actions], width=150
-        )
+        self.mail_menu = ft.Column([self.compose_button, self.mail_actions], width=150)
 
         # self.expand = True
         self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
+
+        self.mail_view = ft.Row(
+            controls=[
+                self.mail_menu,
+                ft.Container(
+                    content=self.messages_list,
+                    expand=True,
+                    bgcolor=ft.colors.WHITE,
+                ),
+            ],
+            expand=True,
+        )
 
         self.controls = [
             ft.Row(
@@ -85,17 +95,7 @@ class WebView(ft.View):
                                         ft.TextField(),
                                     ]
                                 ),
-                                ft.Row(
-                                    controls=[
-                                        self.secondary_menu,
-                                        ft.Container(
-                                            content=self.messages_list,
-                                            expand=True,
-                                            bgcolor=ft.colors.WHITE,
-                                        ),
-                                    ],
-                                    expand=True,
-                                ),
+                                self.mail_view,
                             ],
                         ),
                         bgcolor=ft.colors.GREY_100,
@@ -112,12 +112,12 @@ class WebView(ft.View):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
             print("Open Mail Menu")
-            self.secondary_menu.controls[1] = self.mail_actions
+            self.mail_menu.controls[1] = self.mail_actions
             self.page.go("/inbox")
 
         if e.control.selected_index == 1:
             print("Open Chat Menu")
-            self.secondary_menu.controls[1] = self.chat_actions
+            self.mail_menu.controls[1] = self.chat_actions
             self.page.go("/chat")
 
         if e.control.selected_index == 2:
@@ -129,7 +129,7 @@ class WebView(ft.View):
 
     def open_close_secondary_menu(self, e):
         print("Open secondary menu or close secondary menu")
-        self.secondary_menu.visible = not self.secondary_menu.visible
+        self.mail_menu.visible = not self.mail_menu.visible
         self.update()
 
     def compose_clicked(self, e):
