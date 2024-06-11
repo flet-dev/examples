@@ -130,29 +130,31 @@ class WebView(ft.View):
 
     def get_messages(self):
         messages_list = []
+        id = 1
         for message in messages:
             message_title = message["title"]
             message_text = message["message"]
             messages_list.append(
                 ft.ListTile(
+                    data=id,
                     leading=ft.Checkbox(),
                     title=ft.Row(
                         controls=[
                             ft.Text(
                                 message["author"],
-                                width=150,
                                 max_lines=1,
                                 overflow=ft.TextOverflow.ELLIPSIS,
+                                width=150,
                             ),
                             ft.Text(
-                                value=f"{message_title} - {message_text}",
+                                value=f"{message_title}",
                                 max_lines=1,
-                                overflow=ft.TextOverflow.ELLIPSIS,
+                                overflow=ft.TextOverflow.CLIP,
                             ),
-                            # ft.Text(value=message["date"], style=ft.TextStyle(size=8)),
                         ]
                     ),
                     trailing=ft.Text(value=message["date"]),
                 )
             )
+            id += 1
         return messages_list
