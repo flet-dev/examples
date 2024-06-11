@@ -200,3 +200,12 @@ class WebView(ft.View):
             )
             id += 1
         return messages_list
+
+    def display_inbox(self):
+        print("Display inbox")
+
+    def display_chat(self):
+        print("Display chat")
+
+    def display_meet(self):
+        print("Display meet")
