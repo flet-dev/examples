@@ -2,7 +2,7 @@ from typing import List
 
 import flet as ft
 from components.new_message_view import NewMessageWebView
-from messages import messages
+from model.messages import messages
 
 
 class WebView(ft.View):
