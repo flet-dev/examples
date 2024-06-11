@@ -5,7 +5,7 @@ from messages import messages
 
 class MobileView(ft.View):
     def __init__(self):
-        super().__init__()
+        super().__init__(route="/")
         self.nav_bar_destinations = [
             ft.NavigationDestination(
                 label="Mail",

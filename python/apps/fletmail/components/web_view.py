@@ -7,7 +7,7 @@ from messages import messages
 
 class WebView(ft.View):
     def __init__(self):
-        super().__init__()
+        super().__init__(route="/")
         self.logo = ft.Container(
             padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
         )

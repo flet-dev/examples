@@ -10,36 +10,29 @@ def main(page: ft.Page):
     web_view = WebView()
     mobile_view = MobileView()
 
-    def get_page_design():
-        size = page.width
-        print("Page size:", page.width, page.height)
-        if (size != None) and (size > MOBILE_MAX_WIDTH):
-            return "web"
-        else:
-            return "mobile"
-
     def switch_view():
-        # the last view in the list will be shown on the page
-        temp = page.views[1]
-        page.views[1] = page.views[2]
-        page.views[2] = temp
+        # check if view needs to be changed:
+        size = page.width
+        if size > MOBILE_MAX_WIDTH:
+            if isinstance(page.views[0], MobileView):
+                print("Need to change to WebView")
+                page.views.clear()
+                page.views.append(web_view)
+        else:
+            if isinstance(page.views[0], WebView):
+                print("Need to change to MobileView")
+                page.views.clear()
+                page.views.append(mobile_view)
         page.update()
 
     # Initial layout
-    page.design = get_page_design()
-    page.views.append(mobile_view)
+    print(f"Initial page width: {[page.width]}")
+    page.views.clear()
     page.views.append(web_view)
-    if page.design == "mobile":
-        switch_view()
-
-    page.update()
+    switch_view()
 
     def page_resize(e):
-        new_design = get_page_design()
-        # check if if page layout needs to be changed
-        if page.design != new_design:
-            switch_view()
-            page.design = new_design
+        switch_view()
 
     def view_pop(view):
         page.views.pop()
@@ -58,6 +51,7 @@ def main(page: ft.Page):
 
         if len(route_list) == 0:
             page.go("/inbox")
+            print("Route len is 0")
         if len(route_list) == 1:
             print(route_list)
             if route_list[0] == ("inbox"):
