@@ -61,7 +61,13 @@ class WebView(AppView):
 
         self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
 
-        self.message_view = ft.Text(value="This is the email message", visible=False)
+        self.message_view = ft.Column(
+            controls=[
+                ft.IconButton(icon=ft.icons.ARROW_BACK, on_click=self.back_to_messages),
+                ft.Text(value="This is the email message"),
+            ],
+            visible=False,
+        )
 
         self.mail_view = ft.Row(
             controls=[
@@ -195,7 +201,14 @@ class WebView(AppView):
         print("Message clicked!")
         self.messages_list.visible = False
         self.message_view.visible = True
-        self.message_view.value = e.control.data
+        self.message_view.controls[1].value = e.control.data
+        self.page.update()
+
+    def back_to_messages(self, e):
+        print("Go back to messages!")
+        self.messages_list.visible = True
+        self.message_view.visible = False
+        # self.message_view.controls[1].value = e.control.data
         self.page.update()
 
     def display_inbox(self):
