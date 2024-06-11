@@ -1,6 +1,6 @@
 import flet as ft
+from components.new_message_view import NewMessageMobileView
 from messages import messages
-from new_message_view import NewMessageMobileView
 
 
 class MobileView(ft.View):
