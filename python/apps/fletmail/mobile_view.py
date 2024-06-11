@@ -40,6 +40,10 @@ class MobileView(ft.View):
         )
         self.appbar = ft.AppBar(leading=self.open_menu_button)
 
+        self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
+
+        self.controls = [self.messages_list]
+
     def nav_bar_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
@@ -56,3 +60,9 @@ class MobileView(ft.View):
         print("Open new message dialog")
         self.page.views.append(NewMessageMobileView())
         self.page.update()
+
+    def get_messages(self):
+        messages = []
+        for i in range(20):
+            messages.append(ft.ListTile(title=ft.Text(f"Message{i}")))
+        return messages

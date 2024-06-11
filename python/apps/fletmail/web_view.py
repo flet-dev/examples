@@ -58,6 +58,7 @@ class WebView(ft.View):
         )
 
         # self.expand = True
+        self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
 
         self.controls = [
             ft.Row(
@@ -87,11 +88,12 @@ class WebView(ft.View):
                                     controls=[
                                         self.secondary_menu,
                                         ft.Container(
-                                            content=ft.Text("Body"),
+                                            content=self.messages_list,
                                             expand=True,
                                             bgcolor=ft.colors.WHITE,
                                         ),
-                                    ]
+                                    ],
+                                    expand=True,
                                 ),
                             ],
                         ),
@@ -100,32 +102,6 @@ class WebView(ft.View):
                         padding=20,
                         margin=0,
                     ),
-                    # ft.Column(
-                    #     controls=[
-                    #         ft.Row(controls=[]),
-                    #         ft.Row(controls=[]),
-                    #     ],
-                    # ),
-                    # ft.Container(
-                    #     content=ft.Row(
-                    #         controls=[
-                    #             self.secondary_menu,
-                    #             ft.Column(
-                    #                 controls=[
-                    #                     ft.TextField(),
-                    #                     ft.Container(
-                    #                         content=ft.Text("Body!"),
-                    #                         bgcolor=ft.colors.WHITE,
-                    #                         expand=True,
-                    #                     ),
-                    #                 ],
-                    #             ),
-                    #         ]
-                    #     ),
-                    #     bgcolor=ft.colors.GREY_100,
-                    #     expand=True,
-                    #     padding=20,
-                    # ),
                 ],
                 expand=True,
             )
@@ -150,3 +126,9 @@ class WebView(ft.View):
         print("Open new message dialog")
         self.page.views.append(NewMessageWebView())
         self.page.update()
+
+    def get_messages(self):
+        messages = []
+        for i in range(20):
+            messages.append(ft.ListTile(title=ft.Text(f"Message{i}")))
+        return messages
