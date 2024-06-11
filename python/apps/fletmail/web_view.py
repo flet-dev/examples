@@ -54,9 +54,10 @@ class WebView(ft.View):
             ]
         )
         self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
-        self.mail_menu = ft.Column([self.compose_button, self.mail_actions], width=150)
 
-        # self.expand = True
+        self.mail_menu = ft.Column([self.compose_button, self.mail_actions], width=150)
+        self.chat_menu = ft.Column([self.compose_button, self.chat_actions], width=150)
+
         self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
 
         self.mail_view = ft.Row(
@@ -69,6 +70,26 @@ class WebView(ft.View):
                 ),
             ],
             expand=True,
+        )
+
+        self.chat_view = ft.Row(
+            controls=[
+                self.chat_menu,
+                ft.Container(
+                    content=ft.Text("Chat View"),
+                    expand=True,
+                    bgcolor=ft.colors.WHITE,
+                ),
+            ],
+            expand=True,
+            visible=False,
+        )
+
+        self.meet_view = ft.Container(
+            content=ft.Text("Meet View"),
+            expand=True,
+            bgcolor=ft.colors.WHITE,
+            visible=False,
         )
 
         self.controls = [
@@ -96,6 +117,8 @@ class WebView(ft.View):
                                     ]
                                 ),
                                 self.mail_view,
+                                self.chat_view,
+                                self.meet_view,
                             ],
                         ),
                         bgcolor=ft.colors.GREY_100,
@@ -112,16 +135,25 @@ class WebView(ft.View):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
             print("Open Mail Menu")
-            self.mail_menu.controls[1] = self.mail_actions
+            # self.mail_menu.controls[1] = self.mail_actions
+            self.mail_view.visible = True
+            self.chat_view.visible = False
+            self.meet_view.visible = False
             self.page.go("/inbox")
 
         if e.control.selected_index == 1:
             print("Open Chat Menu")
-            self.mail_menu.controls[1] = self.chat_actions
+            # self.mail_menu.controls[1] = self.chat_actions
+            self.mail_view.visible = False
+            self.chat_view.visible = True
+            self.meet_view.visible = False
             self.page.go("/chat")
 
         if e.control.selected_index == 2:
             print("Open Meet Menu")
+            self.mail_view.visible = False
+            self.chat_view.visible = False
+            self.meet_view.visible = True
             # self.secondary_menu.controls[1] = [ft.Text("Meet")]
             self.page.go("/meet")
 
