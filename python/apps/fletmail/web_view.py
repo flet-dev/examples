@@ -113,9 +113,18 @@ class WebView(ft.View):
         if e.control.selected_index == 0:
             print("Open Mail Menu")
             self.secondary_menu.controls[1] = self.mail_actions
+            self.page.go("/inbox")
+
         if e.control.selected_index == 1:
             print("Open Chat Menu")
             self.secondary_menu.controls[1] = self.chat_actions
+            self.page.go("/chat")
+
+        if e.control.selected_index == 2:
+            print("Open Meet Menu")
+            # self.secondary_menu.controls[1] = [ft.Text("Meet")]
+            self.page.go("/meet")
+
         self.update()
 
     def open_close_secondary_menu(self, e):
