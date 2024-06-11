@@ -41,16 +41,23 @@ class MobileView(ft.View):
         )
         self.appbar = ft.AppBar(leading=self.open_menu_button)
 
-        self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
+        self.mail_view = ft.ListView(controls=self.get_messages(), expand=True)
+        self.chat_view = ft.Text("Chat View")
+        self.meet_view = ft.Text("Meet View")
 
-        self.controls = [self.messages_list]
+        self.controls = [self.mail_view, self.chat_view, self.meet_view]
 
     def nav_bar_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
             print("Open Mail Menu")
+            self.display_inbox()
         if e.control.selected_index == 1:
             print("Open Chat Menu")
+            self.display_chat()
+        if e.control.selected_index == 1:
+            print("Open Meet Menu")
+            self.display_meet()
 
     def open_close_secondary_menu(self, e):
         print("Open secondary menu")
@@ -74,3 +81,24 @@ class MobileView(ft.View):
                 )
             )
         return messages_list
+
+    def display_inbox(self):
+        print("Display inbox")
+        self.mail_view.visible = True
+        self.chat_view.visible = False
+        self.meet_view.visible = False
+        self.page.go("/inbox")
+
+    def display_chat(self):
+        print("Display chat")
+        self.mail_view.visible = False
+        self.chat_view.visible = True
+        self.meet_view.visible = False
+        self.page.go("/chat")
+
+    def display_meet(self):
+        print("Display meet")
+        self.mail_view.visible = False
+        self.chat_view.visible = False
+        self.meet_view.visible = True
+        self.page.go("/meet")
