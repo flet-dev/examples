@@ -134,28 +134,13 @@ class WebView(ft.View):
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
-            print("Open Mail Menu")
-            # self.mail_menu.controls[1] = self.mail_actions
-            self.mail_view.visible = True
-            self.chat_view.visible = False
-            self.meet_view.visible = False
-            self.page.go("/inbox")
+            self.display_inbox()
 
         if e.control.selected_index == 1:
-            print("Open Chat Menu")
-            # self.mail_menu.controls[1] = self.chat_actions
-            self.mail_view.visible = False
-            self.chat_view.visible = True
-            self.meet_view.visible = False
-            self.page.go("/chat")
+            self.display_chat()
 
         if e.control.selected_index == 2:
-            print("Open Meet Menu")
-            self.mail_view.visible = False
-            self.chat_view.visible = False
-            self.meet_view.visible = True
-            # self.secondary_menu.controls[1] = [ft.Text("Meet")]
-            self.page.go("/meet")
+            self.display_meet()
 
         self.update()
 
@@ -203,9 +188,21 @@ class WebView(ft.View):
 
     def display_inbox(self):
         print("Display inbox")
+        self.mail_view.visible = True
+        self.chat_view.visible = False
+        self.meet_view.visible = False
+        self.page.go("/inbox")
 
     def display_chat(self):
         print("Display chat")
+        self.mail_view.visible = False
+        self.chat_view.visible = True
+        self.meet_view.visible = False
+        self.page.go("/chat")
 
     def display_meet(self):
         print("Display meet")
+        self.mail_view.visible = False
+        self.chat_view.visible = False
+        self.meet_view.visible = True
+        self.page.go("/meet")
