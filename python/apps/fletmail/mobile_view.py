@@ -1,4 +1,5 @@
 import flet as ft
+from messages import messages
 from new_message_view import NewMessageMobileView
 
 
@@ -62,7 +63,14 @@ class MobileView(ft.View):
         self.page.update()
 
     def get_messages(self):
-        messages = []
-        for i in range(20):
-            messages.append(ft.ListTile(title=ft.Text(f"Message{i}")))
-        return messages
+        messages_list = []
+        for message in messages:
+            messages_list.append(
+                ft.ListTile(
+                    leading=ft.CircleAvatar(content=ft.Text("JS")),
+                    title=ft.Text(message["author"]),
+                    subtitle=ft.Text(message["title"]),
+                    trailing=ft.Text(message["date"]),
+                )
+            )
+        return messages_list

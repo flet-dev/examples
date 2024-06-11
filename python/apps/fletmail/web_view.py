@@ -1,6 +1,7 @@
 from typing import List
 
 import flet as ft
+from messages import messages
 from new_message_view import NewMessageWebView
 
 
@@ -128,7 +129,30 @@ class WebView(ft.View):
         self.page.update()
 
     def get_messages(self):
-        messages = []
-        for i in range(20):
-            messages.append(ft.ListTile(title=ft.Text(f"Message{i}")))
-        return messages
+        messages_list = []
+        for message in messages:
+            message_title = message["title"]
+            message_text = message["message"]
+            messages_list.append(
+                ft.ListTile(
+                    leading=ft.Checkbox(),
+                    title=ft.Row(
+                        controls=[
+                            ft.Text(
+                                message["author"],
+                                width=150,
+                                max_lines=1,
+                                overflow=ft.TextOverflow.ELLIPSIS,
+                            ),
+                            ft.Text(
+                                value=f"{message_title} - {message_text}",
+                                max_lines=1,
+                                overflow=ft.TextOverflow.ELLIPSIS,
+                            ),
+                            # ft.Text(value=message["date"], style=ft.TextStyle(size=8)),
+                        ]
+                    ),
+                    trailing=ft.Text(value=message["date"]),
+                )
+            )
+        return messages_list
