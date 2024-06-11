@@ -61,11 +61,13 @@ class WebView(AppView):
 
         self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
 
+        self.message_view = ft.Text(value="This is the email message", visible=False)
+
         self.mail_view = ft.Row(
             controls=[
                 self.mail_menu,
                 ft.Container(
-                    content=self.messages_list,
+                    content=ft.Column([self.messages_list, self.message_view]),
                     expand=True,
                     bgcolor=ft.colors.WHITE,
                 ),
@@ -120,6 +122,7 @@ class WebView(AppView):
                                 self.mail_view,
                                 self.chat_view,
                                 self.meet_view,
+                                # self.message_view,
                             ],
                         ),
                         bgcolor=ft.colors.GREY_100,
@@ -182,10 +185,18 @@ class WebView(AppView):
                         ]
                     ),
                     trailing=ft.Text(value=message["date"]),
+                    on_click=self.display_message,
                 )
             )
             id += 1
         return messages_list
+
+    def display_message(self, e):
+        print("Message clicked!")
+        self.messages_list.visible = False
+        self.message_view.visible = True
+        self.message_view.value = e.control.data
+        self.page.update()
 
     def display_inbox(self):
         print("Display inbox")

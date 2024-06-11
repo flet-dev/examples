@@ -6,7 +6,6 @@ from model.messages import messages
 
 class MobileView(AppView):
     def __init__(self):
-        # super().__init__(route="/")
         super().__init__()
         self.nav_bar_destinations = [
             ft.NavigationDestination(
