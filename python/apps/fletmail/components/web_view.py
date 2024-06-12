@@ -197,19 +197,17 @@ class WebView(AppView):
 
     def message_clicked(self, e):
         print("Message clicked!")
+
         self.display_message(e.control.data)
+        route = f"{self.page.route}/{e.control.data}"
+        self.page.go(route)
 
     def display_message(self, id):
         print(f"Display message for {id}")
         self.messages_list.visible = False
         self.message_view.visible = True
-        # body = self.find_message(id)["message"]
         message = self.get_message(id)
         self.message_view.controls[1].value = message.body  # Body of the message
-        print(self.page.route)
-        # self.page.go(self.page.route)
-        route = f"{self.page.route}/{id}"
-        self.page.go(route)
 
     def back_to_messages(self, e):
         print("Go back to messages!")
