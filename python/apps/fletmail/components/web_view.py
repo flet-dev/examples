@@ -167,21 +167,23 @@ class WebView(AppView):
             messages_list.append(
                 ft.ListTile(
                     data=message.id,
-                    leading=ft.Checkbox(),
-                    title=ft.Row(
-                        controls=[
-                            ft.Text(
-                                message.author,
-                                max_lines=1,
-                                overflow=ft.TextOverflow.ELLIPSIS,
-                                width=150,
+                    leading=ft.Row(
+                        width=150,
+                        controls=[ft.Checkbox(), ft.Text(message.author, size=14)],
+                    ),
+                    title=ft.Text(
+                        spans=[
+                            ft.TextSpan(
+                                text=message.title,
+                                style=ft.TextStyle(weight=ft.FontWeight.W_600, size=14),
                             ),
-                            ft.Text(
-                                value=f"{message.title}",
-                                max_lines=1,
-                                overflow=ft.TextOverflow.CLIP,
+                            ft.TextSpan(
+                                text=f" - {message.body}",
+                                style=ft.TextStyle(weight=ft.FontWeight.W_100, size=14),
                             ),
-                        ]
+                        ],
+                        max_lines=1,
+                        overflow=ft.TextOverflow.ELLIPSIS,
                     ),
                     trailing=ft.Text(value=message.date),
                     on_click=self.message_clicked,
@@ -214,7 +216,6 @@ class WebView(AppView):
         self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
-        # self.message_view.controls[1].value = e.control.data
         self.page.go("/inbox")
 
     def display_inbox(self):

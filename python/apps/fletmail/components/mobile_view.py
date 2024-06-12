@@ -89,7 +89,10 @@ class MobileView(AppView):
         self.mail_view.visible = True
         self.chat_view.visible = False
         self.meet_view.visible = False
-        self.page.go("/inbox")
+        if self.selected_message_id == None:
+            self.page.go("/inbox")
+        else:
+            self.page.go(f"/inbox/{self.selected_message_id}")
 
     def display_chat(self):
         print("Display chat")
