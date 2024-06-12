@@ -15,6 +15,7 @@ class AppView(ft.View):
     def __init__(self):
         super().__init__(route="/")
         self.__get_messages()
+        self.selected_message_id = None
 
     def display_inbox(self): ...
 

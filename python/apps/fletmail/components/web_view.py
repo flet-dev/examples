@@ -197,7 +197,7 @@ class WebView(AppView):
 
     def message_clicked(self, e):
         print("Message clicked!")
-
+        self.selected_message_id = e.control.data
         self.display_message(e.control.data)
         route = f"{self.page.route}/{e.control.data}"
         self.page.go(route)
@@ -211,6 +211,7 @@ class WebView(AppView):
 
     def back_to_messages(self, e):
         print("Go back to messages!")
+        self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
         # self.message_view.controls[1].value = e.control.data
@@ -221,7 +222,10 @@ class WebView(AppView):
         self.mail_view.visible = True
         self.chat_view.visible = False
         self.meet_view.visible = False
-        self.page.go("/inbox")
+        if self.selected_message_id == None:
+            self.page.go("/inbox")
+        else:
+            self.page.go(f"/inbox/{self.selected_message_id}")
 
     def display_chat(self):
         print("Display chat")
