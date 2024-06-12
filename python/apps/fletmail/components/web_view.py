@@ -202,7 +202,8 @@ class WebView(AppView):
         self.messages_list.visible = False
         self.message_view.visible = True
         self.message_view.controls[1].value = e.control.data
-        self.page.update()
+        route = f"{self.page.route}/{e.control.data}"
+        self.page.go(route)
 
     def back_to_messages(self, e):
         print("Go back to messages!")
