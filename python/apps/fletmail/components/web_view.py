@@ -3,7 +3,6 @@ from typing import List
 import flet as ft
 from components.app_view import AppView
 from components.new_message_view import NewMessageWebView
-from model.messages import messages
 
 
 class WebView(AppView):
@@ -41,9 +40,7 @@ class WebView(AppView):
             destinations=self.nav_rail_destinations,
             on_change=self.nav_rail_changed,
         )
-        self.compose_button = ft.FloatingActionButton(
-            icon=ft.icons.CREATE, text="Compose"
-        )
+
         self.compose_button = ft.FloatingActionButton(
             icon=ft.icons.CREATE, text="Compose", on_click=self.compose_clicked
         )
@@ -59,7 +56,7 @@ class WebView(AppView):
         self.mail_menu = ft.Column([self.compose_button, self.mail_actions], width=150)
         self.chat_menu = ft.Column([self.compose_button, self.chat_actions], width=150)
 
-        self.messages_list = ft.ListView(controls=self.get_messages(), expand=True)
+        self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
 
         self.message_view = ft.Column(
             controls=[
@@ -128,7 +125,6 @@ class WebView(AppView):
                                 self.mail_view,
                                 self.chat_view,
                                 self.meet_view,
-                                # self.message_view,
                             ],
                         ),
                         bgcolor=ft.colors.GREY_100,
@@ -165,55 +161,51 @@ class WebView(AppView):
         self.page.views.append(NewMessageWebView())
         self.page.update()
 
-    def get_messages(self):
+    def get_message_tiles(self):
         messages_list = []
-        id = 1001
-        for message in messages:
-            message_title = message["title"]
-            message_text = message["message"]
+        for message in self.messages:
             messages_list.append(
                 ft.ListTile(
-                    data=id,
+                    data=message.id,
                     leading=ft.Checkbox(),
                     title=ft.Row(
                         controls=[
                             ft.Text(
-                                message["author"],
+                                message.author,
                                 max_lines=1,
                                 overflow=ft.TextOverflow.ELLIPSIS,
                                 width=150,
                             ),
                             ft.Text(
-                                value=f"{message_title}",
+                                value=f"{message.title}",
                                 max_lines=1,
                                 overflow=ft.TextOverflow.CLIP,
                             ),
                         ]
                     ),
-                    trailing=ft.Text(value=message["date"]),
+                    trailing=ft.Text(value=message.date),
                     on_click=self.message_clicked,
                 )
             )
-            id += 1
         return messages_list
 
     def get_message(self, id):
-        for list_tile in self.messages_list.controls:
-            if list_tile.data == int(id):
-                print("Found!")
-                return list_tile
+        for message in self.messages:
+            if message.id == int(id):
+                print("Found message!")
+                return message
 
     def message_clicked(self, e):
         print("Message clicked!")
         self.display_message(e.control.data)
 
     def display_message(self, id):
-        print("Display message")
+        print(f"Display message for {id}")
         self.messages_list.visible = False
         self.message_view.visible = True
         # body = self.find_message(id)["message"]
         message = self.get_message(id)
-        self.message_view.controls[1].value = message.data  # Body of the message
+        self.message_view.controls[1].value = message.body  # Body of the message
         print(self.page.route)
         # self.page.go(self.page.route)
         route = f"{self.page.route}/{id}"

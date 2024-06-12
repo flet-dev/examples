@@ -1,7 +1,8 @@
 import flet as ft
 from components.app_view import AppView
 from components.new_message_view import NewMessageMobileView
-from model.messages import messages
+
+# from model.messages import messages
 
 
 class MobileView(AppView):
@@ -42,7 +43,7 @@ class MobileView(AppView):
         )
         self.appbar = ft.AppBar(leading=self.open_menu_button)
 
-        self.mail_view = ft.ListView(controls=self.get_messages(), expand=True)
+        self.mail_view = ft.ListView(controls=self.get_message_tiles(), expand=True)
         self.chat_view = ft.Text("Chat View")
         self.meet_view = ft.Text("Meet View")
 
@@ -70,15 +71,15 @@ class MobileView(AppView):
         self.page.views.append(NewMessageMobileView())
         self.page.update()
 
-    def get_messages(self):
+    def get_message_tiles(self):
         messages_list = []
-        for message in messages:
+        for message in self.messages:
             messages_list.append(
                 ft.ListTile(
                     leading=ft.CircleAvatar(content=ft.Text("JS")),
-                    title=ft.Text(message["author"]),
-                    subtitle=ft.Text(message["title"]),
-                    trailing=ft.Text(message["date"]),
+                    title=ft.Text(message.author),
+                    subtitle=ft.Text(message.title),
+                    trailing=ft.Text(message.date),
                 )
             )
         return messages_list
