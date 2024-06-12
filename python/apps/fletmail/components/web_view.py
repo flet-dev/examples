@@ -197,6 +197,12 @@ class WebView(AppView):
             id += 1
         return messages_list
 
+    def get_message(self, id):
+        for list_tile in self.messages_list.controls:
+            if list_tile.data == int(id):
+                print("Found!")
+                return list_tile
+
     def message_clicked(self, e):
         print("Message clicked!")
         self.display_message(e.control.data)
@@ -205,7 +211,11 @@ class WebView(AppView):
         print("Display message")
         self.messages_list.visible = False
         self.message_view.visible = True
-        self.message_view.controls[1].value = id
+        # body = self.find_message(id)["message"]
+        message = self.get_message(id)
+        self.message_view.controls[1].value = message.data  # Body of the message
+        print(self.page.route)
+        # self.page.go(self.page.route)
         route = f"{self.page.route}/{id}"
         self.page.go(route)
 
