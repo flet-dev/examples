@@ -191,18 +191,22 @@ class WebView(AppView):
                         ]
                     ),
                     trailing=ft.Text(value=message["date"]),
-                    on_click=self.display_message,
+                    on_click=self.message_clicked,
                 )
             )
             id += 1
         return messages_list
 
-    def display_message(self, e):
+    def message_clicked(self, e):
         print("Message clicked!")
+        self.display_message(e.control.data)
+
+    def display_message(self, id):
+        print("Display message")
         self.messages_list.visible = False
         self.message_view.visible = True
-        self.message_view.controls[1].value = e.control.data
-        route = f"{self.page.route}/{e.control.data}"
+        self.message_view.controls[1].value = id
+        route = f"{self.page.route}/{id}"
         self.page.go(route)
 
     def back_to_messages(self, e):
@@ -210,7 +214,7 @@ class WebView(AppView):
         self.messages_list.visible = True
         self.message_view.visible = False
         # self.message_view.controls[1].value = e.control.data
-        self.page.update()
+        self.page.go("/inbox")
 
     def display_inbox(self):
         print("Display inbox")
