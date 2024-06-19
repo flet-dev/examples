@@ -43,29 +43,6 @@ class AppView(ft.View):
     def get_message(self, id):
         for message in self.messages:
             if message.id == int(id):
-                print("Found message!")
+                self.selected_message_id = id
+                print(f"Found message {id}!")
                 return message
-
-    # def display_inbox(self):
-    #     print("Display inbox")
-    #     self.mail_view.visible = True
-    #     self.chat_view.visible = False
-    #     self.meet_view.visible = False
-    #     if self.selected_message_id == None:
-    #         self.page.go("/inbox")
-    #     else:
-    #         self.page.go(f"/inbox/{self.selected_message_id}")
-
-    # def display_chat(self):
-    #     print("Display chat")
-    #     self.mail_view.visible = False
-    #     self.chat_view.visible = True
-    #     self.meet_view.visible = False
-    #     self.page.go("/chat")
-
-    # def display_meet(self):
-    #     print("Display meet")
-    #     self.mail_view.visible = False
-    #     self.chat_view.visible = False
-    #     self.meet_view.visible = True
-    #     self.page.go("/meet")

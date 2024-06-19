@@ -210,19 +210,12 @@ class WebView(AppView):
         route = f"{self.page.route}/{e.control.data.id}"
         self.page.go(route)
 
-    # def display_message(self, id):
-    #     print(f"Display message for {id}")
-    #     self.messages_list.visible = False
-    #     self.message_view.visible = True
-    #     message = self.get_message(id)
-    #     self.message_view.controls[1].value = message.body  # Body of the message
-
     def display_message(self, message):
         print(f"Display message for {message.id}")
         self.messages_list.visible = False
         self.message_view.visible = True
-        # message = self.get_message(id)
         self.message_view.controls[1].value = message.body  # Body of the message
+        self.page.update()
 
     def back_to_messages(self, e):
         print("Go back to messages!")
