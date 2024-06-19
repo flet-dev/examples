@@ -170,7 +170,8 @@ class WebView(AppView):
         for message in self.messages:
             messages_list.append(
                 ft.ListTile(
-                    data=message.id,
+                    # data=message.id,
+                    data=message,
                     leading=ft.Row(
                         width=150,
                         controls=[ft.Checkbox(), ft.Text(message.author, size=14)],
@@ -203,16 +204,24 @@ class WebView(AppView):
 
     def message_clicked(self, e):
         print("Message clicked!")
-        self.selected_message_id = e.control.data
+        # self.selected_message_id = e.control.data
+        self.selected_message_id = e.control.data.id
         self.display_message(e.control.data)
-        route = f"{self.page.route}/{e.control.data}"
+        route = f"{self.page.route}/{e.control.data.id}"
         self.page.go(route)
 
-    def display_message(self, id):
-        print(f"Display message for {id}")
+    # def display_message(self, id):
+    #     print(f"Display message for {id}")
+    #     self.messages_list.visible = False
+    #     self.message_view.visible = True
+    #     message = self.get_message(id)
+    #     self.message_view.controls[1].value = message.body  # Body of the message
+
+    def display_message(self, message):
+        print(f"Display message for {message.id}")
         self.messages_list.visible = False
         self.message_view.visible = True
-        message = self.get_message(id)
+        # message = self.get_message(id)
         self.message_view.controls[1].value = message.body  # Body of the message
 
     def back_to_messages(self, e):
