@@ -55,7 +55,8 @@ def main(page: ft.Page):
         if len(route_list) == 1:
             print(route_list)
             if route_list[0] == ("mail"):
-                page.views[0].display_mail("inbox")
+                page.views[0].mail_filter = "inbox"
+                page.views[0].display_mail()
             if route_list[0] == ("chat"):
                 page.views[0].display_chat()
             elif route_list[0] == ("meet"):
@@ -67,7 +68,8 @@ def main(page: ft.Page):
             if route_list[0] == ("mail"):
                 # if route_list[1] == ("inbox"):
                 # page.views[0].display_inbox()
-                page.views[0].display_mail(route_list[1])
+                page.views[0].mail_filter = route_list[1]
+                page.views[0].display_mail()
             # elif route_list[0] == ("chat"):
             #     page.views[0].display_chat()
             # elif route_list[0] == ("meet"):

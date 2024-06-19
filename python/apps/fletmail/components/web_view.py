@@ -189,7 +189,7 @@ class WebView(AppView):
         self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
         self.selected_message = None
         self.mail_filter = "inbox"
-        self.display_mail(self.mail_filter)
+        self.display_mail()
 
     def starred_clicked(self, e):
         print("Starred clicked")
@@ -198,7 +198,7 @@ class WebView(AppView):
         self.mail_actions.controls[2].style.bgcolor = ft.colors.SURFACE
         self.mail_filter = "starred"
         self.selected_message = None
-        self.display_mail(self.mail_filter)
+        self.display_mail()
 
     def spam_clicked(self, e):
         print("Spam clicked")
@@ -207,12 +207,12 @@ class WebView(AppView):
         self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
         self.mail_filter = "spam"
         self.selected_message = None
-        self.display_mail(self.mail_filter)
+        self.display_mail()
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
-            self.display_mail(self.mail_filter)
+            self.display_mail()
 
         if e.control.selected_index == 1:
             self.display_chat()
@@ -291,7 +291,7 @@ class WebView(AppView):
         route = f"mail/{self.mail_filter}"
         self.page.go(route)
 
-    def display_mail(self, filter):
+    def display_mail(self):
         print("Display mail")
         self.mail_view.visible = True
         self.chat_view.visible = False
@@ -299,11 +299,8 @@ class WebView(AppView):
         if self.selected_message == None:
             self.messages_list.visible = True
             self.message_view.visible = False
-            self.page.go(f"/mail/{filter}")
+            self.page.go(f"/mail/{self.mail_filter}")
         else:
-            # self.messages_list.visible = False
-            # self.message_view.visible = True
-            # self.page.go(f"/mail/{filter}/{self.selected_message.id}")
             self.display_message()
 
     def display_chat(self):
