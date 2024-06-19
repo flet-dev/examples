@@ -267,8 +267,8 @@ class WebView(AppView):
         print("Message clicked!")
         self.selected_message = e.control.data
         self.display_message()
-        route = f"{self.page.route}/{e.control.data.id}"
-        self.page.go(route)
+        # route = f"{self.page.route}/{e.control.data.id}"
+        # self.page.go(route)
 
     def display_message(self):
         print(f"Display message for {self.selected_message.id}")
@@ -280,11 +280,12 @@ class WebView(AppView):
         self.message_view.controls[1].value = (
             self.selected_message.body
         )  # Body of the message
-        self.page.update()
+        self.page.go(f"/mail/{self.mail_filter}/{self.selected_message.id}")
+        # self.page.update()
 
     def back_to_messages(self, e):
         print("Go back to messages!")
-        self.selected_message_id = None
+        self.selected_message = None
         self.messages_list.visible = True
         self.message_view.visible = False
         route = f"mail/{self.mail_filter}"
