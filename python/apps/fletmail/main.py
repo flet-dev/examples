@@ -50,13 +50,13 @@ def main(page: ft.Page):
         route_list = get_route_list(page.route)
 
         if len(route_list) == 0:
-            page.go("/inbox")
+            page.go("/mail/inbox")
             print("Route len is 0")
         if len(route_list) == 1:
             print(route_list)
-            if route_list[0] == ("inbox"):
-                page.views[0].display_inbox()
-            elif route_list[0] == ("chat"):
+            # if route_list[0] == ("mail"):
+            #     page.views[0].display_inbox()
+            if route_list[0] == ("chat"):
                 page.views[0].display_chat()
             elif route_list[0] == ("meet"):
                 page.views[0].display_meet()
@@ -64,7 +64,23 @@ def main(page: ft.Page):
                 print("Invalid route")
         if len(route_list) == 2:
             print(route_list)
-            message = page.views[0].get_message(route_list[1])
+            if route_list[0] == ("mail"):
+                # if route_list[1] == ("inbox"):
+                # page.views[0].display_inbox()
+                page.views[0].display_mail(route_list[1])
+            elif route_list[0] == ("chat"):
+                page.views[0].display_chat()
+            elif route_list[0] == ("meet"):
+                page.views[0].display_meet()
+            else:
+                print("Invalid route")
+        # if len(route_list) == 2:
+        #     print(route_list)
+        #     message = page.views[0].get_message(route_list[1])
+        #     page.views[0].display_message(message)
+        if len(route_list) == 3:
+            print(route_list)
+            message = page.views[0].get_message(route_list[2])
             page.views[0].display_message(message)
 
     page.on_route_change = route_change

@@ -188,7 +188,7 @@ class WebView(AppView):
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
-            self.display_inbox()
+            self.display_mail("inbox")
 
         if e.control.selected_index == 1:
             self.display_chat()
@@ -266,17 +266,17 @@ class WebView(AppView):
         self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
-        self.page.go("/inbox")
+        self.page.go("/mail/inbox")
 
-    def display_inbox(self):
-        print("Display inbox")
+    def display_mail(self, filter):
+        print("Display mail")
         self.mail_view.visible = True
         self.chat_view.visible = False
         self.meet_view.visible = False
         if self.selected_message_id == None:
-            self.page.go("/inbox")
+            self.page.go(f"/mail/{filter}")
         else:
-            self.page.go(f"/inbox/{self.selected_message_id}")
+            self.page.go(f"/mail/{filter}/{self.selected_message_id}")
 
     def display_chat(self):
         print("Display chat")
