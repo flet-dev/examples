@@ -82,15 +82,16 @@ class MobileView(AppView):
                     subtitle=ft.Text(message.title),
                     trailing=ft.Text(message.date),
                     on_click=self.message_clicked,
-                    data=message.id,
+                    # data=message.id,
+                    data=message,
                 )
             )
         return messages_list
 
     def message_clicked(self, e):
         print("Message clicked! Open message view")
-        message = self.get_message(e.control.data)
-        self.page.views.append(MessageView(message))
+        # message = self.get_message(e.control.data)
+        self.page.views.append(MessageView(e.control.data))
         self.page.update()
 
     def display_inbox(self):
@@ -117,8 +118,8 @@ class MobileView(AppView):
         self.meet_view.visible = True
         self.page.go("/meet")
 
-    def get_message(self, id):
-        for message in self.messages:
-            if message.id == int(id):
-                print("Found message!")
-                return message
+    # def get_message(self, id):
+    #     for message in self.messages:
+    #         if message.id == int(id):
+    #             print("Found message!")
+    #             return message
