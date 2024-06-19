@@ -1,5 +1,6 @@
 import flet as ft
 from components.app_view import AppView
+from components.message_view import MessageView
 from components.new_message_view import NewMessageMobileView
 
 # from model.messages import messages
@@ -80,9 +81,17 @@ class MobileView(AppView):
                     title=ft.Text(message.author),
                     subtitle=ft.Text(message.title),
                     trailing=ft.Text(message.date),
+                    on_click=self.message_clicked,
+                    data=message.id,
                 )
             )
         return messages_list
+
+    def message_clicked(self, e):
+        print("Message clicked! Open message view")
+        message = self.get_message(e.control.data)
+        self.page.views.append(MessageView(message))
+        self.page.update()
 
     def display_inbox(self):
         print("Display inbox")
@@ -107,3 +116,9 @@ class MobileView(AppView):
         self.chat_view.visible = False
         self.meet_view.visible = True
         self.page.go("/meet")
+
+    def get_message(self, id):
+        for message in self.messages:
+            if message.id == int(id):
+                print("Found message!")
+                return message
