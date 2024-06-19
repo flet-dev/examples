@@ -133,6 +133,10 @@ class WebView(AppView):
                                         ),
                                         # ft.TextField(),
                                         self.search_bar,
+                                        ft.CircleAvatar(
+                                            foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
+                                            content=ft.Text("FF"),
+                                        ),
                                     ]
                                 ),
                                 self.mail_view,
