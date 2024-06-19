@@ -102,6 +102,14 @@ class WebView(AppView):
             visible=False,
         )
 
+        self.search_bar = ft.TextField(
+            border_radius=ft.border_radius.all(30),
+            border_color=ft.colors.GREY_200,
+            bgcolor=ft.colors.WHITE,
+            icon=ft.icons.SEARCH,
+            expand=True,
+        )
+
         self.controls = [
             ft.Row(
                 [
@@ -123,7 +131,8 @@ class WebView(AppView):
                                                 size=20, weight=ft.FontWeight.BOLD
                                             ),
                                         ),
-                                        ft.TextField(),
+                                        # ft.TextField(),
+                                        self.search_bar,
                                     ]
                                 ),
                                 self.mail_view,
@@ -140,6 +149,9 @@ class WebView(AppView):
                 expand=True,
             )
         ]
+
+    def search_view_tapped(self):
+        print("Search")
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
