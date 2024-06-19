@@ -101,8 +101,16 @@ class WebView(AppView):
 
         self.message_view = ft.Column(
             controls=[
-                ft.IconButton(icon=ft.icons.ARROW_BACK, on_click=self.back_to_messages),
-                ft.Text(value="This is the email message"),
+                ft.Row(
+                    controls=[
+                        ft.IconButton(
+                            icon=ft.icons.ARROW_BACK,
+                            on_click=self.back_to_messages,
+                        ),
+                        ft.Text("Message title", style=ft.TextStyle(size=20)),
+                    ]
+                ),
+                ft.Text(value="This is message body"),
             ],
             visible=False,
         )
@@ -200,7 +208,7 @@ class WebView(AppView):
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
         if e.control.selected_index == 0:
-            self.display_mail("inbox")
+            self.display_mail(self.mail_filter)
 
         if e.control.selected_index == 1:
             self.display_chat()
@@ -263,6 +271,9 @@ class WebView(AppView):
         print(f"Display message for {message.id}")
         self.messages_list.visible = False
         self.message_view.visible = True
+        self.message_view.controls[0].controls[
+            1
+        ].value = message.title  # title of the message
         self.message_view.controls[1].value = message.body  # Body of the message
         self.page.update()
 
