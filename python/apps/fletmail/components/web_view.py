@@ -5,6 +5,26 @@ from components.app_view import AppView
 from components.new_message_view import NewMessageWebView
 
 
+class SecondaryMenuAction(ft.TextButton):
+    def __init__(self, text, icon, on_click):
+        super().__init__()
+        self.content = ft.Row(
+            controls=[
+                ft.Icon(icon),
+                ft.Text(text),
+            ]
+        )
+        self.style = ft.ButtonStyle(
+            padding=10
+            # bgcolor={
+            #     ft.ControlState.HOVERED: ft.colors.PRIMARY_CONTAINER,
+            #     ft.ControlState.FOCUSED: ft.colors.RED,
+            #     ft.ControlState.DEFAULT: ft.colors.SURFACE,
+            # }
+        )
+        self.on_click = on_click
+
+
 class WebView(AppView):
     def __init__(self):
         super().__init__()
@@ -56,11 +76,18 @@ class WebView(AppView):
         )
         self.mail_actions = ft.Column(
             [
-                ft.TextButton("Inbox"),
-                ft.TextButton("Starred"),
-                ft.TextButton("Spam"),
+                SecondaryMenuAction(
+                    text="Inbox", icon=ft.icons.MAIL, on_click=self.inbox_clicked
+                ),
+                SecondaryMenuAction(
+                    text="Starred", icon=ft.icons.STAR, on_click=self.starred_clicked
+                ),
+                SecondaryMenuAction(
+                    text="Spam", icon=ft.icons.DELETE, on_click=self.spam_clicked
+                ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+            spacing=0,
         )
         self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
 
@@ -147,8 +174,16 @@ class WebView(AppView):
             )
         ]
 
-    def search_view_tapped(self):
-        print("Search")
+    def inbox_clicked(self, e):
+        print("Inbox clicked")
+        # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.page.update()
+
+    def starred_clicked(self, e):
+        print("Starred clicked")
+
+    def spam_clicked(self, e):
+        print("Spam clicked")
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
