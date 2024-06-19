@@ -8,8 +8,36 @@ from components.new_message_view import NewMessageWebView
 class WebView(AppView):
     def __init__(self):
         super().__init__()
-        self.logo = ft.Container(
-            padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
+        # self.logo = ft.Container(
+        #     padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
+        # )
+        #                                         ft.Text(
+        #                                     "FletMail",
+        #                                     width=100,
+        #                                     style=ft.TextStyle(
+        #                                         size=20, weight=ft.FontWeight.BOLD
+        #                                     ),
+        #                                 ),
+        self.logo = ft.Row(
+            controls=[
+                ft.Container(
+                    padding=5, content=ft.Image(src=f"logo.svg"), width=50, height=50
+                ),
+                ft.Text(
+                    "FletMail",
+                    width=100,
+                    style=ft.TextStyle(size=20, weight=ft.FontWeight.BOLD),
+                ),
+            ]
+        )
+        self.appbar = ft.AppBar(
+            leading=self.logo,
+            actions=[
+                ft.CircleAvatar(
+                    foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
+                    content=ft.Text("FF"),
+                ),
+            ],
         )
         self.nav_rail_destinations = [
             ft.NavigationRailDestination(
@@ -102,13 +130,16 @@ class WebView(AppView):
             visible=False,
         )
 
-        self.search_bar = ft.TextField(
-            border_radius=ft.border_radius.all(30),
-            border_color=ft.colors.GREY_200,
-            bgcolor=ft.colors.WHITE,
-            icon=ft.icons.SEARCH,
-            expand=True,
-        )
+        # self.search_bar = ft.TextField(
+        #     border_radius=ft.border_radius.all(30),
+        #     border_color=ft.colors.GREY_400,
+        #     # bgcolor=ft.colors.WHITE,
+        #     label="Search in mail",
+        #     icon=ft.icons.SEARCH,
+        #     expand=True,
+        # )
+
+        # self.search_bar = ft.SearchBar()
 
         self.controls = [
             ft.Row(
@@ -121,30 +152,12 @@ class WebView(AppView):
                     ft.Container(
                         content=ft.Column(
                             controls=[
-                                ft.Row(
-                                    controls=[
-                                        self.logo,
-                                        ft.Text(
-                                            "FletMail",
-                                            width=100,
-                                            style=ft.TextStyle(
-                                                size=20, weight=ft.FontWeight.BOLD
-                                            ),
-                                        ),
-                                        # ft.TextField(),
-                                        self.search_bar,
-                                        ft.CircleAvatar(
-                                            foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
-                                            content=ft.Text("FF"),
-                                        ),
-                                    ]
-                                ),
                                 self.mail_view,
                                 self.chat_view,
                                 self.meet_view,
                             ],
                         ),
-                        bgcolor=ft.colors.GREY_100,
+                        # bgcolor=ft.colors.GREY_100,
                         expand=True,
                         padding=20,
                         margin=0,
