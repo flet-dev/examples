@@ -181,14 +181,17 @@ class WebView(AppView):
     def inbox_clicked(self, e):
         print("Inbox clicked")
         # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.selected_message_id = None
         self.display_mail("inbox")
 
     def starred_clicked(self, e):
         print("Starred clicked")
+        self.selected_message_id = None
         self.display_mail("starred")
 
     def spam_clicked(self, e):
         print("Spam clicked")
+        self.selected_message_id = None
         self.display_mail("spam")
 
     def nav_rail_changed(self, e):
@@ -282,6 +285,8 @@ class WebView(AppView):
         self.chat_view.visible = False
         self.meet_view.visible = False
         if self.selected_message_id == None:
+            self.messages_list.visible = True
+            self.message_view.visible = False
             self.page.go(f"/mail/{filter}")
         else:
             self.page.go(f"/mail/{filter}/{self.selected_message_id}")
