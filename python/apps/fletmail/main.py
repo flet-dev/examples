@@ -64,7 +64,8 @@ def main(page: ft.Page):
                 print("Invalid route")
         if len(route_list) == 2:
             print(route_list)
-            page.views[0].display_message(route_list[1])
+            message = page.views[0].get_message(route_list[1])
+            page.views[0].display_message(message)
 
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")

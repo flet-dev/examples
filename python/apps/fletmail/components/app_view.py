@@ -23,7 +23,7 @@ class AppView(ft.View):
 
     def display_meet(self): ...
 
-    # def display_message(self): ...
+    def display_message(self): ...
 
     def __get_messages(self):
         self.messages = []
@@ -39,6 +39,12 @@ class AppView(ft.View):
                 )
             )
             id += 1
+
+    def get_message(self, id):
+        for message in self.messages:
+            if message.id == int(id):
+                print("Found message!")
+                return message
 
     # def display_inbox(self):
     #     print("Display inbox")

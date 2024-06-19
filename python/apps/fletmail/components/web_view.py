@@ -218,7 +218,7 @@ class WebView(AppView):
     #     self.message_view.controls[1].value = message.body  # Body of the message
 
     def display_message(self, message):
-        # print(f"Display message for {message.id}")
+        print(f"Display message for {message.id}")
         self.messages_list.visible = False
         self.message_view.visible = True
         # message = self.get_message(id)
