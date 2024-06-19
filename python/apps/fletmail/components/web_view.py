@@ -174,16 +174,22 @@ class WebView(AppView):
             )
         ]
 
+    def get_route_list(self, route):
+        route_list = [item for item in route.split("/") if item != ""]
+        return route_list
+
     def inbox_clicked(self, e):
         print("Inbox clicked")
         # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.page.update()
+        self.display_mail("inbox")
 
     def starred_clicked(self, e):
         print("Starred clicked")
+        self.display_mail("starred")
 
     def spam_clicked(self, e):
         print("Spam clicked")
+        self.display_mail("spam")
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
@@ -266,7 +272,9 @@ class WebView(AppView):
         self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
-        self.page.go("/mail/inbox")
+        route_list = self.get_route_list(self.page.route)
+        route = f"{route_list[0]}/{route_list[1]}"
+        self.page.go(route)
 
     def display_mail(self, filter):
         print("Display mail")
