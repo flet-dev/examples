@@ -54,8 +54,8 @@ def main(page: ft.Page):
             print("Route len is 0")
         if len(route_list) == 1:
             print(route_list)
-            # if route_list[0] == ("mail"):
-            #     page.views[0].display_inbox()
+            if route_list[0] == ("mail"):
+                page.views[0].display_mail("inbox")
             if route_list[0] == ("chat"):
                 page.views[0].display_chat()
             elif route_list[0] == ("meet"):
@@ -80,8 +80,10 @@ def main(page: ft.Page):
         #     page.views[0].display_message(message)
         if len(route_list) == 3:
             print(route_list)
-            message = page.views[0].get_message(route_list[2])
-            page.views[0].display_message(message)
+            if route_list[0] == ("mail"):
+                page.views[0].mail_filter = route_list[1]
+                message = page.views[0].get_message(route_list[2])
+                page.views[0].display_message(message)
 
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")

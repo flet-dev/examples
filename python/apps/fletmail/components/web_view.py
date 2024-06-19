@@ -182,17 +182,20 @@ class WebView(AppView):
         print("Inbox clicked")
         # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
         self.selected_message_id = None
-        self.display_mail("inbox")
+        self.mail_filter = "inbox"
+        self.display_mail(self.mail_filter)
 
     def starred_clicked(self, e):
         print("Starred clicked")
+        self.mail_filter = "starred"
         self.selected_message_id = None
-        self.display_mail("starred")
+        self.display_mail(self.mail_filter)
 
     def spam_clicked(self, e):
         print("Spam clicked")
+        self.mail_filter = "spam"
         self.selected_message_id = None
-        self.display_mail("spam")
+        self.display_mail(self.mail_filter)
 
     def nav_rail_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
@@ -249,15 +252,8 @@ class WebView(AppView):
             )
         return messages_list
 
-    # def get_message(self, id):
-    #     for message in self.messages:
-    #         if message.id == int(id):
-    #             print("Found message!")
-    #             return message
-
     def message_clicked(self, e):
         print("Message clicked!")
-        # self.selected_message_id = e.control.data
         self.selected_message_id = e.control.data.id
         self.display_message(e.control.data)
         route = f"{self.page.route}/{e.control.data.id}"
@@ -275,8 +271,8 @@ class WebView(AppView):
         self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
-        route_list = self.get_route_list(self.page.route)
-        route = f"{route_list[0]}/{route_list[1]}"
+        # route_list = self.get_route_list(self.page.route)
+        route = f"mail/{self.mail_filter}"
         self.page.go(route)
 
     def display_mail(self, filter):
@@ -289,6 +285,8 @@ class WebView(AppView):
             self.message_view.visible = False
             self.page.go(f"/mail/{filter}")
         else:
+            self.messages_list.visible = False
+            self.message_view.visible = True
             self.page.go(f"/mail/{filter}/{self.selected_message_id}")
 
     def display_chat(self):

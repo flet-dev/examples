@@ -16,6 +16,7 @@ class AppView(ft.View):
         super().__init__(route="/")
         self.__get_messages()
         self.selected_message_id = None
+        self.mail_filter = "inbox"
 
     def display_mail(self): ...
 
