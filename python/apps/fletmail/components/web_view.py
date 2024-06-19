@@ -49,11 +49,15 @@ class WebView(AppView):
                 ft.TextButton("Inbox"),
                 ft.TextButton("Starred"),
                 ft.TextButton("Spam"),
-            ]
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
         )
         self.chat_actions = ft.Column([ft.TextButton("Chat1"), ft.TextButton("Chat2")])
 
-        self.mail_menu = ft.Column([self.compose_button, self.mail_actions], width=150)
+        self.mail_menu = ft.Column(
+            [self.compose_button, self.mail_actions],
+            width=150,
+        )
         self.chat_menu = ft.Column([self.compose_button, self.chat_actions], width=150)
 
         self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
