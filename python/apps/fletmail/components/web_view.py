@@ -182,10 +182,6 @@ class WebView(AppView):
             )
         ]
 
-    def get_route_list(self, route):
-        route_list = [item for item in route.split("/") if item != ""]
-        return route_list
-
     def inbox_clicked(self, e):
         print("Inbox clicked")
         # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
@@ -234,7 +230,6 @@ class WebView(AppView):
         for message in self.messages:
             messages_list.append(
                 ft.ListTile(
-                    # data=message.id,
                     data=message,
                     leading=ft.Row(
                         width=150,
@@ -282,7 +277,6 @@ class WebView(AppView):
         self.selected_message_id = None
         self.messages_list.visible = True
         self.message_view.visible = False
-        # route_list = self.get_route_list(self.page.route)
         route = f"mail/{self.mail_filter}"
         self.page.go(route)
 
