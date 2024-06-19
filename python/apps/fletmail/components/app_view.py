@@ -15,7 +15,8 @@ class AppView(ft.View):
     def __init__(self):
         super().__init__(route="/")
         self.__get_messages()
-        self.selected_message_id = None
+        # self.selected_message_id = None
+        self.selected_message = None
         self.mail_filter = "inbox"
 
     def display_mail(self): ...
@@ -44,6 +45,7 @@ class AppView(ft.View):
     def get_message(self, id):
         for message in self.messages:
             if message.id == int(id):
-                self.selected_message_id = id
+                # self.selected_message_id = id
+                self.selected_message = message
                 print(f"Found message {id}!")
-                return message
+                # return message

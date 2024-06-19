@@ -184,21 +184,29 @@ class WebView(AppView):
 
     def inbox_clicked(self, e):
         print("Inbox clicked")
-        # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.selected_message_id = None
+        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
+        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
+        self.selected_message = None
         self.mail_filter = "inbox"
         self.display_mail(self.mail_filter)
 
     def starred_clicked(self, e):
         print("Starred clicked")
+        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.mail_actions.controls[0].style.bgcolor = ft.colors.SURFACE
+        self.mail_actions.controls[2].style.bgcolor = ft.colors.SURFACE
         self.mail_filter = "starred"
-        self.selected_message_id = None
+        self.selected_message = None
         self.display_mail(self.mail_filter)
 
     def spam_clicked(self, e):
         print("Spam clicked")
+        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.mail_actions.controls[0].style.bgcolor = ft.colors.SURFACE
+        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
         self.mail_filter = "spam"
-        self.selected_message_id = None
+        self.selected_message = None
         self.display_mail(self.mail_filter)
 
     def nav_rail_changed(self, e):
@@ -257,19 +265,21 @@ class WebView(AppView):
 
     def message_clicked(self, e):
         print("Message clicked!")
-        self.selected_message_id = e.control.data.id
-        self.display_message(e.control.data)
+        self.selected_message = e.control.data
+        self.display_message()
         route = f"{self.page.route}/{e.control.data.id}"
         self.page.go(route)
 
-    def display_message(self, message):
-        print(f"Display message for {message.id}")
+    def display_message(self):
+        print(f"Display message for {self.selected_message.id}")
         self.messages_list.visible = False
         self.message_view.visible = True
         self.message_view.controls[0].controls[
             1
-        ].value = message.title  # title of the message
-        self.message_view.controls[1].value = message.body  # Body of the message
+        ].value = self.selected_message.title  # title of the message
+        self.message_view.controls[1].value = (
+            self.selected_message.body
+        )  # Body of the message
         self.page.update()
 
     def back_to_messages(self, e):
@@ -285,14 +295,15 @@ class WebView(AppView):
         self.mail_view.visible = True
         self.chat_view.visible = False
         self.meet_view.visible = False
-        if self.selected_message_id == None:
+        if self.selected_message == None:
             self.messages_list.visible = True
             self.message_view.visible = False
             self.page.go(f"/mail/{filter}")
         else:
-            self.messages_list.visible = False
-            self.message_view.visible = True
-            self.page.go(f"/mail/{filter}/{self.selected_message_id}")
+            # self.messages_list.visible = False
+            # self.message_view.visible = True
+            # self.page.go(f"/mail/{filter}/{self.selected_message.id}")
+            self.display_message()
 
     def display_chat(self):
         print("Display chat")

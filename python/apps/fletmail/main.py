@@ -78,8 +78,10 @@ def main(page: ft.Page):
             print(route_list)
             if route_list[0] == ("mail"):
                 page.views[0].mail_filter = route_list[1]
-                message = page.views[0].get_message(route_list[2])
-                page.views[0].display_message(message)
+                # message = page.views[0].get_message(route_list[2])
+                page.views[0].get_message(route_list[2])
+                # page.views[0].display_message(message)
+                page.views[0].display_message()
             else:
                 print("Invalid route")
 
