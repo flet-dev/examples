@@ -42,13 +42,34 @@ class MobileView(AppView):
                 ft.TextButton("Spam"),
             ]
         )
-        self.appbar = ft.AppBar(leading=self.open_menu_button)
+        # self.appbar = ft.AppBar(
+        #     leading=self.open_menu_button,
+        #     title=ft.TextButton("Search in mail"),
+        #     actions=[
+        #         ft.CircleAvatar(
+        #             foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
+        #             content=ft.Text("FF"),
+        #         ),
+        #     ],
+        # )
+        self.top_bar = ft.Container(
+            height=50,
+            margin=10,
+            content=ft.Row(
+                controls=[
+                    self.open_menu_button,
+                    ft.Text("Search in mail"),
+                    ft.CircleAvatar(),
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            ),
+        )
 
         self.mail_view = ft.ListView(controls=self.get_message_tiles(), expand=True)
         self.chat_view = ft.Text("Chat View")
         self.meet_view = ft.Text("Meet View")
 
-        self.controls = [self.mail_view, self.chat_view, self.meet_view]
+        self.controls = [self.top_bar, self.mail_view, self.chat_view, self.meet_view]
 
     def nav_bar_changed(self, e):
         print(f"Selected action: {e.control.selected_index}")
