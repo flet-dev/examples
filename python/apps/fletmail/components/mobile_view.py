@@ -42,16 +42,7 @@ class MobileView(AppView):
                 ft.TextButton("Spam"),
             ]
         )
-        # self.appbar = ft.AppBar(
-        #     leading=self.open_menu_button,
-        #     title=ft.TextButton("Search in mail"),
-        #     actions=[
-        #         ft.CircleAvatar(
-        #             foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4",
-        #             content=ft.Text("FF"),
-        #         ),
-        #     ],
-        # )
+
         self.top_bar = ft.Container(
             height=50,
             margin=10,

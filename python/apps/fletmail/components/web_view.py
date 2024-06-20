@@ -6,7 +6,7 @@ from components.new_message_view import NewMessageWebView
 
 
 class SecondaryMenuAction(ft.TextButton):
-    def __init__(self, text, icon, on_click):
+    def __init__(self, text, icon, on_click, data):
         super().__init__()
         self.content = ft.Row(
             controls=[
@@ -14,15 +14,9 @@ class SecondaryMenuAction(ft.TextButton):
                 ft.Text(text),
             ]
         )
-        self.style = ft.ButtonStyle(
-            padding=10
-            # bgcolor={
-            #     ft.ControlState.HOVERED: ft.colors.PRIMARY_CONTAINER,
-            #     ft.ControlState.FOCUSED: ft.colors.RED,
-            #     ft.ControlState.DEFAULT: ft.colors.SURFACE,
-            # }
-        )
+        self.style = ft.ButtonStyle(padding=10)
         self.on_click = on_click
+        self.data = data
 
 
 class WebView(AppView):
@@ -77,13 +71,22 @@ class WebView(AppView):
         self.mail_actions = ft.Column(
             [
                 SecondaryMenuAction(
-                    text="Inbox", icon=ft.icons.MAIL, on_click=self.inbox_clicked
+                    text="Inbox",
+                    icon=ft.icons.MAIL,
+                    on_click=self.mail_filter_clicked,
+                    data="inbox",
                 ),
                 SecondaryMenuAction(
-                    text="Starred", icon=ft.icons.STAR, on_click=self.starred_clicked
+                    text="Starred",
+                    icon=ft.icons.STAR,
+                    on_click=self.mail_filter_clicked,
+                    data="starred",
                 ),
                 SecondaryMenuAction(
-                    text="Spam", icon=ft.icons.DELETE, on_click=self.spam_clicked
+                    text="Spam",
+                    icon=ft.icons.DELETE,
+                    on_click=self.mail_filter_clicked,
+                    data="spam",
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
@@ -182,31 +185,13 @@ class WebView(AppView):
             )
         ]
 
-    def inbox_clicked(self, e):
-        print("Inbox clicked")
+    def mail_filter_clicked(self, e):
+        print(f"{e.control.data} clicked")
+        for control in self.mail_actions.controls:
+            control.style.bgcolor = ft.colors.SURFACE
         e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
-        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
         self.selected_message = None
-        self.mail_filter = "inbox"
-        self.display_mail()
-
-    def starred_clicked(self, e):
-        print("Starred clicked")
-        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.mail_actions.controls[0].style.bgcolor = ft.colors.SURFACE
-        self.mail_actions.controls[2].style.bgcolor = ft.colors.SURFACE
-        self.mail_filter = "starred"
-        self.selected_message = None
-        self.display_mail()
-
-    def spam_clicked(self, e):
-        print("Spam clicked")
-        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.mail_actions.controls[0].style.bgcolor = ft.colors.SURFACE
-        self.mail_actions.controls[1].style.bgcolor = ft.colors.SURFACE
-        self.mail_filter = "spam"
-        self.selected_message = None
+        self.mail_filter = e.control.data
         self.display_mail()
 
     def nav_rail_changed(self, e):
@@ -267,8 +252,6 @@ class WebView(AppView):
         print("Message clicked!")
         self.selected_message = e.control.data
         self.display_message()
-        # route = f"{self.page.route}/{e.control.data.id}"
-        # self.page.go(route)
 
     def display_message(self):
         print(f"Display message for {self.selected_message.id}")
@@ -281,15 +264,11 @@ class WebView(AppView):
             self.selected_message.body
         )  # Body of the message
         self.page.go(f"/mail/{self.mail_filter}/{self.selected_message.id}")
-        # self.page.update()
 
     def back_to_messages(self, e):
         print("Go back to messages!")
         self.selected_message = None
-        self.messages_list.visible = True
-        self.message_view.visible = False
-        route = f"mail/{self.mail_filter}"
-        self.page.go(route)
+        self.display_mail()
 
     def display_mail(self):
         print("Display mail")
