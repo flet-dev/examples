@@ -29,7 +29,7 @@ class ViewArea(ft.Row):
         self.controls = [
             menu,
             ft.Container(
-                content=content,
+                content=ft.Column([content]),
                 expand=True,
                 bgcolor=ft.colors.WHITE,
             ),
@@ -173,12 +173,12 @@ class WebView(AppView):
             menu=self.mail_menu,
         )
         self.chat_view = ViewArea(
-            content=ft.Column([ft.Text("Chat View", style=ft.TextStyle(size=20))]),
+            content=ft.Text("Chat View", style=ft.TextStyle(size=20)),
             menu=self.chat_menu,
         )
 
         self.meet_view = ViewArea(
-            content=ft.Column([ft.Text("Meet View", style=ft.TextStyle(size=20))]),
+            content=ft.Text("Meet View", style=ft.TextStyle(size=20))
         )
 
         self.controls = [
