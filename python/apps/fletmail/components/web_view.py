@@ -23,7 +23,7 @@ class ViewArea(ft.Row):
     def __init__(
         self,
         view_controls,
-        view_menu=None,
+        view_menu=ft.Column(),
     ):
         super().__init__()
         self.controls = [
@@ -168,45 +168,17 @@ class WebView(AppView):
             visible=False,
         )
 
-        self.mail_view = ft.Row(
-            controls=[
-                self.mail_menu,
-                ft.Container(
-                    content=ft.Column([self.messages_list, self.message_view]),
-                    expand=True,
-                    bgcolor=ft.colors.WHITE,
-                ),
-            ],
-            expand=True,
+        self.mail_view = ViewArea(
+            view_controls=[self.messages_list, self.message_view],
+            view_menu=self.mail_menu,
+        )
+        self.chat_view = ViewArea(
+            view_controls=[ft.Text("Chat View", style=ft.TextStyle(size=20))],
+            view_menu=self.chat_menu,
         )
 
-        self.chat_view = ft.Row(
-            controls=[
-                self.chat_menu,
-                ft.Container(
-                    content=ft.Column(
-                        [ft.Text("Chat View", style=ft.TextStyle(size=20))]
-                    ),
-                    expand=True,
-                    bgcolor=ft.colors.WHITE,
-                ),
-            ],
-            expand=True,
-            visible=False,
-        )
-
-        self.meet_view = ft.Row(
-            controls=[
-                ft.Container(
-                    content=ft.Column(
-                        [ft.Text("Meet View", style=ft.TextStyle(size=20))]
-                    ),
-                    expand=True,
-                    bgcolor=ft.colors.WHITE,
-                ),
-            ],
-            expand=True,
-            visible=False,
+        self.meet_view = ViewArea(
+            view_controls=[ft.Text("Meet View", style=ft.TextStyle(size=20))],
         )
 
         self.controls = [
