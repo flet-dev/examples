@@ -176,10 +176,17 @@ class WebView(AppView):
             visible=False,
         )
 
-        self.meet_view = ft.Container(
-            content=ft.Text("Meet View"),
+        self.meet_view = ft.Row(
+            controls=[
+                ft.Container(
+                    content=ft.Column(
+                        [ft.Text("Meet View", style=ft.TextStyle(size=20))]
+                    ),
+                    expand=True,
+                    bgcolor=ft.colors.WHITE,
+                ),
+            ],
             expand=True,
-            bgcolor=ft.colors.WHITE,
             visible=False,
         )
 
