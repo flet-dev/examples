@@ -19,6 +19,29 @@ class SecondaryMenuAction(ft.TextButton):
         self.data = data
 
 
+class SecondaryMenu(ft.Column):
+    def __init__(self, leading, actions):
+        super().__init__()
+        self.width = 150
+        self.controls = [
+            leading,
+            ft.Column(
+                controls=actions,
+                horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+                spacing=0,
+            ),
+        ]
+        self.actions = actions
+        self.selected_action = 0
+
+    def before_update(self):
+        for action in self.actions:
+            if self.actions.index(action) != self.selected_action:
+                action.style.bgcolor = ft.colors.SURFACE
+            else:
+                action.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+
+
 class ViewArea(ft.Row):
     def __init__(
         self,
@@ -36,7 +59,6 @@ class ViewArea(ft.Row):
             ),
         ]
         self.expand = True
-        # self.visible = False
 
     def before_update(self):
         self.controls[1].content = ft.Column([self.content])
@@ -96,62 +118,52 @@ class WebView(AppView):
         self.new_chat_button = ft.FloatingActionButton(
             icon=ft.icons.CHAT, text="New Chat", on_click=self.new_chat_clicked
         )
-        self.mail_actions = ft.Column(
-            [
-                SecondaryMenuAction(
-                    text="Inbox",
-                    icon=ft.icons.MAIL,
-                    on_click=self.mail_filter_clicked,
-                    data="inbox",
-                ),
-                SecondaryMenuAction(
-                    text="Starred",
-                    icon=ft.icons.STAR,
-                    on_click=self.mail_filter_clicked,
-                    data="starred",
-                ),
-                SecondaryMenuAction(
-                    text="Spam",
-                    icon=ft.icons.DELETE,
-                    on_click=self.mail_filter_clicked,
-                    data="spam",
-                ),
-            ],
-            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
-            spacing=0,
-        )
-        self.chat_actions = ft.Column(
-            [
-                SecondaryMenuAction(
-                    text="Home",
-                    icon=ft.icons.HOME,
-                    on_click=self.chat_filter_clicked,
-                    data="home",
-                ),
-                SecondaryMenuAction(
-                    text="Starred",
-                    icon=ft.icons.STAR,
-                    on_click=self.chat_filter_clicked,
-                    data="starred",
-                ),
-                SecondaryMenuAction(
-                    text="Mentions",
-                    icon=ft.icons.CHAT,
-                    on_click=self.chat_filter_clicked,
-                    data="mentions",
-                ),
-            ],
-            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
-            spacing=0,
-        )
+        self.mail_actions = [
+            SecondaryMenuAction(
+                text="Inbox",
+                icon=ft.icons.MAIL,
+                on_click=self.mail_filter_clicked,
+                data="inbox",
+            ),
+            SecondaryMenuAction(
+                text="Starred",
+                icon=ft.icons.STAR,
+                on_click=self.mail_filter_clicked,
+                data="starred",
+            ),
+            SecondaryMenuAction(
+                text="Spam",
+                icon=ft.icons.DELETE,
+                on_click=self.mail_filter_clicked,
+                data="spam",
+            ),
+        ]
+        self.chat_actions = [
+            SecondaryMenuAction(
+                text="Home",
+                icon=ft.icons.HOME,
+                on_click=self.chat_filter_clicked,
+                data="home",
+            ),
+            SecondaryMenuAction(
+                text="Starred",
+                icon=ft.icons.STAR,
+                on_click=self.chat_filter_clicked,
+                data="starred",
+            ),
+            SecondaryMenuAction(
+                text="Mentions",
+                icon=ft.icons.CHAT,
+                on_click=self.chat_filter_clicked,
+                data="mentions",
+            ),
+        ]
 
-        self.mail_menu = ft.Column(
-            [self.compose_button, self.mail_actions],
-            width=150,
+        self.mail_menu = SecondaryMenu(
+            leading=self.compose_button, actions=self.mail_actions
         )
-        self.chat_menu = ft.Column(
-            [self.new_chat_button, self.chat_actions],
-            width=150,
+        self.chat_menu = SecondaryMenu(
+            leading=self.new_chat_button, actions=self.chat_actions
         )
 
         self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
@@ -169,13 +181,10 @@ class WebView(AppView):
                 ),
                 ft.Text(value="This is message body"),
             ],
-            # visible=False,
         )
 
         self.mail_view = ViewArea(
-            # content=ft.Column([self.messages_list, self.message_view]),
             content=self.messages_list,
-            # content=self.message_view,
             menu=self.mail_menu,
         )
         self.chat_view = ViewArea(
@@ -222,13 +231,13 @@ class WebView(AppView):
         print(f"{e.control.data} clicked")
         self.selected_message = None
         self.mail_filter = e.control.data
+        self.mail_menu.selected_action = self.mail_menu.actions.index(e.control)
+        print(self.mail_menu.selected_action)
         self.display_mail()
 
     def chat_filter_clicked(self, e):
         print(f"{e.control.data} clicked")
-        for control in self.chat_actions.controls:
-            control.style.bgcolor = ft.colors.SURFACE
-        e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.chat_menu.selected_action = self.chat_menu.actions.index(e.control)
         self.chat_filter = e.control.data
         self.display_chat()
 
@@ -312,11 +321,6 @@ class WebView(AppView):
 
     def display_mail(self):
         print("Display mail")
-        for control in self.mail_actions.controls:
-            if control.data != self.mail_filter:
-                control.style.bgcolor = ft.colors.SURFACE
-            else:
-                control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
         self.selected_view = self.mail_view
         if self.selected_message == None:
             self.mail_view.content = self.messages_list
@@ -326,12 +330,6 @@ class WebView(AppView):
 
     def display_chat(self):
         print("Display chat")
-        for control in self.chat_actions.controls:
-            if control.data != self.chat_filter:
-                control.style.bgcolor = ft.colors.SURFACE
-            else:
-                control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-
         self.selected_view = self.chat_view
         self.page.go(f"/chat/{self.chat_filter}")
 
