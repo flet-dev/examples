@@ -19,6 +19,13 @@ class SecondaryMenuAction(ft.TextButton):
         self.data = data
 
 
+class SecondaryMenu(ft.Column):
+    def __init__(self, leading, actions):
+        super().__init__()
+        self.width = 150
+        self.controls = [leading, actions]
+
+
 class ViewArea(ft.Row):
     def __init__(
         self,
@@ -36,7 +43,6 @@ class ViewArea(ft.Row):
             ),
         ]
         self.expand = True
-        # self.visible = False
 
     def before_update(self):
         self.controls[1].content = ft.Column([self.content])
@@ -145,14 +151,20 @@ class WebView(AppView):
             spacing=0,
         )
 
-        self.mail_menu = ft.Column(
-            [self.compose_button, self.mail_actions],
-            width=150,
+        # self.mail_menu = ft.Column(
+        #     [self.compose_button, self.mail_actions],
+        #     width=150,
+        # )
+        self.mail_menu = SecondaryMenu(
+            leading=self.compose_button, actions=self.mail_actions
         )
-        self.chat_menu = ft.Column(
-            [self.new_chat_button, self.chat_actions],
-            width=150,
+        self.chat_menu = SecondaryMenu(
+            leading=self.new_chat_button, actions=self.chat_actions
         )
+        # self.chat_menu = ft.Column(
+        #     [self.new_chat_button, self.chat_actions],
+        #     width=150,
+        # )
 
         self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
 
