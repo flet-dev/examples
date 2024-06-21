@@ -19,6 +19,25 @@ class SecondaryMenuAction(ft.TextButton):
         self.data = data
 
 
+class ViewArea(ft.Row):
+    def __init__(
+        self,
+        view_controls,
+        view_menu=None,
+    ):
+        super().__init__()
+        self.controls = [
+            view_menu,
+            ft.Container(
+                content=ft.Column(view_controls),
+                expand=True,
+                bgcolor=ft.colors.WHITE,
+            ),
+        ]
+        self.expand = True
+        self.visible = False
+
+
 class WebView(AppView):
     def __init__(self):
         super().__init__()
