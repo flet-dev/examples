@@ -181,7 +181,6 @@ class WebView(AppView):
                 ),
                 ft.Text(value="This is message body"),
             ],
-            # visible=False,
         )
 
         self.mail_view = ViewArea(
@@ -238,9 +237,6 @@ class WebView(AppView):
 
     def chat_filter_clicked(self, e):
         print(f"{e.control.data} clicked")
-        # for control in self.chat_actions.controls:
-        #     control.style.bgcolor = ft.colors.SURFACE
-        # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
         self.chat_menu.selected_action = self.chat_menu.actions.index(e.control)
         self.chat_filter = e.control.data
         self.display_chat()
@@ -325,11 +321,6 @@ class WebView(AppView):
 
     def display_mail(self):
         print("Display mail")
-        # for control in self.mail_actions.controls:
-        #     if control.data != self.mail_filter:
-        #         control.style.bgcolor = ft.colors.SURFACE
-        #     else:
-        #         control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
         self.selected_view = self.mail_view
         if self.selected_message == None:
             self.mail_view.content = self.messages_list
@@ -339,12 +330,6 @@ class WebView(AppView):
 
     def display_chat(self):
         print("Display chat")
-        # for control in self.chat_actions.controls:
-        #     if control.data != self.chat_filter:
-        #         control.style.bgcolor = ft.colors.SURFACE
-        #     else:
-        #         control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-
         self.selected_view = self.chat_view
         self.page.go(f"/chat/{self.chat_filter}")
 
