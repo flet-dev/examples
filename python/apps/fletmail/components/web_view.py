@@ -23,13 +23,20 @@ class SecondaryMenu(ft.Column):
     def __init__(self, leading, actions):
         super().__init__()
         self.width = 150
-        self.controls = [leading, actions]
+        self.controls = [
+            leading,
+            ft.Column(
+                controls=actions,
+                horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+                spacing=0,
+            ),
+        ]
         self.actions = actions
         self.selected_action = 0
 
     def before_update(self):
-        for action in self.actions.controls:
-            if self.actions.controls.index(action) != self.selected_action:
+        for action in self.actions:
+            if self.actions.index(action) != self.selected_action:
                 action.style.bgcolor = ft.colors.SURFACE
             else:
                 action.style.bgcolor = ft.colors.SECONDARY_CONTAINER
@@ -111,69 +118,53 @@ class WebView(AppView):
         self.new_chat_button = ft.FloatingActionButton(
             icon=ft.icons.CHAT, text="New Chat", on_click=self.new_chat_clicked
         )
-        self.mail_actions = ft.Column(
-            [
-                SecondaryMenuAction(
-                    text="Inbox",
-                    icon=ft.icons.MAIL,
-                    on_click=self.mail_filter_clicked,
-                    data="inbox",
-                ),
-                SecondaryMenuAction(
-                    text="Starred",
-                    icon=ft.icons.STAR,
-                    on_click=self.mail_filter_clicked,
-                    data="starred",
-                ),
-                SecondaryMenuAction(
-                    text="Spam",
-                    icon=ft.icons.DELETE,
-                    on_click=self.mail_filter_clicked,
-                    data="spam",
-                ),
-            ],
-            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
-            spacing=0,
-        )
-        self.chat_actions = ft.Column(
-            [
-                SecondaryMenuAction(
-                    text="Home",
-                    icon=ft.icons.HOME,
-                    on_click=self.chat_filter_clicked,
-                    data="home",
-                ),
-                SecondaryMenuAction(
-                    text="Starred",
-                    icon=ft.icons.STAR,
-                    on_click=self.chat_filter_clicked,
-                    data="starred",
-                ),
-                SecondaryMenuAction(
-                    text="Mentions",
-                    icon=ft.icons.CHAT,
-                    on_click=self.chat_filter_clicked,
-                    data="mentions",
-                ),
-            ],
-            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
-            spacing=0,
-        )
+        self.mail_actions = [
+            SecondaryMenuAction(
+                text="Inbox",
+                icon=ft.icons.MAIL,
+                on_click=self.mail_filter_clicked,
+                data="inbox",
+            ),
+            SecondaryMenuAction(
+                text="Starred",
+                icon=ft.icons.STAR,
+                on_click=self.mail_filter_clicked,
+                data="starred",
+            ),
+            SecondaryMenuAction(
+                text="Spam",
+                icon=ft.icons.DELETE,
+                on_click=self.mail_filter_clicked,
+                data="spam",
+            ),
+        ]
+        self.chat_actions = [
+            SecondaryMenuAction(
+                text="Home",
+                icon=ft.icons.HOME,
+                on_click=self.chat_filter_clicked,
+                data="home",
+            ),
+            SecondaryMenuAction(
+                text="Starred",
+                icon=ft.icons.STAR,
+                on_click=self.chat_filter_clicked,
+                data="starred",
+            ),
+            SecondaryMenuAction(
+                text="Mentions",
+                icon=ft.icons.CHAT,
+                on_click=self.chat_filter_clicked,
+                data="mentions",
+            ),
+        ]
 
-        # self.mail_menu = ft.Column(
-        #     [self.compose_button, self.mail_actions],
-        #     width=150,
-        # )
         self.mail_menu = SecondaryMenu(
             leading=self.compose_button, actions=self.mail_actions
         )
         self.chat_menu = SecondaryMenu(
             leading=self.new_chat_button, actions=self.chat_actions
         )
-        # self.chat_menu = ft.Column(
-        #     [self.new_chat_button, self.chat_actions],
-        #     width=150,
-        # )
 
         self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
 
@@ -241,9 +232,7 @@ class WebView(AppView):
         print(f"{e.control.data} clicked")
         self.selected_message = None
         self.mail_filter = e.control.data
-        self.mail_menu.selected_action = self.mail_menu.actions.controls.index(
-            e.control
-        )
+        self.mail_menu.selected_action = self.mail_menu.actions.index(e.control)
         print(self.mail_menu.selected_action)
         self.display_mail()
 
@@ -252,9 +241,7 @@ class WebView(AppView):
         # for control in self.chat_actions.controls:
         #     control.style.bgcolor = ft.colors.SURFACE
         # e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.chat_menu.selected_action = self.chat_menu.actions.controls.index(
-            e.control
-        )
+        self.chat_menu.selected_action = self.chat_menu.actions.index(e.control)
         self.chat_filter = e.control.data
         self.display_chat()
 
