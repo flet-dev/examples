@@ -18,6 +18,7 @@ class AppView(ft.View):
         # self.selected_message_id = None
         self.selected_message = None
         self.mail_filter = "inbox"
+        self.chat_filter = "home"
 
     def display_mail(self): ...
 
