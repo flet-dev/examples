@@ -199,15 +199,12 @@ class WebView(AppView):
                                 ),
                             ],
                         ),
-                        content=ft.Container(
-                            content=ft.Column(
-                                controls=[
-                                    self.mail_view,
-                                    self.chat_view,
-                                    self.meet_view,
-                                ],
-                            ),
-                            expand=True,
+                        content=ft.Column(
+                            controls=[
+                                self.mail_view,
+                                self.chat_view,
+                                self.meet_view,
+                            ],
                         ),
                         expand=True,
                     ),
