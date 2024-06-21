@@ -207,14 +207,6 @@ class WebView(AppView):
                                 ),
                             ],
                         ),
-                        # content=ft.Column(
-                        #     controls=[
-                        #         self.mail_view,
-                        #         self.chat_view,
-                        #         self.meet_view,
-                        #     ],
-                        # ),
-                        # content=self.mail_view,
                         content=self.selected_view,
                         expand=True,
                     ),
@@ -304,8 +296,6 @@ class WebView(AppView):
 
     def display_message(self):
         print(f"Display message for {self.selected_message.id}")
-        # self.messages_list.visible = False
-        # self.message_view.visible = True
         self.mail_view.content = self.message_view
         self.message_view.controls[0].controls[
             1
@@ -313,7 +303,6 @@ class WebView(AppView):
         self.message_view.controls[1].value = (
             self.selected_message.body
         )  # Body of the message
-        # self.page.update()
         self.page.go(f"/mail/{self.mail_filter}/{self.selected_message.id}")
 
     def back_to_messages(self, e):
@@ -328,13 +317,8 @@ class WebView(AppView):
                 control.style.bgcolor = ft.colors.SURFACE
             else:
                 control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        # self.mail_view.visible = True
-        # self.chat_view.visible = False
-        # self.meet_view.visible = False
         self.selected_view = self.mail_view
         if self.selected_message == None:
-            # self.messages_list.visible = True
-            # self.message_view.visible = False
             self.mail_view.content = self.messages_list
             self.page.go(f"/mail/{self.mail_filter}")
         else:
@@ -349,15 +333,9 @@ class WebView(AppView):
                 control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
 
         self.selected_view = self.chat_view
-        # self.mail_view.visible = False
-        # self.chat_view.visible = True
-        # self.meet_view.visible = False
         self.page.go(f"/chat/{self.chat_filter}")
 
     def display_meet(self):
         print("Display meet")
         self.selected_view = self.meet_view
-        # self.mail_view.visible = False
-        # self.chat_view.visible = False
-        # self.meet_view.visible = True
         self.page.go("/meet")
