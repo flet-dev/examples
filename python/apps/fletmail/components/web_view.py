@@ -38,20 +38,6 @@ class WebView(AppView):
             ]
         )
 
-        self.nav_rail_destinations = [
-            ft.NavigationRailDestination(
-                label="Mail",
-                icon=ft.icons.MAIL_OUTLINED,
-            ),
-            ft.NavigationRailDestination(
-                label="Chat",
-                icon=ft.icons.CHAT_BUBBLE_OUTLINE,
-            ),
-            ft.NavigationRailDestination(
-                label="Meet",
-                icon=ft.icons.VIDEO_CHAT_OUTLINED,
-            ),
-        ]
         self.open_menu_button = ft.IconButton(
             icon=ft.icons.MENU, on_click=self.open_close_secondary_menu
         )
@@ -64,12 +50,28 @@ class WebView(AppView):
             leading=self.open_menu_button,
             expand=True,
             group_alignment=-0.9,
-            destinations=self.nav_rail_destinations,
+            destinations=[
+                ft.NavigationRailDestination(
+                    label="Mail",
+                    icon=ft.icons.MAIL_OUTLINED,
+                ),
+                ft.NavigationRailDestination(
+                    label="Chat",
+                    icon=ft.icons.CHAT_BUBBLE_OUTLINE,
+                ),
+                ft.NavigationRailDestination(
+                    label="Meet",
+                    icon=ft.icons.VIDEO_CHAT_OUTLINED,
+                ),
+            ],
             on_change=self.nav_rail_changed,
         )
 
         self.compose_button = ft.FloatingActionButton(
             icon=ft.icons.CREATE, text="Compose", on_click=self.compose_clicked
+        )
+        self.new_chat_button = ft.FloatingActionButton(
+            icon=ft.icons.CHAT, text="New Chat", on_click=self.new_chat_clicked
         )
         self.mail_actions = ft.Column(
             [
@@ -124,7 +126,10 @@ class WebView(AppView):
             [self.compose_button, self.mail_actions],
             width=150,
         )
-        self.chat_menu = ft.Column([self.compose_button, self.chat_actions], width=150)
+        self.chat_menu = ft.Column(
+            [self.new_chat_button, self.chat_actions],
+            width=150,
+        )
 
         self.messages_list = ft.ListView(controls=self.get_message_tiles(), expand=True)
 
@@ -160,7 +165,9 @@ class WebView(AppView):
             controls=[
                 self.chat_menu,
                 ft.Container(
-                    content=ft.Text("Chat View"),
+                    content=ft.Column(
+                        [ft.Text("Chat View", style=ft.TextStyle(size=20))]
+                    ),
                     expand=True,
                     bgcolor=ft.colors.WHITE,
                 ),
@@ -249,6 +256,9 @@ class WebView(AppView):
         print("Open new message dialog")
         self.page.views.append(NewMessageWebView())
         self.page.update()
+
+    def new_chat_clicked(self, e):
+        print("New chat clicked")
 
     def get_message_tiles(self):
         messages_list = []
