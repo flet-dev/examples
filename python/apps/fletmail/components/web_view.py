@@ -36,7 +36,7 @@ class ViewArea(ft.Row):
             ),
         ]
         self.expand = True
-        self.visible = False
+        # self.visible = False
 
     def before_update(self):
         self.controls[1].content = ft.Column([self.content])
@@ -187,6 +187,8 @@ class WebView(AppView):
             content=ft.Text("Meet View", style=ft.TextStyle(size=20))
         )
 
+        self.selected_view = self.mail_view
+
         self.controls = [
             ft.Row(
                 [
@@ -205,19 +207,24 @@ class WebView(AppView):
                                 ),
                             ],
                         ),
-                        content=ft.Column(
-                            controls=[
-                                self.mail_view,
-                                self.chat_view,
-                                self.meet_view,
-                            ],
-                        ),
+                        # content=ft.Column(
+                        #     controls=[
+                        #         self.mail_view,
+                        #         self.chat_view,
+                        #         self.meet_view,
+                        #     ],
+                        # ),
+                        # content=self.mail_view,
+                        content=self.selected_view,
                         expand=True,
                     ),
                 ],
                 expand=True,
             )
         ]
+
+    def before_update(self):
+        self.controls[0].controls[1].content = self.selected_view
 
     def mail_filter_clicked(self, e):
         print(f"{e.control.data} clicked")
@@ -230,7 +237,6 @@ class WebView(AppView):
         for control in self.chat_actions.controls:
             control.style.bgcolor = ft.colors.SURFACE
         e.control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        # self.selected_message = None
         self.chat_filter = e.control.data
         self.display_chat()
 
@@ -322,9 +328,10 @@ class WebView(AppView):
                 control.style.bgcolor = ft.colors.SURFACE
             else:
                 control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.mail_view.visible = True
-        self.chat_view.visible = False
-        self.meet_view.visible = False
+        # self.mail_view.visible = True
+        # self.chat_view.visible = False
+        # self.meet_view.visible = False
+        self.selected_view = self.mail_view
         if self.selected_message == None:
             # self.messages_list.visible = True
             # self.message_view.visible = False
@@ -340,14 +347,17 @@ class WebView(AppView):
                 control.style.bgcolor = ft.colors.SURFACE
             else:
                 control.style.bgcolor = ft.colors.SECONDARY_CONTAINER
-        self.mail_view.visible = False
-        self.chat_view.visible = True
-        self.meet_view.visible = False
+
+        self.selected_view = self.chat_view
+        # self.mail_view.visible = False
+        # self.chat_view.visible = True
+        # self.meet_view.visible = False
         self.page.go(f"/chat/{self.chat_filter}")
 
     def display_meet(self):
         print("Display meet")
-        self.mail_view.visible = False
-        self.chat_view.visible = False
-        self.meet_view.visible = True
+        self.selected_view = self.meet_view
+        # self.mail_view.visible = False
+        # self.chat_view.visible = False
+        # self.meet_view.visible = True
         self.page.go("/meet")
