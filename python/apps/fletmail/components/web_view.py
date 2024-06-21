@@ -22,20 +22,24 @@ class SecondaryMenuAction(ft.TextButton):
 class ViewArea(ft.Row):
     def __init__(
         self,
-        content,
+        content: ft.Control,
         menu=ft.Column(),
     ):
         super().__init__()
+        self.content = content
         self.controls = [
             menu,
             ft.Container(
-                content=ft.Column([content]),
+                content=ft.Column([self.content]),
                 expand=True,
                 bgcolor=ft.colors.WHITE,
             ),
         ]
         self.expand = True
         self.visible = False
+
+    def before_update(self):
+        self.controls[1].content = ft.Column([self.content])
 
 
 class WebView(AppView):
@@ -165,11 +169,13 @@ class WebView(AppView):
                 ),
                 ft.Text(value="This is message body"),
             ],
-            visible=False,
+            # visible=False,
         )
 
         self.mail_view = ViewArea(
-            content=ft.Column([self.messages_list, self.message_view]),
+            # content=ft.Column([self.messages_list, self.message_view]),
+            content=self.messages_list,
+            # content=self.message_view,
             menu=self.mail_menu,
         )
         self.chat_view = ViewArea(
@@ -292,14 +298,16 @@ class WebView(AppView):
 
     def display_message(self):
         print(f"Display message for {self.selected_message.id}")
-        self.messages_list.visible = False
-        self.message_view.visible = True
+        # self.messages_list.visible = False
+        # self.message_view.visible = True
+        self.mail_view.content = self.message_view
         self.message_view.controls[0].controls[
             1
         ].value = self.selected_message.title  # title of the message
         self.message_view.controls[1].value = (
             self.selected_message.body
         )  # Body of the message
+        # self.page.update()
         self.page.go(f"/mail/{self.mail_filter}/{self.selected_message.id}")
 
     def back_to_messages(self, e):
@@ -318,8 +326,9 @@ class WebView(AppView):
         self.chat_view.visible = False
         self.meet_view.visible = False
         if self.selected_message == None:
-            self.messages_list.visible = True
-            self.message_view.visible = False
+            # self.messages_list.visible = True
+            # self.message_view.visible = False
+            self.mail_view.content = self.messages_list
             self.page.go(f"/mail/{self.mail_filter}")
         else:
             self.display_message()
