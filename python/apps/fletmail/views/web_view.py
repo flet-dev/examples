@@ -1,8 +1,8 @@
 from typing import List
 
 import flet as ft
-from components.app_view import AppView
-from components.new_message_view import NewMessageWebView
+from views.app_view import AppView
+from views.new_message_view import NewMessageWebView
 
 
 class SecondaryMenuAction(ft.TextButton):

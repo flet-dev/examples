@@ -1,7 +1,7 @@
 import flet as ft
-from components.app_view import AppView
-from components.message_view import MessageView
-from components.new_message_view import NewMessageMobileView
+from views.app_view import AppView
+from views.message_view import MessageView
+from views.new_message_view import NewMessageMobileView
 
 # from model.messages import messages
 

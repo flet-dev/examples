@@ -1,7 +1,7 @@
 MOBILE_MAX_WIDTH = 640
 import flet as ft
-from components.mobile_view import MobileView
-from components.web_view import WebView
+from views.mobile_view import MobileView
+from views.web_view import WebView
 
 
 def main(page: ft.Page):
