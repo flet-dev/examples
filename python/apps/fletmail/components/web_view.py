@@ -22,14 +22,14 @@ class SecondaryMenuAction(ft.TextButton):
 class ViewArea(ft.Row):
     def __init__(
         self,
-        view_controls,
-        view_menu=ft.Column(),
+        content,
+        menu=ft.Column(),
     ):
         super().__init__()
         self.controls = [
-            view_menu,
+            menu,
             ft.Container(
-                content=ft.Column(view_controls),
+                content=content,
                 expand=True,
                 bgcolor=ft.colors.WHITE,
             ),
@@ -169,16 +169,16 @@ class WebView(AppView):
         )
 
         self.mail_view = ViewArea(
-            view_controls=[self.messages_list, self.message_view],
-            view_menu=self.mail_menu,
+            content=ft.Column([self.messages_list, self.message_view]),
+            menu=self.mail_menu,
         )
         self.chat_view = ViewArea(
-            view_controls=[ft.Text("Chat View", style=ft.TextStyle(size=20))],
-            view_menu=self.chat_menu,
+            content=ft.Column([ft.Text("Chat View", style=ft.TextStyle(size=20))]),
+            menu=self.chat_menu,
         )
 
         self.meet_view = ViewArea(
-            view_controls=[ft.Text("Meet View", style=ft.TextStyle(size=20))],
+            content=ft.Column([ft.Text("Meet View", style=ft.TextStyle(size=20))]),
         )
 
         self.controls = [
