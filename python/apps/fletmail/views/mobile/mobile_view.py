@@ -1,7 +1,7 @@
 import flet as ft
 from views.app_view import AppView
-from views.message_view import MessageView
-from views.new_message_view import NewMessageMobileView
+from views.mobile.message_view import MessageView
+from views.mobile.new_message_view import NewMessageMobileView
 
 # from model.messages import messages
 

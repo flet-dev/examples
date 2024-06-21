@@ -2,7 +2,7 @@ from typing import List
 
 import flet as ft
 from views.app_view import AppView
-from views.new_message_view import NewMessageWebView
+from views.web.new_message_view import NewMessageWebView
 
 
 class SecondaryMenuAction(ft.TextButton):
