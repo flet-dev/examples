@@ -36,10 +36,11 @@ class SecondaryMenu(ft.Column):
 
     def before_update(self):
         for action in self.actions:
-            if self.actions.index(action) != self.selected_action:
-                action.style.bgcolor = ft.colors.SURFACE
-            else:
-                action.style.bgcolor = ft.colors.SECONDARY_CONTAINER
+            action.style.bgcolor = (
+                ft.colors.SURFACE
+                if self.actions.index(action) != self.selected_action
+                else ft.colors.SECONDARY_CONTAINER
+            )
 
 
 class ViewArea(ft.Row):

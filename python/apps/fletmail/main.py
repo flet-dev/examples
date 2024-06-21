@@ -67,24 +67,18 @@ def main(page: ft.Page):
         if len(route_list) == 2:
             print(route_list)
             if route_list[0] == ("mail"):
-                # if route_list[1] == ("inbox"):
-                # page.views[0].display_inbox()
                 page.views[0].mail_filter = route_list[1]
                 page.views[0].display_mail()
             elif route_list[0] == ("chat"):
                 page.views[0].chat_filter = route_list[1]
                 page.views[0].display_chat()
-            # elif route_list[0] == ("meet"):
-            #     page.views[0].display_meet()
             else:
                 print("Invalid route")
         if len(route_list) == 3:
             print(route_list)
             if route_list[0] == ("mail"):
                 page.views[0].mail_filter = route_list[1]
-                # message = page.views[0].get_message(route_list[2])
                 page.views[0].get_message(route_list[2])
-                # page.views[0].display_message(message)
                 page.views[0].display_message()
             else:
                 print("Invalid route")
