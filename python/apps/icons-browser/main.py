@@ -46,7 +46,7 @@ class IconBrowser(UserControl):
         for key, value in vars(icons).items():
             if key == "TEN_K":
                 list_started = True
-            if list_started:
+            if list_started and isinstance(value, str):
                 icons_list.append(value)
 
         search_txt = TextField(
