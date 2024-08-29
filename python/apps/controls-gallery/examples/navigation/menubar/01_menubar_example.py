@@ -4,6 +4,9 @@ name = "MenuBar Example"
 
 
 def example():
+    def handle_menu_item_click(e):
+        print(f"{e.control.content.value}.on_click")
+
     menubar = ft.MenuBar(
         expand=True,
         style=ft.MenuStyle(
@@ -27,7 +30,7 @@ def example():
                         style=ft.ButtonStyle(
                             bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Save"),
@@ -35,7 +38,7 @@ def example():
                         style=ft.ButtonStyle(
                             bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Quit"),
@@ -43,7 +46,7 @@ def example():
                         style=ft.ButtonStyle(
                             bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click
                     ),
                 ],
             ),
@@ -65,7 +68,7 @@ def example():
                                         ft.MaterialState.HOVERED: ft.colors.PURPLE_200
                                     }
                                 ),
-                                # on_click=handle_menu_item_click
+                                on_click=handle_menu_item_click
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("Minify"),
@@ -76,7 +79,7 @@ def example():
                                         ft.MaterialState.HOVERED: ft.colors.PURPLE_200
                                     }
                                 ),
-                                # on_click=handle_menu_item_click
+                                on_click=handle_menu_item_click
                             ),
                         ],
                     )
