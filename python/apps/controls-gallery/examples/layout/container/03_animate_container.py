@@ -11,11 +11,11 @@ def example():
         animate=ft.animation.Animation(1000, "bounceOut"),
     )
 
-    async def animate_container(e):
+    def animate_container(e):
         c.width = 100 if c.width == 200 else 200
         c.height = 100 if c.height == 200 else 200
         c.bgcolor = "blue" if c.bgcolor == "red" else "red"
-        await c.update_async()
+        c.update()
 
     return ft.Column(
         controls=[c, ft.ElevatedButton("Animate container", on_click=animate_container)]
