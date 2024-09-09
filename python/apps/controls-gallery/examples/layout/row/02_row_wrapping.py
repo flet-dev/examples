@@ -19,9 +19,9 @@ def example():
             )
         return items
 
-    async def slider_change(e):
+    def slider_change(e):
         row.width = float(e.control.value)
-        await row.update_async()
+        row.update()
 
     width_slider = ft.Slider(
         min=0,
