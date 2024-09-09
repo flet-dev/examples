@@ -12,9 +12,9 @@ def example():
             active_color=ft.colors.BLACK,
             on_change=lambda e: print("Selected tab:", e.control.selected_index),
             destinations=[
-                ft.NavigationDestination(icon=ft.icons.EXPLORE, label="Explore"),
-                ft.NavigationDestination(icon=ft.icons.COMMUTE, label="Commute"),
-                ft.NavigationDestination(
+                ft.NavigationBarDestination(icon=ft.icons.EXPLORE, label="Explore"),
+                ft.NavigationBarDestination(icon=ft.icons.COMMUTE, label="Commute"),
+                ft.NavigationBarDestination(
                     icon=ft.icons.BOOKMARK_BORDER,
                     selected_icon=ft.icons.BOOKMARK,
                     label="Explore",
