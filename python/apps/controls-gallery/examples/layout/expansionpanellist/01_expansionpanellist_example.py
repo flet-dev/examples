@@ -7,9 +7,9 @@ def example():
     def handle_change(e: ft.ControlEvent):
         print(f"change on panel with index {e.data}")
 
-    async def handle_delete(e: ft.ControlEvent):
+    def handle_delete(e: ft.ControlEvent):
         panel.controls.remove(e.control.data)
-        await panel.update_async()
+        panel.update()
 
     panel = ft.ExpansionPanelList(
         expand_icon_color=ft.colors.AMBER,
