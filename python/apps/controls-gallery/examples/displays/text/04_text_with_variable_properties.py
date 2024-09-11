@@ -4,57 +4,33 @@ name = "Text with variable properties"
 
 
 def example():
-    def get_text_style_options():
-        options = []
-        for style in ft.TextThemeStyle:
-            options.append(ft.dropdown.Option(text=style.name, key=style.value))
-        return options
 
     def get_source_code():
-        if t.size == "":
-            size = ""
-        else:
-            size = f"size={t.size}"
 
-        if t.style == None:
-            style = ""
-        else:
-            style = f"""style='{t.style}',"""
-
-        code = f"""text_control = ft.Text(value="{t.value}", italic={t.italic}, selectable={t.selectable}, {style} {size})"""
+        code = f"""text_control = ft.Text(value="{t.value}", italic={t.italic}, selectable={t.selectable}, size={t.size})"""
         return code
 
-    async def update_example():
+    def update_example():
         source_code.value = get_source_code()
-        await example_control.update_async()
+        example_control.update()
 
-    async def value_changed(e):
+    def value_changed(e):
         t.value = e.control.value
-        await update_example()
+        update_example()
 
-    async def italic_changed(e):
+    def italic_changed(e):
         t.italic = e.control.value
-        await update_example()
+        update_example()
 
-    async def selectable_changed(e):
+    def selectable_changed(e):
         t.selectable = e.control.value
-        await update_example()
+        update_example()
 
-    async def size_changed(e):
+    def size_changed(e):
         t.size = e.control.value
-        t.style = None
-        style_dropdown.value = None
-        await update_example()
-
-    async def style_changed(e):
-        t.size = None
-        size_dropdown.value = None
-        t.style = e.control.value
-        await update_example()
+        update_example()
 
     t = ft.Text(value="This is a sample text", size=12)
-
-    text_style_options = get_text_style_options()
 
     size_dropdown = ft.Dropdown(
         content_padding=3,
@@ -66,13 +42,6 @@ def example():
             ft.dropdown.Option("18"),
         ],
         on_change=size_changed,
-    )
-
-    style_dropdown = ft.Dropdown(
-        content_padding=3,
-        value=t.style,
-        options=text_style_options,
-        on_change=style_changed,
     )
 
     properties = ft.DataTable(
@@ -113,12 +82,6 @@ def example():
                 cells=[
                     ft.DataCell(ft.Text("size")),
                     ft.DataCell(size_dropdown),
-                ],
-            ),
-            ft.DataRow(
-                cells=[
-                    ft.DataCell(ft.Text("style")),
-                    ft.DataCell(style_dropdown),
                 ],
             ),
         ],
