@@ -4,9 +4,9 @@ name = "TextField with `change` event"
 
 
 def example():
-    async def textbox_changed(e):
+    def textbox_changed(e):
         t.value = e.control.value
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     tb = ft.TextField(
