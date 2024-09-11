@@ -11,17 +11,17 @@ def example():
 
     async def button_clicked(e):
         t.value = "Doing something..."
-        await t.update_async()
+        t.update()
         b.disabled = True
-        await b.update_async()
+        b.update()
         for i in range(0, 101):
             pb.value = i * 0.01
             await asyncio.sleep(0.1)
-            await pb.update_async()
+            pb.update()
         t.value = "Click the button..."
-        await t.update_async()
+        t.update()
         b.disabled = False
-        await b.update_async()
+        b.update()
 
     b = ft.FilledTonalButton("Start", on_click=button_clicked)
 
