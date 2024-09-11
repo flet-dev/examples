@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Markdown with GitHubWeb extensions and clickable links"
 
+
 def example():
 
     md1 = """
@@ -46,8 +47,6 @@ Select the valid headers:
 ```
 
 ## Images
-
-![Flutter logo](/icons/icon-192.png)
 
 ![Test image](https://picsum.photos/200/300)
 
@@ -120,10 +119,10 @@ line 2
   
 line 3
 """
-    
+
     return ft.Markdown(
-            value=md1,
-            selectable=True,
-            extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
-            #ßon_tap_link=lambda e: ft.page.launch_url(e.data),
-        )
+        value=md1,
+        selectable=True,
+        extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
+        # ßon_tap_link=lambda e: ft.page.launch_url(e.data),
+    )
