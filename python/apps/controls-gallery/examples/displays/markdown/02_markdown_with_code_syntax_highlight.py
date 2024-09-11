@@ -155,9 +155,9 @@ Coming soon.
 Coming soon.
         """
 
-    ft.page.fonts = {
-        "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
-    }
+    # ft.page.fonts = {
+    #     "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
+    # }
 
     return ft.Markdown(
         table,
