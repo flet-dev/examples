@@ -20,7 +20,7 @@ def main(page: ft.Page):
         ft.ElevatedButton(
             "Continuous rectangle",
             style=ft.ButtonStyle(
-                shape=ft.CountinuosRectangleBorder(radius=30),
+                shape=ft.ContinuousRectangleBorder(radius=30),
             ),
         ),
         ft.ElevatedButton(
