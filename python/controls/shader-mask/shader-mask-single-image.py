@@ -1,12 +1,11 @@
 import flet as ft
 
-
 def main(page: ft.Page):
     page.add(
         ft.Row(
             [
                 ft.ShaderMask(
-                    ft.Image(
+                    content=ft.Image(
                         src="https://picsum.photos/200/200?1",
                         width=200,
                         height=200,
@@ -24,5 +23,5 @@ def main(page: ft.Page):
         )
     )
 
-
 ft.app(target=main)
+
