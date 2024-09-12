@@ -12,7 +12,7 @@ def example():
             await asyncio.sleep(1)
             lv.controls.append(ft.Text(f"Line {count}"))
             count += 1
-            await lv.update_async()
+            lv.update()
 
     lv = ft.ListView(spacing=10, padding=20, auto_scroll=True, height=300)
 

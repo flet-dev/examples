@@ -21,9 +21,9 @@ def example():
             )
         return items
 
-    async def slider_change(e):
+    def slider_change(e):
         col.height = float(e.control.value)
-        await col.update_async()
+        col.update()
 
     width_slider = ft.Slider(
         min=0,

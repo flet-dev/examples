@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Row vertical alignments"
 
+
 def example():
 
     def items(count):
@@ -28,13 +29,13 @@ def example():
                     bgcolor=ft.colors.AMBER_100,
                     height=150,
                 ),
-            ]
+            ],
         )
 
     return ft.Column(
-            [
-                row_with_vertical_alignment(ft.CrossAxisAlignment.START),
-                row_with_vertical_alignment(ft.CrossAxisAlignment.CENTER),
-                row_with_vertical_alignment(ft.CrossAxisAlignment.END),
-            ]
-        )
+        [
+            row_with_vertical_alignment(ft.CrossAxisAlignment.START),
+            row_with_vertical_alignment(ft.CrossAxisAlignment.CENTER),
+            row_with_vertical_alignment(ft.CrossAxisAlignment.END),
+        ]
+    )

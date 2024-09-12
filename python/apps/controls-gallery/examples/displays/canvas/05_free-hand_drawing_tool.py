@@ -18,13 +18,13 @@ def example():
         state.x = e.local_x
         state.y = e.local_y
 
-    async def pan_update(e: ft.DragUpdateEvent):
+    def pan_update(e: ft.DragUpdateEvent):
         cp.shapes.append(
             cv.Line(
                 state.x, state.y, e.local_x, e.local_y, paint=ft.Paint(stroke_width=3)
             )
         )
-        await cp.update_async()
+        cp.update()
         state.x = e.local_x
         state.y = e.local_y
 

@@ -1,2 +1,2 @@
-flet==0.21.2
+flet==0.24.1
 flet-contrib

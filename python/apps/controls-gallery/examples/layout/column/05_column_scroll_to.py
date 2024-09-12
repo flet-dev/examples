@@ -41,17 +41,17 @@ def example():
         ],
     )
 
-    async def scroll_to_a(_):
-        await cl.scroll_to_async(key="A", duration=1000)
+    def scroll_to_a(_):
+        cl.scroll_to(key="A", duration=1000)
 
-    async def scroll_to_b(_):
-        await cl.scroll_to_async(key="B", duration=1000)
+    def scroll_to_b(_):
+        cl.scroll_to(key="B", duration=1000)
 
-    async def scroll_to_c(_):
-        await cl.scroll_to_async(key="C", duration=1000)
+    def scroll_to_c(_):
+        cl.scroll_to(key="C", duration=1000)
 
-    async def scroll_to_d(_):
-        await cl.scroll_to_async(key="D", duration=1000)
+    def scroll_to_d(_):
+        cl.scroll_to(key="D", duration=1000)
 
     return ft.Column(
         [

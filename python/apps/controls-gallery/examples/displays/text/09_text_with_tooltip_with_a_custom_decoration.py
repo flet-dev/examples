@@ -2,13 +2,16 @@ import flet as ft
 
 name = "Gradually fade out image to the bottom edge"
 
+
 def example():
 
     import math
-    
-    return ft.Tooltip(
+
+    return ft.Text(
+        value="Hover to see tooltip",
+        tooltip=ft.Tooltip(
             message="This is tooltip",
-            content=ft.Text("Hover to see tooltip"),
+            # content=ft.Text("Hover to see tooltip"),
             padding=20,
             border_radius=10,
             text_style=ft.TextStyle(size=20, color=ft.colors.WHITE),
@@ -28,4 +31,5 @@ def example():
                 tile_mode=ft.GradientTileMode.MIRROR,
                 rotation=math.pi / 3,
             ),
-        )
+        ),
+    )

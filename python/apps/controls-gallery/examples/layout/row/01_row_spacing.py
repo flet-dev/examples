@@ -19,9 +19,9 @@ def example():
             )
         return items
 
-    async def gap_slider_change(e):
+    def gap_slider_change(e):
         row.spacing = int(e.control.value)
-        await row.update_async()
+        row.update()
 
     gap_slider = ft.Slider(
         min=0,

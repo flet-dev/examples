@@ -4,9 +4,9 @@ name = "Banner with leading icon and actions"
 
 
 def example():
-    async def close_banner(e):
-        e.control.page.banner.open = False
-        await e.control.page.update_async()
+    def close_banner(e):
+        banner.open = False
+        e.control.page.update()
 
     banner = ft.Banner(
         bgcolor=ft.colors.AMBER_100,
@@ -21,9 +21,9 @@ def example():
         ],
     )
 
-    async def show_banner_click(e):
-        e.control.page.banner = banner
-        e.control.page.banner.open = True
-        await e.control.page.update_async()
+    def show_banner_click(e):
+        e.control.page.overlay.append(banner)
+        banner.open = True
+        e.control.page.update()
 
     return ft.ElevatedButton("Show Banner", on_click=show_banner_click)

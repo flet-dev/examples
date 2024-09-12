@@ -81,9 +81,9 @@ def example():
 
     responsive_row.controls = []
 
-    async def copy_to_clipboard(e):
-        await e.control.page.set_clipboard_async(f"ft.colors.{e.control.content.value}")
-        await e.control.page.show_snack_bar_async(
+    def copy_to_clipboard(e):
+        e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
+        e.control.page.open(
             ft.SnackBar(
                 ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"),
                 open=True,

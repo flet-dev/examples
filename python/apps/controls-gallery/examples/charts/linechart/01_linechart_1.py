@@ -185,7 +185,7 @@ def example():
         height=500,
     )
 
-    async def toggle_data(e):
+    def toggle_data(e):
         if s.toggle:
             chart.data_series = data_2
             chart.data_series[2].point = True
@@ -196,7 +196,7 @@ def example():
             chart.max_y = 4
             chart.interactive = True
         s.toggle = not s.toggle
-        await chart.update_async()
+        chart.update()
 
     return ft.Column(
         controls=[ft.IconButton(ft.icons.REFRESH, on_click=toggle_data), chart]

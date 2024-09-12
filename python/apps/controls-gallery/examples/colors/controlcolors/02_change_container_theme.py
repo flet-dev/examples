@@ -4,13 +4,13 @@ name = "Change container theme colors"
 
 
 def example():
-    async def change_primary_color(e):
+    def change_primary_color(e):
         container.theme = ft.Theme(
             color_scheme=ft.ColorScheme(primary=primary_color.value)
         )
         primary_color.value = ""
-        await container.update_async()
-        await primary_color.update_async()
+        container.update()
+        primary_color.update()
 
     container = ft.Container(
         width=200,

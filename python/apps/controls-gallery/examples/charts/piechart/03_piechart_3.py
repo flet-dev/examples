@@ -28,7 +28,7 @@ def example():
             bgcolor=ft.colors.WHITE,
         )
 
-    async def on_chart_event(e: ft.PieChartEvent):
+    def on_chart_event(e: ft.PieChartEvent):
         for idx, section in enumerate(chart.sections):
             if idx == e.section_index:
                 section.radius = hover_radius
@@ -36,7 +36,7 @@ def example():
             else:
                 section.radius = normal_radius
                 section.title_style = normal_title_style
-        await chart.update_async()
+        chart.update()
 
     chart = ft.PieChart(
         sections=[

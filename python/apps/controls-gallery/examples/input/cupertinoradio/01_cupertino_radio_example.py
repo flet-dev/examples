@@ -4,9 +4,9 @@ name = "CupertinoRadio example"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Your favorite color is:  {cg.value}"
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
@@ -24,13 +24,13 @@ def example():
                     label="Green - Material Radio",
                     fill_color=ft.colors.GREEN,
                 ),
-                ft.Tooltip(
-                    message="Adaptive Radio shows as CupertinoRadio on macOS and iOS and as Radio on other platforms",
-                    content=ft.Radio(
-                        value="blue",
-                        label="Blue - Adaptive Radio",
-                        adaptive=True,
-                        active_color=ft.colors.BLUE,
+                ft.Radio(
+                    value="blue",
+                    label="Blue - Adaptive Radio",
+                    adaptive=True,
+                    active_color=ft.colors.BLUE,
+                    tooltip=ft.Tooltip(
+                        message="Adaptive Radio shows as CupertinoRadio on macOS and iOS and as Radio on other platforms"
                     ),
                 ),
             ]
