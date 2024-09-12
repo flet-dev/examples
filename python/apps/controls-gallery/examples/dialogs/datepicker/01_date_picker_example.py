@@ -1,5 +1,6 @@
-import flet as ft
 import datetime
+
+import flet as ft
 
 name = "DatePicker example"
 
@@ -25,12 +26,13 @@ def example():
                 self.selected_date,
             ]
 
-        async def open_date_picker(self, e):
-            await self.datepicker.pick_date_async()
+        def open_date_picker(self, e):
+            # self.datepicker.pick_date()
+            e.control.page.open(self.datepicker)
 
-        async def change_date(self, e):
+        def change_date(self, e):
             self.selected_date.value = f"Selected date: {self.datepicker.value}"
-            await e.control.page.update_async()
+            e.control.page.update()
 
         # happens when example is added to the page (when user chooses the DatePicker control from the grid)
         def did_mount(self):

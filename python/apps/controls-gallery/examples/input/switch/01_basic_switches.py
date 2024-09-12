@@ -4,9 +4,9 @@ name = "Basic switches"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Switch values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}."
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     c1 = ft.Switch(label="Unchecked switch", value=False)

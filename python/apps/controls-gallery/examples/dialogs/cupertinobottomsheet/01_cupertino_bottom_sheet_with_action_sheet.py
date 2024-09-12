@@ -6,10 +6,10 @@ name = "CupertinoBottomSheet with CupertinoActionSheet Example"
 def example():
 
     def show_cupertino_action_sheet(e):
-        e.control.page.show_bottom_sheet(ft.CupertinoBottomSheet(action_sheet))
+        e.control.page.open(cupertino_bottom_sheet)
 
     def close_cupertino_action_sheet(e):
-        e.control.page.close_bottom_sheet()
+        e.control.page.close(cupertino_bottom_sheet)
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Text("Title"),
@@ -35,6 +35,8 @@ def example():
             ),
         ],
     )
+
+    cupertino_bottom_sheet = ft.CupertinoBottomSheet(action_sheet)
 
     return ft.OutlinedButton(
         "Open CupertinoBottomSheet containing CupertinoActionSheet",

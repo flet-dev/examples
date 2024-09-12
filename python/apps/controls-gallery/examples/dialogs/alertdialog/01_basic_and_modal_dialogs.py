@@ -8,9 +8,9 @@ def example():
         title=ft.Text("Hello, you!"), on_dismiss=lambda e: print("Dialog dismissed!")
     )
 
-    async def close_dlg(e):
+    def close_dlg(e):
         dlg_modal.open = False
-        await e.control.page.update_async()
+        e.control.page.update()
 
     dlg_modal = ft.AlertDialog(
         modal=True,
@@ -24,15 +24,15 @@ def example():
         on_dismiss=lambda e: print("Modal dialog dismissed!"),
     )
 
-    async def open_dlg(e):
-        e.control.page.dialog = dlg
+    def open_dlg(e):
+        e.control.page.overlay.append(dlg)
         dlg.open = True
-        await e.control.page.update_async()
+        e.control.page.update()
 
-    async def open_dlg_modal(e):
-        e.control.page.dialog = dlg_modal
+    def open_dlg_modal(e):
+        e.control.page.overlay.append(dlg_modal)
         dlg_modal.open = True
-        await e.control.page.update_async()
+        e.control.page.update()
 
     return ft.Column(
         [

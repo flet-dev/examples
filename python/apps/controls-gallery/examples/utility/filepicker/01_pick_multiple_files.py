@@ -10,8 +10,8 @@ def example():
             self.pick_files_dialog = ft.FilePicker(on_result=self.pick_files_result)
             self.selected_files = ft.Text()
 
-            async def pick_files(_):
-                await self.pick_files_dialog.pick_files_async(allow_multiple=True)
+            def pick_files(_):
+                self.pick_files_dialog.pick_files(allow_multiple=True)
 
             self.controls = [
                 ft.ElevatedButton(
@@ -22,11 +22,11 @@ def example():
                 self.selected_files,
             ]
 
-        async def pick_files_result(self, e: ft.FilePickerResultEvent):
+        def pick_files_result(self, e: ft.FilePickerResultEvent):
             self.selected_files.value = (
                 ", ".join(map(lambda f: f.name, e.files)) if e.files else "Cancelled!"
             )
-            await self.selected_files.update_async()
+            self.selected_files.update()
 
         # happens when example is added to the page (when user chooses the FilePicker control from the grid)
         def did_mount(self):

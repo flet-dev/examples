@@ -4,9 +4,9 @@ name = "RadioGroup with `change` event"
 
 
 def example():
-    async def radiogroup_changed(e):
+    def radiogroup_changed(e):
         t.value = f"Your favorite color is:  {e.control.value}"
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     cg = ft.RadioGroup(

@@ -4,8 +4,8 @@ name = "Filter chips"
 
 
 def example():
-    async def amenity_selected(e):
-        await amenity_chips.update_async()
+    def amenity_selected(e):
+        amenity_chips.update()
 
     title = ft.Row([ft.Icon(ft.icons.HOTEL_CLASS), ft.Text("Amenities")])
     amenities = ["Washer / Dryer", "Ramp access", "Dogs OK", "Cats OK", "Smoke-free"]

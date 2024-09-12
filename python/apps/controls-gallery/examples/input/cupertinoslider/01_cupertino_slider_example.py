@@ -11,9 +11,11 @@ def example():
             ft.Text("Material slider:"),
             ft.Slider(),
             ft.Text("Adaptive slider:"),
-            ft.Tooltip(
-                message="Adaptive Slider shows as CupertinoSlider on macOS and iOS and as Slider on other platforms",
-                content=ft.Slider(adaptive=True),
+            ft.Slider(
+                adaptive=True,
+                tooltip=ft.Tooltip(
+                    message="Adaptive Slider shows as CupertinoSlider on macOS and iOS and as Slider on other platforms",
+                ),
             ),
-        ]
+        ],
     )

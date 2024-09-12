@@ -4,9 +4,9 @@ name = "PopupMenuButton example"
 
 
 def example():
-    async def check_item_clicked(e):
+    def check_item_clicked(e):
         e.control.checked = not e.control.checked
-        await e.control.update_async()
+        e.control.update()
 
     pb = ft.PopupMenuButton(
         items=[

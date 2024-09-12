@@ -29,13 +29,13 @@ def example():
         def bs_dismissed(self, e):
             print("Dismissed!")
 
-        async def show_bs(self, e):
+        def show_bs(self, e):
             self.bs.open = True
-            await self.bs.update_async()
+            self.bs.update()
 
-        async def close_bs(self, e):
+        def close_bs(self, e):
             self.bs.open = False
-            await self.bs.update_async()
+            self.bs.update()
 
         # happens when example is added to the page (when user chooses the BottomSheet control from the grid)
         def did_mount(self):

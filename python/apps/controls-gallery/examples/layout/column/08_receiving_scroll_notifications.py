@@ -4,10 +4,10 @@ name = "Receiving scroll notifications"
 
 
 def example():
-    async def on_column_scroll(e: ft.OnScrollEvent):
+    def on_column_scroll(e: ft.OnScrollEvent):
         notification = f"Type: {e.event_type}, pixels: {e.pixels}, min_scroll_extent: {e.min_scroll_extent}, max_scroll_extent: {e.max_scroll_extent}"
         notification_text.value = notification
-        await notification_text.update_async()
+        notification_text.update()
 
     cl = ft.Column(
         spacing=10,

@@ -19,9 +19,9 @@ def example():
         ],
     )
 
-    async def open_dlg(e):
-        e.control.page.dialog = cupertino_alert_dialog
+    def open_dlg(e):
+        e.control.page.overlay.append(cupertino_alert_dialog)
         cupertino_alert_dialog.open = True
-        await e.control.page.update_async()
+        e.control.page.update()
 
     return ft.ElevatedButton("Open CupertinoAlertDialog", on_click=open_dlg)

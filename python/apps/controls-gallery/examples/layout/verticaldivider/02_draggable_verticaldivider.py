@@ -4,14 +4,14 @@ name = "Draggable VerticalDivider"
 
 
 def example():
-    async def move_vertical_divider(e: ft.DragUpdateEvent):
+    def move_vertical_divider(e: ft.DragUpdateEvent):
         if (e.delta_x > 0 and c.width < 300) or (e.delta_x < 0 and c.width > 100):
             c.width += e.delta_x
-        await c.update_async()
+        c.update()
 
-    async def show_draggable_cursor(e: ft.HoverEvent):
+    def show_draggable_cursor(e: ft.HoverEvent):
         e.control.mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
-        await e.control.update_async()
+        e.control.update()
 
     c = ft.Container(
         bgcolor=ft.colors.ORANGE_300,

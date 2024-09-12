@@ -4,9 +4,9 @@ name = "Basic RadioGroup"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Your favorite color is:  {cg.value}"
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)

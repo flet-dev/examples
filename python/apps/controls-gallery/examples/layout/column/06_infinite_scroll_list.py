@@ -12,14 +12,14 @@ def example():
     s = State()
     sem = threading.Semaphore()
 
-    async def on_scroll(e: ft.OnScrollEvent):
+    def on_scroll(e: ft.OnScrollEvent):
         if e.pixels >= e.max_scroll_extent - 100:
             if sem.acquire(blocking=False):
                 try:
                     for i in range(0, 10):
                         cl.controls.append(ft.Text(f"Text line {s.i}", key=str(s.i)))
                         s.i += 1
-                    await cl.update_async()
+                    cl.update()
                 finally:
                     sem.release()
 

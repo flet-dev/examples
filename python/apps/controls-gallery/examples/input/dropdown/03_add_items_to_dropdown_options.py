@@ -4,12 +4,12 @@ name = "Add items to dropdown options"
 
 
 def example():
-    async def add_clicked(e):
+    def add_clicked(e):
         d.options.append(ft.dropdown.Option(option_textbox.value))
         d.value = option_textbox.value
         option_textbox.value = ""
-        await option_textbox.update_async()
-        await d.update_async()
+        option_textbox.update()
+        d.update()
 
     d = ft.Dropdown()
     option_textbox = ft.TextField(hint_text="Enter item name")

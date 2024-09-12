@@ -4,21 +4,21 @@ name = "Drag and drop colors"
 
 
 def example():
-    async def drag_will_accept(e):
+    def drag_will_accept(e):
         e.control.content.border = ft.border.all(
             2, ft.colors.BLACK45 if e.data == "true" else ft.colors.RED
         )
-        await e.control.update_async()
+        e.control.update()
 
-    async def drag_accept(e: ft.DragTargetAcceptEvent):
+    def drag_accept(e):
         src = e.control.page.get_control(e.src_id)
         e.control.content.bgcolor = src.content.bgcolor
         e.control.content.border = None
-        await e.control.update_async()
+        e.control.update()
 
-    async def drag_leave(e):
+    def drag_leave(e):
         e.control.content.border = None
-        await e.control.update_async()
+        e.control.update()
 
     return ft.Row(
         [

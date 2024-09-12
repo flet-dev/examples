@@ -14,6 +14,9 @@ def example():
     tf3 = ft.TextField(
         adaptive=True,
         label="Adaptive",
+        tooltip=ft.Tooltip(
+            message="Adaptive TextField shows as CupertinoTextField on macOS and iOS and as TextField on other platforms"
+        ),
     )
 
     return ft.Column(controls=[tf1, tf2, tf3])

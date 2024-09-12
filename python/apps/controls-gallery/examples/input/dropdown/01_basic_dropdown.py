@@ -4,9 +4,9 @@ name = "Basic dropdown"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Dropdown value is:  {dd.value}"
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)

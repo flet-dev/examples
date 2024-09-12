@@ -4,9 +4,9 @@ name = "Basic TextFields"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Textboxes values are:  '{tb1.value}', '{tb2.value}', '{tb3.value}', '{tb4.value}', '{tb5.value}'."
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     tb1 = ft.TextField(label="Standard")

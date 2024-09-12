@@ -24,12 +24,13 @@ def example():
                 self.selected_time,
             ]
 
-        async def open_time_picker(self, e):
-            await self.timepicker.pick_time_async()
+        def open_time_picker(self, e):
+            # self.timepicker.pick_time()
+            e.control.page.open(self.timepicker)
 
-        async def change_time(self, e):
+        def change_time(self, e):
             self.selected_time.value = f"Selected time: {self.timepicker.value}"
-            await e.control.page.update_async()
+            e.control.page.update()
 
         # happens when example is added to the page (when user chooses the DatePicker control from the grid)
         def did_mount(self):

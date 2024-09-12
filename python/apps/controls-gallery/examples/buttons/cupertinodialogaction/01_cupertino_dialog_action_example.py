@@ -4,9 +4,9 @@ name = "CupertinoDialogAction example"
 
 
 def example():
-    async def dismiss_dialog(e):
+    def dismiss_dialog(e):
         cupertino_alert_dialog.open = False
-        await e.control.page.update_async()
+        e.control.page.update()
 
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
@@ -20,7 +20,7 @@ def example():
     )
 
     def open_dlg(e):
-        e.control.page.dialog = cupertino_alert_dialog
+        e.control.page.overlay.append(cupertino_alert_dialog)
         cupertino_alert_dialog.open = True
         e.control.page.update()
 

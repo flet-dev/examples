@@ -13,12 +13,12 @@ def example():
         value=True,
     )
 
-    c3 = ft.Tooltip(
-        message="Adaptive Switch shows as CupertinoSwitch on macOS and iOS and as Switch on other platforms",
-        content=ft.Switch(
-            adaptive=True,
-            label="Adaptive Switch",
-            value=True,
+    c3 = ft.Switch(
+        adaptive=True,
+        label="Adaptive Switch",
+        value=True,
+        tooltip=ft.Tooltip(
+            message="Adaptive Switch shows as CupertinoSwitch on macOS and iOS and as Switch on other platforms"
         ),
     )
 

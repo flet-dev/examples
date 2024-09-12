@@ -4,9 +4,9 @@ name = "Slider with `change` event"
 
 
 def example():
-    async def slider_changed(e):
+    def slider_changed(e):
         t.value = f"Slider changed to {e.control.value}"
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
 

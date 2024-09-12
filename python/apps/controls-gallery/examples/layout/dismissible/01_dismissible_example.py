@@ -4,9 +4,9 @@ name = "Dismissible ListView Tiles"
 
 
 def example():
-    async def handle_dismiss(e):
+    def handle_dismiss(e):
         lv.controls.remove(e.control)
-        await lv.update_async()
+        lv.update()
 
     def handle_update(e):
         print("update")

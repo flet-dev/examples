@@ -4,9 +4,9 @@ name = "Basic checkboxes"
 
 
 def example():
-    async def button_clicked(e):
+    def button_clicked(e):
         t.value = f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}, {c5.value}."
-        await t.update_async()
+        t.update()
 
     t = ft.Text()
     c1 = ft.Checkbox(label="Unchecked by default checkbox", value=False)

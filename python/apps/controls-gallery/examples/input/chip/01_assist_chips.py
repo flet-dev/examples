@@ -4,14 +4,14 @@ name = "Assist chips"
 
 
 def example():
-    async def save_to_favorites_clicked(e):
+    def save_to_favorites_clicked(e):
         save_to_favourites.label.value = "Saved to favorites"
         save_to_favourites.leading = ft.Icon(ft.icons.FAVORITE_OUTLINED)
         save_to_favourites.disabled = True
-        await save_to_favourites.update_async()
+        save_to_favourites.update()
 
-    async def open_google_maps(e):
-        await e.control.page.launch_url_async("https://maps.google.com")
+    def open_google_maps(e):
+        e.control.page.launch_url("https://maps.google.com")
 
     save_to_favourites = ft.Chip(
         label=ft.Text("Save to favourites"),

@@ -4,14 +4,17 @@ name = "MenuBar Example"
 
 
 def example():
+    def handle_menu_item_click(e):
+        print(f"{e.control.content.value}.on_click")
+
     menubar = ft.MenuBar(
         expand=True,
         style=ft.MenuStyle(
             alignment=ft.alignment.top_left,
             bgcolor=ft.colors.RED_100,
             mouse_cursor={
-                ft.MaterialState.HOVERED: ft.MouseCursor.WAIT,
-                ft.MaterialState.DEFAULT: ft.MouseCursor.ZOOM_OUT,
+                ft.ControlState.HOVERED: ft.MouseCursor.WAIT,
+                ft.ControlState.DEFAULT: ft.MouseCursor.ZOOM_OUT,
             },
         ),
         controls=[
@@ -25,25 +28,25 @@ def example():
                         content=ft.Text("About"),
                         leading=ft.Icon(ft.icons.INFO),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click,
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Save"),
                         leading=ft.Icon(ft.icons.SAVE),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click,
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Quit"),
                         leading=ft.Icon(ft.icons.CLOSE),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.MaterialState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
                         ),
-                        # on_click=handle_menu_item_click
+                        on_click=handle_menu_item_click,
                     ),
                 ],
             ),
@@ -62,10 +65,10 @@ def example():
                                 close_on_click=False,
                                 style=ft.ButtonStyle(
                                     bgcolor={
-                                        ft.MaterialState.HOVERED: ft.colors.PURPLE_200
+                                        ft.ControlState.HOVERED: ft.colors.PURPLE_200
                                     }
                                 ),
-                                # on_click=handle_menu_item_click
+                                on_click=handle_menu_item_click,
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("Minify"),
@@ -73,10 +76,10 @@ def example():
                                 close_on_click=False,
                                 style=ft.ButtonStyle(
                                     bgcolor={
-                                        ft.MaterialState.HOVERED: ft.colors.PURPLE_200
+                                        ft.ControlState.HOVERED: ft.colors.PURPLE_200
                                     }
                                 ),
-                                # on_click=handle_menu_item_click
+                                on_click=handle_menu_item_click,
                             ),
                         ],
                     )

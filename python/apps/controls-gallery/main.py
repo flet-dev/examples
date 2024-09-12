@@ -16,6 +16,7 @@ def main(page: ft.Page):
 
     page.fonts = {
         "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
+        "RobotoSlab": "RobotoSlab[wght].ttf",
     }
 
     def get_route_list(route):

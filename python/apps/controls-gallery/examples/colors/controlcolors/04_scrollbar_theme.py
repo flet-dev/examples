@@ -16,23 +16,21 @@ def example():
         cl.controls.append(ft.Text(f"Text line {i}"))
 
     c = ft.Container(
-        content=cl, 
-        height=300, 
-        width=300,
-        border=ft.border.all(1, "black"))
+        content=cl, height=300, width=300, border=ft.border.all(1, "black")
+    )
 
     c.theme = ft.Theme(
         scrollbar_theme=ft.ScrollbarTheme(
             track_color={
-                ft.MaterialState.HOVERED: ft.colors.AMBER,
-                ft.MaterialState.DEFAULT: ft.colors.TRANSPARENT,
+                ft.ControlState.HOVERED: ft.colors.AMBER,
+                ft.ControlState.DEFAULT: ft.colors.TRANSPARENT,
             },
             track_visibility=True,
             track_border_color=ft.colors.BLUE,
             thumb_visibility=True,
             thumb_color={
-                ft.MaterialState.HOVERED: ft.colors.RED,
-                ft.MaterialState.DEFAULT: ft.colors.GREY_300,
+                ft.ControlState.HOVERED: ft.colors.RED,
+                ft.ControlState.DEFAULT: ft.colors.GREY_300,
             },
             thickness=30,
             radius=15,

@@ -11,8 +11,8 @@ def example():
                 src="https://luan.xyz/files/audio/ambient_c_motion.mp3", autoplay=True
             )
 
-            async def pause_audio(e):
-                await self.audio1.pause_async()
+            def pause_audio(e):
+                self.audio1.pause()
 
             self.controls = [
                 ft.Text(

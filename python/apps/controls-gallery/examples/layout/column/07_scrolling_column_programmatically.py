@@ -14,25 +14,23 @@ def example():
     for i in range(0, 100):
         cl.controls.append(ft.Text(f"Text line {i}", key=str(i)))
 
-    async def scroll_to_offset(e):
-        await cl.scroll_to_async(offset=100, duration=1000)
+    def scroll_to_offset(e):
+        cl.scroll_to(offset=100, duration=1000)
 
-    async def scroll_to_start(e):
-        await cl.scroll_to_async(offset=0, duration=1000)
+    def scroll_to_start(e):
+        cl.scroll_to(offset=0, duration=1000)
 
-    async def scroll_to_end(e):
-        await cl.scroll_to_async(
-            offset=-1, duration=2000, curve=ft.AnimationCurve.EASE_IN_OUT
-        )
+    def scroll_to_end(e):
+        cl.scroll_to(offset=-1, duration=2000, curve=ft.AnimationCurve.EASE_IN_OUT)
 
     # def scroll_to_key(e):
     #     cl.scroll_to(key="20", duration=1000)
 
-    async def scroll_to_delta(e):
-        await cl.scroll_to_async(delta=40, duration=200)
+    def scroll_to_delta(e):
+        cl.scroll_to(delta=40, duration=200)
 
-    async def scroll_to_minus_delta(e):
-        await cl.scroll_to_async(delta=-40, duration=200)
+    def scroll_to_minus_delta(e):
+        cl.scroll_to(delta=-40, duration=200)
 
     return ft.Column(
         [
