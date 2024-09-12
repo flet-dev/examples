@@ -4,15 +4,15 @@ name = "Draggable containers"
 
 
 def example():
-    async def on_pan_update1(e: ft.DragUpdateEvent):
+    def on_pan_update1(e: ft.DragUpdateEvent):
         c.top = max(0, c.top + e.delta_y)
         c.left = max(0, c.left + e.delta_x)
-        await c.update_async()
+        c.update()
 
-    async def on_pan_update2(e: ft.DragUpdateEvent):
+    def on_pan_update2(e: ft.DragUpdateEvent):
         e.control.top = max(0, e.control.top + e.delta_y)
         e.control.left = max(0, e.control.left + e.delta_x)
-        await e.control.update_async()
+        e.control.update()
 
     gd = ft.GestureDetector(
         mouse_cursor=ft.MouseCursor.MOVE,
