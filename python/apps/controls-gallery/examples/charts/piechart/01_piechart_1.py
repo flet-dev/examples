@@ -7,12 +7,12 @@ def example():
     normal_border = ft.BorderSide(0, ft.colors.with_opacity(0, ft.colors.WHITE))
     hovered_border = ft.BorderSide(6, ft.colors.WHITE)
 
-    async def on_chart_event(e: ft.PieChartEvent):
+    def on_chart_event(e: ft.PieChartEvent):
         for idx, section in enumerate(chart.sections):
             section.border_side = (
                 hovered_border if idx == e.section_index else normal_border
             )
-        await chart.update_async()
+        chart.update()
 
     chart = ft.PieChart(
         sections=[

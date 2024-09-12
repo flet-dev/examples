@@ -27,11 +27,11 @@ def example():
             self.bg_to_y = 20
             self.bg_color = ft.colors.GREEN_300
 
-    async def on_chart_event(e: ft.BarChartEvent):
+    def on_chart_event(e: ft.BarChartEvent):
         for group_index, group in enumerate(chart.bar_groups):
             for rod_index, rod in enumerate(group.bar_rods):
                 rod.hovered = e.group_index == group_index and e.rod_index == rod_index
-        await chart.update_async()
+        chart.update()
 
     chart = ft.BarChart(
         bar_groups=[
