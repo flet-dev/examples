@@ -64,4 +64,4 @@ def main(page: Page):
     page.go(page.route)
 
 
-flet.app(target=main, view=flet.WEB_BROWSER)
+flet.app(target=main, view=flet.AppView.WEB_BROWSER)
