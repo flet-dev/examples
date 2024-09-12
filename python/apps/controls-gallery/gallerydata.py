@@ -194,4 +194,7 @@ class GalleryData:
                             grid_item.examples.append(example_item)
                 grid_item.examples.sort(key=lambda x: x.order)
                 control_group_dir.grid_items.append(grid_item)
-            control_group_dir.grid_items.sort(key=lambda x: x.name)
+            try:
+                control_group_dir.grid_items.sort(key=lambda x: x.name)
+            except:
+                print(control_group_dir.name, control_group_dir.grid_items)
