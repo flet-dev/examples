@@ -27,8 +27,8 @@ def example():
         switch_out_curve=ft.AnimationCurve.BOUNCE_IN,
     )
 
-    async def animate(e):
+    def animate(e):
         c.content = c2 if c.content == c1 else c1
-        await c.update_async()
+        c.update()
 
     return ft.Column(controls=[c, ft.ElevatedButton("Animate!", on_click=animate)])
