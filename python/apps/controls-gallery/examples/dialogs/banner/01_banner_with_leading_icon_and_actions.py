@@ -5,7 +5,6 @@ name = "Banner with leading icon and actions"
 
 def example():
     def close_banner(e):
-        # e.control.page.banner.open = False
         banner.open = False
         e.control.page.update()
 
