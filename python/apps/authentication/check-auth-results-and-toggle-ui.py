@@ -38,4 +38,4 @@ def main(page: Page):
     page.add(login_button, logout_button)
 
 
-flet.app(target=main, port=8550, view=flet.WEB_BROWSER)
+flet.app(target=main, port=8550, view=flet.AppView.WEB_BROWSER)
