@@ -23,25 +23,25 @@ def main(page: Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "spaceBetween"
 
-    top = Text(f"Top: {page.window_top}")
-    left = Text(f"Left: {page.window_left}")
+    top = Text(f"Top: {page.window.top}")
+    left = Text(f"Left: {page.window.left}")
     display_width = Text(f"Width: {page.width}")
     display_height = Text(f"Height: {page.height}")
 
     def always_on_top_changed(e):
-        page.window_always_on_top = always_on_top.value
+        page.window.always_on_top = always_on_top.value
         page.update()
 
     def maximize_clicked(e):
-        page.window_maximized = True
+        page.window.maximized = True
         page.update()
 
     def minimize_clicked(e):
-        page.window_minimized = True
+        page.window.minimized = True
         page.update()
 
     def full_screen_changed(e):
-        page.window_full_screen = full_screen.value
+        page.window.full_screen = full_screen.value
         maximize.disabled = full_screen.value
         minimize.disabled = full_screen.value
         width.disabled = full_screen.value
@@ -49,7 +49,7 @@ def main(page: Page):
         page.update()
 
     def resizable_changed(e):
-        page.window_resizable = resizable.value
+        page.window.resizable = resizable.value
         maximize.disabled = not resizable.value
         minimize.disabled = not resizable.value
         width.disabled = not resizable.value
@@ -70,58 +70,58 @@ def main(page: Page):
     minimize = ElevatedButton(text="Minimize", on_click=minimize_clicked)
 
     def width_changed(e):
-        page.window_width = e.control.value
+        page.window.width = e.control.value
         window_changed(e)
         page.update()
 
     def height_changed(e):
-        page.window_height = e.control.value
+        page.window.height = e.control.value
         window_changed(e)
         page.update()
 
     width = Slider(
         min=750,
         max=1400,
-        value=page.window_width,
+        value=page.window.width,
         on_change=width_changed,
     )
 
     height = Slider(
-        min=500, max=900, value=page.window_height, on_change=height_changed
+        min=500, max=900, value=page.window.height, on_change=height_changed
     )
 
     def update_coordinates():
-        top.value = f"Top: {page.window_top}"
-        left.value = f"Left: {page.window_left}"
+        top.value = f"Top: {page.window.top}"
+        left.value = f"Left: {page.window.left}"
 
     def window_changed(e):
         update_coordinates()
 
-        display_width.value = f"Width: {page.window_width:.2f}"
-        display_height.value = f"Height: {page.window_height:.2f}"
+        display_width.value = f"Width: {page.window.width:.2f}"
+        display_height.value = f"Height: {page.window.height:.2f}"
         page.update()
 
     def move_up(e):
-        page.window_top = page.window_top - 10
+        page.window.top = page.window.top - 10
         update_coordinates()
         page.update()
 
     def move_down(e):
-        page.window_top = page.window_top + 10
+        page.window.top = page.window.top + 10
         update_coordinates()
         page.update()
 
     def move_left(e):
-        page.window_left = page.window_left - 10
+        page.window.left = page.window.left - 10
         update_coordinates()
         page.update()
 
     def move_right(e):
-        page.window_left = page.window_left + 10
+        page.window.left = page.window.left + 10
         update_coordinates()
         page.update()
 
-    page.on_window_event = window_changed
+    page.window.on_event = window_changed
 
     # add controls on Page
     page.add(
@@ -239,6 +239,5 @@ def main(page: Page):
     )
 
     window_changed(None)
-
 
 flet.app(target=main)
