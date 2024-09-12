@@ -6,11 +6,11 @@ from flet import ElevatedButton, ProgressBar
 
 def main(page):
     def button_click(e):
-        page.splash = ProgressBar()
+        page.overlay.append(ProgressBar())
         btn.disabled = True
         page.update()
         sleep(3)
-        page.splash = None
+        page.overlay.clear()
         btn.disabled = False
         page.update()
 
