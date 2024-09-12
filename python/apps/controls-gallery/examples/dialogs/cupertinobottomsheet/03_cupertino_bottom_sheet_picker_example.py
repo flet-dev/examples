@@ -39,7 +39,7 @@ def example():
             ft.TextButton(
                 content=ft.Text(fruits[3], size=23, ref=selected_fruit_ref),
                 style=ft.ButtonStyle(color=ft.colors.BLUE),
-                on_click=lambda e: e.control.page.show_bottom_sheet(
+                on_click=lambda e: e.control.page.open(
                     ft.CupertinoBottomSheet(
                         picker,
                         height=216,
