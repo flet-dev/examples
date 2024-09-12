@@ -4,12 +4,12 @@ name = "Change container bgcolor property"
 
 
 def example():
-    async def change_bgcolor(e):
+    def change_bgcolor(e):
         container.bgcolor = new_color.value
         new_color.value = ""
 
-        await container.update_async()
-        await new_color.update_async()
+        container.update()
+        new_color.update()
 
     container = ft.Container(
         width=200, height=200, border=ft.border.all(1, ft.colors.BLACK)

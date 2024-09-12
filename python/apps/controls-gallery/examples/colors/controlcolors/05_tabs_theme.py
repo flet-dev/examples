@@ -40,10 +40,10 @@ def example():
                 label_color=ft.colors.GREEN,
                 unselected_label_color=ft.colors.AMBER,
                 overlay_color={
-                    ft.MaterialState.FOCUSED: ft.colors.with_opacity(
+                    ft.ControlState.FOCUSED: ft.colors.with_opacity(
                         0.2, ft.colors.GREEN
                     ),
-                    ft.MaterialState.DEFAULT: ft.colors.with_opacity(
+                    ft.ControlState.DEFAULT: ft.colors.with_opacity(
                         0.2, ft.colors.PINK
                     ),
                 },
