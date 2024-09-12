@@ -30,4 +30,4 @@ def main(page: Page):
     page.add(ElevatedButton("Login with LinkedIn", on_click=login_click))
 
 
-flet.app(target=main, port=8550, view=flet.WEB_BROWSER)
+flet.app(target=main, port=8550, view=flet.AppView.WEB_BROWSER)
