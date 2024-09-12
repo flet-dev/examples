@@ -1,10 +1,10 @@
 import flet
 from flet import Container, IconButton, Page, Row, Text, WindowDragArea, colors, icons
 
-
 def main(page: Page):
-    page.window_title_bar_hidden = True
-    page.window_title_bar_buttons_hidden = True
+    # Use the updated properties for window title bar settings
+    page.window.title_bar_hidden = True
+    page.window.title_bar_buttons_hidden = True
 
     page.add(
         Row(
@@ -19,10 +19,11 @@ def main(page: Page):
                     ),
                     expand=True,
                 ),
-                IconButton(icons.CLOSE, on_click=lambda _: page.window_close()),
+                # Use the updated method to close the window
+                IconButton(icons.CLOSE, on_click=lambda _: page.window.close()),
             ]
         )
     )
 
-
 flet.app(target=main)
+
