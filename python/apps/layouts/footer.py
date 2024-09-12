@@ -18,4 +18,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main, port=8550, view=flet.WEB_BROWSER)
+flet.app(target=main, port=8550, view=flet.AppView.WEB_BROWSER)
