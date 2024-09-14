@@ -10,13 +10,12 @@ from flet import (
     colors,
 )
 
-
 def main(page: Page):
     page.add(
         Row(
             [
                 ShaderMask(
-                    Image(
+                    content=Image(
                         src="https://picsum.photos/200/300?1",
                         width=400,
                         height=400,
@@ -31,7 +30,7 @@ def main(page: Page):
                     ),
                 ),
                 ShaderMask(
-                    Image(src="https://picsum.photos/200/300?2"),
+                    content=Image(src="https://picsum.photos/200/300?2"),
                     blend_mode="dstIn",
                     shader=LinearGradient(
                         begin=alignment.top_center,
@@ -43,6 +42,5 @@ def main(page: Page):
             ]
         )
     )
-
 
 flet.app(target=main)
