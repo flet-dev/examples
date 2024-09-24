@@ -7,8 +7,8 @@ class ExamplesView(ft.Column):
         self.gallery = gallery
         self.visible = False
         self.expand = True
-        self.control_name_text = ft.Text(style=ft.TextThemeStyle.HEADLINE_MEDIUM)
-        self.control_description = ft.Text(style=ft.TextThemeStyle.BODY_MEDIUM)
+        self.control_name_text = ft.Text(theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM)
+        self.control_description = ft.Text(theme_style=ft.TextThemeStyle.BODY_MEDIUM)
         self.examples = ft.Column(expand=True, spacing=10, scroll=ft.ScrollMode.AUTO)
         self.controls = [
             self.control_name_text,
