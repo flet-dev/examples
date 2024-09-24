@@ -32,7 +32,7 @@ class ExamplesView(ft.Column):
                                 controls=[
                                     ft.Text(
                                         example.name,
-                                        style=ft.TextThemeStyle.TITLE_MEDIUM,
+                                        theme_style=ft.TextThemeStyle.TITLE_MEDIUM,
                                         weight=ft.FontWeight.W_500,
                                     ),
                                     ft.IconButton(
@@ -43,7 +43,7 @@ class ExamplesView(ft.Column):
                                             color=ft.colors.ON_SURFACE,
                                         ),
                                         url=f"https://github.com/flet-dev/examples/blob/main/python/apps/controls-gallery/examples/{example.file_name}",
-                                        url_target="_blank",
+                                        url_target=ft.UrlTarget.BLANK,
                                     ),
                                 ],
                             ),
