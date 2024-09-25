@@ -14,20 +14,6 @@ def example():
         ft.VideoMedia(
             "https://user-images.githubusercontent.com/28951144/229373716-76da0a4e-225a-44e4-9ee7-3e9006dbc3e3.mp4"
         ),
-        ft.VideoMedia(
-            "https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4"
-        ),
-        ft.VideoMedia(
-            "https://user-images.githubusercontent.com/28951144/229373709-603a7a89-2105-4e1b-a5a5-a6c3567c9a59.mp4",
-            extras={
-                "artist": "Thousand Foot Krutch",
-                "album": "The End Is Where We Begin",
-            },
-            http_headers={
-                "Foo": "Bar",
-                "Accept": "*/*",
-            },
-        ),
     ]
     video = ft.Video(
         expand=True,
