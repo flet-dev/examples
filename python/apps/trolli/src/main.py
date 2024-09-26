@@ -211,6 +211,6 @@ def main(page: Page):
     page.update()
     app.initialize()
 
-print("flet version: ", flet.version.version)
-print("flet path: ", flet.__file__)
+#print("flet version: ", flet.version.version)
+#print("flet path: ", flet.__file__)
 flet.app(target=main, assets_dir="../assets")
