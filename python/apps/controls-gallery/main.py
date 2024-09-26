@@ -29,11 +29,11 @@ def main(page: ft.Page):
         if len(route_list) == 0:
             page.go("/layout")
         else:
-            gallery.selected_control_group = gallery.get_control_group(route_list[0])
+            # gallery.selected_control_group = gallery.get_control_group(route_list[0])
             if len(route_list) == 1:
-                gallery_view.display_controls_grid()
+                gallery_view.display_controls_grid(route_list[0])
             elif len(route_list) == 2:
-                gallery_view.display_control_examples(route_list[1])
+                gallery_view.display_control_examples(route_list[0], route_list[1])
             else:
                 print("Invalid route")
 
