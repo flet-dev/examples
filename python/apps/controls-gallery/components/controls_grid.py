@@ -16,10 +16,11 @@ class ControlsGrid(ft.GridView):
         route = f"{self.page.route}/{e.control.data.id}"
         self.page.go(route)
 
-    def display(self):
+    def display(self, control_group):
         self.visible = True
         self.controls = []
-        for grid_item in self.gallery.selected_control_group.grid_items:
+        # for grid_item in self.gallery.selected_control_group.grid_items:
+        for grid_item in control_group.grid_items:
             self.controls.append(
                 ft.Container(
                     on_click=self.grid_item_clicked,

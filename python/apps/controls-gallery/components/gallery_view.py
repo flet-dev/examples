@@ -20,16 +20,18 @@ class GalleryView(ft.Row):
             self.examples_view,
         ]
 
-    def display_controls_grid(self):
-        self.controls_grid.display()
+    def display_controls_grid(self, control_group_name):
+        self.controls_grid.display(self.gallery.get_control_group(control_group_name))
         self.examples_view.examples.controls = []
         self.examples_view.visible = False
         self.page.update()
 
-    def display_control_examples(self, control_name):
+    def display_control_examples(self, control_group_name, control_name):
         self.examples_view.display(
             self.gallery.get_control(
-                self.gallery.selected_control_group.name, control_name
+                # self.gallery.selected_control_group.name, control_name
+                control_group_name,
+                control_name,
             )
         )
         self.controls_grid.visible = False

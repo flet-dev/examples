@@ -62,9 +62,9 @@ class NavigationColumn(ft.Column):
         self.page.go(f"/{e.control.destination.name}")
 
     def update_selected_item(self):
-        self.selected_index = self.gallery.control_groups.index(
-            self.gallery.selected_control_group
-        )
+        # self.selected_index = self.gallery.control_groups.index(
+        #     self.gallery.selected_control_group
+        # )
         for item in self.controls:
             item.bgcolor = None
             item.content.controls[0].name = item.destination.icon

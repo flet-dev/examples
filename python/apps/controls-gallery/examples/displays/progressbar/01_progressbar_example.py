@@ -28,11 +28,13 @@ def example():
     return ft.Column(
         [
             ft.Text(
-                "Linear progress indicator", style=ft.TextThemeStyle.HEADLINE_SMALL
+                "Linear progress indicator",
+                theme_style=ft.TextThemeStyle.HEADLINE_SMALL,
             ),
             ft.Column([t, pb]),
             ft.Text(
-                "Indeterminate progress bar", style=ft.TextThemeStyle.HEADLINE_SMALL
+                "Indeterminate progress bar",
+                theme_style=ft.TextThemeStyle.HEADLINE_SMALL,
             ),
             ft.ProgressBar(width=400, color="amber", bgcolor="#eeeeee"),
             b,
