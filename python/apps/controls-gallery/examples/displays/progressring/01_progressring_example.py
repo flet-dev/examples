@@ -28,12 +28,13 @@ def example():
     return ft.Column(
         [
             ft.Text(
-                "Circular progress indicator", style=ft.TextThemeStyle.HEADLINE_SMALL
+                "Circular progress indicator",
+                theme_style=ft.TextThemeStyle.HEADLINE_SMALL,
             ),
             ft.Row([pr, t]),
             ft.Text(
                 "Indeterminate cicrular progress",
-                style=ft.TextThemeStyle.HEADLINE_SMALL,
+                theme_style=ft.TextThemeStyle.HEADLINE_SMALL,
             ),
             ft.Column(
                 [ft.ProgressRing(), ft.Text("I'm going to run for ages...")],

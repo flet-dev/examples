@@ -122,18 +122,20 @@ class GalleryData:
             ),
         ]
         self.import_modules()
-        self.selected_control_group = self.control_groups[0]
+        # self.selected_control_group = self.control_groups[0]
 
     def get_control_group(self, control_group_name):
         for control_group in self.control_groups:
             if control_group.name == control_group_name:
                 return control_group
+        # return self.control_groups[0]
 
     def get_control(self, control_group_name, control_name):
         control_group = self.get_control_group(control_group_name)
         for grid_item in control_group.grid_items:
             if grid_item.id == control_name:
                 return grid_item
+        # return self.control_groups[0].grid_items[0]
 
     def list_control_dirs(self, dir):
         file_path = os.path.join(str(Path(__file__).parent), "examples", dir)
