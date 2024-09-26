@@ -1,6 +1,7 @@
 import flet
 from app_layout import AppLayout
 from board import Board
+from board_list import BoardList
 from data_store import DataStore
 from flet import (
     AlertDialog,
@@ -12,12 +13,10 @@ from flet import (
     Page,
     PopupMenuButton,
     PopupMenuItem,
-    RoundedRectangleBorder,
     Row,
     TemplateRoute,
     Text,
     TextField,
-    UserControl,
     View,
     colors,
     icons,
@@ -29,9 +28,8 @@ from memory_store import InMemoryStore
 from user import User
 
 
-class TrelloApp(UserControl):
+class TrelloApp(AppLayout):
     def __init__(self, page: Page, store: DataStore):
-        super().__init__()
         self.page = page
         self.store: DataStore = store
         self.page.on_route_change = self.route_change
@@ -58,9 +56,7 @@ class TrelloApp(UserControl):
         )
         self.page.appbar = self.appbar
         self.page.update()
-
-    def build(self):
-        self.layout = AppLayout(
+        super().__init__(
             self,
             self.page,
             self.store,
@@ -68,13 +64,23 @@ class TrelloApp(UserControl):
             expand=True,
             vertical_alignment="start",
         )
-        return self.layout
+
+    # def build(self):
+    #     self.layout = AppLayout(
+    #         self,
+    #         self.page,
+    #         self.store,
+    #         tight=True,
+    #         expand=True,
+    #         vertical_alignment="start",
+    #     )
+    #     return self.layout
 
     def initialize(self):
         self.page.views.append(
             View(
                 "/",
-                [self.appbar, self.layout],
+                [self.appbar, self],
                 padding=padding.all(0),
                 bgcolor=colors.BLUE_GREY_200,
             )
@@ -131,11 +137,11 @@ class TrelloApp(UserControl):
             if int(troute.id) > len(self.store.get_boards()):
                 self.page.go("/")
                 return
-            self.layout.set_board_view(int(troute.id))
+            self.set_board_view(int(troute.id))
         elif troute.match("/boards"):
-            self.layout.set_all_boards_view()
+            self.set_all_boards_view()
         elif troute.match("/members"):
-            self.layout.set_members_view()
+            self.set_members_view()
         self.page.update()
 
     def add_board(self, e):
@@ -183,13 +189,13 @@ class TrelloApp(UserControl):
         dialog_text.focus()
 
     def create_new_board(self, board_name):
-        new_board = Board(self, self.store, board_name)
+        new_board = Board(self, self.store, board_name, self.page)
         self.store.add_board(new_board)
-        self.layout.hydrate_all_boards_view()
+        self.hydrate_all_boards_view()
 
     def delete_board(self, e):
         self.store.remove_board(e.control.data)
-        self.layout.set_all_boards_view()
+        self.set_all_boards_view()
 
 
 def main(page: Page):
@@ -205,5 +211,6 @@ def main(page: Page):
     page.update()
     app.initialize()
 
-
+print("flet version: ", flet.version.version)
+print("flet path: ", flet.__file__)
 flet.app(target=main, assets_dir="../assets")
