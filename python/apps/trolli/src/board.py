@@ -1,12 +1,12 @@
 import itertools
 from flet import (
-    UserControl,
     Column,
     Row,
     FloatingActionButton,
     ElevatedButton,
     Text,
     GridView,
+    Page,
     Container,
     TextField,
     AlertDialog,
@@ -23,11 +23,11 @@ from board_list import BoardList
 from data_store import DataStore
 
 
-class Board(UserControl):
+class Board(Container):
     id_counter = itertools.count()
 
-    def __init__(self, app, store: DataStore, name: str):
-        super().__init__()
+    def __init__(self, app, store: DataStore, name: str, page: Page):
+        self.page = page
         self.board_id = next(Board.id_counter)
         self.store: DataStore = store
         self.app = app
@@ -35,44 +35,30 @@ class Board(UserControl):
         self.add_list_button = FloatingActionButton(
             icon=icons.ADD, text="add a list", height=30, on_click=self.create_list)
 
-        self.board_lists = [
-            self.add_list_button
-        ]
+        self.board_lists = Row(
+            controls=[self.add_list_button],
+            vertical_alignment="start",
+            scroll="auto",
+            expand=True,
+            width=(self.app.page.width - 310),
+            height=(self.app.page.height - 95),
+        )
         for l in self.store.get_lists_by_board(self.board_id):
             self.add_list(l)
 
-        self.list_wrap = Row(
-            self.board_lists,
-            vertical_alignment="start",
-            visible=True,
-            scroll="auto",
-            width=(self.app.page.width - 310),
-            height=(self.app.page.height - 95)
-        )
-
-    def build(self):
-        self.view = Container(
-            content=Column(
-                controls=[
-                    self.list_wrap
-                ],
-
-                scroll="auto",
-                expand=True
-            ),
+        super().__init__(
+            content=self.board_lists,
             data=self,
             margin=margin.all(0),
             padding=padding.only(top=10, right=0),
-            height=self.app.page.height,
+            height=self.app.page.height
         )
-        return self.view
 
     def resize(self, nav_rail_extended, width, height):
-        self.list_wrap.width = (
+        self.board_lists.width = (
             width - 310) if nav_rail_extended else (width - 50)
-        self.view.height = height
-        self.list_wrap.update()
-        self.view.update()
+        self.height = height
+        self.update()
 
     def create_list(self, e):
 
@@ -112,12 +98,11 @@ class Board(UserControl):
 
         def close_dlg(e):
             if (hasattr(e.control, "text") and not e.control.text == "Cancel") or (type(e.control) is TextField and e.control.value != ""):
-                new_list = BoardList(self, self.store, dialog_text.value,
+                new_list = BoardList(self, self.store, dialog_text.value, self.page,
                                      color=color_options.data)
                 self.add_list(new_list)
             dialog.open = False
             self.page.update()
-            self.update()
 
         def textfield_change(e):
             if dialog_text.value == "":
@@ -154,9 +139,10 @@ class Board(UserControl):
         self.store.remove_list(self.board_id, list.board_list_id)
         self.update()
 
-    def add_list(self, list: BoardList):
-        self.board_lists.insert(-1, list)
+    def add_list(self, list):
+        self.board_lists.controls.insert(-1, list)
         self.store.add_list(self.board_id, list)
+        self.page.update()
 
     def color_option_creator(self, color: str):
         return Container(

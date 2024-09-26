@@ -3,13 +3,13 @@ if TYPE_CHECKING:
     from board import Board
 import itertools
 from flet import (
-    UserControl,
     Draggable,
     DragTarget,
     Column,
     Row,
     Text,
     Icon,
+    Page,
     PopupMenuButton,
     PopupMenuItem,
     Container,
@@ -26,11 +26,11 @@ from item import Item
 from data_store import DataStore
 
 
-class BoardList(UserControl):
+class BoardList(Container):
     id_counter = itertools.count()
 
-    def __init__(self, board: "Board", store: DataStore, title: str, color: str = ""):
-        super().__init__()
+    def __init__(self, board: "Board", store: DataStore, title: str, page: Page, color: str = ""):
+        self.page = page
         self.board_list_id = next(BoardList.id_counter)
         self.store: DataStore = store
         self.board = board
@@ -38,9 +38,6 @@ class BoardList(UserControl):
         self.color = color
         self.items = Column([], tight=True, spacing=4)
         self.items.controls = self.store.get_items(self.board_list_id)
-
-    def build(self):
-
         self.new_item_field = TextField(
             label="new card name", height=50, bgcolor=colors.WHITE, on_submit=self.add_item_handler)
 
@@ -51,11 +48,13 @@ class BoardList(UserControl):
             width=200,
             opacity=0.0
         )
+
         self.edit_field = Row([
             TextField(value=self.title, width=150, height=40,
                       content_padding=padding.only(left=10, bottom=10)),
             TextButton(text="Save", on_click=self.save_title)
         ])
+        
         self.header = Row(
             controls=[
                 Text(value=self.title, style="titleMedium",
@@ -103,6 +102,7 @@ class BoardList(UserControl):
             padding=padding.only(
                 bottom=10, right=10, left=10, top=5)
         )
+
         self.view = DragTarget(
             group="items",
             content=Draggable(
@@ -121,9 +121,11 @@ class BoardList(UserControl):
             on_will_accept=self.item_will_drag_accept,
             on_leave=self.item_drag_leave
         )
-
-        return self.view
-
+        super().__init__(
+            content=self.view,
+            data=self
+        )
+        
     def item_drag_accept(self, e):
         src = self.page.get_control(e.src_id)
         self.add_item(src.data.item_text)
@@ -142,13 +144,12 @@ class BoardList(UserControl):
 
     def list_drag_accept(self, e):
         src = self.page.get_control(e.src_id)
-        l = self.board.board_lists
+        l = self.board.content.controls
         to_index = l.index(e.control.data)
         from_index = l.index(src.content.data)
         l[to_index], l[from_index] = l[from_index], l[to_index]
         self.inner_list.border = border.all(2, colors.BLACK12)
-        self.board.update()
-        self.update()
+        self.page.update()
 
     def list_will_drag_accept(self, e):
         if e.data == "true":
@@ -171,7 +172,6 @@ class BoardList(UserControl):
         self.title = self.edit_field.controls[0].value
         self.header.controls[0] = Text(value=self.title, style="titleMedium",
                                        text_align="left", overflow="clip", expand=True)
-
         self.header.controls[1].visible = True
         self.update()
 

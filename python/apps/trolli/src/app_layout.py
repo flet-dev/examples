@@ -22,7 +22,6 @@ from flet import (
 )
 from sidebar import Sidebar
 
-
 class AppLayout(Row):
     def __init__(self, app, page: Page, store: DataStore, *args, **kwargs):
         super().__init__(*args, **kwargs)

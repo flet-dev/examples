@@ -8,18 +8,15 @@ from flet import (
     Container,
     Checkbox,
     Row,
-    UserControl,
     Card,
     border_radius,
 )
 from data_store import DataStore
 
-
-class Item(UserControl):
+class Item(Container):
     id_counter = itertools.count()
 
     def __init__(self, list: "BoardList", store: DataStore, item_text: str):
-        super().__init__()
         self.item_id = next(Item.id_counter)
         self.store: DataStore = store
         self.list = list
@@ -35,9 +32,6 @@ class Item(UserControl):
             elevation=1,
             data=self.list
         )
-
-    def build(self):
-
         self.view = Draggable(
             group="items",
             content=DragTarget(
@@ -49,7 +43,9 @@ class Item(UserControl):
             ),
             data=self
         )
-        return self.view
+        super().__init__(
+            content=self.view
+        )
 
     def drag_accept(self, e):
         src = self.page.get_control(e.src_id)
