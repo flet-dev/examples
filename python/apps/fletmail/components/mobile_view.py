@@ -1,4 +1,5 @@
 import flet as ft
+
 from components.app_view import AppView
 from components.message_view import MessageView
 from components.new_message_view import NewMessageMobileView
@@ -67,6 +68,7 @@ class MobileView(AppView):
         if e.control.selected_index == 0:
             print("Open Mail Menu")
             self.display_inbox()
+            # self.display_mail()
         if e.control.selected_index == 1:
             print("Open Chat Menu")
             self.display_chat()
@@ -104,6 +106,7 @@ class MobileView(AppView):
         print("Message clicked! Open message view")
         # message = self.get_message(e.control.data)
         self.page.views.append(MessageView(e.control.data))
+        # self.selected_message = e.control.data
         self.page.update()
 
     def display_inbox(self):
@@ -111,10 +114,11 @@ class MobileView(AppView):
         self.mail_view.visible = True
         self.chat_view.visible = False
         self.meet_view.visible = False
-        if self.selected_message_id == None:
-            self.page.go("/inbox")
-        else:
-            self.page.go(f"/inbox/{self.selected_message_id}")
+        # if self.selected_message.id == None:
+        #     self.page.go("/inbox")
+        # else:
+        #     self.page.go(f"/inbox/{self.selected_message.id}")
+        self.page.go("/inbox")
 
     def display_chat(self):
         print("Display chat")
