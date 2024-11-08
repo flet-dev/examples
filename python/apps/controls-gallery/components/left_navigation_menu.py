@@ -14,9 +14,7 @@ class PopupColorItem(ft.PopupMenuItem):
         self.data = color
 
     def seed_color_changed(self, e):
-        self.page.theme = self.page.dark_theme = ft.theme.Theme(
-            color_scheme_seed=self.data
-        )
+        self.page.theme = self.page.dark_theme = ft.Theme(color_scheme_seed=self.data)
         self.page.update()
 
 
