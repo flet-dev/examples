@@ -43,7 +43,7 @@ def example():
                     ft.CupertinoBottomSheet(
                         picker,
                         height=216,
-                        bgcolor=ft.cupertino_colors.SYSTEM_BACKGROUND,
+                        bgcolor=ft.CupertinoColors.SYSTEM_BACKGROUND,
                         padding=ft.padding.only(top=6),
                     )
                 ),

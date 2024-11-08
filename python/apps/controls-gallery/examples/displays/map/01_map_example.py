@@ -19,7 +19,7 @@ def example():
     #         marker_layer_ref.current.markers.append(
     #             map.Marker(
     #                 content=ft.Icon(
-    #                     ft.Icons.LOCATION_ON, color=ft.cupertino_colors.DESTRUCTIVE_RED
+    #                     ft.Icons.LOCATION_ON, color=ft.CupertinoColors.DESTRUCTIVE_RED
     #                 ),
     #                 coordinates=e.coordinates,
     #             )

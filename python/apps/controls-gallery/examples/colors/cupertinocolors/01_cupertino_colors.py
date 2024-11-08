@@ -17,15 +17,15 @@ def example():
     cupertino_colors_column = ft.Column(spacing=0, controls=[])
 
     colors_list = [
-        (k, v) for k, v in ft.cupertino_colors.__dict__.items() if k.isupper()
+        (k, v) for k, v in ft.CupertinoColors.__dict__.items() if k.isupper()
     ]
 
     for color in colors_list:
 
         if color[1] in ("activeBlue", "link"):
-            text_color = ft.cupertino_colors.WHITE
+            text_color = ft.CupertinoColors.WHITE
         else:
-            text_color = ft.cupertino_colors.ACTIVE_BLUE
+            text_color = ft.CupertinoColors.ACTIVE_BLUE
 
         cupertino_colors_column.controls.append(
             ft.Container(

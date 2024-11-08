@@ -29,9 +29,6 @@ def example():
         fab_example.content.controls.append(
             ft.ListTile(title=ft.Text(f"Tile {e.control.data}"))
         )
-        # e.control.page.show_snack_bar(
-        #     ft.SnackBar(ft.Text("Tile was added successfully!"), open=True)
-        # )
         e.control.page.open(
             ft.SnackBar(ft.Text("Tile was added successfully!"), open=True)
         )
