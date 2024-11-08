@@ -2,6 +2,7 @@ import flet as ft
 
 name = "BarChart 1"
 
+
 def example():
 
     chart = ft.BarChart(
@@ -13,7 +14,7 @@ def example():
                         from_y=0,
                         to_y=40,
                         width=40,
-                        color=ft.colors.AMBER,
+                        color=ft.Colors.AMBER,
                         tooltip="Apple",
                         border_radius=0,
                     ),
@@ -26,7 +27,7 @@ def example():
                         from_y=0,
                         to_y=100,
                         width=40,
-                        color=ft.colors.BLUE,
+                        color=ft.Colors.BLUE,
                         tooltip="Blueberry",
                         border_radius=0,
                     ),
@@ -39,7 +40,7 @@ def example():
                         from_y=0,
                         to_y=30,
                         width=40,
-                        color=ft.colors.RED,
+                        color=ft.Colors.RED,
                         tooltip="Cherry",
                         border_radius=0,
                     ),
@@ -52,14 +53,14 @@ def example():
                         from_y=0,
                         to_y=60,
                         width=40,
-                        color=ft.colors.ORANGE,
+                        color=ft.Colors.ORANGE,
                         tooltip="Orange",
                         border_radius=0,
                     ),
                 ],
             ),
         ],
-        border=ft.border.all(1, ft.colors.GREY_400),
+        border=ft.border.all(1, ft.Colors.GREY_400),
         left_axis=ft.ChartAxis(
             labels_size=40, title=ft.Text("Fruit supply"), title_size=40
         ),
@@ -81,14 +82,14 @@ def example():
             labels_size=40,
         ),
         horizontal_grid_lines=ft.ChartGridLines(
-            color=ft.colors.GREY_300, width=1, dash_pattern=[3, 3]
+            color=ft.Colors.GREY_300, width=1, dash_pattern=[3, 3]
         ),
-        tooltip_bgcolor=ft.colors.with_opacity(0.5, ft.colors.GREY_300),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.5, ft.Colors.GREY_300),
         max_y=110,
         interactive=True,
-        #expand=True,
+        # expand=True,
         width=700,
-        height=500
+        height=500,
     )
-    
+
     return chart

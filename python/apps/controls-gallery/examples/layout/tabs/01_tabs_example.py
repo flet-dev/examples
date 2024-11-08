@@ -15,12 +15,12 @@ def example():
                 ),
             ),
             ft.Tab(
-                tab_content=ft.Icon(ft.icons.SEARCH),
+                tab_content=ft.Icon(ft.Icons.SEARCH),
                 content=ft.Text("This is Tab 2"),
             ),
             ft.Tab(
                 text="Tab 3",
-                icon=ft.icons.SETTINGS,
+                icon=ft.Icons.SETTINGS,
                 content=ft.Text("This is Tab 3"),
             ),
         ],

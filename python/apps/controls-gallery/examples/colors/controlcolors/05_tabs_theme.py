@@ -15,12 +15,12 @@ def example():
                 ),
             ),
             ft.Tab(
-                tab_content=ft.Icon(ft.icons.SEARCH),
+                tab_content=ft.Icon(ft.Icons.SEARCH),
                 content=ft.Text("This is Tab 2"),
             ),
             ft.Tab(
                 text="Tab 3",
-                icon=ft.icons.SETTINGS,
+                icon=ft.Icons.SETTINGS,
                 content=ft.Text("This is Tab 3"),
             ),
         ],
@@ -34,17 +34,17 @@ def example():
         border=ft.border.all(1, "black"),
         theme=ft.Theme(
             tabs_theme=ft.TabsTheme(
-                divider_color=ft.colors.BLUE,
-                indicator_color=ft.colors.RED,
+                divider_color=ft.Colors.BLUE,
+                indicator_color=ft.Colors.RED,
                 indicator_tab_size=True,
-                label_color=ft.colors.GREEN,
-                unselected_label_color=ft.colors.AMBER,
+                label_color=ft.Colors.GREEN,
+                unselected_label_color=ft.Colors.AMBER,
                 overlay_color={
-                    ft.ControlState.FOCUSED: ft.colors.with_opacity(
-                        0.2, ft.colors.GREEN
+                    ft.ControlState.FOCUSED: ft.Colors.with_opacity(
+                        0.2, ft.Colors.GREEN
                     ),
-                    ft.ControlState.DEFAULT: ft.colors.with_opacity(
-                        0.2, ft.colors.PINK
+                    ft.ControlState.DEFAULT: ft.Colors.with_opacity(
+                        0.2, ft.Colors.PINK
                     ),
                 },
             )

@@ -12,7 +12,7 @@ def example():
         await e.control.page.update_async()
 
     color_picker = ColorPicker(color="#c8df6f", width=300)
-    color_icon = ft.IconButton(icon=ft.icons.BRUSH, on_click=open_color_picker)
+    color_icon = ft.IconButton(icon=ft.Icons.BRUSH, on_click=open_color_picker)
 
     async def change_color(e):
         color_icon.icon_color = color_picker.color

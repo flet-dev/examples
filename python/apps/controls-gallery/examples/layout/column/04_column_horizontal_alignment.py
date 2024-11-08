@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Column horizontal alignments"
 
+
 def example():
 
     def items(count):
@@ -13,7 +14,7 @@ def example():
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER_500,
+                    bgcolor=ft.Colors.AMBER_500,
                 )
             )
         return items
@@ -28,18 +29,18 @@ def example():
                         alignment=ft.MainAxisAlignment.START,
                         horizontal_alignment=align,
                     ),
-                    bgcolor=ft.colors.AMBER_100,
+                    bgcolor=ft.Colors.AMBER_100,
                     width=100,
                 ),
             ]
         )
 
     return ft.Row(
-            [
-                column_with_horiz_alignment(ft.CrossAxisAlignment.START),
-                column_with_horiz_alignment(ft.CrossAxisAlignment.CENTER),
-                column_with_horiz_alignment(ft.CrossAxisAlignment.END),
-            ],
-            spacing=30,
-            alignment=ft.MainAxisAlignment.START,
-        )
+        [
+            column_with_horiz_alignment(ft.CrossAxisAlignment.START),
+            column_with_horiz_alignment(ft.CrossAxisAlignment.CENTER),
+            column_with_horiz_alignment(ft.CrossAxisAlignment.END),
+        ],
+        spacing=30,
+        alignment=ft.MainAxisAlignment.START,
+    )

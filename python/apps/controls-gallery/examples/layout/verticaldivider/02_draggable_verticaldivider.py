@@ -14,7 +14,7 @@ def example():
         e.control.update()
 
     c = ft.Container(
-        bgcolor=ft.colors.ORANGE_300,
+        bgcolor=ft.Colors.ORANGE_300,
         alignment=ft.alignment.center,
         width=100,
         # expand=1,
@@ -30,7 +30,7 @@ def example():
                 on_hover=show_draggable_cursor,
             ),
             ft.Container(
-                bgcolor=ft.colors.BROWN_400,
+                bgcolor=ft.Colors.BROWN_400,
                 alignment=ft.alignment.center,
                 expand=1,
             ),

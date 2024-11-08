@@ -9,6 +9,6 @@ def example():
 
     return ft.CupertinoActivityIndicator(
         radius=50,
-        color=ft.colors.RED,
+        color=ft.Colors.RED,
         animating=True,
     )

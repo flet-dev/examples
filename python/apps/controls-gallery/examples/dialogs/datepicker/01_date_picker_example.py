@@ -20,7 +20,7 @@ def example():
             self.controls = [
                 ft.ElevatedButton(
                     "Pick date",
-                    icon=ft.icons.CALENDAR_MONTH,
+                    icon=ft.Icons.CALENDAR_MONTH,
                     on_click=self.open_date_picker,
                 ),
                 self.selected_date,

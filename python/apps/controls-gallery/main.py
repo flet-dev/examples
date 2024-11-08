@@ -44,7 +44,7 @@ def main(page: ft.Page):
         leading_width=40,
         title=ft.Text("Flet Controls Gallery"),
         center_title=True,
-        bgcolor=ft.colors.INVERSE_PRIMARY,
+        bgcolor=ft.Colors.INVERSE_PRIMARY,
         actions=[
             ft.Container(
                 padding=10, content=ft.Text(f"Flet version: {flet.version.version}")

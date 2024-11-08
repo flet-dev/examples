@@ -6,8 +6,8 @@ name = "Customize Theme colors"
 def example():
     def set_primary_color(e):
         e.control.page.theme = ft.Theme(
-            color_scheme=ft.ColorScheme(
-                primary=ft.colors.GREEN,
+            color_scheme=ft.Colorscheme(
+                primary=ft.Colors.GREEN,
             ),
         )
         e.control.page.update()

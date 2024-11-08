@@ -16,13 +16,13 @@ def example():
     )
     # avatar with icon, aka icon with inverse background
     a3 = ft.CircleAvatar(
-        content=ft.Icon(ft.icons.ABC),
+        content=ft.Icon(ft.Icons.ABC),
     )
     # avatar with icon and custom colors
     a4 = ft.CircleAvatar(
-        content=ft.Icon(ft.icons.WARNING_ROUNDED),
-        color=ft.colors.YELLOW_200,
-        bgcolor=ft.colors.AMBER_700,
+        content=ft.Icon(ft.Icons.WARNING_ROUNDED),
+        color=ft.Colors.YELLOW_200,
+        bgcolor=ft.Colors.AMBER_700,
     )
     # avatar with online status
     a5 = ft.Stack(
@@ -31,7 +31,7 @@ def example():
                 foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4"
             ),
             ft.Container(
-                content=ft.CircleAvatar(bgcolor=ft.colors.GREEN, radius=5),
+                content=ft.CircleAvatar(bgcolor=ft.Colors.GREEN, radius=5),
                 alignment=ft.alignment.bottom_left,
             ),
         ],

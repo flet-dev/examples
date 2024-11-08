@@ -18,7 +18,7 @@ def example():
                 shader=ft.RadialGradient(
                     center=ft.alignment.center,
                     radius=2.0,
-                    colors=[ft.colors.WHITE, ft.colors.PINK],
+                    colors=[ft.Colors.WHITE, ft.Colors.PINK],
                     tile_mode=ft.GradientTileMode.CLAMP,
                 ),
             )
