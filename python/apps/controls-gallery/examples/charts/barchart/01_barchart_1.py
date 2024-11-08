@@ -84,7 +84,7 @@ def example():
         horizontal_grid_lines=ft.ChartGridLines(
             color=ft.Colors.GREY_300, width=1, dash_pattern=[3, 3]
         ),
-        tooltip_bgcolor=ft.Colors.with_opacity(0.5, ft.Colors.GREY_300),
+        tooltip_bgcolor=ft.Colors.GREY_300.with_opacity(0.5),
         max_y=110,
         interactive=True,
         # expand=True,

@@ -35,7 +35,7 @@ def example():
                 ft.LineChartDataPoint(13, 3.9),
             ],
             color=ft.Colors.PINK,
-            below_line_bgcolor=ft.Colors.with_opacity(0, ft.Colors.PINK),
+            below_line_bgcolor=ft.Colors.PINK.with_opacity(0),
             stroke_width=8,
             curved=True,
             stroke_cap_round=True,
@@ -67,7 +67,7 @@ def example():
                 ft.LineChartDataPoint(13, 1.8),
             ],
             stroke_width=4,
-            color=ft.Colors.with_opacity(0.5, ft.Colors.LIGHT_GREEN),
+            color=ft.Colors.LIGHT_GREEN.with_opacity(0.5),
             stroke_cap_round=True,
         ),
         ft.LineChartData(
@@ -79,8 +79,8 @@ def example():
                 ft.LineChartDataPoint(12, 2.6),
                 ft.LineChartDataPoint(13, 3.9),
             ],
-            color=ft.Colors.with_opacity(0.5, ft.Colors.PINK),
-            below_line_bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.PINK),
+            color=ft.Colors.PINK.with_opacity(0.5),
+            below_line_bgcolor=ft.Colors.PINK.with_opacity(0.2),
             stroke_width=4,
             curved=True,
             stroke_cap_round=True,
@@ -93,7 +93,7 @@ def example():
                 ft.LineChartDataPoint(10, 3.3),
                 ft.LineChartDataPoint(13, 4.5),
             ],
-            color=ft.Colors.with_opacity(0.5, ft.Colors.CYAN),
+            color=ft.Colors.CYAN.with_opacity(0.5),
             stroke_width=4,
             stroke_cap_round=True,
         ),
@@ -102,7 +102,7 @@ def example():
     chart = ft.LineChart(
         data_series=data_1,
         border=ft.Border(
-            bottom=ft.BorderSide(4, ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE))
+            bottom=ft.BorderSide(4, ft.Colors.ON_SURFACE.with_opacity(0.5))
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -142,7 +142,7 @@ def example():
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -154,7 +154,7 @@ def example():
                             "OCT",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -166,7 +166,7 @@ def example():
                             "DEC",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -174,7 +174,7 @@ def example():
             ],
             labels_size=32,
         ),
-        tooltip_bgcolor=ft.Colors.with_opacity(0.8, ft.Colors.BLUE_GREY),
+        tooltip_bgcolor=ft.Colors.BLUE_GREY.with_opacity(0.8),
         min_y=0,
         max_y=4,
         min_x=0,
