@@ -49,12 +49,12 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "flet"
-version = "0.25.0.dev3679"
+version = "0.25.0.dev3750"
 description = "Flet for Python - easily build interactive multi-platform apps in Python"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "flet-0.25.0.dev3679-py3-none-any.whl", hash = "sha256:62ad7aafffd82811fae9b1609d83775dcac660cb0fa3c80ebfd4f06a076a0250"},
+    {file = "flet-0.25.0.dev3750-py3-none-any.whl", hash = "sha256:2dad3d3315f9594a977846cd7a13b6b0aef8435dc630778a6ba7acd69ac74ad3"},
 ]
 
 [package.dependencies]
@@ -63,10 +63,10 @@ oauthlib = {version = ">=3.2.2,<4.0.0", markers = "platform_system != \"Pyodide\
 repath = ">=0.9.0,<0.10.0"
 
 [package.extras]
-all = ["flet-cli (==0.25.0.dev3679)", "flet-desktop (==0.25.0.dev3679)", "flet-desktop-light (==0.25.0.dev3679)", "flet-web (==0.25.0.dev3679)"]
-cli = ["flet-cli (==0.25.0.dev3679)"]
-desktop = ["flet-desktop (==0.25.0.dev3679)", "flet-desktop-light (==0.25.0.dev3679)"]
-web = ["flet-web (==0.25.0.dev3679)"]
+all = ["flet-cli (==0.25.0.dev3750)", "flet-desktop (==0.25.0.dev3750)", "flet-desktop-light (==0.25.0.dev3750)", "flet-web (==0.25.0.dev3750)"]
+cli = ["flet-cli (==0.25.0.dev3750)"]
+desktop = ["flet-desktop (==0.25.0.dev3750)", "flet-desktop-light (==0.25.0.dev3750)"]
+web = ["flet-web (==0.25.0.dev3750)"]
 
 [[package]]
 name = "flet-contrib"
@@ -109,13 +109,13 @@ files = [
 
 [[package]]
 name = "httpcore"
-version = "1.0.6"
+version = "1.0.7"
 description = "A minimal low-level HTTP client."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "httpcore-1.0.6-py3-none-any.whl", hash = "sha256:27b59625743b85577a8c0e10e55b50b5368a4f2cfe8cc7bcfa9cf00829c2682f"},
-    {file = "httpcore-1.0.6.tar.gz", hash = "sha256:73f6dbd6eb8c21bbf7ef8efad555481853f5f6acdeaff1edb0694289269ee17f"},
+    {file = "httpcore-1.0.7-py3-none-any.whl", hash = "sha256:a3fff8f43dc260d5bd363d9f9cf1830fa3a458b332856f34282de498ed420edd"},
+    {file = "httpcore-1.0.7.tar.gz", hash = "sha256:8551cb62a169ec7162ac7be8d4817d561f60e08eaa485234898414bb5a8a0b4c"},
 ]
 
 [package.dependencies]
@@ -233,4 +233,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3cbc1782705ffbf0a26ebf6b178dbe72f54f540d9354259505f7a8db14e7ebb5"
+content-hash = "ab2aa58772f29628e89c5afdaf4ce49d6bfcdcc7f0e0de800a0b2834e6faea92"
