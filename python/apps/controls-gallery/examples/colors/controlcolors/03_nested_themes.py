@@ -16,15 +16,15 @@ def example():
             # Outside container theme
             ft.Container(
                 content=ft.ElevatedButton("Outside Container theme button"),
-                bgcolor=ft.Colors.SURFACE_VARIANT,
+                bgcolor=ft.Colors.SURFACE,
                 padding=20,
                 width=300,
             ),
             # Inherited theme with primary color overridden
             ft.Container(
-                theme=ft.Theme(color_scheme=ft.Colorscheme(primary=ft.Colors.PINK)),
+                theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.Colors.PINK)),
                 content=ft.ElevatedButton("Inherited theme button"),
-                bgcolor=ft.Colors.SURFACE_VARIANT,
+                bgcolor=ft.Colors.SURFACE,
                 padding=20,
                 width=300,
             ),
@@ -33,7 +33,7 @@ def example():
                 theme=ft.Theme(color_scheme_seed=ft.Colors.INDIGO),
                 theme_mode=ft.ThemeMode.DARK,
                 content=ft.ElevatedButton("Unique theme button"),
-                bgcolor=ft.Colors.SURFACE_VARIANT,
+                bgcolor=ft.Colors.SURFACE,
                 padding=20,
                 width=300,
             ),
