@@ -47,12 +47,12 @@ def example():
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.border.all(3, ft.Colors.ON_SURFACE.with_opacity(0.2)),
+        border=ft.border.all(3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE)),
         horizontal_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.Colors.ON_SURFACE.with_opacity(0.2), width=1
+            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
         ),
         vertical_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.Colors.ON_SURFACE.with_opacity(0.2), width=1
+            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -80,7 +80,7 @@ def example():
                             "MAR",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -92,7 +92,7 @@ def example():
                             "JUN",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -104,7 +104,7 @@ def example():
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.ON_SURFACE.with_opacity(0.5),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -112,7 +112,7 @@ def example():
             ],
             labels_size=32,
         ),
-        tooltip_bgcolor=ft.Colors.BLUE_GREY.with_opacity(0.8),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.8, ft.Colors.BLUE_GREY),
         min_y=0,
         max_y=6,
         min_x=0,

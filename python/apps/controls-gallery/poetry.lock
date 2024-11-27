@@ -49,12 +49,12 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "flet"
-version = "0.25.0.dev3760"
+version = "0.25.0.dev3769"
 description = "Flet for Python - easily build interactive multi-platform apps in Python"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "flet-0.25.0.dev3760-py3-none-any.whl", hash = "sha256:be2678a016a6efee58b3a60896d7c916758adbb0196ce2e6568eba4b8cc4e0e0"},
+    {file = "flet-0.25.0.dev3769-py3-none-any.whl", hash = "sha256:ecd8038429df3749e1dc65a5ba5f1559f90020b37cd2e01e8e02644d405a22a7"},
 ]
 
 [package.dependencies]
@@ -63,10 +63,10 @@ oauthlib = {version = ">=3.2.2,<4.0.0", markers = "platform_system != \"Pyodide\
 repath = ">=0.9.0,<0.10.0"
 
 [package.extras]
-all = ["flet-cli (==0.25.0.dev3760)", "flet-desktop (==0.25.0.dev3760)", "flet-desktop-light (==0.25.0.dev3760)", "flet-web (==0.25.0.dev3760)"]
-cli = ["flet-cli (==0.25.0.dev3760)"]
-desktop = ["flet-desktop (==0.25.0.dev3760)", "flet-desktop-light (==0.25.0.dev3760)"]
-web = ["flet-web (==0.25.0.dev3760)"]
+all = ["flet-cli (==0.25.0.dev3769)", "flet-desktop (==0.25.0.dev3769)", "flet-desktop-light (==0.25.0.dev3769)", "flet-web (==0.25.0.dev3769)"]
+cli = ["flet-cli (==0.25.0.dev3769)"]
+desktop = ["flet-desktop (==0.25.0.dev3769)", "flet-desktop-light (==0.25.0.dev3769)"]
+web = ["flet-web (==0.25.0.dev3769)"]
 
 [[package]]
 name = "flet-contrib"
@@ -233,4 +233,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "be842fce3e63a0e943597145cad0d2c8a6318e41be4f1872503109661f1bb3e9"
+content-hash = "7a73fc64d025733d1c124a91fff901e934c7bad8bd808eafc59ef71ddf3ddc41"

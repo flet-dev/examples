@@ -4,7 +4,7 @@ name = "PieChart 1"
 
 
 def example():
-    normal_border = ft.BorderSide(0, ft.Colors.WHITE.with_opacity(0))
+    normal_border = ft.BorderSide(0, ft.Colors.with_opacity(0, ft.Colors.WHITE))
     hovered_border = ft.BorderSide(6, ft.Colors.WHITE)
 
     def on_chart_event(e: ft.PieChartEvent):
