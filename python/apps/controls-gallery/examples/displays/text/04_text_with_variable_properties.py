@@ -1,5 +1,7 @@
 import flet as ft
 
+from components.properties_table import PropertiesTable
+
 name = "Text with variable properties"
 
 
@@ -44,13 +46,7 @@ def example():
         on_change=size_changed,
     )
 
-    properties = ft.DataTable(
-        columns=[
-            ft.DataColumn(ft.Text("Property name", weight=ft.FontWeight.BOLD)),
-            ft.DataColumn(
-                ft.Text("Property value", weight=ft.FontWeight.BOLD, width=200)
-            ),
-        ],
+    properties = PropertiesTable(
         rows=[
             ft.DataRow(
                 cells=[
