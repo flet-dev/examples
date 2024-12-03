@@ -70,31 +70,17 @@ web = ["flet-web (==0.25.1)"]
 
 [[package]]
 name = "flet-contrib"
-version = "2024.3.6"
+version = "2024.12.3"
 description = "Flet controls by the community"
-optional = false
-python-versions = ">=3.8,<4.0"
-files = [
-    {file = "flet_contrib-2024.3.6-py3-none-any.whl", hash = "sha256:cff94fafb56112847dac8dc91f9a462b648755e2f1ed669bab506dcf94e7bdde"},
-    {file = "flet_contrib-2024.3.6.tar.gz", hash = "sha256:49123f96f2d020c61f52ff011b962a7e179a840f3d787c14dba6b74d596458d0"},
-]
-
-[package.dependencies]
-flet-core = ">=0,<1"
-
-[[package]]
-name = "flet-core"
-version = "0.24.1"
-description = "Flet core library"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "flet_core-0.24.1-py3-none-any.whl", hash = "sha256:0c729a6a5f914b54ce90d727594d896b975ad1ef749c7076b6775ad4684ea4ed"},
-    {file = "flet_core-0.24.1.tar.gz", hash = "sha256:1137109aec43b78a911f460a56e0e4581b4c411ba53e5c68fe785502e7e89498"},
+    {file = "flet_contrib-2024.12.3-py3-none-any.whl", hash = "sha256:2444eb6d68bc20cbe0bf8fc3fee5b7e1dd3dbec4047b063ee5d5a1ee73c47c6a"},
+    {file = "flet_contrib-2024.12.3.tar.gz", hash = "sha256:9e7c9884b9840bec2de1dd10d7c441f60e6253af1a86751322970e3a9b4f29a0"},
 ]
 
 [package.dependencies]
-repath = ">=0.9.0,<0.10.0"
+flet = ">=0,<1"
 
 [[package]]
 name = "h11"
@@ -232,4 +218,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "e84e82b466567c4c43988d889f97db20d7d66bd547f81b3b5957abdb457ade71"
+content-hash = "1937042011bb34f70236363dc9c1b1a0990d3e2aec80d7c252c30aba13843c1f"
