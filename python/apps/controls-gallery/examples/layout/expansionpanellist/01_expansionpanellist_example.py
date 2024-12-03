@@ -12,23 +12,23 @@ def example():
         panel.update()
 
     panel = ft.ExpansionPanelList(
-        expand_icon_color=ft.colors.AMBER,
+        expand_icon_color=ft.Colors.AMBER,
         elevation=8,
-        divider_color=ft.colors.AMBER,
+        divider_color=ft.Colors.AMBER,
         on_change=handle_change,
         controls=[
             ft.ExpansionPanel(
                 # has no header and content - placeholders will be used
-                bgcolor=ft.colors.BLUE_400,
+                bgcolor=ft.Colors.BLUE_400,
                 expanded=True,
             )
         ],
     )
 
     colors = [
-        ft.colors.GREEN_500,
-        ft.colors.BLUE_800,
-        ft.colors.RED_800,
+        ft.Colors.GREEN_500,
+        ft.Colors.BLUE_800,
+        ft.Colors.RED_800,
     ]
 
     for i in range(3):
@@ -40,7 +40,7 @@ def example():
         exp.content = ft.ListTile(
             title=ft.Text(f"This is in Panel {i}"),
             subtitle=ft.Text(f"Press the icon to delete panel {i}"),
-            trailing=ft.IconButton(ft.icons.DELETE, on_click=handle_delete, data=exp),
+            trailing=ft.IconButton(ft.Icons.DELETE, on_click=handle_delete, data=exp),
         )
 
         panel.controls.append(exp)

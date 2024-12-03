@@ -2,8 +2,10 @@ import flet as ft
 
 name = "Bezier curve"
 
+
 def example():
     import math
+
     import flet.canvas as cv
 
     return cv.Canvas(
@@ -41,7 +43,7 @@ def example():
                 ],
                 paint=ft.Paint(
                     gradient=ft.PaintRadialGradient(
-                        ft.Offset(150, 150), 50, [ft.colors.PINK_100, ft.colors.PINK]
+                        ft.Offset(150, 150), 50, [ft.Colors.PINK_100, ft.Colors.PINK]
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),

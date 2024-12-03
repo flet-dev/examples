@@ -13,7 +13,7 @@ def example():
                 shader=ft.LinearGradient(
                     begin=ft.alignment.top_center,
                     end=ft.alignment.bottom_center,
-                    colors=[ft.colors.BLACK, ft.colors.TRANSPARENT],
+                    colors=[ft.Colors.BLACK, ft.Colors.TRANSPARENT],
                     stops=[0.5, 1.0],
                 ),
                 border_radius=10,

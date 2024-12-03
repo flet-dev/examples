@@ -23,7 +23,7 @@ def example():
 
     anchor = ft.SearchBar(
         view_elevation=4,
-        divider_color=ft.colors.AMBER,
+        divider_color=ft.Colors.AMBER,
         bar_hint_text="Search colors...",
         view_hint_text="Choose a color from the suggestions...",
         on_change=handle_change,

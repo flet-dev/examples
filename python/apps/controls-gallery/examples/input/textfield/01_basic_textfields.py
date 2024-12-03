@@ -13,7 +13,7 @@ def example():
     tb2 = ft.TextField(label="Disabled", disabled=True, value="First name")
     tb3 = ft.TextField(label="Read-only", read_only=True, value="Last name")
     tb4 = ft.TextField(label="With placeholder", hint_text="Please enter text here")
-    tb5 = ft.TextField(label="With an icon", icon=ft.icons.EMOJI_EMOTIONS)
+    tb5 = ft.TextField(label="With an icon", icon=ft.Icons.EMOJI_EMOTIONS)
     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
 
     return ft.Column(controls=[tb1, tb2, tb3, tb4, tb5, b, t])

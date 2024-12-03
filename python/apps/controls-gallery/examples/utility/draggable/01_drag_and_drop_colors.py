@@ -6,7 +6,7 @@ name = "Drag and drop colors"
 def example():
     def drag_will_accept(e):
         e.control.content.border = ft.border.all(
-            2, ft.colors.BLACK45 if e.data == "true" else ft.colors.RED
+            2, ft.Colors.BLACK45 if e.data == "true" else ft.Colors.RED
         )
         e.control.update()
 
@@ -29,13 +29,13 @@ def example():
                         content=ft.Container(
                             width=50,
                             height=50,
-                            bgcolor=ft.colors.CYAN,
+                            bgcolor=ft.Colors.CYAN,
                             border_radius=5,
                         ),
                         content_feedback=ft.Container(
                             width=20,
                             height=20,
-                            bgcolor=ft.colors.CYAN,
+                            bgcolor=ft.Colors.CYAN,
                             border_radius=3,
                         ),
                     ),
@@ -44,7 +44,7 @@ def example():
                         content=ft.Container(
                             width=50,
                             height=50,
-                            bgcolor=ft.colors.YELLOW,
+                            bgcolor=ft.Colors.YELLOW,
                             border_radius=5,
                         ),
                     ),
@@ -53,7 +53,7 @@ def example():
                         content=ft.Container(
                             width=50,
                             height=50,
-                            bgcolor=ft.colors.GREEN,
+                            bgcolor=ft.Colors.GREEN,
                             border_radius=5,
                         ),
                     ),
@@ -65,7 +65,7 @@ def example():
                 content=ft.Container(
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.BLUE_GREY_100,
+                    bgcolor=ft.Colors.BLUE_GREY_100,
                     border_radius=5,
                 ),
                 on_will_accept=drag_will_accept,

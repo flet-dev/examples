@@ -6,7 +6,7 @@ class PopupColorItem(ft.PopupMenuItem):
         super().__init__()
         self.content = ft.Row(
             controls=[
-                ft.Icon(name=ft.icons.COLOR_LENS_OUTLINED, color=color),
+                ft.Icon(name=ft.Icons.COLOR_LENS_OUTLINED, color=color),
                 ft.Text(name),
             ],
         )
@@ -14,9 +14,7 @@ class PopupColorItem(ft.PopupMenuItem):
         self.data = color
 
     def seed_color_changed(self, e):
-        self.page.theme = self.page.dark_theme = ft.theme.Theme(
-            color_scheme_seed=self.data
-        )
+        self.page.theme = self.page.dark_theme = ft.Theme(color_scheme_seed=self.data)
         self.page.update()
 
 
@@ -68,7 +66,7 @@ class NavigationColumn(ft.Column):
         for item in self.controls:
             item.bgcolor = None
             item.content.controls[0].name = item.destination.icon
-        self.controls[self.selected_index].bgcolor = ft.colors.SECONDARY_CONTAINER
+        self.controls[self.selected_index].bgcolor = ft.Colors.SECONDARY_CONTAINER
         self.controls[self.selected_index].content.controls[0].name = self.controls[
             self.selected_index
         ].destination.selected_icon
@@ -83,7 +81,7 @@ class LeftNavigationMenu(ft.Column):
 
         self.dark_light_text = ft.Text("Light theme")
         self.dark_light_icon = ft.IconButton(
-            icon=ft.icons.BRIGHTNESS_2_OUTLINED,
+            icon=ft.Icons.BRIGHTNESS_2_OUTLINED,
             tooltip="Toggle brightness",
             on_click=self.theme_changed,
         )
@@ -102,7 +100,7 @@ class LeftNavigationMenu(ft.Column):
                     ft.Row(
                         controls=[
                             ft.PopupMenuButton(
-                                icon=ft.icons.COLOR_LENS_OUTLINED,
+                                icon=ft.Icons.COLOR_LENS_OUTLINED,
                                 items=[
                                     PopupColorItem(
                                         color="deeppurple", name="Deep purple"
@@ -130,9 +128,9 @@ class LeftNavigationMenu(ft.Column):
         if self.page.theme_mode == ft.ThemeMode.LIGHT:
             self.page.theme_mode = ft.ThemeMode.DARK
             self.dark_light_text.value = "Dark theme"
-            self.dark_light_icon.icon = ft.icons.BRIGHTNESS_HIGH
+            self.dark_light_icon.icon = ft.Icons.BRIGHTNESS_HIGH
         else:
             self.page.theme_mode = ft.ThemeMode.LIGHT
             self.dark_light_text.value = "Light theme"
-            self.dark_light_icon.icon = ft.icons.BRIGHTNESS_2
+            self.dark_light_icon.icon = ft.Icons.BRIGHTNESS_2
         self.page.update()

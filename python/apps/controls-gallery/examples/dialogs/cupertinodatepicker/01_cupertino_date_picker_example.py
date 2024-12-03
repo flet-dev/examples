@@ -14,7 +14,7 @@ def example():
                     date_picker_mode=ft.CupertinoDatePickerMode.DATE_AND_TIME,
                 ),
                 height=216,
-                bgcolor=ft.cupertino_colors.SYSTEM_BACKGROUND,
+                bgcolor=ft.CupertinoColors.SYSTEM_BACKGROUND,
                 padding=ft.padding.only(top=6),
             )
         ),

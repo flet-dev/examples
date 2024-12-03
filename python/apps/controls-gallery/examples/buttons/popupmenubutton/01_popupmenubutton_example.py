@@ -11,11 +11,11 @@ def example():
     pb = ft.PopupMenuButton(
         items=[
             ft.PopupMenuItem(text="Item 1"),
-            ft.PopupMenuItem(icon=ft.icons.POWER_INPUT, text="Check power"),
+            ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, text="Check power"),
             ft.PopupMenuItem(
                 content=ft.Row(
                     [
-                        ft.Icon(ft.icons.HOURGLASS_TOP_OUTLINED),
+                        ft.Icon(ft.Icons.HOURGLASS_TOP_OUTLINED),
                         ft.Text("Item with a custom content"),
                     ]
                 ),

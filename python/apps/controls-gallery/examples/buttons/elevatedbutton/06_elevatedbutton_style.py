@@ -11,18 +11,18 @@ def example():
         "Styled button 1",
         style=ft.ButtonStyle(
             color={
-                ft.ControlState.HOVERED: ft.colors.WHITE,
-                ft.ControlState.FOCUSED: ft.colors.BLUE,
-                ft.ControlState.DEFAULT: ft.colors.BLACK,
+                ft.ControlState.HOVERED: ft.Colors.WHITE,
+                ft.ControlState.FOCUSED: ft.Colors.BLUE,
+                ft.ControlState.DEFAULT: ft.Colors.BLACK,
             },
-            bgcolor={ft.ControlState.FOCUSED: ft.colors.PINK_200, "": ft.colors.YELLOW},
+            bgcolor={ft.ControlState.FOCUSED: ft.Colors.PINK_200, "": ft.Colors.YELLOW},
             padding={ft.ControlState.HOVERED: 20},
-            overlay_color=ft.colors.TRANSPARENT,
+            overlay_color=ft.Colors.TRANSPARENT,
             elevation={"pressed": 0, "": 1},
             animation_duration=500,
             side={
-                ft.ControlState.DEFAULT: ft.BorderSide(1, ft.colors.BLUE),
-                ft.ControlState.HOVERED: ft.BorderSide(2, ft.colors.BLUE),
+                ft.ControlState.DEFAULT: ft.BorderSide(1, ft.Colors.BLUE),
+                ft.ControlState.HOVERED: ft.BorderSide(2, ft.Colors.BLUE),
             },
             shape={
                 ft.ControlState.HOVERED: ft.RoundedRectangleBorder(radius=20),

@@ -10,7 +10,7 @@ def example():
         t.update()
 
     b = ft.IconButton(
-        icon=ft.icons.PLAY_CIRCLE_FILL_OUTLINED, on_click=button_clicked, data=0
+        icon=ft.Icons.PLAY_CIRCLE_FILL_OUTLINED, on_click=button_clicked, data=0
     )
     t = ft.Text()
 

@@ -22,15 +22,15 @@ def example():
     c.theme = ft.Theme(
         scrollbar_theme=ft.ScrollbarTheme(
             track_color={
-                ft.ControlState.HOVERED: ft.colors.AMBER,
-                ft.ControlState.DEFAULT: ft.colors.TRANSPARENT,
+                ft.ControlState.HOVERED: ft.Colors.AMBER,
+                ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
             },
             track_visibility=True,
-            track_border_color=ft.colors.BLUE,
+            track_border_color=ft.Colors.BLUE,
             thumb_visibility=True,
             thumb_color={
-                ft.ControlState.HOVERED: ft.colors.RED,
-                ft.ControlState.DEFAULT: ft.colors.GREY_300,
+                ft.ControlState.HOVERED: ft.Colors.RED,
+                ft.ControlState.DEFAULT: ft.Colors.GREY_300,
             },
             thickness=30,
             radius=15,

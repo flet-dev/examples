@@ -4,7 +4,7 @@ name = "SegmentedButton example"
 
 
 def example():
-    bg_container = ft.Container(height=100, expand=True, bgcolor=ft.colors.AMBER)
+    bg_container = ft.Container(height=100, expand=True, bgcolor=ft.Colors.AMBER)
 
     def handle_color_click(e):
         color = e.control.content.value
@@ -23,12 +23,12 @@ def example():
                 controls=[
                     ft.SubmenuButton(
                         content=ft.Text("B"),
-                        leading=ft.Icon(ft.icons.COLORIZE),
+                        leading=ft.Icon(ft.Icons.COLORIZE),
                         controls=[
                             ft.MenuItemButton(
                                 content=ft.Text("Blue"),
                                 style=ft.ButtonStyle(
-                                    bgcolor={ft.ControlState.HOVERED: ft.colors.BLUE}
+                                    bgcolor={ft.ControlState.HOVERED: ft.Colors.BLUE}
                                 ),
                                 on_click=handle_color_click,
                                 on_hover=handle_on_hover,
@@ -37,12 +37,12 @@ def example():
                     ),
                     ft.SubmenuButton(
                         content=ft.Text("G"),
-                        leading=ft.Icon(ft.icons.COLORIZE),
+                        leading=ft.Icon(ft.Icons.COLORIZE),
                         controls=[
                             ft.MenuItemButton(
                                 content=ft.Text("Green"),
                                 style=ft.ButtonStyle(
-                                    bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN}
+                                    bgcolor={ft.ControlState.HOVERED: ft.Colors.GREEN}
                                 ),
                                 on_click=handle_color_click,
                                 on_hover=handle_on_hover,
@@ -51,12 +51,12 @@ def example():
                     ),
                     ft.SubmenuButton(
                         content=ft.Text("R"),
-                        leading=ft.Icon(ft.icons.COLORIZE),
+                        leading=ft.Icon(ft.Icons.COLORIZE),
                         controls=[
                             ft.MenuItemButton(
                                 content=ft.Text("Red"),
                                 style=ft.ButtonStyle(
-                                    bgcolor={ft.ControlState.HOVERED: ft.colors.RED}
+                                    bgcolor={ft.ControlState.HOVERED: ft.Colors.RED}
                                 ),
                                 on_click=handle_color_click,
                                 on_hover=handle_on_hover,

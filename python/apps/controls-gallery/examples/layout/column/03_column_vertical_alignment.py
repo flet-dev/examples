@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Column vertical alignments"
 
+
 def example():
     HEIGHT = 400
 
@@ -14,7 +15,7 @@ def example():
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER_500,
+                    bgcolor=ft.Colors.AMBER_500,
                 )
             )
         return items
@@ -25,21 +26,21 @@ def example():
                 ft.Text(str(align), size=10),
                 ft.Container(
                     content=ft.Column(items(3), alignment=align),
-                    bgcolor=ft.colors.AMBER_100,
+                    bgcolor=ft.Colors.AMBER_100,
                     height=HEIGHT,
                 ),
             ]
         )
 
     return ft.Row(
-            [
-                column_with_alignment(ft.MainAxisAlignment.START),
-                column_with_alignment(ft.MainAxisAlignment.CENTER),
-                column_with_alignment(ft.MainAxisAlignment.END),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_BETWEEN),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_AROUND),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_EVENLY),
-            ],
-            spacing=30,
-            alignment=ft.MainAxisAlignment.START,
-        )
+        [
+            column_with_alignment(ft.MainAxisAlignment.START),
+            column_with_alignment(ft.MainAxisAlignment.CENTER),
+            column_with_alignment(ft.MainAxisAlignment.END),
+            column_with_alignment(ft.MainAxisAlignment.SPACE_BETWEEN),
+            column_with_alignment(ft.MainAxisAlignment.SPACE_AROUND),
+            column_with_alignment(ft.MainAxisAlignment.SPACE_EVENLY),
+        ],
+        spacing=30,
+        alignment=ft.MainAxisAlignment.START,
+    )

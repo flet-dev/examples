@@ -7,7 +7,7 @@ def example():
     def amenity_selected(e):
         amenity_chips.update()
 
-    title = ft.Row([ft.Icon(ft.icons.HOTEL_CLASS), ft.Text("Amenities")])
+    title = ft.Row([ft.Icon(ft.Icons.HOTEL_CLASS), ft.Text("Amenities")])
     amenities = ["Washer / Dryer", "Ramp access", "Dogs OK", "Cats OK", "Smoke-free"]
     amenity_chips = ft.Row()
 

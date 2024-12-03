@@ -23,8 +23,8 @@ def example():
         # happens when example is added to the page
         def did_mount(self):
             self.page.floating_action_button = ft.FloatingActionButton(
-                icon=ft.icons.ADD,
-                bgcolor=ft.colors.LIME_300,
+                icon=ft.Icons.ADD,
+                bgcolor=ft.Colors.LIME_300,
                 data=0,
                 on_click=fab_pressed,
             )

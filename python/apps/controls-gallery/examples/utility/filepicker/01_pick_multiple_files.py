@@ -16,7 +16,7 @@ def example():
             self.controls = [
                 ft.ElevatedButton(
                     "Pick files",
-                    icon=ft.icons.UPLOAD_FILE,
+                    icon=ft.Icons.UPLOAD_FILE,
                     on_click=pick_files,
                 ),
                 self.selected_files,

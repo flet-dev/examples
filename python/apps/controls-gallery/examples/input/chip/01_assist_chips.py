@@ -6,7 +6,7 @@ name = "Assist chips"
 def example():
     def save_to_favorites_clicked(e):
         save_to_favourites.label.value = "Saved to favorites"
-        save_to_favourites.leading = ft.Icon(ft.icons.FAVORITE_OUTLINED)
+        save_to_favourites.leading = ft.Icon(ft.Icons.FAVORITE_OUTLINED)
         save_to_favourites.disabled = True
         save_to_favourites.update()
 
@@ -15,13 +15,13 @@ def example():
 
     save_to_favourites = ft.Chip(
         label=ft.Text("Save to favourites"),
-        leading=ft.Icon(ft.icons.FAVORITE_BORDER_OUTLINED),
+        leading=ft.Icon(ft.Icons.FAVORITE_BORDER_OUTLINED),
         on_click=save_to_favorites_clicked,
     )
 
     open_in_maps = ft.Chip(
         label=ft.Text("9 min walk"),
-        leading=ft.Icon(ft.icons.MAP_SHARP),
+        leading=ft.Icon(ft.Icons.MAP_SHARP),
         on_click=open_google_maps,
     )
 

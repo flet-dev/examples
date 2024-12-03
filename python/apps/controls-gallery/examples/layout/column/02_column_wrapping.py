@@ -15,7 +15,7 @@ def example():
                     alignment=ft.alignment.center,
                     width=30,
                     height=30,
-                    bgcolor=ft.colors.AMBER,
+                    bgcolor=ft.Colors.AMBER,
                     border_radius=ft.border_radius.all(5),
                 )
             )
@@ -53,6 +53,6 @@ def example():
                     width_slider,
                 ]
             ),
-            ft.Container(content=col, bgcolor=ft.colors.AMBER_100),
+            ft.Container(content=col, bgcolor=ft.Colors.AMBER_100),
         ]
     )

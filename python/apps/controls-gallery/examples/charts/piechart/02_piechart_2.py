@@ -7,13 +7,13 @@ def example():
     normal_radius = 50
     hover_radius = 60
     normal_title_style = ft.TextStyle(
-        size=16, color=ft.colors.WHITE, weight=ft.FontWeight.BOLD
+        size=16, color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD
     )
     hover_title_style = ft.TextStyle(
         size=22,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
         weight=ft.FontWeight.BOLD,
-        shadow=ft.BoxShadow(blur_radius=2, color=ft.colors.BLACK54),
+        shadow=ft.BoxShadow(blur_radius=2, color=ft.Colors.BLACK54),
     )
 
     def on_chart_event(e: ft.PieChartEvent):
@@ -32,28 +32,28 @@ def example():
                 40,
                 title="40%",
                 title_style=normal_title_style,
-                color=ft.colors.BLUE,
+                color=ft.Colors.BLUE,
                 radius=normal_radius,
             ),
             ft.PieChartSection(
                 30,
                 title="30%",
                 title_style=normal_title_style,
-                color=ft.colors.YELLOW,
+                color=ft.Colors.YELLOW,
                 radius=normal_radius,
             ),
             ft.PieChartSection(
                 15,
                 title="15%",
                 title_style=normal_title_style,
-                color=ft.colors.PURPLE,
+                color=ft.Colors.PURPLE,
                 radius=normal_radius,
             ),
             ft.PieChartSection(
                 15,
                 title="15%",
                 title_style=normal_title_style,
-                color=ft.colors.GREEN,
+                color=ft.Colors.GREEN,
                 radius=normal_radius,
             ),
         ],

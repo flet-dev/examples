@@ -9,8 +9,8 @@ packages = [{include = "controls_gallery"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flet = "^0.24.1"
-flet-contrib = "2024.3.6"
+flet = "0.25.1"
+flet-contrib = "2024.12.3"
 
 [build-system]
 requires = ["poetry-core"]
