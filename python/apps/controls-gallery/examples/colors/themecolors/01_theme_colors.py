@@ -44,10 +44,10 @@ def example():
     ]
 
     def copy_to_clipboard(e):
-        e.control.page.set_clipboard(f"ft.colors.{e.control.content.value}")
+        e.control.page.set_clipboard(f"ft.Colors.{e.control.content.value}")
         e.control.page.open(
             ft.SnackBar(
-                ft.Text(f"Copied to clipboard: ft.colors.{e.control.content.value}"),
+                ft.Text(f"Copied to clipboard: ft.Colors.{e.control.content.value}"),
                 open=True,
             )
         )
@@ -58,9 +58,9 @@ def example():
 
     for color in theme_colors:
         if color.is_dark:
-            text_color = ft.colors.SURFACE
+            text_color = ft.Colors.SURFACE
         else:
-            text_color = ft.colors.ON_SURFACE
+            text_color = ft.Colors.ON_SURFACE
 
         theme_colors_column.controls.append(
             ft.Container(

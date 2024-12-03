@@ -18,7 +18,7 @@ def example():
             self.controls = [
                 ft.ElevatedButton(
                     "Pick time",
-                    icon=ft.icons.CALENDAR_MONTH,
+                    icon=ft.Icons.CALENDAR_MONTH,
                     on_click=self.open_time_picker,
                 ),
                 self.selected_time,

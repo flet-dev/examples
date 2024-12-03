@@ -10,29 +10,29 @@ def example():
 
     pagelet = ft.Pagelet(
         appbar=ft.AppBar(
-            title=ft.Text("Pagelet AppBar title"), bgcolor=ft.colors.AMBER_ACCENT
+            title=ft.Text("Pagelet AppBar title"), bgcolor=ft.Colors.AMBER_ACCENT
         ),
         content=ft.Text("Pagelet body"),
-        bgcolor=ft.colors.AMBER_100,
+        bgcolor=ft.Colors.AMBER_100,
         bottom_app_bar=ft.BottomAppBar(
-            bgcolor=ft.colors.BLUE,
+            bgcolor=ft.Colors.BLUE,
             shape=ft.NotchShape.CIRCULAR,
             content=ft.Row(
                 controls=[
-                    ft.IconButton(icon=ft.icons.MENU, icon_color=ft.colors.WHITE),
+                    ft.IconButton(icon=ft.Icons.MENU, icon_color=ft.Colors.WHITE),
                     ft.Container(expand=True),
-                    ft.IconButton(icon=ft.icons.SEARCH, icon_color=ft.colors.WHITE),
-                    ft.IconButton(icon=ft.icons.FAVORITE, icon_color=ft.colors.WHITE),
+                    ft.IconButton(icon=ft.Icons.SEARCH, icon_color=ft.Colors.WHITE),
+                    ft.IconButton(icon=ft.Icons.FAVORITE, icon_color=ft.Colors.WHITE),
                 ]
             ),
         ),
         end_drawer=ft.NavigationDrawer(
             controls=[
                 ft.NavigationDrawerDestination(
-                    icon=ft.icons.ADD_TO_HOME_SCREEN_SHARP, label="Item 1"
+                    icon=ft.Icons.ADD_TO_HOME_SCREEN_SHARP, label="Item 1"
                 ),
                 ft.NavigationDrawerDestination(
-                    icon=ft.icons.ADD_COMMENT, label="Item 2"
+                    icon=ft.Icons.ADD_COMMENT, label="Item 2"
                 ),
             ],
         ),

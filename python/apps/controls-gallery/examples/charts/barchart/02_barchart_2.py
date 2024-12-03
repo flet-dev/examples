@@ -12,20 +12,20 @@ def example():
 
         def _before_build_command(self):
             self.to_y = self.y + 1 if self.hovered else self.y
-            self.color = ft.colors.YELLOW if self.hovered else ft.colors.WHITE
+            self.color = ft.Colors.YELLOW if self.hovered else ft.Colors.WHITE
             self.border_side = (
-                ft.BorderSide(width=1, color=ft.colors.GREEN_400)
+                ft.BorderSide(width=1, color=ft.Colors.GREEN_400)
                 if self.hovered
-                else ft.BorderSide(width=0, color=ft.colors.WHITE)
+                else ft.BorderSide(width=0, color=ft.Colors.WHITE)
             )
             super()._before_build_command()
 
         def _build(self):
             self.tooltip = str(self.y)
             self.width = 22
-            self.color = ft.colors.WHITE
+            self.color = ft.Colors.WHITE
             self.bg_to_y = 20
-            self.bg_color = ft.colors.GREEN_300
+            self.bg_color = ft.Colors.GREEN_300
 
     def on_chart_event(e: ft.BarChartEvent):
         for group_index, group in enumerate(chart.bar_groups):
@@ -81,7 +81,7 @@ def example():
 
     return ft.Container(
         chart,
-        bgcolor=ft.colors.GREEN_200,
+        bgcolor=ft.Colors.GREEN_200,
         padding=10,
         border_radius=5,
         # expand=True

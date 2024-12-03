@@ -12,8 +12,8 @@ def example():
         # happens when example is added to the page (when user chooses the FloatingActionButton control from the grid)
         def did_mount(self):
             self.page.floating_action_button = ft.FloatingActionButton(
-                icon=ft.icons.ADD,
-                bgcolor=ft.colors.LIME_300,
+                icon=ft.Icons.ADD,
+                bgcolor=ft.Colors.LIME_300,
                 data=0,
                 on_click=fab_pressed,
             )
@@ -29,7 +29,7 @@ def example():
         fab_example.content.controls.append(
             ft.ListTile(title=ft.Text(f"Tile {e.control.data}"))
         )
-        e.control.page.show_snack_bar(
+        e.control.page.open(
             ft.SnackBar(ft.Text("Tile was added successfully!"), open=True)
         )
         e.control.data += 1

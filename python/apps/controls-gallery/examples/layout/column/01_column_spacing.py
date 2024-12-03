@@ -13,7 +13,7 @@ def example():
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER,
+                    bgcolor=ft.Colors.AMBER,
                     border_radius=ft.border_radius.all(5),
                 )
             )

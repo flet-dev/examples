@@ -11,7 +11,7 @@ def example():
             super().__init__()
             self.datepicker = ft.DatePicker(
                 first_date=datetime.datetime(2023, 10, 1),
-                last_date=datetime.datetime(2024, 10, 1),
+                last_date=datetime.datetime(2024, 12, 1),
                 on_change=self.change_date,
             )
 
@@ -20,7 +20,7 @@ def example():
             self.controls = [
                 ft.ElevatedButton(
                     "Pick date",
-                    icon=ft.icons.CALENDAR_MONTH,
+                    icon=ft.Icons.CALENDAR_MONTH,
                     on_click=self.open_date_picker,
                 ),
                 self.selected_date,
