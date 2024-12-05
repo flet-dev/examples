@@ -12,3 +12,16 @@ class PropertiesTable(ft.DataTable):
             ]
         )
         self.rows = rows
+
+    def get_value_control(self, value_type, value):
+        match value_type:
+            case "text":
+                return ft.TextField(value=value)
+            case "bool":
+                return ft.Checkbox(value=value)
+            case "enum":
+                return ft.Dropdown()
+
+            # If an exact match is not confirmed, this last case will be used if provided
+            case _:
+                return ft.Text("Something's wrong with the type")
