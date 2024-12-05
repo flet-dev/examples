@@ -38,6 +38,7 @@ class PropertiesTable(ft.DataTable):
         data_rows = []
 
         for property in self.properties:
+
             print(
                 f"Property type: {type(getattr(self.control, property["name"])).__name__}"
             )
@@ -46,11 +47,12 @@ class PropertiesTable(ft.DataTable):
                     cells=[
                         ft.DataCell(ft.Text(property["name"])),
                         ft.DataCell(
-                            self.get_value_control(
-                                value_type=property["value_type"],
-                                value=getattr(self.control, property["name"]),
-                                data=property["name"],
-                            )
+                            # self.get_value_control(
+                            #     value_type=property["value_type"],
+                            #     value=getattr(self.control, property["name"]),
+                            #     data=property["name"],
+                            # )
+                            self.get_value_control(property)
                         ),
                     ],
                 ),
@@ -63,23 +65,35 @@ class PropertiesTable(ft.DataTable):
         self.update_source_code()
         self.control.update()
 
-    def get_value_control(self, value_type, value, data):
-        match value_type:
+    # def get_value_control(self, value_type, value, data):
+    def get_value_control(self, property):
+        value = getattr(self.control, property["name"])
+        match property["value_type"]:
             case "text":
                 return ft.TextField(
                     content_padding=3,
                     value=value,
-                    data=data,
+                    data=property["name"],
                     on_change=self.value_changed,
                 )
             case "bool":
                 return ft.Checkbox(
                     value=value,
-                    data=data,
+                    data=property["name"],
                     on_change=self.value_changed,
                 )
             case "enum":
-                return ft.Dropdown()
+                options = []
+                for option in property["values"]:
+                    print(option)
+                    options.append(ft.dropdown.Option(option))
+
+                return ft.Dropdown(
+                    options=options,
+                    value=value,
+                    data=property["name"],
+                    on_change=self.value_changed,
+                )
 
             # If an exact match is not confirmed, this last case will be used if provided
             case _:
