@@ -11,9 +11,10 @@ class PropertiesTable(ft.DataTable):
                 ),
             ]
         )
-        self.rows = self.get_rows(properties, control)
         self.properties = properties
         self.control = control
+        self.rows = self.get_rows()
+
         self.source_code = ft.Text()
 
     def did_mount(self):
@@ -22,17 +23,24 @@ class PropertiesTable(ft.DataTable):
     def update_source_code(self):
         text = ""
         for property in self.properties:
-            text = (
-                text + f"{property["name"]}={getattr(self.control, property["name"])}, "
-            )
-        code = f"""text_control = ft.Text({text})"""
+            if type(getattr(self.control, property["name"])).__name__ == "str":
+                property_value = f"""'{getattr(self.control, property["name"])}'"""
+            else:
+                property_value = getattr(self.control, property["name"])
+            text = text + f"{property["name"]}={property_value}, "
+        control_name = type(self.control).__name__
+
+        code = f"""ft.{control_name}({text})"""
         self.source_code.value = code
         self.source_code.update()
 
-    def get_rows(self, properties, control):
+    def get_rows(self):
         data_rows = []
 
-        for property in properties:
+        for property in self.properties:
+            print(
+                f"Property type: {type(getattr(self.control, property["name"])).__name__}"
+            )
             data_rows.append(
                 ft.DataRow(
                     cells=[
@@ -40,7 +48,7 @@ class PropertiesTable(ft.DataTable):
                         ft.DataCell(
                             self.get_value_control(
                                 value_type=property["value_type"],
-                                value=getattr(control, property["name"]),
+                                value=getattr(self.control, property["name"]),
                                 data=property["name"],
                             )
                         ),

@@ -14,6 +14,7 @@ def example():
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
         {"name": "size", "value_type": "text"},
+        {"name": "color", "value_type": "enum", "class_name": "Colors"},
     ]
 
     properties = PropertiesTable(properties_list, t)
