@@ -12,7 +12,22 @@ class PropertiesTable(ft.DataTable):
             ]
         )
         self.rows = self.get_rows(properties, control)
+        self.properties = properties
         self.control = control
+        self.source_code = ft.Text()
+
+    def did_mount(self):
+        self.update_source_code()
+
+    def update_source_code(self):
+        text = ""
+        for property in self.properties:
+            text = (
+                text + f"{property["name"]}={getattr(self.control, property["name"])}, "
+            )
+        code = f"""text_control = ft.Text({text})"""
+        self.source_code.value = code
+        self.source_code.update()
 
     def get_rows(self, properties, control):
         data_rows = []
@@ -37,6 +52,7 @@ class PropertiesTable(ft.DataTable):
     def value_changed(self, e):
         print("Value changed!")
         setattr(self.control, e.control.data, e.control.value)
+        self.update_source_code()
         self.control.update()
 
     def get_value_control(self, value_type, value, data):
