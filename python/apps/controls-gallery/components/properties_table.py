@@ -13,12 +13,17 @@ class PropertiesTable(ft.DataTable):
         )
         self.rows = rows
 
-    def get_value_control(self, value_type, value):
+    def get_value_control(self, value_type, value, value_changed, data):
         match value_type:
             case "text":
-                return ft.TextField(value=value)
+                return ft.TextField(
+                    content_padding=3,
+                    value=value,
+                    data=data,
+                    on_change=value_changed,
+                )
             case "bool":
-                return ft.Checkbox(value=value)
+                return ft.Checkbox(value=value, data=data, on_change=value_changed)
             case "enum":
                 return ft.Dropdown()
 
