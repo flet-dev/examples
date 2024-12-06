@@ -18,6 +18,11 @@ def example():
         style=ft.TextStyle(size=30),
     )
 
+    style_properties_list = [
+        {"name": "size", "value_type": "number"},
+        {"name": "letter_spacing", "value_type": "number"},
+    ]
+
     properties_list = [
         {"name": "value", "value_type": "str"},
         {"name": "italic", "value_type": "bool"},
@@ -26,7 +31,11 @@ def example():
         {"name": "color", "value_type": "enum", "values": ft.Colors},
         {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
         {"name": "max_lines", "value_type": "number"},
-        {"name": "style", "value_type": "dataclass"},
+        {
+            "name": "style",
+            "value_type": "dataclass",
+            "properties": style_properties_list,
+        },
     ]
 
     properties = PropertiesTable(properties_list, t)

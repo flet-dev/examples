@@ -105,8 +105,14 @@ class PropertiesTable(ft.DataTable):
                 )
 
             case "dataclass":
+                properties_dialog = ft.AlertDialog(
+                    title=ft.Text(f"{property["name"].capitalize()} properties")
+                )
 
-                return ft.Button(text="...")
+                def open_dlg(e):
+                    e.control.page.open(properties_dialog)
+
+                return ft.Button(text="...", on_click=open_dlg)
 
             # If an exact match is not confirmed, this last case will be used if provided
             case _:
