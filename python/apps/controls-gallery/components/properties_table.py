@@ -76,6 +76,13 @@ class PropertiesTable(ft.DataTable):
                     data=property["name"],
                     on_change=self.value_changed,
                 )
+            case "number":
+                return ft.TextField(
+                    content_padding=3,
+                    value=value,
+                    data=property["name"],
+                    on_change=self.value_changed,
+                )
             case "bool":
                 return ft.Checkbox(
                     value=value,
@@ -83,10 +90,12 @@ class PropertiesTable(ft.DataTable):
                     on_change=self.value_changed,
                 )
             case "enum":
+
                 options = []
-                for option in property["values"]:
-                    print(option)
-                    options.append(ft.dropdown.Option(option))
+
+                options_list = property["values"]
+                for item in options_list:
+                    options.append(ft.dropdown.Option(item.value))
 
                 return ft.Dropdown(
                     options=options,

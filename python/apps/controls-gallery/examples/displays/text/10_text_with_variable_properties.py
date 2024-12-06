@@ -13,18 +13,16 @@ def example():
         selectable=True,
         size=20,
         color=ft.Colors.GREEN_800,
+        max_lines=2,
     )
-
-    colors = []
-    for color in ft.Colors:
-        colors.append(color.value)
 
     properties_list = [
         {"name": "value", "value_type": "text"},
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
-        {"name": "size", "value_type": "text"},
-        {"name": "color", "value_type": "enum", "values": colors},
+        {"name": "size", "value_type": "number"},
+        {"name": "color", "value_type": "enum", "values": ft.Colors},
+        {"name": "max_lines", "value_type": "number"},
     ]
 
     properties = PropertiesTable(properties_list, t)
