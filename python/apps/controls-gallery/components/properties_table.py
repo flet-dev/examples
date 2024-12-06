@@ -69,7 +69,7 @@ class PropertiesTable(ft.DataTable):
     def get_value_control(self, property):
         value = getattr(self.control, property["name"])
         match property["value_type"]:
-            case "text":
+            case "str":
                 return ft.TextField(
                     content_padding=3,
                     value=value,
@@ -103,6 +103,10 @@ class PropertiesTable(ft.DataTable):
                     data=property["name"],
                     on_change=self.value_changed,
                 )
+
+            case "dataclass":
+
+                return ft.Button(text="...")
 
             # If an exact match is not confirmed, this last case will be used if provided
             case _:

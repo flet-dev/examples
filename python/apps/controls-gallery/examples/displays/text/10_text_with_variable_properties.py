@@ -13,16 +13,20 @@ def example():
         selectable=True,
         size=20,
         color=ft.Colors.GREEN_800,
+        bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
+        style=ft.TextStyle(size=30),
     )
 
     properties_list = [
-        {"name": "value", "value_type": "text"},
+        {"name": "value", "value_type": "str"},
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
         {"name": "size", "value_type": "number"},
         {"name": "color", "value_type": "enum", "values": ft.Colors},
+        {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
         {"name": "max_lines", "value_type": "number"},
+        {"name": "style", "value_type": "dataclass"},
     ]
 
     properties = PropertiesTable(properties_list, t)
