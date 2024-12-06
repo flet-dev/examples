@@ -105,8 +105,14 @@ class PropertiesTable(ft.DataTable):
                 )
 
             case "dataclass":
+                t = ft.TextStyle(size=30)
+                print(property["properties"])
                 properties_dialog = ft.AlertDialog(
-                    title=ft.Text(f"{property["name"].capitalize()} properties")
+                    title=ft.Text(f"{property["name"].capitalize()} properties"),
+                    # content=ft.Column(controls=[PropertiesTable(properties: property["properties"], control = t)]),
+                    # content=PropertiesTable(
+                    #     (properties=property["properties"], control=t)
+                    # ),
                 )
 
                 def open_dlg(e):
