@@ -15,10 +15,10 @@ class PropertiesTable(ft.DataTable):
         self.control = control
         self.rows = self.get_rows()
 
-        self.source_code = ft.Text()
+        # self.source_code = ft.Text()
 
-    def did_mount(self):
-        self.update_source_code()
+    # def did_mount(self):
+    #     self.update_source_code()
 
     def update_source_code(self):
         text = ""
@@ -30,18 +30,18 @@ class PropertiesTable(ft.DataTable):
             text = text + f"{property["name"]}={property_value}, "
         control_name = type(self.control).__name__
 
-        code = f"""ft.{control_name}({text})"""
-        self.source_code.value = code
-        self.source_code.update()
+        # code = f"""ft.{control_name}({text})"""
+        # self.source_code.value = code
+        # self.source_code.update()
 
     def get_rows(self):
         data_rows = []
 
         for property in self.properties:
 
-            print(
-                f"Property type: {type(getattr(self.control, property["name"])).__name__}"
-            )
+            # print(
+            #     f"Property type: {type(getattr(self.control, property["name"])).__name__}"
+            # )
             data_rows.append(
                 ft.DataRow(
                     cells=[
@@ -62,7 +62,7 @@ class PropertiesTable(ft.DataTable):
     def value_changed(self, e):
         print("Value changed!")
         setattr(self.control, e.control.data, e.control.value)
-        self.update_source_code()
+        # self.update_source_code()
         self.control.update()
 
     # def get_value_control(self, value_type, value, data):
@@ -105,14 +105,11 @@ class PropertiesTable(ft.DataTable):
                 )
 
             case "dataclass":
-                t = ft.TextStyle(size=30)
-                print(property["properties"])
                 properties_dialog = ft.AlertDialog(
                     title=ft.Text(f"{property["name"].capitalize()} properties"),
-                    # content=ft.Column(controls=[PropertiesTable(properties: property["properties"], control = t)]),
                     content=PropertiesTable(
                         properties=property["properties"],
-                        control=ft.TextStyle(),
+                        control=value,
                     ),
                 )
 

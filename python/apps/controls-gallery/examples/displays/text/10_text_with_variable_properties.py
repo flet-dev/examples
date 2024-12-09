@@ -15,19 +15,27 @@ def example():
         color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
-        style=ft.TextStyle(size=30),
+        style=ft.TextStyle(size=30, foreground=ft.Paint(color=ft.Colors.GREEN_400)),
     )
+
+    paint_properties_list = [
+        {"name": "color", "value_type": "enum", "values": ft.Colors},
+    ]
 
     style_properties_list = [
         {"name": "size", "value_type": "number"},
         {"name": "letter_spacing", "value_type": "number"},
+        {
+            "name": "foreground",
+            "value_type": "dataclass",
+            "properties": paint_properties_list,
+        },
     ]
 
     properties_list = [
         {
             "name": "value",
             "value_type": "str",
-            "value": "This is the Text value provided in dict",
         },
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
@@ -38,6 +46,7 @@ def example():
         {
             "name": "style",
             "value_type": "dataclass",
+            # "dataclass": ft.TextStyle,
             "properties": style_properties_list,
         },
     ]
@@ -45,14 +54,14 @@ def example():
     properties = PropertiesTable(properties_list, t)
 
     # source_code = ft.Text(value=get_source_code(), selectable=True)
-    source_code = properties.source_code
+    # source_code = properties.source_code
 
     example_control = ft.Column(
         controls=[
             t,
             properties,
             ft.Text("Source code:", weight=ft.FontWeight.BOLD),
-            source_code,
+            # source_code,
         ]
     )
 
