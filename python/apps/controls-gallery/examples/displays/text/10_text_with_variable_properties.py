@@ -24,7 +24,11 @@ def example():
     ]
 
     properties_list = [
-        {"name": "value", "value_type": "str"},
+        {
+            "name": "value",
+            "value_type": "str",
+            "value": "This is the Text value provided in dict",
+        },
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
         {"name": "size", "value_type": "number"},
