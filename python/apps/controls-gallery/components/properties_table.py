@@ -1,6 +1,31 @@
 import flet as ft
 
 
+class SourceCode(ft.Text):
+    def __init__(self, control):
+        super().__init__()
+        self.control = control
+        # self.update_source_code(control)
+
+    def did_mount(self):
+        self.update_source_code(self.control)
+
+    def update_source_code(self, control):
+        text = ""
+        # for property in self.properties:
+        #     if type(getattr(self.control, property["name"])).__name__ == "str":
+        #         property_value = f"""'{getattr(self.control, property["name"])}'"""
+        #     else:
+        #         property_value = getattr(self.control, property["name"])
+        #     text = text + f"{property["name"]}={property_value}, "
+        # control_name = type(self.control).__name__
+        print(control)
+
+        # code = f"""ft.{control_name}({text})"""
+        # self.value = code
+        self.update()
+
+
 class PropertiesTable(ft.DataTable):
     def __init__(self, properties, control):
         super().__init__(
@@ -121,3 +146,39 @@ class PropertiesTable(ft.DataTable):
             # If an exact match is not confirmed, this last case will be used if provided
             case _:
                 return ft.Text("Something's wrong with the type")
+
+
+class PropertiesList(ft.ExpansionPanelList):
+    def __init__(self, properties, control):
+        super().__init__()
+        self.properties = properties
+        self.control = control
+        self.width = 400
+        self.expanded_icon_color = ft.Colors.AMBER
+        self.elevation = 8
+        self.divider_color = ft.colors.RED
+        self.controls = [
+            ft.ExpansionPanel(header=ft.Text("Property1")),
+            ft.ExpansionPanel(header=ft.Text("Property2")),
+            ft.ExpansionPanel(
+                # has no header and content - placeholders will be used
+                # bgcolor=ft.Colors.BLUE_400,
+                header=ft.Text("Dataclass property"),
+                content=ft.ExpansionPanelList(
+                    controls=[
+                        ft.ExpansionPanel(header=ft.Text("Property1")),
+                        ft.ExpansionPanel(header=ft.Text("Property2")),
+                    ]
+                ),
+                expanded=True,
+            ),
+        ]
+
+    def get_properties_controls(self):
+        return [
+            ft.ExpansionPanel(
+                # has no header and content - placeholders will be used
+                bgcolor=ft.Colors.BLUE_400,
+                expanded=True,
+            )
+        ]
