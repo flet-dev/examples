@@ -99,20 +99,20 @@ class PropertiesTable(ft.DataTable):
                     content_padding=3,
                     value=value,
                     data=property["name"],
-                    on_change=self.value_changed,
+                    # on_change=self.value_changed,
                 )
             case "number":
                 return ft.TextField(
                     content_padding=3,
                     value=value,
                     data=property["name"],
-                    on_change=self.value_changed,
+                    # on_change=self.value_changed,
                 )
             case "bool":
                 return ft.Checkbox(
                     value=value,
                     data=property["name"],
-                    on_change=self.value_changed,
+                    # on_change=self.value_changed,
                 )
             case "enum":
 
@@ -126,7 +126,7 @@ class PropertiesTable(ft.DataTable):
                     options=options,
                     value=value,
                     data=property["name"],
-                    on_change=self.value_changed,
+                    # on_change=self.value_changed,
                 )
 
             case "dataclass":
@@ -148,37 +148,105 @@ class PropertiesTable(ft.DataTable):
                 return ft.Text("Something's wrong with the type")
 
 
-class PropertiesList(ft.ExpansionPanelList):
+class PropertiesList(ft.ListView):
     def __init__(self, properties, control):
         super().__init__()
         self.properties = properties
         self.control = control
-        self.width = 400
-        self.expanded_icon_color = ft.Colors.AMBER
-        self.elevation = 8
-        self.divider_color = ft.colors.RED
-        self.controls = [
-            ft.ExpansionPanel(header=ft.Text("Property1")),
-            ft.ExpansionPanel(header=ft.Text("Property2")),
-            ft.ExpansionPanel(
-                # has no header and content - placeholders will be used
-                # bgcolor=ft.Colors.BLUE_400,
-                header=ft.Text("Dataclass property"),
-                content=ft.ExpansionPanelList(
-                    controls=[
-                        ft.ExpansionPanel(header=ft.Text("Property1")),
-                        ft.ExpansionPanel(header=ft.Text("Property2")),
-                    ]
-                ),
-                expanded=True,
-            ),
-        ]
+        self.divider_thickness = 3
+        self.width = 500
+        # self.expanded_icon_color = ft.Colors.AMBER
+        # self.elevation = 8
+        # self.divider_color = ft.colors.PRIMARY
+        self.controls = self.get_properties_controls()
 
     def get_properties_controls(self):
-        return [
-            ft.ExpansionPanel(
-                # has no header and content - placeholders will be used
-                bgcolor=ft.Colors.BLUE_400,
-                expanded=True,
-            )
-        ]
+        controls = []
+
+        for property in self.properties:
+            value = getattr(self.control, property["name"])
+            if property["value_type"] == "dataclass":
+                property_value = ""
+                controls.append(
+                    ft.ExpansionTile(
+                        bgcolor=ft.Colors.OUTLINE_VARIANT,
+                        title=ft.Text(property["name"]),
+                        controls=[
+                            PropertiesList(
+                                properties=property["properties"],
+                                control=value,
+                            )
+                        ],
+                    )
+                )
+            else:
+                controls.append(
+                    ft.Container(
+                        bgcolor=ft.Colors.ON_INVERSE_SURFACE,
+                        margin=5,
+                        padding=5,
+                        border_radius=3,
+                        content=ft.Row(
+                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                            controls=[
+                                ft.Text(property["name"]),
+                                self.get_value_control(property),
+                            ],
+                        ),
+                    )
+                )
+
+        return controls
+
+    def get_value_control(self, property):
+
+        value = getattr(self.control, property["name"])
+        match property["value_type"]:
+            case "str":
+                return ft.TextField(
+                    border_color=ft.Colors.SECONDARY,
+                    content_padding=3,
+                    value=value,
+                    data=property["name"],
+                    # on_change=self.value_changed,
+                )
+            case "number":
+                return ft.TextField(
+                    border_color=ft.Colors.SECONDARY,
+                    content_padding=3,
+                    value=value,
+                    data=property["name"],
+                    # on_change=self.value_changed,
+                )
+            case "bool":
+                return ft.Checkbox(
+                    value=value,
+                    data=property["name"],
+                    # on_change=self.value_changed,
+                )
+            case "enum":
+
+                options = []
+
+                options_list = property["values"]
+                for item in options_list:
+                    options.append(ft.dropdown.Option(item.value))
+
+                return ft.Dropdown(
+                    options=options,
+                    value=value,
+                    data=property["name"],
+                    # on_change=self.value_changed,
+                )
+
+            case "dataclass":
+
+                properties_list = PropertiesList(
+                    properties=property["properties"], control=value
+                )
+
+                return properties_list
+
+            # If an exact match is not confirmed, this last case will be used if provided
+            case _:
+                return ft.Text("Something's wrong with the type")
