@@ -166,6 +166,19 @@ class PropertiesList(ft.ListView):
             self.top_control = top_control
         self.controls = self.get_properties_list()
 
+    def get_dataclass_tile(self, property, object):
+        return ft.ExpansionTile(
+            bgcolor=ft.Colors.OUTLINE_VARIANT,
+            title=ft.Text(property["name"]),
+            controls=[
+                PropertiesList(
+                    properties=property["properties"],
+                    control=object,
+                    top_control=self.top_control,
+                )
+            ],
+        )
+
     def get_properties_list(self):
         controls = []
 
@@ -174,7 +187,6 @@ class PropertiesList(ft.ListView):
             def add_list_item(e):
                 print("Add item to list property")
                 print(f"{property["name"]}1")
-                # setattr(self, property["name"], 1)
                 n = getattr(self, property["name"])
                 self.controls.append(
                     ft.ExpansionTile(
@@ -183,7 +195,8 @@ class PropertiesList(ft.ListView):
                         controls=[
                             PropertiesList(
                                 properties=property["properties"],
-                                control=ft.TextSpan(text="Span 1 Text"),
+                                # control=ft.TextSpan(text="Span 1 Text"),
+                                control=value[n],
                                 top_control=self.top_control,
                             )
                         ],
@@ -194,37 +207,64 @@ class PropertiesList(ft.ListView):
 
             value = getattr(self.control, property["name"])
             if "list" in property["value_type"]:
+                print(f"Print spans value: {value}")
                 setattr(self, property["name"], 0)
+                list_items = []
+                n = 0
+                for item in value:
+                    print(item)
+                    list_items.append(
+                        ft.ExpansionTile(
+                            bgcolor=ft.Colors.OUTLINE_VARIANT,
+                            title=ft.Text(f"{property["name"]}{n+1}"),
+                            controls=[
+                                PropertiesList(
+                                    properties=property["properties"],
+                                    # control=ft.TextSpan(text="Span 1 Text"),
+                                    control=value[n],
+                                    top_control=self.top_control,
+                                )
+                            ],
+                        )
+                    )
+                    n += 1
                 controls.append(
                     ft.Container(
                         bgcolor=ft.Colors.ON_INVERSE_SURFACE,
                         margin=5,
                         padding=5,
                         border_radius=3,
-                        content=ft.Row(
-                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                            controls=[
-                                ft.Text(property["name"]),
-                                ft.IconButton(
-                                    icon=ft.Icons.ADD, on_click=add_list_item
-                                ),
-                            ],
+                        content=ft.Column(
+                            [
+                                ft.Row(
+                                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                                    controls=[
+                                        ft.Text(property["name"]),
+                                        ft.IconButton(
+                                            icon=ft.Icons.ADD, on_click=add_list_item
+                                        ),
+                                        # list_items,
+                                    ],
+                                )
+                            ]
+                            + list_items,
                         ),
                     )
                 )
             elif property["value_type"] == "dataclass":
                 controls.append(
-                    ft.ExpansionTile(
-                        bgcolor=ft.Colors.OUTLINE_VARIANT,
-                        title=ft.Text(property["name"]),
-                        controls=[
-                            PropertiesList(
-                                properties=property["properties"],
-                                control=value,
-                                top_control=self.top_control,
-                            )
-                        ],
-                    )
+                    # ft.ExpansionTile(
+                    #     bgcolor=ft.Colors.OUTLINE_VARIANT,
+                    #     title=ft.Text(property["name"]),
+                    #     controls=[
+                    #         PropertiesList(
+                    #             properties=property["properties"],
+                    #             control=value,
+                    #             top_control=self.top_control,
+                    #         )
+                    #     ],
+                    # )
+                    self.get_dataclass_tile(property, value)
                 )
             else:
                 controls.append(
