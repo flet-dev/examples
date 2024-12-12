@@ -159,13 +159,11 @@ class PropertiesList(ft.ListView):
         self.control = control
         self.divider_thickness = 3
         self.width = 500
+        self.auto_scroll = True
         if top_control == None:
             self.top_control = control
         else:
             self.top_control = top_control
-        # self.expanded_icon_color = ft.Colors.AMBER
-        # self.elevation = 8
-        # self.divider_color = ft.colors.PRIMARY
         self.controls = self.get_properties_controls()
 
     def get_properties_controls(self):
@@ -214,11 +212,6 @@ class PropertiesList(ft.ListView):
 
         print(f"Value: {e.control.value}!")
         setattr(self.control, e.control.data, e.control.value)
-        # update
-        # if self.control != self.top_control:
-        #     setattr(self.top_control, e.control.data, self.control)
-        # self.update_source_code()
-        # self.control.update()
         self.top_control.update()
 
     def get_value_control(self, property):
@@ -234,19 +227,20 @@ class PropertiesList(ft.ListView):
                     on_change=self.value_changed,
                 )
             case "number":
-                # return ft.TextField(
-                #     border_color=ft.Colors.SECONDARY,
-                #     content_padding=3,
-                #     value=value,
-                #     data=property["name"],
-                #     on_change=self.value_changed,
-                # )
-                return ft.Slider(
-                    min=property["min"],
-                    max=property["max"],
-                    value=value,
-                    data=property["name"],
-                    on_change=self.value_changed,
+                return ft.Row(
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    controls=[
+                        ft.Text(property["min"]),
+                        ft.Slider(
+                            min=property["min"],
+                            max=property["max"],
+                            label="{value}%",
+                            value=value,
+                            data=property["name"],
+                            on_change=self.value_changed,
+                        ),
+                        ft.Text(property["max"]),
+                    ],
                 )
             case "bool":
                 return ft.Checkbox(

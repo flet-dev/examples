@@ -11,6 +11,7 @@ def example():
         value="This is a sample text",
         italic=True,
         selectable=True,
+        spans=[ft.TextSpan("Span1"), ft.TextSpan("Span2")],
         size=20,
         # color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
