@@ -12,18 +12,33 @@ def example():
         italic=True,
         selectable=True,
         size=20,
-        color=ft.Colors.GREEN_800,
+        # color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
         style=ft.TextStyle(
             size=30,
+            shadow=ft.BoxShadow(
+                spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE
+            ),
             foreground=ft.Paint(
-                color=ft.Colors.GREEN_400, blend_mode=ft.BlendMode.COLOR_BURN
+                color=ft.Colors.BLUE_400, blend_mode=ft.BlendMode.COLOR_BURN
             ),
         ),
     )
 
     paint_properties_list = [
+        {"name": "color", "value_type": "enum", "values": ft.Colors},
+    ]
+
+    shadow_properties_list = [
+        {
+            "name": "spread_radius",
+            "value_type": "number",
+        },
+        {
+            "name": "blur_radius",
+            "value_type": "number",
+        },
         {"name": "color", "value_type": "enum", "values": ft.Colors},
     ]
 
@@ -34,6 +49,11 @@ def example():
             "name": "foreground",
             "value_type": "dataclass",
             "properties": paint_properties_list,
+        },
+        {
+            "name": "shadow",
+            "value_type": "dataclass",
+            "properties": shadow_properties_list,
         },
     ]
 

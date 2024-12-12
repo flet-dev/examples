@@ -209,7 +209,6 @@ class PropertiesList(ft.ListView):
 
     def value_changed(self, e):
         print(f"Control: {self.control}!")
-        # print(f"Parent: {self.control.parent}")
         print(f"Top Control: {self.top_control}!")
         print(f"Property: {e.control.data}!")
 
