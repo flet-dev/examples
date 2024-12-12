@@ -186,29 +186,53 @@ class PropertiesList(ft.ListView):
 
             def add_list_item(e):
                 print("Add item to list property")
-                print(f"{property["name"]}1")
-                n = getattr(self, property["name"])
-                self.controls.append(
-                    ft.ExpansionTile(
-                        bgcolor=ft.Colors.OUTLINE_VARIANT,
-                        title=ft.Text(f"{property["name"]}{n+1}"),
-                        controls=[
-                            PropertiesList(
-                                properties=property["properties"],
-                                # control=ft.TextSpan(text="Span 1 Text"),
-                                control=value[n],
-                                top_control=self.top_control,
-                            )
-                        ],
-                    )
+                print(property["name"])
+                items_list = getattr(self.control, property["name"])
+                items_list.append(
+                    # ft.ExpansionTile(
+                    #     bgcolor=ft.Colors.OUTLINE_VARIANT,
+                    #     title=ft.Text(f"{property["name"]}{3}"),
+                    #     # controls=[
+                    #     #     PropertiesList(
+                    #     #         properties=property["properties"],
+                    #     #         # control=ft.TextSpan(text="Span 1 Text"),
+                    #     #         control=value[n],
+                    #     #         top_control=self.top_control,
+                    #     #     )
+                    #     # ],
+                    # )
+                    ft.TextSpan()
                 )
-                setattr(self, property["name"], n + 1)
+
+                setattr(self.control, property["name"], items_list)
+                dataclass_type_old = type(getattr(self.control, property["name"])[0])
+                print(dataclass_type)
+                dataclass_type = "flet.core.text_span.TextSpan"
+                new_object = dataclass_type()
+                print(new_object)
+                print(getattr(self.control, property["name"]))
+                # setattr(self.control, property["name"], new_list)
+                # self.controls.append(
+                #    ft.ExpansionTile(
+                #        bgcolor=ft.Colors.OUTLINE_VARIANT,
+                #        title=ft.Text(f"{property["name"]}{n+1}"),
+                #        controls=[
+                #            PropertiesList(
+                #                properties=property["properties"],
+                #                # control=ft.TextSpan(text="Span 1 Text"),
+                #                control=value[n],
+                #                top_control=self.top_control,
+                #            )
+                #        ],
+                #    )
+                # )
+                # setattr(self, property["name"], n + 1)
                 self.update()
 
             value = getattr(self.control, property["name"])
             if "list" in property["value_type"]:
                 print(f"Print spans value: {value}")
-                setattr(self, property["name"], 0)
+                # setattr(self, property["name"], 0)
                 list_items = []
                 n = 0
                 for item in value:
