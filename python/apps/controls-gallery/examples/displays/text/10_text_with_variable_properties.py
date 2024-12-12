@@ -31,20 +31,14 @@ def example():
     ]
 
     shadow_properties_list = [
-        {
-            "name": "spread_radius",
-            "value_type": "number",
-        },
-        {
-            "name": "blur_radius",
-            "value_type": "number",
-        },
+        {"name": "spread_radius", "value_type": "number", "min": 0, "max": 100},
+        {"name": "blur_radius", "value_type": "number", "min": 0, "max": 100},
         {"name": "color", "value_type": "enum", "values": ft.Colors},
     ]
 
     style_properties_list = [
-        {"name": "size", "value_type": "number"},
-        {"name": "letter_spacing", "value_type": "number"},
+        {"name": "size", "value_type": "number", "min": 0, "max": 100},
+        {"name": "letter_spacing", "value_type": "number", "min": 0, "max": 100},
         {
             "name": "foreground",
             "value_type": "dataclass",
@@ -64,10 +58,10 @@ def example():
         },
         {"name": "italic", "value_type": "bool"},
         {"name": "selectable", "value_type": "bool"},
-        {"name": "size", "value_type": "number"},
+        {"name": "size", "value_type": "number", "min": 0, "max": 100},
         {"name": "color", "value_type": "enum", "values": ft.Colors},
         {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
-        {"name": "max_lines", "value_type": "number"},
+        {"name": "max_lines", "value_type": "number", "min": 0, "max": 100},
         {
             "name": "style",
             "value_type": "dataclass",

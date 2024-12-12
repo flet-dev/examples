@@ -234,9 +234,16 @@ class PropertiesList(ft.ListView):
                     on_change=self.value_changed,
                 )
             case "number":
-                return ft.TextField(
-                    border_color=ft.Colors.SECONDARY,
-                    content_padding=3,
+                # return ft.TextField(
+                #     border_color=ft.Colors.SECONDARY,
+                #     content_padding=3,
+                #     value=value,
+                #     data=property["name"],
+                #     on_change=self.value_changed,
+                # )
+                return ft.Slider(
+                    min=property["min"],
+                    max=property["max"],
                     value=value,
                     data=property["name"],
                     on_change=self.value_changed,
