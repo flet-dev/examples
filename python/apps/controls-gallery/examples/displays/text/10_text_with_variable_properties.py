@@ -27,6 +27,10 @@ def example():
         ),
     )
 
+    span_properties_list = [
+        {"name": "text", "value_type": "str"},
+    ]
+
     paint_properties_list = [
         {"name": "color", "value_type": "enum", "values": ft.Colors},
     ]
@@ -68,6 +72,11 @@ def example():
             "value_type": "dataclass",
             # "dataclass": ft.TextStyle,
             "properties": style_properties_list,
+        },
+        {
+            "name": "spans",
+            "value_type": "list[dataclass]",
+            "properties": span_properties_list,
         },
     ]
 

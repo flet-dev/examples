@@ -164,15 +164,51 @@ class PropertiesList(ft.ListView):
             self.top_control = control
         else:
             self.top_control = top_control
-        self.controls = self.get_properties_controls()
+        self.controls = self.get_properties_list()
 
-    def get_properties_controls(self):
+    def get_properties_list(self):
         controls = []
 
         for property in self.properties:
+
+            def add_list_item(e):
+                print("Add item to list property")
+                print(f"{property["name"]}1")
+                self.controls.append(
+                    ft.ExpansionTile(
+                        bgcolor=ft.Colors.OUTLINE_VARIANT,
+                        title=ft.Text(f"{property["name"]}1"),
+                        controls=[
+                            PropertiesList(
+                                properties=property["properties"],
+                                control=ft.TextSpan(text="Span 1 Text"),
+                                top_control=self.top_control,
+                            )
+                        ],
+                    )
+                )
+                self.update()
+
             value = getattr(self.control, property["name"])
-            if property["value_type"] == "dataclass":
-                property_value = ""
+            if "list" in property["value_type"]:
+                controls.append(
+                    ft.Container(
+                        bgcolor=ft.Colors.ON_INVERSE_SURFACE,
+                        margin=5,
+                        padding=5,
+                        border_radius=3,
+                        content=ft.Row(
+                            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                            controls=[
+                                ft.Text(property["name"]),
+                                ft.IconButton(
+                                    icon=ft.Icons.ADD, on_click=add_list_item
+                                ),
+                            ],
+                        ),
+                    )
+                )
+            elif property["value_type"] == "dataclass":
                 controls.append(
                     ft.ExpansionTile(
                         bgcolor=ft.Colors.OUTLINE_VARIANT,
