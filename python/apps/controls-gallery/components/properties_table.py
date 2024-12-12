@@ -174,10 +174,12 @@ class PropertiesList(ft.ListView):
             def add_list_item(e):
                 print("Add item to list property")
                 print(f"{property["name"]}1")
+                # setattr(self, property["name"], 1)
+                n = getattr(self, property["name"])
                 self.controls.append(
                     ft.ExpansionTile(
                         bgcolor=ft.Colors.OUTLINE_VARIANT,
-                        title=ft.Text(f"{property["name"]}1"),
+                        title=ft.Text(f"{property["name"]}{n+1}"),
                         controls=[
                             PropertiesList(
                                 properties=property["properties"],
@@ -187,10 +189,12 @@ class PropertiesList(ft.ListView):
                         ],
                     )
                 )
+                setattr(self, property["name"], n + 1)
                 self.update()
 
             value = getattr(self.control, property["name"])
             if "list" in property["value_type"]:
+                setattr(self, property["name"], 0)
                 controls.append(
                     ft.Container(
                         bgcolor=ft.Colors.ON_INVERSE_SURFACE,
