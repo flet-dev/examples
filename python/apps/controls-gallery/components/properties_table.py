@@ -27,7 +27,7 @@ class SourceCode(ft.Text):
 
 
 class PropertiesTable(ft.DataTable):
-    def __init__(self, properties, control):
+    def __init__(self, properties, control, parent=None):
         super().__init__(
             columns=[
                 ft.DataColumn(ft.Text("Property name", weight=ft.FontWeight.BOLD)),
@@ -36,6 +36,10 @@ class PropertiesTable(ft.DataTable):
                 ),
             ]
         )
+        if parent == None:
+            self.parent = control
+        else:
+            self.parent = parent
         self.properties = properties
         self.control = control
         self.rows = self.get_rows()
@@ -88,7 +92,7 @@ class PropertiesTable(ft.DataTable):
         print("Value changed!")
         setattr(self.control, e.control.data, e.control.value)
         # self.update_source_code()
-        self.control.update()
+        self.parent.update()
 
     # def get_value_control(self, value_type, value, data):
     def get_value_control(self, property):
@@ -149,12 +153,16 @@ class PropertiesTable(ft.DataTable):
 
 
 class PropertiesList(ft.ListView):
-    def __init__(self, properties, control):
+    def __init__(self, properties, control, top_control=None):
         super().__init__()
         self.properties = properties
         self.control = control
         self.divider_thickness = 3
         self.width = 500
+        if top_control == None:
+            self.top_control = control
+        else:
+            self.top_control = top_control
         # self.expanded_icon_color = ft.Colors.AMBER
         # self.elevation = 8
         # self.divider_color = ft.colors.PRIMARY
@@ -175,6 +183,7 @@ class PropertiesList(ft.ListView):
                             PropertiesList(
                                 properties=property["properties"],
                                 control=value,
+                                top_control=self.top_control,
                             )
                         ],
                     )
@@ -198,6 +207,21 @@ class PropertiesList(ft.ListView):
 
         return controls
 
+    def value_changed(self, e):
+        print(f"Control: {self.control}!")
+        # print(f"Parent: {self.control.parent}")
+        print(f"Top Control: {self.top_control}!")
+        print(f"Property: {e.control.data}!")
+
+        print(f"Value: {e.control.value}!")
+        setattr(self.control, e.control.data, e.control.value)
+        # update
+        # if self.control != self.top_control:
+        #     setattr(self.top_control, e.control.data, self.control)
+        # self.update_source_code()
+        # self.control.update()
+        self.top_control.update()
+
     def get_value_control(self, property):
 
         value = getattr(self.control, property["name"])
@@ -208,7 +232,7 @@ class PropertiesList(ft.ListView):
                     content_padding=3,
                     value=value,
                     data=property["name"],
-                    # on_change=self.value_changed,
+                    on_change=self.value_changed,
                 )
             case "number":
                 return ft.TextField(
@@ -216,13 +240,13 @@ class PropertiesList(ft.ListView):
                     content_padding=3,
                     value=value,
                     data=property["name"],
-                    # on_change=self.value_changed,
+                    on_change=self.value_changed,
                 )
             case "bool":
                 return ft.Checkbox(
                     value=value,
                     data=property["name"],
-                    # on_change=self.value_changed,
+                    on_change=self.value_changed,
                 )
             case "enum":
 
@@ -236,7 +260,7 @@ class PropertiesList(ft.ListView):
                     options=options,
                     value=value,
                     data=property["name"],
-                    # on_change=self.value_changed,
+                    on_change=self.value_changed,
                 )
 
             case "dataclass":
