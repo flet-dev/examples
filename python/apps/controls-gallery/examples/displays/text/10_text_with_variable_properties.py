@@ -75,7 +75,8 @@ def example():
         },
         {
             "name": "spans",
-            "value_type": "list[dataclass]",
+            "value_type": "list",
+            "item_type": ft.TextSpan,
             "properties": span_properties_list,
         },
     ]

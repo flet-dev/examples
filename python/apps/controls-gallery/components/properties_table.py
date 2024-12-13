@@ -188,45 +188,14 @@ class PropertiesList(ft.ListView):
                 print("Add item to list property")
                 print(property["name"])
                 items_list = getattr(self.control, property["name"])
-                items_list.append(
-                    # ft.ExpansionTile(
-                    #     bgcolor=ft.Colors.OUTLINE_VARIANT,
-                    #     title=ft.Text(f"{property["name"]}{3}"),
-                    #     # controls=[
-                    #     #     PropertiesList(
-                    #     #         properties=property["properties"],
-                    #     #         # control=ft.TextSpan(text="Span 1 Text"),
-                    #     #         control=value[n],
-                    #     #         top_control=self.top_control,
-                    #     #     )
-                    #     # ],
-                    # )
-                    ft.TextSpan()
-                )
-
+                dataclass_type = property["item_type"]
+                # adding new item to a list
+                items_list.append(dataclass_type())
+                # updating property with the new list
                 setattr(self.control, property["name"], items_list)
-                dataclass_type_old = type(getattr(self.control, property["name"])[0])
-                print(dataclass_type)
-                dataclass_type = "flet.core.text_span.TextSpan"
-                new_object = dataclass_type()
-                print(new_object)
                 print(getattr(self.control, property["name"]))
-                # setattr(self.control, property["name"], new_list)
-                # self.controls.append(
-                #    ft.ExpansionTile(
-                #        bgcolor=ft.Colors.OUTLINE_VARIANT,
-                #        title=ft.Text(f"{property["name"]}{n+1}"),
-                #        controls=[
-                #            PropertiesList(
-                #                properties=property["properties"],
-                #                # control=ft.TextSpan(text="Span 1 Text"),
-                #                control=value[n],
-                #                top_control=self.top_control,
-                #            )
-                #        ],
-                #    )
-                # )
-                # setattr(self, property["name"], n + 1)
+                print(self)
+                self.controls = self.get_properties_list()
                 self.update()
 
             value = getattr(self.control, property["name"])
