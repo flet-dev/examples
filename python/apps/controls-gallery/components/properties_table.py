@@ -198,7 +198,12 @@ class PropertiesList(ft.ListView):
                 self.controls = self.get_properties_list()
                 self.update()
 
-            value = getattr(self.control, property["name"])
+            print(f"self.control: {self.control}")
+            if self.control != None:
+                value = getattr(self.control, property["name"])
+            else:
+                print(f'NoneType property: {property["name"]}')
+                value = None
             if "list" in property["value_type"]:
                 print(f"Print spans value: {value}")
                 # setattr(self, property["name"], 0)
@@ -289,7 +294,10 @@ class PropertiesList(ft.ListView):
 
     def get_value_control(self, property):
 
-        value = getattr(self.control, property["name"])
+        if self.control != None:
+            value = getattr(self.control, property["name"])
+        else:
+            value = None
         match property["value_type"]:
             case "str":
                 return ft.TextField(
@@ -338,11 +346,14 @@ class PropertiesList(ft.ListView):
 
             case "dataclass":
 
+                print(value)
+
                 properties_list = PropertiesList(
                     properties=property["properties"], control=value
                 )
 
                 return properties_list
+                # ft.Container(bgcolor=ft.Colors.YELLOW, width=30, height=30)
 
             # If an exact match is not confirmed, this last case will be used if provided
             case _:

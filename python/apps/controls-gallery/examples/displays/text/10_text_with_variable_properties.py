@@ -11,25 +11,27 @@ def example():
         value="This is a sample text",
         italic=True,
         selectable=True,
-        spans=[ft.TextSpan("Span1"), ft.TextSpan("Span2")],
+        spans=[
+            ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
+            ft.TextSpan(
+                text="Span1",
+                # style=ft.TextStyle(size=30),
+            ),
+        ],
         size=20,
         # color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
         style=ft.TextStyle(
             size=30,
-            shadow=ft.BoxShadow(
-                spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE
-            ),
+            shadow=[
+                ft.BoxShadow(spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE)
+            ],
             foreground=ft.Paint(
                 color=ft.Colors.BLUE_400, blend_mode=ft.BlendMode.COLOR_BURN
             ),
         ),
     )
-
-    span_properties_list = [
-        {"name": "text", "value_type": "str"},
-    ]
 
     paint_properties_list = [
         {"name": "color", "value_type": "enum", "values": ft.Colors},
@@ -44,15 +46,27 @@ def example():
     style_properties_list = [
         {"name": "size", "value_type": "number", "min": 0, "max": 100},
         {"name": "letter_spacing", "value_type": "number", "min": 0, "max": 100},
+        # {
+        #     "name": "foreground",
+        #     "value_type": "dataclass",
+        #     "dataclass": ft.Paint,
+        #     "properties": paint_properties_list,
+        # },
+        # {
+        #     "name": "shadow",
+        #     "value_type": "list",
+        #     "dataclass": ft.BoxShadow,
+        #     "properties": shadow_properties_list,
+        # },
+    ]
+
+    span_properties_list = [
+        {"name": "text", "value_type": "str"},
         {
-            "name": "foreground",
+            "name": "style",
             "value_type": "dataclass",
-            "properties": paint_properties_list,
-        },
-        {
-            "name": "shadow",
-            "value_type": "dataclass",
-            "properties": shadow_properties_list,
+            "dataclass": ft.TextStyle,
+            "properties": style_properties_list,
         },
     ]
 
@@ -70,13 +84,13 @@ def example():
         {
             "name": "style",
             "value_type": "dataclass",
-            # "dataclass": ft.TextStyle,
+            "dataclass": ft.TextStyle,
             "properties": style_properties_list,
         },
         {
             "name": "spans",
             "value_type": "list",
-            "item_type": ft.TextSpan,
+            "dataclass": ft.TextSpan,
             "properties": span_properties_list,
         },
     ]
