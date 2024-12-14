@@ -107,10 +107,10 @@ def example():
     example_control = ft.Column(
         controls=[
             t,
-            properties,
+            ft.Column(expand=True, scroll=ft.ScrollMode.AUTO, controls=[properties]),
             ft.Text("Source code:", weight=ft.FontWeight.BOLD),
             # source_code,
-        ]
+        ],
     )
 
     return example_control
