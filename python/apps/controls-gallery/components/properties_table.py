@@ -188,7 +188,7 @@ class PropertiesList(ft.ListView):
                 print("Add item to list property")
                 print(property["name"])
                 items_list = getattr(self.control, property["name"])
-                dataclass_type = property["item_type"]
+                dataclass_type = property["dataclass"]
                 # adding new item to a list
                 items_list.append(dataclass_type())
                 # updating property with the new list
@@ -198,34 +198,36 @@ class PropertiesList(ft.ListView):
                 self.controls = self.get_properties_list()
                 self.update()
 
-            print(f"self.control: {self.control}")
-            if self.control != None:
-                value = getattr(self.control, property["name"])
-            else:
-                print(f'NoneType property: {property["name"]}')
-                value = None
+            print(f"self.control: {self.control}, property: {property}")
+            # if self.control == None:
+            #     dataclass_type = property["dataclass"]
+            #     self.control = dataclass_type()
+
+            value = getattr(self.control, property["name"])
+
             if "list" in property["value_type"]:
                 print(f"Print spans value: {value}")
                 # setattr(self, property["name"], 0)
                 list_items = []
                 n = 0
-                for item in value:
-                    print(item)
-                    list_items.append(
-                        ft.ExpansionTile(
-                            bgcolor=ft.Colors.OUTLINE_VARIANT,
-                            title=ft.Text(f"{property["name"]}{n+1}"),
-                            controls=[
-                                PropertiesList(
-                                    properties=property["properties"],
-                                    # control=ft.TextSpan(text="Span 1 Text"),
-                                    control=value[n],
-                                    top_control=self.top_control,
-                                )
-                            ],
+                if value != None:
+                    for item in value:
+                        print(item)
+                        list_items.append(
+                            ft.ExpansionTile(
+                                bgcolor=ft.Colors.OUTLINE_VARIANT,
+                                title=ft.Text(f"{property["name"]}{n+1}"),
+                                controls=[
+                                    PropertiesList(
+                                        properties=property["properties"],
+                                        # control=ft.TextSpan(text="Span 1 Text"),
+                                        control=value[n],
+                                        top_control=self.top_control,
+                                    )
+                                ],
+                            )
                         )
-                    )
-                    n += 1
+                        n += 1
                 controls.append(
                     ft.Container(
                         bgcolor=ft.Colors.ON_INVERSE_SURFACE,
@@ -250,6 +252,10 @@ class PropertiesList(ft.ListView):
                     )
                 )
             elif property["value_type"] == "dataclass":
+                if value == None:
+                    dataclass_type = property["dataclass"]
+                    value = dataclass_type()
+                    setattr(self.control, property["name"], value)
                 controls.append(
                     # ft.ExpansionTile(
                     #     bgcolor=ft.Colors.OUTLINE_VARIANT,
@@ -294,10 +300,8 @@ class PropertiesList(ft.ListView):
 
     def get_value_control(self, property):
 
-        if self.control != None:
-            value = getattr(self.control, property["name"])
-        else:
-            value = None
+        value = getattr(self.control, property["name"])
+
         match property["value_type"]:
             case "str":
                 return ft.TextField(
@@ -346,7 +350,8 @@ class PropertiesList(ft.ListView):
 
             case "dataclass":
 
-                print(value)
+                if value == None:
+                    print(f"This dataclass value is None")
 
                 properties_list = PropertiesList(
                     properties=property["properties"], control=value

@@ -15,11 +15,11 @@ def example():
             ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
             ft.TextSpan(
                 text="Span1",
-                # style=ft.TextStyle(size=30),
+                style=ft.TextStyle(size=30),
             ),
         ],
         size=20,
-        # color=ft.Colors.GREEN_800,
+        color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
         style=ft.TextStyle(
@@ -46,18 +46,18 @@ def example():
     style_properties_list = [
         {"name": "size", "value_type": "number", "min": 0, "max": 100},
         {"name": "letter_spacing", "value_type": "number", "min": 0, "max": 100},
-        # {
-        #     "name": "foreground",
-        #     "value_type": "dataclass",
-        #     "dataclass": ft.Paint,
-        #     "properties": paint_properties_list,
-        # },
-        # {
-        #     "name": "shadow",
-        #     "value_type": "list",
-        #     "dataclass": ft.BoxShadow,
-        #     "properties": shadow_properties_list,
-        # },
+        {
+            "name": "foreground",
+            "value_type": "dataclass",
+            "dataclass": ft.Paint,
+            "properties": paint_properties_list,
+        },
+        {
+            "name": "shadow",
+            "value_type": "list",
+            "dataclass": ft.BoxShadow,
+            "properties": shadow_properties_list,
+        },
     ]
 
     span_properties_list = [
