@@ -188,6 +188,8 @@ class PropertiesList(ft.ListView):
                 print("Add item to list property")
                 print(property["name"])
                 items_list = getattr(self.control, property["name"])
+                if items_list == None:
+                    items_list = []
                 dataclass_type = property["dataclass"]
                 # adding new item to a list
                 items_list.append(dataclass_type())
