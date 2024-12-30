@@ -94,7 +94,7 @@ class IconBrowser(UserControl):
 
             for batch in batches(search_icons(search_term.lower()), 200):
                 for icon_name in batch:
-                    icon_key = f"icons.{icon_name.upper()}"
+                    icon_key = f"Icons.{icon_name.upper()}"
                     search_results.controls.append(
                         TextButton(
                             content=Container(
