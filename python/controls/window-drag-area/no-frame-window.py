@@ -1,10 +1,9 @@
-import flet
+import flet as ft
 from flet import Container, IconButton, Page, Row, Text, WindowDragArea, colors, icons
 
-
 def main(page: Page):
-    page.window_title_bar_hidden = True
-    page.window_title_bar_buttons_hidden = True
+    page.window.title_bar_hidden = True
+    page.window.title_bar_buttons_hidden = True
 
     page.add(
         Row(
@@ -19,10 +18,9 @@ def main(page: Page):
                     ),
                     expand=True,
                 ),
-                IconButton(icons.CLOSE, on_click=lambda _: page.window_close()),
+                IconButton(icons.CLOSE, on_click=lambda e: page.window.close()),
             ]
         )
     )
 
-
-flet.app(target=main)
+ft.app(target=main)
