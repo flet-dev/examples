@@ -16,7 +16,7 @@ def example():
         spans=[
             ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
             ft.TextSpan(
-                text="Span1",
+                text="Span2",
                 style=ft.TextStyle(size=30),
             ),
         ],
@@ -36,76 +36,145 @@ def example():
     )
 
     paint_properties_list = [
-        {"name": "color", "value_type": "enum", "values": ft.Colors},
+        {
+            "name": "color",
+            "value_type": "enum",
+            "values": ft.Colors,
+            "description": "Description.",
+        },
     ]
 
     shadow_properties_list = [
-        {"name": "spread_radius", "value_type": "number", "min": 0, "max": 100},
-        {"name": "blur_radius", "value_type": "number", "min": 0, "max": 100},
-        {"name": "color", "value_type": "enum", "values": ft.Colors},
+        {
+            "name": "spread_radius",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
+        },
+        {
+            "name": "blur_radius",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
+        },
+        {
+            "name": "color",
+            "value_type": "enum",
+            "values": ft.Colors,
+            "description": "Description.",
+        },
     ]
 
     style_properties_list = [
-        {"name": "size", "value_type": "number", "min": 0, "max": 100},
-        {"name": "letter_spacing", "value_type": "number", "min": 0, "max": 100},
+        {
+            "name": "size",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
+        },
+        {
+            "name": "letter_spacing",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
+        },
         {
             "name": "foreground",
             "value_type": "dataclass",
             "dataclass": ft.Paint,
             "properties": paint_properties_list,
+            "description": "Description.",
         },
         {
             "name": "shadow",
             "value_type": "list",
             "dataclass": ft.BoxShadow,
             "properties": shadow_properties_list,
+            "description": "Description.",
         },
     ]
 
     span_properties_list = [
-        {"name": "text", "value_type": "str"},
+        {"name": "text", "value_type": "str", "description": "Description."},
         {
             "name": "style",
             "value_type": "dataclass",
             "dataclass": ft.TextStyle,
             "properties": style_properties_list,
+            "description": "Description.",
         },
     ]
 
     badge_properties_list = [
-        {"name": "text", "value_type": "str"},
-        {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
+        {"name": "text", "value_type": "str", "description": "Description."},
+        {
+            "name": "bgcolor",
+            "value_type": "enum",
+            "values": ft.Colors,
+            "description": "Description.",
+        },
     ]
 
     properties_list = [
+        {"name": "value", "value_type": "str", "description": "The text displayed."},
+        {"name": "italic", "value_type": "bool", "description": "Description."},
+        {"name": "selectable", "value_type": "bool", "description": "Description."},
         {
-            "name": "value",
-            "value_type": "str",
+            "name": "size",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
         },
-        {"name": "italic", "value_type": "bool"},
-        {"name": "selectable", "value_type": "bool"},
-        {"name": "size", "value_type": "number", "min": 0, "max": 100},
-        {"name": "color", "value_type": "enum", "values": ft.Colors},
-        {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
-        {"name": "text_align", "value_type": "enum", "values": ft.TextAlign},
-        {"name": "max_lines", "value_type": "number", "min": 0, "max": 100},
+        {
+            "name": "color",
+            "value_type": "enum",
+            "values": ft.Colors,
+            "description": "Text foreground color. If style foreground color property is specified, it overrides this color.",
+        },
+        {
+            "name": "bgcolor",
+            "value_type": "enum",
+            "values": ft.Colors,
+            "description": "Text background color.",
+        },
+        {
+            "name": "text_align",
+            "value_type": "enum",
+            "values": ft.TextAlign,
+            "description": "Description.",
+        },
+        {
+            "name": "max_lines",
+            "value_type": "number",
+            "min": 0,
+            "max": 100,
+            "description": "Description.",
+        },
         {
             "name": "style",
             "value_type": "dataclass",
             "dataclass": ft.TextStyle,
             "properties": style_properties_list,
+            "description": "Description.",
         },
         {
             "name": "badge",
             "value_type": "dataclass",
             "dataclass": ft.Badge,
             "properties": badge_properties_list,
+            "description": "Description.",
         },
         {
             "name": "spans",
             "value_type": "list",
             "dataclass": ft.TextSpan,
             "properties": span_properties_list,
+            "description": "Description.",
         },
     ]
 

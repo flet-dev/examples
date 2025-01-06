@@ -152,6 +152,17 @@ class PropertiesTable(ft.DataTable):
                 return ft.Text("Something's wrong with the type")
 
 
+class PropertyName(ft.Row):
+    def __init__(self, name, description="Description"):
+        super().__init__()
+        self.controls = [
+            ft.Text(name),
+            ft.Icon(
+                name=ft.Icons.INFO_OUTLINE, tooltip=ft.Tooltip(message=description)
+            ),
+        ]
+
+
 class PropertiesList(ft.ListView):
     def __init__(self, properties, control, top_control=None):
         super().__init__()
@@ -169,7 +180,11 @@ class PropertiesList(ft.ListView):
     def get_dataclass_tile(self, property, object):
         return ft.ExpansionTile(
             bgcolor=ft.Colors.OUTLINE_VARIANT,
-            title=ft.Text(property["name"]),
+            # title=ft.Text(property["name"]),
+            title=PropertyName(
+                name=property["name"], description=property["description"]
+            ),
+            # trailing=ft.Icon(name=ft.Icons.INFO),
             controls=[
                 PropertiesList(
                     properties=property["properties"],
@@ -282,7 +297,11 @@ class PropertiesList(ft.ListView):
                         content=ft.Row(
                             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
-                                ft.Text(property["name"]),
+                                # ft.Text(property["name"]),
+                                PropertyName(
+                                    name=property["name"],
+                                    description=property["description"],
+                                ),
                                 self.get_value_control(property),
                             ],
                         ),
