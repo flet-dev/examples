@@ -11,6 +11,8 @@ def example():
         value="This is a sample text",
         italic=True,
         selectable=True,
+        text_align=ft.TextAlign.CENTER,
+        # badge=ft.Badge(text="Badge on the Text"),
         spans=[
             ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
             ft.TextSpan(
@@ -70,6 +72,11 @@ def example():
         },
     ]
 
+    badge_properties_list = [
+        {"name": "text", "value_type": "str"},
+        {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
+    ]
+
     properties_list = [
         {
             "name": "value",
@@ -80,12 +87,19 @@ def example():
         {"name": "size", "value_type": "number", "min": 0, "max": 100},
         {"name": "color", "value_type": "enum", "values": ft.Colors},
         {"name": "bgcolor", "value_type": "enum", "values": ft.Colors},
+        {"name": "text_align", "value_type": "enum", "values": ft.TextAlign},
         {"name": "max_lines", "value_type": "number", "min": 0, "max": 100},
         {
             "name": "style",
             "value_type": "dataclass",
             "dataclass": ft.TextStyle,
             "properties": style_properties_list,
+        },
+        {
+            "name": "badge",
+            "value_type": "dataclass",
+            "dataclass": ft.Badge,
+            "properties": badge_properties_list,
         },
         {
             "name": "spans",
