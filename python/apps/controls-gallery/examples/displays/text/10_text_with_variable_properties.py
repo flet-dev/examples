@@ -121,14 +121,22 @@ def example():
 
     properties_list = [
         {"name": "value", "value_type": "str", "description": "The text displayed."},
-        {"name": "italic", "value_type": "bool", "description": "Description."},
-        {"name": "selectable", "value_type": "bool", "description": "Description."},
+        {
+            "name": "italic",
+            "value_type": "bool",
+            "description": "True to use italic typeface.",
+        },
+        {
+            "name": "selectable",
+            "value_type": "bool",
+            "description": "Whether the text should be selectable.",
+        },
         {
             "name": "size",
             "value_type": "number",
             "min": 0,
             "max": 100,
-            "description": "Description.",
+            "description": "Text size in virtual pixels.",
         },
         {
             "name": "color",
@@ -146,35 +154,35 @@ def example():
             "name": "text_align",
             "value_type": "enum",
             "values": ft.TextAlign,
-            "description": "Description.",
+            "description": "Text horizontal align.",
         },
         {
             "name": "max_lines",
             "value_type": "number",
             "min": 0,
             "max": 100,
-            "description": "Description.",
+            "description": "An optional maximum number of lines for the text to span, wrapping if necessary. If the text exceeds the given number of lines, it will be truncated according to overflow.",
         },
         {
             "name": "style",
             "value_type": "dataclass",
             "dataclass": ft.TextStyle,
             "properties": style_properties_list,
-            "description": "Description.",
+            "description": "The text's style.",
         },
         {
             "name": "badge",
             "value_type": "dataclass",
             "dataclass": ft.Badge,
             "properties": badge_properties_list,
-            "description": "Description.",
+            "description": "Badges are used to show notifications, counts, or status information about its control.",
         },
         {
             "name": "spans",
             "value_type": "list",
             "dataclass": ft.TextSpan,
             "properties": span_properties_list,
-            "description": "Description.",
+            "description": "The list of TextSpan objects to build a rich text paragraph.",
         },
     ]
 
