@@ -1,6 +1,6 @@
 import flet as ft
 
-from components.properties_table import PropertiesList, PropertiesTable, SourceCode
+from components.properties_table import PropertiesList
 
 name = "Text with variable properties"
 
@@ -24,15 +24,15 @@ def example():
         color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
-        style=ft.TextStyle(
-            size=30,
-            shadow=[
-                ft.BoxShadow(spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE)
-            ],
-            foreground=ft.Paint(
-                color=ft.Colors.BLUE_400, blend_mode=ft.BlendMode.COLOR_BURN
-            ),
-        ),
+        # style=ft.TextStyle(
+        #     size=30,
+        #     shadow=[
+        #         ft.BoxShadow(spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE)
+        #     ],
+        #     foreground=ft.Paint(
+        #         color=ft.Colors.BLUE_400, blend_mode=ft.BlendMode.COLOR_BURN
+        #     ),
+        # ),
     )
 
     paint_properties_list = [
