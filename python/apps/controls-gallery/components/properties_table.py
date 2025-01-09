@@ -74,8 +74,8 @@ class PropertiesList(ft.ListView):
         for property in self.properties:
 
             def add_list_item(e):
-                print("Add item to list property")
-                print(property["name"])
+                # print("Add item to list property")
+                # print(property["name"])
                 items_list = getattr(self.control, property["name"])
                 if items_list == None:
                     items_list = []
@@ -89,7 +89,7 @@ class PropertiesList(ft.ListView):
                 self.controls = self.get_properties_list()
                 self.update()
 
-            print(f"self.control: {self.control}, property: {property}")
+            # print(f"self.control: {self.control}, property: {property}")
             # if self.control == None:
             #     dataclass_type = property["dataclass"]
             #     self.control = dataclass_type()
