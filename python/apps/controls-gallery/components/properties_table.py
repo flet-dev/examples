@@ -146,6 +146,8 @@ class PropertiesList(ft.ListView):
                 if value == None:
                     dataclass_type = property["dataclass"]
                     value = dataclass_type()
+                    print(value)
+                    # setting badge = ft.Badge()
                     setattr(self.control, property["name"], value)
                 controls.append(self.get_dataclass_tile(property, value))
             else:
@@ -172,11 +174,12 @@ class PropertiesList(ft.ListView):
         return controls
 
     def value_changed(self, e):
-        # print(f"Control: {self.control}!")
-        # print(f"Top Control: {self.top_control}!")
-        # print(f"Property: {e.control.data}!")
+        print(f"Control: {self.control}!")
+        print(f"Top Control: {self.top_control}!")
+        print(f"Property: {e.control.data}!")
 
-        # print(f"Value: {e.control.value}!")
+        print(f"Value: {e.control.value}!")
+
         setattr(self.control, e.control.data, e.control.value)
         self.top_control.update()
 

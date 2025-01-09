@@ -13,13 +13,13 @@ def example():
         selectable=True,
         text_align=ft.TextAlign.CENTER,
         # badge=ft.Badge(text="Badge on the Text"),
-        spans=[
-            ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
-            ft.TextSpan(
-                text="Span2",
-                style=ft.TextStyle(size=30),
-            ),
-        ],
+        # spans=[
+        #     ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
+        #     ft.TextSpan(
+        #         text="Span2",
+        #         style=ft.TextStyle(size=30),
+        #     ),
+        # ],
         size=20,
         color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
@@ -163,13 +163,13 @@ def example():
             "max": 100,
             "description": "An optional maximum number of lines for the text to span, wrapping if necessary. If the text exceeds the given number of lines, it will be truncated according to overflow.",
         },
-        {
-            "name": "style",
-            "value_type": "dataclass",
-            "dataclass": ft.TextStyle,
-            "properties": style_properties_list,
-            "description": "The text's style.",
-        },
+        # {
+        #     "name": "style",
+        #     "value_type": "dataclass",
+        #     "dataclass": ft.TextStyle,
+        #     "properties": style_properties_list,
+        #     "description": "The text's style.",
+        # },
         {
             "name": "badge",
             "value_type": "dataclass",
@@ -177,13 +177,13 @@ def example():
             "properties": badge_properties_list,
             "description": "Badges are used to show notifications, counts, or status information about its control.",
         },
-        {
-            "name": "spans",
-            "value_type": "list",
-            "dataclass": ft.TextSpan,
-            "properties": span_properties_list,
-            "description": "The list of TextSpan objects to build a rich text paragraph.",
-        },
+        # {
+        #     "name": "spans",
+        #     "value_type": "list",
+        #     "dataclass": ft.TextSpan,
+        #     "properties": span_properties_list,
+        #     "description": "The list of TextSpan objects to build a rich text paragraph.",
+        # },
     ]
 
     # properties = PropertiesTable(properties_list, t)
