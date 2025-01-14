@@ -52,6 +52,23 @@ class PropertiesList(ft.ListView):
         self.controls = self.get_properties_list()
 
     def get_dataclass_tile(self, property, object):
+        def add_property(e):
+            setattr(self.control, property["name"], object)
+            self.control.update()
+
+        def delete_property(e):
+            print(self.control)
+            # delattr(self.control, property["name"])
+            delattr(self.control, "value")
+            print(self.control)
+            self.control.update()
+
+        add_button = ft.Button("Add", on_click=add_property)
+        delete_button = ft.Button("Delete", on_click=delete_property)
+        buttons_row = ft.Row(
+            alignment=ft.MainAxisAlignment.START, controls=[add_button, delete_button]
+        )
+
         return ft.ExpansionTile(
             bgcolor=ft.Colors.OUTLINE_VARIANT,
             # title=ft.Text(property["name"]),
@@ -64,7 +81,8 @@ class PropertiesList(ft.ListView):
                     properties=property["properties"],
                     control=object,
                     top_control=self.top_control,
-                )
+                ),
+                buttons_row,
             ],
         )
 
@@ -148,7 +166,7 @@ class PropertiesList(ft.ListView):
                     value = dataclass_type()
                     print(value)
                     # setting badge = ft.Badge()
-                    setattr(self.control, property["name"], value)
+                    # setattr(self.control, property["name"], value)
                 controls.append(self.get_dataclass_tile(property, value))
             else:
                 controls.append(
