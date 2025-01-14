@@ -127,7 +127,8 @@ class PropertiesList(ft.ListView):
                                         # control=ft.TextSpan(text="Span 1 Text"),
                                         control=value[n],
                                         top_control=self.top_control,
-                                    )
+                                    ),
+                                    ft.Row(controls=[ft.IconButton(ft.Icons.DELETE)]),
                                 ],
                             )
                         )

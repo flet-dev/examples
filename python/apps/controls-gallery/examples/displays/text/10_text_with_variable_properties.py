@@ -24,7 +24,7 @@ def example():
         color=ft.Colors.GREEN_800,
         bgcolor=ft.Colors.GREEN_100,
         max_lines=2,
-        tooltip=ft.Tooltip(""),
+        tooltip=ft.Tooltip("Tooltip"),
         style=ft.TextStyle(
             size=30,
             shadow=[
