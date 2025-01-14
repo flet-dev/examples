@@ -52,37 +52,32 @@ class PropertiesList(ft.ListView):
         self.controls = self.get_properties_list()
 
     def get_dataclass_tile(self, property, object):
-        def add_property(e):
-            setattr(self.control, property["name"], object)
+
+        def switch_changed(e):
+            if e.control.value:
+                setattr(self.control, property["name"], object)
+            else:
+                setattr(self.control, property["name"], None)
             self.control.update()
 
-        def delete_property(e):
-            print(self.control)
-            # delattr(self.control, property["name"])
-            delattr(self.control, "value")
-            print(self.control)
-            self.control.update()
-
-        add_button = ft.Button("Add", on_click=add_property)
-        delete_button = ft.Button("Delete", on_click=delete_property)
-        buttons_row = ft.Row(
-            alignment=ft.MainAxisAlignment.START, controls=[add_button, delete_button]
-        )
+        if getattr(self.control, property["name"]) == None:
+            switch_value = False
+        else:
+            switch_value = True
+        switch = ft.Switch(value=switch_value, on_change=switch_changed)
 
         return ft.ExpansionTile(
             bgcolor=ft.Colors.OUTLINE_VARIANT,
-            # title=ft.Text(property["name"]),
             title=PropertyName(
                 name=property["name"], description=property["description"]
             ),
-            # trailing=ft.Icon(name=ft.Icons.INFO),
             controls=[
                 PropertiesList(
                     properties=property["properties"],
                     control=object,
                     top_control=self.top_control,
                 ),
-                buttons_row,
+                ft.Row(controls=[switch], alignment=ft.MainAxisAlignment.START),
             ],
         )
 
