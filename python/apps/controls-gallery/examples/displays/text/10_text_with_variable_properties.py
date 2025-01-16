@@ -28,7 +28,7 @@ def example():
         style=ft.TextStyle(
             size=30,
             shadow=[
-                ft.BoxShadow(spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE)
+                # ft.BoxShadow(spread_radius=5, blur_radius=10, color=ft.Colors.ORANGE)
             ],
             foreground=ft.Paint(
                 color=ft.Colors.BLUE_400, blend_mode=ft.BlendMode.COLOR_BURN

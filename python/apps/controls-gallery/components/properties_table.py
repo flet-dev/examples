@@ -58,13 +58,17 @@ class PropertiesList(ft.ListView):
                 setattr(self.control, property["name"], object)
             else:
                 setattr(self.control, property["name"], None)
-            self.control.update()
+            self.top_control.update()
 
         if getattr(self.control, property["name"]) == None:
             switch_value = False
         else:
             switch_value = True
-        switch = ft.Switch(value=switch_value, on_change=switch_changed)
+        switch = ft.Switch(
+            value=switch_value,
+            on_change=switch_changed,
+            tooltip=ft.Tooltip(f"Set/Unset {property["name"]} property"),
+        )
 
         return ft.ExpansionTile(
             bgcolor=ft.Colors.OUTLINE_VARIANT,
@@ -72,12 +76,12 @@ class PropertiesList(ft.ListView):
                 name=property["name"], description=property["description"]
             ),
             controls=[
+                ft.Row(controls=[switch], alignment=ft.MainAxisAlignment.START),
                 PropertiesList(
                     properties=property["properties"],
                     control=object,
                     top_control=self.top_control,
                 ),
-                ft.Row(controls=[switch], alignment=ft.MainAxisAlignment.START),
             ],
         )
 
