@@ -124,7 +124,12 @@ class PropertiesList(ft.ListView):
                             print(self.control)
                             # removing the tile
                             # list_items.remove(list_items[e.control.data])
-                            print(controls[0].content)
+                            print(len(controls))
+                            print(e.control.parent.parent)
+                            print(e.control.parent.parent.parent.controls)
+                            e.control.parent.parent.parent.controls.remove(
+                                e.control.parent.parent
+                            )
                             self.update()
                             self.control.update()
 
