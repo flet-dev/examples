@@ -91,8 +91,6 @@ class PropertiesList(ft.ListView):
         for property in self.properties:
 
             def add_list_item(e):
-                # print("Add item to list property")
-                # print(property["name"])
                 items_list = getattr(self.control, property["name"])
                 if items_list == None:
                     items_list = []
@@ -101,26 +99,31 @@ class PropertiesList(ft.ListView):
                 items_list.append(dataclass_type())
                 # updating property with the new list
                 setattr(self.control, property["name"], items_list)
-                # print(getattr(self.control, property["name"]))
-                # print(self)
                 self.controls = self.get_properties_list()
                 self.update()
-
-            # print(f"self.control: {self.control}, property: {property}")
-            # if self.control == None:
-            #     dataclass_type = property["dataclass"]
-            #     self.control = dataclass_type()
 
             value = getattr(self.control, property["name"])
 
             if "list" in property["value_type"]:
-                # print(f"Print spans value: {value}")
-                # setattr(self, property["name"], 0)
                 list_items = []
                 n = 0
                 if value != None:
                     for item in value:
-                        # print(item)
+
+                        def delete_item(e):
+                            print(self.control)
+                            items_list = getattr(self.control, property["name"])
+                            print(items_list)
+                            # removing item from the list
+                            print(f"Delete list {items_list[e.control.data]} item!")
+                            items_list.remove(items_list[e.control.data])
+                            print(items_list)
+                            # updating property with the new list
+                            setattr(self.control, property["name"], items_list)
+                            print(self.control)
+                            self.update()
+                            self.control.update()
+
                         list_items.append(
                             ft.ExpansionTile(
                                 bgcolor=ft.Colors.OUTLINE_VARIANT,
@@ -132,7 +135,18 @@ class PropertiesList(ft.ListView):
                                         control=value[n],
                                         top_control=self.top_control,
                                     ),
-                                    ft.Row(controls=[ft.IconButton(ft.Icons.DELETE)]),
+                                    ft.Row(
+                                        controls=[
+                                            ft.IconButton(
+                                                ft.Icons.DELETE,
+                                                on_click=delete_item,
+                                                tooltip=ft.Tooltip(
+                                                    f"Delete {property["name"]}{n+1}"
+                                                ),
+                                                data=n,
+                                            )
+                                        ]
+                                    ),
                                 ],
                             )
                         )
