@@ -112,6 +112,7 @@ class PropertiesList(ft.ListView):
 
                         def delete_item(e):
                             print(self.control)
+                            print(list_items)
                             items_list = getattr(self.control, property["name"])
                             print(items_list)
                             # removing item from the list
@@ -121,6 +122,9 @@ class PropertiesList(ft.ListView):
                             # updating property with the new list
                             setattr(self.control, property["name"], items_list)
                             print(self.control)
+                            # removing the tile
+                            # list_items.remove(list_items[e.control.data])
+                            print(controls[0].content)
                             self.update()
                             self.control.update()
 
