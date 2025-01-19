@@ -63,7 +63,7 @@ def main(page: ft.Page):
             join_user_name.update()
         else:
             page.session.set("user_name", join_user_name.value)
-            page.dialog.open = False
+            welcome_dlg.open = False
             new_message.prefix = ft.Text(f"{join_user_name.value}: ")
             page.pubsub.send_all(
                 Message(
@@ -103,7 +103,7 @@ def main(page: ft.Page):
         autofocus=True,
         on_submit=join_chat_click,
     )
-    page.dialog = ft.AlertDialog(
+    welcome_dlg = ft.AlertDialog(
         open=True,
         modal=True,
         title=ft.Text("Welcome!"),
@@ -111,6 +111,8 @@ def main(page: ft.Page):
         actions=[ft.ElevatedButton(text="Join chat", on_click=join_chat_click)],
         actions_alignment=ft.MainAxisAlignment.END,
     )
+
+    page.overlay.append(welcome_dlg)
 
     # Chat messages
     chat = ft.ListView(
