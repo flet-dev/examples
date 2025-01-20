@@ -15,7 +15,7 @@ class ChatMessage(ft.Row):
         self.controls = [
             ft.CircleAvatar(
                 content=ft.Text(self.get_initials(message.user_name)),
-                color=ft.colors.WHITE,
+                color=ft.Colors.WHITE,
                 bgcolor=self.get_avatar_color(message.user_name),
             ),
             ft.Column(
@@ -36,19 +36,19 @@ class ChatMessage(ft.Row):
 
     def get_avatar_color(self, user_name: str):
         colors_lookup = [
-            ft.colors.AMBER,
-            ft.colors.BLUE,
-            ft.colors.BROWN,
-            ft.colors.CYAN,
-            ft.colors.GREEN,
-            ft.colors.INDIGO,
-            ft.colors.LIME,
-            ft.colors.ORANGE,
-            ft.colors.PINK,
-            ft.colors.PURPLE,
-            ft.colors.RED,
-            ft.colors.TEAL,
-            ft.colors.YELLOW,
+            ft.Colors.AMBER,
+            ft.Colors.BLUE,
+            ft.Colors.BROWN,
+            ft.Colors.CYAN,
+            ft.Colors.GREEN,
+            ft.Colors.INDIGO,
+            ft.Colors.LIME,
+            ft.Colors.ORANGE,
+            ft.Colors.PINK,
+            ft.Colors.PURPLE,
+            ft.Colors.RED,
+            ft.Colors.TEAL,
+            ft.Colors.YELLOW,
         ]
         return colors_lookup[hash(user_name) % len(colors_lookup)]
 
@@ -63,7 +63,7 @@ def main(page: ft.Page):
             join_user_name.update()
         else:
             page.session.set("user_name", join_user_name.value)
-            page.dialog.open = False
+            welcome_dlg.open = False
             new_message.prefix = ft.Text(f"{join_user_name.value}: ")
             page.pubsub.send_all(
                 Message(
@@ -91,7 +91,7 @@ def main(page: ft.Page):
         if message.message_type == "chat_message":
             m = ChatMessage(message)
         elif message.message_type == "login_message":
-            m = ft.Text(message.text, italic=True, color=ft.colors.BLACK45, size=12)
+            m = ft.Text(message.text, italic=True, color=ft.Colors.BLACK45, size=12)
         chat.controls.append(m)
         page.update()
 
@@ -103,7 +103,7 @@ def main(page: ft.Page):
         autofocus=True,
         on_submit=join_chat_click,
     )
-    page.dialog = ft.AlertDialog(
+    welcome_dlg = ft.AlertDialog(
         open=True,
         modal=True,
         title=ft.Text("Welcome!"),
@@ -111,6 +111,8 @@ def main(page: ft.Page):
         actions=[ft.ElevatedButton(text="Join chat", on_click=join_chat_click)],
         actions_alignment=ft.MainAxisAlignment.END,
     )
+
+    page.overlay.append(welcome_dlg)
 
     # Chat messages
     chat = ft.ListView(
@@ -135,7 +137,7 @@ def main(page: ft.Page):
     page.add(
         ft.Container(
             content=chat,
-            border=ft.border.all(1, ft.colors.OUTLINE),
+            border=ft.border.all(1, ft.Colors.OUTLINE),
             border_radius=5,
             padding=10,
             expand=True,
@@ -144,7 +146,7 @@ def main(page: ft.Page):
             [
                 new_message,
                 ft.IconButton(
-                    icon=ft.icons.SEND_ROUNDED,
+                    icon=ft.Icons.SEND_ROUNDED,
                     tooltip="Send message",
                     on_click=send_message_click,
                 ),
