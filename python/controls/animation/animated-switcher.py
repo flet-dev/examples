@@ -2,6 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
+    page.title = "AnimatedSwitcher examples"
 
     c1 = ft.Container(
         ft.Text("Hello!", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
