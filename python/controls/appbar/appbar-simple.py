@@ -1,44 +1,34 @@
-import flet
-from flet import (
-    AppBar,
-    Icon,
-    IconButton,
-    Page,
-    PopupMenuButton,
-    PopupMenuItem,
-    Text,
-    colors,
-    icons,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
+    page.title = "AppBar Example"
+
     def check_item_clicked(e):
         e.control.checked = not e.control.checked
         page.update()
 
-    page.title = "AppBar Example"
-    page.appbar = AppBar(
-        leading=Icon(icons.PALETTE),
+    page.appbar = ft.AppBar(
+        leading=ft.Icon(ft.Icons.PALETTE),
         leading_width=40,
-        title=Text("AppBar Example"),
+        title=ft.Text("AppBar Example"),
         center_title=False,
-        bgcolor=colors.SURFACE_VARIANT,
+        bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
         actions=[
-            IconButton(icons.WB_SUNNY_OUTLINED),
-            IconButton(icons.FILTER_3),
-            PopupMenuButton(
+            ft.IconButton(ft.Icons.WB_SUNNY_OUTLINED),
+            ft.IconButton(ft.Icons.FILTER_3),
+            ft.PopupMenuButton(
                 items=[
-                    PopupMenuItem(text="Item 1"),
-                    PopupMenuItem(),  # divider
-                    PopupMenuItem(
+                    ft.PopupMenuItem(text="Item 1"),
+                    ft.PopupMenuItem(),  # divider
+                    ft.PopupMenuItem(
                         text="Checked item", checked=False, on_click=check_item_clicked
                     ),
                 ]
             ),
         ],
     )
-    page.add(Text("Body!"))
+    page.add(ft.Text("Body!"))
 
 
-flet.app(target=main)
+ft.app(target=main)
