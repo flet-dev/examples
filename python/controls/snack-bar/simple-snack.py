@@ -20,6 +20,8 @@ d = Data()
 
 
 def main(page):
+    page.title = "SnackBar examples"
+
     sb = ft.SnackBar(
         content=ft.Text(f"You did it!"),
         action="Undo it!",
