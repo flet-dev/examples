@@ -1,101 +1,100 @@
 from time import sleep
 
-import flet
-from flet import (
-    AppBar,
-    ElevatedButton,
-    Icon,
-    IconButton,
-    Page,
-    PopupMenuButton,
-    PopupMenuItem,
-    Row,
-    Text,
-    colors,
-    icons,
-    theme,
-)
+import flet as ft
 
-LIGHT_SEED_COLOR = colors.DEEP_ORANGE
-DARK_SEED_COLOR = colors.INDIGO
+LIGHT_SEED_COLOR = ft.Colors.DEEP_ORANGE
+DARK_SEED_COLOR = ft.Colors.DEEP_PURPLE
 
 
-def main(page: Page):
+def main(page: ft.Page):
+    page.title = "AppBar Example"
+
     def check_item_clicked(e):
         e.control.checked = not e.control.checked
         page.update()
 
-    page.title = "AppBar Example"
-    page.theme_mode = "light"
-    page.theme = theme.Theme(color_scheme_seed=LIGHT_SEED_COLOR, use_material3=True)
-    page.dark_theme = theme.Theme(color_scheme_seed=DARK_SEED_COLOR, use_material3=True)
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.theme = ft.Theme(color_scheme_seed=LIGHT_SEED_COLOR, use_material3=True)
+    page.dark_theme = ft.Theme(color_scheme_seed=DARK_SEED_COLOR, use_material3=True)
     page.update()
 
     def toggle_theme_mode(e):
-        page.theme_mode = "dark" if page.theme_mode == "light" else "light"
+        page.theme_mode = (
+            ft.ThemeMode.DARK
+            if page.theme_mode == ft.ThemeMode.LIGHT
+            else ft.ThemeMode.LIGHT
+        )
         lightMode.icon = (
-            icons.WB_SUNNY_OUTLINED if page.theme_mode == "light" else icons.WB_SUNNY
+            ft.Icons.WB_SUNNY_OUTLINED
+            if page.theme_mode == "light"
+            else ft.Icons.WB_SUNNY
         )
         page.update()
 
-    lightMode = IconButton(
-        icons.WB_SUNNY_OUTLINED if page.theme_mode == "light" else icons.WB_SUNNY,
+    lightMode = ft.IconButton(
+        ft.Icons.WB_SUNNY_OUTLINED if page.theme_mode == "light" else ft.Icons.WB_SUNNY,
         on_click=toggle_theme_mode,
     )
 
     def toggle_material(e):
         use_material3 = not page.theme.use_material3
-        page.theme = theme.Theme(
+        page.theme = ft.Theme(
             color_scheme_seed=LIGHT_SEED_COLOR, use_material3=use_material3
         )
-        page.dark_theme = theme.Theme(
+        page.dark_theme = ft.Theme(
             color_scheme_seed=DARK_SEED_COLOR, use_material3=use_material3
         )
         materialMode.icon = (
-            icons.FILTER_3 if page.theme.use_material3 else icons.FILTER_2
+            ft.Icons.FILTER_3 if page.theme.use_material3 else ft.Icons.FILTER_2
         )
         page.update()
 
-    materialMode = IconButton(
-        icons.FILTER_3 if page.theme.use_material3 else icons.FILTER_2,
+    materialMode = ft.IconButton(
+        ft.Icons.FILTER_3 if page.theme.use_material3 else ft.Icons.FILTER_2,
         on_click=toggle_material,
     )
 
     page.padding = 50
-    page.appbar = AppBar(
+    page.appbar = ft.AppBar(
         # toolbar_height=100,
-        # bgcolor=colors.SECONDARY_CONTAINER,
-        leading=Icon(icons.PALETTE),
+        bgcolor=ft.Colors.SECONDARY_CONTAINER,
+        leading=ft.Icon(ft.Icons.PALETTE),
         leading_width=40,
-        title=Text("AppBar Example"),
+        title=ft.Text("AppBar Example"),
         center_title=False,
         actions=[
             lightMode,
             materialMode,
-            PopupMenuButton(
+            ft.PopupMenuButton(
                 items=[
-                    PopupMenuItem(text="Item 1"),
-                    PopupMenuItem(icon=icons.POWER_INPUT, text="Check power"),
-                    PopupMenuItem(
-                        content=Row(
+                    ft.PopupMenuItem(text="Item 1"),
+                    ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, text="Check power"),
+                    ft.PopupMenuItem(
+                        content=ft.Row(
                             [
-                                Icon(icons.HOURGLASS_TOP_OUTLINED),
-                                Text("Item with a custom content"),
+                                ft.Icon(ft.Icons.HOURGLASS_TOP_OUTLINED),
+                                ft.Text("Item with a custom content"),
                             ]
                         ),
                         on_click=lambda _: print(
                             "Button with a custom content clicked!"
                         ),
                     ),
-                    PopupMenuItem(),  # divider
-                    PopupMenuItem(
+                    ft.PopupMenuItem(),  # divider
+                    ft.PopupMenuItem(
                         text="Checked item", checked=False, on_click=check_item_clicked
                     ),
                 ]
             ),
         ],
     )
-    page.add(Text("Body!"), ElevatedButton("Click me!"))
+    page.add(
+        ft.Text(
+            "Flet is a framework that allows building web, desktop and mobile applications in Python without prior experience in frontend development.You can build a UI for your program with Flet controls which are based on Flutter by Google. Flet goes beyond merely wrapping Flutter widgets. It adds its own touch by combining smaller widgets, simplifying complexities, implementing UI best practices, and applying sensible defaults. This ensures that your applications look stylish and polished without requiring additional design efforts on your part.",
+            text_align=ft.TextAlign.END,
+        ),
+        ft.ElevatedButton("Click me!"),
+    )
 
 
-flet.app(target=main)
+ft.app(main)
