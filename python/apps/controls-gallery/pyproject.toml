@@ -14,8 +14,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "controls_gallery"}]
-package-mode = false
+packages = [{include = "components"}]
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.26.0.dev4041"}
