@@ -45,6 +45,9 @@ def main(page: ft.Page):
 
     def get_position(_):
         print("Current position:", audio1.get_current_position())
+    
+    def position_changed(e):
+        s.value=???
 
     audio1 = ft.Audio(
         src=url,
@@ -58,10 +61,16 @@ def main(page: ft.Page):
         on_seek_complete=lambda _: print("Seek complete"),
     )
     page.overlay.append(audio1)
+    s = ft.Slider(value=0.3)
     page.add(
-        ft.ElevatedButton("Play", on_click=play),
-        ft.ElevatedButton("Pause", on_click=pause),
-        ft.ElevatedButton("Resume", on_click=resume),
+        s,
+        ft.Row(
+            [
+                ft.ElevatedButton("Play", on_click=play),
+                ft.ElevatedButton("Pause", on_click=pause),
+                ft.ElevatedButton("Resume", on_click=resume),
+            ]
+        ),
         ft.ElevatedButton("Release", on_click=release),
         ft.ElevatedButton("Seek 3s", on_click=seek),
         ft.Row(
@@ -76,8 +85,12 @@ def main(page: ft.Page):
                 ft.ElevatedButton("Balance right", on_click=balance_right),
             ]
         ),
-        ft.ElevatedButton("Get duration", on_click=get_duration),
-        ft.ElevatedButton("Get current position", on_click=get_position),
+        ft.Row(
+            [
+                ft.ElevatedButton("Get duration", on_click=get_duration),
+                ft.ElevatedButton("Get current position", on_click=get_position),
+            ]
+        ),
     )
 
 
