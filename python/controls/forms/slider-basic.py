@@ -1,14 +1,13 @@
-import flet
-from flet import Slider, Text
+import flet as ft
 
 
 def main(page):
     page.add(
-        Text("Default slider:"),
-        Slider(),
-        Text("Default disabled slider:"),
-        Slider(disabled=True),
+        ft.Text("Default slider:"),
+        ft.Slider(),
+        ft.Text("Default disabled slider:"),
+        ft.Slider(disabled=True),
     )
 
 
-flet.app(target=main)
+ft.app(main)
