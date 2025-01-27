@@ -1,37 +1,35 @@
-import logging
-
-import flet
-from flet import Banner, ElevatedButton, Icon, Text, TextButton, colors, icons
-
-logging.basicConfig(level=logging.DEBUG)
+import flet as ft
 
 
 def main(page):
-    page.title = "Banner Example"
-    page.update()
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     def close_banner(e):
-        page.banner.open = False
-        page.update()
+        page.close(banner)
+        page.add(ft.Text("Action clicked: " + e.control.text))
 
-    page.banner = Banner(
-        bgcolor=colors.AMBER_100,
-        leading=Icon(icons.WARNING_AMBER_ROUNDED, color=colors.AMBER, size=40),
-        content=Text(
-            "Oops, there were some errors while trying to delete the file. What would you like me to do?"
+    action_button_style = ft.ButtonStyle(color=ft.Colors.BLUE)
+    banner = ft.Banner(
+        bgcolor=ft.Colors.AMBER_100,
+        leading=ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, color=ft.Colors.AMBER, size=40),
+        content=ft.Text(
+            value="Oops, there were some errors while trying to delete the file. What would you like to do?",
+            color=ft.Colors.BLACK,
         ),
         actions=[
-            TextButton("Retry", on_click=close_banner),
-            TextButton("Ignore", on_click=close_banner),
-            TextButton("Cancel", on_click=close_banner),
+            ft.TextButton(
+                text="Retry", style=action_button_style, on_click=close_banner
+            ),
+            ft.TextButton(
+                text="Ignore", style=action_button_style, on_click=close_banner
+            ),
+            ft.TextButton(
+                text="Cancel", style=action_button_style, on_click=close_banner
+            ),
         ],
     )
 
-    def show_banner_click(e):
-        page.banner.open = True
-        page.update()
-
-    page.add(ElevatedButton("Show Banner", on_click=show_banner_click))
+    page.add(ft.ElevatedButton("Show Banner", on_click=lambda e: page.open(banner)))
 
 
-flet.app(target=main)
+ft.app(main)
