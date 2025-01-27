@@ -11,7 +11,7 @@ def main(page: ft.Page):
                         from_y=0,
                         to_y=40,
                         width=40,
-                        color=ft.colors.AMBER,
+                        color=ft.colors.GREEN,
                         tooltip="Apple",
                         border_radius=0,
                     ),
