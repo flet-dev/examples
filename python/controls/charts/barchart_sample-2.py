@@ -9,20 +9,20 @@ class SampleRod(ft.BarChartRod):
 
     def before_update(self):
         self.to_y = self.y + 0.5 if self.hovered else self.y
-        self.color = ft.colors.YELLOW if self.hovered else ft.colors.WHITE
+        self.color = ft.Colors.YELLOW if self.hovered else ft.Colors.WHITE
         self.border_side = (
-            ft.BorderSide(width=1, color=ft.colors.GREEN_400)
+            ft.BorderSide(width=1, color=ft.Colors.GREEN_400)
             if self.hovered
-            else ft.BorderSide(width=0, color=ft.colors.WHITE)
+            else ft.BorderSide(width=0, color=ft.Colors.WHITE)
         )
         super().before_update()
 
     def build(self):
         self.tooltip = str(self.y)
         self.width = 22
-        self.color = ft.colors.WHITE
+        self.color = ft.Colors.WHITE
         self.bg_to_y = 20
-        self.bg_color = ft.colors.GREEN_300
+        self.bg_color = ft.Colors.GREEN_300
 
 
 def main(page: ft.Page):
@@ -80,7 +80,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Container(
-            chart, bgcolor=ft.colors.GREEN_200, padding=10, border_radius=5, expand=True
+            chart, bgcolor=ft.Colors.GREEN_200, padding=10, border_radius=5, expand=True
         )
     )
 
