@@ -1,4 +1,5 @@
 import logging
+
 import flet
 from flet import ElevatedButton, SnackBar, Text
 
@@ -15,22 +16,20 @@ d = Data()
 
 def main(page):
 
-    snack_bar = SnackBar(
+    page.snack_bar = SnackBar(
         content=Text("Hello, world!"),
-        action="Alright!"
+        # remove_current_snackbar=True,
+        action="Alright!",
     )
 
     def on_click(e):
+        # page.snack_bar.content.value = f"Hello, world: {d.counter}"
+        page.snack_bar = SnackBar(Text(f"Hello {d.counter}"))
+        page.snack_bar.open = True
         d.counter += 1
-        snack_bar.content = Text(f"Hello {d.counter}")
-        snack_bar.open = True
-        
-        page.add(snack_bar)
         page.update()
 
     page.add(ElevatedButton("Open SnackBar", on_click=on_click))
-
-    page.add(snack_bar)
 
 
 flet.app(target=main)
