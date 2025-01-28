@@ -2,33 +2,31 @@ import flet as ft
 
 
 def main(page: ft.Page):
+    page.title = "BottomSheet example"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
     def bs_dismissed(e):
-        print("Dismissed!")
-
-    def show_bs(e):
-        bs.open = True
-        bs.update()
-
-    def close_bs(e):
-        bs.open = False
-        bs.update()
+        page.add(ft.Text("Bottom sheet dismissed"))
 
     bs = ft.BottomSheet(
         ft.Container(
             ft.Column(
                 [
-                    ft.Text("This is sheet's content!"),
-                    ft.ElevatedButton("Close bottom sheet", on_click=close_bs),
+                    ft.Text("Here is a bottom sheet!"),
+                    ft.ElevatedButton("Dismiss", on_click=lambda _: page.close(bs)),
                 ],
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 tight=True,
             ),
-            padding=10,
+            padding=50,
         ),
-        open=True,
+        open=False,
         on_dismiss=bs_dismissed,
     )
     page.overlay.append(bs)
-    page.add(ft.ElevatedButton("Display bottom sheet", on_click=show_bs))
+    page.add(
+        ft.ElevatedButton("Display bottom sheet", on_click=lambda e: page.open(bs))
+    )
 
 
 ft.app(target=main)
