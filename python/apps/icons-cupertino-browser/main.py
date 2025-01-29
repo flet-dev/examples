@@ -15,10 +15,10 @@ from flet import (
     Text,
     TextButton,
     TextField,
-    UserControl,
+    Stack,
     alignment,
-    colors,
-    cupertino_icons,
+    Colors,
+    CupertinoIcons,
 )
 
 # logging.basicConfig(level=logging.INFO)
@@ -26,7 +26,7 @@ from flet import (
 os.environ["FLET_WS_MAX_MESSAGE_SIZE"] = "8000000"
 
 
-class IconCupertinoBrowser(UserControl):
+class IconCupertinoBrowser(Stack):
     def __init__(self, expand=False, height=500):
         super().__init__()
         if expand:
@@ -42,14 +42,8 @@ class IconCupertinoBrowser(UserControl):
 
         # fetch all icon constants from icons.py module
         icons_list = []
-        list_started = False
-        # loop through cupertino icons
-        for key, value in vars(cupertino_icons).items():
-            # use top-most from flet/sdk/python/packages/flet-core/src/flet_core/cupertino_icons.py
-            if key == "LEFT_CHEVRON":
-                list_started = True
-            if list_started and isinstance(value, str):
-                icons_list.append(value)
+        for icon in CupertinoIcons:
+            icons_list.append(icon.name)
 
         search_txt = TextField(
             expand=1,
@@ -62,7 +56,7 @@ class IconCupertinoBrowser(UserControl):
             display_icons(search_txt.value)
 
         search_query = Row(
-            [search_txt, IconButton(icon=cupertino_icons.SEARCH, on_click=search_click)]
+            [search_txt, IconButton(icon=CupertinoIcons.SEARCH, on_click=search_click)]
         )
 
         search_results = GridView(
@@ -79,7 +73,7 @@ class IconCupertinoBrowser(UserControl):
             icon_key = e.control.data
             print("Copy to clipboard:", icon_key)
             self.page.set_clipboard(e.control.data)
-            self.page.show_snack_bar(SnackBar(Text(f"Copied {icon_key}"), open=True))
+            self.page.open(SnackBar(Text(f"Copied {icon_key}"), open=True))
 
         def search_icons(search_term: str):
             # switch variable to allow empty search, which shows all icons
@@ -109,16 +103,16 @@ class IconCupertinoBrowser(UserControl):
 
             search_results.clean()
 
-            for batch in batches(search_icons(search_term.lower()), 200):
+            for batch in batches(search_icons(search_term.upper()), 200):
                 for icon_name in batch:
                     # HOT GLUE - primitive text in replace to diplay & copy correctly.
-                    icon_key = f"cupertino_icons.{icon_name.upper()}".replace("cupertino_".upper(), "")
+                    icon_key = f"CupertinoIcons.{icon_name.upper()}".replace("cupertino_".upper(), "")
                     search_results.controls.append(
                         TextButton(
                             content=Container(
                                 content=Column(
                                     [
-                                        Icon(name=icon_name, size=30),
+                                        Icon(name=f"cupertino_{icon_name.lower()}", size=30),
                                         Text(
                                             # HOT GLUE - primitive text in replace to diplay & copy correctly.
                                             value=f"{icon_name}".replace("cupertino_", ""),
@@ -126,7 +120,7 @@ class IconCupertinoBrowser(UserControl):
                                             width=100,
                                             no_wrap=True,
                                             text_align="center",
-                                            color=colors.ON_SURFACE_VARIANT,
+                                            color=Colors.ON_SURFACE_VARIANT,
                                         ),
                                     ],
                                     spacing=5,
@@ -144,7 +138,7 @@ class IconCupertinoBrowser(UserControl):
                 self.update()
 
             if len(search_results.controls) == 0:
-                self.page.show_snack_bar(SnackBar(Text("No icons found"), open=True))
+                self.page.open(SnackBar(Text("No icons found"), open=True))
             search_query.disabled = False
             self.update()
 
