@@ -3,6 +3,7 @@ flet --version
 DIST_PATH=$PWD/python/dist
 flet publish python/apps/todo/todo.py --distpath $DIST_PATH/todo --base-url todo --app-name "Flet To-Do" --app-description "A classic To-Do app inspired by TodoMVC project."
 flet publish python/apps/icons-browser/main.py --distpath $DIST_PATH/icons-browser --base-url icons-browser --app-name "Flet Icons Browser" --app-description "Quickly search through icons collection to use in your app."
+flet publish python/apps/icons-cupertino-browser/main.py --distpath $DIST_PATH/icons-cupertino-browser --base-url icons-cupertino-browser --app-name "Flet Cupertino Icons Browser" --app-description "Quickly search through icons collection to use in your app."
 flet publish python/tutorials/calc/calc.py --distpath $DIST_PATH/calculator --base-url calculator --app-name "Calculator" --app-description "A simple calculator app written in Flet."
 flet publish python/tutorials/solitaire/solitaire-final-part1/main.py --distpath $DIST_PATH/solitaire --base-url solitaire --assets assets --app-name "Solitaire" --app-description "Learn how to handle gestures and position controls on a page."
 flet publish python/apps/trolli/src/main.py --distpath $DIST_PATH/trolli --base-url trolli --assets ../assets --route-url-strategy "hash" --app-name "Trolli" --app-description "A clone of Trello."
