@@ -8,13 +8,12 @@ def main(page: ft.Page):
         height=100,
         bgcolor="blue",
         border_radius=5,
-        scale=ft.transform.Scale(scale=1),
+        scale=1,
         animate_scale=ft.animation.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):
-        # c1.rotate = 1
-        c.scale = 2
+        c.scale = 2 if c.scale == 1 else 1
         page.update()
 
     page.vertical_alignment = ft.MainAxisAlignment.CENTER

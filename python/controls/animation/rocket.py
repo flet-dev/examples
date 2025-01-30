@@ -7,7 +7,7 @@ def main(page: ft.Page):
 
     c2 = ft.Container(
         content=ft.Container(
-            ft.Icon(ft.icons.ROCKET, size=40, color="black"),
+            ft.Icon(ft.Icons.ROCKET, size=40, color="black"),
             scale=1.0,
             animate_scale=1000,
             opacity=1.0,
@@ -41,4 +41,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+ft.app(main)

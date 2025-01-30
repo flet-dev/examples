@@ -1,8 +1,7 @@
-import flet
-from flet import ElevatedButton, Page, Text
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Elevated button with 'click' event"
 
     def button_clicked(e):
@@ -10,10 +9,10 @@ def main(page: Page):
         t.value = f"Button clicked {b.data} time(s)"
         page.update()
 
-    b = ElevatedButton("Button with 'click' event", on_click=button_clicked, data=0)
-    t = Text()
+    b = ft.ElevatedButton("Button with 'click' event", on_click=button_clicked, data=0)
+    t = ft.Text()
 
     page.add(b, t)
 
 
-flet.app(target=main)
+ft.app(main)

@@ -6,6 +6,7 @@ def main(page: ft.Page):
     i1 = ft.Image(
         src="https://picsum.photos/200/300?1",
         animate_position=ft.animation.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
+        left=0,
     )
     i2 = ft.Image(
         src="https://picsum.photos/200/300?2",
@@ -14,8 +15,8 @@ def main(page: ft.Page):
     )
 
     def animate(e):
-        i1.left = 400
-        i2.left = 0
+        i1.left = 400 if i1.left == 0 else 0
+        i2.left = 0 if i2.left == -400 else -400
         page.update()
 
     page.add(
@@ -31,4 +32,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+ft.app(main)

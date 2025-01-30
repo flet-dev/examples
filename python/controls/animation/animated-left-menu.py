@@ -14,7 +14,7 @@ def main(page: ft.Page):
         content=ft.Column(
             [
                 ft.Row(
-                    [ft.IconButton(icon=ft.icons.CLOSE, on_click=hide_menu)],
+                    [ft.IconButton(icon=ft.Icons.CLOSE, on_click=hide_menu)],
                     alignment=ft.MainAxisAlignment.END,
                 ),
                 ft.ListTile(
@@ -31,7 +31,7 @@ def main(page: ft.Page):
         top=10,
         width=200,
         height=300,
-        bgcolor=ft.colors.SURFACE_VARIANT,
+        bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
         border_radius=5,
         offset=ft.transform.Offset(-2, 0),
         animate_offset=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN),
@@ -43,4 +43,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+ft.app(main)

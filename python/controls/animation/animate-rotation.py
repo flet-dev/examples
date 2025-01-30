@@ -29,9 +29,9 @@ def main(page: ft.Page):
         page.update()
 
     page.add(
-        ft.Stack([c1, c2], width=600, height=600),
+        ft.Stack([c1, c2], width=500, height=300),
         ft.ElevatedButton("Animate!", on_click=animate),
     )
 
 
-ft.app(target=main)
+ft.app(main)
