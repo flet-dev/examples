@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
 
     c1 = ft.ShaderMask(
-        ft.Image(
+        content=ft.Image(
             src="https://picsum.photos/140/100?1",
             width=140,
             height=100,
@@ -14,7 +14,7 @@ def main(page: ft.Page):
         shader=ft.RadialGradient(
             center=ft.alignment.top_left,
             radius=1.0,
-            colors=[ft.colors.YELLOW, ft.colors.DEEP_ORANGE_900],
+            colors=[ft.Colors.YELLOW, ft.Colors.DEEP_ORANGE_900],
             tile_mode=ft.GradientTileMode.CLAMP,
         ),
         border_radius=5,
@@ -28,7 +28,7 @@ def main(page: ft.Page):
         page.update()
 
     page.add(
-        ft.Stack([c1], width=600, height=600),
+        ft.Stack([c1], width=500, height=300),
         ft.ElevatedButton("Animate!", on_click=animate),
     )
 
