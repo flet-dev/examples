@@ -9,7 +9,7 @@ def main(page: ft.Page):
         ft.ElevatedButton(
             "Button with colorful icon",
             icon="park_rounded",
-            icon_color="green400",
+            icon_color=ft.Colors.GREEN_400,
         ),
     )
 
