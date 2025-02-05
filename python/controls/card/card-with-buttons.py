@@ -1,32 +1,34 @@
-import flet
-from flet import Card, Column, Container, Icon, ListTile, Row, Text, TextButton, icons
+import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.title = "Card Example"
+    page.theme_mode = ft.ThemeMode.LIGHT
     page.add(
-        Card(
-            content=Container(
-                content=Column(
+        ft.Card(
+            content=ft.Container(
+                content=ft.Column(
                     [
-                        ListTile(
-                            leading=Icon(icons.ALBUM),
-                            title=Text("The Enchanted Nightingale"),
-                            subtitle=Text(
+                        ft.ListTile(
+                            leading=ft.Icon(ft.Icons.ALBUM),
+                            title=ft.Text("The Enchanted Nightingale"),
+                            subtitle=ft.Text(
                                 "Music by Julie Gable. Lyrics by Sidney Stein."
                             ),
+                            bgcolor=ft.Colors.GREY_400,
                         ),
-                        Row(
-                            [TextButton("Buy tickets"), TextButton("Listen")],
-                            alignment="end",
+                        ft.Row(
+                            [ft.TextButton("Buy tickets"), ft.TextButton("Listen")],
+                            alignment=ft.MainAxisAlignment.END,
                         ),
                     ]
                 ),
                 width=400,
                 padding=10,
-            )
+            ),
+            shadow_color=ft.Colors.ON_SURFACE_VARIANT,
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)
