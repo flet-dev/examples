@@ -18,7 +18,6 @@ def main(page: ft.Page):
                         (0, 10),
                         (100, 50),
                         colors=[ft.colors.BLUE, ft.colors.YELLOW],
-                        # rotation=math.pi / 2,
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),
