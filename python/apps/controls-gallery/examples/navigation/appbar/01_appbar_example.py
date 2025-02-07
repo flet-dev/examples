@@ -28,6 +28,7 @@ def example():
             ],
         ),
         content=ft.Container(),
+        height=200
     )
 
     return pagelet

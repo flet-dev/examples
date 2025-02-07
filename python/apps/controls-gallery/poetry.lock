@@ -287,44 +287,44 @@ standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "htt
 
 [[package]]
 name = "flet"
-version = "0.26.0.dev4041"
+version = "0.26.0"
 description = "Flet for Python - easily build interactive multi-platform apps in Python"
 optional = false
 python-versions = ">=3.9"
 groups = ["main", "dev"]
 files = [
-    {file = "flet-0.26.0.dev4041-py3-none-any.whl", hash = "sha256:78f15371a329d90ddc9934b2c8f6fa4086beb065ce2a570e1b781fdae35bc2f0"},
+    {file = "flet-0.26.0-py3-none-any.whl", hash = "sha256:779e58dcfb4fbf0760715471121a183bf7ecf48e522fee068556cb26df3490fb"},
 ]
 
 [package.dependencies]
-flet-cli = {version = "0.26.0.dev4041", optional = true, markers = "extra == \"all\" or extra == \"cli\""}
-flet-desktop = {version = "0.26.0.dev4041", optional = true, markers = "(platform_system == \"Darwin\" or platform_system == \"Windows\") and (extra == \"all\" or extra == \"desktop\")"}
-flet-desktop-light = {version = "0.26.0.dev4041", optional = true, markers = "platform_system == \"Linux\" and (extra == \"all\" or extra == \"desktop\")"}
-flet-web = {version = "0.26.0.dev4041", optional = true, markers = "extra == \"all\" or extra == \"web\""}
+flet-cli = {version = "0.26.0", optional = true, markers = "extra == \"all\" or extra == \"cli\""}
+flet-desktop = {version = "0.26.0", optional = true, markers = "(platform_system == \"Darwin\" or platform_system == \"Windows\") and (extra == \"all\" or extra == \"desktop\")"}
+flet-desktop-light = {version = "0.26.0", optional = true, markers = "platform_system == \"Linux\" and (extra == \"all\" or extra == \"desktop\")"}
+flet-web = {version = "0.26.0", optional = true, markers = "extra == \"all\" or extra == \"web\""}
 httpx = {version = "*", markers = "platform_system != \"Pyodide\""}
 oauthlib = {version = ">=3.2.2,<4.0.0", markers = "platform_system != \"Pyodide\""}
 repath = ">=0.9.0,<0.10.0"
 
 [package.extras]
-all = ["flet-cli (==0.26.0.dev4041)", "flet-desktop (==0.26.0.dev4041)", "flet-desktop-light (==0.26.0.dev4041)", "flet-web (==0.26.0.dev4041)"]
-cli = ["flet-cli (==0.26.0.dev4041)"]
-desktop = ["flet-desktop (==0.26.0.dev4041)", "flet-desktop-light (==0.26.0.dev4041)"]
-web = ["flet-web (==0.26.0.dev4041)"]
+all = ["flet-cli (==0.26.0)", "flet-desktop (==0.26.0)", "flet-desktop-light (==0.26.0)", "flet-web (==0.26.0)"]
+cli = ["flet-cli (==0.26.0)"]
+desktop = ["flet-desktop (==0.26.0)", "flet-desktop-light (==0.26.0)"]
+web = ["flet-web (==0.26.0)"]
 
 [[package]]
 name = "flet-cli"
-version = "0.26.0.dev4041"
+version = "0.26.0"
 description = "Flet CLI"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "flet_cli-0.26.0.dev4041-py3-none-any.whl", hash = "sha256:0171d8a3b90d8b4a47bf63046684c0b366ffa784e56dd3313bffc71cf025865a"},
+    {file = "flet_cli-0.26.0-py3-none-any.whl", hash = "sha256:4ae9f7a855df022033e1174a6191ebde814646d7f1c92bd6f9739522a72b35a2"},
 ]
 
 [package.dependencies]
 cookiecutter = ">=2.6.0,<3.0.0"
-flet = "0.26.0.dev4041"
+flet = "0.26.0"
 packaging = "*"
 qrcode = ">=7.4.2,<8.0.0"
 toml = ">=0.10.2,<0.11.0"
@@ -347,59 +347,59 @@ flet = ">=0,<1"
 
 [[package]]
 name = "flet-desktop"
-version = "0.26.0.dev4041"
+version = "0.26.0"
 description = "Flet Desktop client in Flutter"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 markers = "platform_system == \"Darwin\" or platform_system == \"Windows\""
 files = [
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:7445c7de47ffba9bf5b7e9498c28f9acea888674dafd6fe185ac567f1102b326"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-macosx_12_0_arm64.whl", hash = "sha256:51b22c0934714a0e35807b28fac1fc771f55c4f1b472f70185abc4b7fbbd040d"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:2d24634b4ca7e12070856d13fa0d3b6b39166d529c988effc40fc2b15f4bb9e9"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:5e47250914c3605d8336f227e9da6ef0d2888e37a5844f5215e1643554f2eb17"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:a696005c36bc7575afdaa9f438626e5083d520c0c82f2ac75040c4a70d396c75"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:71b0bece0b83617324cad0b7d606e761333361649e34add02b669eda3a4a8899"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-win32.whl", hash = "sha256:5e91db0a49e74b0c5a6b81afdb6b0c8d667dec37af643b0c696f3b6f43dd2551"},
-    {file = "flet_desktop-0.26.0.dev4041-py3-none-win_amd64.whl", hash = "sha256:91c9f424b8ea18a151f27802db7c2fd8cbf8194b4e6942f3a9e0a02cdcc13cb2"},
-    {file = "flet_desktop-0.26.0.dev4041.tar.gz", hash = "sha256:ac10008ad6af4a5de6c7e09341cf187fc1ec1b956e0d6613b41b132bf7024a64"},
+    {file = "flet_desktop-0.26.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:7e4631a781adbf1a1e3f11c48b639227efe6dca3f0f63d39f57da76aff7c985e"},
+    {file = "flet_desktop-0.26.0-py3-none-macosx_12_0_arm64.whl", hash = "sha256:b57c523ffe71d7f78ea5dab1514b108475139d09d55f83ef841c5190c6edf5c7"},
+    {file = "flet_desktop-0.26.0-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:79552def4614193d35320b0ee70db1d806834ed51b62cb0abc658c97f2e8e673"},
+    {file = "flet_desktop-0.26.0-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:e6e0cb855761bd23ab1e7fffbba532f588909224ab43c9ab1794a2a29818dbce"},
+    {file = "flet_desktop-0.26.0-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:1e07b0849686d9400b5cf3f7ccf41fe7dcd580d50aef03345544f493a0e80ae3"},
+    {file = "flet_desktop-0.26.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:6e2a5b1390a8ea3983a8d94663120bfcc19be5f6c8dd7ce333155345191ed599"},
+    {file = "flet_desktop-0.26.0-py3-none-win32.whl", hash = "sha256:97280becebdc55cf6e26b8a1a42e24bff595bc5bc4c2a976aa2ab323844e2db2"},
+    {file = "flet_desktop-0.26.0-py3-none-win_amd64.whl", hash = "sha256:4bb5770efb38ea523705d1e300a1fc14b603d63ee00a5e03df945c756892cfe9"},
+    {file = "flet_desktop-0.26.0.tar.gz", hash = "sha256:f8e88c03bbb0d62975d626fca3fa1b3b1bea5d5f2e45ac3066a7525587f1cee7"},
 ]
 
 [package.dependencies]
-flet = "0.26.0.dev4041"
+flet = "0.26.0"
 
 [[package]]
 name = "flet-desktop-light"
-version = "0.26.0.dev4041"
+version = "0.26.0"
 description = "Flet Desktop client in Flutter"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 markers = "platform_system == \"Linux\""
 files = [
-    {file = "flet_desktop_light-0.26.0.dev4041-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:13eb0a67238eab5fb3b833f19edd88d74e077a5b3e0720db85f8ede6c70e793f"},
-    {file = "flet_desktop_light-0.26.0.dev4041-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:9f4ed050437d06c54a0595dfa5f59456d6e9dc430c2ca11279f8b51587681aa2"},
-    {file = "flet_desktop_light-0.26.0.dev4041-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:6d127c9e4655c201adeb01ec1e2bd6249705776ba4c77e46e9bc1dd058b52afa"},
-    {file = "flet_desktop_light-0.26.0.dev4041-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:2f9c2e5f38f829b4bcb62079a05502523eb3f1a93095ef093987b051712627f5"},
+    {file = "flet_desktop_light-0.26.0-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:5ef509a2ef45fa5ebbcca1fb4bec175abf95271a0d85af459931d54d689979d2"},
+    {file = "flet_desktop_light-0.26.0-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:20a2cb5e2cdbfe4c65a37a63f39801bd456c0bf6b130e5b0a1fd2eb18b49bd74"},
+    {file = "flet_desktop_light-0.26.0-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:30605dd2998c5c48bc8f057d239ae0dcbb0f97834ebdf1e6eb51abb85af191b6"},
+    {file = "flet_desktop_light-0.26.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:e4beeaece64b14905914503820b828f8599790e56ff001f99f0c05c85eccf3d1"},
 ]
 
 [package.dependencies]
-flet = "0.26.0.dev4041"
+flet = "0.26.0"
 
 [[package]]
 name = "flet-web"
-version = "0.26.0.dev4041"
+version = "0.26.0"
 description = "Flet web client in Flutter."
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "flet_web-0.26.0.dev4041-py3-none-any.whl", hash = "sha256:4442a85f9ef4b9ef4cca391c40d1531769095777b3b650e14c4bb5f74e1dd969"},
+    {file = "flet_web-0.26.0-py3-none-any.whl", hash = "sha256:d29865ab0136c71d164b08628e86222a1c3c38fd9158e44065344a7d569ba8ae"},
 ]
 
 [package.dependencies]
 fastapi = "*"
-flet = "0.26.0.dev4041"
+flet = "0.26.0"
 uvicorn = {version = "*", extras = ["standard"]}
 
 [[package]]
@@ -1450,4 +1450,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "36e2b7e85d6943e61f3545df78e85fc6cfcecf10e990c06eeb863ce516b7b36c"
+content-hash = "4a1a5d018dbcc66d58b66109b0b5a9d5e965b1ccec349de368fe6314775c2f9a"
