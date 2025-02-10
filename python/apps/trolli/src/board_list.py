@@ -1,131 +1,156 @@
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from board import Board
 import itertools
-from flet import (
-    Draggable,
-    DragTarget,
-    Column,
-    Row,
-    Text,
-    Icon,
-    Page,
-    PopupMenuButton,
-    PopupMenuItem,
-    Container,
-    TextButton,
-    TextField,
-    icons,
-    border_radius,
-    alignment,
-    border,
-    colors,
-    padding,
-)
+import flet as ft
 from item import Item
 from data_store import DataStore
 
 
-class BoardList(Container):
+class BoardList(ft.Container):
     id_counter = itertools.count()
 
-    def __init__(self, board: "Board", store: DataStore, title: str, page: Page, color: str = ""):
-        self.page = page
+    def __init__(
+        self,
+        board: "Board",
+        store: DataStore,
+        title: str,
+        page: ft.Page,
+        color: str = "",
+    ):
+        self.page: ft.Page = page
         self.board_list_id = next(BoardList.id_counter)
         self.store: DataStore = store
         self.board = board
         self.title = title
         self.color = color
-        self.items = Column([], tight=True, spacing=4)
+        self.items = ft.Column([], tight=True, spacing=4)
         self.items.controls = self.store.get_items(self.board_list_id)
-        self.new_item_field = TextField(
-            label="new card name", height=50, bgcolor=colors.WHITE, on_submit=self.add_item_handler)
+        self.new_item_field = ft.TextField(
+            label="new card name",
+            height=50,
+            bgcolor=ft.Colors.WHITE,
+            on_submit=self.add_item_handler,
+        )
 
-        self.end_indicator = Container(
-            bgcolor=colors.BLACK26,
-            border_radius=border_radius.all(30),
+        self.end_indicator = ft.Container(
+            bgcolor=ft.Colors.BLACK26,
+            border_radius=ft.border_radius.all(30),
             height=3,
             width=200,
-            opacity=0.0
+            opacity=0.0,
         )
 
-        self.edit_field = Row([
-            TextField(value=self.title, width=150, height=40,
-                      content_padding=padding.only(left=10, bottom=10)),
-            TextButton(text="Save", on_click=self.save_title)
-        ])
-        
-        self.header = Row(
-            controls=[
-                Text(value=self.title, style="titleMedium",
-                     text_align="left", overflow="clip", expand=True),
+        self.edit_field = ft.Row(
+            [
+                ft.TextField(
+                    value=self.title,
+                    width=150,
+                    height=40,
+                    content_padding=ft.padding.only(left=10, bottom=10),
+                ),
+                ft.TextButton(text="Save", on_click=self.save_title),
+            ]
+        )
 
-                Container(
-                    PopupMenuButton(
+        self.header = ft.Row(
+            controls=[
+                ft.Text(
+                    value=self.title,
+                    theme_style=ft.TextThemeStyle.TITLE_MEDIUM,
+                    text_align=ft.TextAlign.LEFT,
+                    overflow=ft.TextOverflow.CLIP,
+                    expand=True,
+                ),
+                ft.Container(
+                    ft.PopupMenuButton(
                         items=[
-                            PopupMenuItem(
-                                content=Text(value="Edit", style="labelMedium",
-                                             text_align="center", color=self.color),
-                                on_click=self.edit_title),
-                            PopupMenuItem(),
-                            PopupMenuItem(
-                                content=Text(value="Delete", style="labelMedium",
-                                             text_align="center", color=self.color),
-                                on_click=self.delete_list),
-                            PopupMenuItem(),
-                            PopupMenuItem(
-                                content=Text(value="Move List", style="labelMedium",
-                                             text_align="center", color=self.color))
+                            ft.PopupMenuItem(
+                                content=ft.Text(
+                                    value="Edit",
+                                    theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
+                                    text_align=ft.TextAlign.CENTER,
+                                    color=self.color,
+                                ),
+                                on_click=self.edit_title,
+                            ),
+                            ft.PopupMenuItem(),
+                            ft.PopupMenuItem(
+                                content=ft.Text(
+                                    value="Delete",
+                                    theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
+                                    text_align=ft.TextAlign.CENTER,
+                                    color=self.color,
+                                ),
+                                on_click=self.delete_list,
+                            ),
+                            ft.PopupMenuItem(),
+                            ft.PopupMenuItem(
+                                content=ft.Text(
+                                    value="Move List",
+                                    theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
+                                    text_align=ft.TextAlign.CENTER,
+                                    color=self.color,
+                                )
+                            ),
                         ],
                     ),
-                    padding=padding.only(right=-10)
-                )
+                    padding=ft.padding.only(right=-10),
+                ),
             ],
-            alignment="spaceBetween"
-
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         )
 
-        self.inner_list = Container(
-            content=Column([
-                self.header,
-                self.new_item_field,
-                TextButton(content=Row([Icon(icons.ADD), Text("add card", color=colors.BLACK38)], tight=True),
-                           on_click=self.add_item_handler),
-                self.items,
-                self.end_indicator
-            ], spacing=4, tight=True, data=self.title),
+        self.inner_list = ft.Container(
+            content=ft.Column(
+                [
+                    self.header,
+                    self.new_item_field,
+                    ft.TextButton(
+                        content=ft.Row(
+                            [
+                                ft.Icon(ft.Icons.ADD),
+                                ft.Text("add card", color=ft.Colors.BLACK38),
+                            ],
+                            tight=True,
+                        ),
+                        on_click=self.add_item_handler,
+                    ),
+                    self.items,
+                    self.end_indicator,
+                ],
+                spacing=4,
+                tight=True,
+                data=self.title,
+            ),
             width=250,
-            border=border.all(2, colors.BLACK12),
-            border_radius=border_radius.all(5),
-            bgcolor=self.color if (
-                self.color != "") else colors.BACKGROUND,
-            padding=padding.only(
-                bottom=10, right=10, left=10, top=5)
+            border=ft.border.all(2, ft.Colors.BLACK12),
+            border_radius=ft.border_radius.all(5),
+            bgcolor=self.color if (self.color != "") else ft.Colors.BACKGROUND,
+            padding=ft.padding.only(bottom=10, right=10, left=10, top=5),
         )
 
-        self.view = DragTarget(
+        self.view = ft.DragTarget(
             group="items",
-            content=Draggable(
+            content=ft.Draggable(
                 group="lists",
-                content=DragTarget(
+                content=ft.DragTarget(
                     group="lists",
                     content=self.inner_list,
                     data=self,
                     on_accept=self.list_drag_accept,
                     on_will_accept=self.list_will_drag_accept,
-                    on_leave=self.list_drag_leave
-                )
+                    on_leave=self.list_drag_leave,
+                ),
             ),
             data=self,
             on_accept=self.item_drag_accept,
             on_will_accept=self.item_will_drag_accept,
-            on_leave=self.item_drag_leave
+            on_leave=self.item_drag_leave,
         )
-        super().__init__(
-            content=self.view,
-            data=self
-        )
-        
+        super().__init__(content=self.view, data=self)
+
     def item_drag_accept(self, e):
         src = self.page.get_control(e.src_id)
         self.add_item(src.data.item_text)
@@ -148,16 +173,16 @@ class BoardList(Container):
         to_index = l.index(e.control.data)
         from_index = l.index(src.content.data)
         l[to_index], l[from_index] = l[from_index], l[to_index]
-        self.inner_list.border = border.all(2, colors.BLACK12)
+        self.inner_list.border = ft.border.all(2, ft.Colors.BLACK12)
         self.page.update()
 
     def list_will_drag_accept(self, e):
         if e.data == "true":
-            self.inner_list.border = border.all(2, colors.BLACK)
+            self.inner_list.border = ft.border.all(2, ft.Colors.BLACK)
         self.update()
 
     def list_drag_leave(self, e):
-        self.inner_list.border = border.all(2, colors.BLACK12)
+        self.inner_list.border = ft.border.all(2, ft.Colors.BLACK12)
         self.update()
 
     def delete_list(self, e):
@@ -170,8 +195,13 @@ class BoardList(Container):
 
     def save_title(self, e):
         self.title = self.edit_field.controls[0].value
-        self.header.controls[0] = Text(value=self.title, style="titleMedium",
-                                       text_align="left", overflow="clip", expand=True)
+        self.header.controls[0] = ft.Text(
+            value=self.title,
+            theme_style=ft.TextThemeStyle.TITLE_MEDIUM,
+            text_align=ft.TextAlign.LEFT,
+            overflow=ft.TextOverflow.CLIP,
+            expand=True,
+        )
         self.header.controls[1].visible = True
         self.update()
 
@@ -180,40 +210,53 @@ class BoardList(Container):
             return
         self.add_item()
 
-    def add_item(self, item: str = None, chosen_control: Draggable = None, swap_control: Draggable = None):
+    def add_item(
+        self,
+        item: str | None = None,
+        chosen_control: ft.Draggable | None = None,
+        swap_control: ft.Draggable | None = None,
+    ):
 
         controls_list = [x.controls[1] for x in self.items.controls]
-        to_index = controls_list.index(
-            swap_control) if swap_control in controls_list else None
-        from_index = controls_list.index(
-            chosen_control) if chosen_control in controls_list else None
-        control_to_add = Column([
-            Container(
-                bgcolor=colors.BLACK26,
-                border_radius=border_radius.all(30),
-                height=3,
-                alignment=alignment.center_right,
-                width=200,
-                opacity=0.0
-            )
-        ])
+        to_index = (
+            controls_list.index(swap_control) if swap_control in controls_list else None
+        )
+        from_index = (
+            controls_list.index(chosen_control)
+            if chosen_control in controls_list
+            else None
+        )
+        control_to_add = ft.Column(
+            [
+                ft.Container(
+                    bgcolor=ft.Colors.BLACK26,
+                    border_radius=ft.border_radius.all(30),
+                    height=3,
+                    alignment=ft.alignment.center_right,
+                    width=200,
+                    opacity=0.0,
+                )
+            ]
+        )
 
         # rearrange (i.e. drag drop from same list)
-        if ((from_index is not None) and (to_index is not None)):
-            self.items.controls.insert(
-                to_index, self.items.controls.pop(from_index))
+        if (from_index is not None) and (to_index is not None):
+            self.items.controls.insert(to_index, self.items.controls.pop(from_index))
             self.set_indicator_opacity(swap_control, 0.0)
 
         # insert (drag from other list to middle of this list)
-        elif (to_index is not None):
+        elif to_index is not None:
             new_item = Item(self, self.store, item)
             control_to_add.controls.append(new_item)
             self.items.controls.insert(to_index, control_to_add)
 
         # add new (drag from other list to end of this list, or use add item button)
         else:
-            new_item = Item(self, self.store, item) if item else Item(
-                self, self.store, self.new_item_field.value)
+            new_item = (
+                Item(self, self.store, item)
+                if item
+                else Item(self, self.store, self.new_item_field.value)
+            )
             control_to_add.controls.append(new_item)
             self.items.controls.append(control_to_add)
             self.store.add_item(self.board_list_id, new_item)
@@ -230,6 +273,5 @@ class BoardList(Container):
 
     def set_indicator_opacity(self, item, opacity):
         controls_list = [x.controls[1] for x in self.items.controls]
-        self.items.controls[controls_list.index(
-            item)].controls[0].opacity = opacity
+        self.items.controls[controls_list.index(item)].controls[0].opacity = opacity
         self.view.update()
