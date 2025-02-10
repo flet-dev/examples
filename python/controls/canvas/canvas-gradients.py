@@ -17,7 +17,7 @@ def main(page: ft.Page):
                     gradient=ft.PaintLinearGradient(
                         (0, 10),
                         (100, 50),
-                        colors=[ft.colors.BLUE, ft.colors.YELLOW],
+                        colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),
