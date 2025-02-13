@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     def button_clicked(e):
         t.value = f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}, {c5.value}."
         page.update()
@@ -19,4 +19,4 @@ def main(page):
     page.add(c1, c2, c3, c4, c5, b, t)
 
 
-ft.app(target=main)
+ft.app(main)

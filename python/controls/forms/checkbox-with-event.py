@@ -1,16 +1,14 @@
-import flet
-from flet import Checkbox, ElevatedButton, Text
+import flet as ft
 
 
-def main(page):
-  def checkbox_changed(e):
-    t.value = f"Checkbox value changed to {c.value}" 
-    t.update()
+def main(page: ft.Page):
+    def checkbox_changed(e):
+        page.add(ft.Text(f"Checkbox value changed to {c.value}"))
+        page.update()
 
-  c = Checkbox(label="Checkbox with 'change' event", on_change=checkbox_changed)
-  t = Text()
+    c = ft.Checkbox(label="Checkbox with 'change' event", on_change=checkbox_changed)
 
-  page.add(c, t)
+    page.add(c)
 
 
-flet.app(target=main)
+ft.app(main)
