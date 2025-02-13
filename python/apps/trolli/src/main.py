@@ -40,7 +40,7 @@ class TrelloApp(AppLayout):
             ],
         )
         self.page.appbar = self.appbar
-        self.page.theme_mode = ft.ThemeMode.LIGHT
+
         self.page.update()
         super().__init__(
             self,
@@ -124,7 +124,6 @@ class TrelloApp(AppLayout):
             ):
                 self.create_new_board(dialog_text.value)
             self.page.close(dialog)
-            # dialog.open = False
             self.page.update()
 
         def textfield_change(e):
@@ -177,6 +176,7 @@ def main(page: ft.Page):
     page.title = "Flet Trello clone"
     page.padding = 0
     page.theme = ft.Theme(font_family="Verdana")
+    page.theme_mode = ft.ThemeMode.LIGHT
     page.theme.page_transitions.windows = "cupertino"
     page.fonts = {"Pacifico": "Pacifico-Regular.ttf"}
     page.bgcolor = ft.Colors.BLUE_GREY_200

@@ -262,7 +262,6 @@ class BoardList(ft.Container):
             self.store.add_item(self.board_list_id, new_item)
             self.new_item_field.value = ""
 
-        self.view.update()
         self.page.update()
 
     def remove_item(self, item: Item):

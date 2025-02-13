@@ -91,7 +91,6 @@ class AppLayout(ft.Row):
         self.active_view = self.store.get_boards()[i]
         self.sidebar.bottom_nav_rail.selected_index = i
         self.sidebar.top_nav_rail.selected_index = None
-        # self.sidebar.update()
         self.page_resize()
         self.page.update()
 
@@ -100,14 +99,12 @@ class AppLayout(ft.Row):
         self.hydrate_all_boards_view()
         self.sidebar.top_nav_rail.selected_index = 0
         self.sidebar.bottom_nav_rail.selected_index = None
-        # self.sidebar.update()
         self.page.update()
 
     def set_members_view(self):
         self.active_view = self.members_view
         self.sidebar.top_nav_rail.selected_index = 1
         self.sidebar.bottom_nav_rail.selected_index = None
-        # self.sidebar.update()
         self.page.update()
 
     def page_resize(self, e=None):

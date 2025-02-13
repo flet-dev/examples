@@ -76,7 +76,6 @@ class Sidebar(ft.Container):
             padding=ft.padding.all(15),
             margin=ft.margin.all(0),
             width=250,
-            # expand=True,
             bgcolor=ft.Colors.BLUE_GREY,
             visible=self.nav_rail_visible,
         )
