@@ -26,7 +26,7 @@ from flet import (
 os.environ["FLET_WS_MAX_MESSAGE_SIZE"] = "8000000"
 
 
-class IconBrowser(Stack):
+class IconBrowser(Container):
     def __init__(self, expand=False, height=500):
         super().__init__()
         if expand:
@@ -126,7 +126,7 @@ class IconBrowser(Stack):
             search_query.disabled = False
             self.update()
 
-        return Column(
+        self.content = Column(
             [
                 search_query,
                 search_results,
