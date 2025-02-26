@@ -9,7 +9,7 @@ license = "MIT"
 readme = "README.md"
 requires-python = ">=3.9,<4.0"
 dependencies = [
-    "flet==0.26.0",
+    "flet==0.27.2",
     "flet-contrib==2024.12.3"
 ]
 
@@ -17,7 +17,7 @@ dependencies = [
 packages = [{include = "components"}]
 
 [tool.poetry.group.dev.dependencies]
-flet = {extras = ["all"], version = "0.26.0"}
+flet = {extras = ["all"], version = "0.27.2"}
 
 [build-system]
 requires = ["poetry-core"]
