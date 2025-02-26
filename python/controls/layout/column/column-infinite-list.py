@@ -1,5 +1,4 @@
 import threading
-
 import flet as ft
 
 

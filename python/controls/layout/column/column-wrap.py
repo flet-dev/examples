@@ -4,6 +4,7 @@ HEIGHT = 400
 
 
 def main(page: ft.Page):
+
     def items(count):
         items = []
         for i in range(1, count + 1):
@@ -13,7 +14,7 @@ def main(page: ft.Page):
                     alignment=ft.alignment.center,
                     width=30,
                     height=30,
-                    bgcolor=ft.colors.AMBER,
+                    bgcolor=ft.Colors.AMBER,
                     border_radius=ft.border_radius.all(5),
                 )
             )
@@ -50,7 +51,7 @@ def main(page: ft.Page):
                 width_slider,
             ]
         ),
-        ft.Container(content=col, bgcolor=ft.colors.AMBER_100),
+        ft.Container(content=col, bgcolor=ft.Colors.TRANSPARENT),
     )
 
 

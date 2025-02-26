@@ -11,7 +11,7 @@ def main(page: ft.Page):
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER_500,
+                    bgcolor=ft.Colors.AMBER_500,
                 )
             )
         return items
@@ -22,7 +22,7 @@ def main(page: ft.Page):
                 ft.Text(str(align), size=10),
                 ft.Container(
                     content=ft.Column(items(3), alignment=align),
-                    bgcolor=ft.colors.AMBER_100,
+                    bgcolor=ft.Colors.AMBER_100,
                     height=400,
                 ),
             ]

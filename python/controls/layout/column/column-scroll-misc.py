@@ -5,15 +5,15 @@ def main(page: ft.Page):
     page.theme = ft.Theme(
         scrollbar_theme=ft.ScrollbarTheme(
             track_color={
-                ft.MaterialState.HOVERED: ft.colors.AMBER,
-                ft.MaterialState.DEFAULT: ft.colors.TRANSPARENT,
+                ft.ControlState.HOVERED: ft.Colors.AMBER,
+                ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
             },
             track_visibility=True,
-            track_border_color=ft.colors.BLUE,
+            track_border_color=ft.Colors.BLUE,
             thumb_visibility=True,
             thumb_color={
-                ft.MaterialState.HOVERED: ft.colors.RED,
-                ft.MaterialState.DEFAULT: ft.colors.GREY_300,
+                ft.ControlState.HOVERED: ft.Colors.RED,
+                ft.ControlState.DEFAULT: ft.Colors.GREY_300,
             },
             thickness=30,
             radius=15,
@@ -33,7 +33,7 @@ def main(page: ft.Page):
         cl.controls.append(ft.Text(f"Text line {i}", key=str(i)))
 
     def scroll_to_offset(e):
-        cl.scroll_to(offset=100, duration=1000)
+        cl.scroll_to(offset=500, duration=1000)
 
     def scroll_to_start(e):
         cl.scroll_to(offset=0, duration=1000)
@@ -45,25 +45,25 @@ def main(page: ft.Page):
         cl.scroll_to(key="20", duration=1000)
 
     def scroll_to_delta(e):
-        cl.scroll_to(delta=40, duration=200)
+        cl.scroll_to(delta=100, duration=200)
 
     def scroll_to_minus_delta(e):
-        cl.scroll_to(delta=-40, duration=200)
+        cl.scroll_to(delta=-100, duration=200)
 
     page.add(
         ft.Container(cl, border=ft.border.all(1)),
-        ft.ElevatedButton("Scroll to offset 100", on_click=scroll_to_offset),
+        ft.ElevatedButton("Scroll to offset 500", on_click=scroll_to_offset),
         ft.Row(
             [
-                ft.ElevatedButton("Scroll to start", on_click=scroll_to_start),
-                ft.ElevatedButton("Scroll to end", on_click=scroll_to_end),
+                ft.ElevatedButton("Scroll -100", on_click=scroll_to_minus_delta),
+                ft.ElevatedButton("Scroll +100", on_click=scroll_to_delta),
             ]
         ),
         ft.ElevatedButton("Scroll to key '20'", on_click=scroll_to_key),
         ft.Row(
             [
-                ft.ElevatedButton("Scroll -40", on_click=scroll_to_minus_delta),
-                ft.ElevatedButton("Scroll +40", on_click=scroll_to_delta),
+                ft.ElevatedButton("Scroll to start", on_click=scroll_to_start),
+                ft.ElevatedButton("Scroll to end", on_click=scroll_to_end),
             ]
         ),
     )
