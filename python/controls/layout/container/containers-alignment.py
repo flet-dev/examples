@@ -1,39 +1,38 @@
-import flet
-from flet import Container, ElevatedButton, Page, Row, alignment, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Containers with different alignments"
 
-    c1 = Container(
-        content=ElevatedButton("Center"),
-        bgcolor=colors.AMBER,
+    c1 = ft.Container(
+        content=ft.ElevatedButton("Center"),
+        bgcolor=ft.Colors.AMBER,
         padding=15,
-        alignment=alignment.center,
+        alignment=ft.alignment.center,
         width=150,
         height=150,
     )
 
-    c2 = Container(
-        content=ElevatedButton("Top left"),
-        bgcolor=colors.AMBER,
+    c2 = ft.Container(
+        content=ft.ElevatedButton("Top left"),
+        bgcolor=ft.Colors.AMBER,
         padding=15,
-        alignment=alignment.top_left,
+        alignment=ft.alignment.top_left,
         width=150,
         height=150,
     )
 
-    c3 = Container(
-        content=ElevatedButton("-0.5, -0.5"),
-        bgcolor=colors.AMBER,
+    c3 = ft.Container(
+        content=ft.ElevatedButton("-0.5, -0.5"),
+        bgcolor=ft.Colors.AMBER,
         padding=15,
-        alignment=alignment.Alignment(-0.5, -0.5),
+        alignment=ft.alignment.Alignment(-0.5, -0.5),
         width=150,
         height=150,
     )
 
-    r = Row([c1, c2, c3])
+    r = ft.Row([c1, c2, c3])
     page.add(r)
 
 
-flet.app(target=main)
+ft.app(main)

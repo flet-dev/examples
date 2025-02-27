@@ -5,8 +5,8 @@ def main(page: ft.Page):
     def add_text_box(_):
         text_field = ft.TextField(
             label=f"Text Box {len(left_column.controls)}",
-            label_style=ft.TextStyle(color=ft.colors.GREEN),
-            color=ft.colors.GREEN,
+            label_style=ft.TextStyle(color=ft.Colors.GREEN),
+            color=ft.Colors.GREEN,
             value=str(len(left_column.controls)),
         )
         left_column.controls.append(text_field)
@@ -46,7 +46,7 @@ def main(page: ft.Page):
     )
 
     left_column = ft.Column(
-        [ft.Text("THIS IS COL 1", color=ft.colors.RED_400)],
+        [ft.Text("THIS IS COL 1", color=ft.Colors.RED_400)],
         scroll=next(scroll_mode),
     )
     left_container = ft.Container(
@@ -54,7 +54,7 @@ def main(page: ft.Page):
         expand=True,
         margin=10,
         padding=10,
-        bgcolor=ft.colors.AMBER_100,
+        bgcolor=ft.Colors.AMBER_100,
         border_radius=10,
         alignment=ft.alignment.top_center,
     )
@@ -70,14 +70,14 @@ def main(page: ft.Page):
         ),
         margin=10,
         padding=10,
-        bgcolor=ft.colors.CYAN_500,
+        bgcolor=ft.Colors.CYAN_500,
         border_radius=10,
         expand=True,
-        alignment=ft.alignment.top_center,
+        alignment=ft.alignment.top_left,
     )
 
     row = ft.Row([left_container, right_container], expand=True)
     page.add(row)
 
 
-ft.app(target=main)
+ft.app(main)

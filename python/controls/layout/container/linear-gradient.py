@@ -1,17 +1,15 @@
 import math
-
-import flet
-from flet import Alignment, Container, LinearGradient, Page, alignment
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     page.add(
-        Container(
-            alignment=alignment.center,
-            gradient=LinearGradient(
-                begin=alignment.top_left,
-                end=Alignment(0.8, 1),
+        ft.Container(
+            alignment=ft.alignment.center,
+            gradient=ft.LinearGradient(
+                begin=ft.alignment.top_left,
+                end=ft.Alignment(0.8, 1),
                 colors=[
                     "0xff1f005c",
                     "0xff5b0060",
@@ -22,7 +20,7 @@ def main(page: Page):
                     "0xfff39060",
                     "0xffffb56b",
                 ],
-                tile_mode="mirror",
+                tile_mode=ft.GradientTileMode.MIRROR,
                 rotation=math.pi / 3,
             ),
             width=150,
@@ -32,4 +30,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(main)

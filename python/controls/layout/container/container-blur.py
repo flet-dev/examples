@@ -2,38 +2,57 @@ import flet as ft
 
 
 def main(page: ft.Page):
+    page.theme_mode = ft.ThemeMode.LIGHT
+    i = 1
+
+    img_container = ft.Container(
+        image=ft.DecorationImage(src="https://picsum.photos/250/250"),
+        width=250,
+        height=250,
+    )
+
+    def change_img(e):
+        nonlocal i
+        print(f"button clicked {i}")
+        img_container.image = ft.DecorationImage(
+            src=f"https://picsum.photos/250/250?random={i}"
+        )
+        i += 1
+        page.update()
 
     page.add(
         ft.Stack(
             [
+                img_container,
                 ft.Container(
-                    content=ft.Text("Hello"),
-                    image_src="https://picsum.photos/100/100",
                     width=100,
                     height=100,
-                ),
-                ft.Container(
-                    width=50,
-                    height=50,
                     blur=10,
-                    bgcolor="#44CCCC00",
+                    bgcolor="#22CCCC00",
                 ),
                 ft.Container(
-                    width=50,
-                    height=50,
-                    left=10,
-                    top=60,
+                    width=100,
+                    height=100,
+                    left=20,
+                    top=120,
                     blur=(0, 10),
                 ),
                 ft.Container(
-                    top=10,
-                    left=60,
+                    top=50,
+                    right=10,
                     blur=ft.Blur(10, 0, ft.BlurTileMode.MIRROR),
-                    width=50,
-                    height=50,
+                    width=100,
+                    height=100,
                     bgcolor="#44CCCCCC",
-                    # border_radius=10,
-                    border=ft.border.all(2, ft.colors.BLACK),
+                    border_radius=10,
+                    border=ft.border.all(2, ft.Colors.BLACK),
+                ),
+                ft.ElevatedButton(
+                    text="Change Background",
+                    bottom=5,
+                    right=5,
+                    style=ft.ButtonStyle(text_style=ft.TextStyle(size=8)),
+                    on_click=change_img,
                 ),
             ]
         )

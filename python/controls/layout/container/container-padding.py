@@ -1,44 +1,44 @@
-import flet
+import flet as ft
 from flet import Container, ElevatedButton, Page, Row, colors, padding
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Containers with different padding"
 
-    c1 = Container(
-        content=ElevatedButton("container_1"),
-        bgcolor=colors.AMBER,
-        padding=padding.all(10),
+    c1 = ft.Container(
+        content=ft.ElevatedButton("container_1"),
+        bgcolor=ft.Colors.AMBER,
+        padding=ft.padding.all(10),
         width=150,
         height=150,
     )
 
-    c2 = Container(
-        content=ElevatedButton("container_2"),
-        bgcolor=colors.AMBER,
-        padding=padding.all(20),
+    c2 = ft.Container(
+        content=ft.ElevatedButton("container_2"),
+        bgcolor=ft.Colors.AMBER,
+        padding=ft.padding.all(20),
         width=150,
         height=150,
     )
 
-    c3 = Container(
-        content=ElevatedButton("container_3"),
-        bgcolor=colors.AMBER,
-        padding=padding.symmetric(horizontal=10),
+    c3 = ft.Container(
+        content=ft.ElevatedButton("container_3"),
+        bgcolor=ft.Colors.AMBER,
+        padding=ft.padding.symmetric(horizontal=10),
         width=150,
         height=150,
     )
 
-    c4 = Container(
-        content=ElevatedButton("container_4"),
-        bgcolor=colors.AMBER,
-        padding=padding.only(left=10),
+    c4 = ft.Container(
+        content=ft.ElevatedButton("container_4"),
+        bgcolor=ft.Colors.AMBER,
+        padding=ft.padding.only(left=10),
         width=150,
         height=150,
     )
 
-    r = Row([c1, c2, c3, c4])
+    r = ft.Row([c1, c2, c3, c4])
     page.add(r)
 
 
-flet.app(target=main)
+ft.app(main)

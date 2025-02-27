@@ -23,15 +23,15 @@ def main(page: ft.Page):
     page.add(
         ft.Row(
             [
-                SizeAwareContainer(ft.colors.RED, expand=2),
-                SizeAwareContainer(ft.colors.GREEN, expand=4),
+                SizeAwareContainer(ft.Colors.RED, expand=2),
+                SizeAwareContainer(ft.Colors.GREEN, expand=4),
             ],
             expand=2,
         ),
         ft.Row(
             [
-                SizeAwareContainer(ft.colors.YELLOW, expand=2),
-                SizeAwareContainer(ft.colors.BLUE, expand=4),
+                SizeAwareContainer(ft.Colors.YELLOW, expand=2),
+                SizeAwareContainer(ft.Colors.BLUE, expand=4),
             ],
             expand=3,
         ),

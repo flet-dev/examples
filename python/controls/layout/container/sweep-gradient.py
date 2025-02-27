@@ -1,16 +1,14 @@
 import math
-
-import flet
-from flet import Container, Page, SweepGradient, alignment
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     page.add(
-        Container(
-            alignment=alignment.center,
-            gradient=SweepGradient(
-                center=alignment.center,
+        ft.Container(
+            alignment=ft.alignment.center,
+            gradient=ft.SweepGradient(
+                center=ft.alignment.center,
                 start_angle=0.0,
                 end_angle=math.pi * 2,
                 colors=[
@@ -29,4 +27,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(main)

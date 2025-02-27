@@ -1,35 +1,23 @@
 import math
 
-import flet
-from flet import (
-    Alignment,
-    Container,
-    LinearGradient,
-    Page,
-    RadialGradient,
-    Row,
-    SweepGradient,
-    Text,
-    alignment,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Containers with gradient"
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     page.add(
-        Row(
+        ft.Row(
             [
-                Container(
-                    content=Text("Linear gradient"),
+                ft.Container(
+                    content=ft.Text("Linear gradient"),
                     padding=10,
-                    alignment=alignment.center,
-                    gradient=LinearGradient(
-                        begin=alignment.top_left,
-                        end=Alignment(0.8, 1),
+                    alignment=ft.alignment.center,
+                    gradient=ft.LinearGradient(
+                        begin=ft.alignment.top_left,
+                        end=ft.Alignment(0.8, 1),
                         colors=[
                             "0xff1f005c",
                             "0xff5b0060",
@@ -40,34 +28,34 @@ def main(page: Page):
                             "0xfff39060",
                             "0xffffb56b",
                         ],
-                        tile_mode="mirror",
+                        tile_mode=ft.GradientTileMode.MIRROR,
                         rotation=math.pi / 3,
                     ),
                     width=200,
                     height=200,
                     border_radius=10,
                 ),
-                Container(
-                    content=Text("Linear gradient with stops"),
+                ft.Container(
+                    content=ft.Text("Linear gradient with stops"),
                     padding=10,
-                    alignment=alignment.center,
-                    gradient=LinearGradient(
-                        begin=alignment.center_left,
-                        end=alignment.center_right,
-                        colors=[colors.RED, colors.GREEN, colors.BLUE],
+                    alignment=ft.alignment.center,
+                    gradient=ft.LinearGradient(
+                        begin=ft.alignment.center_left,
+                        end=ft.alignment.center_right,
+                        colors=[ft.colors.RED, ft.colors.GREEN, ft.colors.BLUE],
                         stops=[0.1, 0.2, 1.0],
-                        tile_mode="mirror",
+                        tile_mode=ft.GradientTileMode.MIRROR,
                     ),
                     width=200,
                     height=200,
                     border_radius=10,
                 ),
-                Container(
-                    content=Text("Radial gradient"),
+                ft.Container(
+                    content=ft.Text("Radial gradient"),
                     padding=10,
-                    alignment=alignment.center,
-                    gradient=RadialGradient(
-                        center=Alignment(0.7, -0.6),
+                    alignment=ft.alignment.center,
+                    gradient=ft.RadialGradient(
+                        center=ft.Alignment(0.7, -0.6),
                         radius=0.2,
                         colors=[
                             "0xFFFFFF00",  # yellow sun
@@ -79,12 +67,12 @@ def main(page: Page):
                     height=200,
                     border_radius=10,
                 ),
-                Container(
-                    content=Text("Sweep gradient"),
+                ft.Container(
+                    content=ft.Text("Sweep gradient"),
                     padding=10,
-                    alignment=alignment.center,
-                    gradient=SweepGradient(
-                        center=alignment.center,
+                    alignment=ft.alignment.center,
+                    gradient=ft.SweepGradient(
+                        center=ft.alignment.center,
                         start_angle=0.0,
                         end_angle=math.pi * 2,
                         colors=[
@@ -102,9 +90,10 @@ def main(page: Page):
                     border_radius=10,
                 ),
             ],
-            alignment="center",
+            alignment=ft.MainAxisAlignment.CENTER,
+            scroll=ft.ScrollMode.AUTO,
         ),
     )
 
 
-flet.app(target=main)
+ft.app(main)

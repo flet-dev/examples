@@ -1,14 +1,13 @@
-import flet
-from flet import Alignment, Container, Page, RadialGradient, alignment
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     page.add(
-        Container(
-            alignment=alignment.center,
-            gradient=RadialGradient(
-                center=Alignment(0.7, -0.6),
+        ft.Container(
+            alignment=ft.alignment.center,
+            gradient=ft.RadialGradient(
+                center=ft.Alignment(0.7, -0.6),
                 radius=0.2,
                 colors=[
                     "0xFFFFFF00",  # yellow sun
@@ -23,4 +22,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(main)

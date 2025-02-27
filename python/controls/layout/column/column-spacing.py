@@ -36,4 +36,4 @@ def main(page: ft.Page):
     page.add(ft.Column([ft.Text("Spacing between items"), gap_slider]), col)
 
 
-ft.app(target=main)
+ft.app(main)

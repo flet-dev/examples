@@ -2,6 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
+    page.theme_mode = ft.ThemeMode.LIGHT
     page.title = "Containers - clickable and not"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -14,7 +15,7 @@ def main(page: ft.Page):
                     margin=10,
                     padding=10,
                     alignment=ft.alignment.center,
-                    bgcolor=ft.colors.AMBER,
+                    bgcolor=ft.Colors.AMBER,
                     width=150,
                     height=150,
                     border_radius=10,
@@ -24,7 +25,7 @@ def main(page: ft.Page):
                     margin=10,
                     padding=10,
                     alignment=ft.alignment.center,
-                    bgcolor=ft.colors.GREEN_200,
+                    bgcolor=ft.Colors.GREEN_200,
                     width=150,
                     height=150,
                     border_radius=10,
@@ -35,7 +36,7 @@ def main(page: ft.Page):
                     margin=10,
                     padding=10,
                     alignment=ft.alignment.center,
-                    bgcolor=ft.colors.CYAN_200,
+                    bgcolor=ft.Colors.CYAN_200,
                     width=150,
                     height=150,
                     border_radius=10,
@@ -59,4 +60,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+ft.app(main)
