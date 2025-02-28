@@ -14,7 +14,7 @@ def example():
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER_500,
+                    bgcolor=ft.Colors.AMBER_500,
                 )
             )
         return items
@@ -26,7 +26,7 @@ def example():
                 ft.Text(str(align), size=16),
                 ft.Container(
                     content=ft.Row(items(3), vertical_alignment=align),
-                    bgcolor=ft.colors.AMBER_100,
+                    bgcolor=ft.Colors.AMBER_100,
                     height=150,
                 ),
             ],

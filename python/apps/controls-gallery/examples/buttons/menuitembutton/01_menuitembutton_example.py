@@ -8,7 +8,7 @@ def example():
         expand=True,
         style=ft.MenuStyle(
             alignment=ft.alignment.top_left,
-            bgcolor=ft.colors.RED_100,
+            bgcolor=ft.Colors.RED_100,
             mouse_cursor={
                 ft.ControlState.HOVERED: ft.MouseCursor.WAIT,
                 ft.ControlState.DEFAULT: ft.MouseCursor.ZOOM_OUT,
@@ -23,25 +23,25 @@ def example():
                 controls=[
                     ft.MenuItemButton(
                         content=ft.Text("About"),
-                        leading=ft.Icon(ft.icons.INFO),
+                        leading=ft.Icon(ft.Icons.INFO),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.Colors.GREEN_100}
                         ),
                         # on_click=handle_menu_item_click
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Save"),
-                        leading=ft.Icon(ft.icons.SAVE),
+                        leading=ft.Icon(ft.Icons.SAVE),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.Colors.GREEN_100}
                         ),
                         # on_click=handle_menu_item_click
                     ),
                     ft.MenuItemButton(
                         content=ft.Text("Quit"),
-                        leading=ft.Icon(ft.icons.CLOSE),
+                        leading=ft.Icon(ft.Icons.CLOSE),
                         style=ft.ButtonStyle(
-                            bgcolor={ft.ControlState.HOVERED: ft.colors.GREEN_100}
+                            bgcolor={ft.ControlState.HOVERED: ft.Colors.GREEN_100}
                         ),
                         # on_click=handle_menu_item_click
                     ),
@@ -58,22 +58,22 @@ def example():
                         controls=[
                             ft.MenuItemButton(
                                 content=ft.Text("Magnify"),
-                                leading=ft.Icon(ft.icons.ZOOM_IN),
+                                leading=ft.Icon(ft.Icons.ZOOM_IN),
                                 close_on_click=False,
                                 style=ft.ButtonStyle(
                                     bgcolor={
-                                        ft.ControlState.HOVERED: ft.colors.PURPLE_200
+                                        ft.ControlState.HOVERED: ft.Colors.PURPLE_200
                                     }
                                 ),
                                 # on_click=handle_menu_item_click
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("Minify"),
-                                leading=ft.Icon(ft.icons.ZOOM_OUT),
+                                leading=ft.Icon(ft.Icons.ZOOM_OUT),
                                 close_on_click=False,
                                 style=ft.ButtonStyle(
                                     bgcolor={
-                                        ft.ControlState.HOVERED: ft.colors.PURPLE_200
+                                        ft.ControlState.HOVERED: ft.Colors.PURPLE_200
                                     }
                                 ),
                                 # on_click=handle_menu_item_click

@@ -1,89 +1,78 @@
 from board import Board
 from data_store import DataStore
-from flet import (
-    ButtonStyle,
-    Column,
-    Container,
-    Control,
-    IconButton,
-    Page,
-    PopupMenuButton,
-    PopupMenuItem,
-    RoundedRectangleBorder,
-    Row,
-    Text,
-    TextButton,
-    TextField,
-    border,
-    border_radius,
-    colors,
-    icons,
-    padding,
-)
+import flet as ft
 from sidebar import Sidebar
 
-class AppLayout(Row):
-    def __init__(self, app, page: Page, store: DataStore, *args, **kwargs):
+
+class AppLayout(ft.Row):
+    def __init__(self, app, page: ft.Page, store: DataStore, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = app
-        self.page = page
-        self.page.on_resize = self.page_resize
+        self.page: ft.Page = page
+        self.page.on_resized = self.page_resize
         self.store: DataStore = store
-        self.toggle_nav_rail_button = IconButton(
-            icon=icons.ARROW_CIRCLE_LEFT,
-            icon_color=colors.BLUE_GREY_400,
+        self.toggle_nav_rail_button = ft.IconButton(
+            icon=ft.Icons.ARROW_CIRCLE_LEFT,
+            icon_color=ft.Colors.BLUE_GREY_400,
             selected=False,
-            selected_icon=icons.ARROW_CIRCLE_RIGHT,
+            selected_icon=ft.Icons.ARROW_CIRCLE_RIGHT,
             on_click=self.toggle_nav_rail,
         )
-        self.sidebar = Sidebar(self, self.store, page)
-        self.members_view = Text("members view")
-        self.all_boards_view = Column(
+        self.sidebar = Sidebar(self, self.store)
+        self.members_view = ft.Text("members view")
+        self.all_boards_view = ft.Column(
             [
-                Row(
+                ft.Row(
                     [
-                        Container(
-                            Text(value="Your Boards", style="headlineMedium"),
+                        ft.Container(
+                            ft.Text(
+                                value="Your Boards",
+                                theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
+                            ),
                             expand=True,
-                            padding=padding.only(top=15),
+                            padding=ft.padding.only(top=15),
                         ),
-                        Container(
-                            TextButton(
+                        ft.Container(
+                            ft.TextButton(
                                 "Add new board",
-                                icon=icons.ADD,
+                                icon=ft.Icons.ADD,
                                 on_click=self.app.add_board,
-                                style=ButtonStyle(
+                                style=ft.ButtonStyle(
                                     bgcolor={
-                                        "": colors.BLUE_200,
-                                        "hovered": colors.BLUE_400,
+                                        ft.ControlState.DEFAULT: ft.Colors.BLUE_200,
+                                        ft.ControlState.HOVERED: ft.Colors.BLUE_400,
                                     },
-                                    shape={"": RoundedRectangleBorder(radius=3)},
+                                    shape={
+                                        ft.ControlState.DEFAULT: ft.RoundedRectangleBorder(
+                                            radius=3
+                                        )
+                                    },
                                 ),
                             ),
-                            padding=padding.only(right=50, top=15),
+                            padding=ft.padding.only(right=50, top=15),
                         ),
                     ]
                 ),
-                Row(
+                ft.Row(
                     [
-                        TextField(
+                        ft.TextField(
                             hint_text="Search all boards",
                             autofocus=False,
-                            content_padding=padding.only(left=10),
+                            content_padding=ft.padding.only(left=10),
                             width=200,
                             height=40,
                             text_size=12,
-                            border_color=colors.BLACK26,
-                            focused_border_color=colors.BLUE_ACCENT,
-                            suffix_icon=icons.SEARCH,
+                            border_color=ft.Colors.BLACK26,
+                            focused_border_color=ft.Colors.BLUE_ACCENT,
+                            suffix_icon=ft.Icons.SEARCH,
                         )
                     ]
                 ),
-                Row([Text("No Boards to Display")]),
+                ft.Row([ft.Text("No Boards to Display")]),
             ],
             expand=True,
         )
-        self._active_view: Control = self.all_boards_view
+        self._active_view: ft.Control = self.all_boards_view
 
         self.controls = [self.sidebar, self.toggle_nav_rail_button, self.active_view]
 
@@ -96,29 +85,26 @@ class AppLayout(Row):
         self._active_view = view
         self.controls[-1] = self._active_view
         self.sidebar.sync_board_destinations()
-        self.update()
+        self.page.update()
 
     def set_board_view(self, i):
         self.active_view = self.store.get_boards()[i]
         self.sidebar.bottom_nav_rail.selected_index = i
         self.sidebar.top_nav_rail.selected_index = None
-        self.sidebar.update()
-        self.page.update()
         self.page_resize()
+        self.page.update()
 
     def set_all_boards_view(self):
         self.active_view = self.all_boards_view
         self.hydrate_all_boards_view()
         self.sidebar.top_nav_rail.selected_index = 0
         self.sidebar.bottom_nav_rail.selected_index = None
-        self.sidebar.update()
         self.page.update()
 
     def set_members_view(self):
         self.active_view = self.members_view
         self.sidebar.top_nav_rail.selected_index = 1
         self.sidebar.bottom_nav_rail.selected_index = None
-        self.sidebar.update()
         self.page.update()
 
     def page_resize(self, e=None):
@@ -129,49 +115,49 @@ class AppLayout(Row):
         self.page.update()
 
     def hydrate_all_boards_view(self):
-        self.all_boards_view.controls[-1] = Row(
+        self.all_boards_view.controls[-1] = ft.Row(
             [
-                Container(
-                    content=Row(
+                ft.Container(
+                    content=ft.Row(
                         [
-                            Container(
-                                content=Text(value=b.name),
+                            ft.Container(
+                                content=ft.Text(value=b.name),
                                 data=b,
                                 expand=True,
                                 on_click=self.board_click,
                             ),
-                            Container(
-                                content=PopupMenuButton(
+                            ft.Container(
+                                content=ft.PopupMenuButton(
                                     items=[
-                                        PopupMenuItem(
-                                            content=Text(
+                                        ft.PopupMenuItem(
+                                            content=ft.Text(
                                                 value="Delete",
-                                                style="labelMedium",
-                                                text_align="center",
+                                                theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
+                                                text_align=ft.TextAlign.CENTER,
                                             ),
                                             on_click=self.app.delete_board,
                                             data=b,
                                         ),
-                                        PopupMenuItem(),
-                                        PopupMenuItem(
-                                            content=Text(
+                                        ft.PopupMenuItem(),
+                                        ft.PopupMenuItem(
+                                            content=ft.Text(
                                                 value="Archive",
-                                                style="labelMedium",
-                                                text_align="center",
+                                                theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
+                                                text_align=ft.TextAlign.CENTER,
                                             ),
                                         ),
                                     ]
                                 ),
-                                padding=padding.only(right=-10),
-                                border_radius=border_radius.all(3),
+                                padding=ft.padding.only(right=-10),
+                                border_radius=ft.border_radius.all(3),
                             ),
                         ],
-                        alignment="spaceBetween",
+                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                     ),
-                    border=border.all(1, colors.BLACK38),
-                    border_radius=border_radius.all(5),
-                    bgcolor=colors.WHITE60,
-                    padding=padding.all(10),
+                    border=ft.border.all(1, ft.Colors.BLACK38),
+                    border_radius=ft.border_radius.all(5),
+                    bgcolor=ft.Colors.WHITE60,
+                    padding=ft.padding.all(10),
                     width=250,
                     data=b,
                 )

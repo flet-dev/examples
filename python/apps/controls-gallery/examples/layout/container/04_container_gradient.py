@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Containers with different gradient backgrounds"
 
+
 def example():
 
     import math
@@ -12,7 +13,7 @@ def example():
         gradient=ft.LinearGradient(
             begin=ft.alignment.top_center,
             end=ft.alignment.bottom_center,
-            colors=[ft.colors.BLUE, ft.colors.YELLOW],
+            colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
         ),
         width=150,
         height=150,
@@ -23,7 +24,7 @@ def example():
         content=ft.Text("RadialGradient"),
         alignment=ft.alignment.center,
         gradient=ft.RadialGradient(
-            colors=[ft.colors.YELLOW, ft.colors.BLUE],
+            colors=[ft.Colors.YELLOW, ft.Colors.BLUE],
         ),
         width=150,
         height=150,
@@ -37,16 +38,11 @@ def example():
             center=ft.alignment.center,
             start_angle=0.0,
             end_angle=math.pi * 2,
-            colors=[ft.colors.YELLOW, ft.colors.BLUE],
+            colors=[ft.Colors.YELLOW, ft.Colors.BLUE],
         ),
         width=150,
         height=150,
         border_radius=5,
     )
 
-    return ft.Row(controls=[
-        container_1,
-        container_2,
-        container_3
-        ]
-    )
+    return ft.Row(controls=[container_1, container_2, container_3])
