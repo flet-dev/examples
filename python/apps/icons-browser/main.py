@@ -41,14 +41,14 @@ class IconBrowser(Container):
                 yield batch
 
         # fetch all icon constants from icons.py module
-        icons_list = []
+        icons_list = []        
         list_started = False
         for icon in Icons:
             icons_list.append(icon.name)
 
         search_txt = TextField(
             expand=1,
-            hint_text="Enter keyword and press search button",
+            hint_text="Enter keyword and press search button. To view all icons enter *",
             autofocus=True,
             on_submit=lambda e: display_icons(e.control.value),
         )
@@ -77,9 +77,24 @@ class IconBrowser(Container):
             self.page.open(SnackBar(Text(f"Copied {icon_key}"), open=True))
 
         def search_icons(search_term: str):
+            # switch variable to allow empty search, which shows all icons
+            all_icons = 0
             for icon_name in icons_list:
-                if search_term != "" and search_term in icon_name:
-                    yield icon_name
+                if all_icons == 1 or search_term != "":
+                    # match search to query
+                    if search_term != "" and search_term in icon_name:
+                        all_icons = 0
+                        yield icon_name
+                    # turn on switch, empty search, and yield to not skip 1st icon
+                    elif search_term == "*":
+                        all_icons = 1
+                        search_term = ""
+                        yield icon_name
+                    # all_icons is 1, which allows for empty search, which shows all
+                    elif search_term == "" and all_icons == 1:
+                        yield icon_name
+                    else:
+                        all_icons = 0
 
         def display_icons(search_term: str):
 
