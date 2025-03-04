@@ -1,14 +1,13 @@
-import flet
-from flet import GridView, Image, Page, border_radius
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "GridView Example"
-    page.theme_mode = "dark"
+    page.theme_mode = ft.ThemeMode.DARK
     page.padding = 50
     page.update()
 
-    images = GridView(
+    images = ft.GridView(
         expand=1,
         runs_count=5,
         max_extent=150,
@@ -21,14 +20,14 @@ def main(page: Page):
 
     for i in range(0, 60):
         images.controls.append(
-            Image(
+            ft.Image(
                 src=f"https://picsum.photos/150/150?{i}",
-                fit="none",
-                repeat="noRepeat",
-                border_radius=border_radius.all(10),
+                fit=ft.ImageFit.NONE,
+                repeat=ft.ImageRepeat.NO_REPEAT,
+                border_radius=ft.border_radius.all(10),
             )
         )
     page.update()
 
 
-flet.app(target=main)
+ft.app(main)
