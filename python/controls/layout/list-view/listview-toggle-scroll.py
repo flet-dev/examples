@@ -3,7 +3,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "Auto-scrolling ListView"
 
     def change_auto_scroll(e):
         print("Change auto scroll triggered")

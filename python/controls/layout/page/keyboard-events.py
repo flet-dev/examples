@@ -1,20 +1,19 @@
-import flet
-from flet import Container, Page, Row, Text, border, colors, KeyboardEvent
+import flet as ft
 
 
-class ButtonControl(Container):
+class ButtonControl(ft.Container):
     def __init__(self, text):
         super().__init__()
-        self.content = Text(text)
-        self.border = border.all(1, colors.BLACK54)
+        self.content: ft.Text = ft.Text(text)
+        self.border = ft.border.all(1, ft.Colors.BLACK54)
         self.border_radius = 3
         self.bgcolor = "0x09000000"
         self.padding = 10
         self.visible = False
 
 
-def main(page: Page):
-    def on_keyboard(e: KeyboardEvent):
+def main(page: ft.Page):
+    def on_keyboard(e: ft.KeyboardEvent):
         key.content.value = e.key
         key.visible = True
         shift.visible = e.shift
@@ -32,12 +31,14 @@ def main(page: Page):
     meta = ButtonControl("Meta")
 
     page.spacing = 50
-    page.vertical_alignment = "center"
-    page.horizontal_alignment = "center"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(
-        Text("Press any key with a combination of CTRL, ALT, SHIFT and META keys..."),
-        Row([key, shift, ctrl, alt, meta], alignment="center"),
+        ft.Text(
+            "Press any key with a combination of CTRL, ALT, SHIFT and META keys..."
+        ),
+        ft.Row([key, shift, ctrl, alt, meta], alignment=ft.MainAxisAlignment.CENTER),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

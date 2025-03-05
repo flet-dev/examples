@@ -1,11 +1,11 @@
 from time import sleep
 import flet as ft
-from flet import ElevatedButton, ProgressBar
 
-def main(page):
+
+def main(page: ft.Page):
     def button_click(e):
-        my_bar = ProgressBar()
-        
+        my_bar = ft.ProgressBar()
+
         page.overlay.append(my_bar)
         btn.disabled = True
         page.update()
@@ -15,7 +15,8 @@ def main(page):
         btn.disabled = False
         page.update()
 
-    btn = ElevatedButton("Do some lengthy task!", on_click=button_click)
+    btn = ft.ElevatedButton("Do some lengthy task!", on_click=button_click)
     page.add(btn)
 
-ft.app(target=main)
+
+ft.app(main)

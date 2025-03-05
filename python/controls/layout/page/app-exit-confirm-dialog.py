@@ -1,38 +1,36 @@
-import flet
-from flet import AlertDialog, ElevatedButton, OutlinedButton, Page, Text
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "MyApp"
 
     def window_event(e):
         if e.data == "close":
-            page.dialog = confirm_dialog
-            confirm_dialog.open = True
+            page.open(confirm_dialog)
             page.update()
 
-    page.window_prevent_close = True
-    page.on_window_event = window_event
+    page.window.prevent_close = True
+    page.window.on_event = window_event
 
     def yes_click(e):
-        page.window_destroy()
+        page.window.destroy()
 
     def no_click(e):
-        confirm_dialog.open = False
+        page.close(confirm_dialog)
         page.update()
 
-    confirm_dialog = AlertDialog(
+    confirm_dialog = ft.AlertDialog(
         modal=True,
-        title=Text("Please confirm"),
-        content=Text("Do you really want to exit this app?"),
+        title=ft.Text("Please confirm"),
+        content=ft.Text("Do you really want to exit this app?"),
         actions=[
-            ElevatedButton("Yes", on_click=yes_click),
-            OutlinedButton("No", on_click=no_click),
+            ft.ElevatedButton("Yes", on_click=yes_click),
+            ft.OutlinedButton("No", on_click=no_click),
         ],
-        actions_alignment="end",
+        actions_alignment=ft.MainAxisAlignment.END,
     )
 
-    page.add(Text('Try exiting this app by clicking window\'s "Close" button!'))
+    page.add(ft.Text('Try exiting this app by clicking window\'s "Close" button!'))
 
 
-flet.app(target=main, view=flet.FLET_APP)
+ft.app(main)

@@ -1,17 +1,14 @@
 from time import sleep
 
-import flet
-from flet import Page, Text
+import flet as ft
 
 
-def main(page: Page):
-    
-    page.add(
-        Text("Hello!")
-    )
+def main(page: ft.Page):
 
+    page.add(ft.Text("Hello!"))
     sleep(3)
-    page.window_visible = True
-    page.update()  
+    page.window.visible = True
+    page.update()
 
-flet.app(target=main, view=flet.FLET_APP_HIDDEN)
+
+ft.app(main, view=ft.AppView.FLET_APP_HIDDEN)
