@@ -11,7 +11,7 @@ def main(page: ft.Page):
                     alignment=ft.alignment.center,
                     width=50,
                     height=50,
-                    bgcolor=ft.colors.AMBER,
+                    bgcolor=ft.Colors.AMBER,
                     border_radius=ft.border_radius.all(5),
                 )
             )
@@ -23,9 +23,9 @@ def main(page: ft.Page):
 
     width_slider = ft.Slider(
         min=0,
-        max=page.window_width,
+        max=page.window.width,
         divisions=20,
-        value=page.window_width,
+        value=page.window.width,
         label="{value}",
         on_change=slider_change,
     )
@@ -35,7 +35,7 @@ def main(page: ft.Page):
         spacing=10,
         run_spacing=10,
         controls=items(30),
-        width=page.window_width,
+        width=page.window.width,
     )
 
     page.add(
@@ -51,4 +51,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+ft.app(main)
