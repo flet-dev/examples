@@ -6,9 +6,9 @@ def main(page: ft.Page):
         pw.value = f"{page.width} px"
         pw.update()
 
-    page.on_resize = page_resize
+    page.on_resized = page_resize
 
-    pw = ft.Text(bottom=50, right=50, style="displaySmall")
+    pw = ft.Text(bottom=50, right=50, style=ft.TextTheme.display_small)
     page.overlay.append(pw)
     page.add(
         ft.ResponsiveRow(
@@ -16,26 +16,26 @@ def main(page: ft.Page):
                 ft.Container(
                     ft.Text("Column 1"),
                     padding=5,
-                    bgcolor=ft.colors.YELLOW,
-                    col={"sm": 6, "md": 4, "xl": 2},
+                    bgcolor=ft.Colors.YELLOW,
+                    col={"xs": 12, "md": 6, "lg": 3},
                 ),
                 ft.Container(
                     ft.Text("Column 2"),
                     padding=5,
-                    bgcolor=ft.colors.GREEN,
-                    col={"sm": 6, "md": 4, "xl": 2},
+                    bgcolor=ft.Colors.GREEN,
+                    col={"xs": 12, "md": 6, "lg": 3},
                 ),
                 ft.Container(
                     ft.Text("Column 3"),
                     padding=5,
-                    bgcolor=ft.colors.BLUE,
-                    col={"sm": 6, "md": 4, "xl": 2},
+                    bgcolor=ft.Colors.BLUE,
+                    col={"xs": 12, "md": 6, "lg": 3},
                 ),
                 ft.Container(
                     ft.Text("Column 4"),
                     padding=5,
-                    bgcolor=ft.colors.PINK_300,
-                    col={"sm": 6, "md": 4, "xl": 2},
+                    bgcolor=ft.Colors.PINK_300,
+                    col={"xs": 12, "md": 6, "lg": 3},
                 ),
             ],
         ),
@@ -51,4 +51,4 @@ def main(page: ft.Page):
     page_resize(None)
 
 
-ft.app(target=main)
+ft.app(main)
