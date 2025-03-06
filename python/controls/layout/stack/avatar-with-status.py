@@ -1,18 +1,16 @@
-import flet
-from flet import CircleAvatar, Container, Stack, alignment, colors
+import flet as ft
 
 
 def main(page):
-    # avatar with online status
     page.add(
-        Stack(
+        ft.Stack(
             [
-                CircleAvatar(
-                    foreground_image_url="https://avatars.githubusercontent.com/u/5041459?s=88&v=4"
+                ft.CircleAvatar(
+                    foreground_image_src="https://avatars.githubusercontent.com/u/5041459?s=88&v=4"
                 ),
-                Container(
-                    content=CircleAvatar(bgcolor=colors.GREEN, radius=5),
-                    alignment=alignment.bottom_left,
+                ft.Container(
+                    content=ft.CircleAvatar(bgcolor=ft.Colors.GREEN, radius=5),
+                    alignment=ft.alignment.bottom_left,
                 ),
             ],
             width=40,
@@ -21,4 +19,4 @@ def main(page):
     )
 
 
-flet.app(target=main)
+ft.app(main)

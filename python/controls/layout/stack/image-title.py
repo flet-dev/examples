@@ -1,27 +1,26 @@
-import flet
-from flet import Image, Page, Row, Stack, Text
+import flet as ft
 
 
-def main(page: Page):
-    st = Stack(
+def main(page: ft.Page):
+    st = ft.Stack(
         [
-            Image(
+            ft.Image(
                 src=f"https://picsum.photos/300/300",
                 width=300,
                 height=300,
-                fit="contain",
+                fit=ft.ImageFit.CONTAIN,
             ),
-            Row(
+            ft.Row(
                 [
-                    Text(
+                    ft.Text(
                         "Image title",
-                        color="white",
+                        color=ft.Colors.ON_SURFACE,
                         size=40,
-                        weight="bold",
+                        weight=ft.FontWeight.BOLD,
                         opacity=0.5,
                     )
                 ],
-                alignment="center",
+                alignment=ft.MainAxisAlignment.CENTER,
             ),
         ],
         width=300,
@@ -31,4 +30,4 @@ def main(page: Page):
     page.add(st)
 
 
-flet.app(target=main)
+ft.app(main)

@@ -1,61 +1,62 @@
-import flet
-from flet import Column, Container, Page, Stack, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     page.add(
-        Container(
-            Stack(
+        ft.Container(
+            ft.Stack(
                 [
-                    Container(width=20, height=20, bgcolor=colors.RED, border_radius=5),
-                    Container(
+                    ft.Container(
+                        width=20, height=20, bgcolor=ft.Colors.RED, border_radius=5
+                    ),
+                    ft.Container(
                         width=20,
                         height=20,
-                        bgcolor=colors.YELLOW,
+                        bgcolor=ft.Colors.YELLOW,
                         border_radius=5,
                         right=0,
                     ),
-                    Container(
+                    ft.Container(
                         width=20,
                         height=20,
-                        bgcolor=colors.BLUE,
+                        bgcolor=ft.Colors.BLUE,
                         border_radius=5,
                         right=0,
                         bottom=0,
                     ),
-                    Container(
+                    ft.Container(
                         width=20,
                         height=20,
-                        bgcolor=colors.GREEN,
+                        bgcolor=ft.Colors.GREEN,
                         border_radius=5,
                         left=0,
                         bottom=0,
                     ),
-                    Column(
+                    ft.Column(
                         [
-                            Container(
+                            ft.Container(
                                 width=20,
                                 height=20,
-                                bgcolor=colors.PURPLE,
+                                bgcolor=ft.Colors.PURPLE,
                                 border_radius=5,
                             )
                         ],
-                        left=35,
-                        top=35,
+                        left=85,
+                        top=85,
                     ),
                 ]
             ),
             border_radius=8,
             padding=5,
-            width=100,
-            height=100,
-            bgcolor=colors.BLACK,
+            width=200,
+            height=200,
+            bgcolor=ft.Colors.BLACK,
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)
