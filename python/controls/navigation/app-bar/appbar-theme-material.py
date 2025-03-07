@@ -26,13 +26,17 @@ def main(page: ft.Page):
         )
         lightMode.icon = (
             ft.Icons.WB_SUNNY_OUTLINED
-            if page.theme_mode == "light"
+            if page.theme_mode == ft.ThemeMode.LIGHT
             else ft.Icons.WB_SUNNY
         )
         page.update()
 
     lightMode = ft.IconButton(
-        ft.Icons.WB_SUNNY_OUTLINED if page.theme_mode == "light" else ft.Icons.WB_SUNNY,
+        (
+            ft.Icons.WB_SUNNY_OUTLINED
+            if page.theme_mode == ft.ThemeMode.LIGHT
+            else ft.Icons.WB_SUNNY
+        ),
         on_click=toggle_theme_mode,
     )
 

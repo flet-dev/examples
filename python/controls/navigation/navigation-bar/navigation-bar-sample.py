@@ -11,7 +11,7 @@ def main(page: ft.Page):
             ft.NavigationBarDestination(
                 icon=ft.icons.BOOKMARK_BORDER,
                 selected_icon=ft.icons.BOOKMARK,
-                label="Explore",
+                label="Favorites",
             ),
         ]
     )
