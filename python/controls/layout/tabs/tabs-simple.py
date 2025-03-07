@@ -1,27 +1,32 @@
-import flet
-from flet import Container, Icon, Page, Tab, Tabs, Text, alignment, icons
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    t = Tabs(
+    t = ft.Tabs(
         selected_index=1,
         animation_duration=300,
         tabs=[
-            Tab(
+            ft.Tab(
                 text="Tab 1",
-                content=Container(
-                    content=Text("This is Tab 1"), alignment=alignment.center
+                content=ft.Container(
+                    content=ft.Text("This is Tab 1"), alignment=ft.alignment.center
                 ),
             ),
-            Tab(
-                tab_content=Icon(icons.SEARCH),
-                content=Text("This is Tab 2"),
+            ft.Tab(
+                text="Tab 2",
+                icon=ft.Icons.SETTINGS,
+                content=ft.Container(
+                    content=ft.Text("This is Tab 2"), alignment=ft.alignment.center
+                ),
             ),
-            Tab(
-                text="Tab 3",
-                icon=icons.SETTINGS,
-                content=Text("This is Tab 3"),
+            ft.Tab(
+                tab_content=ft.CircleAvatar(
+                    foreground_image_src="https://avatars.githubusercontent.com/u/7119543?s=88&v=4"
+                ),
+                content=ft.Container(
+                    content=ft.Text("This is Tab 3"), alignment=ft.alignment.center
+                ),
             ),
         ],
         expand=1,
@@ -30,4 +35,4 @@ def main(page: Page):
     page.add(t)
 
 
-flet.app(target=main)
+ft.app(main)

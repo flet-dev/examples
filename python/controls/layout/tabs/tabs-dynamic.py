@@ -1,33 +1,30 @@
 import logging
 from time import sleep
 
-import flet
-from flet import Container, Icon, Page, Tab, Tabs, Text, alignment, icons
-
-logging.basicConfig(level=logging.DEBUG)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Tabs example"
 
-    t = Tabs(
+    t = ft.Tabs(
         selected_index=1,
         animation_duration=300,
         tabs=[
-            Tab(
+            ft.Tab(
                 text="Tab 1",
-                content=Container(
-                    content=Text("This is Tab 1"), alignment=alignment.center
+                content=ft.Container(
+                    content=ft.Text("This is Tab 1"), alignment=ft.alignment.center
                 ),
             ),
-            Tab(
-                tab_content=Icon(icons.MESSAGE),
-                content=Text("This is Tab 2"),
+            ft.Tab(
+                tab_content=ft.Icon(ft.Icons.MESSAGE),
+                content=ft.Text("This is Tab 2"),
             ),
-            Tab(
+            ft.Tab(
                 text="Tab 3",
-                icon=icons.IRON,
-                content=Text("This is Tab 3"),
+                icon=ft.Icons.IRON,
+                content=ft.Text("This is Tab 3"),
             ),
         ],
         expand=1,
@@ -44,27 +41,27 @@ def main(page: Page):
     sleep(3)
     t.selected_index = 1
     t.tabs.pop(0)
-    t.tabs[1].content = Text("Blah blah blah")
+    t.tabs[1].content = ft.Text("Blah blah blah")
     page.update()
     sleep(3)
     t.tabs.clear()
     page.update()
     sleep(3)
     t.tabs.append(
-        Tab(
+        ft.Tab(
             text="Tab 4",
-            icon=icons.LOCK,
-            content=Text("This is Tab 4"),
+            icon=ft.Icons.LOCK,
+            content=ft.Text("This is Tab 4"),
         )
     )
     t.tabs.append(
-        Tab(
+        ft.Tab(
             text="Tab 5",
-            icon=icons.SIP_SHARP,
-            content=Text("This is Tab 5"),
+            icon=ft.Icons.SIP_SHARP,
+            content=ft.Text("This is Tab 5"),
         )
     )
     page.update()
 
 
-flet.app(target=main)
+ft.app(main)
