@@ -6,7 +6,6 @@ def main(page: ft.Page):
     rail = ft.NavigationRail(
         selected_index=0,
         label_type=ft.NavigationRailLabelType.ALL,
-        # extended=True,
         min_width=100,
         min_extended_width=400,
         leading=ft.FloatingActionButton(
