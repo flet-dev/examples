@@ -12,14 +12,15 @@ def main(page):
             controls=[
                 ft.Text("One"),
                 ft.Container(
-                    padding=ft.padding.symmetric(0, 30),
+                    padding=ft.padding.symmetric(10, 30),
                     content=ft.Text("Two"),
                 ),
                 ft.Container(
-                    padding=ft.padding.symmetric(0, 10),
+                    padding=ft.padding.symmetric(5, 10),
                     content=ft.Text("Three"),
                 ),
             ],
+            padding=ft.padding.symmetric(20, 50),
         ),
     )
 

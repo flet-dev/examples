@@ -26,12 +26,10 @@ def main(page):
             ft.Container(
                 padding=ft.padding.symmetric(30, 0),
                 content=ft.Text("None"),
-                # alignment=ft.alignment.top_left,
             ),
             ft.Container(
                 padding=ft.padding.symmetric(0, 30),
                 content=ft.Text("Some"),
-                # alignment=ft.alignment.bottom_right,
             ),
         ],
     )
