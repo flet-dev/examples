@@ -1,23 +1,30 @@
-import flet
-from flet import ButtonStyle, IconButton, Page, colors, icons
+import flet as ft
 
 
-def main(page: Page):
-    page.padding = 50
+def main(page: ft.Page):
+    page.padding = 10
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     def toggle_icon_button(e):
         e.control.selected = not e.control.selected
         e.control.update()
 
     page.add(
-        IconButton(
-            icon=icons.BATTERY_1_BAR,
-            selected_icon=icons.BATTERY_FULL,
+        ft.IconButton(
+            icon=ft.Icons.BATTERY_1_BAR,
+            selected_icon=ft.Icons.BATTERY_FULL,
+            scale=5,
             on_click=toggle_icon_button,
             selected=False,
-            style=ButtonStyle(color={"selected": colors.GREEN, "": colors.RED}),
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.SELECTED: ft.Colors.GREEN,
+                    ft.ControlState.DEFAULT: ft.Colors.RED,
+                }
+            ),
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)

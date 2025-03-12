@@ -1,41 +1,42 @@
-import flet
-from flet import (
-    BorderSide,
-    ButtonStyle,
-    ElevatedButton,
-    Page,
-    RoundedRectangleBorder,
-    colors,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.padding = 50
+    page.theme_mode = ft.ThemeMode.LIGHT
     page.add(
-        ElevatedButton(
+        ft.ElevatedButton(
             "Styled button 1",
-            style=ButtonStyle(
+            style=ft.ButtonStyle(
                 color={
-                    "hovered": colors.WHITE,
-                    "focused": colors.BLUE,
-                    "": colors.BLACK,
+                    ft.ControlState.HOVERED: ft.colors.WHITE,
+                    ft.ControlState.FOCUSED: ft.colors.BLUE,
+                    ft.ControlState.DEFAULT: ft.colors.BLACK,
                 },
-                bgcolor={"focused": colors.PINK_200, "": colors.YELLOW},
-                padding={"hovered": 20},
-                overlay_color=colors.TRANSPARENT,
-                elevation={"pressed": 0, "": 1},
+                bgcolor={
+                    ft.ControlState.FOCUSED: ft.colors.PINK_200,
+                    ft.ControlState.DEFAULT: ft.colors.YELLOW,
+                },
+                padding={ft.ControlState.HOVERED: 20},
+                overlay_color=ft.colors.TRANSPARENT,
+                elevation={
+                    ft.ControlState.DEFAULT: 0,
+                    ft.ControlState.HOVERED: 5,
+                    ft.ControlState.PRESSED: 10,
+                },
                 animation_duration=500,
                 side={
-                    "": BorderSide(1, colors.BLUE),
-                    "hovered": BorderSide(2, colors.BLUE),
+                    ft.ControlState.DEFAULT: ft.BorderSide(1, color=ft.colors.BLUE_100),
+                    ft.ControlState.HOVERED: ft.BorderSide(3, color=ft.colors.BLUE_400),
+                    ft.ControlState.PRESSED: ft.BorderSide(6, color=ft.Colors.BLUE_600),
                 },
                 shape={
-                    "hovered": RoundedRectangleBorder(radius=20),
-                    "": RoundedRectangleBorder(radius=2),
+                    ft.ControlState.HOVERED: ft.RoundedRectangleBorder(radius=20),
+                    ft.ControlState.DEFAULT: ft.RoundedRectangleBorder(radius=2),
                 },
             ),
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)

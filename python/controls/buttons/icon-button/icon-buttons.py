@@ -1,27 +1,32 @@
-import flet
-from flet import IconButton, Page, Row, icons
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Icon buttons"
+
+    sby = ft.SnackBar(ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_300))
+    sbn = ft.SnackBar(ft.Icon(ft.Icons.CANCEL, color=ft.Colors.PINK_700))
     page.add(
-        Row(
+        ft.Row(
             [
-                IconButton(
-                    icon=icons.PAUSE_CIRCLE_FILLED_ROUNDED,
-                    icon_color="blue400",
-                    icon_size=20,
-                    tooltip="Pause record",
-                ),
-                IconButton(
-                    icon=icons.DELETE_FOREVER_ROUNDED,
-                    icon_color="pink600",
+                ft.IconButton(
+                    icon=ft.Icons.CHECK_CIRCLE,
+                    icon_color=ft.Colors.GREEN_300,
                     icon_size=40,
-                    tooltip="Delete record",
+                    tooltip="Yep",
+                    on_click=lambda e: page.open(sby),
                 ),
-            ]
+                ft.IconButton(
+                    icon=ft.Icons.CANCEL,
+                    icon_color=ft.Colors.PINK_700,
+                    icon_size=40,
+                    tooltip="Nope",
+                    on_click=lambda e: page.open(sbn),
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
         ),
     )
 
 
-flet.app(target=main)
+ft.app(main)

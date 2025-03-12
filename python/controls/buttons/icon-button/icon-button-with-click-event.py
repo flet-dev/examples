@@ -1,8 +1,7 @@
-import flet
-from flet import IconButton, Page, Text, icons
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Icon button with 'click' event"
 
     def button_clicked(e):
@@ -10,12 +9,12 @@ def main(page: Page):
         t.value = f"Button clicked {b.data} time(s)"
         page.update()
 
-    b = IconButton(
-        icon=icons.PLAY_CIRCLE_FILL_OUTLINED, on_click=button_clicked, data=0
+    b = ft.IconButton(
+        icon=ft.Icons.PLAY_CIRCLE_FILL_OUTLINED, on_click=button_clicked, data=0
     )
-    t = Text()
+    t = ft.Text()
 
     page.add(b, t)
 
 
-flet.app(target=main)
+ft.app(target=main)

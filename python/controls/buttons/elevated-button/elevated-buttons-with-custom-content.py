@@ -8,9 +8,9 @@ def main(page: ft.Page):
             width=150,
             content=ft.Row(
                 [
-                    ft.Icon(name=ft.Icons.FAVORITE, color="pink"),
-                    ft.Icon(name=ft.Icons.AUDIOTRACK, color="green"),
-                    ft.Icon(name=ft.Icons.BEACH_ACCESS, color="blue"),
+                    ft.Icon(name=ft.Icons.FAVORITE, color=ft.Colors.PINK),
+                    ft.Icon(name=ft.Icons.AUDIOTRACK, color=ft.Colors.GREEN),
+                    ft.Icon(name=ft.Icons.BEACH_ACCESS, color=ft.Colors.BLUE),
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_AROUND,
             ),
