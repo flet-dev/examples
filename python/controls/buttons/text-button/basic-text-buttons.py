@@ -1,13 +1,12 @@
-import flet
-from flet import Page, TextButton
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Basic text buttons"
     page.add(
-        TextButton(text="Text button"),
-        TextButton("Disabled button", disabled=True),
+        ft.TextButton(text="Text button"),
+        ft.TextButton("Disabled button", disabled=True),
     )
 
 
-flet.app(target=main)
+ft.app(main)
