@@ -1,19 +1,19 @@
-import flet
-from flet import OutlinedButton, Page, Text
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Outlined button with 'click' event"
+    page.theme_mode = ft.ThemeMode.LIGHT
 
     def button_clicked(e):
         b.data += 1
         t.value = f"Button clicked {b.data} time(s)"
         page.update()
 
-    b = OutlinedButton("Button with 'click' event", on_click=button_clicked, data=0)
-    t = Text()
+    b = ft.OutlinedButton("Button with 'click' event", on_click=button_clicked, data=0)
+    t = ft.Text()
 
     page.add(b, t)
 
 
-flet.app(target=main)
+ft.app(main)

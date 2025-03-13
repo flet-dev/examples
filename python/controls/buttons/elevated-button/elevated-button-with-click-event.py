@@ -3,6 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Elevated button with 'click' event"
+    page.theme_mode = ft.ThemeMode.LIGHT
 
     def button_clicked(e):
         b.data += 1
