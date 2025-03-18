@@ -1,5 +1,4 @@
-import flet
-from flet import Column, Radio, RadioGroup, Text
+import flet as ft
 
 
 def main(page):
@@ -7,19 +6,19 @@ def main(page):
         t.value = f"Your favorite color is:  {e.control.value}"
         page.update()
 
-    t = Text()
-    cg = RadioGroup(
-        content=Column(
+    t = ft.Text()
+    cg = ft.RadioGroup(
+        content=ft.Column(
             [
-                Radio(value="red", label="Red"),
-                Radio(value="green", label="Green"),
-                Radio(value="blue", label="Blue"),
+                ft.Radio(value="red", label="Red"),
+                ft.Radio(value="green", label="Green"),
+                ft.Radio(value="blue", label="Blue"),
             ]
         ),
         on_change=radiogroup_changed,
     )
 
-    page.add(Text("Select your favorite color:"), cg, t)
+    page.add(ft.Text("Select your favorite color:"), cg, t)
 
 
-flet.app(target=main)
+ft.app(main)

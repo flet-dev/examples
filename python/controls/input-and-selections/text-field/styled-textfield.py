@@ -1,26 +1,25 @@
-import flet
-from flet import Page, TextField, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.padding = 50
     page.add(
-        TextField(
+        ft.TextField(
             text_size=30,
-            cursor_color=colors.RED,
-            selection_color=colors.YELLOW,
-            color=colors.PINK,
-            bgcolor=colors.BLACK26,
+            cursor_color=ft.Colors.RED,
+            selection_color=ft.Colors.YELLOW,
+            color=ft.Colors.PINK,
+            bgcolor=ft.Colors.BLACK26,
             filled=True,
-            focused_color=colors.GREEN,
-            focused_bgcolor=colors.CYAN_200,
+            focused_color=ft.Colors.GREEN,
+            focused_bgcolor=ft.Colors.CYAN_200,
             border_radius=30,
-            border_color=colors.GREEN_800,
-            focused_border_color=colors.GREEN_ACCENT_400,
+            border_color=ft.Colors.GREEN_800,
+            focused_border_color=ft.Colors.GREEN_ACCENT_400,
             max_length=20,
-            capitalization="characters",
+            capitalization=ft.TextCapitalization.CHARACTERS,
         )
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

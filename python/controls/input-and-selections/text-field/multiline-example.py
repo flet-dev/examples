@@ -1,17 +1,16 @@
-import flet
-from flet import Page, TextField
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.add(
-        TextField(label="standard", multiline=True),
-        TextField(
+        ft.TextField(label="standard", multiline=True),
+        ft.TextField(
             label="disabled",
             multiline=True,
             disabled=True,
             value="line1\nline2\nline3\nline4\nline5",
         ),
-        TextField(
+        ft.TextField(
             label="Auto adjusted height with max lines",
             multiline=True,
             min_lines=1,
@@ -20,4 +19,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(main)

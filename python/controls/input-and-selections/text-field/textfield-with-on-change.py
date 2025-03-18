@@ -1,14 +1,13 @@
-import flet
-from flet import ElevatedButton, Page, Text, TextField
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def textbox_changed(e):
         t.value = e.control.value
         page.update()
 
-    t = Text()
-    tb = TextField(
+    t = ft.Text()
+    tb = ft.TextField(
         label="Textbox with 'change' event:",
         on_change=textbox_changed,
     )
@@ -16,4 +15,4 @@ def main(page: Page):
     page.add(tb, t)
 
 
-flet.app(target=main)
+ft.app(main)

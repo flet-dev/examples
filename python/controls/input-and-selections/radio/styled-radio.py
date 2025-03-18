@@ -1,22 +1,25 @@
-import flet
-from flet import Column, Page, Radio, RadioGroup
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.add(
-        RadioGroup(
-            Column(
+        ft.RadioGroup(
+            ft.Column(
                 [
-                    Radio(label="Radio with default style", value="1"),
-                    Radio(
+                    ft.Radio(label="Radio with default style", value="1"),
+                    ft.Radio(
                         label="Radio with constant fill color",
                         value="2",
-                        fill_color="red",
+                        fill_color=ft.Colors.RED,
                     ),
-                    Radio(
+                    ft.Radio(
                         label="Radio with dynamic fill color",
                         value="3",
-                        fill_color={"hovered": "blue", "selected": "green", "": "red"},
+                        fill_color={
+                            ft.ControlState.HOVERED: ft.Colors.BLUE,
+                            ft.ControlState.SELECTED: ft.Colors.GREEN,
+                            ft.ControlState.DEFAULT: ft.Colors.RED,
+                        },
                     ),
                 ]
             )
@@ -24,4 +27,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

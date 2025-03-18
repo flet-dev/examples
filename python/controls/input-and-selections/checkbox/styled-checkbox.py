@@ -6,15 +6,15 @@ def main(page: ft.Page):
         ft.Checkbox(label="Checkbox with default style"),
         ft.Checkbox(
             label="Checkbox with constant fill color",
-            fill_color="red",
-            check_color="yellow",
+            fill_color=ft.Colors.RED,
+            check_color=ft.Colors.YELLOW,
         ),
         ft.Checkbox(
             label="Checkbox with dynamic fill color",
             fill_color={
-                ft.MaterialState.HOVERED: "blue",
-                ft.MaterialState.SELECTED: "green",
-                ft.MaterialState.DEFAULT: "red",
+                ft.ControlState.HOVERED: ft.Colors.BLUE,
+                ft.ControlState.SELECTED: ft.Colors.GREEN,
+                ft.ControlState.DEFAULT: ft.Colors.RED,
             },
         ),
     )

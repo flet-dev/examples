@@ -1,13 +1,12 @@
-import flet
-from flet import Page, TextField
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.add(
-        TextField(
+        ft.TextField(
             label="Password with reveal button", password=True, can_reveal_password=True
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)
