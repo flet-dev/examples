@@ -1,92 +1,82 @@
-from flet import (
-    Column,
-    Container,
-    IconButton,
-    Row,
-    Text,
-    IconButton,
-    NavigationRail,
-    NavigationRailDestination,
-    TextField,
-    alignment,
-    border_radius,
-    colors,
-    icons,
-    padding,
-    margin,
-)
+import flet as ft
 from data_store import DataStore
 
-class Sidebar(Container):
 
-    def __init__(self, app_layout, store: DataStore, page):
+class Sidebar(ft.Container):
+
+    def __init__(self, app_layout, store: DataStore):
         self.store: DataStore = store
         self.app_layout = app_layout
         self.nav_rail_visible = True
         self.top_nav_items = [
-            NavigationRailDestination(
-                label_content=Text("Boards"),
+            ft.NavigationRailDestination(
+                label_content=ft.Text("Boards"),
                 label="Boards",
-                icon=icons.BOOK_OUTLINED,
-                selected_icon=icons.BOOK_OUTLINED
+                icon=ft.Icons.BOOK_OUTLINED,
+                selected_icon=ft.Icons.BOOK_OUTLINED,
             ),
-            NavigationRailDestination(
-                label_content=Text("Members"),
+            ft.NavigationRailDestination(
+                label_content=ft.Text("Members"),
                 label="Members",
-                icon=icons.PERSON,
-                selected_icon=icons.PERSON
+                icon=ft.Icons.PERSON,
+                selected_icon=ft.Icons.PERSON,
             ),
         ]
 
-        self.top_nav_rail = NavigationRail(
+        self.top_nav_rail = ft.NavigationRail(
             selected_index=None,
-            label_type="all",
+            label_type=ft.NavigationRailLabelType.ALL,
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
-            bgcolor=colors.BLUE_GREY,
+            bgcolor=ft.Colors.BLUE_GREY,
             extended=True,
-            height=110
+            height=110,
         )
-        
-        self.bottom_nav_rail = NavigationRail(
+
+        self.bottom_nav_rail = ft.NavigationRail(
             selected_index=None,
-            label_type="all",
+            label_type=ft.NavigationRailLabelType.ALL,
             on_change=self.bottom_nav_change,
             extended=True,
             expand=True,
-            bgcolor=colors.BLUE_GREY,
+            bgcolor=ft.Colors.BLUE_GREY,
         )
-        self.toggle_nav_rail_button = IconButton(icons.ARROW_BACK)
+        self.toggle_nav_rail_button = ft.IconButton(ft.Icons.ARROW_BACK)
 
         super().__init__(
-            content=Column([
-                Row([
-                    Text("Workspace"),
-                ], alignment="spaceBetween"),
-                # divider
-                Container(
-                    bgcolor=colors.BLACK26,
-                    border_radius=border_radius.all(30),
-                    height=1,
-                    alignment=alignment.center_right,
-                    width=220
-                ),
-                self.top_nav_rail,
-                # divider
-                Container(
-                    bgcolor=colors.BLACK26,
-                    border_radius=border_radius.all(30),
-                    height=1,
-                    alignment=alignment.center_right,
-                    width=220
-                ),
-                self.bottom_nav_rail
-            ], tight=True),
-            padding=padding.all(15),
-            margin=margin.all(0),
+            content=ft.Column(
+                [
+                    ft.Row(
+                        [
+                            ft.Text("Workspace"),
+                        ],
+                        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    ),
+                    # divider
+                    ft.Container(
+                        bgcolor=ft.Colors.BLACK26,
+                        border_radius=ft.border_radius.all(30),
+                        height=1,
+                        alignment=ft.alignment.center_right,
+                        width=220,
+                    ),
+                    self.top_nav_rail,
+                    # divider
+                    ft.Container(
+                        bgcolor=ft.Colors.BLACK26,
+                        border_radius=ft.border_radius.all(30),
+                        height=1,
+                        alignment=ft.alignment.center_right,
+                        width=220,
+                    ),
+                    self.bottom_nav_rail,
+                ],
+                tight=True,
+            ),
+            padding=ft.padding.all(15),
+            margin=ft.margin.all(0),
             width=250,
-            #expand=True,
-            bgcolor=colors.BLUE_GREY,
+            bgcolor=ft.Colors.BLUE_GREY,
             visible=self.nav_rail_visible,
         )
 
@@ -96,50 +86,48 @@ class Sidebar(Container):
         for i in range(len(boards)):
             b = boards[i]
             self.bottom_nav_rail.destinations.append(
-                NavigationRailDestination(
-                    label_content=TextField(
+                ft.NavigationRailDestination(
+                    label_content=ft.TextField(
                         value=b.name,
                         hint_text=b.name,
                         text_size=12,
                         read_only=True,
                         on_focus=self.board_name_focus,
                         on_blur=self.board_name_blur,
-                        border="none",
+                        border=ft.InputBorder.NONE,
                         height=50,
                         width=150,
-                        text_align="start",
-                        data=i
+                        text_align=ft.TextAlign.START,
+                        data=i,
                     ),
                     label=b.name,
-                    selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
-                    icon=icons.CHEVRON_RIGHT_OUTLINED
+                    selected_icon=ft.Icons.CHEVRON_RIGHT_ROUNDED,
+                    icon=ft.Icons.CHEVRON_RIGHT_OUTLINED,
                 )
             )
-        self.update()
 
     def toggle_nav_rail(self, e):
         self.visible = not self.visible
-        self.update()
         self.page.update()
 
     def board_name_focus(self, e):
         e.control.read_only = False
-        e.control.border = "outline"
-        e.control.update()
+        e.control.border = ft.InputBorder.OUTLINE
+        self.page.update()
 
     def board_name_blur(self, e):
-        self.store.update_board(self.store.get_boards()[e.control.data], {
-            'name': e.control.value})
+        self.store.update_board(
+            self.store.get_boards()[e.control.data], {"name": e.control.value}
+        )
         self.app_layout.hydrate_all_boards_view()
         e.control.read_only = True
-        e.control.border = "none"
+        e.control.border = ft.InputBorder.NONE
         self.page.update()
 
     def top_nav_change(self, e):
         index = e if (type(e) == int) else e.control.selected_index
         self.bottom_nav_rail.selected_index = None
         self.top_nav_rail.selected_index = index
-        self.update()
         if index == 0:
             self.page.route = "/boards"
         elif index == 1:
@@ -151,5 +139,4 @@ class Sidebar(Container):
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         self.page.route = f"/board/{index}"
-        self.update()
         self.page.update()
