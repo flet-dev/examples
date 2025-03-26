@@ -1,80 +1,70 @@
-import logging
-import flet
-from flet import (
-    Page,
-    DragTarget,
-    Draggable,
-    Container,
-    Column,
-    Row,
-    Icon,
-    UserControl,
-    icons,
-    border,
-    alignment,
-    colors,
-)
+import flet as ft
 
 
-class OuterContainer(UserControl):
+class OuterContainer(ft.Draggable):
 
-    def __init__(self, page, color):
-        super().__init__()
+    def __init__(self, page, list_ref, color):
+
         self.page = page
+        self.list_ref = list_ref
         self.container_color = color
+        # inner_container is a draggable
         self.inner_container = InnerContainer(self)
-        self.outer_container = Container(
-            content=self.inner_container.view,
+        self.outer_container = ft.Container(
+            content=self.inner_container,
             width=200,
             height=200,
             bgcolor=self.container_color,
             border_radius=5,
-            alignment=alignment.center,
-            border=border.all(4, colors.BLACK12),
+            alignment=ft.alignment.center,
+            border=ft.border.all(4, ft.Colors.BLACK12),
         )
 
-    def build(self):
-        self.view = Draggable(
-            group="outer",
-            content=DragTarget(
-                group="inner",
-                content=DragTarget(
-                    group="outer",
-                    content=self.outer_container,
-                    data=self,
-                    on_accept=self.drag_accept,
-                    on_will_accept=self.drag_will_accept,
-                    on_leave=self.drag_leave
-                ),
+        self.target = ft.DragTarget(
+            group="inner",
+            content=ft.DragTarget(
+                group="outer",
+                content=self.outer_container,
                 data=self,
-                on_accept=self.inner_drag_accept,
-                on_will_accept=self.inner_drag_will_accept,
-                on_leave=self.inner_drag_leave
-            )
+                on_accept=self.drag_accept,
+                on_will_accept=self.drag_will_accept,
+                on_leave=self.drag_leave,
+            ),
+            data=self,
+            on_accept=self.inner_drag_accept,
+            on_will_accept=self.inner_drag_will_accept,
+            on_leave=self.inner_drag_leave,
         )
-        return self.view
+        super().__init__(content=self.target, group="outer", data=self)
 
     def drag_accept(self, e):
-        if e.data == 'true':
-            self.outer_container.border = border.all(4, colors.BLACK12)
-        self.view.update()
+        print(f"e: {e}")
+        if e.data == "true":
+            print("drag_accept outer")
+            self.outer_container.border = ft.border.all(4, ft.Colors.BLACK12)
+        self.update()
 
     def drag_will_accept(self, e):
-        if e.data == 'true':
-            self.outer_container.border = border.all(4, colors.BLACK54)
-        self.view.update()
+        print(f"e: {e}")
+        if e.data == "true":
+            print("drag_will_accept outer")
+            self.outer_container.border = ft.border.all(4, ft.Colors.BLACK54)
+        self.update()
 
     def drag_leave(self, e):
-        self.outer_container.border = border.all(4, colors.BLACK12)
-        self.view.update()
+        print(f"e: {e}")
+        self.outer_container.border = ft.border.all(4, ft.Colors.BLACK12)
+        self.update()
 
     def inner_drag_accept(self, e):
-        if e.data == 'true':
+        if e.data == "true":
+            print("drag_accept inner")
             self.outer_container.border_radius = 5
         self.update()
 
     def inner_drag_will_accept(self, e):
-        if e.data == 'true':
+        if e.data == "true":
+            print("drag_will_accept inner")
             self.outer_container.border_radius = 25
         self.update()
 
@@ -83,61 +73,66 @@ class OuterContainer(UserControl):
         self.update()
 
 
-class InnerContainer():
+class InnerContainer(ft.Draggable):
 
     def __init__(self, outer: OuterContainer):
         self.outer = outer
-        self.inner_icon = Icon(
-            icons.CIRCLE,
-            color=colors.WHITE54,
-            size=100,
-            tooltip="drag me!"
+        self.inner_icon = ft.Icon(
+            ft.Icons.CIRCLE, color=ft.Colors.WHITE54, size=100, tooltip="drag me!"
         )
+        # self.data = self
 
-        self.view = Draggable(
+        self.target = ft.DragTarget(
             group="inner",
-            content=DragTarget(
-                group="inner",
-                content=self.inner_icon,
-
-                on_accept=self.drag_accept,
-                on_leave=self.drag_leave,
-                on_will_accept=self.drag_will_accept,
-            ),
-            data=self
+            content=self.inner_icon,
+            on_accept=self.drag_accept,
+            on_leave=self.drag_leave,
+            on_will_accept=self.drag_will_accept,
         )
+        super().__init__(content=self.target, group="outer", data=self)
 
     def change_color(self, color: str):
         self.inner_icon.color = color
-        self.view.update()
+        self.update()
 
     def drag_accept(self, e):
-        if e.data == 'true':
-            self.change_color(colors.WHITE54)
+        if e.data == "true":
+            print("drag_accept from inner")
+            self.change_color(ft.Colors.WHITE54)
         print("inner_drag_accept")
 
     def drag_will_accept(self, e):
         if e.data == "true":
-            self.change_color(colors.BLUE_GREY)
-        self.view.update()
+            print("drag_will_accept from inner")
+            self.change_color(ft.Colors.BLUE_GREY)
+        self.update()
 
     def drag_leave(self, e):
-        self.change_color(colors.WHITE54)
-        self.view.update()
+        self.change_color(ft.Colors.WHITE54)
+        self.update()
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     page.title = "Drag and drop ordering"
-    page.bgcolor = colors.BLUE_GREY_100
-    page.containers = Row([
-        OuterContainer(page, colors.DEEP_ORANGE_400),
-        OuterContainer(page, colors.BLUE_400),
-    ], alignment="spaceAround", vertical_alignment="center", expand=True)
-    page.add(page.containers)
+    list_ref = ft.Ref[ft.Row]()
+    page.bgcolor = ft.Colors.BLUE_GREY_100
+    page.add(
+        ft.Row(
+            [
+                OuterContainer(page, list_ref, ft.Colors.DEEP_ORANGE_400),
+                OuterContainer(page, list_ref, ft.Colors.BLUE_400),
+            ],
+            alignment=ft.MainAxisAlignment.SPACE_AROUND,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
+            ref=list_ref,
+        )
+    )
+    page.update()
 
 
 # print("flet path: ", flet.__file__)
 # logging.basicConfig(level=logging.DEBUG,
 #                     format='%(asctime)s.%(msecs)03d %(message)s', datefmt='%H:%M:%S')
-flet.app(target=main)
+ft.app(target=main)
