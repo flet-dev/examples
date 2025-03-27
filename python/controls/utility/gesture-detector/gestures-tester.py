@@ -1,11 +1,10 @@
-import flet
-from flet import Container, GestureDetector, Page, TapEvent, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    gd = GestureDetector(
-        Container(bgcolor=colors.GREEN, width=200, height=200),
+    gd = ft.GestureDetector(
+        ft.Container(bgcolor=ft.colors.GREEN, width=200, height=200),
         hover_interval=50,
         on_tap=lambda e: print("TAP"),
         on_tap_down=lambda e: print(
@@ -60,4 +59,4 @@ def main(page: Page):
     page.add(gd)
 
 
-flet.app(target=main)
+ft.app(target=main)
