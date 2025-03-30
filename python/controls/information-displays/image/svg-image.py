@@ -1,8 +1,7 @@
-import flet
-from flet import Container, Image, Page, colors
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     svg_content = """
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 30 30" style="enable-background:new 0 0 30 30;" xml:space="preserve">
@@ -26,23 +25,19 @@ def main(page: Page):
 </g>
 </svg>"""
     page.add(
-        Image(
+        ft.Image(
             src=f"https://raw.githubusercontent.com/dnfield/flutter_svg/master/packages/flutter_svg/example/assets/wikimedia/Firefox_Logo_2017.svg",
             width=200,
             height=200,
         ),
-        Image(
-            src=svg_content,
-            width=100,
-            height=100,
-        ),
-        Image(src=svg_content, width=100, height=100, color="blue"),
-        Container(
-            Image(src=svg_content, width=100, height=100, color="white"),
-            bgcolor=colors.BLACK87,
+        ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.RED),
+        ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.BLUE),
+        ft.Container(
+            ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.WHITE),
+            bgcolor=ft.Colors.BLACK87,
             border_radius=5,
         ),
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

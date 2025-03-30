@@ -1,9 +1,8 @@
 from time import sleep
+import flet as ft
 
-import flet
-from flet import Container, Image, Page, colors
 
-def main(page: Page):
+def main(page: ft.Page):
 
     svg_content = """
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
@@ -12,7 +11,7 @@ def main(page: Page):
  </g>
 </svg>
 """
-    img = Image(src=svg_content.format(0, 0))
+    img = ft.Image(src=svg_content.format(0, 0))
     page.add(img)
 
     for c in range(0, 10):
@@ -21,4 +20,5 @@ def main(page: Page):
             img.update()
             sleep(0.1)
 
-flet.app(target=main)
+
+ft.app(target=main)
