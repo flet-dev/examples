@@ -1,28 +1,27 @@
-import flet
-from flet import Container, IconButton, Page, Row, Text, WindowDragArea, colors, icons
+import flet as ft
 
 
-def main(page: Page):
-    page.window_title_bar_hidden = True
-    page.window_title_bar_buttons_hidden = True
+def main(page: ft.Page):
+    page.window.title_bar_hidden = True
+    page.window.title_bar_buttons_hidden = True
 
     page.add(
-        Row(
+        ft.Row(
             [
-                WindowDragArea(
-                    Container(
-                        Text(
+                ft.WindowDragArea(
+                    ft.Container(
+                        ft.Text(
                             "Drag this area to move, maximize and restore application window."
                         ),
-                        bgcolor=colors.AMBER_300,
+                        bgcolor=ft.Colors.AMBER_300,
                         padding=10,
                     ),
                     expand=True,
                 ),
-                IconButton(icons.CLOSE, on_click=lambda _: page.window_close()),
+                ft.IconButton(ft.Icons.CLOSE, on_click=lambda _: page.window.close()),
             ]
         )
     )
 
 
-flet.app(target=main)
+ft.app(main)

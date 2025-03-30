@@ -6,7 +6,7 @@ def main(page: ft.Page):
     c = ft.Container(
         width=100,
         height=100,
-        bgcolor="blue",
+        bgcolor=ft.Colors.BLUE,
         border_radius=5,
         scale=1,
         animate_scale=ft.animation.Animation(600, ft.AnimationCurve.BOUNCE_OUT),

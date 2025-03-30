@@ -21,10 +21,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Stack(
-            [
-                i1,
-                i2,
-            ],
+            [i1, i2],
             width=200,
             height=300,
         ),

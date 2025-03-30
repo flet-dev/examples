@@ -1,8 +1,9 @@
 import flet as ft
+import flet_lottie as fl
 
 
 def main(page: ft.Page):
-    l = ft.Lottie(
+    l = fl.Lottie(
         src="https://raw.githubusercontent.com/xvrh/lottie-flutter/refs/heads/master/example/assets/Logo/LogoSmall.json",
         reverse=False,
         animate=True,

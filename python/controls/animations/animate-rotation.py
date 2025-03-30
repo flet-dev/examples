@@ -8,7 +8,7 @@ def main(page: ft.Page):
         height=100,
         left=200,
         top=100,
-        bgcolor="red",
+        bgcolor=ft.Colors.RED,
         border_radius=5,
         rotate=1,
         animate_rotation=1000,
@@ -17,7 +17,7 @@ def main(page: ft.Page):
     c2 = ft.Container(
         width=100,
         height=70,
-        bgcolor="blue",
+        bgcolor=ft.Colors.BLUE,
         border_radius=5,
         rotate=ft.transform.Rotate(-1, alignment=ft.alignment.center_left),
         animate_rotation=ft.animation.Animation(duration=300),

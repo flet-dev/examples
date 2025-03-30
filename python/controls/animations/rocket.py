@@ -1,5 +1,4 @@
 from math import pi
-
 import flet as ft
 
 
@@ -7,7 +6,7 @@ def main(page: ft.Page):
 
     c2 = ft.Container(
         content=ft.Container(
-            ft.Icon(ft.Icons.ROCKET, size=40, color="black"),
+            ft.Icon(ft.Icons.ROCKET, size=40, color=ft.Colors.BLACK),
             scale=1.0,
             animate_scale=1000,
             opacity=1.0,
