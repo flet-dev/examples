@@ -1,11 +1,8 @@
 import flet as ft
+import flet_audio as fa
 
 
 url = "https://github.com/mdn/webaudio-examples/blob/main/audio-basics/outfoxing.mp3?raw=true"
-# url = "https://github.com/mdn/webaudio-examples/blob/main/audio-analyser/viper.mp3?raw=true"
-# url = "https://luan.xyz/files/audio/ambient_c_motion.mp3"
-# url = "https://luan.xyz/files/audio/coins.wav"
-# url = "https://luan.xyz/files/audio/laser.wav"
 
 
 def main(page: ft.Page):
@@ -46,7 +43,7 @@ def main(page: ft.Page):
     def get_position(_):
         print("Current position:", audio1.get_current_position())
 
-    audio1 = ft.Audio(
+    audio1 = fa.Audio(
         src=url,
         autoplay=False,
         volume=1,
