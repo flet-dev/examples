@@ -1,11 +1,10 @@
 import plotly.graph_objects as go
 
-import flet
-from flet import Page
+import flet as ft
 from flet.plotly_chart import PlotlyChart
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     x = [
         "day 1",
@@ -57,4 +56,4 @@ def main(page: Page):
     page.add(PlotlyChart(fig, expand=True))
 
 
-flet.app(target=main)
+ft.app(main)

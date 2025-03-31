@@ -2,14 +2,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-import flet
-from flet import Page
+import flet as ft
 from flet.matplotlib_chart import MatplotlibChart
 
 matplotlib.use("svg")
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     N = 45
     x, y = np.random.rand(2, N)
@@ -31,4 +30,4 @@ def main(page: Page):
     page.add(MatplotlibChart(fig, expand=True))
 
 
-flet.app(target=main)
+ft.app(target=main)

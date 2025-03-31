@@ -1,14 +1,13 @@
 import matplotlib
 import matplotlib.pyplot as plt
 
-import flet
-from flet import Page
+import flet as ft
 from flet.matplotlib_chart import MatplotlibChart
 
 matplotlib.use("svg")
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     fig, ax = plt.subplots()
 
@@ -26,4 +25,4 @@ def main(page: Page):
     page.add(MatplotlibChart(fig, expand=True))
 
 
-flet.app(target=main)
+ft.app(main)

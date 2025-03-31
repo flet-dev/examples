@@ -1,19 +1,21 @@
+import os
 import matplotlib
 import mplfinance as mpf
 import pandas as pd
 
-import flet
-from flet import Page
+import flet as ft
 from flet.matplotlib_chart import MatplotlibChart
 
 matplotlib.use("svg")
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
-    daily = pd.read_csv(
-        ".\\playground\\data\\SP500_NOV2019_Hist.csv", index_col=0, parse_dates=True
+    csv_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "assets/SP500_NOV2019_Hist.csv"
     )
+    print(csv_path)
+    daily = pd.read_csv(csv_path, index_col=0, parse_dates=True)
     daily.index.name = "Date"
     daily.shape
     daily.head(3)
@@ -24,4 +26,4 @@ def main(page: Page):
     page.add(MatplotlibChart(fig, expand=True))
 
 
-flet.app(target=main)
+ft.app(target=main)

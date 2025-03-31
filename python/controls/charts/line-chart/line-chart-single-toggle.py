@@ -21,7 +21,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(11, 4),
             ],
             stroke_width=5,
-            color=ft.colors.CYAN,
+            color=ft.Colors.CYAN,
             curved=True,
             stroke_cap_round=True,
         )
@@ -39,7 +39,7 @@ def main(page: ft.Page):
                 ft.LineChartDataPoint(11, 3.44),
             ],
             stroke_width=5,
-            color=ft.colors.CYAN,
+            color=ft.Colors.CYAN,
             curved=True,
             stroke_cap_round=True,
         )
@@ -47,12 +47,12 @@ def main(page: ft.Page):
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.border.all(3, ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE)),
+        border=ft.border.all(3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE)),
         horizontal_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE), width=1
+            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
         ),
         vertical_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.colors.with_opacity(0.2, ft.colors.ON_SURFACE), width=1
+            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -80,7 +80,7 @@ def main(page: ft.Page):
                             "MAR",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -92,7 +92,7 @@ def main(page: ft.Page):
                             "JUN",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -104,7 +104,7 @@ def main(page: ft.Page):
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -112,7 +112,7 @@ def main(page: ft.Page):
             ],
             labels_size=32,
         ),
-        tooltip_bgcolor=ft.colors.with_opacity(0.8, ft.colors.BLUE_GREY),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.8, ft.Colors.BLUE_GREY),
         min_y=0,
         max_y=6,
         min_x=0,

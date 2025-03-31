@@ -1,11 +1,10 @@
 import plotly.graph_objects as go
 
-import flet
-from flet import Page
+import flet as ft
 from flet.plotly_chart import PlotlyChart
 
 
-def main(page: Page):
+def main(page: ft.Page):
 
     labels = ["Oxygen", "Hydrogen", "Carbon_Dioxide", "Nitrogen"]
     values = [4500, 2500, 1053, 500]
@@ -15,4 +14,4 @@ def main(page: Page):
     page.add(PlotlyChart(fig, expand=True))
 
 
-flet.app(target=main)
+ft.app(main)

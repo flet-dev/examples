@@ -6,6 +6,11 @@ class SampleRod(ft.BarChartRod):
         super().__init__()
         self.hovered = hovered
         self.y = y
+        # self.tooltip = f"{self.y}"
+        self.width = 22
+        self.color = ft.Colors.WHITE
+        self.bg_to_y = 20
+        self.bg_color = ft.Colors.GREEN_300
 
     def before_update(self):
         self.to_y = self.y + 0.5 if self.hovered else self.y
@@ -16,13 +21,6 @@ class SampleRod(ft.BarChartRod):
             else ft.BorderSide(width=0, color=ft.Colors.WHITE)
         )
         super().before_update()
-
-    def build(self):
-        self.tooltip = str(self.y)
-        self.width = 22
-        self.color = ft.Colors.WHITE
-        self.bg_to_y = 20
-        self.bg_color = ft.Colors.GREEN_300
 
 
 def main(page: ft.Page):

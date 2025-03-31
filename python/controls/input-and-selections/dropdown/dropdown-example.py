@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     colors = [
         ft.Colors.RED,
-        ft.colors.BLUE,
+        ft.Colors.BLUE,
         ft.Colors.YELLOW,
         ft.Colors.PURPLE,
         ft.Colors.LIME,
