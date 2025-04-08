@@ -1,5 +1,4 @@
-import flet
-from flet import Divider, ListView, Markdown, Page
+import flet as ft
 
 md1 = """
 # Markdown Example
@@ -119,22 +118,23 @@ line 3
 """
 
 
-def main(page: Page):
+def main(page: ft.Page):
     def goto_url(e):
         print("GOTO:", e.data)
         page.launch_url(e.data)
 
     page.add(
-        ListView(
-            [Markdown(md1, on_tap_link=lambda e: page.launch_url(e.data))], expand=True
+        ft.ListView(
+            [ft.Markdown(md1, on_tap_link=lambda e: page.launch_url(e.data))],
+            expand=True,
         ),
-        Divider(),
-        ListView(
+        ft.Divider(),
+        ft.ListView(
             [
-                Markdown(
+                ft.Markdown(
                     md1,
                     selectable=True,
-                    extension_set="gitHubWeb",
+                    extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
                     on_tap_link=goto_url,
                 )
             ],
@@ -143,4 +143,4 @@ def main(page: Page):
     )
 
 
-flet.app(target=main)
+ft.app(target=main)

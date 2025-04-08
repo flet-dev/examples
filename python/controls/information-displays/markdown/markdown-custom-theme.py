@@ -11,9 +11,9 @@ def main(page: ft.Page):
             padding=20,
             theme=ft.Theme(
                 text_theme=ft.TextTheme(
-                    body_medium=ft.TextStyle(color=ft.colors.WHITE),
-                    body_large=ft.TextStyle(color=ft.colors.WHITE),
-                    body_small=ft.TextStyle(color=ft.colors.WHITE),
+                    body_medium=ft.TextStyle(color=ft.Colors.WHITE),
+                    body_large=ft.TextStyle(color=ft.Colors.WHITE),
+                    body_small=ft.TextStyle(color=ft.Colors.WHITE),
                 )
             ),
         )

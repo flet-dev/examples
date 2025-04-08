@@ -153,7 +153,7 @@ Coming soon.
 
 
 def main(page: ft.Page):
-    page.scroll = "auto"
+    page.scroll = ft.ScrollMode.AUTO
 
     page.fonts = {
         "Roboto Mono": "RobotoMono-VariableFont_wght.ttf",
@@ -163,9 +163,11 @@ def main(page: ft.Page):
         ft.Markdown(
             table,
             selectable=True,
-            extension_set="gitHubWeb",
-            code_theme="atom-one-dark",
-            code_style=ft.TextStyle(font_family="Roboto Mono"),
+            extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
+            code_theme=ft.MarkdownCodeTheme.ATOM_ONE_DARK,
+            code_style_sheet=ft.MarkdownStyleSheet(
+                code_text_style=ft.TextStyle(font_family="Roboto Mono")
+            ),
             on_tap_link=lambda e: page.launch_url(e.data),
         )
     )
