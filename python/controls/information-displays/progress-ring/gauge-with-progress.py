@@ -1,13 +1,13 @@
-import flet
-from flet import Container, Page, ProgressRing, Stack, Text, alignment
+import flet as ft
 
-def main(page: Page):
+
+def main(page: ft.Page):
 
     page.add(
-        Stack(
+        ft.Stack(
             [
-                Container(Text("60%"), alignment=alignment.center),
-                ProgressRing(
+                ft.Container(ft.Text("60%"), alignment=ft.alignment.center),
+                ft.ProgressRing(
                     value=0.6,
                     width=100,
                     height=100,
@@ -18,4 +18,5 @@ def main(page: Page):
         )
     )
 
-flet.app(target=main)
+
+ft.app(target=main)
