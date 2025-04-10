@@ -1,8 +1,4 @@
-import logging
-
 import flet as ft
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 def main(page: ft.Page):
@@ -16,7 +12,7 @@ def main(page: ft.Page):
             spans=[
                 ft.TextSpan(
                     "here goes italic",
-                    ft.TextStyle(italic=True, size=20, color=ft.colors.GREEN),
+                    ft.TextStyle(italic=True, size=20, color=ft.Colors.GREEN),
                     spans=[
                         ft.TextSpan(
                             "bold and italic",
@@ -47,7 +43,7 @@ def main(page: ft.Page):
                     "underlined red wavy",
                     ft.TextStyle(
                         decoration=ft.TextDecoration.UNDERLINE,
-                        decoration_color=ft.colors.RED,
+                        decoration_color=ft.Colors.RED,
                         decoration_style=ft.TextDecorationStyle.WAVY,
                     ),
                     on_enter=lambda e: print(f"Entered span: {e.control.uid}"),
@@ -81,7 +77,7 @@ def main(page: ft.Page):
     )
 
     def highlight_link(e):
-        e.control.style.color = ft.colors.BLUE
+        e.control.style.color = ft.Colors.BLUE
         e.control.update()
 
     def unhighlight_link(e):
@@ -105,4 +101,3 @@ def main(page: ft.Page):
 
 
 ft.app(main)
-# ft.app(main, port=8550, view=ft.WEB_BROWSER)

@@ -12,7 +12,7 @@ def main(page: ft.Page):
                         weight=ft.FontWeight.BOLD,
                         foreground=ft.Paint(
                             gradient=ft.PaintLinearGradient(
-                                (0, 20), (150, 20), [ft.colors.RED, ft.colors.YELLOW]
+                                (0, 20), (150, 20), [ft.Colors.RED, ft.Colors.YELLOW]
                             )
                         ),
                     ),

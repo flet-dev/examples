@@ -18,9 +18,10 @@ def main(page: ft.Page):
         icon=ft.Icons.FORMAT_SIZE,
         hint_text="Type your favorite color",
         helper_text="You can type only one color",
-        counter_text="0 symbols typed",
+        counter_text="{value_length}/{max_length} chars used",
         prefix_icon=ft.Icons.COLOR_LENS,
         suffix_text="...is your color",
+        max_length=20,
     )
     page.add(pr, sf, ps, icon, b, t)
 
