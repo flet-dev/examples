@@ -1,5 +1,5 @@
 import flet as ft
-import flet.ads as ads
+import flet_ads as ads
 
 
 def main(page: ft.Page):
@@ -50,15 +50,16 @@ def main(page: ft.Page):
                 ),
                 width=320,
                 height=50,
-                bgcolor=ft.colors.TRANSPARENT,
+                bgcolor=ft.Colors.TRANSPARENT,
             )
         )
 
-    page.overlay.append(iad := get_new_interstitial_ad())
+    iad = get_new_interstitial_ad()
+    page.overlay.append(iad)
     page.appbar = ft.AppBar(
         adaptive=True,
         title=ft.Text("Mobile Ads Playground"),
-        bgcolor=ft.colors.LIGHT_BLUE_300,
+        bgcolor=ft.Colors.LIGHT_BLUE_300,
     )
     page.add(
         ft.OutlinedButton("Show InterstitialAd", on_click=lambda e: iad.show()),
