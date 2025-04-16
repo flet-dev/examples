@@ -45,9 +45,11 @@ def main(page: ft.Page):
 
     def get_position(_):
         print("Current position:", audio1.get_current_position())
-    
+
     def position_changed(e):
-        s.value=???
+        print(f"e: {e}")
+        print(f"e.data: {e.data}")
+        # s.value=???
 
     audio1 = ft.Audio(
         src=url,

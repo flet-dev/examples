@@ -59,7 +59,7 @@ def main(page: ft.Page):
     page.appbar = ft.AppBar(
         adaptive=True,
         title=ft.Text("Mobile Ads Playground"),
-        bgcolor=ft.Colors.LIGHT_BLUE_300,
+        bgcolor=Colors.LIGHT_BLUE_300,
     )
     page.add(
         ft.OutlinedButton("Show InterstitialAd", on_click=lambda e: iad.show()),
