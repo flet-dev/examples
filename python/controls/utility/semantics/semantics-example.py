@@ -18,7 +18,7 @@ def main(page: ft.Page):
         ft.Column(
             [
                 ft.Semantics(
-                    tf,
+                    content=tf,
                     label="Input your occupation",
                     on_did_gain_accessibility_focus=on_focus,
                     on_did_lose_accessibility_focus=on_lose_focus,
