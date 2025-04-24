@@ -40,7 +40,7 @@ class ExamplesView(ft.Column):
                                             src="github-mark.svg",
                                             width=24,
                                             height=24,
-                                            color=ft.Colors.ON_SURFACE,
+                                            color=ft.Colors.ON_SURFACE_VARIANT,
                                         ),
                                         url=f"https://github.com/flet-dev/examples/blob/main/python/apps/controls-gallery/examples/{example.file_name}",
                                         url_target=ft.UrlTarget.BLANK,
