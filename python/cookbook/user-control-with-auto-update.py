@@ -1,19 +1,16 @@
 import flet as ft
 
 
-@ft.control
+@ft.control(isolated=True)
 class MyPanel(ft.Container):
 
     # control properties
     color: ft.OptionalColorValue = None
     greeting: str = "Hi"
 
-    # sets control boundaries for auto-update
-    def is_isolated(self):
-        return True
-
     # called only once
     def init(self):
+        print(self.page.platform)
         self.content = ft.Column(
             [
                 ft.ElevatedButton(
