@@ -5,9 +5,9 @@ def main(page: ft.Page):
     page.title = "Basic elevated buttons"
 
     page.add(
-        ft.ElevatedButton(text="Elevated button"),
+        ft.ElevatedButton("Elevated button"),
         ft.Button("Disabled button", disabled=True),
     )
 
 
-ft.app(main)
+ft.run(main)

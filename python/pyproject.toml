@@ -1,20 +1,24 @@
-[tool.poetry]
+[project]
 name = "flet-examples"
 version = "0.1.0"
 description = "Sample apps for Flet"
-authors = ["Appveyor Systems Inc. <hello@flet.dev>"]
 license = "Apache-2.0"
 readme = "README.md"
+dependencies = [
+  "flet",
+  "flet-contrib"
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-flet = "^0.27.2"
-flet-contrib = "^2023.8.9"
+[tool.uv]
+dev-dependencies = [
+    "flet",
+    "flet-cli",
+    "flet-desktop",
+    "flet-web",
+]
 
-[tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-flet = {extras = ["all"], version = "^0.27.2"}
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv.sources]
+flet = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet", rev = "v1" }
+flet-cli = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-cli", rev = "v1" }
+flet-desktop = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-desktop", rev = "v1" }
+flet-web = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-web", rev = "v1" }
