@@ -67,7 +67,7 @@ class PropertiesList(ft.ListView):
         switch = ft.Switch(
             value=switch_value,
             on_change=switch_changed,
-            tooltip=ft.Tooltip(f"Set/Unset {property["name"]} property"),
+            tooltip=ft.Tooltip(f"Set/Unset {property['name']} property"),
         )
 
         return ft.ExpansionTile(
@@ -126,7 +126,7 @@ class PropertiesList(ft.ListView):
                         list_items.append(
                             ft.ExpansionTile(
                                 bgcolor=ft.Colors.OUTLINE_VARIANT,
-                                title=ft.Text(f"{property["name"]}{n+1}"),
+                                title=ft.Text(f"{property['name']}{n+1}"),
                                 controls=[
                                     PropertiesList(
                                         properties=property["properties"],
@@ -140,7 +140,7 @@ class PropertiesList(ft.ListView):
                                                 ft.Icons.DELETE,
                                                 on_click=delete_item,
                                                 tooltip=ft.Tooltip(
-                                                    f"Delete {property["name"]}{n+1}"
+                                                    f"Delete {property['name']}{n+1}"
                                                 ),
                                                 data=n,
                                             )
