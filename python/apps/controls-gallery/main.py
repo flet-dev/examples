@@ -61,4 +61,4 @@ def main(page: ft.Page):
     page.go(page.route)
 
 
-ft.app(main)
+ft.run(main)
