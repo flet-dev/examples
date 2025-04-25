@@ -12,7 +12,7 @@ def example():
             items.append(
                 ft.Container(
                     content=ft.Text(value=str(i)),
-                    alignment=ft.alignment.center,
+                    alignment=ft.Alignment.center(),
                     width=50,
                     height=50,
                     bgcolor=ft.Colors.AMBER_500,

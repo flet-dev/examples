@@ -102,7 +102,7 @@ def example():
             swatch_colors.controls.append(
                 ft.Container(
                     height=50,
-                    alignment=ft.alignment.center,
+                    alignment=ft.Alignment.center(),
                     bgcolor=color.name,
                     on_click=copy_to_clipboard,
                     content=ft.Text(color.display_name, weight=ft.FontWeight.W_500),

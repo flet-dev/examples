@@ -1,5 +1,6 @@
 import logging
 import os
+
 import flet as ft
 import flet.version
 
@@ -11,6 +12,7 @@ gallery = GalleryData()
 logging.basicConfig(level=logging.DEBUG)
 
 ft.UpdateBehavior.disable_auto_update()
+
 
 def main(page: ft.Page):
     page.title = "Flet controls gallery"
@@ -54,12 +56,13 @@ def main(page: ft.Page):
     )
 
     page.theme_mode = ft.ThemeMode.LIGHT
-    #page.on_error = lambda e: print("Page error:", e.data)
+    # page.on_error = lambda e: print("Page error:", e.data)
 
     page.add(gallery_view)
     page.on_route_change = route_change
     print(f"Initial route: {page.route}")
     page.go(page.route)
+
 
 # os.environ["FLET_PLATFORM"] = "macos"
 # ft.app(main, view=ft.AppView.FLET_APP, port=8550)

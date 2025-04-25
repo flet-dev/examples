@@ -12,7 +12,7 @@ def example():
         scroll=ft.ScrollMode.ALWAYS,
     )
     for i in range(0, 100):
-        cl.controls.append(ft.Text(f"Text line {i}", key=str(i)))
+        cl.controls.append(ft.Text(f"Text line {i}", scroll_key=str(i)))
 
     def scroll_to_offset(e):
         cl.scroll_to(offset=100, duration=1000)

@@ -16,7 +16,7 @@ def example():
                 ),
                 blend_mode=ft.BlendMode.MULTIPLY,
                 shader=ft.RadialGradient(
-                    center=ft.alignment.center,
+                    center=ft.Alignment.center(),
                     radius=2.0,
                     colors=[ft.Colors.WHITE, ft.Colors.PINK],
                     tile_mode=ft.GradientTileMode.CLAMP,

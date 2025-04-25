@@ -32,7 +32,7 @@ def example():
         on_scroll=on_scroll,
     )
     for i in range(0, 50):
-        cl.controls.append(ft.Text(f"Text line {s.i}", key=str(s.i)))
+        cl.controls.append(ft.Text(f"Text line {s.i}", scroll_key=str(s.i)))
         s.i += 1
 
     return ft.Container(cl, border=ft.border.all(1))

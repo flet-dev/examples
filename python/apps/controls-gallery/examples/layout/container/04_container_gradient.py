@@ -9,7 +9,7 @@ def example():
 
     container_1 = ft.Container(
         content=ft.Text("LinearGradient"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         gradient=ft.LinearGradient(
             begin=ft.alignment.top_center,
             end=ft.alignment.bottom_center,
@@ -22,7 +22,7 @@ def example():
 
     container_2 = ft.Container(
         content=ft.Text("RadialGradient"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         gradient=ft.RadialGradient(
             colors=[ft.Colors.YELLOW, ft.Colors.BLUE],
         ),
@@ -33,9 +33,9 @@ def example():
 
     container_3 = ft.Container(
         content=ft.Text("SweepGradient"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         gradient=ft.SweepGradient(
-            center=ft.alignment.center,
+            center=ft.Alignment.center(),
             start_angle=0.0,
             end_angle=math.pi * 2,
             colors=[ft.Colors.YELLOW, ft.Colors.BLUE],

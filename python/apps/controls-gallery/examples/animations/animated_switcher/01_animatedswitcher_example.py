@@ -6,14 +6,14 @@ name = "Animated switching between two containers with scale effect"
 def example():
     c1 = ft.Container(
         ft.Text("Hello!", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         width=200,
         height=200,
         bgcolor=ft.Colors.GREEN,
     )
     c2 = ft.Container(
         ft.Text("Bye!", size=50),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         width=200,
         height=200,
         bgcolor=ft.Colors.YELLOW,

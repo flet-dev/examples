@@ -10,7 +10,7 @@ def example():
     menubar = ft.MenuBar(
         expand=True,
         style=ft.MenuStyle(
-            alignment=ft.alignment.top_left,
+            alignment=ft.Alignment.top_left(),
             bgcolor=ft.Colors.RED_100,
             mouse_cursor={
                 ft.ControlState.HOVERED: ft.MouseCursor.WAIT,

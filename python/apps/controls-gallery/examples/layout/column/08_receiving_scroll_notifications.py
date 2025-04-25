@@ -17,7 +17,7 @@ def example():
         on_scroll=on_column_scroll,
     )
     for i in range(0, 50):
-        cl.controls.append(ft.Text(f"Text line {i}", key=str(i)))
+        cl.controls.append(ft.Text(f"Text line {i}", scroll_key=str(i)))
 
     notification_text = ft.Text()
 

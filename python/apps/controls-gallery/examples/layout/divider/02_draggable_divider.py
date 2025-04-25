@@ -15,7 +15,7 @@ def example():
 
     c = ft.Container(
         bgcolor=ft.Colors.AMBER,
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         height=100,
         # expand=1,
     )
@@ -29,7 +29,7 @@ def example():
                 on_hover=show_draggable_cursor,
             ),
             ft.Container(
-                bgcolor=ft.Colors.PINK, alignment=ft.alignment.center, expand=1
+                bgcolor=ft.Colors.PINK, alignment=ft.Alignment.center(), expand=1
             ),
         ],
         spacing=0,
