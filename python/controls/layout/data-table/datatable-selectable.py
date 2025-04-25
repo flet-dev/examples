@@ -66,7 +66,7 @@ def main(page: ft.Page):
         horizontal_lines=ft.border.BorderSide(1, ft.Colors.GREEN_600),
         sort_column_index=0,
         sort_ascending=True,
-        heading_row_color=ft.colors.BLACK12,
+        heading_row_color=ft.Colors.BLACK12,
         heading_row_height=100,
         data_row_color={ft.ControlState.HOVERED: "0x30FF0000"},
         show_checkbox_column=True,
