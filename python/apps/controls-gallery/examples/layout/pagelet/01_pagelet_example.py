@@ -14,7 +14,7 @@ def example():
         ),
         content=ft.Text("Pagelet body"),
         bgcolor=ft.Colors.AMBER_100,
-        bottom_app_bar=ft.BottomAppBar(
+        bottom_appbar=ft.BottomAppBar(
             bgcolor=ft.Colors.BLUE,
             shape=ft.NotchShape.CIRCULAR,
             content=ft.Row(

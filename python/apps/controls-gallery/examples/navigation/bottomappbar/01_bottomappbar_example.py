@@ -6,7 +6,7 @@ name = "BottomAppBar Example"
 def example():
 
     pagelet = ft.Pagelet(
-        bottom_app_bar=ft.BottomAppBar(
+        bottom_appbar=ft.BottomAppBar(
             bgcolor=ft.Colors.BLUE,
             shape=ft.NotchShape.CIRCULAR,
             content=ft.Row(

@@ -11,7 +11,7 @@ def example():
             leading_width=40,
             title=ft.Text("AppBar Title"),
             center_title=False,
-            bgcolor=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.PRIMARY_CONTAINER,
             actions=[
                 ft.IconButton(ft.Icons.WB_SUNNY_OUTLINED),
                 ft.IconButton(ft.Icons.FILTER_3),
@@ -28,7 +28,7 @@ def example():
             ],
         ),
         content=ft.Container(),
-        height=200
+        height=200,
     )
 
     return pagelet
