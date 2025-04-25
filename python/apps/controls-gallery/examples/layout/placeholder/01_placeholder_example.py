@@ -5,5 +5,5 @@ name = "Placeholder example"
 
 def example():
     return ft.Placeholder(
-        expand=True, color=ft.colors.random()
+        expand=True, color=ft.Colors.random()
     )  # random material color

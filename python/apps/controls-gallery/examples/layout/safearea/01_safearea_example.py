@@ -12,7 +12,8 @@ def example():
 
     class Example(ft.SafeArea):
         def __init__(self):
-            super().__init__(ft.Container())
+            # super().__init__(ft.Container())
+            super().__init__(content=ft.Container())
             self.counter = ft.Text("0", size=50)
             self.content = ft.Container(
                 content=self.counter,
