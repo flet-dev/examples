@@ -9,17 +9,17 @@ def example():
         animation_duration=300,
         tabs=[
             ft.Tab(
-                text="Tab 1",
+                label="Tab 1",
                 content=ft.Container(
                     content=ft.Text("This is Tab 1"), alignment=ft.Alignment.center()
                 ),
             ),
             ft.Tab(
-                tab_content=ft.Icon(ft.Icons.SEARCH),
+                label=ft.Icon(ft.Icons.SEARCH),
                 content=ft.Text("This is Tab 2"),
             ),
             ft.Tab(
-                text="Tab 3",
+                label="Tab 3",
                 icon=ft.Icons.SETTINGS,
                 content=ft.Text("This is Tab 3"),
             ),
