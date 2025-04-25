@@ -23,7 +23,7 @@ def example():
                         ft.TextStyle(italic=True, color=ft.Colors.GREEN, size=20),
                     )
                 ],
-                alignment=ft.alignment.top_center,
+                alignment=ft.Alignment.top_center(),
                 rotate=math.pi * 0.15,
             ),
             cv.Circle(400, 100, 2, ft.Paint(color=ft.Colors.RED)),

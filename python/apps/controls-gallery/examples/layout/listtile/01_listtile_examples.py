@@ -59,6 +59,6 @@ def example():
                 ],
                 spacing=0,
             ),
-            padding=ft.padding.symmetric(vertical=10),
+            padding=ft.Padding.symmetric(vertical=10),
         )
     )

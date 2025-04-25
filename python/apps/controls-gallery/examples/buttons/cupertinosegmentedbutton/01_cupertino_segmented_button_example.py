@@ -12,11 +12,11 @@ def example():
         controls=[
             ft.Text("One"),
             ft.Container(
-                padding=ft.padding.symmetric(0, 30),
+                padding=ft.Padding.symmetric(0, 30),
                 content=ft.Text("Two"),
             ),
             ft.Container(
-                padding=ft.padding.symmetric(0, 10),
+                padding=ft.Padding.symmetric(0, 10),
                 content=ft.Text("Three"),
             ),
         ],

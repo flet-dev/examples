@@ -8,7 +8,7 @@ def example():
         width=200,
         height=200,
         bgcolor="red",
-        animate=ft.animation.Animation(1000, "bounceOut"),
+        animate=ft.Animation(1000, "bounceOut"),
     )
 
     def animate_container(e):

@@ -36,7 +36,7 @@ def example():
                         timer_picker,
                         height=216,
                         bgcolor=ft.CupertinoColors.SYSTEM_BACKGROUND,
-                        padding=ft.padding.only(top=6),
+                        padding=ft.Padding.only(top=6),
                     )
                 ),
             ),
