@@ -60,7 +60,7 @@ def example():
                 ],
             ),
         ],
-        border=ft.border.all(1, ft.Colors.GREY_400),
+        border=ft.Border.all(1, ft.Colors.GREY_400),
         left_axis=ft.ChartAxis(
             labels_size=40, title=ft.Text("Fruit supply"), title_size=40
         ),

@@ -16,7 +16,7 @@ def example():
         cl.controls.append(ft.Text(f"Text line {i}"))
 
     c = ft.Container(
-        content=cl, height=300, width=300, border=ft.border.all(1, "black")
+        content=cl, height=300, width=300, border=ft.Border.all(1, "black")
     )
 
     c.theme = ft.Theme(

@@ -21,4 +21,4 @@ def example():
 
     notification_text = ft.Text()
 
-    return ft.Column([ft.Container(cl, border=ft.border.all(1)), notification_text])
+    return ft.Column([ft.Container(cl, border=ft.Border.all(1)), notification_text])

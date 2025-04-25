@@ -47,7 +47,7 @@ def example():
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.border.all(3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE)),
+        border=ft.Border.all(3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE)),
         horizontal_grid_lines=ft.ChartGridLines(
             interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
         ),

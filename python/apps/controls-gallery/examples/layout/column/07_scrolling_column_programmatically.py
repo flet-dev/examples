@@ -34,7 +34,7 @@ def example():
 
     return ft.Column(
         [
-            ft.Container(cl, border=ft.border.all(1)),
+            ft.Container(cl, border=ft.Border.all(1)),
             ft.ElevatedButton("Scroll to offset 100", on_click=scroll_to_offset),
             ft.Row(
                 [

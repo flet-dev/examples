@@ -2,8 +2,9 @@ import flet as ft
 
 name = "GridView Example"
 
+
 def example():
-    
+
     images = ft.GridView(
         height=400,
         width=400,
@@ -20,7 +21,7 @@ def example():
                 src=f"https://picsum.photos/150/150?{i}",
                 fit=ft.ImageFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
-                border_radius=ft.border_radius.all(10),
+                border_radius=ft.BorderRadius.all(10),
             )
         )
 

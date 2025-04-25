@@ -8,7 +8,7 @@ def example():
     return ft.DataTable(
         width=700,
         bgcolor="yellow",
-        border=ft.border.all(2, "red"),
+        border=ft.Border.all(2, "red"),
         border_radius=10,
         vertical_lines=ft.border.BorderSide(3, "blue"),
         horizontal_lines=ft.border.BorderSide(1, "green"),

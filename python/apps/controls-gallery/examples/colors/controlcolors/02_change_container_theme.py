@@ -15,7 +15,7 @@ def example():
     container = ft.Container(
         width=200,
         height=200,
-        border=ft.border.all(1, ft.Colors.BLACK),
+        border=ft.Border.all(1, ft.Colors.BLACK),
         content=ft.FilledButton("Primary color"),
     )
 

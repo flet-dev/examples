@@ -23,7 +23,7 @@ def example():
             ft.Icon(icon),
             width=size,
             height=size,
-            border=ft.border.all(1, ft.Colors.BROWN),
+            border=ft.Border.all(1, ft.Colors.BROWN),
             border_radius=size / 2,
             bgcolor=ft.Colors.WHITE,
         )

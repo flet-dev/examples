@@ -55,7 +55,7 @@ def example():
 
     return ft.Column(
         [
-            ft.Container(cl, border=ft.border.all(1)),
+            ft.Container(cl, border=ft.Border.all(1)),
             ft.Column(
                 [
                     ft.Text("Scroll to:"),

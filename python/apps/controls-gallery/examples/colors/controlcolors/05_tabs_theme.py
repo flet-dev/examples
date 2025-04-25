@@ -31,7 +31,7 @@ def example():
         content=t,
         height=300,
         width=300,
-        border=ft.border.all(1, "black"),
+        border=ft.Border.all(1, "black"),
         theme=ft.Theme(
             tabs_theme=ft.TabsTheme(
                 divider_color=ft.Colors.BLUE,

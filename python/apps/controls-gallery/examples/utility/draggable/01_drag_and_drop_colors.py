@@ -5,7 +5,7 @@ name = "Drag and drop colors"
 
 def example():
     def drag_will_accept(e):
-        e.control.content.border = ft.border.all(
+        e.control.content.border = ft.Border.all(
             2, ft.Colors.BLACK45 if e.data == "true" else ft.Colors.RED
         )
         e.control.update()

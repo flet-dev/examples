@@ -2,6 +2,7 @@ import flet as ft
 
 name = "Images Example"
 
+
 def example():
     img = ft.Image(
         src="logo.svg",
@@ -19,15 +20,15 @@ def example():
                 height=200,
                 fit=ft.ImageFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
-                border_radius=ft.border_radius.all(10),
+                border_radius=ft.BorderRadius.all(10),
             )
         )
-    
+
     return ft.Column(
-        #width=400,
-        #height=400, 
+        # width=400,
+        # height=400,
         controls=[
-        img,
-        images,
-        
-    ])
+            img,
+            images,
+        ]
+    )

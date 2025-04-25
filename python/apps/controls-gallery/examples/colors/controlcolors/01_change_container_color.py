@@ -12,7 +12,7 @@ def example():
         new_color.update()
 
     container = ft.Container(
-        width=200, height=200, border=ft.border.all(1, ft.Colors.BLACK)
+        width=200, height=200, border=ft.Border.all(1, ft.Colors.BLACK)
     )
     new_color = ft.TextField(
         label="Hex value in format #AARRGGBB or #RRGGBB", width=500
