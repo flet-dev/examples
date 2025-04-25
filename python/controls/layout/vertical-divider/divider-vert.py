@@ -17,7 +17,7 @@ def main(page: ft.Page):
                     alignment=ft.alignment.center,
                     expand=True,
                 ),
-                ft.VerticalDivider(width=1, color="white"),
+                ft.VerticalDivider(width=1, color=ft.Colors.WHITE),
                 ft.Container(
                     bgcolor=ft.Colors.BLUE_300,
                     alignment=ft.alignment.center,

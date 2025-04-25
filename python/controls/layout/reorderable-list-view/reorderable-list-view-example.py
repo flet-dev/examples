@@ -3,6 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "ReorderableListView Demo"
+    page.theme_mode = ft.ThemeMode.DARK
 
     # the primary color is the color of the reorder handle
     page.theme = page.dark_theme = ft.Theme(
