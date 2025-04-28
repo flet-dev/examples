@@ -5,6 +5,7 @@ name = "NavigationDrawer example"
 
 def example():
     end_drawer = ft.NavigationDrawer(
+        position=ft.NavigationDrawerPosition.END,
         controls=[
             ft.NavigationDrawerDestination(
                 icon=ft.Icons.ADD_TO_HOME_SCREEN_SHARP, label="Item 1"
@@ -23,14 +24,10 @@ def example():
     )
 
     def open_end_drawer(e):
-        e.control.page.end_drawer = end_drawer
-        end_drawer.open = True
-        e.control.page.update()
+        e.control.page.show_dialog(end_drawer)
 
     def open_drawer(e):
-        e.control.page.drawer = drawer
-        drawer.open = True
-        e.control.page.update()
+        e.control.page.show_dialog(drawer)
 
     return ft.Column(
         [
