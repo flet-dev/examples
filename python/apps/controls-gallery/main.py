@@ -11,7 +11,7 @@ gallery = GalleryData()
 
 logging.basicConfig(level=logging.DEBUG)
 
-ft.UpdateBehavior.disable_auto_update()
+# ft.UpdateBehavior.disable_auto_update()
 
 
 def main(page: ft.Page):

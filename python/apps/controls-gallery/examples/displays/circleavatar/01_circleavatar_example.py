@@ -32,7 +32,7 @@ def example():
             ),
             ft.Container(
                 content=ft.CircleAvatar(bgcolor=ft.Colors.GREEN, radius=5),
-                alignment=ft.alignment.bottom_left,
+                alignment=ft.Alignment.bottom_left(),
             ),
         ],
         width=40,

@@ -19,9 +19,9 @@ def example():
             await asyncio.sleep(0.1)
             pb.update()
         t.value = "Click the button..."
-        t.update()
+        # t.update()
         b.disabled = False
-        b.update()
+        # b.update()
 
     b = ft.FilledTonalButton("Start", on_click=button_clicked)
 
