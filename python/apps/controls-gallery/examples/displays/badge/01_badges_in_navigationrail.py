@@ -9,7 +9,7 @@ def example():
         label_type=ft.NavigationRailLabelType.ALL,
         min_width=100,
         min_extended_width=400,
-        leading=ft.FloatingActionButton(icon=ft.Icons.CREATE, text="Add"),
+        leading=ft.FloatingActionButton(icon=ft.Icons.CREATE, content="Add"),
         group_alignment=-0.9,
         destinations=[
             ft.NavigationRailDestination(
@@ -17,13 +17,13 @@ def example():
                 label="Calls",
             ),
             ft.NavigationRailDestination(
-                icon=ft.Icon(ft.Icons.MAIL, badge="5"),
+                icon=ft.Icon(ft.Icons.MAIL, badge=ft.Badge()),
                 label="Mail",
             ),
             ft.NavigationRailDestination(
                 icon=ft.Icons.SETTINGS_OUTLINED,
                 selected_icon=ft.Icon(ft.Icons.SETTINGS),
-                label_content=ft.Text("Settings"),
+                label=ft.Text("Settings"),
             ),
         ],
         on_change=lambda e: print("Selected destination:", e.control.selected_index),
