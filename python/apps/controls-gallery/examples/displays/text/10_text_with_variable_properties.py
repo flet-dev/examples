@@ -12,7 +12,7 @@ def example():
         italic=True,
         selectable=True,
         text_align=ft.TextAlign.CENTER,
-        badge=ft.Badge(text="Badge on the Text"),
+        badge=ft.Badge(label="Badge on the Text"),
         spans=[
             ft.TextSpan(text="Span1", style=ft.TextStyle(size=30)),
             ft.TextSpan(
@@ -111,7 +111,11 @@ def example():
     ]
 
     badge_properties_list = [
-        {"name": "text", "value_type": "str", "description": "Description."},
+        {
+            "name": "label",
+            "value_type": "str",
+            "description": "Description.",
+        },
         {
             "name": "bgcolor",
             "value_type": "enum",
@@ -121,7 +125,11 @@ def example():
     ]
 
     properties_list = [
-        {"name": "value", "value_type": "str", "description": "The text displayed."},
+        {
+            "name": "value",
+            "value_type": "str",
+            "description": "The text displayed.",
+        },
         {
             "name": "italic",
             "value_type": "bool",

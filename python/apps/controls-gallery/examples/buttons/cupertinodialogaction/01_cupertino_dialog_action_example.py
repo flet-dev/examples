@@ -5,8 +5,7 @@ name = "CupertinoDialogAction example"
 
 def example():
     def dismiss_dialog(e):
-        cupertino_alert_dialog.open = False
-        e.control.page.update()
+        e.control.page.pop_dialog()
 
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
@@ -20,8 +19,6 @@ def example():
     )
 
     def open_dlg(e):
-        e.control.page.overlay.append(cupertino_alert_dialog)
-        cupertino_alert_dialog.open = True
-        e.control.page.update()
+        e.control.page.show_dialog(cupertino_alert_dialog)
 
     return ft.ElevatedButton("Open CupertinoAlertDialog", on_click=open_dlg)

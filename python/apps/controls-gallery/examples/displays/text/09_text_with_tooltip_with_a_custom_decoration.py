@@ -17,7 +17,9 @@ def example():
             text_style=ft.TextStyle(size=20, color=ft.Colors.WHITE),
             gradient=ft.LinearGradient(
                 begin=ft.Alignment.top_left(),
-                end=ft.alignment.Alignment(0.8, 1),
+                end=ft.Alignment(0.8, 1),
+                # end=ft.Alignment.bottom_left(),
+                # colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
                 colors=[
                     "0xff1f005c",
                     "0xff5b0060",

@@ -6,10 +6,10 @@ name = "CupertinoActionSheetAction Example"
 def example():
 
     def show_cupertino_action_sheet(e):
-        e.control.page.open(bottom_sheet)
+        e.control.page.show_dialog(bottom_sheet)
 
     def close_cupertino_action_sheet(e):
-        e.control.page.close(bottom_sheet)
+        e.control.page.pop_dialog()
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Text("Title"),
@@ -39,6 +39,6 @@ def example():
     bottom_sheet = ft.CupertinoBottomSheet(action_sheet)
 
     return ft.OutlinedButton(
-        "Open CupertinoBottomSheet containing CupertinoActionSheet",
+        content="Open CupertinoBottomSheet containing CupertinoActionSheet",
         on_click=show_cupertino_action_sheet,
     )
