@@ -6,10 +6,12 @@ name = "CupertinoBottomSheet with CupertinoActionSheet Example"
 def example():
 
     def show_cupertino_action_sheet(e):
-        e.control.page.open(cupertino_bottom_sheet)
+        # e.control.page.open(cupertino_bottom_sheet)
+        e.control.page.show_dialog(cupertino_bottom_sheet)
 
     def close_cupertino_action_sheet(e):
-        e.control.page.close(cupertino_bottom_sheet)
+        # e.control.page.close(cupertino_bottom_sheet)
+        e.control.page.pop_dialog()
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Text("Title"),
@@ -21,7 +23,7 @@ def example():
         actions=[
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Default Action"),
-                is_default_action=True,
+                default=True,
                 on_click=lambda e: print("Default clicked"),
             ),
             ft.CupertinoActionSheetAction(
@@ -30,7 +32,7 @@ def example():
             ),
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Destructive Action"),
-                is_destructive_action=True,
+                destructive=True,
                 on_click=lambda e: print("Destructive Action clicked"),
             ),
         ],
