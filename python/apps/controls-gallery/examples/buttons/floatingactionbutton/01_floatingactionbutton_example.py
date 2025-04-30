@@ -17,23 +17,21 @@ def example():
                 data=0,
                 on_click=fab_pressed,
             )
-            self.page.update()
 
         # happens when example is removed from the page (when user chooses different control group on the navigation rail)
         def will_unmount(self):
             print("Will unmount happens")
             self.page.floating_action_button = None
-            self.page.update()
+            self.page.pop_dialog()
 
     def fab_pressed(e):
         fab_example.content.controls.append(
             ft.ListTile(title=ft.Text(f"Tile {e.control.data}"))
         )
-        e.control.page.open(
+        e.control.page.show_dialog(
             ft.SnackBar(ft.Text("Tile was added successfully!"), open=True)
         )
         e.control.data += 1
-        fab_example.update()
 
     fab_example = Example()
 
