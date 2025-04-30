@@ -5,8 +5,7 @@ name = "Banner with leading icon and actions"
 
 def example():
     def close_banner(e):
-        banner.open = False
-        e.control.page.update()
+        e.control.page.pop_dialog()
 
     banner = ft.Banner(
         bgcolor=ft.Colors.AMBER_100,
@@ -22,8 +21,6 @@ def example():
     )
 
     def show_banner_click(e):
-        e.control.page.overlay.append(banner)
-        banner.open = True
-        e.control.page.update()
+        e.control.page.show_dialog(banner)
 
     return ft.ElevatedButton("Show Banner", on_click=show_banner_click)
