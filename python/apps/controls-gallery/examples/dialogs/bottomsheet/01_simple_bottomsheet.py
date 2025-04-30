@@ -7,7 +7,7 @@ def example():
     class Example(ft.ElevatedButton):
         def __init__(self):
             super().__init__()
-            self.text = "Display bottom sheet"
+            self.content = "Display bottom sheet"
             self.on_click = self.show_bs
             self.bs = ft.BottomSheet(
                 ft.Container(
@@ -30,22 +30,10 @@ def example():
             print("Dismissed!")
 
         def show_bs(self, e):
-            self.bs.open = True
-            self.bs.update()
+            self.page.show_dialog(self.bs)
 
         def close_bs(self, e):
-            self.bs.open = False
-            self.bs.update()
-
-        # happens when example is added to the page (when user chooses the BottomSheet control from the grid)
-        def did_mount(self):
-            self.page.overlay.append(self.bs)
-            self.page.update()
-
-        # happens when example is removed from the page (when user chooses different control group on the navigation rail)
-        def will_unmount(self):
-            self.page.overlay.remove(self.bs)
-            self.page.update()
+            self.page.pop_dialog()
 
     bs_example = Example()
 
