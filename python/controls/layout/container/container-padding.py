@@ -8,7 +8,7 @@ def main(page: ft.Page):
     c1 = ft.Container(
         content=ft.ElevatedButton("container_1"),
         bgcolor=ft.Colors.AMBER,
-        padding=ft.padding.all(10),
+        padding=ft.Padding.all(10),
         width=150,
         height=150,
     )
@@ -16,7 +16,7 @@ def main(page: ft.Page):
     c2 = ft.Container(
         content=ft.ElevatedButton("container_2"),
         bgcolor=ft.Colors.AMBER,
-        padding=ft.padding.all(20),
+        padding=ft.Padding.all(20),
         width=150,
         height=150,
     )

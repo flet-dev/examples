@@ -24,7 +24,7 @@ from flet import (
 def main(page: Page):
     page.title = "Form Example"
     page.theme_mode = "light"
-    page.padding = padding.all(20)
+    page.padding = Padding.all(20)
 
     results = Column(scroll="always", height=100)
 
@@ -81,7 +81,7 @@ def main(page: Page):
             dropdown.Option("c", "Item C"),
         ],
         value="b",
-        content_padding=padding.all(5),
+        content_padding=Padding.all(5),
         height=35,
     )
 

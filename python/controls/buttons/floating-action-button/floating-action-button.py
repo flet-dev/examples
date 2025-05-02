@@ -23,7 +23,7 @@ def main(page: ft.Page):
                 on_click=lambda x: print(x.control.title.value + " was clicked!"),
             )
         )
-        page.open(ft.SnackBar(ft.Text("Tile was added successfully!")))
+        page.show_dialog(ft.SnackBar(ft.Text("Tile was added successfully!")))
         count += 1
 
     page.floating_action_button = ft.FloatingActionButton(
@@ -41,7 +41,7 @@ def main(page: ft.Page):
                 alignment=ft.MainAxisAlignment.CENTER,
             ),
             bgcolor=ft.Colors.BLUE,
-            padding=ft.padding.all(20),
+            padding=ft.Padding.all(20),
         ),
         ft.Text("Press the FAB to add a tile!"),
     )

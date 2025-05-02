@@ -25,7 +25,7 @@ def main(page: ft.Page):
                     alignment=ft.MainAxisAlignment.CENTER,
                     spacing=5,
                 ),
-                padding=ft.padding.all(10),
+                padding=ft.Padding.all(10),
             ),
         ),
     )

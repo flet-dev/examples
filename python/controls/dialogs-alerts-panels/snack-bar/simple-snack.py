@@ -6,7 +6,7 @@ def main(page: ft.Page):
 
     def on_click(e):
         nonlocal counter
-        page.open(ft.SnackBar(ft.Text(f"Counter value at {counter}")))
+        page.show_dialog(ft.SnackBar(ft.Text(f"Counter value at {counter}")))
         counter += 1
         page.update()
 

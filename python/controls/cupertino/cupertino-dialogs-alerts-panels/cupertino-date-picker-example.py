@@ -17,7 +17,7 @@ def main(page):
     page.add(
         ft.CupertinoFilledButton(
             "Open CupertinoDatePicker",
-            on_click=lambda e: page.open(
+            on_click=lambda e: page.show_dialog(
                 ft.CupertinoBottomSheet(
                     cupertino_date_picker,
                     height=216,

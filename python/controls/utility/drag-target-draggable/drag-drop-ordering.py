@@ -50,7 +50,7 @@ class ItemList(ft.Draggable):
                     border=ft.border.all(2, ft.Colors.BLACK12),
                     border_radius=ft.border_radius.all(15),
                     bgcolor=self.list_color,
-                    padding=ft.padding.all(20),
+                    padding=ft.Padding.all(20),
                 ),
                 data=self,
                 on_accept=self.drag_accept,

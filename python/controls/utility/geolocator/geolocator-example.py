@@ -50,12 +50,12 @@ async def main(page: ft.Page):
 
     async def handle_open_location_settings(e):
         p = await gl.open_location_settings_async()
-        page.close(location_settings_dlg)
+        page.pop_dialog(location_settings_dlg)
         page.add(ft.Text(f"open_location_settings: {p}"))
 
     async def handle_open_app_settings(e):
         p = await gl.open_app_settings_async()
-        page.close(app_settings_dlg)
+        page.pop_dialog(app_settings_dlg)
         page.add(ft.Text(f"open_app_settings: {p}"))
 
     location_settings_dlg = settings_dlg(handle_open_location_settings)
@@ -89,12 +89,12 @@ async def main(page: ft.Page):
                 ft.OutlinedButton(
                     "Open Location Settings",
                     visible=False if page.web else True,
-                    on_click=lambda e: page.open(location_settings_dlg),
+                    on_click=lambda e: page.show_dialog(location_settings_dlg),
                 ),
                 ft.OutlinedButton(
                     "Open App Settings",
                     visible=False if page.web else True,
-                    on_click=lambda e: page.open(app_settings_dlg),
+                    on_click=lambda e: page.show_dialog(app_settings_dlg),
                 ),
             ],
         )
