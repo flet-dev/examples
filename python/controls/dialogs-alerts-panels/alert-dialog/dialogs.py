@@ -7,7 +7,7 @@ def main(page: ft.Page):
     dlg = ft.AlertDialog(
         title=ft.Text("Hello"),
         content=ft.Text("You are notified!"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         on_dismiss=lambda e: print("Dialog dismissed!"),
         title_padding=ft.padding.all(25),
     )

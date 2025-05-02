@@ -18,7 +18,7 @@ def main(page):
         border_color=ft.Colors.GREEN_800,
         focused_border_color=ft.Colors.GREEN_ACCENT_400,
         focused_border_width=5,
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
     )
 
     dd1 = ft.Dropdown(
@@ -33,7 +33,7 @@ def main(page):
         bgcolor=ft.Colors.BLACK12,
         focused_border_color=ft.Colors.BLUE_100,
         focused_border_width=20,
-        alignment=ft.alignment.center_right,
+        alignment=ft.Alignment.center()_right,
     )
 
     dd1_5 = ft.Dropdown(

@@ -89,7 +89,7 @@ class ItemList(ft.Draggable):
                     bgcolor=ft.Colors.BLACK26,
                     border_radius=ft.border_radius.all(30),
                     height=3,
-                    alignment=ft.alignment.center_right,
+                    alignment=ft.Alignment.center()_right,
                     width=200,
                     opacity=0.0,
                 )

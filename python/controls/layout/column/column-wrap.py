@@ -11,7 +11,7 @@ def main(page: ft.Page):
             items.append(
                 ft.Container(
                     content=ft.Text(value=str(i)),
-                    alignment=ft.alignment.center,
+                    alignment=ft.Alignment.center(),
                     width=30,
                     height=30,
                     bgcolor=ft.Colors.AMBER,

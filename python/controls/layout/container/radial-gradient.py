@@ -5,7 +5,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Container(
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment.center(),
             gradient=ft.RadialGradient(
                 center=ft.Alignment(0.7, -0.6),
                 radius=0.2,
