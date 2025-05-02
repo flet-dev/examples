@@ -12,7 +12,7 @@ def main(page: ft.Page):
         animation_duration=300,
         tabs=[
             ft.Tab(
-                text="Tab 1",
+                label="Tab 1",
                 content=ft.Container(
                     content=ft.Text("This is Tab 1"), alignment=ft.Alignment.center()
                 ),
@@ -22,7 +22,7 @@ def main(page: ft.Page):
                 content=ft.Text("This is Tab 2"),
             ),
             ft.Tab(
-                text="Tab 3",
+                label="Tab 3",
                 icon=ft.Icons.IRON,
                 content=ft.Text("This is Tab 3"),
             ),
@@ -49,14 +49,14 @@ def main(page: ft.Page):
     sleep(3)
     t.tabs.append(
         ft.Tab(
-            text="Tab 4",
+            label="Tab 4",
             icon=ft.Icons.LOCK,
             content=ft.Text("This is Tab 4"),
         )
     )
     t.tabs.append(
         ft.Tab(
-            text="Tab 5",
+            label="Tab 5",
             icon=ft.Icons.SIP_SHARP,
             content=ft.Text("This is Tab 5"),
         )
