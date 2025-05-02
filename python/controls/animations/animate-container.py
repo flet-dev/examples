@@ -23,7 +23,7 @@ def main(page: ft.Page):
         height=250,
         gradient=g1,
         alignment=ft.alignment.top_left,
-        animate=ft.animation.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
+        animate=ft.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
         border=ft.border.all(2, "blue"),
         border_radius=10,
         padding=10,

@@ -7,7 +7,7 @@ def main(page: ft.Page):
         width=150,
         height=150,
         bgcolor=ft.Colors.RED,
-        animate=ft.animation.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
+        animate=ft.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate_container(e):

@@ -34,7 +34,7 @@ def main(page: ft.Page):
         bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
         border_radius=5,
         offset=ft.transform.Offset(-2, 0),
-        animate_offset=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN),
+        animate_offset=ft.Animation(300, ft.AnimationCurve.EASE_IN),
     )
 
     page.overlay.append(c)

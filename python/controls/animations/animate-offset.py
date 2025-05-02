@@ -8,7 +8,7 @@ def main(page: ft.Page):
         width=200,
         height=300,
         offset=ft.transform.Offset(-2, 0),
-        animate_offset=ft.animation.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
+        animate_offset=ft.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):

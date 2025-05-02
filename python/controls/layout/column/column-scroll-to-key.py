@@ -13,28 +13,28 @@ def main(page: ft.Page):
                 alignment=ft.alignment.top_left,
                 bgcolor=ft.Colors.YELLOW_200,
                 height=100,
-                key="A",
+                scroll_key="A",
             ),
             ft.Container(
                 ft.Text("Section B"),
                 alignment=ft.alignment.top_left,
                 bgcolor=ft.Colors.GREEN_200,
                 height=100,
-                key="B",
+                scroll_key="B",
             ),
             ft.Container(
                 ft.Text("Section C"),
                 alignment=ft.alignment.top_left,
                 bgcolor=ft.Colors.BLUE_200,
                 height=100,
-                key="C",
+                scroll_key="C",
             ),
             ft.Container(
                 ft.Text("Section D"),
                 alignment=ft.alignment.top_left,
                 bgcolor=ft.Colors.PINK_200,
                 height=100,
-                key="D",
+                scroll_key="D",
             ),
         ],
     )
@@ -48,19 +48,27 @@ def main(page: ft.Page):
                     [
                         ft.ElevatedButton(
                             "Section A",
-                            on_click=lambda _: cl.scroll_to(key="A", duration=1000),
+                            on_click=lambda _: cl.scroll_to(
+                                scroll_key="A", duration=1000
+                            ),
                         ),
                         ft.ElevatedButton(
                             "Section B",
-                            on_click=lambda _: cl.scroll_to(key="B", duration=1000),
+                            on_click=lambda _: cl.scroll_to(
+                                scroll_key="B", duration=1000
+                            ),
                         ),
                         ft.ElevatedButton(
                             "Section C",
-                            on_click=lambda _: cl.scroll_to(key="C", duration=1000),
+                            on_click=lambda _: cl.scroll_to(
+                                scroll_key="C", duration=1000
+                            ),
                         ),
                         ft.ElevatedButton(
                             "Section D",
-                            on_click=lambda _: cl.scroll_to(key="D", duration=1000),
+                            on_click=lambda _: cl.scroll_to(
+                                scroll_key="D", duration=1000
+                            ),
                         ),
                     ]
                 ),
