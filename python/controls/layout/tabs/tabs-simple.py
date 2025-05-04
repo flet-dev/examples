@@ -8,16 +8,16 @@ def main(page: ft.Page):
         animation_duration=300,
         tabs=[
             ft.Tab(
-                text="Tab 1",
+                label="Tab 1",
                 content=ft.Container(
-                    content=ft.Text("This is Tab 1"), alignment=ft.alignment.center
+                    content=ft.Text("This is Tab 1"), alignment=ft.Alignment.center()
                 ),
             ),
             ft.Tab(
-                text="Tab 2",
+                label="Tab 2",
                 icon=ft.Icons.SETTINGS,
                 content=ft.Container(
-                    content=ft.Text("This is Tab 2"), alignment=ft.alignment.center
+                    content=ft.Text("This is Tab 2"), alignment=ft.Alignment.center()
                 ),
             ),
             ft.Tab(
@@ -25,7 +25,7 @@ def main(page: ft.Page):
                     foreground_image_src="https://avatars.githubusercontent.com/u/7119543?s=88&v=4"
                 ),
                 content=ft.Container(
-                    content=ft.Text("This is Tab 3"), alignment=ft.alignment.center
+                    content=ft.Text("This is Tab 3"), alignment=ft.Alignment.center()
                 ),
             ),
         ],

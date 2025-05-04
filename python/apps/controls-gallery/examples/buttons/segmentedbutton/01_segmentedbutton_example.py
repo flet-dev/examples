@@ -6,7 +6,7 @@ name = "SegmentedButton example"
 def example():
     return ft.SegmentedButton(
         selected_icon=ft.Icon(ft.Icons.ONETWOTHREE),
-        selected={"1", "4"},
+        selected=["1", "4"],
         allow_multiple_selection=True,
         segments=[
             ft.Segment(

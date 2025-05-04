@@ -8,7 +8,7 @@ def main(page: ft.Page):
     def handle_action_click(e):
         page.add(ft.Text(f"Action clicked: {e.control.text}"))
         # e.control is the clicked action button, e.control.parent is the corresponding parent dialog of the button
-        page.close(e.control.parent)
+        page.pop_dialog(e.control.parent)
 
     cupertino_actions = [
         ft.CupertinoDialogAction(
@@ -31,7 +31,7 @@ def main(page: ft.Page):
     page.add(
         ft.FilledButton(
             text="Open Material Dialog",
-            on_click=lambda e: page.open(
+            on_click=lambda e: page.show_dialog(
                 ft.AlertDialog(
                     title=ft.Text("Material Alert Dialog"),
                     content=ft.Text("Do you want to delete this file?"),
@@ -41,7 +41,7 @@ def main(page: ft.Page):
         ),
         ft.CupertinoFilledButton(
             text="Open Cupertino Dialog",
-            on_click=lambda e: page.open(
+            on_click=lambda e: page.show_dialog(
                 ft.CupertinoAlertDialog(
                     title=ft.Text("Cupertino Alert Dialog"),
                     content=ft.Text("Do you want to delete this file?"),
@@ -53,7 +53,7 @@ def main(page: ft.Page):
             text="Open Adaptive Dialog",
             adaptive=True,
             bgcolor=ft.Colors.BLUE_ACCENT,
-            on_click=lambda e: page.open(
+            on_click=lambda e: page.show_dialog(
                 ft.AlertDialog(
                     adaptive=True,
                     title=ft.Text("Adaptive Alert Dialog"),

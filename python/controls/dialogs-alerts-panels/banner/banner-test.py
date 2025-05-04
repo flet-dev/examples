@@ -5,7 +5,7 @@ def main(page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     def close_banner(e):
-        page.close(banner)
+        page.pop_dialog(banner)
         page.add(ft.Text("Action clicked: " + e.control.text))
 
     action_button_style = ft.ButtonStyle(color=ft.Colors.BLUE)
@@ -29,7 +29,9 @@ def main(page):
         ],
     )
 
-    page.add(ft.ElevatedButton("Show Banner", on_click=lambda e: page.open(banner)))
+    page.add(
+        ft.ElevatedButton("Show Banner", on_click=lambda e: page.show_dialog(banner))
+    )
 
 
 ft.app(main)

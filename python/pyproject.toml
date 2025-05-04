@@ -18,7 +18,7 @@ dev-dependencies = [
 ]
 
 [tool.uv.sources]
-flet = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet", rev = "v1" }
-flet-cli = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-cli", rev = "v1" }
-flet-desktop = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-desktop", rev = "v1" }
-flet-web = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-web", rev = "v1" }
+flet = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet", branch = "v1" }
+flet-cli = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-cli", branch = "v1" }
+flet-desktop = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-desktop", branch = "v1" }
+flet-web = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-web", branch = "v1" }

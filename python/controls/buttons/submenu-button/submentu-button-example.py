@@ -38,7 +38,7 @@ def main(page: ft.Page):
             "Choose a bgcolor from the menu",
             style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),
         ),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
     )
     menubar = ft.MenuBar(
         expand=True,
@@ -113,7 +113,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("center_left"),
-                                data=ft.alignment.center_left,
+                                data=ft.Alignment.center()_left,
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -123,7 +123,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("center_right"),
-                                data=ft.alignment.center_right,
+                                data=ft.Alignment.center()_right,
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -148,7 +148,7 @@ def main(page: ft.Page):
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),
             ),
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment.center(),
         ),
     )
 

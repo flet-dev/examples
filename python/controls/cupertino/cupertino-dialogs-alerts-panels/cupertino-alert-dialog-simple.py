@@ -9,7 +9,7 @@ def main(page: ft.Page):
 
     def handle_action_click(e):
         page.add(ft.Text(f"Action clicked: {e.control.text}"))
-        page.close(cupertino_alert_dialog)
+        page.pop_dialog(cupertino_alert_dialog)
 
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
@@ -30,7 +30,7 @@ def main(page: ft.Page):
     page.add(
         ft.CupertinoFilledButton(
             text="Open CupertinoAlertDialog",
-            on_click=lambda e: page.open(cupertino_alert_dialog),
+            on_click=lambda e: page.show_dialog(cupertino_alert_dialog),
         )
     )
 

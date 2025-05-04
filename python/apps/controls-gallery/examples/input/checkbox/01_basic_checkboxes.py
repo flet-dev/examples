@@ -17,6 +17,6 @@ def example():
         label="Checkbox with rendered label_position='left'",
         label_position=ft.LabelPosition.LEFT,
     )
-    b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+    b = ft.ElevatedButton(content="Submit", on_click=button_clicked)
 
     return ft.Column(controls=[c1, c2, c3, c4, c5, b, t])

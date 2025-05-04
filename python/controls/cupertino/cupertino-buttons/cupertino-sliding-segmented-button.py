@@ -7,7 +7,7 @@ def main(page):
 
     def handle_change(e):
         print(f"selected_index: {e.data}")
-        page.open(ft.SnackBar(ft.Text(f"segment {int(e.data) + 1} chosen")))
+        page.show_dialog(ft.SnackBar(ft.Text(f"segment {int(e.data) + 1} chosen")))
 
     page.add(
         ft.CupertinoSlidingSegmentedButton(

@@ -50,7 +50,7 @@ class ItemList(ft.Draggable):
                     border=ft.border.all(2, ft.Colors.BLACK12),
                     border_radius=ft.border_radius.all(15),
                     bgcolor=self.list_color,
-                    padding=ft.padding.all(20),
+                    padding=ft.Padding.all(20),
                 ),
                 data=self,
                 on_accept=self.drag_accept,
@@ -89,7 +89,7 @@ class ItemList(ft.Draggable):
                     bgcolor=ft.Colors.BLACK26,
                     border_radius=ft.border_radius.all(30),
                     height=3,
-                    alignment=ft.alignment.center_right,
+                    alignment=ft.Alignment.center()_right,
                     width=200,
                     opacity=0.0,
                 )

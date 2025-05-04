@@ -6,7 +6,7 @@ def main(page: ft.Page):
 
     def handle_menu_item_click(e):
         print(f"{e.control.content.value}.on_click")
-        page.open(
+        page.show_dialog(
             ft.SnackBar(content=ft.Text(f"{e.control.content.value} was clicked!"))
         )
         appbar_text_ref.current.value = e.control.content.value

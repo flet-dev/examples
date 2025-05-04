@@ -13,7 +13,9 @@ def main(page: ft.Page):
             ft.Column(
                 [
                     ft.Text("Here is a bottom sheet!"),
-                    ft.ElevatedButton("Dismiss", on_click=lambda _: page.close(bs)),
+                    ft.ElevatedButton(
+                        "Dismiss", on_click=lambda _: page.pop_dialog(bs)
+                    ),
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 tight=True,
@@ -25,7 +27,9 @@ def main(page: ft.Page):
     )
     page.overlay.append(bs)
     page.add(
-        ft.ElevatedButton("Display bottom sheet", on_click=lambda e: page.open(bs))
+        ft.ElevatedButton(
+            "Display bottom sheet", on_click=lambda e: page.show_dialog(bs)
+        )
     )
 
 

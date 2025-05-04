@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page):
     def handle_dlg_action_clicked(e):
-        page.close(dlg)
+        page.pop_dialog(dlg)
         dlg.data.confirm_dismiss(e.control.data)
 
     dlg = ft.AlertDialog(
@@ -21,7 +21,7 @@ def main(page):
         if e.direction == ft.DismissDirection.END_TO_START:  # right-to-left slide
             # save current dismissible to dialog's data, for confirmation in handle_dlg_action_clicked
             dlg.data = e.control
-            page.open(dlg)
+            page.show_dialog(dlg)
         else:  # left-to-right slide
             e.control.confirm_dismiss(True)
 

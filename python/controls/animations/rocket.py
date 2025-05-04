@@ -14,9 +14,9 @@ def main(page: ft.Page):
         ),
         width=120,
         height=70,
-        alignment=ft.alignment.center_right,
-        rotate=ft.transform.Rotate(0, alignment=ft.alignment.center_left),
-        animate_rotation=ft.animation.Animation(duration=1000),
+        alignment=ft.Alignment.center()_right,
+        rotate=ft.transform.Rotate(0, alignment=ft.Alignment.center()_left),
+        animate_rotation=ft.Animation(duration=1000),
     )
 
     def animate(e):

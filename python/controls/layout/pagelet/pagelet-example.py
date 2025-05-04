@@ -17,9 +17,9 @@ def main(page: ft.Page):
         appbar=ft.AppBar(
             title=ft.Text("Pagelet AppBar Title"), bgcolor=ft.Colors.AMBER_ACCENT
         ),
-        content=ft.Container(ft.Text("Pagelet Body"), padding=ft.padding.all(16)),
+        content=ft.Container(ft.Text("Pagelet Body"), padding=ft.Padding.all(16)),
         bgcolor=ft.Colors.AMBER_100,
-        bottom_app_bar=ft.BottomAppBar(
+        bottom_appbar=ft.BottomAppBar(
             bgcolor=ft.Colors.BLUE,
             shape=ft.NotchShape.CIRCULAR,
             content=ft.Row(

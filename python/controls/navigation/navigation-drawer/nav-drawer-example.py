@@ -8,7 +8,7 @@ def main(page: ft.Page):
 
     def handle_change(e):
         print(f"Selected Index changed: {e.control.selected_index}")
-        page.close(drawer)
+        page.pop_dialog(drawer)
 
     drawer = ft.NavigationDrawer(
         on_dismiss=handle_dismissal,
@@ -34,7 +34,9 @@ def main(page: ft.Page):
         ],
     )
 
-    page.add(ft.ElevatedButton("Show drawer", on_click=lambda e: page.open(drawer)))
+    page.add(
+        ft.ElevatedButton("Show drawer", on_click=lambda e: page.show_dialog(drawer))
+    )
 
 
 ft.app(main)

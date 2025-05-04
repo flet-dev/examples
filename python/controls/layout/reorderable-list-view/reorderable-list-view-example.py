@@ -27,7 +27,7 @@ def main(page: ft.Page):
                 bgcolor=get_color(i),
                 margin=ft.margin.symmetric(horizontal=5, vertical=10),
                 width=100,
-                alignment=ft.alignment.center,
+                alignment=ft.Alignment.center(),
             )
             for i in range(10)
         ],

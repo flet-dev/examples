@@ -13,7 +13,7 @@ def example():
                     ft.AutoCompleteSuggestion(key="two 2", value="Two"),
                     ft.AutoCompleteSuggestion(key="three 3", value="Three"),
                 ],
-                on_select=lambda e: print(e.control.selected_index, e.selection),
+                on_select=lambda e: print(e.control.selected_index),
             ),
             ft.Text("Type in 1, 2 or 3 to receive suggestions."),
         ]

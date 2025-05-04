@@ -7,7 +7,7 @@ def example():
 
     return ft.OutlinedButton(
         "Show CupertinoDatePicker",
-        on_click=lambda e: e.control.page.open(
+        on_click=lambda e: e.control.page.show_dialog(
             ft.CupertinoBottomSheet(
                 ft.CupertinoDatePicker(
                     on_change=lambda e: print(e.data),

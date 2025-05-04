@@ -7,9 +7,9 @@ def main(page: ft.Page):
     dlg = ft.AlertDialog(
         title=ft.Text("Hello"),
         content=ft.Text("You are notified!"),
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         on_dismiss=lambda e: print("Dialog dismissed!"),
-        title_padding=ft.padding.all(25),
+        title_padding=ft.Padding.all(25),
     )
 
     dlg_modal = ft.AlertDialog(
@@ -17,16 +17,18 @@ def main(page: ft.Page):
         title=ft.Text("Please confirm"),
         content=ft.Text("Do you really want to delete all those files?"),
         actions=[
-            ft.TextButton("Yes", on_click=lambda e: page.close(dlg_modal)),
-            ft.TextButton("No", on_click=lambda e: page.close(dlg_modal)),
+            ft.TextButton("Yes", on_click=lambda e: page.pop_dialog(dlg_modal)),
+            ft.TextButton("No", on_click=lambda e: page.pop_dialog(dlg_modal)),
         ],
         actions_alignment=ft.MainAxisAlignment.END,
         on_dismiss=lambda e: print("Modal dialog dismissed!"),
     )
 
     page.add(
-        ft.ElevatedButton("Open dialog", on_click=lambda e: page.open(dlg)),
-        ft.ElevatedButton("Open modal dialog", on_click=lambda e: page.open(dlg_modal)),
+        ft.ElevatedButton("Open dialog", on_click=lambda e: page.show_dialog(dlg)),
+        ft.ElevatedButton(
+            "Open modal dialog", on_click=lambda e: page.show_dialog(dlg_modal)
+        ),
     )
 
 

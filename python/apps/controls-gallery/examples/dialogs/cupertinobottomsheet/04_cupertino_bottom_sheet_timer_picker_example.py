@@ -31,7 +31,7 @@ def example():
             ft.TextButton(
                 content=ft.Text("00:01:10", size=23, ref=timer_picker_value_ref),
                 style=ft.ButtonStyle(color=ft.Colors.RED),
-                on_click=lambda e: e.control.page.open(
+                on_click=lambda e: e.control.page.show_dialog(
                     ft.CupertinoBottomSheet(
                         timer_picker,
                         height=216,

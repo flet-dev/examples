@@ -18,7 +18,7 @@ def example():
 
     def handle_picker_change(e):
         selected_fruit_ref.current.value = fruits[int(e.data)]
-        e.control.page.update()
+        # e.control.page.update()
 
     picker = ft.CupertinoPicker(
         selected_index=3,
@@ -39,7 +39,7 @@ def example():
             ft.TextButton(
                 content=ft.Text(fruits[3], size=23, ref=selected_fruit_ref),
                 style=ft.ButtonStyle(color=ft.Colors.BLUE),
-                on_click=lambda e: e.control.page.open(
+                on_click=lambda e: e.control.page.show_dialog(
                     ft.CupertinoBottomSheet(
                         picker,
                         height=216,

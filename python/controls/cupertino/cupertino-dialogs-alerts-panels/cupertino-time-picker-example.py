@@ -34,7 +34,7 @@ def main(page):
                         size=23,
                         color=ft.CupertinoColors.DESTRUCTIVE_RED,
                     ),
-                    on_click=lambda e: page.open(
+                    on_click=lambda e: page.show_dialog(
                         ft.CupertinoBottomSheet(
                             cupertino_timer_picker,
                             height=216,

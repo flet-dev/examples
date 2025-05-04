@@ -27,7 +27,7 @@ def main(page):
     def on_click(e):
         d.increment()
         sb.content.value = f"You did it x {d.counter}"
-        page.open(sb)
+        page.show_dialog(sb)
         page.update()
 
     page.add(ft.ElevatedButton("Open SnackBar", on_click=on_click))

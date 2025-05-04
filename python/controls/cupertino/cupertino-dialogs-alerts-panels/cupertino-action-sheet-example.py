@@ -6,7 +6,7 @@ def main(page):
 
     def handle_click(e):
         page.add(ft.Text(f"Action clicked: {e.control.content.value}"))
-        page.close(bottom_sheet)
+        page.pop_dialog(bottom_sheet)
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Row(
@@ -44,7 +44,7 @@ def main(page):
     page.add(
         ft.CupertinoFilledButton(
             "Open CupertinoBottomSheet",
-            on_click=lambda e: page.open(bottom_sheet),
+            on_click=lambda e: page.show_dialog(bottom_sheet),
         )
     )
 

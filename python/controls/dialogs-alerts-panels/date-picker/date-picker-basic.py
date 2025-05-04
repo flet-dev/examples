@@ -15,7 +15,7 @@ def main(page: ft.Page):
         ft.ElevatedButton(
             "Pick date",
             icon=ft.Icons.CALENDAR_MONTH,
-            on_click=lambda e: page.open(
+            on_click=lambda e: page.show_dialog(
                 ft.DatePicker(
                     first_date=datetime.datetime(year=2000, month=10, day=1),
                     last_date=datetime.datetime(year=2025, month=10, day=1),

@@ -6,9 +6,9 @@ def main(page: ft.Page):
 
     page.add(
         ft.Container(
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment.center(),
             gradient=ft.SweepGradient(
-                center=ft.alignment.center,
+                center=ft.Alignment.center(),
                 start_angle=0.0,
                 end_angle=math.pi * 2,
                 colors=[

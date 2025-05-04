@@ -16,7 +16,9 @@ def main(page: ft.Page):
             if sem.acquire(blocking=False):
                 try:
                     for i in range(0, 10):
-                        cl.controls.append(ft.Text(f"Text line {s.i}", key=str(s.i)))
+                        cl.controls.append(
+                            ft.Text(f"Text line {s.i}", scroll_key=str(s.i))
+                        )
                         s.i += 1
                     cl.update()
                 finally:
@@ -27,11 +29,11 @@ def main(page: ft.Page):
         height=200,
         width=200,
         scroll=ft.ScrollMode.ALWAYS,
-        on_scroll_interval=0,
+        scroll_interval=0,
         on_scroll=on_scroll,
     )
     for i in range(0, 50):
-        cl.controls.append(ft.Text(f"Text line {s.i}", key=str(s.i)))
+        cl.controls.append(ft.Text(f"Text line {s.i}", scroll_key=str(s.i)))
         s.i += 1
 
     page.add(ft.Container(cl, border=ft.border.all(1)))

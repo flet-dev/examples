@@ -78,11 +78,11 @@ class TrelloApp(AppLayout):
                 if user not in self.store.get_users():
                     self.store.add_user(user)
                 self.user = user_name.value
-                self.page.client_storage.set("current_user", user_name.value)
+                self.page.shared_preferences.set("current_user", user_name.value)
 
             self.page.close(dialog)
             self.appbar_items[0] = ft.PopupMenuItem(
-                text=f"{self.page.client_storage.get('current_user')}'s Profile"
+                text=f"{self.page.shared_preferences.get('current_user')}'s Profile"
             )
             self.page.update()
 

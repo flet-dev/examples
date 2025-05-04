@@ -19,7 +19,7 @@ def main(page: ft.Page):
         ),
         border_radius=5,
         animate_rotation=300,
-        animate_scale=ft.animation.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
+        animate_scale=ft.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):

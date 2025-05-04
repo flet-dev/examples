@@ -8,7 +8,7 @@ def main(page: ft.Page):
         content=ft.ElevatedButton("Center"),
         bgcolor=ft.Colors.AMBER,
         padding=15,
-        alignment=ft.alignment.center,
+        alignment=ft.Alignment.center(),
         width=150,
         height=150,
     )

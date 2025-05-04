@@ -45,7 +45,7 @@ def example():
         on_blur=lambda e: print("Blured!"),
         on_focus=lambda e: print("Focused!"),
         badge=ft.Badge(
-            text="1", offset=ft.Offset(-15, -25), alignment=ft.Alignment(0, 0)
+            label="1", offset=ft.Offset(-15, -25), alignment=ft.Alignment(0, 0)
         ),
         expand=False,
         expand_loose=True,

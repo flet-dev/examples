@@ -32,7 +32,7 @@ def main(page: ft.Page):
             cv.Fill(
                 ft.Paint(
                     gradient=ft.PaintLinearGradient(
-                        (0, 0), (600, 600), colors=[ft.colors.CYAN_50, ft.colors.GREY]
+                        (0, 0), (600, 600), colors=[ft.Colors.CYAN_50, ft.Colors.GREY]
                     )
                 )
             ),

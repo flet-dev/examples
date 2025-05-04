@@ -6,7 +6,7 @@ def main(page: ft.Page):
 
     def window_event(e):
         if e.data == "close":
-            page.open(confirm_dialog)
+            page.show_dialog(confirm_dialog)
             page.update()
 
     page.window.prevent_close = True
@@ -16,7 +16,7 @@ def main(page: ft.Page):
         page.window.destroy()
 
     def no_click(e):
-        page.close(confirm_dialog)
+        page.pop_dialog(confirm_dialog)
         page.update()
 
     confirm_dialog = ft.AlertDialog(

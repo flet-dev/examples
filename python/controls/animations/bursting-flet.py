@@ -8,9 +8,9 @@ def main(page: ft.Page):
         width=100,
         height=100,
         scale=1.0,
-        animate_scale=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
+        animate_scale=ft.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
         opacity=1.0,
-        animate_opacity=ft.animation.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
+        animate_opacity=ft.Animation(300, ft.AnimationCurve.EASE_IN_QUINT),
     )
 
     def animate(e):

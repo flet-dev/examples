@@ -7,7 +7,7 @@ def main(page: ft.Page):
     page.padding = 0
 
     def handle_expansion_tile_change(e):
-        page.open(
+        page.show_dialog(
             ft.SnackBar(
                 ft.Text(
                     f"ExpansionTile was {'expanded' if e.data=='true' else 'collapsed'}"
