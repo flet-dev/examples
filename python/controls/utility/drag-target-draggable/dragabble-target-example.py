@@ -4,22 +4,22 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "Drag and Drop example"
 
-    def drag_will_accept(e):
+    def drag_will_accept(e: ft.DragWillAcceptEvent):
         e.control.content.border = ft.border.all(
-            2, ft.Colors.BLACK45 if e.data == "true" else ft.Colors.RED
+            2, ft.Colors.BLACK45 if e.accept else ft.Colors.RED
         )
         e.control.update()
 
     def drag_accept(e: ft.DragTargetEvent):
-        src = page.get_control(f"{e.src_id}")
+        src = page.get_control(e.src_id)
         e.control.content.bgcolor = src.content.bgcolor
         e.control.content.border = None
         e.control.update()
 
-    def drag_leave(e):
+    def drag_leave(e: ft.DragTargetLeaveEvent):
         e.control.content.border = None
         e.control.update()
-
+        
     page.add(
         ft.Row(
             [
