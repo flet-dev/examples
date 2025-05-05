@@ -102,7 +102,7 @@ def example():
     chart = ft.LineChart(
         data_series=data_1,
         border=ft.Border(
-            bottom=ft.BorderSide(4, ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE))
+            bottom=ft.BorderSide(4, ft.Colors.with_opacity(0.5, ft.Colors.PRIMARY))
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -142,7 +142,7 @@ def example():
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.PRIMARY),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -154,7 +154,7 @@ def example():
                             "OCT",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.PRIMARY),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -166,7 +166,7 @@ def example():
                             "DEC",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.PRIMARY),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
