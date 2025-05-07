@@ -11,10 +11,8 @@ def example():
         title=ft.Text("Cupertino Alert Dialog"),
         content=ft.Text("Do you want to delete this file?"),
         actions=[
-            ft.CupertinoDialogAction(
-                "OK", is_destructive_action=True, on_click=dismiss_dialog
-            ),
-            ft.CupertinoDialogAction(text="Cancel", on_click=dismiss_dialog),
+            ft.CupertinoDialogAction("OK", destructive=True, on_click=dismiss_dialog),
+            ft.CupertinoDialogAction(content="Cancel", on_click=dismiss_dialog),
         ],
     )
 

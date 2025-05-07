@@ -9,29 +9,27 @@ def example():
             super().__init__()
             self.hovered = hovered
             self.y = y
+            # self.tooltip = f"{self.y}"
+            self.width = 22
+            self.color = ft.Colors.WHITE
+            self.bg_to_y = 20
+            self.bg_color = ft.Colors.GREEN_300
 
-        def _before_build_command(self):
-            self.to_y = self.y + 1 if self.hovered else self.y
+        def before_update(self):
+            self.to_y = self.y + 0.5 if self.hovered else self.y
             self.color = ft.Colors.YELLOW if self.hovered else ft.Colors.WHITE
             self.border_side = (
                 ft.BorderSide(width=1, color=ft.Colors.GREEN_400)
                 if self.hovered
                 else ft.BorderSide(width=0, color=ft.Colors.WHITE)
             )
-            super()._before_build_command()
-
-        def _build(self):
-            self.tooltip = str(self.y)
-            self.width = 22
-            self.color = ft.Colors.WHITE
-            self.bg_to_y = 20
-            self.bg_color = ft.Colors.GREEN_300
+            super().before_update()
 
     def on_chart_event(e: ft.BarChartEvent):
         for group_index, group in enumerate(chart.bar_groups):
             for rod_index, rod in enumerate(group.bar_rods):
                 rod.hovered = e.group_index == group_index and e.rod_index == rod_index
-        chart.update()
+        # chart.update()
 
     chart = ft.BarChart(
         bar_groups=[
@@ -45,7 +43,7 @@ def example():
             ),
             ft.BarChartGroup(
                 x=2,
-                bar_rods=[SampleRod(5)],
+                bar_rods=[SampleRod(15)],
             ),
             ft.BarChartGroup(
                 x=3,
@@ -88,3 +86,7 @@ def example():
         width=700,
         height=400,
     )
+
+    # return ft.Container(
+    #         chart, bgcolor=ft.Colors.GREEN_200, padding=10, border_radius=5, expand=True
+    #     )

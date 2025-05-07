@@ -18,7 +18,7 @@ def example():
 
     def handle_picker_change(e):
         selected_fruit_ref.current.value = fruits[int(e.data)]
-        e.control.page.update()
+        # e.control.page.update()
 
     picker = ft.CupertinoPicker(
         selected_index=3,

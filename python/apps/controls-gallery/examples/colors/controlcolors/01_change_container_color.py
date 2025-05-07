@@ -24,7 +24,7 @@ def example():
                 controls=[
                     new_color,
                     ft.FilledButton(
-                        text="Change container bgcolor", on_click=change_bgcolor
+                        "Change container bgcolor", on_click=change_bgcolor
                     ),
                 ]
             ),

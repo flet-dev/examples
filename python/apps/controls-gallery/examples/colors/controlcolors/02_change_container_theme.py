@@ -6,7 +6,7 @@ name = "Change container theme colors"
 def example():
     def change_primary_color(e):
         container.theme = ft.Theme(
-            color_scheme=ft.Colorscheme(primary=primary_color.value)
+            color_scheme=ft.ColorScheme(primary=primary_color.value)
         )
         primary_color.value = ""
         container.update()
@@ -27,7 +27,7 @@ def example():
                 controls=[
                     primary_color,
                     ft.FilledButton(
-                        text="Change Primary color in Container",
+                        "Change Primary color in Container",
                         on_click=change_primary_color,
                     ),
                 ]

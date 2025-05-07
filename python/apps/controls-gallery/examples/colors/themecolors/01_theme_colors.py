@@ -31,10 +31,7 @@ def example():
         Color("OUTLINE_VARIANT", "outlinevariant", True),
         Color("BACKGROUND", "background"),
         Color("ON_BACKGROUND", "onbackground", True),
-        Color("SURFACE", "surface"),
-        Color("ON_SURFACE", "onsurface", True),
         Color("SURFACE_TINT", "surfacetint"),
-        Color("SURFACE_VARIANT", "surfacevariant"),
         Color("ON_SURFACE_VARIANT", "onsurfacevariant", True),
         Color("INVERSE_SURFACE", "inversesurface", True),
         Color("ON_INVERSE_SURFACE", "oninversesurface"),
@@ -58,9 +55,9 @@ def example():
 
     for color in theme_colors:
         if color.is_dark:
-            text_color = ft.Colors.SURFACE
+            text_color = ft.Colors.SURFACE_TINT
         else:
-            text_color = ft.Colors.ON_SURFACE
+            text_color = ft.Colors.ON_SURFACE_VARIANT
 
         theme_colors_column.controls.append(
             ft.Container(

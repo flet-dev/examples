@@ -21,7 +21,7 @@ def example():
         actions=[
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Default Action"),
-                is_default_action=True,
+                default=True,
                 on_click=lambda e: print("Default clicked"),
             ),
             ft.CupertinoActionSheetAction(
@@ -30,7 +30,7 @@ def example():
             ),
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Destructive Action"),
-                is_destructive_action=True,
+                destructive=True,
                 on_click=lambda e: print("Destructive Action clicked"),
             ),
         ],
