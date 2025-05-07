@@ -8,8 +8,8 @@ def main(page: ft.Page):
         page.add(ft.Text("Dialog dismissed"))
 
     def handle_action_click(e):
-        page.add(ft.Text(f"Action clicked: {e.control.text}"))
-        page.pop_dialog(cupertino_alert_dialog)
+        page.add(ft.Text(f"Action clicked: {e.control.content}"))
+        page.pop_dialog()
 
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
@@ -17,19 +17,19 @@ def main(page: ft.Page):
         on_dismiss=dialog_dismissed,
         actions=[
             ft.CupertinoDialogAction(
-                text="Yes",
-                is_destructive_action=True,
+                content="Yes",
+                destructive=True,
                 on_click=handle_action_click,
             ),
             ft.CupertinoDialogAction(
-                text="No", is_default_action=True, on_click=handle_action_click
+                content="No", default=True, on_click=handle_action_click
             ),
         ],
     )
 
     page.add(
         ft.CupertinoFilledButton(
-            text="Open CupertinoAlertDialog",
+            content="Open CupertinoAlertDialog",
             on_click=lambda e: page.show_dialog(cupertino_alert_dialog),
         )
     )

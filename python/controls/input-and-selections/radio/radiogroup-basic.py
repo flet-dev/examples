@@ -7,7 +7,7 @@ def main(page):
         page.update()
 
     t = ft.Text()
-    b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+    b = ft.ElevatedButton(content="Submit", on_click=button_clicked)
     cg = ft.RadioGroup(
         content=ft.Column(
             [

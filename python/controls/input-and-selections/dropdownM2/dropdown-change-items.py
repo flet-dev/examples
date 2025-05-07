@@ -23,9 +23,9 @@ def main(page: ft.Page):
 
     d = ft.DropdownM2()
     option_textbox = ft.TextField(hint_text="Enter item name")
-    add = ft.ElevatedButton("Add", on_click=add_clicked)
+    add = ft.ElevatedButton(content="Add", on_click=add_clicked)
     delete = ft.OutlinedButton(
-        "Delete selected",
+        content="Delete selected",
         on_click=delete_clicked,
         style=ft.ButtonStyle(bgcolor=ft.Colors.RED),
     )

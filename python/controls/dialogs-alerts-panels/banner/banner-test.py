@@ -1,12 +1,13 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     def close_banner(e):
-        page.pop_dialog(banner)
-        page.add(ft.Text("Action clicked: " + e.control.text))
+        print(e.control)
+        page.pop_dialog()
+        page.add(ft.Text("Action clicked: " + e.control.content))
 
     action_button_style = ft.ButtonStyle(color=ft.Colors.BLUE)
     banner = ft.Banner(
@@ -18,13 +19,13 @@ def main(page):
         ),
         actions=[
             ft.TextButton(
-                text="Retry", style=action_button_style, on_click=close_banner
+                content="Retry", style=action_button_style, on_click=close_banner
             ),
             ft.TextButton(
-                text="Ignore", style=action_button_style, on_click=close_banner
+                content="Ignore", style=action_button_style, on_click=close_banner
             ),
             ft.TextButton(
-                text="Cancel", style=action_button_style, on_click=close_banner
+                content="Cancel", style=action_button_style, on_click=close_banner
             ),
         ],
     )

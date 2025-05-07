@@ -42,7 +42,7 @@ def main(page: ft.Page):
         cl.scroll_to(offset=-1, duration=2000, curve=ft.AnimationCurve.EASE_IN_OUT)
 
     def scroll_to_key(e):
-        cl.scroll_to(key="20", duration=1000)
+        cl.scroll_to(scroll_key="20", duration=1000)
 
     def scroll_to_delta(e):
         cl.scroll_to(delta=100, duration=200)

@@ -8,7 +8,7 @@ def main(page: ft.Page):
 
     def handle_change(e):
         print(f"Selected Index changed: {e.control.selected_index}")
-        page.pop_dialog(end_drawer)
+        page.pop_dialog()
 
     end_drawer = ft.NavigationDrawer(
         position=ft.NavigationDrawerPosition.END,

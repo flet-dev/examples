@@ -7,7 +7,7 @@ def main(page: ft.Page):
         page.update()
 
     t = ft.Text()
-    b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+    b = ft.ElevatedButton(content="Submit", on_click=button_clicked)
     pr = ft.TextField(label="With prefix", prefix_text="https://")
     sf = ft.TextField(label="With suffix", suffix_text=".com")
     ps = ft.TextField(

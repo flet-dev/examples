@@ -11,19 +11,19 @@ def main(page):
             content=ft.Image("https://picsum.photos/200/200"),
             actions=[
                 ft.CupertinoContextMenuAction(
-                    text="Action 1",
-                    is_default_action=True,
+                    content="Action 1",
+                    default=True,
                     trailing_icon=ft.Icons.CHECK,
                     on_click=lambda e: print("Action 1"),
                 ),
                 ft.CupertinoContextMenuAction(
-                    text="Action 2",
+                    content="Action 2",
                     trailing_icon=ft.Icons.MORE,
                     on_click=lambda e: print("Action 2"),
                 ),
                 ft.CupertinoContextMenuAction(
-                    text="Action 3",
-                    is_destructive_action=True,
+                    content="Action 3",
+                    destructive=True,
                     trailing_icon=ft.Icons.CANCEL,
                     on_click=lambda e: print("Action 3"),
                 ),

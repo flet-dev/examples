@@ -6,7 +6,7 @@ def main(page):
 
     def handle_click(e):
         page.add(ft.Text(f"Action clicked: {e.control.content.value}"))
-        page.pop_dialog(bottom_sheet)
+        page.pop_dialog()
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Row(
@@ -24,7 +24,7 @@ def main(page):
         actions=[
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Default Action"),
-                is_default_action=True,
+                default=True,
                 on_click=handle_click,
             ),
             ft.CupertinoActionSheetAction(
@@ -33,7 +33,7 @@ def main(page):
             ),
             ft.CupertinoActionSheetAction(
                 content=ft.Text("Destructive Action"),
-                is_destructive_action=True,
+                destructive=True,
                 on_click=handle_click,
             ),
         ],

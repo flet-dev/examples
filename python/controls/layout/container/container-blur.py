@@ -48,7 +48,7 @@ def main(page: ft.Page):
                     border=ft.border.all(2, ft.Colors.BLACK),
                 ),
                 ft.ElevatedButton(
-                    text="Change Background",
+                    content="Change Background",
                     bottom=5,
                     right=5,
                     style=ft.ButtonStyle(text_style=ft.TextStyle(size=8)),

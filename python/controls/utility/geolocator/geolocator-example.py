@@ -24,7 +24,7 @@ async def main(page: ft.Page):
             "You are about to be redirected to the location/app settings. "
             "Please locate this app and grant it location permissions."
         ),
-        actions=[ft.TextButton(text="Take me there", on_click=handler)],
+        actions=[ft.TextButton(content="Take me there", on_click=handler)],
         actions_alignment=ft.MainAxisAlignment.CENTER,
     )
 
