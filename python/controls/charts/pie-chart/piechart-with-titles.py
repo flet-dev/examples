@@ -64,4 +64,4 @@ def main(page: ft.Page):
     page.add(chart)
 
 
-ft.app(main)
+ft.run(main)

@@ -2,8 +2,8 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    normal_border = ft.BorderSide(0, ft.colors.with_opacity(0, ft.colors.WHITE))
-    hovered_border = ft.BorderSide(6, ft.colors.WHITE)
+    normal_border = ft.BorderSide(0, ft.Colors.with_opacity(0, ft.Colors.WHITE))
+    hovered_border = ft.BorderSide(6, ft.Colors.WHITE)
 
     def on_chart_event(e: ft.PieChartEvent):
         for idx, section in enumerate(chart.sections):
@@ -16,25 +16,25 @@ def main(page: ft.Page):
         sections=[
             ft.PieChartSection(
                 25,
-                color=ft.colors.BLUE,
+                color=ft.Colors.BLUE,
                 radius=80,
                 border_side=normal_border,
             ),
             ft.PieChartSection(
                 25,
-                color=ft.colors.YELLOW,
+                color=ft.Colors.YELLOW,
                 radius=65,
                 border_side=normal_border,
             ),
             ft.PieChartSection(
                 25,
-                color=ft.colors.PINK,
+                color=ft.Colors.PINK,
                 radius=60,
                 border_side=normal_border,
             ),
             ft.PieChartSection(
                 25,
-                color=ft.colors.GREEN,
+                color=ft.Colors.GREEN,
                 radius=70,
                 border_side=normal_border,
             ),
@@ -48,4 +48,4 @@ def main(page: ft.Page):
     page.add(chart)
 
 
-ft.app(main)
+ft.run(main)

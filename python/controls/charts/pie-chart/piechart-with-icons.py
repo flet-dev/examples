@@ -21,7 +21,7 @@ def main(page: ft.Page):
             ft.Icon(icon),
             width=size,
             height=size,
-            border=ft.border.all(1, ft.Colors.BROWN),
+            border=ft.Border.all(1, ft.Colors.BROWN),
             border_radius=size / 2,
             bgcolor=ft.Colors.WHITE,
         )
@@ -44,7 +44,7 @@ def main(page: ft.Page):
                 title_style=normal_title_style,
                 color=ft.Colors.BLUE,
                 radius=normal_radius,
-                badge=badge(ft.Icons.AC_UNIT, normal_badge_size),
+                badge_content=badge(ft.Icons.AC_UNIT, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -53,7 +53,7 @@ def main(page: ft.Page):
                 title_style=normal_title_style,
                 color=ft.Colors.YELLOW,
                 radius=normal_radius,
-                badge=badge(ft.Icons.ACCESS_ALARM, normal_badge_size),
+                badge_content=badge(ft.Icons.ACCESS_ALARM, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -62,7 +62,7 @@ def main(page: ft.Page):
                 title_style=normal_title_style,
                 color=ft.Colors.PURPLE,
                 radius=normal_radius,
-                badge=badge(ft.Icons.APPLE, normal_badge_size),
+                badge_content=badge(ft.Icons.APPLE, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -71,7 +71,7 @@ def main(page: ft.Page):
                 title_style=normal_title_style,
                 color=ft.Colors.GREEN,
                 radius=normal_radius,
-                badge=badge(ft.Icons.PEDAL_BIKE, normal_badge_size),
+                badge_content=badge(ft.Icons.PEDAL_BIKE, normal_badge_size),
                 badge_position=0.98,
             ),
         ],
@@ -84,4 +84,4 @@ def main(page: ft.Page):
     page.add(chart)
 
 
-ft.app(main)
+ft.run(main)
