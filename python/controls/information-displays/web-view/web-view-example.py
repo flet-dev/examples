@@ -13,4 +13,4 @@ def main(page: ft.Page):
     page.add(wv)
 
 
-ft.app(main)
+ft.run(main)

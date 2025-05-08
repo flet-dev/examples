@@ -31,4 +31,4 @@ def main(page: ft.Page):
     page.add(ft.Row([save_to_favourites, open_in_maps]))
 
 
-ft.app(main)
+ft.run(main)

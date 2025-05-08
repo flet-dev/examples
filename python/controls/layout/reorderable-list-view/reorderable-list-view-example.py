@@ -50,4 +50,4 @@ def main(page: ft.Page):
     page.add(h, v)
 
 
-ft.app(main)
+ft.run(main)

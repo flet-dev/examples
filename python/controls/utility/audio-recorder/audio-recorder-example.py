@@ -6,7 +6,7 @@ import flet_audio as fta
 
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.appbar = ft.AppBar(title=ft.Text("Audio Recorder"), center_title=True)
+    page.appbar = ft.runBar(title=ft.Text("Audio Recorder"), center_title=True)
 
     path = "test-audio-file.wav"
 
@@ -88,4 +88,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)

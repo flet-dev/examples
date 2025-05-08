@@ -32,4 +32,4 @@ def main(page: ft.Page):
     page.add(d, ft.Row(controls=[option_textbox, add, delete]))
 
 
-ft.app(main)
+ft.run(main)

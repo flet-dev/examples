@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.scroll = ft.ScrollMode.ADAPTIVE
-    page.appbar = ft.AppBar(title=ft.Text("PermissionHandler Tests"))
+    page.appbar = ft.runBar(title=ft.Text("PermissionHandler Tests"))
     ph = ft.PermissionHandler()
     page.overlay.append(ph)
 
@@ -37,4 +37,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)

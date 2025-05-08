@@ -16,4 +16,4 @@ def main(page: ft.Page):
     page.add(tb1, tb2, tb3, tb4, tb5, b, t)
 
 
-ft.app(main)
+ft.run(main)

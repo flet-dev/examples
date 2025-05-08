@@ -118,4 +118,4 @@ def main(page):
     page.add(dd, dd1, dd1_5, dd2, dd3)
 
 
-ft.app(target=main)
+ft.run(target=main)

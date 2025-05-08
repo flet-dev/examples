@@ -26,4 +26,4 @@ def main(page: ft.Page):
     page.add(pr, sf, ps, icon, b, t)
 
 
-ft.app(main)
+ft.run(main)

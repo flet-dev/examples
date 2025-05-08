@@ -18,4 +18,4 @@ def main(page: ft.Page):
     page.add(ft.Text("Body!"))
 
 
-ft.app(target=main)
+ft.run(target=main)

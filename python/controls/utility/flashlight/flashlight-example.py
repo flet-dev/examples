@@ -7,4 +7,4 @@ def main(page: ft.Page):
     page.add(ft.TextButton("toggle", on_click=lambda _: flashlight.toggle()))
 
 
-ft.app(main)
+ft.run(main)

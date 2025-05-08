@@ -80,4 +80,4 @@ def main(page: ft.Page):
     page.add(row)
 
 
-ft.app(main)
+ft.run(main)

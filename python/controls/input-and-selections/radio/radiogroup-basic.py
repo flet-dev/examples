@@ -21,4 +21,4 @@ def main(page):
     page.add(ft.Text("Select your favorite color:"), cg, b, t)
 
 
-ft.app(main)
+ft.run(main)

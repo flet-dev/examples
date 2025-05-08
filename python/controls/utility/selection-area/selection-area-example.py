@@ -24,4 +24,4 @@ def main(page: ft.Page):
     page.add(ft.Text("Not selectable", color=ft.Colors.RED, style=ts))
 
 
-ft.app(main)
+ft.run(main)

@@ -51,4 +51,4 @@ def main(page: ft.Page):
     page_resize(None)
 
 
-ft.app(main)
+ft.run(main)

@@ -199,4 +199,4 @@ def main(page: ft.Page):
     page.add(ft.IconButton(ft.Icons.REFRESH, on_click=toggle_data), chart)
 
 
-ft.app(main)
+ft.run(main)

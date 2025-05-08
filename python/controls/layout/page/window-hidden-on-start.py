@@ -11,4 +11,4 @@ def main(page: ft.Page):
     page.update()
 
 
-ft.app(main, view=ft.AppView.FLET_APP_HIDDEN)
+ft.run(main, view=ft.runView.FLET_APP_HIDDEN)

@@ -14,4 +14,4 @@ def main(page: ft.Page):
     page.add(ft.Text("Body!"))
 
 
-ft.app(main)
+ft.run(main)

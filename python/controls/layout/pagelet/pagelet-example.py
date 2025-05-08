@@ -14,7 +14,7 @@ def main(page: ft.Page):
         ],
     )
     pagelet = ft.Pagelet(
-        appbar=ft.AppBar(
+        appbar=ft.runBar(
             title=ft.Text("Pagelet AppBar Title"), bgcolor=ft.Colors.AMBER_ACCENT
         ),
         content=ft.Container(ft.Text("Pagelet Body"), padding=ft.Padding.all(16)),
@@ -43,4 +43,4 @@ def main(page: ft.Page):
     page.add(pagelet)
 
 
-ft.app(main)
+ft.run(main)

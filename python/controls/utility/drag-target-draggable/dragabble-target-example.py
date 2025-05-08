@@ -19,7 +19,7 @@ def main(page: ft.Page):
     def drag_leave(e: ft.DragTargetLeaveEvent):
         e.control.content.border = None
         e.control.update()
-        
+
     page.add(
         ft.Row(
             [
@@ -78,4 +78,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)

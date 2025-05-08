@@ -33,4 +33,4 @@ def main(page: ft.Page):
 
 
 # run with 'flet run -w'
-ft.app(main)
+ft.run(main)

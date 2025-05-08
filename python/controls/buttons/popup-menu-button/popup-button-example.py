@@ -28,4 +28,4 @@ def main(page: ft.Page):
     page.add(pb)
 
 
-ft.app(main)
+ft.run(main)

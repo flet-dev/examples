@@ -19,4 +19,4 @@ def main(page: ft.Page):
     page.add(c1, c2, c3, c4, c5, b, t)
 
 
-ft.app(main)
+ft.run(main)

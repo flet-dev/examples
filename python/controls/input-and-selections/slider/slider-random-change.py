@@ -26,4 +26,4 @@ def main(page):
         s.update()
 
 
-ft.app(main)
+ft.run(main)

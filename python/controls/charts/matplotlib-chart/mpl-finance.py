@@ -26,4 +26,4 @@ def main(page: ft.Page):
     page.add(MatplotlibChart(fig, expand=True))
 
 
-ft.app(target=main)
+ft.run(target=main)

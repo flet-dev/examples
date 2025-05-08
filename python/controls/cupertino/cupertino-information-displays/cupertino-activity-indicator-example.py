@@ -13,4 +13,4 @@ def main(page):
     )
 
 
-ft.app(main)
+ft.run(main)

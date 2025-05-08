@@ -135,4 +135,4 @@ def main(page: ft.Page):
 # print("flet path: ", flet.__file__)
 # logging.basicConfig(level=logging.DEBUG,
 #                     format='%(asctime)s.%(msecs)03d %(message)s', datefmt='%H:%M:%S')
-ft.app(target=main)
+ft.run(target=main)

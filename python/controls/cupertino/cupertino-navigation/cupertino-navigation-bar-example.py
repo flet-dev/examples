@@ -21,4 +21,4 @@ def main(page: ft.Page):
     page.add(ft.SafeArea(ft.Text("Body!")))
 
 
-ft.app(main)
+ft.run(main)

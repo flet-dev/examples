@@ -26,4 +26,4 @@ def main(page: ft.Page):
     page.add(ft.Text("This is an app with background audio."), b)
 
 
-ft.app(main)
+ft.run(main)

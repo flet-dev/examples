@@ -21,7 +21,7 @@ def main(page: ft.Page):
     def handle_submenu_hover(e):
         print(f"{e.control.content.value}.on_hover")
 
-    page.appbar = ft.AppBar(
+    page.appbar = ft.runBar(
         title=ft.Text("Menus", ref=appbar_text_ref),
         center_title=True,
         bgcolor=ft.Colors.BLUE,
@@ -111,4 +111,4 @@ def main(page: ft.Page):
     page.add(ft.Row([menubar]))
 
 
-ft.app(main)
+ft.run(main)

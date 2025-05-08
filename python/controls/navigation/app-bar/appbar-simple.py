@@ -8,7 +8,7 @@ def main(page: ft.Page):
         e.control.checked = not e.control.checked
         page.update()
 
-    page.appbar = ft.AppBar(
+    page.appbar = ft.runBar(
         leading=ft.Icon(ft.Icons.PALETTE),
         leading_width=40,
         title=ft.Text("AppBar Example"),
@@ -31,4 +31,4 @@ def main(page: ft.Page):
     page.add(ft.Text("Body!"))
 
 
-ft.app(target=main)
+ft.run(target=main)

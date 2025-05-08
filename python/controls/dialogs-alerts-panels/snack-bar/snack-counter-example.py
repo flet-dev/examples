@@ -33,4 +33,4 @@ def main(page):
     page.add(ft.ElevatedButton("Open SnackBar", on_click=on_click))
 
 
-ft.app(main)
+ft.run(main)

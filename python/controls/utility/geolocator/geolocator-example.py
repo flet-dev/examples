@@ -3,7 +3,7 @@ import flet as ft
 
 async def main(page: ft.Page):
     page.scroll = ft.ScrollMode.ADAPTIVE
-    page.appbar = ft.AppBar(title=ft.Text("Geolocator Tests"))
+    page.appbar = ft.runBar(title=ft.Text("Geolocator Tests"))
 
     def handle_position_change(e):
         page.add(ft.Text(f"New position: {e.latitude} {e.longitude}"))
@@ -101,4 +101,4 @@ async def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)

@@ -21,4 +21,4 @@ def main(page):
     print("Default platform:", page.platform)
 
 
-ft.app(main)
+ft.run(main)

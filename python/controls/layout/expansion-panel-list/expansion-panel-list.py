@@ -51,4 +51,4 @@ def main(page: ft.Page):
     page.add(panel)
 
 
-ft.app(main)
+ft.run(main)

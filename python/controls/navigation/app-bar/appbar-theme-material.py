@@ -59,7 +59,7 @@ def main(page: ft.Page):
     )
 
     page.padding = 50
-    page.appbar = ft.AppBar(
+    page.appbar = ft.runBar(
         # toolbar_height=100,
         bgcolor=ft.Colors.SECONDARY_CONTAINER,
         leading=ft.Icon(ft.Icons.PALETTE),
@@ -101,4 +101,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)

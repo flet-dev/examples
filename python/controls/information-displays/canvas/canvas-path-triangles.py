@@ -37,4 +37,4 @@ def main(page: ft.Page):
     page.add(cp)
 
 
-ft.app(main)
+ft.run(main)

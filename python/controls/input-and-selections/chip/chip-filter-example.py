@@ -23,4 +23,4 @@ def main(page: ft.Page):
     page.add(title, ft.Row(amenity_chips))
 
 
-ft.app(main)
+ft.run(main)

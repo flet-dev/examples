@@ -39,4 +39,4 @@ def main(page: ft.Page):
     page.add(ft.Container(cl, border=ft.border.all(1)))
 
 
-ft.app(main)
+ft.run(main)

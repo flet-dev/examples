@@ -33,4 +33,4 @@ def main(page: ft.Page):
     page.add(body)
 
 
-ft.app(main)
+ft.run(main)

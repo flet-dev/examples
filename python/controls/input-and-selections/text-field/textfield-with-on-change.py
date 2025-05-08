@@ -15,4 +15,4 @@ def main(page: ft.Page):
     page.add(tb, t)
 
 
-ft.app(main)
+ft.run(main)

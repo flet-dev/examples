@@ -134,4 +134,4 @@ def main(page: ft.Page):
     page.add(ft.ElevatedButton("avg", on_click=toggle_data), chart)
 
 
-ft.app(main)
+ft.run(main)
