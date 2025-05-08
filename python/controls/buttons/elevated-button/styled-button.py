@@ -6,19 +6,19 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
     page.add(
         ft.ElevatedButton(
-            "Styled button 1",
+            content="Styled button 1",
             style=ft.ButtonStyle(
                 color={
-                    ft.ControlState.HOVERED: ft.colors.WHITE,
-                    ft.ControlState.FOCUSED: ft.colors.BLUE,
-                    ft.ControlState.DEFAULT: ft.colors.BLACK,
+                    ft.ControlState.HOVERED: ft.Colors.WHITE,
+                    ft.ControlState.FOCUSED: ft.Colors.BLUE,
+                    ft.ControlState.DEFAULT: ft.Colors.BLACK,
                 },
                 bgcolor={
-                    ft.ControlState.FOCUSED: ft.colors.PINK_200,
-                    ft.ControlState.DEFAULT: ft.colors.YELLOW,
+                    ft.ControlState.FOCUSED: ft.Colors.PINK_200,
+                    ft.ControlState.DEFAULT: ft.Colors.YELLOW,
                 },
                 padding={ft.ControlState.HOVERED: 20},
-                overlay_color=ft.colors.TRANSPARENT,
+                overlay_color=ft.Colors.TRANSPARENT,
                 elevation={
                     ft.ControlState.DEFAULT: 0,
                     ft.ControlState.HOVERED: 5,
@@ -26,8 +26,8 @@ def main(page: ft.Page):
                 },
                 animation_duration=500,
                 side={
-                    ft.ControlState.DEFAULT: ft.BorderSide(1, color=ft.colors.BLUE_100),
-                    ft.ControlState.HOVERED: ft.BorderSide(3, color=ft.colors.BLUE_400),
+                    ft.ControlState.DEFAULT: ft.BorderSide(1, color=ft.Colors.BLUE_100),
+                    ft.ControlState.HOVERED: ft.BorderSide(3, color=ft.Colors.BLUE_400),
                     ft.ControlState.PRESSED: ft.BorderSide(6, color=ft.Colors.BLUE_600),
                 },
                 shape={

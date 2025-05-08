@@ -10,7 +10,9 @@ def main(page: ft.Page):
         t.value = f"Button clicked {b.data} time(s)"
         page.update()
 
-    b = ft.OutlinedButton("Button with 'click' event", on_click=button_clicked, data=0)
+    b = ft.OutlinedButton(
+        content="Button with 'click' event", on_click=button_clicked, data=0
+    )
     t = ft.Text()
 
     page.add(b, t)

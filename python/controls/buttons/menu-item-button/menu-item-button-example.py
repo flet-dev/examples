@@ -61,7 +61,7 @@ def main(page: ft.Page):
         ft.Container(
             ref=bg_container,
             expand=True,
-            bgcolor=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.WHITE,
             content=ft.Text(
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(weight=ft.FontWeight.W_500),

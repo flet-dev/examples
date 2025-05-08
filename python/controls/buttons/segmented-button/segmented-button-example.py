@@ -9,7 +9,7 @@ def main(page: ft.Page):
         ft.SegmentedButton(
             on_change=handle_change,
             selected_icon=ft.Icon(ft.Icons.CHECK_SHARP),
-            selected={"1"},
+            selected=["1"],
             allow_empty_selection=True,
             allow_multiple_selection=True,
             segments=[
@@ -38,7 +38,7 @@ def main(page: ft.Page):
         ft.SegmentedButton(
             on_change=handle_change,
             selected_icon=ft.Icon(ft.Icons.ONETWOTHREE),
-            selected={"2"},
+            selected=["2"],
             allow_multiple_selection=False,
             segments=[
                 ft.Segment(

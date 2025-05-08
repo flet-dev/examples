@@ -33,7 +33,7 @@ def main(page: ft.Page):
     bg_container = ft.Container(
         # ref=bg_container,
         expand=True,
-        bgcolor=ft.Colors.SURFACE,
+        bgcolor=ft.Colors.SURFACE_TINT,
         content=ft.Text(
             "Choose a bgcolor from the menu",
             style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),
@@ -82,7 +82,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.MenuItemButton(
                                 content=ft.Text("bottom_center"),
-                                data=ft.alignment.bottom_center,
+                                data=ft.Alignment.bottom_center(),
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -93,7 +93,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("bottom_left"),
-                                data=ft.alignment.bottom_left,
+                                data=ft.Alignment.bottom_left(),
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -103,7 +103,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("top_center"),
-                                data=ft.alignment.top_center,
+                                data=ft.Alignment.top_center(),
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -113,7 +113,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("center_left"),
-                                data=ft.Alignment.center()_left,
+                                data=ft.Alignment.center_left(),
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -123,7 +123,7 @@ def main(page: ft.Page):
                             ),
                             ft.MenuItemButton(
                                 content=ft.Text("center_right"),
-                                data=ft.Alignment.center()_right,
+                                data=ft.Alignment.center_right(),
                                 style=ft.ButtonStyle(
                                     bgcolor={
                                         ft.ControlState.HOVERED: ft.Colors.GREY_100
@@ -143,7 +143,7 @@ def main(page: ft.Page):
         ft.Container(
             ref=bg_container,
             expand=True,
-            bgcolor=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.SURFACE_TINT,
             content=ft.Text(
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),

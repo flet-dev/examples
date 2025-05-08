@@ -8,8 +8,8 @@ def main(page: ft.Page):
 
     pb = ft.PopupMenuButton(
         items=[
-            ft.PopupMenuItem(content="Item 1"),
-            ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, content="Check power"),
+            ft.PopupMenuItem(text="Item 1"),
+            ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, text="Check power"),
             ft.PopupMenuItem(
                 content=ft.Row(
                     [
@@ -21,7 +21,7 @@ def main(page: ft.Page):
             ),
             ft.PopupMenuItem(),  # divider
             ft.PopupMenuItem(
-                content="Checked item", checked=False, on_click=check_item_clicked
+                text="Checked item", checked=False, on_click=check_item_clicked
             ),
         ]
     )
