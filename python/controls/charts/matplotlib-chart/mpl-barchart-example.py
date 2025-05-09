@@ -22,7 +22,7 @@ def main(page: ft.Page):
     ax.set_title("Fruit supply by kind and color")
     ax.legend(title="Fruit color")
 
-    page.add(MatplotlibChart(fig, expand=True))
+    page.add(MatplotlibChart(figure=fig, expand=True))
 
 
 ft.run(main)

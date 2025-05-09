@@ -29,12 +29,12 @@ def main(page: ft.Page):
     axs[0].set_ylabel("s1 and s2")
     axs[0].grid(True)
 
-    cxy, f = axs[1].cohere(s1, s2, 256, 1.0 / dt)
+    cxy, f = axs[1].cohere(s1, s2, NFFT=256, Fs=1.0 / dt)
     axs[1].set_ylabel("coherence")
 
     fig.tight_layout()
 
-    page.add(MatplotlibChart(fig, expand=True))
+    page.add(MatplotlibChart(figure=fig, expand=True))
 
 
 ft.run(main)

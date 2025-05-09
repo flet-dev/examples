@@ -11,7 +11,7 @@ def main(page: ft.Page):
 
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
 
-    page.add(PlotlyChart(fig, expand=True))
+    page.add(PlotlyChart(figure=fig, expand=True))
 
 
 ft.run(main)

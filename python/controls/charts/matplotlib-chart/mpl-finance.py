@@ -23,7 +23,7 @@ def main(page: ft.Page):
 
     fig, axlist = mpf.plot(daily, type="candle", mav=(3, 6, 9), returnfig=True)
 
-    page.add(MatplotlibChart(fig, expand=True))
+    page.add(MatplotlibChart(figure=fig, expand=True))
 
 
 ft.run(target=main)

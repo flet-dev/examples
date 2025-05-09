@@ -9,7 +9,7 @@ def main(page: ft.Page):
     df = px.data.gapminder().query("continent=='Oceania'")
     fig = px.line(df, x="year", y="lifeExp", color="country")
 
-    page.add(PlotlyChart(fig, expand=True))
+    page.add(PlotlyChart(figure=fig, expand=True))
 
 
 ft.run(main)

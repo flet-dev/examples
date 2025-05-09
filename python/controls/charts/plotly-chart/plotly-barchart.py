@@ -17,7 +17,7 @@ def main(page: ft.Page):
         height=400,
     )
 
-    page.add(PlotlyChart(fig, expand=True))
+    page.add(PlotlyChart(figure=fig, expand=True))
 
 
 ft.run(main)

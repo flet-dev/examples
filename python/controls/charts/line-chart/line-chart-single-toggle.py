@@ -47,12 +47,18 @@ def main(page: ft.Page):
 
     chart = ft.LineChart(
         data_series=data_1,
-        border=ft.border.all(3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE)),
+        border=ft.Border.all(
+            3, ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE_VARIANT)
+        ),
         horizontal_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
+            interval=1,
+            color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE_VARIANT),
+            width=1,
         ),
         vertical_grid_lines=ft.ChartGridLines(
-            interval=1, color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE), width=1
+            interval=1,
+            color=ft.Colors.with_opacity(0.2, ft.Colors.ON_SURFACE_VARIANT),
+            width=1,
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -80,9 +86,11 @@ def main(page: ft.Page):
                             "MAR",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(
+                                0.5, ft.Colors.ON_SURFACE_VARIANT
+                            ),
                         ),
-                        margin=ft.margin.only(top=10),
+                        margin=ft.Margin.only(top=10),
                     ),
                 ),
                 ft.ChartAxisLabel(
@@ -92,9 +100,11 @@ def main(page: ft.Page):
                             "JUN",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(
+                                0.5, ft.Colors.ON_SURFACE_VARIANT
+                            ),
                         ),
-                        margin=ft.margin.only(top=10),
+                        margin=ft.Margin.only(top=10),
                     ),
                 ),
                 ft.ChartAxisLabel(
@@ -104,9 +114,11 @@ def main(page: ft.Page):
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(
+                                0.5, ft.Colors.ON_SURFACE_VARIANT
+                            ),
                         ),
-                        margin=ft.margin.only(top=10),
+                        margin=ft.Margin.only(top=10),
                     ),
                 ),
             ],

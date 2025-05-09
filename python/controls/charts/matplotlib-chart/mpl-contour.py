@@ -68,7 +68,7 @@ def main(page: ft.Page):
 
     plt.subplots_adjust(hspace=0.5)
 
-    page.add(MatplotlibChart(fig, expand=True))
+    page.add(MatplotlibChart(figure=fig, expand=True))
 
 
 ft.run(target=main)

@@ -15,6 +15,10 @@ dev-dependencies = [
     "flet-cli",
     "flet-desktop",
     "flet-web",
+    "matplotlib",
+    "mplfinance", 
+    "pandas",
+    "plotly"
 ]
 
 [tool.uv.sources]

@@ -53,7 +53,7 @@ def main(page: ft.Page):
         boxmode="group",  # group together boxes of the different traces for each value of x
     )
 
-    page.add(PlotlyChart(fig, expand=True))
+    page.add(PlotlyChart(figure=fig, expand=True))
 
 
 ft.run(main)
