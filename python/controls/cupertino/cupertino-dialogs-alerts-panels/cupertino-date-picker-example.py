@@ -21,7 +21,7 @@ def main(page):
                 ft.CupertinoBottomSheet(
                     cupertino_date_picker,
                     height=216,
-                    padding=ft.padding.only(top=6),
+                    padding=ft.Padding.only(top=6),
                 )
             ),
         ),

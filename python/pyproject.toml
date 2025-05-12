@@ -16,7 +16,7 @@ dev-dependencies = [
     "flet-desktop",
     "flet-web",
     "matplotlib",
-    "mplfinance", 
+    "mplfinance",
     "pandas",
     "plotly"
 ]

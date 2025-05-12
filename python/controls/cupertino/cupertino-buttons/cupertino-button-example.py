@@ -15,7 +15,7 @@ def main(page: ft.Page):
         ft.CupertinoButton(
             content=ft.Text("Filled CupertinoButton", color=ft.Colors.YELLOW),
             bgcolor=ft.Colors.PRIMARY,
-            alignment=ft.alignment.top_left,
+            alignment=ft.Alignment.top_left(),
             border_radius=ft.border_radius.all(15),
             opacity_on_click=0.5,
             on_click=lambda e: print("Filled CupertinoButton clicked!"),
@@ -24,7 +24,7 @@ def main(page: ft.Page):
             content=ft.Text("Disabled CupertinoButton"),
             bgcolor=ft.Colors.PRIMARY,
             disabled=True,
-            alignment=ft.alignment.top_left,
+            alignment=ft.Alignment.top_left(),
             opacity_on_click=0.5,
         ),
         ft.ElevatedButton(

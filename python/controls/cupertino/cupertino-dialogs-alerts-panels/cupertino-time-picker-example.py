@@ -8,14 +8,18 @@ def main(page):
     timer_picker_value_ref = ft.Ref[ft.Text]()
 
     def handle_timer_picker_change(e):
+        print(f"time in seconds: {e.data.in_seconds}")
+        print(f"time in minutes:{e.data.in_minutes}")
+        print(f"time in hours:{e.data.in_hours}")
+        # t = time.struct_time(tm_hour=e.data.in_hours)
         # e.data is the selected time in seconds
-        timer_picker_value_ref.current.value = time.strftime(
-            "%H:%M:%S", time.gmtime(int(e.data))
-        )
+        # timer_picker_value_ref.current.value = time.strftime("%H:%M:%S", (e.data.)
+        timer_picker_value_ref.current.value = f"{e.data.in_hours}:{(e.data.in_minutes % 60)}:{(e.data.in_seconds % 60) % 60}"
+
         page.update()
 
     cupertino_timer_picker = ft.CupertinoTimerPicker(
-        value=3600,
+        # value=ft.DurationValue(),
         second_interval=10,
         minute_interval=1,
         mode=ft.CupertinoTimerPickerMode.HOUR_MINUTE_SECONDS,

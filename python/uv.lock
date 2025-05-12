@@ -263,7 +263,7 @@ dev = [
     { name = "matplotlib" },
     { name = "mplfinance" },
     { name = "pandas" },
-    { name = "plotly", specifier = "==5.3.1" },
+    { name = "plotly" },
 ]
 
 [[package]]
