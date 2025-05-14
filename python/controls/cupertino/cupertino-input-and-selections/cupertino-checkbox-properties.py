@@ -21,16 +21,17 @@ def main(page: ft.Page):
                 label="Cupertino Checkbox circle border",
                 value=True,
                 shape=ft.CircleBorder(),
-                scale=ft.Scale(2, alignment=ft.Alignment(-1, 0)),
+                # scale=ft.Scale(2, alignment=ft.Alignment(-1, 0)),
             ),
             ft.CupertinoCheckbox(
                 label="Cupertino Checkbox border states",
                 value=True,
-                border_side={
-                    ft.ControlState.HOVERED: ft.BorderSide(width=5, stroke_align=5),
-                    ft.ControlState.DEFAULT: ft.BorderSide(width=3, stroke_align=5),
-                    ft.ControlState.FOCUSED: ft.BorderSide(width=3, stroke_align=5),
-                },
+                border_side=ft.BorderSide(),
+                # border_side={
+                #     ft.ControlState.HOVERED: ft.BorderSide(width=5),
+                #     ft.ControlState.DEFAULT: ft.BorderSide(width=3),
+                #     ft.ControlState.FOCUSED: ft.BorderSide(),
+                # },
                 # scale=ft.Scale(2, alignment=ft.Alignment(-0.9, 0)),
             ),
             ft.CupertinoCheckbox(

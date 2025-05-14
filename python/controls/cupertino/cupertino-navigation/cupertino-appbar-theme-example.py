@@ -23,13 +23,15 @@ def main(page: ft.Page):
             if page.theme_mode == ft.ThemeMode.LIGHT
             else ft.Icons.WB_SUNNY
         ),
+        icon_color=ft.Colors.ON_INVERSE_SURFACE,
         on_click=toggle_theme_mode,
     )
     page.appbar = ft.CupertinoAppBar(
-        leading=ft.Icon(ft.Icons.PALETTE),
-        bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+        automatic_background_visibility=False,
+        leading=ft.Icon(ft.Icons.PALETTE, color=ft.Colors.ON_INVERSE_SURFACE),
+        bgcolor=ft.Colors.INVERSE_SURFACE,
         trailing=lightMode,
-        middle=ft.Text("CupertinoAppBar Example"),
+        middle=ft.Text("CupertinoAppBar Example", color=ft.Colors.ON_INVERSE_SURFACE),
     )
     page.add(ft.Text("Body!"))
 

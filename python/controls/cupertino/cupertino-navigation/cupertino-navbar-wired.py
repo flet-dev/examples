@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.title = "CupertinoNavigationBar Example"
 
     def on_nav_change(e):
-        # print(e.control.label)
+        # print(f"on_nav_change: {e.control}")
         if e.control.selected_index == 0:
             body.content.value = "Explore!"
         elif e.control.selected_index == 1:
@@ -21,8 +21,16 @@ def main(page: ft.Page):
         active_color=ft.Colors.BLACK,
         on_change=on_nav_change,
         destinations=[
-            ft.NavigationBarDestination(icon=ft.Icons.EXPLORE, label="Explore"),
-            ft.NavigationBarDestination(icon=ft.Icons.COMMUTE, label="Commute"),
+            ft.NavigationBarDestination(
+                icon=ft.Icons.EXPLORE_OUTLINED,
+                selected_icon=ft.Icons.EXPLORE,
+                label="Explore",
+            ),
+            ft.NavigationBarDestination(
+                icon=ft.Icons.COMMUTE_OUTLINED,
+                selected_icon=ft.Icons.COMMUTE,
+                label="Commute",
+            ),
             ft.NavigationBarDestination(
                 icon=ft.Icons.BOOKMARK_BORDER,
                 selected_icon=ft.Icons.BOOKMARK,

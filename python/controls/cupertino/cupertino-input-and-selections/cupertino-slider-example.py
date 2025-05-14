@@ -21,7 +21,8 @@ def main(page: ft.Page):
     page.add(
         slider_value := ft.Text("0.0"),
         ft.CupertinoSlider(
-            divisions=5,
+            divisions=20,
+            min=0,
             max=100,
             active_color=ft.Colors.PURPLE,
             thumb_color=ft.Colors.PURPLE,
