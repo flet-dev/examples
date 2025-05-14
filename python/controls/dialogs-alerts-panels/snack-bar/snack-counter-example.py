@@ -15,7 +15,7 @@ class Data:
 d = Data()
 
 
-def main(page):
+def main(page: ft.Page):
     page.title = "SnackBar examples"
 
     sb = ft.SnackBar(
@@ -27,7 +27,8 @@ def main(page):
     def on_click(e):
         d.increment()
         sb.content.value = f"You did it x {d.counter}"
-        page.show_dialog(sb)
+        if not sb.open:
+            page.show_dialog(sb)
         page.update()
 
     page.add(ft.ElevatedButton("Open SnackBar", on_click=on_click))

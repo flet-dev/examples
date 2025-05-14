@@ -13,9 +13,7 @@ def main(page: ft.Page):
             ft.Column(
                 [
                     ft.Text("Here is a bottom sheet!"),
-                    ft.ElevatedButton(
-                        "Dismiss", on_click=lambda _: page.pop_dialog(bs)
-                    ),
+                    ft.ElevatedButton("Dismiss", on_click=lambda _: page.pop_dialog()),
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 tight=True,

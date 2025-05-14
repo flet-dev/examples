@@ -26,7 +26,7 @@ def main(page: ft.Page):
             ft.CupertinoCheckbox(
                 label="Cupertino Checkbox border states",
                 value=True,
-                border_side=ft.BorderSide(),
+                # v1 bug - border_side renders grey box
                 # border_side={
                 #     ft.ControlState.HOVERED: ft.BorderSide(width=5),
                 #     ft.ControlState.DEFAULT: ft.BorderSide(width=3),

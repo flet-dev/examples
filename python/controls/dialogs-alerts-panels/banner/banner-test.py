@@ -5,7 +5,6 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     def close_banner(e):
-        print(e.control)
         page.pop_dialog()
         page.add(ft.Text("Action clicked: " + e.control.content))
 
