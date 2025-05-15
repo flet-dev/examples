@@ -40,7 +40,7 @@ def main(page: ft.Page):
                 ],
                 paint=ft.Paint(
                     gradient=ft.PaintRadialGradient(
-                        ft.Offset(150, 150), 50, [ft.colors.PINK_100, ft.colors.PINK]
+                        ft.Offset(150, 150), 50, [ft.Colors.PINK_100, ft.Colors.PINK]
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),

@@ -6,7 +6,7 @@ license = "Apache-2.0"
 readme = "README.md"
 dependencies = [
   "flet",
-  "flet-contrib"
+  "flet-contrib",
 ]
 
 [tool.uv]

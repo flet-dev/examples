@@ -1,8 +1,8 @@
-from time import sleep
+import asyncio
 import flet as ft
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
     pr = ft.ProgressRing(width=16, height=16, stroke_width=2)
     prl = ft.Text("Wait for the completion...")
     page.add(
@@ -19,7 +19,7 @@ def main(page: ft.Page):
 
     for i in range(0, 101):
         pr.value = i * 0.01
-        sleep(0.1)
+        await asyncio.sleep(0.1)
         if i == 100:
             prl.value = "Finished!"
         page.update()

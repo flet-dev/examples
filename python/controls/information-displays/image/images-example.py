@@ -11,7 +11,7 @@ def main(page: ft.Page):
         src=f"/icons/icon-512.png",
         width=100,
         height=100,
-        fit=ft.ImageFit.CONTAIN,
+        fit=ft.BoxFit.CONTAIN,
     )
     images = ft.Row(expand=1, wrap=False, scroll=ft.ScrollMode.ALWAYS)
 
@@ -23,9 +23,9 @@ def main(page: ft.Page):
                 src=f"https://picsum.photos/200/200?{i}",
                 width=200,
                 height=200,
-                fit=ft.ImageFit.NONE,
+                fit=ft.BoxFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
-                border_radius=ft.border_radius.all(10),
+                border_radius=ft.BorderRadius.all(10),
             )
         )
     page.update()

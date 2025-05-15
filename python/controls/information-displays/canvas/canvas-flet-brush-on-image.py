@@ -39,7 +39,7 @@ def main(page: ft.Page):
     page.add(
         ft.Container(
             ft.Stack(
-                [
+                controls=[
                     ft.Image(
                         src="https://picsum.photos/200/300",
                         fit=ft.ImageFit.FILL,

@@ -28,7 +28,7 @@ def main(page: ft.Page):
                 50,
                 ft.Paint(
                     gradient=ft.PaintRadialGradient(
-                        (60, 170), 50, colors=[ft.colors.YELLOW, ft.colors.BLUE]
+                        (60, 170), 50, colors=[ft.Colors.YELLOW, ft.Colors.BLUE]
                     ),
                     style=ft.PaintingStyle.FILL,
                 ),
@@ -38,7 +38,7 @@ def main(page: ft.Page):
                 ft.Paint(
                     gradient=ft.PaintSweepGradient(
                         (60, 280),
-                        colors=[ft.colors.YELLOW, ft.colors.PURPLE],
+                        colors=[ft.Colors.YELLOW, ft.Colors.PURPLE],
                         color_stops=[0.0, 1.0],
                         start_angle=0,
                         end_angle=math.pi * 2,

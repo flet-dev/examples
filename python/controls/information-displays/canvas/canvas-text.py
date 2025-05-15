@@ -8,7 +8,7 @@ def main(page: ft.Page):
     cp = cv.Canvas(
         [
             cv.Text(0, 0, "Just a text"),
-            cv.Circle(200, 100, 2, ft.Paint(color=ft.colors.RED)),
+            cv.Circle(200, 100, 2, ft.Paint(color=ft.Colors.RED)),
             cv.Text(
                 200,
                 100,
@@ -17,22 +17,22 @@ def main(page: ft.Page):
                 spans=[
                     ft.TextSpan(
                         "around top_center",
-                        ft.TextStyle(italic=True, color=ft.colors.GREEN, size=20),
+                        ft.TextStyle(italic=True, color=ft.Colors.GREEN, size=20),
                     )
                 ],
-                alignment=ft.alignment.top_center,
+                alignment=ft.Alignment.top_center(),
                 rotate=math.pi * 0.15,
             ),
-            cv.Circle(400, 100, 2, ft.Paint(color=ft.colors.RED)),
+            cv.Circle(400, 100, 2, ft.Paint(color=ft.Colors.RED)),
             cv.Text(
                 400,
                 100,
                 "Rotated around top_left",
                 ft.TextStyle(size=20),
-                alignment=ft.alignment.top_left,
+                alignment=ft.Alignment.top_left(),
                 rotate=math.pi * -0.15,
             ),
-            cv.Circle(600, 200, 2, ft.Paint(color=ft.colors.RED)),
+            cv.Circle(600, 200, 2, ft.Paint(color=ft.Colors.RED)),
             cv.Text(
                 600,
                 200,
@@ -56,7 +56,7 @@ def main(page: ft.Page):
                     weight=ft.FontWeight.BOLD,
                     size=100,
                     foreground=ft.Paint(
-                        color=ft.colors.PINK,
+                        color=ft.Colors.PINK,
                         stroke_width=6,
                         style=ft.PaintingStyle.STROKE,
                         stroke_join=ft.StrokeJoin.ROUND,
@@ -75,7 +75,7 @@ def main(page: ft.Page):
                         gradient=ft.PaintLinearGradient(
                             (200, 200),
                             (300, 300),
-                            colors=[ft.colors.YELLOW, ft.colors.RED],
+                            colors=[ft.Colors.YELLOW, ft.Colors.RED],
                         ),
                         stroke_join=ft.StrokeJoin.ROUND,
                         stroke_cap=ft.StrokeCap.ROUND,

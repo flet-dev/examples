@@ -1,8 +1,8 @@
-from time import sleep
+import asyncio
 import flet as ft
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
 
     svg_content = """
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,8 @@ def main(page: ft.Page):
         for i in range(0, 10):
             img.src = svg_content.format(i * 10, i * 10)
             img.update()
-            sleep(0.1)
+            # page.update()
+            await asyncio.sleep(0.1)
 
 
 ft.run(target=main)
