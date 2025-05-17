@@ -15,6 +15,7 @@ def main(page: ft.Page):
             ft.dropdownm2.Option("Blue"),
         ],
         width=200,
+        color=ft.Colors.BLUE_GREY_700,
     )
     page.add(dd, t)
 

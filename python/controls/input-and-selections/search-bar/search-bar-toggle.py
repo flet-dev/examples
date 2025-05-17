@@ -22,21 +22,21 @@ def main(page):
         anchor.open_view()
 
     def toggle_open_view(e):
-        if ob.text == "Open Search View":
-            ob.text = "Close Search View"
+        if ob.content == "Open Search View":
+            ob.content = "Close Search View"
             anchor.open_view()
         else:
-            ob.text = "Open Search View"
+            ob.content = "Open Search View"
             anchor.close_view(e.data)
         page.update()
 
     def handle_tap_outside_bar(e):
         print("handle_tap_outside_bar")
-        if ob.text == "Open Search View":
-            ob.text = "Close Search View"
+        if ob.content == "Open Search View":
+            ob.content = "Close Search View"
             anchor.open_view()
         else:
-            ob.text = "Open Search View"
+            ob.content = "Open Search View"
             anchor.close_view(e.data)
         page.update()
 
@@ -54,7 +54,7 @@ def main(page):
             for i in range(10)
         ],
     )
-    ob = ft.OutlinedButton("Open Search View", on_click=toggle_open_view)
+    ob = ft.OutlinedButton(content="Open Search View", on_click=toggle_open_view)
 
     page.add(
         ft.Row(

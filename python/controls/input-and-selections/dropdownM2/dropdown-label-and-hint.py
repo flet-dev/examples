@@ -12,6 +12,7 @@ def main(page: ft.Page):
                 ft.dropdownm2.Option("Blue"),
             ],
             autofocus=True,
+            color=ft.Colors.BLACK,
         )
     )
 

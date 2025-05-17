@@ -21,7 +21,7 @@ def main(page: ft.Page):
             # d.value = None
             page.update()
 
-    d = ft.DropdownM2()
+    d = ft.DropdownM2(options=[], color=ft.Colors.BLUE_400)
     option_textbox = ft.TextField(hint_text="Enter item name")
     add = ft.ElevatedButton(content="Add", on_click=add_clicked)
     delete = ft.OutlinedButton(

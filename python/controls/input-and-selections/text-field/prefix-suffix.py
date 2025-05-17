@@ -8,19 +8,22 @@ def main(page: ft.Page):
 
     t = ft.Text()
     b = ft.ElevatedButton(content="Submit", on_click=button_clicked)
-    pr = ft.TextField(label="With prefix", prefix_text="https://")
-    sf = ft.TextField(label="With suffix", suffix_text=".com")
+    pr = ft.TextField(label="With prefix", prefix="https://")
+    sf = ft.TextField(label="With suffix", suffix=".com")
     ps = ft.TextField(
-        label="With prefix and suffix", prefix_text="https://", suffix_text=".com"
+        label="With prefix and suffix",
+        prefix="https://",
+        suffix=".com",
+        enable_interactive_selection=True,
     )
     icon = ft.TextField(
         label="My favorite color",
         icon=ft.Icons.FORMAT_SIZE,
         hint_text="Type your favorite color",
-        helper_text="You can type only one color",
-        counter_text="{value_length}/{max_length} chars used",
+        helper="You can type only one color",
+        counter="{value_length}/{max_length} chars used",
         prefix_icon=ft.Icons.COLOR_LENS,
-        suffix_text="...is your color",
+        suffix="...is your color",
         max_length=20,
     )
     page.add(pr, sf, ps, icon, b, t)

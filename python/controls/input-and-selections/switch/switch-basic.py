@@ -14,7 +14,7 @@ def main(page):
         label="Switch with rendered label_position='left'",
         label_position=ft.LabelPosition.LEFT,
     )
-    b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
+    b = ft.ElevatedButton(content="Submit", on_click=button_clicked)
     page.add(c1, c2, c3, c4, b, t)
 
 

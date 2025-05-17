@@ -37,7 +37,7 @@ def main(page):
             alignment=ft.MainAxisAlignment.CENTER,
             controls=[
                 ft.OutlinedButton(
-                    "Open Search View",
+                    content="Open Search View",
                     on_click=lambda _: anchor.open_view(),
                 ),
             ],

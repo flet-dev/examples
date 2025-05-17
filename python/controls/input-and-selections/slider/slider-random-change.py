@@ -1,9 +1,9 @@
-import time
+import asyncio
 import random
 import flet as ft
 
 
-def main(page):
+async def main(page):
 
     def slider_changed(e):
         t.value = f"Slider changed to {e.control.value}"
@@ -19,9 +19,9 @@ def main(page):
     )
 
     while True:
-        time.sleep(1)
+        await asyncio.sleep(1)
         val = s.value = random.random()
-        e = ft.ControlEvent("_", "_", "_", s, val)
+        e = ft.ControlEvent("_", s, data=val)
         slider_changed(e)
         s.update()
 

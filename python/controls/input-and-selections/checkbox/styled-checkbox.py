@@ -16,7 +16,7 @@ def main(page: ft.Page):
                 ft.ControlState.SELECTED: ft.Colors.GREEN,
                 ft.ControlState.DEFAULT: ft.Colors.RED,
             },
-            border_side={ft.ControlState.HOVERED: ft.BorderSide(width=1.0)},
+            # border_side={ft.ControlState.HOVERED: ft.BorderSide(width=1.0)},
         ),
     )
 

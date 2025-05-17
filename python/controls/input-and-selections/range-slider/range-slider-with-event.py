@@ -18,6 +18,7 @@ def main(page: ft.Page):
     t = ft.Text("")
 
     range_slider = ft.RangeSlider(
+        divisions=50,
         min=0,
         max=50,
         start_value=10,
