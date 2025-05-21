@@ -14,16 +14,17 @@ def main(page: ft.Page):
         page.update()
 
     def sort(e):
-        print(f"sort called with {e.data} {e.control}")
+        print(f"sort called with {e.control.data} {e.control}")
         match e.control.data:
             case 1:
                 print(f"{e.column_index}, {e.ascending}")
                 # dt.sort_column_index = 1
-                dt.sort_ascending = not dt.sort_ascending
+                dt.sort_ascending = e.ascending
             case 2:
                 print(f"{e.column_index}, {e.ascending}")
                 # dt.sort_column_index = 2
-                dt.sort_ascending = not dt.sort_ascending
+                dt.sort_ascending = e.ascending
+        dt.update()
         page.update()
 
     dr1 = ft.DataRow(
@@ -60,13 +61,13 @@ def main(page: ft.Page):
     dt = ft.DataTable(
         width=700,
         bgcolor=ft.Colors.TEAL_ACCENT_200,
-        border=ft.border.all(2, ft.Colors.RED_ACCENT_200),
+        border=ft.Border.all(2, ft.Colors.RED_ACCENT_200),
         border_radius=10,
         vertical_lines=ft.border.BorderSide(3, ft.Colors.BLUE_600),
         horizontal_lines=ft.border.BorderSide(1, ft.Colors.GREEN_600),
         sort_column_index=0,
         sort_ascending=True,
-        heading_row_color=ft.colors.BLACK12,
+        heading_row_color=ft.Colors.BLACK12,
         heading_row_height=100,
         data_row_color={ft.ControlState.HOVERED: "0x30FF0000"},
         show_checkbox_column=True,

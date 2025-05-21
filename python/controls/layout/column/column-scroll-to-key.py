@@ -4,34 +4,34 @@ import flet as ft
 def main(page: ft.Page):
     cl = ft.Column(
         spacing=10,
-        height=180,
+        height=200,
         width=300,
         scroll=ft.ScrollMode.ALWAYS,
         controls=[
             ft.Container(
-                ft.Text("Section A"),
-                alignment=ft.alignment.top_left,
+                ft.Text("Section A", color=ft.Colors.BLACK),
+                alignment=ft.Alignment.top_left(),
                 bgcolor=ft.Colors.YELLOW_200,
                 height=100,
                 scroll_key="A",
             ),
             ft.Container(
-                ft.Text("Section B"),
-                alignment=ft.alignment.top_left,
+                ft.Text("Section B", color=ft.Colors.BLACK),
+                alignment=ft.Alignment.top_left(),
                 bgcolor=ft.Colors.GREEN_200,
                 height=100,
                 scroll_key="B",
             ),
             ft.Container(
-                ft.Text("Section C"),
-                alignment=ft.alignment.top_left,
+                ft.Text("Section C", color=ft.Colors.BLACK),
+                alignment=ft.Alignment.top_left(),
                 bgcolor=ft.Colors.BLUE_200,
                 height=100,
                 scroll_key="C",
             ),
             ft.Container(
-                ft.Text("Section D"),
-                alignment=ft.alignment.top_left,
+                ft.Text("Section D", color=ft.Colors.BLACK),
+                alignment=ft.Alignment.top_left(),
                 bgcolor=ft.Colors.PINK_200,
                 height=100,
                 scroll_key="D",
@@ -40,7 +40,7 @@ def main(page: ft.Page):
     )
 
     page.add(
-        ft.Container(cl, border=ft.border.all(1)),
+        ft.Container(cl, border=ft.Border.all(1)),
         ft.Column(
             [
                 ft.Text("Scroll to:"),

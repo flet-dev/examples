@@ -6,16 +6,16 @@ def main(page: ft.Page):
     i = 1
 
     img_container = ft.Container(
-        image=ft.DecorationImage(src="https://picsum.photos/250/250"),
-        width=250,
-        height=250,
+        image=ft.DecorationImage(src="https://picsum.photos/300/300"),
+        width=300,
+        height=300,
     )
 
     def change_img(e):
         nonlocal i
         print(f"button clicked {i}")
         img_container.image = ft.DecorationImage(
-            src=f"https://picsum.photos/250/250?random={i}"
+            src=f"https://picsum.photos/300/300?random={i}"
         )
         i += 1
         page.update()
@@ -45,13 +45,13 @@ def main(page: ft.Page):
                     height=100,
                     bgcolor="#44CCCCCC",
                     border_radius=10,
-                    border=ft.border.all(2, ft.Colors.BLACK),
+                    border=ft.Border.all(2, ft.Colors.BLACK),
                 ),
                 ft.ElevatedButton(
                     content="Change Background",
                     bottom=5,
                     right=5,
-                    style=ft.ButtonStyle(text_style=ft.TextStyle(size=8)),
+                    # style=ft.ButtonStyle(text_style=ft.TextStyle(size=8)),
                     on_click=change_img,
                 ),
             ]

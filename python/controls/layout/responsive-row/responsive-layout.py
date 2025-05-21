@@ -8,8 +8,8 @@ def main(page: ft.Page):
 
     page.on_resized = page_resize
 
-    pw = ft.Text(bottom=50, right=50, style=ft.TextTheme.display_small)
-    page.overlay.append(pw)
+    pw = ft.Text(text_align=ft.TextAlign.END, style=ft.TextTheme.display_small)
+    # page.overlay.append(pw)
     page.add(
         ft.ResponsiveRow(
             [
@@ -47,6 +47,7 @@ def main(page: ft.Page):
             ],
             run_spacing={"xs": 10},
         ),
+        pw,
     )
     page_resize(None)
 

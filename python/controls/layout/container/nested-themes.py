@@ -2,12 +2,12 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.theme = ft.Theme(
-        color_scheme_seed=ft.Colors.YELLOW,
-        color_scheme=ft.ColorScheme(
-            primary=ft.Colors.GREEN, primary_container=ft.Colors.GREEN_200
-        ),
-    )
+    # page.theme = ft.Theme(
+    #     color_scheme_seed=ft.Colors.YELLOW,
+    #     color_scheme=ft.ColorScheme(
+    #         primary=ft.Colors.GREEN, primary_container=ft.Colors.GREEN_200
+    #     ),
+    # )
 
     page.add(
         ft.Row(
@@ -42,7 +42,7 @@ def main(page: ft.Page):
                 ]
             ),
             padding=20,
-            bgcolor=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.SURFACE_TINT,
             theme_mode=ft.ThemeMode.DARK,
             theme=ft.Theme(
                 color_scheme_seed=ft.Colors.GREEN,
@@ -61,7 +61,7 @@ def main(page: ft.Page):
                 ]
             ),
             padding=20,
-            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+            bgcolor=ft.Colors.SURFACE_TINT,
             border=ft.border.all(3, ft.Colors.OUTLINE),
             theme_mode=ft.ThemeMode.LIGHT,
             theme=ft.Theme(),
@@ -78,7 +78,7 @@ def main(page: ft.Page):
                 ]
             ),
             padding=20,
-            bgcolor=ft.Colors.SURFACE,
+            bgcolor=ft.Colors.SURFACE_TINT,
             border=ft.border.all(3, ft.Colors.OUTLINE),
             border_radius=10,
             theme_mode=ft.ThemeMode.SYSTEM,

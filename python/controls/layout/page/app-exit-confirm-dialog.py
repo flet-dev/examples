@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.title = "MyApp"
 
     def window_event(e):
-        if e.data == "close":
+        if e.type == ft.WindowEventType.CLOSE:
             page.show_dialog(confirm_dialog)
             page.update()
 
@@ -16,7 +16,7 @@ def main(page: ft.Page):
         page.window.destroy()
 
     def no_click(e):
-        page.pop_dialog(confirm_dialog)
+        page.pop_dialog()
         page.update()
 
     confirm_dialog = ft.AlertDialog(
@@ -24,8 +24,8 @@ def main(page: ft.Page):
         title=ft.Text("Please confirm"),
         content=ft.Text("Do you really want to exit this app?"),
         actions=[
-            ft.ElevatedButton("Yes", on_click=yes_click),
-            ft.OutlinedButton("No", on_click=no_click),
+            ft.ElevatedButton(content="Yes", on_click=yes_click),
+            ft.OutlinedButton(content="No", on_click=no_click),
         ],
         actions_alignment=ft.MainAxisAlignment.END,
     )

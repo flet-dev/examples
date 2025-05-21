@@ -40,6 +40,7 @@ def main(page: ft.Page):
             ],
             spacing=30,
             alignment=ft.MainAxisAlignment.START,
+            scroll=ft.ScrollMode.AUTO,
         )
     )
 

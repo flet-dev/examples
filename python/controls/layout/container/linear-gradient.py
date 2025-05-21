@@ -8,7 +8,7 @@ def main(page: ft.Page):
         ft.Container(
             alignment=ft.Alignment.center(),
             gradient=ft.LinearGradient(
-                begin=ft.alignment.top_left,
+                begin=ft.Alignment.top_left(),
                 end=ft.Alignment(0.8, 1),
                 colors=[
                     "0xff1f005c",

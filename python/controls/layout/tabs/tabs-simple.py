@@ -21,7 +21,7 @@ def main(page: ft.Page):
                 ),
             ),
             ft.Tab(
-                tab_content=ft.CircleAvatar(
+                label=ft.CircleAvatar(
                     foreground_image_src="https://avatars.githubusercontent.com/u/7119543?s=88&v=4"
                 ),
                 content=ft.Container(

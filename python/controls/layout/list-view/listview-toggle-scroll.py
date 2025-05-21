@@ -1,8 +1,8 @@
-from time import sleep
+import asyncio
 import flet as ft
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
 
     def change_auto_scroll(e):
         print("Change auto scroll triggered")
@@ -37,7 +37,7 @@ def main(page: ft.Page):
     page.add(c)
 
     for i in range(0, 60):
-        sleep(1)
+        await asyncio.sleep(1)
         lv.controls.append(ft.Text(f"Line {count}", color=ft.Colors.ON_SECONDARY))
         count += 1
         page.update()

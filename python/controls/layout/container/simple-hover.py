@@ -3,12 +3,14 @@ import flet as ft
 
 def main(page: ft.Page):
     def on_hover(e):
-        e.control.bgcolor = "blue" if e.data == "true" else "red"
-        e.control.update()
+        print(e)
+        c.bgcolor = ft.Colors.BLUE if e.data else ft.Colors.RED
+        c.update()
 
-    page.add(
-        ft.Container(width=100, height=100, bgcolor="red", ink=False, on_hover=on_hover)
+    c = ft.Container(
+        width=200, height=200, bgcolor=ft.Colors.RED, ink=False, on_hover=on_hover
     )
+    page.add(c)
 
 
 ft.run(main)

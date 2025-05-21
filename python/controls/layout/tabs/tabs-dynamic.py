@@ -1,10 +1,10 @@
 import logging
-from time import sleep
+import asyncio
 
 import flet as ft
 
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
     page.title = "Tabs example"
 
     t = ft.Tabs(
@@ -18,7 +18,7 @@ def main(page: ft.Page):
                 ),
             ),
             ft.Tab(
-                tab_content=ft.Icon(ft.Icons.MESSAGE),
+                label=ft.Icon(ft.Icons.MESSAGE),
                 content=ft.Text("This is Tab 2"),
             ),
             ft.Tab(
@@ -32,21 +32,21 @@ def main(page: ft.Page):
 
     page.add(t)
 
-    sleep(7)
+    await asyncio.sleep(7)
     t.selected_index = 2
     page.update()
-    sleep(3)
+    await asyncio.sleep(3)
     t.selected_index = 0
     page.update()
-    sleep(3)
+    await asyncio.sleep(3)
     t.selected_index = 1
     t.tabs.pop(0)
     t.tabs[1].content = ft.Text("Blah blah blah")
     page.update()
-    sleep(3)
+    await asyncio.sleep(3)
     t.tabs.clear()
     page.update()
-    sleep(3)
+    await asyncio.sleep(3)
     t.tabs.append(
         ft.Tab(
             label="Tab 4",

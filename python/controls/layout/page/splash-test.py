@@ -1,15 +1,15 @@
-from time import sleep
+import asyncio
 import flet as ft
 
 
-def main(page: ft.Page):
-    def button_click(e):
+async def main(page: ft.Page):
+    async def button_click(e):
         my_bar = ft.ProgressBar()
 
         page.overlay.append(my_bar)
         btn.disabled = True
         page.update()
-        sleep(3)
+        await asyncio.sleep(3)
 
         page.overlay.remove(my_bar)
         btn.disabled = False

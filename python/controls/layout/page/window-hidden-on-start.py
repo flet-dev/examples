@@ -1,14 +1,12 @@
-from time import sleep
-
+import asyncio
 import flet as ft
 
 
-def main(page: ft.Page):
-
+async def main(page: ft.Page):
     page.add(ft.Text("Hello!"))
-    sleep(3)
+    await asyncio.sleep(3)
     page.window.visible = True
     page.update()
 
 
-ft.run(main, view=ft.runView.FLET_APP_HIDDEN)
+ft.run(main, view=ft.AppView.FLET_APP_HIDDEN)

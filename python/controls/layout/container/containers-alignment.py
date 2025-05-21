@@ -17,7 +17,7 @@ def main(page: ft.Page):
         content=ft.ElevatedButton("Top left"),
         bgcolor=ft.Colors.AMBER,
         padding=15,
-        alignment=ft.alignment.top_left,
+        alignment=ft.Alignment.top_left(),
         width=150,
         height=150,
     )
