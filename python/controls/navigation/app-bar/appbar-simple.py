@@ -8,12 +8,12 @@ def main(page: ft.Page):
         e.control.checked = not e.control.checked
         page.update()
 
-    page.appbar = ft.runBar(
+    page.appbar = ft.AppBar(
         leading=ft.Icon(ft.Icons.PALETTE),
         leading_width=40,
         title=ft.Text("AppBar Example"),
         center_title=False,
-        bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+        bgcolor=ft.Colors.BLUE_GREY_400,
         actions=[
             ft.IconButton(ft.Icons.WB_SUNNY_OUTLINED),
             ft.IconButton(ft.Icons.FILTER_3),

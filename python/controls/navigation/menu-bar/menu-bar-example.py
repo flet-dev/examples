@@ -21,7 +21,7 @@ def main(page: ft.Page):
     def handle_submenu_hover(e):
         print(f"{e.control.content.value}.on_hover")
 
-    page.appbar = ft.runBar(
+    page.appbar = ft.AppBar(
         title=ft.Text("Menus", ref=appbar_text_ref),
         center_title=True,
         bgcolor=ft.Colors.BLUE,
@@ -30,7 +30,7 @@ def main(page: ft.Page):
     menubar = ft.MenuBar(
         expand=True,
         style=ft.MenuStyle(
-            alignment=ft.alignment.top_left,
+            alignment=ft.Alignment.top_left(),
             bgcolor=ft.Colors.RED_300,
             mouse_cursor={
                 ft.ControlState.HOVERED: ft.MouseCursor.WAIT,
