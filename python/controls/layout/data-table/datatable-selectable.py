@@ -80,4 +80,4 @@ def main(page: ft.Page):
     page.add(dt)
 
 
-ft.run(target=main)
+ft.run(main)

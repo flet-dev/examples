@@ -8,7 +8,7 @@ import flet as ft
 class ItemList(ft.Draggable):
 
     def __init__(self, page: ft.Page, list_row, list_name, color):
-        self.page: ft.Page = page
+        # self.page: ft.Page = page
         self.list_row = list_row
         self.list_name: str = list_name
         self.list_color = color
@@ -37,7 +37,7 @@ class ItemList(ft.Draggable):
                             self.item_name,
                             ft.TextButton(
                                 "Add Item",
-                                icon=ft.icons.ADD,
+                                icon=ft.Icons.ADD,
                                 on_click=self.add_item_handler,
                             ),
                             self.items,
@@ -89,7 +89,7 @@ class ItemList(ft.Draggable):
                     bgcolor=ft.Colors.BLACK26,
                     border_radius=ft.border_radius.all(30),
                     height=3,
-                    alignment=ft.Alignment.center()_right,
+                    alignment=ft.Alignment.center_right(),
                     width=200,
                     opacity=0.0,
                 )
@@ -176,7 +176,7 @@ class Item(ft.Draggable):
             content=ft.Container(
                 content=ft.Row(
                     [
-                        ft.Icon(name=ft.icons.CIRCLE_OUTLINED),
+                        ft.Icon(name=ft.Icons.CIRCLE_OUTLINED),
                         ft.Text(value=f"{self.item_text}"),
                     ],
                     alignment=ft.MainAxisAlignment.START,
@@ -254,4 +254,4 @@ def main(page: ft.Page):
     page.update()
 
 
-ft.run(target=main)
+ft.run(main)

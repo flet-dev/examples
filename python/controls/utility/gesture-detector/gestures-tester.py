@@ -59,4 +59,4 @@ def main(page: ft.Page):
     page.add(gd)
 
 
-ft.run(target=main)
+ft.run(main)

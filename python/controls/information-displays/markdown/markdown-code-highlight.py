@@ -59,7 +59,7 @@ def main(page: Page):
         )
     )
 
-flet.app(target=main, port=8550)
+flet.app(main, port=8550)
 ```
 
 Run the app:
@@ -173,4 +173,4 @@ def main(page: ft.Page):
     )
 
 
-ft.run(target=main, assets_dir="assets")
+ft.run(main, assets_dir="assets")

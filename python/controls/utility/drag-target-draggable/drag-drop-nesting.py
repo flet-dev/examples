@@ -3,10 +3,10 @@ import flet as ft
 
 class OuterContainer(ft.Draggable):
 
-    def __init__(self, page, list_ref, color):
+    def __init__(self, page, color):
 
-        self.page = page
-        self.list_ref = list_ref
+        # self.page = page
+        # self.list_ref = list_ref
         self.container_color = color
         # inner_container is a draggable
         self.inner_container = InnerContainer(self)
@@ -17,7 +17,7 @@ class OuterContainer(ft.Draggable):
             bgcolor=self.container_color,
             border_radius=5,
             alignment=ft.Alignment.center(),
-            border=ft.border.all(4, ft.Colors.BLACK12),
+            border=ft.Border.all(4, ft.Colors.BLACK12),
         )
 
         self.target = ft.DragTarget(
@@ -41,19 +41,19 @@ class OuterContainer(ft.Draggable):
         print(f"e: {e}")
         if e.data == "true":
             print("drag_accept outer")
-            self.outer_container.border = ft.border.all(4, ft.Colors.BLACK12)
+            self.outer_container.border = ft.Border.all(4, ft.Colors.BLACK12)
         self.update()
 
     def drag_will_accept(self, e):
         print(f"e: {e}")
         if e.data == "true":
             print("drag_will_accept outer")
-            self.outer_container.border = ft.border.all(4, ft.Colors.BLACK54)
+            self.outer_container.border = ft.Border.all(4, ft.Colors.BLACK54)
         self.update()
 
     def drag_leave(self, e):
         print(f"e: {e}")
-        self.outer_container.border = ft.border.all(4, ft.Colors.BLACK12)
+        self.outer_container.border = ft.Border.all(4, ft.Colors.BLACK12)
         self.update()
 
     def inner_drag_accept(self, e):
@@ -115,18 +115,18 @@ class InnerContainer(ft.Draggable):
 def main(page: ft.Page):
 
     page.title = "Drag and drop ordering"
-    list_ref = ft.Ref[ft.Row]()
+    # list_ref = ft.Ref[ft.Row]()
     page.bgcolor = ft.Colors.BLUE_GREY_100
     page.add(
         ft.Row(
             [
-                OuterContainer(page, list_ref, ft.Colors.DEEP_ORANGE_400),
-                OuterContainer(page, list_ref, ft.Colors.BLUE_400),
+                OuterContainer(page, ft.Colors.DEEP_ORANGE_400),
+                OuterContainer(page, ft.Colors.BLUE_400),
             ],
             alignment=ft.MainAxisAlignment.SPACE_AROUND,
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
             expand=True,
-            ref=list_ref,
+            # ref=list_ref,
         )
     )
     page.update()
@@ -135,4 +135,4 @@ def main(page: ft.Page):
 # print("flet path: ", flet.__file__)
 # logging.basicConfig(level=logging.DEBUG,
 #                     format='%(asctime)s.%(msecs)03d %(message)s', datefmt='%H:%M:%S')
-ft.run(target=main)
+ft.run(main)

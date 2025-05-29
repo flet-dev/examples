@@ -34,4 +34,4 @@ def main(page: ft.Page):
     page.add(text)
 
 
-ft.run(target=main)
+ft.run(main)

@@ -49,4 +49,4 @@ def main(page: ft.Page):
     page.add(c, ft.ElevatedButton("Animate container", on_click=animate_container))
 
 
-ft.run(target=main)
+ft.run(main)

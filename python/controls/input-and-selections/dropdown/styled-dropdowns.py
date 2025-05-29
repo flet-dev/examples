@@ -119,4 +119,4 @@ def main(page):
     page.add(dd1, dd2, dd3, ft.Container(dd4, padding=ft.padding.only(bottom=20)), dd5)
 
 
-ft.run(target=main)
+ft.run(main)
