@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
 
     gd = ft.GestureDetector(
-        ft.Container(bgcolor=ft.colors.GREEN, width=200, height=200),
+        ft.Container(bgcolor=ft.Colors.GREEN, width=200, height=200),
         hover_interval=50,
         on_tap=lambda e: print("TAP"),
         on_tap_down=lambda e: print(

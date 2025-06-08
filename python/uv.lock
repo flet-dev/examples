@@ -249,6 +249,8 @@ dev = [
     { name = "flet-audio" },
     { name = "flet-cli" },
     { name = "flet-desktop" },
+    { name = "flet-flashlight" },
+    { name = "flet-geolocator" },
     { name = "flet-web" },
     { name = "matplotlib" },
     { name = "mplfinance" },
@@ -267,11 +269,29 @@ dev = [
     { name = "flet-audio", git = "https://github.com/flet-dev/flet-audio?rev=v1" },
     { name = "flet-cli", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-cli&rev=v1" },
     { name = "flet-desktop", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-desktop&rev=v1" },
+    { name = "flet-flashlight", git = "https://github.com/flet-dev/flet-flashlight?rev=v1" },
+    { name = "flet-geolocator", git = "https://github.com/flet-dev/flet-geolocator?rev=v1" },
     { name = "flet-web", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-web&rev=v1" },
     { name = "matplotlib" },
     { name = "mplfinance" },
     { name = "pandas" },
     { name = "plotly" },
+]
+
+[[package]]
+name = "flet-flashlight"
+version = "0.2.0"
+source = { git = "https://github.com/flet-dev/flet-flashlight?rev=v1#45d5ab750c6b0bd891be7c52ee6a1eb944890094" }
+dependencies = [
+    { name = "flet" },
+]
+
+[[package]]
+name = "flet-geolocator"
+version = "0.2.0"
+source = { git = "https://github.com/flet-dev/flet-geolocator?rev=v1#bae3cf438b2a355a17067a2715bf155e19b61b92" }
+dependencies = [
+    { name = "flet" },
 ]
 
 [[package]]

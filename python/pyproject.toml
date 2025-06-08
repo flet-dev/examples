@@ -15,6 +15,8 @@ dev-dependencies = [
     "flet-desktop",
     "flet-web",
     "flet-audio",
+    "flet-flashlight",
+    "flet-geolocator",
     "matplotlib",
     "mplfinance",
     "pandas",
@@ -27,6 +29,9 @@ flet-cli = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/pytho
 flet-desktop = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-desktop", rev = "v1" }
 flet-web = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-web", rev = "v1" }
 flet-audio = { git = "https://github.com/flet-dev/flet-audio", rev = "v1"}
+flet-flashlight = { git = "https://github.com/flet-dev/flet-flashlight", rev = "v1"}
+flet-geolocator = { git = "https://github.com/flet-dev/flet-geolocator", rev = "v1"}
+
 
 # [tool.uv.resolutions]
 # flet = { url = "git+https://github.com/flet-dev/flet.git@v1" }
