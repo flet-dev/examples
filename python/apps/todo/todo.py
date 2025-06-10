@@ -1,15 +1,13 @@
-from dataclasses import field
-from typing import Any
-
 import flet as ft
 from flet.controls.base_control import control
 
 
-@control
 class Task(ft.Column):
-    task_name: str = field(metadata={"skip": True})
-    task_delete: Any = field(metadata={"skip": True})
-    completed: bool = field(default=False, metadata={"skip": True})
+    def __init__(self, task_name, task_delete):
+        super().__init__()
+        self.completed = False
+        self.task_name = task_name
+        self.task_delete = task_delete
 
     def init(self):
         self.display_task = ft.Checkbox(
