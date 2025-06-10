@@ -22,9 +22,9 @@ def main(page: ft.Page):
         images.controls.append(
             ft.Image(
                 src=f"https://picsum.photos/150/150?{i}",
-                fit=ft.ImageFit.NONE,
+                fit=ft.BoxFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
-                border_radius=ft.border_radius.all(10),
+                border_radius=ft.BorderRadius.all(10),
             )
         )
     page.update()

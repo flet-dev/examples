@@ -17,4 +17,4 @@ def main(page: ft.Page):
     page.add(b, t)
 
 
-ft.run(target=main)
+ft.run(main)

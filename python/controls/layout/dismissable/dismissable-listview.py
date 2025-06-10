@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page):
     def handle_dlg_action_clicked(e):
-        page.pop_dialog(dlg)
+        page.pop_dialog()
         dlg.data.confirm_dismiss(e.control.data)
 
     dlg = ft.AlertDialog(

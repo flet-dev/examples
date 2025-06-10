@@ -12,7 +12,7 @@ def main(page: ft.Page):
         drag_interval=50,
         on_pan_update=on_pan_update,
     )
-    c = ft.Container(gd, bgcolor=ft.Colors.AMBER, width=50, height=50, left=0, top=0)
+    c = ft.Container(gd, bgcolor=ft.Colors.AMBER, width=150, height=150, left=0, top=0)
 
     def change_icon(event):
         mouse_cursor = next(mouse_cursors)
@@ -34,4 +34,4 @@ def main(page: ft.Page):
     page.add(text)
 
 
-ft.run(target=main)
+ft.run(main)

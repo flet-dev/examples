@@ -2,26 +2,25 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.theme = ft.Theme(
-        scrollbar_theme=ft.ScrollbarTheme(
-            track_color={
-                ft.ControlState.HOVERED: ft.Colors.AMBER,
-                ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
-            },
-            track_visibility=True,
-            track_border_color=ft.Colors.BLUE,
-            thumb_visibility=True,
-            thumb_color={
-                ft.ControlState.HOVERED: ft.Colors.RED,
-                ft.ControlState.DEFAULT: ft.Colors.GREY_300,
-            },
-            thickness=30,
-            radius=15,
-            main_axis_margin=5,
-            cross_axis_margin=10,
-            # interactive=False,
-        )
-    )
+    # page.theme = ft.Theme(
+    #     scrollbar_theme=ft.ScrollbarTheme(
+    #         track_color={
+    #             ft.ControlState.HOVERED: ft.Colors.AMBER,
+    #             ft.ControlState.DEFAULT: ft.Colors.TRANSPARENT,
+    #         },
+    #         track_visibility=True,
+    #         track_border_color=ft.Colors.BLUE,
+    #         thumb_visibility=True,
+    #         thumb_color={
+    #             ft.ControlState.HOVERED: ft.Colors.RED,
+    #             ft.ControlState.DEFAULT: ft.Colors.GREY_300,
+    #         },
+    #         thickness=30,
+    #         radius=15,
+    #         main_axis_margin=5,
+    #         cross_axis_margin=10,
+    #     )
+    # )
 
     cl = ft.Column(
         spacing=10,
@@ -30,7 +29,7 @@ def main(page: ft.Page):
         scroll=ft.ScrollMode.ALWAYS,
     )
     for i in range(0, 100):
-        cl.controls.append(ft.Text(f"Text line {i}", key=str(i)))
+        cl.controls.append(ft.Text(f"Text line {i}", scroll_key=str(i)))
 
     def scroll_to_offset(e):
         cl.scroll_to(offset=500, duration=1000)
@@ -51,7 +50,7 @@ def main(page: ft.Page):
         cl.scroll_to(delta=-100, duration=200)
 
     page.add(
-        ft.Container(cl, border=ft.border.all(1)),
+        ft.Container(cl, border=ft.Border.all(1)),
         ft.ElevatedButton("Scroll to offset 500", on_click=scroll_to_offset),
         ft.Row(
             [

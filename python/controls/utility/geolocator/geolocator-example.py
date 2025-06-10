@@ -1,16 +1,17 @@
 import flet as ft
+import flet_geolocator as ftg
 
 
 async def main(page: ft.Page):
     page.scroll = ft.ScrollMode.ADAPTIVE
-    page.appbar = ft.runBar(title=ft.Text("Geolocator Tests"))
+    page.appbar = ft.AppBar(title=ft.Text("Geolocator Tests"))
 
     def handle_position_change(e):
         page.add(ft.Text(f"New position: {e.latitude} {e.longitude}"))
 
-    gl = ft.Geolocator(
-        location_settings=ft.GeolocatorSettings(
-            accuracy=ft.GeolocatorPositionAccuracy.LOW
+    gl = ftg.Geolocator(
+        location_settings=ftg.GeolocatorSettings(
+            accuracy=ftg.GeolocatorPositionAccuracy.LOW
         ),
         on_position_change=handle_position_change,
         on_error=lambda e: page.add(ft.Text(f"Error: {e.data}")),

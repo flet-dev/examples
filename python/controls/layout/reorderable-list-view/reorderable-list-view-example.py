@@ -2,12 +2,12 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "ReorderableListView Demo"
+    # page.title = "ReorderableListView Demo"
 
     # the primary color is the color of the reorder handle
-    page.theme = page.dark_theme = ft.Theme(
-        color_scheme=ft.ColorScheme(primary=ft.Colors.BLUE)
-    )
+    # page.theme = page.dark_theme = ft.Theme(
+    #     color_scheme=ft.ColorScheme(primary=ft.Colors.BLUE)
+    # )
 
     def handle_reorder(e: ft.OnReorderEvent):
         print(f"Reordered from {e.old_index} to {e.new_index}")
@@ -25,7 +25,8 @@ def main(page: ft.Page):
             ft.Container(
                 content=ft.Text(f"Item {i}", color=ft.Colors.BLACK),
                 bgcolor=get_color(i),
-                margin=ft.margin.symmetric(horizontal=5, vertical=10),
+                # bgcolor=ft.Colors.RED,
+                margin=ft.Margin.symmetric(horizontal=5, vertical=10),
                 width=100,
                 alignment=ft.Alignment.center(),
             )
@@ -42,6 +43,7 @@ def main(page: ft.Page):
                 title=ft.Text(f"Item {i}", color=ft.Colors.BLACK),
                 leading=ft.Icon(ft.Icons.CHECK, color=ft.Colors.RED),
                 bgcolor=get_color(i),
+                # bgcolor=ft.Colors.GREEN,
             )
             for i in range(10)
         ],

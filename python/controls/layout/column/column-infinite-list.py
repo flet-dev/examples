@@ -36,7 +36,7 @@ def main(page: ft.Page):
         cl.controls.append(ft.Text(f"Text line {s.i}", scroll_key=str(s.i)))
         s.i += 1
 
-    page.add(ft.Container(cl, border=ft.border.all(1)))
+    page.add(ft.Container(cl, border=ft.Border.all(1)))
 
 
 ft.run(main)

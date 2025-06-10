@@ -1,5 +1,3 @@
-from time import sleep
-
 import flet as ft
 
 LIGHT_SEED_COLOR = ft.Colors.DEEP_ORANGE
@@ -14,8 +12,8 @@ def main(page: ft.Page):
         page.update()
 
     page.theme_mode = ft.ThemeMode.LIGHT
-    page.theme = ft.Theme(color_scheme_seed=LIGHT_SEED_COLOR, use_material3=True)
-    page.dark_theme = ft.Theme(color_scheme_seed=DARK_SEED_COLOR, use_material3=True)
+    page.theme = ft.Theme(color_scheme_seed=LIGHT_SEED_COLOR, use_material3=False)
+    page.dark_theme = ft.Theme(color_scheme_seed=DARK_SEED_COLOR, use_material3=False)
     page.update()
 
     def toggle_theme_mode(e):
@@ -59,7 +57,7 @@ def main(page: ft.Page):
     )
 
     page.padding = 50
-    page.appbar = ft.runBar(
+    page.appbar = ft.AppBar(
         # toolbar_height=100,
         bgcolor=ft.Colors.SECONDARY_CONTAINER,
         leading=ft.Icon(ft.Icons.PALETTE),

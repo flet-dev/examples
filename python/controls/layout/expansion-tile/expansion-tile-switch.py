@@ -77,8 +77,8 @@ def main(page: ft.Page):
             [
                 ft.Container(
                     content=sw,
-                    padding=ft.padding.only(bottom=50),
-                    alignment=ft.alignment.bottom_right,
+                    padding=ft.Padding.only(bottom=50),
+                    alignment=ft.Alignment.bottom_right(),
                     expand=True,
                 ),
             ],

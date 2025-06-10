@@ -21,7 +21,9 @@ def main(page):
                             selected=True,
                         ),
                         ft.ListTile(
-                            leading=ft.Image(src="/icons/icon-192.png", fit="contain"),
+                            leading=ft.Image(
+                                src="/icons/icon-192.png", fit=ft.BoxFit.CONTAIN
+                            ),
                             title=ft.Text("One-line with leading control"),
                         ),
                         ft.ListTile(
@@ -64,7 +66,7 @@ def main(page):
                     ],
                     spacing=0,
                 ),
-                padding=ft.padding.symmetric(vertical=10),
+                padding=ft.Padding.symmetric(vertical=10),
             )
         )
     )

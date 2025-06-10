@@ -56,4 +56,4 @@ def main(page: ft.Page):
     )
 
 
-ft.run(target=main, upload_dir="uploads")
+ft.run(main, upload_dir="uploads")

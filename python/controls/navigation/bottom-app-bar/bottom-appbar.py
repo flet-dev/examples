@@ -10,7 +10,7 @@ def main(page: ft.Page):
     )
     page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_DOCKED
 
-    page.appbar = ft.runBar(
+    page.appbar = ft.AppBar(
         title=ft.Text("Bottom AppBar Demo"),
         center_title=True,
         bgcolor=ft.Colors.GREEN_300,

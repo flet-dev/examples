@@ -1,5 +1,4 @@
 import flet as ft
-from flet import Container, ElevatedButton, Page, Row, colors, padding
 
 
 def main(page: ft.Page):

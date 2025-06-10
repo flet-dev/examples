@@ -56,7 +56,7 @@ def main(page: ft.Page):
         padding=10,
         bgcolor=ft.Colors.AMBER_100,
         border_radius=10,
-        alignment=ft.alignment.top_center,
+        alignment=ft.Alignment.top_center(),
     )
     scroll_mode_text = ft.Text(str(left_column.scroll))
     right_container = ft.Container(
@@ -73,7 +73,7 @@ def main(page: ft.Page):
         bgcolor=ft.Colors.CYAN_500,
         border_radius=10,
         expand=True,
-        alignment=ft.alignment.top_left,
+        alignment=ft.Alignment.top_left(),
     )
 
     row = ft.Row([left_container, right_container], expand=True)

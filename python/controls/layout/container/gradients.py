@@ -16,7 +16,7 @@ def main(page: ft.Page):
                     padding=10,
                     alignment=ft.Alignment.center(),
                     gradient=ft.LinearGradient(
-                        begin=ft.alignment.top_left,
+                        begin=ft.Alignment.top_left(),
                         end=ft.Alignment(0.8, 1),
                         colors=[
                             "0xff1f005c",
@@ -40,9 +40,9 @@ def main(page: ft.Page):
                     padding=10,
                     alignment=ft.Alignment.center(),
                     gradient=ft.LinearGradient(
-                        begin=ft.Alignment.center()_left,
-                        end=ft.Alignment.center()_right,
-                        colors=[ft.colors.RED, ft.colors.GREEN, ft.colors.BLUE],
+                        begin=ft.Alignment.center_left(),
+                        end=ft.Alignment.center_right(),
+                        colors=[ft.Colors.RED, ft.Colors.GREEN, ft.Colors.BLUE],
                         stops=[0.1, 0.2, 1.0],
                         tile_mode=ft.GradientTileMode.MIRROR,
                     ),

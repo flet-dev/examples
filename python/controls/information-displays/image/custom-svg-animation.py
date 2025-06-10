@@ -22,4 +22,4 @@ async def main(page: ft.Page):
             await asyncio.sleep(0.1)
 
 
-ft.run(target=main)
+ft.run(main)

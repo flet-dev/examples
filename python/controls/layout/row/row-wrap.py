@@ -12,7 +12,7 @@ def main(page: ft.Page):
                     width=50,
                     height=50,
                     bgcolor=ft.Colors.AMBER,
-                    border_radius=ft.border_radius.all(5),
+                    border_radius=ft.BorderRadius.all(5),
                 )
             )
         return items

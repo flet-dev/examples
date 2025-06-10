@@ -186,7 +186,7 @@ wheels = [
 [[package]]
 name = "flet"
 version = "0.1.0"
-source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet&branch=v1#a3a5840e57762eb76afc2fc5d457667ee775e2cc" }
+source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet&rev=v1#e818abd0efe5a401d5dd2e6a97b0f3cb1ee5b3db" }
 dependencies = [
     { name = "httpx", marker = "platform_system != 'Pyodide'" },
     { name = "msgpack" },
@@ -195,9 +195,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "flet-audio"
+version = "0.2.0"
+source = { git = "https://github.com/flet-dev/flet-audio?rev=v1#4645f214c7da9095f43ce15fa8445a69ccf00e64" }
+dependencies = [
+    { name = "flet" },
+]
+
+[[package]]
 name = "flet-cli"
 version = "0.1.0"
-source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-cli&branch=v1#a3a5840e57762eb76afc2fc5d457667ee775e2cc" }
+source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-cli&rev=v1#e818abd0efe5a401d5dd2e6a97b0f3cb1ee5b3db" }
 dependencies = [
     { name = "cookiecutter" },
     { name = "flet" },
@@ -222,7 +230,7 @@ wheels = [
 [[package]]
 name = "flet-desktop"
 version = "0.1.0"
-source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-desktop&branch=v1#a3a5840e57762eb76afc2fc5d457667ee775e2cc" }
+source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-desktop&rev=v1#e818abd0efe5a401d5dd2e6a97b0f3cb1ee5b3db" }
 dependencies = [
     { name = "flet" },
 ]
@@ -238,9 +246,11 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "flet" },
+    { name = "flet-audio" },
     { name = "flet-cli" },
     { name = "flet-desktop" },
+    { name = "flet-flashlight" },
+    { name = "flet-geolocator" },
     { name = "flet-web" },
     { name = "matplotlib" },
     { name = "mplfinance" },
@@ -250,16 +260,18 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flet", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet&branch=v1" },
+    { name = "flet", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet&rev=v1" },
     { name = "flet-contrib" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "flet", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet&branch=v1" },
-    { name = "flet-cli", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-cli&branch=v1" },
-    { name = "flet-desktop", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-desktop&branch=v1" },
-    { name = "flet-web", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-web&branch=v1" },
+    { name = "flet-audio", git = "https://github.com/flet-dev/flet-audio?rev=v1" },
+    { name = "flet-cli", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-cli&rev=v1" },
+    { name = "flet-desktop", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-desktop&rev=v1" },
+    { name = "flet-flashlight", git = "https://github.com/flet-dev/flet-flashlight?rev=v1" },
+    { name = "flet-geolocator", git = "https://github.com/flet-dev/flet-geolocator?rev=v1" },
+    { name = "flet-web", git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-web&rev=v1" },
     { name = "matplotlib" },
     { name = "mplfinance" },
     { name = "pandas" },
@@ -267,9 +279,25 @@ dev = [
 ]
 
 [[package]]
+name = "flet-flashlight"
+version = "0.2.0"
+source = { git = "https://github.com/flet-dev/flet-flashlight?rev=v1#45d5ab750c6b0bd891be7c52ee6a1eb944890094" }
+dependencies = [
+    { name = "flet" },
+]
+
+[[package]]
+name = "flet-geolocator"
+version = "0.2.0"
+source = { git = "https://github.com/flet-dev/flet-geolocator?rev=v1#bae3cf438b2a355a17067a2715bf155e19b61b92" }
+dependencies = [
+    { name = "flet" },
+]
+
+[[package]]
 name = "flet-web"
 version = "0.1.0"
-source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-web&branch=v1#a3a5840e57762eb76afc2fc5d457667ee775e2cc" }
+source = { git = "https://github.com/flet-dev/flet?subdirectory=sdk%2Fpython%2Fpackages%2Fflet-web&rev=v1#e818abd0efe5a401d5dd2e6a97b0f3cb1ee5b3db" }
 dependencies = [
     { name = "fastapi" },
     { name = "flet" },

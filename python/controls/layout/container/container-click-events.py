@@ -29,7 +29,7 @@ def main(page: ft.Page):
         )
         page.update()
 
-    def on_tap_down(e: ft.ContainerTapEvent):
+    def on_tap_down(e):
         nonlocal td_counter
         td_counter += 1
         t2.spans[-1] = ft.TextSpan(
