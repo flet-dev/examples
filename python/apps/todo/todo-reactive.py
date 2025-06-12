@@ -1,10 +1,9 @@
 import itertools
-#import logging
 from dataclasses import dataclass, field
+from typing import cast
 
 import flet as ft
 
-#logging.basicConfig(level=logging.DEBUG)
 
 task_id = itertools.count(1)
 
@@ -33,36 +32,39 @@ class TaskItem:
 
 
 @dataclass
-class TodoState:
+class TodoAppState:
     tasks: list[TaskItem] = field(default_factory=list)
-    tabs: list[str] = field(default_factory=lambda: ["all", "active", "completed"])
-    selected_tab: str = "all"
+    statuses: list[str] = field(default_factory=lambda: ["all", "active", "completed"])
+    status: str = "all"
+    new_task_field: ft.Ref = field(default_factory=lambda: ft.Ref())
     new_task_name: str = ""
 
     def get_tasks(self) -> list[TaskItem]:
         return list(
             filter(
-                lambda task: self.selected_tab == "all"
-                or self.selected_tab == "active"
+                lambda task: self.status == "all"
+                or self.status == "active"
                 and not task.completed
-                or self.selected_tab == "completed"
+                or self.status == "completed"
                 and task.completed,
                 self.tasks,
             )
         )
 
-    def active_tasks_number(self):
+    @property
+    def active_tasks_number(self) -> int:
         return len([task for task in self.tasks if not task.completed])
 
-    def set_new_task_name(self, e: ft.ControlEvent):
+    def status_changed(self, e: ft.Event[ft.Tabs]):
+        self.status = self.statuses[e.control.selected_index]
+
+    def set_new_task_name(self, e: ft.Event[ft.TextField]):
         self.new_task_name = e.control.value
 
     def add_task(self):
         self.tasks.append(TaskItem(self.new_task_name))
         self.new_task_name = ""
-
-    def tab_changed(self, e):
-        self.selected_tab = self.tabs[e.control.selected_index]
+        cast(ft.TextField, self.new_task_field.current).focus()
 
     def delete_task(self, task: TaskItem):
         self.tasks.remove(task)
@@ -71,7 +73,44 @@ class TodoState:
         self.tasks = list(filter(lambda task: not task.completed, self.tasks))
 
 
-def TaskView(state: TodoState, task: TaskItem):
+def TodoAppView(state: TodoAppState):
+    return ft.Column(
+        [
+            Header(),
+            ft.Row(
+                controls=[
+                    ft.TextField(
+                        ref=state.new_task_field,
+                        hint_text="What needs to be done?",
+                        on_submit=state.add_task,
+                        value=state.new_task_name,
+                        on_change=state.set_new_task_name,
+                        autofocus=True,
+                        expand=True,
+                    ),
+                    ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=state.add_task),
+                ],
+            ),
+            ft.Column(
+                spacing=25,
+                controls=[
+                    ft.Tabs(
+                        scrollable=False,
+                        selected_index=state.statuses.index(state.status),
+                        on_change=state.status_changed,
+                        tabs=[ft.Tab(label=tab) for tab in state.statuses],
+                    ),
+                    ft.Column(
+                        [TaskItemView(state, task) for task in state.get_tasks()]
+                    ),
+                    Footer(state),
+                ],
+            ),
+        ]
+    )
+
+
+def TaskItemView(state: TodoAppState, task: TaskItem):
     return (
         ft.Row(
             key=task.id,
@@ -134,12 +173,12 @@ def Header():
     )
 
 
-def Footer(state: TodoState):
+def Footer(state: TodoAppState):
     return ft.Row(
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         vertical_alignment=ft.CrossAxisAlignment.CENTER,
         controls=[
-            ft.Text(f"{state.active_tasks_number()} items left"),
+            ft.Text(f"{state.active_tasks_number} items left"),
             ft.OutlinedButton(
                 content="Clear completed",
                 on_click=state.clear_completed,
@@ -149,47 +188,10 @@ def Footer(state: TodoState):
 
 
 def main(page: ft.Page):
-    state = TodoState()
+    page.scroll = ft.ScrollMode.AUTO
 
-    page.add(
-        ft.ControlBuilder(
-            state,
-            lambda state: ft.Column(
-                [
-                    Header(),
-                    ft.Row(
-                        controls=[
-                            ft.TextField(
-                                hint_text="What needs to be done?",
-                                on_submit=state.add_task,
-                                value=state.new_task_name,
-                                on_change=state.set_new_task_name,
-                                expand=True,
-                            ),
-                            ft.FloatingActionButton(
-                                icon=ft.Icons.ADD, on_click=state.add_task
-                            ),
-                        ],
-                    ),
-                    ft.Column(
-                        spacing=25,
-                        controls=[
-                            ft.Tabs(
-                                scrollable=False,
-                                selected_index=state.tabs.index(state.selected_tab),
-                                on_change=state.tab_changed,
-                                tabs=[ft.Tab(label=tab) for tab in state.tabs],
-                            ),
-                            ft.Column(
-                                [TaskView(state, task) for task in state.get_tasks()]
-                            ),
-                            Footer(state),
-                        ],
-                    ),
-                ]
-            ),
-        )
-    )
+    state = TodoAppState()
+    page.add(ft.ControlBuilder(state, lambda state: TodoAppView(state)))
 
 
 ft.run(main)
