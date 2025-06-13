@@ -3,10 +3,9 @@ import flet as ft
 
 class OuterContainer(ft.Draggable):
 
-    def __init__(self, page, color):
+    def __init__(self, color, list_ref):
 
-        # self.page = page
-        # self.list_ref = list_ref
+        self.list_ref = list_ref
         self.container_color = color
         # inner_container is a draggable
         self.inner_container = InnerContainer(self)
@@ -115,18 +114,18 @@ class InnerContainer(ft.Draggable):
 def main(page: ft.Page):
 
     page.title = "Drag and drop ordering"
-    # list_ref = ft.Ref[ft.Row]()
+    list_ref = ft.Ref[ft.Row]()
     page.bgcolor = ft.Colors.BLUE_GREY_100
     page.add(
         ft.Row(
             [
-                OuterContainer(page, ft.Colors.DEEP_ORANGE_400),
-                OuterContainer(page, ft.Colors.BLUE_400),
+                OuterContainer(ft.Colors.DEEP_ORANGE_400, list_ref),
+                OuterContainer(ft.Colors.BLUE_400, list_ref),
             ],
             alignment=ft.MainAxisAlignment.SPACE_AROUND,
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
             expand=True,
-            # ref=list_ref,
+            ref=list_ref,
         )
     )
     page.update()
