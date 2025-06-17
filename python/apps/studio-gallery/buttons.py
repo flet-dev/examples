@@ -12,7 +12,7 @@ def example(page):
                 [
                     ft.Text("Common buttons"),
                     ft.IconButton(
-                        ft.icons.INFO_OUTLINED,
+                        ft.Icons.INFO_OUTLINED,
                         tooltip="There are five types of common buttons: elevated, filled, filled tonal, outlined, and text",
                     ),
                 ],
@@ -52,7 +52,7 @@ def example(page):
                 [
                     ft.Text("Icon buttons"),
                     ft.IconButton(
-                        ft.icons.INFO_OUTLINED,
+                        ft.Icons.INFO_OUTLINED,
                         tooltip="Icon buttons help people take supplementary actions with a single tap",
                     ),
                 ],
@@ -60,9 +60,9 @@ def example(page):
             ),
             ft.Row(
                 controls=[
-                    ft.IconButton(icon=ft.icons.BOOKMARK),
+                    ft.IconButton(icon=ft.Icons.BOOKMARK),
                     ft.IconButton(
-                        icon=ft.icons.BOOKMARK,
+                        icon=ft.Icons.BOOKMARK,
                         disabled=True,
                     ),
                 ],
@@ -72,7 +72,7 @@ def example(page):
                 [
                     ft.Text("Floating action buttons"),
                     ft.IconButton(
-                        ft.icons.INFO_OUTLINED,
+                        ft.Icons.INFO_OUTLINED,
                         tooltip="The FAB represents the most important action on a screen. It puts key actions within reach",
                     ),
                 ],
@@ -80,12 +80,12 @@ def example(page):
             ),
             ft.Row(
                 controls=[
-                    ft.FloatingActionButton(icon=ft.icons.ADD, tooltip="Standard"),
+                    ft.FloatingActionButton(icon=ft.Icons.ADD, tooltip="Standard"),
                     ft.FloatingActionButton(
-                        icon=ft.icons.ADD, text="Extended", tooltip="Extended"
+                        icon=ft.Icons.ADD, text="Extended", tooltip="Extended"
                     ),
                     ft.FloatingActionButton(
-                        icon=ft.icons.ADD, mini=True, tooltip="Mini"
+                        icon=ft.Icons.ADD, mini=True, tooltip="Mini"
                     ),
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
