@@ -41,6 +41,7 @@ def main(page: ft.Page):
         )
 
     page.add(
+        ft.Text("test"),
         ft.ElevatedButton(
             "Select files...",
             icon=ft.Icons.FOLDER_OPEN,
@@ -56,4 +57,4 @@ def main(page: ft.Page):
     )
 
 
-ft.run(main, upload_dir="uploads")
+ft.run(main, upload_dir="examples")

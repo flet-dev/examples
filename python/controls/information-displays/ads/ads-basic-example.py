@@ -56,7 +56,7 @@ def main(page: ft.Page):
 
     iad = get_new_interstitial_ad()
     page.overlay.append(iad)
-    page.appbar = ft.runBar(
+    page.appbar = ft.AppBar(
         adaptive=True,
         title=ft.Text("Mobile Ads Playground"),
         bgcolor=ft.Colors.LIGHT_BLUE_300,

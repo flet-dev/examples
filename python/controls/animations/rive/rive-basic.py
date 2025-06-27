@@ -1,9 +1,10 @@
 import flet as ft
+import flet_rive as ftr
 
 
 def main(page):
     page.add(
-        ft.Rive(
+        ftr.Rive(
             "https://cdn.rive.app/animations/vehicles.riv",
             placeholder=ft.ProgressBar(),
             width=300,

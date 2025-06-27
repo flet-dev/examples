@@ -57,9 +57,9 @@ def main(page: ft.Page):
         volume=1,
         balance=0,
         on_loaded=lambda _: print("Loaded"),
-        on_duration_changed=lambda e: print("Duration changed:", e.data),
-        on_position_changed=lambda e: print("Position changed:", e.data),
-        on_state_changed=lambda e: print("State changed:", e.data),
+        on_duration_change=lambda e: print("Duration changed:", e.data),
+        on_position_change=lambda e: print("Position changed:", e.data),
+        on_state_change=lambda e: print("State changed:", e.data),
         on_seek_complete=lambda _: print("Seek complete"),
     )
     page.overlay.append(audio1)
