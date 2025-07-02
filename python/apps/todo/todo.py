@@ -22,12 +22,12 @@ class Task(ft.Column):
                     spacing=0,
                     controls=[
                         ft.IconButton(
-                            icon=ft.icons.CREATE_OUTLINED,
+                            icon=ft.Icons.CREATE_OUTLINED,
                             tooltip="Edit To-Do",
                             on_click=self.edit_clicked,
                         ),
                         ft.IconButton(
-                            ft.icons.DELETE_OUTLINE,
+                            ft.Icons.DELETE_OUTLINE,
                             tooltip="Delete To-Do",
                             on_click=self.delete_clicked,
                         ),
@@ -43,8 +43,8 @@ class Task(ft.Column):
             controls=[
                 self.edit_name,
                 ft.IconButton(
-                    icon=ft.icons.DONE_OUTLINE_OUTLINED,
-                    icon_color=ft.colors.GREEN,
+                    icon=ft.Icons.DONE_OUTLINE_OUTLINED,
+                    icon_color=ft.Colors.GREEN,
                     tooltip="Update To-Do",
                     on_click=self.save_clicked,
                 ),
@@ -100,7 +100,7 @@ class TodoApp(ft.Column):
                 controls=[
                     self.new_task,
                     ft.FloatingActionButton(
-                        icon=ft.icons.ADD, on_click=self.add_clicked
+                        icon=ft.Icons.ADD, on_click=self.add_clicked
                     ),
                 ],
             ),
