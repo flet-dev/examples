@@ -15,7 +15,7 @@ def main(page: ft.Page):
             ft.Row(
                 controls=[
                     new_task,
-                    ft.FloatingActionButton(icon=ft.icons.ADD, on_click=add_clicked),
+                    ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=add_clicked),
                 ],
             ),
             tasks_view,
