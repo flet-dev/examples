@@ -25,19 +25,3 @@ dev-dependencies = [
     "pandas",
     "plotly"
 ]
-
-[tool.uv.sources]
-flet = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet", rev = "v1" }
-flet-cli = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-cli", rev = "v1" }
-flet-desktop = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-desktop", rev = "v1" }
-flet-web = { git = "https://github.com/flet-dev/flet", subdirectory = "sdk/python/packages/flet-web", rev = "v1" }
-flet-audio = { git = "https://github.com/flet-dev/flet-audio", rev = "v1"}
-flet-video = { git = "https://github.com/flet-dev/flet-video", rev = "v1"}
-flet-flashlight = { git = "https://github.com/flet-dev/flet-flashlight", rev = "v1"}
-flet-geolocator = { git = "https://github.com/flet-dev/flet-geolocator", rev = "v1"}
-flet-ads = { git = "https://github.com/flet-dev/flet-ads", rev = "v1"}
-flet-rive = { git = "https://github.com/flet-dev/flet-rive", rev = "v1"}
-
-
-# [tool.uv.resolutions]
-# flet = { url = "git+https://github.com/flet-dev/flet.git@v1" }
