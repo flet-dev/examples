@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.scroll = True
+    page.scroll = ft.ScrollMode.ALWAYS
 
     def handle_action_click(e):
         page.add(ft.Text(f"Action clicked: {e.control.text}"))
