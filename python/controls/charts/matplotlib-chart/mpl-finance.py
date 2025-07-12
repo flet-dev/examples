@@ -12,7 +12,7 @@ matplotlib.use("svg")
 def main(page: ft.Page):
 
     csv_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "assets/SP500_NOV2019_Hist.csv"
+        os.path.dirname(os.path.abspath(__file__)), "SP500_NOV2019_Hist.csv"
     )
     print(csv_path)
     daily = pd.read_csv(csv_path, index_col=0, parse_dates=True)
