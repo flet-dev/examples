@@ -64,7 +64,7 @@ def example():
                 height=50,
                 bgcolor=color.name,
                 content=ft.Text(color.display_name, color=text_color),
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
                 on_click=copy_to_clipboard,
             )
         )

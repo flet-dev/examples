@@ -4,16 +4,15 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     i = ft.Image(src="https://picsum.photos/200/300", width=200, height=300)
 
     def animate(e):
-        sw.content = ft.Image(
+        switcher.content = ft.Image(
             src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
         )
         page.update()
 
-    sw = ft.AnimatedSwitcher(
+    switcher = ft.AnimatedSwitcher(
         i,
         transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
@@ -23,7 +22,7 @@ def main(page: ft.Page):
     )
 
     page.add(
-        sw,
+        switcher,
         ft.ElevatedButton("Animate!", on_click=animate),
     )
 

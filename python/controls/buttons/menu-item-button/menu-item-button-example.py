@@ -66,7 +66,7 @@ def main(page: ft.Page):
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(weight=ft.FontWeight.W_500),
             ),
-            alignment=ft.Alignment.center(),
+            alignment=ft.Alignment.CENTER,
         ),
     )
 

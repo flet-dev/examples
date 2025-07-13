@@ -15,7 +15,7 @@ class OuterContainer(ft.Draggable):
             height=200,
             bgcolor=self.container_color,
             border_radius=5,
-            alignment=ft.Alignment.center(),
+            alignment=ft.Alignment.CENTER,
             border=ft.Border.all(4, ft.Colors.BLACK12),
         )
 

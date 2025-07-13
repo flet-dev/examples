@@ -56,7 +56,7 @@ def main(page: ft.Page):
             ),
             theme_style=ft.TextThemeStyle.DISPLAY_MEDIUM,
         ),
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
         padding=ft.Padding.all(10),
         height=150,
         width=150,

@@ -38,7 +38,7 @@ def main(page: ft.Page):
                 200,
                 "Rotated around center",
                 ft.TextStyle(size=20),
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
                 rotate=math.pi / 2,
             ),
             cv.Text(

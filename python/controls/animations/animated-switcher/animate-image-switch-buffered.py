@@ -48,13 +48,11 @@ class BufferingSwitcher(ft.AnimatedSwitcher):
             print(f"Image request failed with {response.status_code}")
 
     def before_update(self):
-
         self.page.run_task(self.fill_queue)
         print(len(self.image_queue))
 
 
 def main(page: ft.Page):
-
     i = ft.Image(
         src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
     )

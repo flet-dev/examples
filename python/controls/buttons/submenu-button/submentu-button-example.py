@@ -38,7 +38,7 @@ def main(page: ft.Page):
             "Choose a bgcolor from the menu",
             style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),
         ),
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
     )
     menubar = ft.MenuBar(
         expand=True,
@@ -148,7 +148,7 @@ def main(page: ft.Page):
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(size=24, weight=ft.FontWeight.BOLD),
             ),
-            alignment=ft.Alignment.center(),
+            alignment=ft.Alignment.CENTER,
         ),
     )
 

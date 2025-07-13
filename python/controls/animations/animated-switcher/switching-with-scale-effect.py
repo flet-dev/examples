@@ -2,23 +2,23 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "AnimatedSwitcher examples"
+    page.title = "AnimatedSwitcher example"
 
     c1 = ft.Container(
         ft.Text("Hello!", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
         width=200,
         height=200,
         bgcolor=ft.Colors.GREEN,
     )
     c2 = ft.Container(
         ft.Text("Bye!", size=50),
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
         width=200,
         height=200,
         bgcolor=ft.Colors.YELLOW,
     )
-    c = ft.AnimatedSwitcher(
+    switcher = ft.AnimatedSwitcher(
         c1,
         transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
@@ -28,22 +28,22 @@ def main(page: ft.Page):
     )
 
     def scale(e):
-        c.content = c2 if c.content == c1 else c1
-        c.transition = ft.AnimatedSwitcherTransition.SCALE
-        c.update()
+        switcher.content = c2 if switcher.content == c1 else c1
+        switcher.transition = ft.AnimatedSwitcherTransition.SCALE
+        switcher.update()
 
     def fade(e):
-        c.content = c2 if c.content == c1 else c1
-        c.transition = ft.AnimatedSwitcherTransition.FADE
-        c.update()
+        switcher.content = c2 if switcher.content == c1 else c1
+        switcher.transition = ft.AnimatedSwitcherTransition.FADE
+        switcher.update()
 
     def rotate(e):
-        c.content = c2 if c.content == c1 else c1
-        c.transition = ft.AnimatedSwitcherTransition.ROTATION
-        c.update()
+        switcher.content = c2 if switcher.content == c1 else c1
+        switcher.transition = ft.AnimatedSwitcherTransition.ROTATION
+        switcher.update()
 
     page.add(
-        c,
+        switcher,
         ft.ElevatedButton("Scale", on_click=scale),
         ft.ElevatedButton("Fade", on_click=fade),
         ft.ElevatedButton("Rotate", on_click=rotate),

@@ -14,7 +14,7 @@ async def main(page: ft.Page):
             ft.Tab(
                 label="Tab 1",
                 content=ft.Container(
-                    content=ft.Text("This is Tab 1"), alignment=ft.Alignment.center()
+                    content=ft.Text("This is Tab 1"), alignment=ft.Alignment.CENTER
                 ),
             ),
             ft.Tab(

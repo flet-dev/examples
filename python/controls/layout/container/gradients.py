@@ -14,7 +14,7 @@ def main(page: ft.Page):
                 ft.Container(
                     content=ft.Text("Linear gradient"),
                     padding=10,
-                    alignment=ft.Alignment.center(),
+                    alignment=ft.Alignment.CENTER,
                     gradient=ft.LinearGradient(
                         begin=ft.Alignment.top_left(),
                         end=ft.Alignment(0.8, 1),
@@ -38,7 +38,7 @@ def main(page: ft.Page):
                 ft.Container(
                     content=ft.Text("Linear gradient with stops"),
                     padding=10,
-                    alignment=ft.Alignment.center(),
+                    alignment=ft.Alignment.CENTER,
                     gradient=ft.LinearGradient(
                         begin=ft.Alignment.center_left(),
                         end=ft.Alignment.center_right(),
@@ -53,7 +53,7 @@ def main(page: ft.Page):
                 ft.Container(
                     content=ft.Text("Radial gradient"),
                     padding=10,
-                    alignment=ft.Alignment.center(),
+                    alignment=ft.Alignment.CENTER,
                     gradient=ft.RadialGradient(
                         center=ft.Alignment(0.7, -0.6),
                         radius=0.2,
@@ -70,9 +70,9 @@ def main(page: ft.Page):
                 ft.Container(
                     content=ft.Text("Sweep gradient"),
                     padding=10,
-                    alignment=ft.Alignment.center(),
+                    alignment=ft.Alignment.CENTER,
                     gradient=ft.SweepGradient(
-                        center=ft.Alignment.center(),
+                        center=ft.Alignment.CENTER,
                         start_angle=0.0,
                         end_angle=math.pi * 2,
                         colors=[

@@ -6,7 +6,7 @@ def main(page: ft.Page):
     page.add(
         ft.Stack(
             [
-                ft.Container(ft.Text("60%"), alignment=ft.Alignment.center()),
+                ft.Container(ft.Text("60%"), alignment=ft.Alignment.CENTER),
                 ft.ProgressRing(
                     value=0.6,
                     width=100,

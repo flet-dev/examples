@@ -8,7 +8,7 @@ class SizeAwareContainer(cv.Canvas):
         self.size = ft.Text()
         self.content = ft.Container(
             self.size,
-            alignment=ft.Alignment.center(),
+            alignment=ft.Alignment.CENTER,
             bgcolor=color,
         )
         self.resize_interval = 100

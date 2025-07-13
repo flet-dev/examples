@@ -29,7 +29,7 @@ def main(page: ft.Page):
                 # bgcolor=ft.Colors.RED,
                 margin=ft.Margin.symmetric(horizontal=5, vertical=10),
                 width=100,
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
             )
             for i in range(10)
         ],

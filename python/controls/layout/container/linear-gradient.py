@@ -6,7 +6,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Container(
-            alignment=ft.Alignment.center(),
+            alignment=ft.Alignment.CENTER,
             gradient=ft.LinearGradient(
                 begin=ft.Alignment.top_left(),
                 end=ft.Alignment(0.8, 1),

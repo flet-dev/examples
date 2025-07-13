@@ -20,7 +20,7 @@ def main(page: ft.Page):
                     ),
                     blend_mode=ft.BlendMode.MULTIPLY,
                     shader=ft.RadialGradient(
-                        center=ft.Alignment.center(),
+                        center=ft.Alignment.CENTER,
                         radius=0.5,
                         colors=[ft.Colors.WHITE, ft.Colors.PINK],
                         tile_mode=ft.GradientTileMode.CLAMP,

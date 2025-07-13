@@ -19,7 +19,7 @@ def main(page: ft.Page):
         height=70,
         bgcolor=ft.Colors.BLUE,
         border_radius=5,
-        rotate=ft.transform.Rotate(-1, alignment=ft.Alignment.center()_left),
+        rotate=ft.transform.Rotate(-1, alignment=ft.Alignment.CENTER_left),
         animate_rotation=ft.Animation(duration=300),
     )
 
