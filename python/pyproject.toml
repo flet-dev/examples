@@ -5,23 +5,24 @@ description = "Sample apps for Flet"
 license = "Apache-2.0"
 readme = "README.md"
 dependencies = [
-  "flet",
+  "flet>=0.70.0.dev0",
+  "flet-desktop>=0.70.0.dev0",
+  "flet-web>=0.70.0.dev0",
+  "flet-cli>=0.70.0.dev0",
   "flet-contrib",
 ]
 
 [tool.uv]
 dev-dependencies = [
-    "flet-cli",
-    "flet-desktop",
-    "flet-web",
-    "flet-audio",
-    "flet-video",
-    "flet-flashlight",
-    "flet-geolocator",
-    "flet-ads",
-    "flet-rive",
+    "flet-audio>=0.2.0.dev0",
+    "flet-video>=0.2.0.dev0",
+    "flet-flashlight>=0.2.0.dev0",
+    "flet-geolocator>=0.2.0.dev0",
+    "flet-ads>=0.2.0.dev0",
+    "flet-rive>=0.2.0.dev0",
     "matplotlib",
     "mplfinance",
     "pandas",
     "plotly"
 ]
+
