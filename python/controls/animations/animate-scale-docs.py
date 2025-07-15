@@ -9,7 +9,7 @@ def main(page: ft.Page):
         bgcolor=ft.Colors.BLUE,
         border_radius=5,
         scale=1,
-        animate_scale=ft.animation.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
+        animate_scale=ft.Animation(600, ft.AnimationCurve.BOUNCE_OUT),
     )
 
     def animate(e):
