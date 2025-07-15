@@ -9,7 +9,7 @@ def main(page: ft.Page):
         page.add(ft.Text(f"Action clicked: {e.control.content}"))
         page.pop_dialog()
 
-    cupertino_actions: list[ft.Control] = [
+    cupertino_actions = [
         ft.CupertinoDialogAction(
             content="Yes",
             destructive=True,
@@ -22,7 +22,7 @@ def main(page: ft.Page):
         ),
     ]
 
-    material_actions: list[ft.Control] = [
+    material_actions = [
         ft.TextButton(content="Yes", on_click=handle_action_click),
         ft.TextButton(content="No", on_click=handle_action_click),
     ]
@@ -59,7 +59,7 @@ def main(page: ft.Page):
                     content=ft.Text("Do you want to delete this file?"),
                     actions=(
                         cupertino_actions
-                        if page.platform in [ft.PagePlatform.IOS, ft.PagePlatform.MACOS]
+                        if page.platform.is_apple()
                         else material_actions
                     ),
                 )

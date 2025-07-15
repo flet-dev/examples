@@ -7,7 +7,7 @@ def main(page: ft.Page):
         ft.Checkbox(label="Material Checkbox", value=True),
         ft.Container(height=20),
         ft.Text(
-            "Adaptive Checkbox shows as CupertinoCheckbox on macOS and iOS and as Checkbox on other platforms:"
+            value="Adaptive Checkbox shows as CupertinoCheckbox on macOS and iOS and as Checkbox on other platforms:"
         ),
         ft.Checkbox(adaptive=True, label="Adaptive Checkbox", value=True),
     )

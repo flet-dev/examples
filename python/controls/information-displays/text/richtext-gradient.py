@@ -6,13 +6,15 @@ def main(page: ft.Page):
         ft.Text(
             spans=[
                 ft.TextSpan(
-                    "Greetings, planet!",
-                    ft.TextStyle(
+                    text="Greetings, planet!",
+                    style=ft.TextStyle(
                         size=40,
                         weight=ft.FontWeight.BOLD,
                         foreground=ft.Paint(
                             gradient=ft.PaintLinearGradient(
-                                (0, 20), (150, 20), [ft.Colors.RED, ft.Colors.YELLOW]
+                                begin=(0, 20),
+                                end=(150, 20),
+                                colors=[ft.Colors.RED, ft.Colors.YELLOW],
                             )
                         ),
                     ),

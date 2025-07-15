@@ -2,7 +2,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     c1 = ft.Container(
         width=140,
         height=100,
@@ -19,7 +18,7 @@ def main(page: ft.Page):
         height=70,
         bgcolor=ft.Colors.BLUE,
         border_radius=5,
-        rotate=ft.transform.Rotate(-1, alignment=ft.Alignment.CENTER_left),
+        rotate=ft.Rotate(-1, alignment=ft.Alignment.CENTER_LEFT),
         animate_rotation=ft.Animation(duration=300),
     )
 
@@ -29,7 +28,7 @@ def main(page: ft.Page):
         page.update()
 
     page.add(
-        ft.Stack([c1, c2], width=500, height=300),
+        ft.Stack(controls=[c1, c2], width=500, height=300),
         ft.ElevatedButton("Animate!", on_click=animate),
     )
 

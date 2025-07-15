@@ -1,5 +1,3 @@
-import math
-
 import flet as ft
 import flet.canvas as cv
 
@@ -7,9 +5,11 @@ import flet.canvas as cv
 def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
     cp = cv.Canvas(
-        [
+        width=float("inf"),
+        expand=True,
+        shapes=[
             cv.Path(
-                [
+                elements=[
                     cv.Path.MoveTo(25, 125),
                     cv.Path.QuadraticTo(50, 25, 135, 35, 0.35),
                     cv.Path.QuadraticTo(75, 115, 135, 215, 0.6),
@@ -22,7 +22,7 @@ def main(page: ft.Page):
                 ),
             ),
             cv.Path(
-                [
+                elements=[
                     cv.Path.MoveTo(85, 125),
                     cv.Path.QuadraticTo(120, 85, 165, 75, 0.5),
                     cv.Path.QuadraticTo(120, 115, 165, 175, 0.3),
@@ -35,8 +35,6 @@ def main(page: ft.Page):
                 ),
             ),
         ],
-        width=float("inf"),
-        expand=True,
     )
 
     page.add(cp)

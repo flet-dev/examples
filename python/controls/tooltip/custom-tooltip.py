@@ -13,7 +13,7 @@ def main(page: ft.Page):
                 border_radius=10,
                 text_style=ft.TextStyle(size=20, color=ft.Colors.WHITE),
                 gradient=ft.LinearGradient(
-                    begin=ft.Alignment.top_left(),
+                    begin=ft.Alignment.TOP_LEFT,
                     end=ft.Alignment(0.8, 1),
                     colors=[
                         "0xff1f005c",

@@ -4,6 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.padding = 50
     page.theme_mode = ft.ThemeMode.LIGHT
+
     page.add(
         ft.ElevatedButton(
             content="Styled button 1",

@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     def animate(e):
-        b.rotate = 0.1 if e.data == "true" else 0
+        b.rotate = 0.1 if e.data == True else 0
         page.update()
 
     t = ft.Text()

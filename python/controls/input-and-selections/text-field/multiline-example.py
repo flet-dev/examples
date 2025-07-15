@@ -3,9 +3,9 @@ import flet as ft
 
 def main(page: ft.Page):
     page.add(
-        ft.TextField(label="standard", multiline=True),
+        ft.TextField(label="Standard", multiline=True),
         ft.TextField(
-            label="disabled",
+            label="Disabled",
             multiline=True,
             disabled=True,
             value="line1\nline2\nline3\nline4\nline5",

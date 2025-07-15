@@ -2,8 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
-    c = ft.Image(src="https://picsum.photos/200/300", opacity=None, animate_opacity=300)
+    c = ft.Image(src="https://picsum.photos/200/300", opacity=1, animate_opacity=300)
 
     def animate_opacity(e):
         c.opacity = 0 if c.opacity == 1 else 1

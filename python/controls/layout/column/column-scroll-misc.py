@@ -27,9 +27,8 @@ def main(page: ft.Page):
         height=200,
         width=float("inf"),
         scroll=ft.ScrollMode.ALWAYS,
+        controls=[ft.Text(f"Text line {i}", scroll_key=str(i)) for i in range(0, 100)],
     )
-    for i in range(0, 100):
-        cl.controls.append(ft.Text(f"Text line {i}", scroll_key=str(i)))
 
     def scroll_to_offset(e):
         cl.scroll_to(offset=500, duration=1000)
@@ -53,14 +52,14 @@ def main(page: ft.Page):
         ft.Container(cl, border=ft.Border.all(1)),
         ft.ElevatedButton("Scroll to offset 500", on_click=scroll_to_offset),
         ft.Row(
-            [
+            controls=[
                 ft.ElevatedButton("Scroll -100", on_click=scroll_to_minus_delta),
                 ft.ElevatedButton("Scroll +100", on_click=scroll_to_delta),
             ]
         ),
         ft.ElevatedButton("Scroll to key '20'", on_click=scroll_to_key),
         ft.Row(
-            [
+            controls=[
                 ft.ElevatedButton("Scroll to start", on_click=scroll_to_start),
                 ft.ElevatedButton("Scroll to end", on_click=scroll_to_end),
             ]

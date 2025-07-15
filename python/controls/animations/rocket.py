@@ -3,8 +3,12 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     c2 = ft.Container(
+        width=120,
+        height=70,
+        alignment=ft.Alignment.CENTER_RIGHT,
+        rotate=ft.Rotate(0, alignment=ft.Alignment.CENTER_LEFT),
+        animate_rotation=ft.Animation(duration=1000),
         content=ft.Container(
             ft.Icon(ft.Icons.ROCKET, size=40, color=ft.Colors.BLACK),
             scale=1.0,
@@ -12,11 +16,6 @@ def main(page: ft.Page):
             opacity=1.0,
             animate_opacity=True,
         ),
-        width=120,
-        height=70,
-        alignment=ft.Alignment.CENTER_right,
-        rotate=ft.transform.Rotate(0, alignment=ft.Alignment.CENTER_left),
-        animate_rotation=ft.Animation(duration=1000),
     )
 
     def animate(e):
@@ -30,12 +29,12 @@ def main(page: ft.Page):
 
     page.add(
         ft.Column(
-            [
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            height=300,
+            controls=[
                 c2,
                 ft.ElevatedButton("Launch!", on_click=animate),
             ],
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            height=300,
         )
     )
 

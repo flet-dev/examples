@@ -2,26 +2,25 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     page.spacing = 0
     page.padding = 0
 
-    def change_theme_mode(e):
+    def handle_switch_change(e: ft.Event[ft.Switch]):
         if page.theme_mode == ft.ThemeMode.DARK:
             page.theme_mode = ft.ThemeMode.LIGHT
-            sw.thumb_icon = ft.Icons.LIGHT_MODE
+            switch.thumb_icon = ft.Icons.LIGHT_MODE
         else:
-            sw.thumb_icon = ft.Icons.DARK_MODE
+            switch.thumb_icon = ft.Icons.DARK_MODE
             page.theme_mode = ft.ThemeMode.DARK
         page.update()
 
-    def handle_expansion_tile_change(e):
+    def handle_expansion_tile_change(e: ft.Event[ft.ExpansionTile]):
         page.show_dialog(
             ft.SnackBar(
-                ft.Text(
+                duration=1000,
+                content=ft.Text(
                     f"ExpansionTile was {'expanded' if e.data=='true' else 'collapsed'}"
                 ),
-                duration=1000,
             )
         )
         if e.control.trailing:
@@ -32,7 +31,7 @@ def main(page: ft.Page):
             )
             page.update()
 
-    sw = ft.Switch(thumb_icon=ft.Icons.DARK_MODE, on_change=change_theme_mode)
+    switch = ft.Switch(thumb_icon=ft.Icons.DARK_MODE, on_change=handle_switch_change)
 
     page.add(
         ft.ExpansionTile(
@@ -74,16 +73,16 @@ def main(page: ft.Page):
             ],
         ),
         ft.Row(
-            [
+            expand=True,
+            alignment=ft.MainAxisAlignment.END,
+            controls=[
                 ft.Container(
-                    content=sw,
+                    content=switch,
                     padding=ft.Padding.only(bottom=50),
-                    alignment=ft.Alignment.bottom_right(),
+                    alignment=ft.Alignment.BOTTOM_RIGHT,
                     expand=True,
                 ),
             ],
-            expand=True,
-            alignment=ft.MainAxisAlignment.END,
         ),
     )
 

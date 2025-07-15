@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    def dialog_dismissed(e):
+    def handle_dialog_dismissal(e):
         page.add(ft.Text("Dialog dismissed"))
 
     def handle_action_click(e):
@@ -14,7 +14,7 @@ def main(page: ft.Page):
     cupertino_alert_dialog = ft.CupertinoAlertDialog(
         title=ft.Text("Cupertino Alert Dialog"),
         content=ft.Text("Do you want to delete this file?"),
-        on_dismiss=dialog_dismissed,
+        on_dismiss=handle_dialog_dismissal,
         actions=[
             ft.CupertinoDialogAction(
                 content="Yes",

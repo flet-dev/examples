@@ -8,28 +8,33 @@ def main(page: ft.Page):
                 return option
         return None
 
-    def add_clicked(e):
-        d.options.append(ft.dropdown.Option(option_textbox.value))
+    def handle_add(e: ft.Event[ft.ElevatedButton]):
+        d.options.append(ft.dropdownm2.Option(option_textbox.value))
         d.value = option_textbox.value
         option_textbox.value = ""
         page.update()
 
-    def delete_clicked(e):
+    def handle_delete(e: ft.Event[ft.OutlinedButton]):
         option = find_option(d.value)
-        if option != None:
+        if option is not None:
             d.options.remove(option)
             # d.value = None
             page.update()
 
-    d = ft.DropdownM2(options=[], color=ft.Colors.BLUE_400)
-    option_textbox = ft.TextField(hint_text="Enter item name")
-    add = ft.ElevatedButton(content="Add", on_click=add_clicked)
-    delete = ft.OutlinedButton(
-        content="Delete selected",
-        on_click=delete_clicked,
-        style=ft.ButtonStyle(bgcolor=ft.Colors.RED),
+    page.add(
+        d := ft.DropdownM2(options=[], color=ft.Colors.BLUE_400),
+        ft.Row(
+            controls=[
+                option_textbox := ft.TextField(hint_text="Enter item name"),
+                ft.ElevatedButton(content="Add", on_click=handle_add),
+                ft.OutlinedButton(
+                    content="Delete selected",
+                    on_click=handle_delete,
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.RED),
+                ),
+            ]
+        ),
     )
-    page.add(d, ft.Row(controls=[option_textbox, add, delete]))
 
 
 ft.run(main)

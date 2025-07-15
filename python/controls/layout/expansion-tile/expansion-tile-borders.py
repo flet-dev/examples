@@ -20,7 +20,7 @@ def main(page: ft.Page):
             affinity=ft.TileAffinity.PLATFORM,
             maintain_state=True,
             shape=ft.RoundedRectangleBorder(radius=20),
-            collapsed_shape=ft.StadiumBorder(ft.BorderSide(width=2)),
+            collapsed_shape=ft.StadiumBorder(side=ft.BorderSide(width=2)),
             collapsed_text_color=ft.Colors.GREY_800,
             text_color=ft.Colors.GREY_800,
             controls=[

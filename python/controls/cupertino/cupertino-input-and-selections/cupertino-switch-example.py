@@ -16,7 +16,7 @@ def main(page: ft.Page):
         ),
         ft.Container(height=20),
         ft.Text(
-            "Adaptive Switch shows as CupertinoSwitch on macOS and iOS and as Switch on other platforms:"
+            value="Adaptive Switch shows as CupertinoSwitch on macOS and iOS and as Switch on other platforms:"
         ),
         ft.Switch(
             adaptive=True,

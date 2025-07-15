@@ -13,39 +13,37 @@ state = State()
 def main(page: ft.Page):
     page.title = "Flet Brush"
 
-    def pan_start(e: ft.DragStartEvent):
+    def handle_pan_start(e: ft.DragStartEvent):
         state.x = e.local_x
         state.y = e.local_y
 
-    def pan_update(e: ft.DragUpdateEvent):
-        cp.shapes.append(
+    def handle_pan_update(e: ft.DragUpdateEvent):
+        canvas.shapes.append(
             cv.Line(
                 state.x, state.y, e.local_x, e.local_y, paint=ft.Paint(stroke_width=3)
             )
         )
-        cp.update()
+        canvas.update()
         state.x = e.local_x
         state.y = e.local_y
 
-    cp = cv.Canvas(
-        content=ft.GestureDetector(
-            on_pan_start=pan_start,
-            on_pan_update=pan_update,
-            drag_interval=10,
-        ),
-        expand=False,
-    )
-
     page.add(
         ft.Container(
-            ft.Stack(
+            content=ft.Stack(
                 controls=[
                     ft.Image(
                         src="https://picsum.photos/200/300",
-                        fit=ft.ImageFit.FILL,
+                        fit=ft.BoxFit.FILL,
                         width=float("inf"),
                     ),
-                    cp,
+                    canvas := cv.Canvas(
+                        expand=False,
+                        content=ft.GestureDetector(
+                            on_pan_start=handle_pan_start,
+                            on_pan_update=handle_pan_update,
+                            drag_interval=10,
+                        ),
+                    ),
                 ]
             ),
             border_radius=5,

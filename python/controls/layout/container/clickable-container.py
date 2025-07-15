@@ -9,7 +9,8 @@ def main(page: ft.Page):
 
     page.add(
         ft.Row(
-            [
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
                 ft.Container(
                     content=ft.Text("Non clickable"),
                     margin=10,
@@ -55,7 +56,6 @@ def main(page: ft.Page):
                     on_click=lambda e: print("Clickable transparent with Ink clicked!"),
                 ),
             ],
-            alignment=ft.MainAxisAlignment.CENTER,
         ),
     )
 

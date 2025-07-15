@@ -62,11 +62,11 @@ def main(page: ft.Page):
             ref=bg_container,
             expand=True,
             bgcolor=ft.Colors.WHITE,
+            alignment=ft.Alignment.CENTER,
             content=ft.Text(
                 "Choose a bgcolor from the menu",
                 style=ft.TextStyle(weight=ft.FontWeight.W_500),
             ),
-            alignment=ft.Alignment.CENTER,
         ),
     )
 

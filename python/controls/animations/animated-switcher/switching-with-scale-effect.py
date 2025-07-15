@@ -2,24 +2,22 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "AnimatedSwitcher example"
-
     c1 = ft.Container(
-        ft.Text("Hello!", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
+        content=ft.Text("Hello!", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
         alignment=ft.Alignment.CENTER,
         width=200,
         height=200,
         bgcolor=ft.Colors.GREEN,
     )
     c2 = ft.Container(
-        ft.Text("Bye!", size=50),
+        content=ft.Text("Bye!", size=50),
         alignment=ft.Alignment.CENTER,
         width=200,
         height=200,
         bgcolor=ft.Colors.YELLOW,
     )
     switcher = ft.AnimatedSwitcher(
-        c1,
+        content=c1,
         transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
         reverse_duration=100,

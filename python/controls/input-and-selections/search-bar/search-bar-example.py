@@ -1,36 +1,19 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
+    def close_anchor(e: ft.Event[ft.ListTile]):
+        anchor.close_view(f"Color {e.control.data}")
 
-    def close_anchor(e):
-        text = f"Color {e.control.data}"
-        print(f"closing view from {text}")
-        anchor.close_view(text)
-
-    def handle_change(e):
+    def handle_change(e: ft.Event[ft.SearchBar]):
         print(f"handle_change e.data: {e.data}")
 
-    def handle_submit(e):
+    def handle_submit(e: ft.Event[ft.SearchBar]):
         print(f"handle_submit e.data: {e.data}")
 
-    def handle_tap(e):
-        print(f"handle_tap")
+    def handle_tap(e: ft.Event[ft.SearchBar]):
+        print("handle_tap")
         anchor.open_view()
-
-    anchor = ft.SearchBar(
-        view_elevation=4,
-        divider_color=ft.Colors.AMBER,
-        bar_hint_text="Search colors...",
-        view_hint_text="Choose a color from the suggestions...",
-        on_change=handle_change,
-        on_submit=handle_submit,
-        on_tap=handle_tap,
-        controls=[
-            ft.ListTile(title=ft.Text(f"Color {i}"), on_click=close_anchor, data=i)
-            for i in range(10)
-        ],
-    )
 
     page.add(
         ft.Row(
@@ -42,7 +25,19 @@ def main(page):
                 ),
             ],
         ),
-        anchor,
+        anchor := ft.SearchBar(
+            view_elevation=4,
+            divider_color=ft.Colors.AMBER,
+            bar_hint_text="Search colors...",
+            view_hint_text="Choose a color from the suggestions...",
+            on_change=handle_change,
+            on_submit=handle_submit,
+            on_tap=handle_tap,
+            controls=[
+                ft.ListTile(title=ft.Text(f"Color {i}"), on_click=close_anchor, data=i)
+                for i in range(10)
+            ],
+        ),
     )
 
 

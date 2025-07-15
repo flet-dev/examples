@@ -26,14 +26,16 @@ def main(page: ft.Page):
 </svg>"""
     page.add(
         ft.Image(
-            src=f"https://raw.githubusercontent.com/dnfield/flutter_svg/master/packages/flutter_svg/example/assets/wikimedia/Firefox_Logo_2017.svg",
+            src="https://raw.githubusercontent.com/dnfield/flutter_svg/master/packages/flutter_svg/example/assets/wikimedia/Firefox_Logo_2017.svg",
             width=200,
             height=200,
         ),
         ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.RED),
         ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.BLUE),
         ft.Container(
-            ft.Image(src=svg_content, width=100, height=100, color=ft.Colors.WHITE),
+            content=ft.Image(
+                src=svg_content, width=100, height=100, color=ft.Colors.WHITE
+            ),
             bgcolor=ft.Colors.BLACK87,
             border_radius=5,
         ),

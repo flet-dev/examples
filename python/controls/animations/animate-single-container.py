@@ -2,7 +2,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     c = ft.Container(
         width=150,
         height=150,

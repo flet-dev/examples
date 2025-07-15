@@ -1,46 +1,46 @@
 import flet as ft
 
 
-def main(page: ft.Page):
-    def items(count):
-        items = []
-        for i in range(1, count + 1):
-            items.append(
-                ft.Container(
-                    content=ft.Text(value=str(i)),
-                    alignment=ft.Alignment.CENTER,
-                    width=50,
-                    height=50,
-                    bgcolor=ft.Colors.AMBER_500,
-                )
+class ColumnFromAlignment(ft.Column):
+    def __init__(self, alignment: ft.MainAxisAlignment):
+        super().__init__()
+        self.controls = [
+            ft.Text(str(alignment), size=10),
+            ft.Container(
+                content=ft.Column(self.get_items(3), alignment=alignment),
+                bgcolor=ft.Colors.AMBER_100,
+                height=400,
+            ),
+        ]
+
+    @staticmethod
+    def get_items(count):
+        return [
+            ft.Container(
+                content=ft.Text(value=str(i)),
+                alignment=ft.Alignment.CENTER,
+                width=50,
+                height=50,
+                bgcolor=ft.Colors.AMBER_500,
             )
-        return items
+            for i in range(1, count + 1)
+        ]
 
-    def column_with_alignment(align: ft.MainAxisAlignment):
-        return ft.Column(
-            [
-                ft.Text(str(align), size=10),
-                ft.Container(
-                    content=ft.Column(items(3), alignment=align),
-                    bgcolor=ft.Colors.AMBER_100,
-                    height=400,
-                ),
-            ]
-        )
 
+def main(page: ft.Page):
     page.add(
         ft.Row(
-            [
-                column_with_alignment(ft.MainAxisAlignment.START),
-                column_with_alignment(ft.MainAxisAlignment.CENTER),
-                column_with_alignment(ft.MainAxisAlignment.END),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_BETWEEN),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_AROUND),
-                column_with_alignment(ft.MainAxisAlignment.SPACE_EVENLY),
-            ],
             spacing=30,
             alignment=ft.MainAxisAlignment.START,
             scroll=ft.ScrollMode.AUTO,
+            controls=[
+                ColumnFromAlignment(ft.MainAxisAlignment.START),
+                ColumnFromAlignment(ft.MainAxisAlignment.CENTER),
+                ColumnFromAlignment(ft.MainAxisAlignment.END),
+                ColumnFromAlignment(ft.MainAxisAlignment.SPACE_BETWEEN),
+                ColumnFromAlignment(ft.MainAxisAlignment.SPACE_AROUND),
+                ColumnFromAlignment(ft.MainAxisAlignment.SPACE_EVENLY),
+            ],
         )
     )
 

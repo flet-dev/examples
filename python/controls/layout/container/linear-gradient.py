@@ -3,12 +3,14 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     page.add(
         ft.Container(
             alignment=ft.Alignment.CENTER,
+            width=150,
+            height=150,
+            border_radius=ft.BorderRadius.all(5),
             gradient=ft.LinearGradient(
-                begin=ft.Alignment.top_left(),
+                begin=ft.Alignment.TOP_LEFT,
                 end=ft.Alignment(0.8, 1),
                 colors=[
                     "0xff1f005c",
@@ -23,9 +25,6 @@ def main(page: ft.Page):
                 tile_mode=ft.GradientTileMode.MIRROR,
                 rotation=math.pi / 3,
             ),
-            width=150,
-            height=150,
-            border_radius=5,
         )
     )
 

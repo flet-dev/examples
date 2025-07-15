@@ -11,8 +11,8 @@ def example():
         content=ft.Text("LinearGradient"),
         alignment=ft.Alignment.CENTER,
         gradient=ft.LinearGradient(
-            begin=ft.Alignment.top_center(),
-            end=ft.Alignment.bottom_center(),
+            begin=ft.Alignment.top_CENTER,
+            end=ft.Alignment.bottom_CENTER,
             colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
         ),
         width=150,

@@ -4,14 +4,16 @@ import flet as ft
 def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
 
-    def handle_change(e: ft.ControlEvent):
+    def handle_change(e: ft.Event[ft.ExpansionPanelList]):
         print(f"change on panel with index {e.data}")
 
-    def handle_delete(e: ft.ControlEvent):
-        panel.controls.remove(e.control.data)
+    def handle_delete(e: ft.Event[ft.IconButton]):
+        # e.control is IconButton; e.control.parent is ExpansionPanel;
+        # e.control.parent.parent is ExpansionPanelList
+        panel_list.controls.remove(e.control.parent.parent)
         page.update()
 
-    panel = ft.ExpansionPanelList(
+    panel_list = ft.ExpansionPanelList(
         expand_icon_color=ft.Colors.AMBER,
         elevation=8,
         divider_color=ft.Colors.AMBER,
@@ -21,7 +23,7 @@ def main(page: ft.Page):
                 # has no header and content - placeholders will be used
                 bgcolor=ft.Colors.BLUE_400,
                 expanded=True,
-            )
+            ),
         ],
     )
 
@@ -31,24 +33,25 @@ def main(page: ft.Page):
         ft.Colors.RED_800,
     ]
 
-    for i in range(3):
+    for i in range(len(colors)):
         bgcolor = colors[i % len(colors)]
-
-        exp = ft.ExpansionPanel(
-            bgcolor=bgcolor,
-            header=ft.ListTile(title=ft.Text(f"Panel {i}"), bgcolor=bgcolor),
+        panel_list.controls.append(
+            ft.ExpansionPanel(
+                bgcolor=bgcolor,
+                header=ft.ListTile(title=ft.Text(f"Panel {i}"), bgcolor=bgcolor),
+                content=ft.ListTile(
+                    bgcolor=bgcolor,
+                    title=ft.Text(f"This is in Panel {i}"),
+                    subtitle=ft.Text(f"Press the icon to delete panel {i}"),
+                    trailing=ft.IconButton(
+                        icon=ft.Icons.DELETE,
+                        on_click=handle_delete,
+                    ),
+                ),
+            )
         )
 
-        exp.content = ft.ListTile(
-            title=ft.Text(f"This is in Panel {i}"),
-            subtitle=ft.Text(f"Press the icon to delete panel {i}"),
-            trailing=ft.IconButton(ft.Icons.DELETE, on_click=handle_delete, data=exp),
-            bgcolor=bgcolor,
-        )
-
-        panel.controls.append(exp)
-
-    page.add(panel)
+    page.add(panel_list)
 
 
 ft.run(main)

@@ -22,7 +22,7 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(
         ft.Column(
-            [c, ft.ElevatedButton("Boom!", on_click=animate)],
+            controls=[c, ft.ElevatedButton("Boom!", on_click=animate)],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
     )

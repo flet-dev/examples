@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     def handle_click(e):
@@ -10,11 +10,11 @@ def main(page):
 
     action_sheet = ft.CupertinoActionSheet(
         title=ft.Row(
-            [ft.Text("Title"), ft.Icon(ft.Icons.BEDTIME)],
+            controls=[ft.Text("Title"), ft.Icon(ft.Icons.BEDTIME)],
             alignment=ft.MainAxisAlignment.CENTER,
         ),
         message=ft.Row(
-            [ft.Text("Description"), ft.Icon(ft.Icons.AUTO_AWESOME)],
+            controls=[ft.Text("Description"), ft.Icon(ft.Icons.AUTO_AWESOME)],
             alignment=ft.MainAxisAlignment.CENTER,
         ),
         cancel=ft.CupertinoActionSheetAction(
@@ -43,7 +43,7 @@ def main(page):
 
     page.add(
         ft.CupertinoFilledButton(
-            "Open CupertinoBottomSheet",
+            content="Open CupertinoBottomSheet",
             on_click=lambda e: page.show_dialog(bottom_sheet),
         )
     )

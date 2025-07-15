@@ -2,22 +2,23 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def dropdown_changed(e):
-        t.value = f"Dropdown changed to {dd.value}"
+    def dropdown_changed(e: ft.Event[ft.DropdownM2]):
+        message.value = f"Dropdown changed to {e.control.value}"
         page.update()
 
-    t = ft.Text()
-    dd = ft.DropdownM2(
-        on_change=dropdown_changed,
-        options=[
-            ft.dropdownm2.Option("Red"),
-            ft.dropdownm2.Option("Green"),
-            ft.dropdownm2.Option("Blue"),
-        ],
-        width=200,
-        color=ft.Colors.BLUE_GREY_700,
+    page.add(
+        ft.DropdownM2(
+            width=200,
+            color=ft.Colors.BLUE_GREY_700,
+            on_change=dropdown_changed,
+            options=[
+                ft.dropdownm2.Option("Red"),
+                ft.dropdownm2.Option("Green"),
+                ft.dropdownm2.Option("Blue"),
+            ],
+        ),
+        message := ft.Text(),
     )
-    page.add(dd, t)
 
 
 ft.run(main)

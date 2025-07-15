@@ -11,7 +11,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Row(
-            [
+            controls=[
                 ft.ElevatedButton("Page theme"),
                 ft.TextButton("Page theme text button"),
                 ft.Text(
@@ -21,18 +21,25 @@ def main(page: ft.Page):
             ]
         ),
         ft.Container(
+            height=100,
+            theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.Colors.PINK)),
             content=ft.Row(
-                [
+                controls=[
                     ft.ElevatedButton("Inherited theme with primary color overriden"),
                     ft.TextButton("Button 2"),
                 ]
             ),
-            height=100,
-            theme=ft.Theme(color_scheme=ft.ColorScheme(primary=ft.Colors.PINK)),
         ),
         ft.Container(
+            padding=20,
+            bgcolor=ft.Colors.SURFACE_TINT,
+            theme_mode=ft.ThemeMode.DARK,
+            theme=ft.Theme(
+                color_scheme_seed=ft.Colors.GREEN,
+                color_scheme=ft.ColorScheme(primary_container=ft.Colors.BLUE),
+            ),
             content=ft.Row(
-                [
+                controls=[
                     ft.ElevatedButton("Always DARK theme"),
                     ft.TextButton("Text button"),
                     ft.Text(
@@ -41,17 +48,15 @@ def main(page: ft.Page):
                     ),
                 ]
             ),
-            padding=20,
-            bgcolor=ft.Colors.SURFACE_TINT,
-            theme_mode=ft.ThemeMode.DARK,
-            theme=ft.Theme(
-                color_scheme_seed=ft.Colors.GREEN,
-                color_scheme=ft.ColorScheme(primary_container=ft.Colors.BLUE),
-            ),
         ),
         ft.Container(
+            padding=20,
+            bgcolor=ft.Colors.SURFACE_TINT,
+            border=ft.border.all(3, ft.Colors.OUTLINE),
+            theme_mode=ft.ThemeMode.LIGHT,
+            theme=ft.Theme(),
             content=ft.Row(
-                [
+                controls=[
                     ft.ElevatedButton("Always LIGHT theme"),
                     ft.TextButton("Text button"),
                     ft.Text(
@@ -60,15 +65,16 @@ def main(page: ft.Page):
                     ),
                 ]
             ),
+        ),
+        ft.Container(
             padding=20,
             bgcolor=ft.Colors.SURFACE_TINT,
             border=ft.border.all(3, ft.Colors.OUTLINE),
-            theme_mode=ft.ThemeMode.LIGHT,
+            border_radius=10,
+            theme_mode=ft.ThemeMode.SYSTEM,
             theme=ft.Theme(),
-        ),
-        ft.Container(
             content=ft.Row(
-                [
+                controls=[
                     ft.ElevatedButton("SYSTEM theme"),
                     ft.TextButton("Text button"),
                     ft.Text(
@@ -77,12 +83,6 @@ def main(page: ft.Page):
                     ),
                 ]
             ),
-            padding=20,
-            bgcolor=ft.Colors.SURFACE_TINT,
-            border=ft.border.all(3, ft.Colors.OUTLINE),
-            border_radius=10,
-            theme_mode=ft.ThemeMode.SYSTEM,
-            theme=ft.Theme(),
         ),
     )
 

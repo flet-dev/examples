@@ -6,14 +6,18 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
 
     def button_clicked(e):
-        b.data += 1
-        t.value = f"Button clicked {b.data} time(s)"
+        button.data += 1
+        message.value = f"Button clicked {button.data} time(s)"
         page.update()
 
-    b = ft.ElevatedButton("Button with 'click' event", on_click=button_clicked, data=0)
-    t = ft.Text()
+    button = ft.ElevatedButton(
+        content="Button with 'click' event",
+        data=0,
+        on_click=button_clicked,
+    )
+    message = ft.Text()
 
-    page.add(b, t)
+    page.add(button, message)
 
 
 ft.run(main)

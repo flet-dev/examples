@@ -2,17 +2,17 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def textbox_changed(e):
-        t.value = e.control.value
+    def handle_field_change(e: ft.Event[ft.TextField]):
+        message.value = e.control.value
         page.update()
 
-    t = ft.Text()
-    tb = ft.TextField(
-        label="Textbox with 'change' event:",
-        on_change=textbox_changed,
+    page.add(
+        ft.TextField(
+            label="Textbox with 'change' event:",
+            on_change=handle_field_change,
+        ),
+        message := ft.Text(),
     )
-
-    page.add(tb, t)
 
 
 ft.run(main)

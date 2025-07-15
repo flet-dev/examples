@@ -1,24 +1,25 @@
 import flet as ft
 
 
-def main(page):
-    def radiogroup_changed(e):
-        t.value = f"Your favorite color is:  {e.control.value}"
+def main(page: ft.Page):
+    def radiogroup_changed(e: ft.Event[ft.RadioGroup]):
+        message.value = f"Your favorite color is:  {e.control.value}"
         page.update()
 
-    t = ft.Text()
-    cg = ft.RadioGroup(
-        content=ft.Column(
-            [
-                ft.Radio(value="red", label="Red"),
-                ft.Radio(value="green", label="Green"),
-                ft.Radio(value="blue", label="Blue"),
-            ]
+    page.add(
+        ft.Text("Select your favorite color:"),
+        ft.RadioGroup(
+            on_change=radiogroup_changed,
+            content=ft.Column(
+                controls=[
+                    ft.Radio(value="red", label="Red"),
+                    ft.Radio(value="green", label="Green"),
+                    ft.Radio(value="blue", label="Blue"),
+                ]
+            ),
         ),
-        on_change=radiogroup_changed,
+        message := ft.Text(),
     )
-
-    page.add(ft.Text("Select your favorite color:"), cg, t)
 
 
 ft.run(main)

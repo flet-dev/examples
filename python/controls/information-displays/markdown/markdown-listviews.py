@@ -1,6 +1,6 @@
 import flet as ft
 
-md1 = """
+sample = """
 # Markdown Example
 Markdown allows you to easily include formatted text, images, and even formatted Dart code in your app.
 
@@ -119,26 +119,24 @@ line 3
 
 
 def main(page: ft.Page):
-    def goto_url(e):
-        print("GOTO:", e.data)
-        page.launch_url(e.data)
-
     page.add(
         ft.ListView(
-            [ft.Markdown(md1, on_tap_link=lambda e: page.launch_url(e.data))],
             expand=True,
+            controls=[
+                ft.Markdown(value=sample, on_tap_link=lambda e: page.launch_url(e.data))
+            ],
         ),
         ft.Divider(),
         ft.ListView(
-            [
+            expand=True,
+            controls=[
                 ft.Markdown(
-                    md1,
+                    value=sample,
                     selectable=True,
                     extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
-                    on_tap_link=goto_url,
+                    on_tap_link=lambda e: page.launch_url(e.data),
                 )
             ],
-            expand=True,
         ),
     )
 

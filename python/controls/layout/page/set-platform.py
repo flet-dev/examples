@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     def set_android(e):
         page.platform = ft.PagePlatform.ANDROID
         page.update()

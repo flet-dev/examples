@@ -9,10 +9,10 @@ def main(page: ft.Page):
     def handle_expansion_tile_change(e):
         page.show_dialog(
             ft.SnackBar(
-                ft.Text(
-                    f"ExpansionTile was {'expanded' if e.data=='true' else 'collapsed'}"
-                ),
                 duration=1000,
+                content=ft.Text(
+                    value=f"ExpansionTile was {'expanded' if e.data == 'true' else 'collapsed'}"
+                ),
             )
         )
         if e.control.trailing:

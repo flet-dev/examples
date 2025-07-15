@@ -13,7 +13,7 @@ def main(page: ft.Page):
         page.update()
 
     switcher = ft.AnimatedSwitcher(
-        i,
+        content=i,
         transition=ft.AnimatedSwitcherTransition.SCALE,
         duration=500,
         reverse_duration=100,

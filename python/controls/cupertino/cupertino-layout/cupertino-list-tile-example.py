@@ -2,7 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def tile_clicked(e):
+    def handle_tile_click(e):
         print("Tile clicked")
 
     page.add(
@@ -13,7 +13,7 @@ def main(page: ft.Page):
             title=ft.Text("CupertinoListTile: notched = False"),
             subtitle=ft.Text("Subtitle"),
             trailing=ft.Icon(name=ft.CupertinoIcons.ALARM),
-            on_click=tile_clicked,
+            on_click=handle_tile_click,
         ),
         ft.CupertinoListTile(
             notched=True,
@@ -22,7 +22,7 @@ def main(page: ft.Page):
             title=ft.Text("CupertinoListTile: notched = True"),
             subtitle=ft.Text("Subtitle"),
             trailing=ft.Icon(name=ft.CupertinoIcons.ALARM),
-            on_click=tile_clicked,
+            on_click=handle_tile_click,
         ),
     )
 

@@ -3,6 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Outlined buttons with icons"
+
     page.add(
         ft.OutlinedButton(content="Button with icon", icon="chair_outlined"),
         ft.OutlinedButton(

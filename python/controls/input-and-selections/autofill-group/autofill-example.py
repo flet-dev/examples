@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.add(
         ft.AutofillGroup(
-            ft.Column(
+            content=ft.Column(
                 controls=[
                     ft.TextField(
                         label="Name",

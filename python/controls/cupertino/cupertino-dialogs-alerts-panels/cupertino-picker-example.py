@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
     selected_fruit_ref = ft.Ref[ft.Text]()
@@ -37,7 +37,7 @@ def main(page):
                     style=ft.ButtonStyle(color=ft.Colors.BLUE),
                     on_click=lambda e: page.show_dialog(
                         ft.CupertinoBottomSheet(
-                            cupertino_picker,
+                            content=cupertino_picker,
                             height=216,
                             padding=ft.Padding.only(top=6),
                         )

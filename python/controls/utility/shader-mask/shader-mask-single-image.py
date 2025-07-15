@@ -9,14 +9,14 @@ def main(page: ft.Page):
                     src="https://picsum.photos/300/300?1",
                     width=300,
                     height=300,
-                    fit=ft.ImageFit.FILL,
+                    fit=ft.BoxFit.FILL,
                 ),
                 ft.ShaderMask(
                     content=ft.Image(
                         src="https://picsum.photos/300/300?1",
                         width=300,
                         height=300,
-                        fit=ft.ImageFit.FILL,
+                        fit=ft.BoxFit.FILL,
                     ),
                     blend_mode=ft.BlendMode.MULTIPLY,
                     shader=ft.RadialGradient(

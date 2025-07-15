@@ -15,7 +15,9 @@ def main(page: ft.Page):
             hint_text="Enter text here",
         ),
         ft.TextField(
-            label="Borderless", border=ft.InputBorder.NONE, hint_text="Enter text here"
+            label="Borderless",
+            border=ft.InputBorder.NONE,
+            hint_text="Enter text here",
         ),
         ft.TextField(
             label="Borderless filled",

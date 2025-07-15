@@ -1,9 +1,9 @@
 import flet as ft
 
-# Browse icons:
-# https://lucide.dev/
-#
-# Copy selected icon
+"""
+- Browse Lucide icons: https://lucide.dev/
+- Copy SVG and use it as value for `Image.src`
+"""
 
 
 def main(page: ft.Page):

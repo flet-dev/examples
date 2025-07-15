@@ -10,14 +10,21 @@ def main(page: ft.Page):
 
     page.add(
         ft.Row(
-            [
+            alignment=ft.MainAxisAlignment.CENTER,
+            scroll=ft.ScrollMode.AUTO,
+            controls=[
                 ft.Container(
                     content=ft.Text("Linear gradient"),
                     padding=10,
                     alignment=ft.Alignment.CENTER,
+                    width=200,
+                    height=200,
+                    border_radius=10,
                     gradient=ft.LinearGradient(
-                        begin=ft.Alignment.top_left(),
+                        begin=ft.Alignment.TOP_LEFT,
                         end=ft.Alignment(0.8, 1),
+                        tile_mode=ft.GradientTileMode.MIRROR,
+                        rotation=math.pi / 3,
                         colors=[
                             "0xff1f005c",
                             "0xff5b0060",
@@ -28,49 +35,47 @@ def main(page: ft.Page):
                             "0xfff39060",
                             "0xffffb56b",
                         ],
-                        tile_mode=ft.GradientTileMode.MIRROR,
-                        rotation=math.pi / 3,
                     ),
-                    width=200,
-                    height=200,
-                    border_radius=10,
                 ),
                 ft.Container(
                     content=ft.Text("Linear gradient with stops"),
                     padding=10,
                     alignment=ft.Alignment.CENTER,
+                    width=200,
+                    height=200,
+                    border_radius=10,
                     gradient=ft.LinearGradient(
-                        begin=ft.Alignment.center_left(),
-                        end=ft.Alignment.center_right(),
+                        begin=ft.Alignment.CENTER_LEFT,
+                        end=ft.Alignment.CENTER_RIGHT,
                         colors=[ft.Colors.RED, ft.Colors.GREEN, ft.Colors.BLUE],
                         stops=[0.1, 0.2, 1.0],
                         tile_mode=ft.GradientTileMode.MIRROR,
                     ),
-                    width=200,
-                    height=200,
-                    border_radius=10,
                 ),
                 ft.Container(
                     content=ft.Text("Radial gradient"),
                     padding=10,
                     alignment=ft.Alignment.CENTER,
+                    width=200,
+                    height=200,
+                    border_radius=10,
                     gradient=ft.RadialGradient(
                         center=ft.Alignment(0.7, -0.6),
                         radius=0.2,
                         colors=[
-                            "0xFFFFFF00",  # yellow sun
-                            "0xFF0099FF",  # blue sky
+                            "0xFFFFFF00",
+                            "0xFF0099FF",
                         ],
                         stops=[0.4, 1.0],
                     ),
-                    width=200,
-                    height=200,
-                    border_radius=10,
                 ),
                 ft.Container(
                     content=ft.Text("Sweep gradient"),
                     padding=10,
                     alignment=ft.Alignment.CENTER,
+                    width=200,
+                    height=200,
+                    border_radius=10,
                     gradient=ft.SweepGradient(
                         center=ft.Alignment.CENTER,
                         start_angle=0.0,
@@ -85,13 +90,8 @@ def main(page: ft.Page):
                         stops=[0.0, 0.25, 0.5, 0.75, 1.0],
                         rotation=math.pi / 4,
                     ),
-                    width=200,
-                    height=200,
-                    border_radius=10,
                 ),
             ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            scroll=ft.ScrollMode.AUTO,
         ),
     )
 
