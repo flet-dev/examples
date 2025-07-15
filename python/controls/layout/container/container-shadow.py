@@ -2,7 +2,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     page.add(
         ft.Container(
             bgcolor=ft.Colors.YELLOW,
@@ -34,7 +33,7 @@ def main(page: ft.Page):
                 blur_radius=15,
                 color=ft.Colors.BLUE_GREY_300,
                 offset=ft.Offset(0, 0),
-                blur_style=ft.ShadowBlurStyle.OUTER,
+                blur_style=ft.BlurStyle.OUTER,
             ),
         ),
     )

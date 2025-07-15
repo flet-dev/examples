@@ -1,144 +1,135 @@
-import flet
-from flet import (
-    Checkbox,
-    Column,
-    Container,
-    Dropdown,
-    ElevatedButton,
-    Image,
-    Page,
-    Radio,
-    RadioGroup,
-    Row,
-    Slider,
-    Switch,
-    Text,
-    Theme,
-    border,
-    border_radius,
-    dropdown,
-    padding,
-)
+import flet as ft
 
 
-def main(page: Page):
+def main(page: ft.Page):
     page.title = "Form Example"
-    page.theme_mode = "light"
-    page.padding = Padding.all(20)
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.padding = ft.Padding.all(20)
 
-    results = Column(scroll="always", height=100)
+    results = ft.Column(scroll=ft.ScrollMode.ALWAYS, height=100)
 
-    checkboxes = Column(
-        [
-            Checkbox(value=True),
-            Checkbox(label="A simple checkbox with a label"),
-            Checkbox(label="Checkbox with tristate", tristate=True),
-            Checkbox(label="Disabled checkbox", disabled=True),
-            Checkbox(label="Label on the left", label_position="left"),
+    checkboxes = ft.Column(
+        controls=[
+            ft.Checkbox(value=True),
+            ft.Checkbox(label="A simple checkbox with a label"),
+            ft.Checkbox(label="Checkbox with tristate", tristate=True),
+            ft.Checkbox(label="Disabled checkbox", disabled=True),
+            ft.Checkbox(
+                label="Label on the left", label_position=ft.LabelPosition.LEFT
+            ),
         ]
     )
 
-    switches = Column(
-        [
-            Switch(value=True),
-            Switch(value=False),
-            Switch(label="Switch with a label"),
-            Switch(label="Disabled switch", disabled=True),
-            Switch(label="Label on the left", label_position="left"),
+    switches = ft.Column(
+        controls=[
+            ft.Switch(value=True),
+            ft.Switch(value=False),
+            ft.Switch(label="Switch with a label"),
+            ft.Switch(label="Disabled switch", disabled=True),
+            ft.Switch(label="Label on the left", label_position=ft.LabelPosition.LEFT),
         ]
     )
 
-    rg = RadioGroup(
-        content=Column(
-            [
-                Radio(value="red", label="Red color"),
-                Radio(value="green", label="Green color"),
-                Radio(value="blue", label="Blue color"),
+    rg = ft.RadioGroup(
+        content=ft.Column(
+            controls=[
+                ft.Radio(value="red", label="Red color"),
+                ft.Radio(value="green", label="Green color"),
+                ft.Radio(value="blue", label="Blue color"),
             ]
         )
     )
 
-    def rg1_on_change(e):
-        results.controls.append(Text(f"Selected value: {rg1.value}"))
+    def handle_rg1_change(e: ft.Event[ft.RadioGroup]):
+        results.controls.append(ft.Text(f"Selected value: {rg1.value}"))
         page.update()
 
-    rg1 = RadioGroup(
-        content=Row(
-            [
-                Radio(value="one", label="One"),
-                Radio(value="two", label="Two"),
-                Radio(value="three", label="Three"),
+    rg1 = ft.RadioGroup(
+        value="two",
+        on_change=handle_rg1_change,
+        content=ft.Row(
+            controls=[
+                ft.Radio(value="one", label="One"),
+                ft.Radio(value="two", label="Two"),
+                ft.Radio(value="three", label="Three"),
             ]
         ),
-        value="two",
-        on_change=rg1_on_change,
     )
 
-    dd = Dropdown(
-        options=[
-            dropdown.Option("a", "Item A"),
-            dropdown.Option("b", "Item B"),
-            dropdown.Option("c", "Item C"),
-        ],
+    dd = ft.Dropdown(
         value="b",
-        content_padding=Padding.all(5),
+        content_padding=ft.Padding.all(5),
         height=35,
+        options=[
+            ft.dropdown.Option("a", "Item A"),
+            ft.dropdown.Option("b", "Item B"),
+            ft.dropdown.Option("c", "Item C"),
+        ],
     )
 
-    dd1 = Dropdown(
+    dd1 = ft.Dropdown(
         options=[
-            dropdown.Option("r", "Red"),
-            dropdown.Option("g", "Green"),
-            dropdown.Option("b", "Blue"),
+            ft.dropdown.Option("r", "Red"),
+            ft.dropdown.Option("g", "Green"),
+            ft.dropdown.Option("b", "Blue"),
         ]
     )
-    dd2 = Dropdown(
-        options=[
-            dropdown.Option("1", "One"),
-            dropdown.Option("2", "Two"),
-            dropdown.Option("3", "Three"),
-        ],
+    dd2 = ft.DropdownM2(
         label="My favorite number",
-        icon="format_size",
+        icon=ft.Icons.FORMAT_SIZE,
         hint_text="Choose your favorite color",
-        helper_text="You can choose only one color",
-        counter_text="0 colors selected",
-        prefix_icon="color_lens",
-        suffix_text="...is your color",
+        helper="You can choose only one color",
+        counter="0 colors selected",
+        prefix_icon=ft.Icons.COLOR_LENS,
+        suffix="...is your color",
+        options=[
+            ft.dropdownm2.Option("1", "One"),
+            ft.dropdownm2.Option("2", "Two"),
+            ft.dropdownm2.Option("3", "Three"),
+        ],
     )
 
     page.add(
-        Column(
-            [
-                Text("Checkboxes", style="headlineMedium"),
+        ft.Column(
+            scroll=ft.ScrollMode.ALWAYS,
+            expand=1,
+            controls=[
+                ft.Text("Checkboxes", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 checkboxes,
-                Text("Switches", style="headlineMedium"),
+                ft.Text("Switches", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 switches,
-                Text("Radio", style="headlineMedium"),
+                ft.Text("Radio", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 rg,
-                Text("Radio with on_change", style="headlineMedium"),
+                ft.Text(
+                    "Radio with on_change",
+                    theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
+                ),
                 rg1,
-                Container(
+                ft.Container(
                     content=results,
                     padding=10,
-                    border=border.all(1, "black12"),
-                    border_radius=border_radius.all(10),
+                    border=ft.border.all(1, "black12"),
+                    border_radius=ft.border_radius.all(10),
                     bgcolor="black12",
                 ),
-                Text("Dropdown with pre-selected value", style="headlineMedium"),
+                ft.Text(
+                    "Dropdown with pre-selected value",
+                    theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
+                ),
                 dd,
-                Text("Dropdown", style="headlineMedium"),
+                ft.Text("Dropdown", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 dd1,
-                Text("Dropdown with all decoration", style="headlineMedium"),
+                ft.Text(
+                    "Dropdown with all decoration",
+                    theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
+                ),
                 dd2,
-                Text("Slider", style="headlineMedium"),
-                Slider(value=0.5),
-                Slider(min=0, max=100, divisions=10, value=30, label="{value}%"),
+                ft.Text("Slider", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
+                ft.Slider(value=0.5),
+                ft.Slider(min=0, max=100, divisions=10, value=30, label="{value}%"),
             ],
-            scroll="always",
-            expand=1,
         ),
     )
 
 
-flet.app(main)
+ft.run(main)

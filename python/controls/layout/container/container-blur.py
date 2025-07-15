@@ -11,7 +11,7 @@ def main(page: ft.Page):
         height=300,
     )
 
-    def change_img(e):
+    def handle_button_click(e: ft.Event[ft.ElevatedButton]):
         nonlocal i
         print(f"button clicked {i}")
         img_container.image = ft.DecorationImage(
@@ -22,7 +22,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Stack(
-            [
+            controls=[
                 img_container,
                 ft.Container(
                     width=100,
@@ -52,7 +52,7 @@ def main(page: ft.Page):
                     bottom=5,
                     right=5,
                     # style=ft.ButtonStyle(text_style=ft.TextStyle(size=8)),
-                    on_click=change_img,
+                    on_click=handle_button_click,
                 ),
             ]
         )

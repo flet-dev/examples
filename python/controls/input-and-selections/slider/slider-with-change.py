@@ -1,18 +1,21 @@
 import flet as ft
 
 
-def main(page):
-    def slider_changed(e):
-        t.value = f"Slider changed to {e.control.value}"
-        page.update()
+def main(page: ft.Page):
+    def slider_changed(e: ft.Event[ft.Slider]):
+        message.value = f"Slider changed to {e.control.value}"
+        message.update()
 
-    t = ft.Text()
     page.add(
         ft.Text("Slider with 'on_change' event:"),
         ft.Slider(
-            min=0, max=100, divisions=10, label="{value}%", on_change=slider_changed
+            min=0,
+            max=100,
+            divisions=10,
+            label="{value}%",
+            on_change=slider_changed,
         ),
-        t,
+        message := ft.Text(),
     )
 
 

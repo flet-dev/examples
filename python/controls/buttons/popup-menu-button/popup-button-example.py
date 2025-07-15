@@ -2,17 +2,17 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def check_item_clicked(e):
+    def handle_check_item_click(e):
         e.control.checked = not e.control.checked
         page.update()
 
     pb = ft.PopupMenuButton(
         items=[
-            ft.PopupMenuItem(text="Item 1"),
-            ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, text="Check power"),
+            ft.PopupMenuItem(content="Item 1"),
+            ft.PopupMenuItem(icon=ft.Icons.POWER_INPUT, content="Check power"),
             ft.PopupMenuItem(
                 content=ft.Row(
-                    [
+                    controls=[
                         ft.Icon(ft.Icons.HOURGLASS_TOP_OUTLINED),
                         ft.Text("Item with a custom content"),
                     ]
@@ -21,7 +21,9 @@ def main(page: ft.Page):
             ),
             ft.PopupMenuItem(),  # divider
             ft.PopupMenuItem(
-                text="Checked item", checked=False, on_click=check_item_clicked
+                content="Checked item",
+                checked=False,
+                on_click=handle_check_item_click,
             ),
         ]
     )

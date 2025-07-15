@@ -1,4 +1,3 @@
-import logging
 import flet as ft
 
 # logging.basicConfig(level=logging.INFO)
@@ -89,7 +88,7 @@ class ItemList(ft.Draggable):
                     bgcolor=ft.Colors.BLACK26,
                     border_radius=ft.border_radius.all(30),
                     height=3,
-                    alignment=ft.Alignment.center_right(),
+                    alignment=ft.Alignment.CENTER_RIGHT,
                     width=200,
                     opacity=0.0,
                 )

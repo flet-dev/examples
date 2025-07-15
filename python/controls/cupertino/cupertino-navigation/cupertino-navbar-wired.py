@@ -4,8 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "CupertinoNavigationBar Example"
 
-    def on_nav_change(e):
-        # print(f"on_nav_change: {e.control}")
+    def handle_nav_change(e: ft.Event[ft.CupertinoNavigationBar]):
         if e.control.selected_index == 0:
             body.content.value = "Explore!"
         elif e.control.selected_index == 1:
@@ -14,12 +13,11 @@ def main(page: ft.Page):
             body.content.value = "Your Favorites!"
         page.update()
 
-    body = ft.SafeArea(ft.Text("Explore!"))
     page.navigation_bar = ft.CupertinoNavigationBar(
         bgcolor=ft.Colors.AMBER_100,
         inactive_color=ft.Colors.GREY,
         active_color=ft.Colors.BLACK,
-        on_change=on_nav_change,
+        on_change=handle_nav_change,
         destinations=[
             ft.NavigationBarDestination(
                 icon=ft.Icons.EXPLORE_OUTLINED,
@@ -38,7 +36,9 @@ def main(page: ft.Page):
             ),
         ],
     )
-    page.add(body)
+    page.add(
+        body := ft.SafeArea(content=ft.Text("Explore!")),
+    )
 
 
 ft.run(main)

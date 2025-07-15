@@ -38,7 +38,7 @@ def main(page: ft.Page):
                     ),
                     on_click=lambda e: page.show_dialog(
                         ft.CupertinoBottomSheet(
-                            cupertino_timer_picker,
+                            content=cupertino_timer_picker,
                             height=216,
                             padding=ft.Padding.only(top=6),
                         )

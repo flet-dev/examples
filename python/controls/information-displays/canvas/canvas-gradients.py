@@ -5,56 +5,62 @@ import flet.canvas as cv
 
 
 def main(page: ft.Page):
-    cp = cv.Canvas(
-        [
-            cv.Rect(
-                10,
-                10,
-                100,
-                100,
-                5,
-                ft.Paint(
-                    gradient=ft.PaintLinearGradient(
-                        (0, 10),
-                        (100, 50),
-                        colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
+    page.add(
+        cv.Canvas(
+            width=float("inf"),
+            expand=True,
+            shapes=[
+                cv.Rect(
+                    x=10,
+                    y=10,
+                    width=100,
+                    height=100,
+                    border_radius=5,
+                    paint=ft.Paint(
+                        style=ft.PaintingStyle.FILL,
+                        gradient=ft.PaintLinearGradient(
+                            begin=(0, 10),
+                            end=(100, 50),
+                            colors=[ft.Colors.BLUE, ft.Colors.YELLOW],
+                        ),
                     ),
-                    style=ft.PaintingStyle.FILL,
                 ),
-            ),
-            cv.Circle(
-                60,
-                170,
-                50,
-                ft.Paint(
-                    gradient=ft.PaintRadialGradient(
-                        (60, 170), 50, colors=[ft.Colors.YELLOW, ft.Colors.BLUE]
+                cv.Circle(
+                    x=60,
+                    y=170,
+                    radius=50,
+                    paint=ft.Paint(
+                        style=ft.PaintingStyle.FILL,
+                        gradient=ft.PaintRadialGradient(
+                            center=(60, 170),
+                            radius=50,
+                            colors=[ft.Colors.YELLOW, ft.Colors.BLUE],
+                        ),
                     ),
-                    style=ft.PaintingStyle.FILL,
                 ),
-            ),
-            cv.Path(
-                [cv.Path.Arc(10, 230, 100, 100, 3 * math.pi / 4, 3 * math.pi / 2)],
-                ft.Paint(
-                    gradient=ft.PaintSweepGradient(
-                        (60, 280),
-                        colors=[ft.Colors.YELLOW, ft.Colors.PURPLE],
-                        color_stops=[0.0, 1.0],
-                        start_angle=0,
-                        end_angle=math.pi * 2,
-                        rotation=3 * math.pi / 4,
+                cv.Path(
+                    elements=[
+                        cv.Path.Arc(
+                            10, 230, 100, 100, 3 * math.pi / 4, 3 * math.pi / 2
+                        ),
+                    ],
+                    paint=ft.Paint(
+                        stroke_width=15,
+                        stroke_join=ft.StrokeJoin.ROUND,
+                        style=ft.PaintingStyle.STROKE,
+                        gradient=ft.PaintSweepGradient(
+                            center=(60, 280),
+                            colors=[ft.Colors.YELLOW, ft.Colors.PURPLE],
+                            color_stops=[0.0, 1.0],
+                            start_angle=0,
+                            end_angle=math.pi * 2,
+                            rotation=3 * math.pi / 4,
+                        ),
                     ),
-                    stroke_width=15,
-                    stroke_join=ft.StrokeJoin.ROUND,
-                    style=ft.PaintingStyle.STROKE,
                 ),
-            ),
-        ],
-        width=float("inf"),
-        expand=True,
+            ],
+        )
     )
-
-    page.add(cp)
 
 
 ft.run(main)

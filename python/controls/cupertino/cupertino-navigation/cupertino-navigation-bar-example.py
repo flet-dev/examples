@@ -3,6 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "CupertinoNavigationBar Example"
+
     page.navigation_bar = ft.CupertinoNavigationBar(
         bgcolor=ft.Colors.AMBER_100,
         inactive_color=ft.Colors.GREY,
@@ -26,7 +27,7 @@ def main(page: ft.Page):
             ),
         ],
     )
-    page.add(ft.SafeArea(ft.Text("Body!")))
+    page.add(ft.SafeArea(content=ft.Text("Body!")))
 
 
 ft.run(main)

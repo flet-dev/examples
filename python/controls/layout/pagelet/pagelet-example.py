@@ -2,10 +2,10 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def open_pagelet_end_drawer(e):
-        pagelet.show_drawer(ed)
+    def handle_show_drawer(e: ft.Event[ft.FloatingActionButton]):
+        pagelet.show_drawer(drawer)
 
-    ed = ft.NavigationDrawer(
+    drawer = ft.NavigationDrawer(
         controls=[
             ft.NavigationDrawerDestination(
                 icon=ft.Icons.ADD_TO_HOME_SCREEN_SHARP, label="Item 1"
@@ -15,13 +15,14 @@ def main(page: ft.Page):
     )
     pagelet = ft.Pagelet(
         appbar=ft.AppBar(
-            title=ft.Text("Pagelet AppBar Title"), bgcolor=ft.Colors.AMBER_ACCENT
+            title=ft.Text("Pagelet AppBar Title"),
+            bgcolor=ft.Colors.AMBER_ACCENT,
         ),
         content=ft.Container(ft.Text("Pagelet Body"), padding=ft.Padding.all(16)),
         bgcolor=ft.Colors.AMBER_100,
         bottom_appbar=ft.BottomAppBar(
             bgcolor=ft.Colors.BLUE,
-            shape=ft.NotchShape.CIRCULAR,
+            shape=ft.CircularRectangleNotchShape(),
             content=ft.Row(
                 controls=[
                     ft.IconButton(icon=ft.Icons.MENU, icon_color=ft.Colors.WHITE),
@@ -31,9 +32,11 @@ def main(page: ft.Page):
                 ]
             ),
         ),
-        end_drawer=ed,
+        end_drawer=drawer,
         floating_action_button=ft.FloatingActionButton(
-            "Open", on_click=open_pagelet_end_drawer, shape=ft.CircleBorder()
+            content="Open",
+            shape=ft.CircleBorder(),
+            on_click=handle_show_drawer,
         ),
         floating_action_button_location=ft.FloatingActionButtonLocation.CENTER_DOCKED,
         width=400,

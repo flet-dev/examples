@@ -2,9 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "MyApp"
-
-    def window_event(e):
+    def window_event(e: ft.WindowEvent):
         if e.type == ft.WindowEventType.CLOSE:
             page.show_dialog(confirm_dialog)
             page.update()
@@ -12,10 +10,10 @@ def main(page: ft.Page):
     page.window.prevent_close = True
     page.window.on_event = window_event
 
-    def yes_click(e):
+    def handle_yes_click(e: ft.Event[ft.ElevatedButton]):
         page.window.destroy()
 
-    def no_click(e):
+    def handle_no_click(e: ft.Event[ft.OutlinedButton]):
         page.pop_dialog()
         page.update()
 
@@ -24,8 +22,8 @@ def main(page: ft.Page):
         title=ft.Text("Please confirm"),
         content=ft.Text("Do you really want to exit this app?"),
         actions=[
-            ft.ElevatedButton(content="Yes", on_click=yes_click),
-            ft.OutlinedButton(content="No", on_click=no_click),
+            ft.ElevatedButton(content="Yes", on_click=handle_yes_click),
+            ft.OutlinedButton(content="No", on_click=handle_no_click),
         ],
         actions_alignment=ft.MainAxisAlignment.END,
     )

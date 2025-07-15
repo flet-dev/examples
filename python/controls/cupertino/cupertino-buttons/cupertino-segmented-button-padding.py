@@ -1,22 +1,22 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.LIGHT
 
     def handle_vertical_change(e):
-        csb.controls[1].padding = ft.padding.only(
+        button.controls[1].padding = ft.Padding.only(
             top=e.control.value, bottom=e.control.value
         )
         page.update()
 
     def handle_horizontal_change(e):
-        csb.controls[2].padding = ft.padding.only(
+        button.controls[2].padding = ft.Padding.only(
             left=e.control.value, right=e.control.value
         )
         page.update()
 
-    csb = ft.CupertinoSegmentedButton(
+    button = ft.CupertinoSegmentedButton(
         selected_index=1,
         selected_color=ft.Colors.RED_400,
         unselected_color=ft.Colors.GREY_400,
@@ -24,41 +24,39 @@ def main(page):
         controls=[
             ft.Text("All"),
             ft.Container(
-                padding=ft.padding.symmetric(30, 0),
+                padding=ft.Padding.symmetric(vertical=30, horizontal=0),
                 content=ft.Text("None"),
             ),
             ft.Container(
-                padding=ft.padding.symmetric(0, 30),
+                padding=ft.Padding.symmetric(vertical=0, horizontal=30),
                 content=ft.Text("Some"),
             ),
         ],
     )
 
-    vs = ft.Slider(
-        label="{value}",
-        min=0,
-        max=50,
-        divisions=50,
-        value=30,
-        on_change=handle_vertical_change,
-    )
-    hs = ft.Slider(
-        label="{value}",
-        min=0,
-        max=50,
-        divisions=50,
-        value=30,
-        on_change=handle_horizontal_change,
-    )
     page.add(
-        csb,
+        button,
         ft.Text("Vertical padding button 1: "),
-        vs,
+        vertical_slider := ft.Slider(
+            label="{value}",
+            min=0,
+            max=50,
+            divisions=50,
+            value=30,
+            on_change=handle_vertical_change,
+        ),
         ft.Text("Horizontal padding button 2:"),
-        hs,
+        horizontal_slider := ft.Slider(
+            label="{value}",
+            min=0,
+            max=50,
+            divisions=50,
+            value=30,
+            on_change=handle_horizontal_change,
+        ),
         ft.Text(
-            "*note that padding changes to one segment can effect padding on other segments*",
-            style=ft.TextThemeStyle.LABEL_MEDIUM,
+            value="*note that padding changes to one segment can effect padding on other segments*",
+            theme_style=ft.TextThemeStyle.LABEL_MEDIUM,
             color=ft.Colors.ORANGE_ACCENT,
         ),
     )

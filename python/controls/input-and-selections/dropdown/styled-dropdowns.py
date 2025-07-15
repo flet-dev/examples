@@ -1,13 +1,8 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     dd1 = ft.Dropdown(
-        options=[
-            ft.dropdown.Option("a", "Item A"),
-            ft.dropdown.Option("b", "Item B"),
-            ft.dropdown.Option("c", "Item C"),
-        ],
         text_size=20,
         content_padding=10,
         color=ft.Colors.PURPLE_200,
@@ -17,14 +12,14 @@ def main(page):
         border_color=ft.Colors.GREEN_800,
         focused_border_color=ft.Colors.GREEN_ACCENT_400,
         focused_border_width=5,
+        options=[
+            ft.DropdownOption("a", "Item A"),
+            ft.DropdownOption("b", "Item B"),
+            ft.DropdownOption("c", "Item C"),
+        ],
     )
 
     dd2 = ft.Dropdown(
-        options=[
-            ft.dropdown.Option("a", "Item A"),
-            ft.dropdown.Option("b", "Item B"),
-            ft.dropdown.Option("c", "Item C"),
-        ],
         border_radius=30,
         filled=True,
         fill_color=ft.Colors.RED_400,
@@ -33,28 +28,28 @@ def main(page):
         color=ft.Colors.CYAN_400,
         focused_border_color=ft.Colors.PINK_300,
         focused_border_width=20,
+        options=[
+            ft.DropdownOption("a", "Item A"),
+            ft.DropdownOption("b", "Item B"),
+            ft.DropdownOption("c", "Item C"),
+        ],
     )
 
     dd3 = ft.Dropdown(
-        options=[
-            ft.dropdown.Option("a", "Item A"),
-            ft.dropdown.Option("b", "Item B"),
-            ft.dropdown.Option("c", "Item C"),
-        ],
         border_color=ft.Colors.PINK_ACCENT,
         focused_border_color=ft.Colors.GREEN_ACCENT_400,
         focused_border_width=25,
         border_radius=30,
         width=150,
         border_width=5,
+        options=[
+            ft.DropdownOption("a", "Item A"),
+            ft.DropdownOption("b", "Item B"),
+            ft.DropdownOption("c", "Item C"),
+        ],
     )
 
     dd4 = ft.Dropdown(
-        options=[
-            ft.dropdown.Option("a", "Item A"),
-            ft.dropdown.Option("b", "Item B"),
-            ft.dropdown.Option("c", "Item C"),
-        ],
         text_size=30,
         color=ft.Colors.ORANGE_ACCENT,
         border_radius=20,
@@ -65,47 +60,14 @@ def main(page):
         focused_border_width=10,
         width=200,
         height=50,
+        options=[
+            ft.dropdown.Option("a", "Item A"),
+            ft.dropdown.Option("b", "Item B"),
+            ft.dropdown.Option("c", "Item C"),
+        ],
     )
 
     dd5 = ft.Dropdown(
-        options=[
-            ft.dropdown.Option(
-                "a",
-                "Item A",
-                style=ft.ButtonStyle(
-                    color={
-                        ft.ControlState.HOVERED: ft.Colors.WHITE,
-                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
-                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
-                    },
-                    shape=ft.BeveledRectangleBorder(radius=15),
-                ),
-            ),
-            ft.dropdown.Option(
-                "b",
-                "Item B",
-                style=ft.ButtonStyle(
-                    color={
-                        ft.ControlState.HOVERED: ft.Colors.WHITE,
-                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
-                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
-                    },
-                    shape=ft.BeveledRectangleBorder(radius=15),
-                ),
-            ),
-            ft.dropdown.Option(
-                "c",
-                "Item C",
-                style=ft.ButtonStyle(
-                    color={
-                        ft.ControlState.HOVERED: ft.Colors.WHITE,
-                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
-                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
-                    },
-                    shape=ft.BeveledRectangleBorder(radius=15),
-                ),
-            ),
-        ],
         text_size=30,
         border_radius=20,
         filled=True,
@@ -114,9 +76,47 @@ def main(page):
         focused_border_width=10,
         content_padding=20,
         width=200,
+        options=[
+            ft.DropdownOption(
+                key="a",
+                text="Item A",
+                style=ft.ButtonStyle(
+                    shape=ft.BeveledRectangleBorder(radius=15),
+                    color={
+                        ft.ControlState.HOVERED: ft.Colors.WHITE,
+                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
+                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                    },
+                ),
+            ),
+            ft.DropdownOption(
+                key="b",
+                text="Item B",
+                style=ft.ButtonStyle(
+                    shape=ft.BeveledRectangleBorder(radius=15),
+                    color={
+                        ft.ControlState.HOVERED: ft.Colors.WHITE,
+                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
+                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                    },
+                ),
+            ),
+            ft.DropdownOption(
+                key="c",
+                text="Item C",
+                style=ft.ButtonStyle(
+                    shape=ft.BeveledRectangleBorder(radius=15),
+                    color={
+                        ft.ControlState.HOVERED: ft.Colors.WHITE,
+                        ft.ControlState.FOCUSED: ft.Colors.BLUE,
+                        ft.ControlState.DEFAULT: ft.Colors.BLACK,
+                    },
+                ),
+            ),
+        ],
     )
 
-    page.add(dd1, dd2, dd3, ft.Container(dd4, padding=ft.padding.only(bottom=20)), dd5)
+    page.add(dd1, dd2, dd3, ft.Container(dd4, padding=ft.Padding.only(bottom=20)), dd5)
 
 
 ft.run(main)

@@ -3,27 +3,23 @@ import random
 import flet as ft
 
 
-async def main(page):
-
-    def slider_changed(e):
-        t.value = f"Slider changed to {e.control.value}"
-        page.update()
-
-    t = ft.Text()
-    s = ft.Slider(label="{value}", on_change=slider_changed)
+async def main(page: ft.Page):
+    def slider_changed(e: ft.Event[ft.Slider]):
+        message.value = f"Slider changed to {e.control.value}"
+        message.update()
 
     page.add(
         ft.Text("Slider with 'on_change' event:"),
-        s,
-        t,
+        slider := ft.Slider(label="{value}", on_change=slider_changed),
+        message := ft.Text(),
     )
 
     while True:
         await asyncio.sleep(1)
-        val = s.value = random.random()
-        e = ft.ControlEvent("_", s, data=val)
-        slider_changed(e)
-        s.update()
+        val = slider.value = random.random()
+        event = ft.ControlEvent("_", slider, data=val)
+        slider_changed(event)
+        slider.update()
 
 
 ft.run(main)

@@ -1,14 +1,14 @@
 import flet as ft
 
 
-def main(page):
-    def set_android(e):
+def main(page: ft.Page):
+    def set_android(e: ft.Event[ft.ElevatedButton]):
         page.platform = ft.PagePlatform.ANDROID
         page.update()
         print("New platform:", page.platform)
 
-    def set_ios(e):
-        page.platform = "ios"
+    def set_ios(e: ft.Event[ft.ElevatedButton]):
+        page.platform = ft.PagePlatform.IOS
         page.update()
         print("New platform:", page.platform)
 

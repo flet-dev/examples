@@ -27,21 +27,23 @@ def main(page: ft.Page):
         count += 1
 
     page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD, on_click=fab_pressed, bgcolor=ft.Colors.LIME_300
+        icon=ft.Icons.ADD,
+        on_click=fab_pressed,
+        bgcolor=ft.Colors.LIME_300,
     )
     page.add(
         ft.Container(
-            ft.Row(
-                [
+            bgcolor=ft.Colors.BLUE,
+            padding=ft.Padding.all(20),
+            content=ft.Row(
+                alignment=ft.MainAxisAlignment.CENTER,
+                controls=[
                     ft.Text(
-                        "Floating Action Button Example",
+                        value="Floating Action Button Example",
                         style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
                     )
                 ],
-                alignment=ft.MainAxisAlignment.CENTER,
             ),
-            bgcolor=ft.Colors.BLUE,
-            padding=ft.Padding.all(20),
         ),
         ft.Text("Press the FAB to add a tile!"),
     )

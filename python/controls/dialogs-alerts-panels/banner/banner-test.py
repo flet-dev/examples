@@ -18,13 +18,19 @@ def main(page: ft.Page):
         ),
         actions=[
             ft.TextButton(
-                content="Retry", style=action_button_style, on_click=close_banner
+                content="Retry",
+                style=action_button_style,
+                on_click=close_banner,
             ),
             ft.TextButton(
-                content="Ignore", style=action_button_style, on_click=close_banner
+                content="Ignore",
+                style=action_button_style,
+                on_click=close_banner,
             ),
             ft.TextButton(
-                content="Cancel", style=action_button_style, on_click=close_banner
+                content="Cancel",
+                style=action_button_style,
+                on_click=close_banner,
             ),
         ],
     )

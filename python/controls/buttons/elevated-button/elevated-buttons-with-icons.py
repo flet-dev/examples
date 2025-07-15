@@ -5,9 +5,9 @@ def main(page: ft.Page):
     page.title = "Elevated buttons with icons"
 
     page.add(
-        ft.ElevatedButton("Button with icon", icon=ft.Icons.WAVES_ROUNDED),
+        ft.ElevatedButton(content="Button with icon", icon=ft.Icons.WAVES_ROUNDED),
         ft.ElevatedButton(
-            "Button with colorful icon",
+            content="Button with colorful icon",
             icon=ft.Icons.PARK_ROUNDED,
             icon_color=ft.Colors.GREEN_400,
         ),

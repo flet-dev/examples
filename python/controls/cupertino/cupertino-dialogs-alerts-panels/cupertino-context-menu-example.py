@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 

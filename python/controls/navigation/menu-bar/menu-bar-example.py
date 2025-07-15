@@ -30,7 +30,7 @@ def main(page: ft.Page):
     menubar = ft.MenuBar(
         expand=True,
         style=ft.MenuStyle(
-            alignment=ft.Alignment.top_left(),
+            alignment=ft.Alignment.TOP_LEFT,
             bgcolor=ft.Colors.RED_300,
             mouse_cursor={
                 ft.ControlState.HOVERED: ft.MouseCursor.WAIT,

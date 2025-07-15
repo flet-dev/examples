@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "AlertDialog examples"
 
-    dlg = ft.AlertDialog(
+    dialog = ft.AlertDialog(
         title=ft.Text("Hello"),
         content=ft.Text("You are notified!"),
         alignment=ft.Alignment.CENTER,
@@ -12,7 +12,7 @@ def main(page: ft.Page):
         title_padding=ft.Padding.all(25),
     )
 
-    dlg_modal = ft.AlertDialog(
+    modal_dialog = ft.AlertDialog(
         modal=True,
         title=ft.Text("Please confirm"),
         content=ft.Text("Do you really want to delete all those files?"),
@@ -25,9 +25,13 @@ def main(page: ft.Page):
     )
 
     page.add(
-        ft.ElevatedButton("Open dialog", on_click=lambda e: page.show_dialog(dlg)),
         ft.ElevatedButton(
-            "Open modal dialog", on_click=lambda e: page.show_dialog(dlg_modal)
+            content="Open dialog",
+            on_click=lambda e: page.show_dialog(dialog),
+        ),
+        ft.ElevatedButton(
+            content="Open modal dialog",
+            on_click=lambda e: page.show_dialog(modal_dialog),
         ),
     )
 

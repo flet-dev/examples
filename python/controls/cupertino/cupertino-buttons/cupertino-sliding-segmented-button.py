@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.title = "CupertinoSlidingSegmentedButton example"
     page.theme_mode = ft.ThemeMode.LIGHT
 

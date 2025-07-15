@@ -2,7 +2,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     c1 = ft.Container(width=50, height=50, bgcolor="red", animate_position=1000)
 
     c2 = ft.Container(
@@ -23,7 +22,7 @@ def main(page: ft.Page):
         page.update()
 
     page.add(
-        ft.Stack([c1, c2, c3], height=400),
+        ft.Stack(controls=[c1, c2, c3], height=400),
         ft.ElevatedButton("Animate!", on_click=animate_container),
     )
 

@@ -67,7 +67,7 @@ def main(page: ft.Page):
             for repo in user_repos:
                 repos_view.controls.append(
                     ft.ListTile(
-                        leading=ft.Icon(ft.icons.FOLDER_ROUNDED),
+                        leading=ft.Icon(ft.Icons.FOLDER_ROUNDED),
                         title=ft.Text(repo["full_name"]),
                     )
                 )

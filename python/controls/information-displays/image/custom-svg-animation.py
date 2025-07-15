@@ -18,7 +18,6 @@ async def main(page: ft.Page):
         for i in range(0, 10):
             img.src = svg_content.format(i * 10, i * 10)
             img.update()
-            # page.update()
             await asyncio.sleep(0.1)
 
 

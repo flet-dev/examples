@@ -3,6 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.padding = 50
+
     page.add(
         ft.TextField(
             text_size=30,

@@ -2,13 +2,15 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def checkbox_changed(e):
-        page.add(ft.Text(f"Checkbox value changed to {c.value}"))
+    def handle_checkbox_change(e: ft.Event[ft.Checkbox]):
+        page.add(ft.Text(f"Checkbox value changed to {e.control.value}"))
         page.update()
 
-    c = ft.Checkbox(label="Checkbox with 'change' event", on_change=checkbox_changed)
-
-    page.add(c)
+    page.add(
+        ft.Checkbox(
+            label="Checkbox with 'change' event", on_change=handle_checkbox_change
+        )
+    )
 
 
 ft.run(main)

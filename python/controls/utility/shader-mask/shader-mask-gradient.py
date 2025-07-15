@@ -9,8 +9,8 @@ def main(page: ft.Page):
                     content=ft.Image(src="https://picsum.photos/200/200?2"),
                     blend_mode=ft.BlendMode.DST_IN,
                     shader=ft.LinearGradient(
-                        begin=ft.Alignment.top_center(),
-                        end=ft.Alignment.bottom_center(),
+                        begin=ft.Alignment.top_CENTER,
+                        end=ft.Alignment.bottom_CENTER,
                         colors=[ft.Colors.BLACK, ft.Colors.TRANSPARENT],
                         stops=[0.5, 1.0],
                     ),

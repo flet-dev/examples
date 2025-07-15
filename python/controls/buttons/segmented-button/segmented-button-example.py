@@ -2,12 +2,12 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def handle_change(e):
+    def handle_selection_change(e):
         print("on_change data : " + str(e.data))
 
     page.add(
         ft.SegmentedButton(
-            on_change=handle_change,
+            on_change=handle_selection_change,
             selected_icon=ft.Icon(ft.Icons.CHECK_SHARP),
             selected=["1"],
             allow_empty_selection=True,
@@ -36,7 +36,7 @@ def main(page: ft.Page):
             ],
         ),
         ft.SegmentedButton(
-            on_change=handle_change,
+            on_change=handle_selection_change,
             selected_icon=ft.Icon(ft.Icons.ONETWOTHREE),
             selected=["2"],
             allow_multiple_selection=False,

@@ -3,7 +3,7 @@ import flet as ft
 
 
 async def main(page: ft.Page):
-    async def button_click(e):
+    async def handle_button_click(e: ft.Event[ft.ElevatedButton]):
         my_bar = ft.ProgressBar()
 
         page.overlay.append(my_bar)
@@ -15,7 +15,7 @@ async def main(page: ft.Page):
         btn.disabled = False
         page.update()
 
-    btn = ft.ElevatedButton("Do some lengthy task!", on_click=button_click)
+    btn = ft.ElevatedButton("Do some lengthy task!", on_click=handle_button_click)
     page.add(btn)
 
 

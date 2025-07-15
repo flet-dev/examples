@@ -29,7 +29,6 @@ class BufferingSwitcher(ft.AnimatedSwitcher):
 
     async def fill_queue(self):
         while len(self.image_queue) < 10:
-
             self.image_queue.append(
                 await self.image_to_base64(
                     f"https://picsum.photos/200/300?{time.time()}"
@@ -46,6 +45,7 @@ class BufferingSwitcher(ft.AnimatedSwitcher):
             return base64_str
         else:
             print(f"Image request failed with {response.status_code}")
+            return None
 
     def before_update(self):
         self.page.run_task(self.fill_queue)
@@ -57,11 +57,11 @@ def main(page: ft.Page):
         src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
     )
 
-    sw = BufferingSwitcher(i, page)
+    switcher = BufferingSwitcher(i, page)
 
     page.add(
-        sw,
-        ft.ElevatedButton("Animate!", on_click=sw.animate),
+        switcher,
+        ft.ElevatedButton("Animate!", on_click=switcher.animate),
     )
 
 

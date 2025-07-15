@@ -15,7 +15,7 @@ def example():
 
     container_2 = ft.Container(
         content=ft.Text("Top left"),
-        alignment=ft.Alignment.top_left(),
+        alignment=ft.Alignment.TOP_LEFT,
         bgcolor=ft.Colors.BLUE_GREY_200,
         width=150,
         height=150,

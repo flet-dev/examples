@@ -12,7 +12,7 @@ def example():
                     src="https://picsum.photos/200/200?1",
                     width=200,
                     height=200,
-                    fit=ft.ImageFit.FILL,
+                    fit=ft.BoxFit.FILL,
                 ),
                 blend_mode=ft.BlendMode.MULTIPLY,
                 shader=ft.RadialGradient(

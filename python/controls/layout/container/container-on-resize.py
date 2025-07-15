@@ -7,7 +7,7 @@ class SizeAwareContainer(cv.Canvas):
         super().__init__(expand=expand)
         self.size = ft.Text()
         self.content = ft.Container(
-            self.size,
+            content=self.size,
             alignment=ft.Alignment.CENTER,
             bgcolor=color,
         )
@@ -22,18 +22,18 @@ class SizeAwareContainer(cv.Canvas):
 def main(page: ft.Page):
     page.add(
         ft.Row(
-            [
+            expand=2,
+            controls=[
                 SizeAwareContainer(ft.Colors.RED, expand=2),
                 SizeAwareContainer(ft.Colors.GREEN, expand=4),
             ],
-            expand=2,
         ),
         ft.Row(
-            [
+            expand=3,
+            controls=[
                 SizeAwareContainer(ft.Colors.YELLOW, expand=2),
                 SizeAwareContainer(ft.Colors.BLUE, expand=4),
             ],
-            expand=3,
         ),
     )
 

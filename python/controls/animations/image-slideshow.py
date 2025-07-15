@@ -2,7 +2,6 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     i1 = ft.Image(
         src="https://picsum.photos/200/300?1",
         animate_position=ft.Animation(300, ft.AnimationCurve.BOUNCE_OUT),
@@ -21,7 +20,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Stack(
-            [i1, i2],
+            controls=[i1, i2],
             width=200,
             height=300,
         ),

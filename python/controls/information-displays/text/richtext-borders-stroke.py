@@ -4,12 +4,12 @@ import flet as ft
 def main(page: ft.Page):
     page.add(
         ft.Stack(
-            [
+            controls=[
                 ft.Text(
                     spans=[
                         ft.TextSpan(
-                            "Greetings, planet!",
-                            ft.TextStyle(
+                            text="Greetings, planet!",
+                            style=ft.TextStyle(
                                 size=40,
                                 weight=ft.FontWeight.BOLD,
                                 foreground=ft.Paint(
@@ -24,8 +24,8 @@ def main(page: ft.Page):
                 ft.Text(
                     spans=[
                         ft.TextSpan(
-                            "Greetings, planet!",
-                            ft.TextStyle(
+                            text="Greetings, planet!",
+                            style=ft.TextStyle(
                                 size=40,
                                 weight=ft.FontWeight.BOLD,
                                 color=ft.Colors.GREY_300,

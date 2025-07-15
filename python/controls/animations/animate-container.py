@@ -2,27 +2,26 @@ import flet as ft
 
 
 def main(page: ft.Page):
-
     g1 = ft.LinearGradient(
-        begin=ft.alignment.top_center,
-        end=ft.alignment.bottom_center,
+        begin=ft.Alignment.TOP_CENTER,
+        end=ft.Alignment.BOTTOM_CENTER,
         colors=[ft.Colors.GREEN, ft.Colors.BLUE],
         stops=[0.5, 1.0],
     )
 
     g2 = ft.RadialGradient(
-        center=ft.alignment.top_left,
+        center=ft.Alignment.TOP_LEFT,
         radius=1.0,
         colors=[ft.Colors.YELLOW, ft.Colors.DEEP_ORANGE_900],
         tile_mode=ft.GradientTileMode.CLAMP,
     )
     t = ft.Text("Animate me!")
     c = ft.Container(
-        t,
+        content=t,
         width=250,
         height=250,
         gradient=g1,
-        alignment=ft.alignment.top_left,
+        alignment=ft.Alignment.TOP_LEFT,
         animate=ft.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),
         border=ft.border.all(2, "blue"),
         border_radius=10,
@@ -34,10 +33,10 @@ def main(page: ft.Page):
         c.width = 150 if c.width == 250 else 250
         c.height = 150 if c.height == 250 else 250
         c.gradient = g2 if c.gradient == g1 else g1
-        if c.alignment == ft.alignment.top_left:
-            c.alignment = ft.alignment.bottom_right
+        if c.alignment == ft.Alignment.TOP_LEFT:
+            c.alignment = ft.Alignment.BOTTOM_RIGHT
         else:
-            c.alignment = ft.alignment.top_left
+            c.alignment = ft.Alignment.TOP_LEFT
         c.border_radius = 30 if c.border_radius == 10 else 10
         c.border = (
             ft.border.all(2, "black")

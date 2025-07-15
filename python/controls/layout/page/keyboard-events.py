@@ -13,6 +13,10 @@ class ButtonControl(ft.Container):
 
 
 def main(page: ft.Page):
+    page.spacing = 50
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
     def on_keyboard(e: ft.KeyboardEvent):
         key.content.value = e.key
         key.visible = True
@@ -24,20 +28,20 @@ def main(page: ft.Page):
 
     page.on_keyboard_event = on_keyboard
 
-    key = ButtonControl("")
-    shift = ButtonControl("Shift")
-    ctrl = ButtonControl("Control")
-    alt = ButtonControl("Alt")
-    meta = ButtonControl("Meta")
-
-    page.spacing = 50
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.add(
         ft.Text(
             "Press any key with a combination of CTRL, ALT, SHIFT and META keys..."
         ),
-        ft.Row([key, shift, ctrl, alt, meta], alignment=ft.MainAxisAlignment.CENTER),
+        ft.Row(
+            controls=[
+                key := ButtonControl(""),
+                shift := ButtonControl("Shift"),
+                ctrl := ButtonControl("Control"),
+                alt := ButtonControl("Alt"),
+                meta := ButtonControl("Meta"),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
     )
 
 

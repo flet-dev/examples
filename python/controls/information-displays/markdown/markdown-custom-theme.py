@@ -7,17 +7,18 @@ def main(page: ft.Page):
     def change_theme_mode(e):
         if page.theme_mode == ft.ThemeMode.DARK:
             page.theme_mode = ft.ThemeMode.LIGHT
-            sw.thumb_icon = ft.Icons.LIGHT_MODE
+            switch.thumb_icon = ft.Icons.LIGHT_MODE
         else:
-            sw.thumb_icon = ft.Icons.DARK_MODE
+            switch.thumb_icon = ft.Icons.DARK_MODE
             page.theme_mode = ft.ThemeMode.DARK
         page.update()
 
-    sw = ft.Switch(thumb_icon=ft.Icons.DARK_MODE, on_change=change_theme_mode)
+    switch = ft.Switch(thumb_icon=ft.Icons.DARK_MODE, on_change=change_theme_mode)
 
     page.add(
         ft.Row(
-            [
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            controls=[
                 ft.Container(
                     content=ft.Markdown(
                         "I can read this!",
@@ -33,12 +34,11 @@ def main(page: ft.Page):
                     ),
                 ),
                 ft.Container(
-                    content=sw,
-                    padding=ft.padding.only(bottom=50),
-                    alignment=ft.Alignment.top_right(),
+                    content=switch,
+                    padding=ft.Padding.only(bottom=50),
+                    alignment=ft.Alignment.TOP_RIGHT,
                 ),
             ],
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         )
     )
 

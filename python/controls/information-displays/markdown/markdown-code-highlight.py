@@ -1,8 +1,6 @@
 import flet as ft
 
-table = """
-
-
+sample = """
 # Flet
 
 <img src="https://raw.githubusercontent.com/flet-dev/flet/flet-widget/media/logo/flet-logo.svg" width="50%"/>
@@ -149,7 +147,7 @@ Coming soon.
 ## Adding custom Flutter widgets
 
 Coming soon.
-        """
+"""
 
 
 def main(page: ft.Page):
@@ -161,7 +159,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Markdown(
-            table,
+            value=sample,
             selectable=True,
             extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
             code_theme=ft.MarkdownCodeTheme.ATOM_ONE_DARK,
@@ -173,4 +171,4 @@ def main(page: ft.Page):
     )
 
 
-ft.run(main, assets_dir="assets")
+ft.run(main)

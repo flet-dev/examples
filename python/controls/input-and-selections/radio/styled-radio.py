@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.add(
         ft.RadioGroup(
             ft.Column(
-                [
+                controls=[
                     ft.Radio(label="Radio with default style", value="1"),
                     ft.Radio(
                         label="Radio with constant fill color",

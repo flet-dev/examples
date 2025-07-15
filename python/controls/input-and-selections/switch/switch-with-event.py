@@ -2,20 +2,21 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def theme_changed(e):
+    def handle_switch_change(e: ft.Event[ft.Switch]):
         page.theme_mode = (
             ft.ThemeMode.DARK
             if page.theme_mode == ft.ThemeMode.LIGHT
             else ft.ThemeMode.LIGHT
         )
-        c.label = (
-            "Light theme" if page.theme_mode == ft.ThemeMode.LIGHT else "Dark theme"
+        e.control.label = (
+            "Light ThemeMode"
+            if page.theme_mode == ft.ThemeMode.LIGHT
+            else "Dark ThemeMode"
         )
         page.update()
 
     page.theme_mode = ft.ThemeMode.LIGHT
-    c = ft.Switch(label="Light theme", on_change=theme_changed)
-    page.add(c)
+    page.add(ft.Switch(label="Light ThemeMode", on_change=handle_switch_change))
 
 
 ft.run(main)

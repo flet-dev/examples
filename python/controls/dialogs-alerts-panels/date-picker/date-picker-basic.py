@@ -9,11 +9,11 @@ def main(page: ft.Page):
         page.add(ft.Text(f"Date changed: {e.control.value.strftime('%m/%d/%Y')}"))
 
     def handle_dismissal(e):
-        page.add(ft.Text(f"DatePicker dismissed"))
+        page.add(ft.Text("DatePicker dismissed"))
 
     page.add(
         ft.ElevatedButton(
-            "Pick date",
+            content="Pick date",
             icon=ft.Icons.CALENDAR_MONTH,
             on_click=lambda e: page.show_dialog(
                 ft.DatePicker(

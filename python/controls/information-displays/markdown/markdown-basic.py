@@ -1,6 +1,6 @@
 import flet as ft
 
-md1 = """
+sample = """
 # Markdown Example
 Markdown allows you to easily include formatted text, images, and even formatted Dart code in your app.
 
@@ -79,7 +79,7 @@ def main(page: ft.Page):
     page.scroll = ft.ScrollMode.AUTO
     page.add(
         ft.Markdown(
-            md1,
+            value=sample,
             selectable=True,
             extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
             on_tap_link=lambda e: page.launch_url(e.data),

@@ -1,19 +1,21 @@
 import flet as ft
 
 
-def main(page):
+def main(page: ft.Page):
     page.title = "ListTile Examples"
+
     page.add(
         ft.Card(
             content=ft.Container(
                 width=500,
+                padding=ft.Padding.symmetric(vertical=10),
                 content=ft.Column(
-                    [
+                    spacing=0,
+                    controls=[
+                        ft.ListTile(title=ft.Text("One-line list tile")),
                         ft.ListTile(
-                            title=ft.Text("One-line list tile"),
-                        ),
-                        ft.ListTile(
-                            title=ft.Text("One-line dense list tile"), dense=True
+                            title=ft.Text("One-line dense list tile"),
+                            dense=True,
                         ),
                         ft.ListTile(
                             leading=ft.Icon(ft.Icons.SETTINGS),
@@ -22,7 +24,8 @@ def main(page):
                         ),
                         ft.ListTile(
                             leading=ft.Image(
-                                src="/icons/icon-192.png", fit=ft.BoxFit.CONTAIN
+                                src="/icons/icon-192.png",
+                                fit=ft.BoxFit.CONTAIN,
                             ),
                             title=ft.Text("One-line with leading control"),
                         ),
@@ -31,42 +34,40 @@ def main(page):
                             trailing=ft.PopupMenuButton(
                                 icon=ft.Icons.MORE_VERT,
                                 items=[
-                                    ft.PopupMenuItem(text="Item 1"),
-                                    ft.PopupMenuItem(text="Item 2"),
+                                    ft.PopupMenuItem(content="Item 1"),
+                                    ft.PopupMenuItem(content="Item 2"),
                                 ],
                             ),
                         ),
                         ft.ListTile(
                             leading=ft.Icon(ft.Icons.ALBUM),
                             title=ft.Text(
-                                "One-line with leading and trailing controls"
+                                value="One-line with leading and trailing controls"
                             ),
                             trailing=ft.PopupMenuButton(
                                 icon=ft.Icons.MORE_VERT,
                                 items=[
-                                    ft.PopupMenuItem(text="Item 1"),
-                                    ft.PopupMenuItem(text="Item 2"),
+                                    ft.PopupMenuItem(content="Item 1"),
+                                    ft.PopupMenuItem(content="Item 2"),
                                 ],
                             ),
                         ),
                         ft.ListTile(
                             leading=ft.Icon(ft.Icons.SNOOZE),
                             title=ft.Text(
-                                "Two-line with leading and trailing controls"
+                                value="Two-line with leading and trailing controls"
                             ),
                             subtitle=ft.Text("Here is a second title."),
                             trailing=ft.PopupMenuButton(
                                 icon=ft.Icons.MORE_VERT,
                                 items=[
-                                    ft.PopupMenuItem(text="Item 1"),
-                                    ft.PopupMenuItem(text="Item 2"),
+                                    ft.PopupMenuItem(content="Item 1"),
+                                    ft.PopupMenuItem(content="Item 2"),
                                 ],
                             ),
                         ),
                     ],
-                    spacing=0,
                 ),
-                padding=ft.Padding.symmetric(vertical=10),
             )
         )
     )

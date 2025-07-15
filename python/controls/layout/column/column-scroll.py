@@ -2,7 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def add_text_box(_):
+    def add_text_box(e: ft.Event[ft.ElevatedButton]):
         text_field = ft.TextField(
             label=f"Text Box {len(left_column.controls)}",
             label_style=ft.TextStyle(color=ft.Colors.GREEN),
@@ -12,12 +12,12 @@ def main(page: ft.Page):
         left_column.controls.append(text_field)
         page.update()
 
-    def remove_text_box(_):
+    def remove_text_box(e: ft.Event[ft.ElevatedButton]):
         if left_column.controls:
             left_column.controls.pop()
         page.update()
 
-    def scroll_generator(scroll_mode_list):
+    def scroll_generator(scroll_mode_list: list):
         while True:
             for scroll_mode in scroll_mode_list:
                 yield scroll_mode
@@ -29,10 +29,12 @@ def main(page: ft.Page):
 
     add_text_box_button = ft.ElevatedButton("Add TextBox", on_click=add_text_box)
     remove_text_box_button = ft.ElevatedButton(
-        "Remove TextBox", on_click=remove_text_box
+        content="Remove TextBox",
+        on_click=remove_text_box,
     )
     scroll_change_button = ft.ElevatedButton(
-        "Change Scroll Mode", on_click=change_scroll
+        content="Change Scroll Mode",
+        on_click=change_scroll,
     )
 
     scroll_mode = scroll_generator(
@@ -46,38 +48,43 @@ def main(page: ft.Page):
     )
 
     left_column = ft.Column(
-        [ft.Text("THIS IS COL 1", color=ft.Colors.RED_400)],
+        controls=[ft.Text("THIS IS COL 1", color=ft.Colors.RED_400)],
         scroll=next(scroll_mode),
     )
-    left_container = ft.Container(
-        left_column,
-        expand=True,
-        margin=10,
-        padding=10,
-        bgcolor=ft.Colors.AMBER_100,
-        border_radius=10,
-        alignment=ft.Alignment.top_center(),
-    )
     scroll_mode_text = ft.Text(str(left_column.scroll))
-    right_container = ft.Container(
-        ft.Column(
-            [
-                add_text_box_button,
-                remove_text_box_button,
-                scroll_change_button,
-                scroll_mode_text,
-            ],
-        ),
-        margin=10,
-        padding=10,
-        bgcolor=ft.Colors.CYAN_500,
-        border_radius=10,
-        expand=True,
-        alignment=ft.Alignment.top_left(),
-    )
 
-    row = ft.Row([left_container, right_container], expand=True)
-    page.add(row)
+    page.add(
+        ft.Row(
+            expand=True,
+            controls=[
+                ft.Container(
+                    content=left_column,
+                    expand=True,
+                    margin=10,
+                    padding=10,
+                    bgcolor=ft.Colors.AMBER_100,
+                    border_radius=10,
+                    alignment=ft.Alignment.TOP_CENTER,
+                ),
+                ft.Container(
+                    margin=10,
+                    padding=10,
+                    bgcolor=ft.Colors.CYAN_500,
+                    border_radius=10,
+                    expand=True,
+                    alignment=ft.Alignment.TOP_LEFT,
+                    content=ft.Column(
+                        controls=[
+                            add_text_box_button,
+                            remove_text_box_button,
+                            scroll_change_button,
+                            scroll_mode_text,
+                        ],
+                    ),
+                ),
+            ],
+        )
+    )
 
 
 ft.run(main)
