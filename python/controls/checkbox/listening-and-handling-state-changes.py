@@ -8,7 +8,8 @@ def main(page: ft.Page):
 
     page.add(
         ft.Checkbox(
-            label="Checkbox with 'change' event", on_change=handle_checkbox_change
+            label="Checkbox with 'change' event",
+            on_change=handle_checkbox_change,
         )
     )
 

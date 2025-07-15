@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    def close_banner(e):
+    def handle_banner_close(e: ft.Event[ft.TextButton]):
         page.pop_dialog()
         page.add(ft.Text("Action clicked: " + e.control.content))
 
@@ -20,17 +20,17 @@ def main(page: ft.Page):
             ft.TextButton(
                 content="Retry",
                 style=action_button_style,
-                on_click=close_banner,
+                on_click=handle_banner_close,
             ),
             ft.TextButton(
                 content="Ignore",
                 style=action_button_style,
-                on_click=close_banner,
+                on_click=handle_banner_close,
             ),
             ft.TextButton(
                 content="Cancel",
                 style=action_button_style,
-                on_click=close_banner,
+                on_click=handle_banner_close,
             ),
         ],
     )

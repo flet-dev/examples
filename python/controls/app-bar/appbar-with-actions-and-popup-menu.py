@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "AppBar Example"
 
-    def check_item_clicked(e):
+    def handle_checked_item_click(e: ft.Event[ft.PopupMenuItem]):
         e.control.checked = not e.control.checked
         page.update()
 
@@ -19,10 +19,12 @@ def main(page: ft.Page):
             ft.IconButton(ft.Icons.FILTER_3),
             ft.PopupMenuButton(
                 items=[
-                    ft.PopupMenuItem(text="Item 1"),
+                    ft.PopupMenuItem(content="Item 1"),
                     ft.PopupMenuItem(),  # divider
                     ft.PopupMenuItem(
-                        text="Checked item", checked=False, on_click=check_item_clicked
+                        content="Checked item",
+                        checked=False,
+                        on_click=handle_checked_item_click,
                     ),
                 ]
             ),

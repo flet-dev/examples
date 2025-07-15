@@ -2,7 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def handle_button_click(e):
+    def handle_button_click(e: ft.Event[ft.ElevatedButton]):
         message.value = f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}, {c5.value}."
         page.update()
 

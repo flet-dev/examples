@@ -14,19 +14,19 @@ def main(page: ft.Page):
                 content=ft.Column(
                     controls=[
                         ft.ListTile(
+                            bgcolor=ft.Colors.GREY_400,
                             leading=ft.Icon(ft.Icons.ALBUM),
                             title=ft.Text("The Enchanted Nightingale"),
                             subtitle=ft.Text(
                                 "Music by Julie Gable. Lyrics by Sidney Stein."
                             ),
-                            bgcolor=ft.Colors.GREY_400,
                         ),
                         ft.Row(
+                            alignment=ft.MainAxisAlignment.END,
                             controls=[
                                 ft.TextButton("Buy tickets"),
                                 ft.TextButton("Listen"),
                             ],
-                            alignment=ft.MainAxisAlignment.END,
                         ),
                     ]
                 ),

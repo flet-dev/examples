@@ -53,11 +53,12 @@ class BufferingSwitcher(ft.AnimatedSwitcher):
 
 
 def main(page: ft.Page):
-    i = ft.Image(
-        src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
+    switcher = BufferingSwitcher(
+        ft.Image(
+            src=f"https://picsum.photos/200/300?{time.time()}", width=200, height=300
+        ),
+        page,
     )
-
-    switcher = BufferingSwitcher(i, page)
 
     page.add(
         switcher,
