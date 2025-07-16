@@ -2,7 +2,8 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def get_items(count: int):
+    def generate_items(count: int):
+        """Generates a list of custom Containers with length `count`."""
         return [
             ft.Container(
                 content=ft.Text(value=str(i)),
@@ -16,8 +17,9 @@ def main(page: ft.Page):
         ]
 
     def handle_slider_change(e: ft.Event[ft.Slider]):
-        col.spacing = int(e.control.value)
-        col.update()
+        """Updates the spacing between items based on slider value."""
+        column.spacing = int(e.control.value)
+        column.update()
 
     page.add(
         ft.Column(
@@ -34,7 +36,7 @@ def main(page: ft.Page):
                 ),
             ]
         ),
-        col := ft.Column(spacing=0, controls=get_items(5)),
+        column := ft.Column(spacing=0, controls=generate_items(5)),
     )
 
 

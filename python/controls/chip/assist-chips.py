@@ -2,13 +2,13 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    def handle_chip1_click(e):
+    def handle_chip1_click(e: ft.Event[ft.Chip]):
         e.control.label.value = "Saved to favorites"
         e.control.leading = ft.Icon(ft.Icons.FAVORITE_OUTLINED)
         e.control.disabled = True
         page.update()
 
-    def handle_chip2_click(e):
+    def handle_chip2_click(e: ft.Event[ft.Chip]):
         page.launch_url("https://maps.google.com")
         page.update()
 

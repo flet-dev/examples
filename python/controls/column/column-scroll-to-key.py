@@ -13,28 +13,28 @@ def main(page: ft.Page):
                     scroll=ft.ScrollMode.ALWAYS,
                     controls=[
                         ft.Container(
-                            ft.Text("Section A", color=ft.Colors.BLACK),
+                            content=ft.Text("Section A", color=ft.Colors.BLACK),
                             alignment=ft.Alignment.TOP_LEFT,
                             bgcolor=ft.Colors.YELLOW_200,
                             height=100,
                             scroll_key="A",
                         ),
                         ft.Container(
-                            ft.Text("Section B", color=ft.Colors.BLACK),
+                            content=ft.Text("Section B", color=ft.Colors.BLACK),
                             alignment=ft.Alignment.TOP_LEFT,
                             bgcolor=ft.Colors.GREEN_200,
                             height=100,
                             scroll_key="B",
                         ),
                         ft.Container(
-                            ft.Text("Section C", color=ft.Colors.BLACK),
+                            content=ft.Text("Section C", color=ft.Colors.BLACK),
                             alignment=ft.Alignment.TOP_LEFT,
                             bgcolor=ft.Colors.BLUE_200,
                             height=100,
                             scroll_key="C",
                         ),
                         ft.Container(
-                            ft.Text("Section D", color=ft.Colors.BLACK),
+                            content=ft.Text("Section D", color=ft.Colors.BLACK),
                             alignment=ft.Alignment.TOP_LEFT,
                             bgcolor=ft.Colors.PINK_200,
                             height=100,
