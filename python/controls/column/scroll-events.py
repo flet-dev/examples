@@ -3,9 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     def handle_column_scroll(e: ft.OnScrollEvent[ft.Column]):
-        print(
-            f"Type: {e.event_type}, pixels: {e.pixels}, min_scroll_extent: {e.min_scroll_extent}, max_scroll_extent: {e.max_scroll_extent}"
-        )
+        print(e)
 
     page.add(
         ft.Container(
@@ -17,7 +15,8 @@ def main(page: ft.Page):
                 scroll=ft.ScrollMode.ALWAYS,
                 on_scroll=handle_column_scroll,
                 controls=[
-                    ft.Text(f"Text line {i}", scroll_key=str(i)) for i in range(0, 50)
+                    ft.Text(f"Text line {i}", key=ft.ScrollKey(str(i)))
+                    for i in range(0, 50)
                 ],
             ),
         ),

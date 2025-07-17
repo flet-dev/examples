@@ -8,27 +8,19 @@ def main(page: ft.Page):
     page.add(
         ft.ElevatedButton(
             content="Stadium",
-            style=ft.ButtonStyle(
-                shape=ft.StadiumBorder(),
-            ),
+            style=ft.ButtonStyle(shape=ft.StadiumBorder()),
         ),
         ft.ElevatedButton(
             content="Rounded rectangle",
-            style=ft.ButtonStyle(
-                shape=ft.RoundedRectangleBorder(radius=10),
-            ),
+            style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)),
         ),
         ft.ElevatedButton(
             content="Continuous rectangle",
-            style=ft.ButtonStyle(
-                shape=ft.ContinuousRectangleBorder(radius=30),
-            ),
+            style=ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=30)),
         ),
         ft.ElevatedButton(
             content="Beveled rectangle",
-            style=ft.ButtonStyle(
-                shape=ft.BeveledRectangleBorder(radius=10),
-            ),
+            style=ft.ButtonStyle(shape=ft.BeveledRectangleBorder(radius=10)),
         ),
         ft.ElevatedButton(
             content="Circle",
