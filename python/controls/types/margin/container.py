@@ -2,7 +2,7 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "Containers with different margins"
+    page.title = "Margin Example"
 
     page.add(
         ft.Row(

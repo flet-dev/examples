@@ -13,7 +13,6 @@ def main(page: ft.Page):
 
     def handle_button_click(e: ft.Event[ft.ElevatedButton]):
         nonlocal i
-        print(f"button clicked {i}")
         img_container.image = ft.DecorationImage(
             src=f"https://picsum.photos/300/300?random={i}"
         )

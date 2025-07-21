@@ -30,7 +30,7 @@ def main(page: ft.Page):
         ]
     )
 
-    rg = ft.RadioGroup(
+    radio_group1 = ft.RadioGroup(
         content=ft.Column(
             controls=[
                 ft.Radio(value="red", label="Red color"),
@@ -40,13 +40,13 @@ def main(page: ft.Page):
         )
     )
 
-    def handle_rg1_change(e: ft.Event[ft.RadioGroup]):
-        results.controls.append(ft.Text(f"Selected value: {rg1.value}"))
+    def handle_rg2_change(e: ft.Event[ft.RadioGroup]):
+        results.controls.append(ft.Text(f"Selected value: {e.data}"))
         page.update()
 
-    rg1 = ft.RadioGroup(
+    radio_group2 = ft.RadioGroup(
         value="two",
-        on_change=handle_rg1_change,
+        on_change=handle_rg2_change,
         content=ft.Row(
             controls=[
                 ft.Radio(value="one", label="One"),
@@ -99,12 +99,12 @@ def main(page: ft.Page):
                 ft.Text("Switches", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 switches,
                 ft.Text("Radio", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
-                rg,
+                radio_group1,
                 ft.Text(
-                    "Radio with on_change",
+                    value="Radio with on_change",
                     theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
                 ),
-                rg1,
+                radio_group2,
                 ft.Container(
                     content=results,
                     padding=10,
@@ -113,14 +113,14 @@ def main(page: ft.Page):
                     bgcolor="black12",
                 ),
                 ft.Text(
-                    "Dropdown with pre-selected value",
+                    value="Dropdown with pre-selected value",
                     theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
                 ),
                 dd,
                 ft.Text("Dropdown", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
                 dd1,
                 ft.Text(
-                    "Dropdown with all decoration",
+                    value="Dropdown with all decoration",
                     theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
                 ),
                 dd2,

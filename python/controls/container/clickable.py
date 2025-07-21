@@ -2,8 +2,8 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.theme_mode = ft.ThemeMode.LIGHT
     page.title = "Container Example"
+    page.theme_mode = ft.ThemeMode.LIGHT
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 

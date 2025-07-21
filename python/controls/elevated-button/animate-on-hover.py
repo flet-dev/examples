@@ -3,7 +3,7 @@ import flet as ft
 
 def main(page: ft.Page):
     def animate(e: ft.Event[ft.ElevatedButton]):
-        e.control.rotate = 0.1 if e.data == True else 0
+        e.control.rotate = 0.1 if e.data else 0
         page.update()
 
     page.add(
