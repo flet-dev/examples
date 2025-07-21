@@ -14,7 +14,7 @@ class AppTile(ft.ListTile):
     def __init__(self, name, view, icon_name, file_name):
         super().__init__()
         self.view = view
-        self.bgcolor = ft.colors.SURFACE_VARIANT
+        self.bgcolor = ft.Colors.SURFACE_VARIANT
         self.title = ft.Text(name)
         self.leading = ft.Icon(icon_name)
         self.on_click = self.app_button_clicked
@@ -52,55 +52,55 @@ def main(page: ft.Page):
                     name="Counter",
                     file_name="counter.py",
                     view=counter.example(page),
-                    icon_name=ft.icons.ADD,
+                    icon_name=ft.Icons.ADD,
                 ),
                 AppTile(
                     name="To-Do",
                     file_name="to_do.py",
                     view=to_do.example(page),
-                    icon_name=ft.icons.CHECK_BOX_OUTLINED,
+                    icon_name=ft.Icons.CHECK_BOX_OUTLINED,
                 ),
                 AppTile(
                     name="Calculator",
                     file_name="calculator.py",
                     view=calculator.example(page),
-                    icon_name=ft.icons.CALCULATE_OUTLINED,
+                    icon_name=ft.Icons.CALCULATE_OUTLINED,
                 ),
                 AppTile(
                     name="Drawing Tool",
                     file_name="drawing_tool.py",
                     view=drawing_tool.example(page),
-                    icon_name=ft.icons.DRAW_OUTLINED,
+                    icon_name=ft.Icons.DRAW_OUTLINED,
                 ),
                 AppTile(
                     name="Buttons",
                     file_name="buttons.py",
                     view=buttons.example(page),
-                    icon_name=ft.icons.SMART_BUTTON_OUTLINED,
+                    icon_name=ft.Icons.SMART_BUTTON_OUTLINED,
                 ),
                 AppTile(
                     name="Entry Form",
                     file_name="entry_form.py",
                     view=entry_form.example(page),
-                    icon_name=ft.icons.LOGIN,
+                    icon_name=ft.Icons.LOGIN,
                 ),
                 AppTile(
                     name="Charts",
                     file_name="charts.py",
                     view=charts.example(page),
-                    icon_name=ft.icons.INSERT_CHART_OUTLINED,
+                    icon_name=ft.Icons.INSERT_CHART_OUTLINED,
                 ),
                 AppTile(
                     name="Flet Animation",
                     file_name="flet_animation.py",
                     view=flet_animation.example(page),
-                    icon_name=ft.icons.ANIMATION,
+                    icon_name=ft.Icons.ANIMATION,
                 ),
                 AppTile(
                     name="Audio Player",
                     file_name="audio_player.py",
                     view=audio_player.example(page),
-                    icon_name=ft.icons.AUDIOTRACK,
+                    icon_name=ft.Icons.AUDIOTRACK,
                 ),
             ]
         )

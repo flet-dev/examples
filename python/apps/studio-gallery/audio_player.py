@@ -33,7 +33,7 @@ def example(page):
                             y=0,
                             height=4,
                             border_radius=3,
-                            paint=ft.Paint(color=ft.colors.GREY_500),
+                            paint=ft.Paint(color=ft.Colors.GREY_500),
                             width=100,
                         ),
                         cv.Rect(
@@ -41,14 +41,14 @@ def example(page):
                             y=0,
                             height=4,
                             border_radius=3,
-                            paint=ft.Paint(color=ft.colors.GREY_900),
+                            paint=ft.Paint(color=ft.Colors.GREY_900),
                             width=100,
                         ),
                         cv.Circle(
                             x=100,
                             y=2,
                             radius=6,
-                            paint=ft.Paint(color=ft.colors.GREY_900),
+                            paint=ft.Paint(color=ft.Colors.GREY_900),
                         ),
                     ]
                 ),
@@ -100,7 +100,7 @@ def example(page):
                             y=0,
                             height=5,
                             border_radius=3,
-                            paint=ft.Paint(color=ft.colors.GREY_500),
+                            paint=ft.Paint(color=ft.Colors.GREY_500),
                             width=100,
                         ),
                         cv.Rect(
@@ -108,7 +108,7 @@ def example(page):
                             y=0,
                             height=5,
                             border_radius=3,
-                            paint=ft.Paint(color=ft.colors.GREY_900),
+                            paint=ft.Paint(color=ft.Colors.GREY_900),
                             width=0,
                         ),
                     ],
@@ -160,12 +160,12 @@ def example(page):
                 audio=self.audio1, on_change_position=self.seek_position
             )
             self.play_button = ft.IconButton(
-                icon=ft.icons.PLAY_ARROW,
+                icon=ft.Icons.PLAY_ARROW,
                 visible=False,
                 on_click=self.play,
             )
             self.pause_button = ft.IconButton(
-                icon=ft.icons.PAUSE,
+                icon=ft.Icons.PAUSE,
                 visible=False,
                 on_click=self.pause,
             )
@@ -175,7 +175,7 @@ def example(page):
                 audio=self.audio1, on_change_volume=self.check_mute
             )
             self.volume_icon = ft.IconButton(
-                icon=ft.icons.VOLUME_UP,
+                icon=ft.Icons.VOLUME_UP,
                 visible=False,
                 on_click=self.volume_icon_clicked,
             )
@@ -256,27 +256,27 @@ def example(page):
             e.control.page.update()
 
         def volume_icon_clicked(self, e):
-            if e.control.icon == ft.icons.VOLUME_UP:
-                e.control.icon = ft.icons.VOLUME_OFF
+            if e.control.icon == ft.Icons.VOLUME_UP:
+                e.control.icon = ft.Icons.VOLUME_OFF
                 self.volume_slider.mute()
             else:
-                e.control.icon = ft.icons.VOLUME_UP
+                e.control.icon = ft.Icons.VOLUME_UP
                 self.volume_slider.unmute()
             e.control.page.update()
 
         def check_mute(self):
             if (
                 int(self.audio1.volume * 100) == 0
-                and self.volume_icon.icon == ft.icons.VOLUME_UP
+                and self.volume_icon.icon == ft.Icons.VOLUME_UP
             ):
-                self.volume_icon.icon = ft.icons.VOLUME_OFF
+                self.volume_icon.icon = ft.Icons.VOLUME_OFF
                 self.volume_slider.mute()
                 self.volume_icon.update()
             elif (
                 int(self.audio1.volume * 100) != 0
-                and self.volume_icon.icon == ft.icons.VOLUME_OFF
+                and self.volume_icon.icon == ft.Icons.VOLUME_OFF
             ):
-                self.volume_icon.icon = ft.icons.VOLUME_UP
+                self.volume_icon.icon = ft.Icons.VOLUME_UP
                 self.volume_slider.unmute()
                 self.volume_icon.update()
 

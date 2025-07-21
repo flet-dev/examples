@@ -2,15 +2,16 @@ import flet as ft
 
 name = "Transparent title over an image"
 
+
 def example():
 
     st = ft.Stack(
         [
             ft.Image(
-                src=f"https://picsum.photos/300/300",
+                src="https://picsum.photos/300/300",
                 width=300,
                 height=300,
-                fit=ft.ImageFit.CONTAIN,
+                fit=ft.BoxFit.CONTAIN,
             ),
             ft.Row(
                 [

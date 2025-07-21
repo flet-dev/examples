@@ -8,7 +8,7 @@ def example():
         src="logo.svg",
         width=100,
         height=100,
-        fit=ft.ImageFit.CONTAIN,
+        fit=ft.BoxFit.CONTAIN,
     )
     images = ft.Row(width=600, wrap=False, scroll="always")
 
@@ -18,7 +18,7 @@ def example():
                 src=f"https://picsum.photos/200/200?{i}",
                 width=200,
                 height=200,
-                fit=ft.ImageFit.NONE,
+                fit=ft.BoxFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
                 border_radius=ft.BorderRadius.all(10),
             )

@@ -19,7 +19,7 @@ def line_chart():
                 ft.LineChartDataPoint(13, 1.8),
             ],
             stroke_width=8,
-            color=ft.colors.LIGHT_GREEN,
+            color=ft.Colors.LIGHT_GREEN,
             curved=True,
             stroke_cap_round=True,
         ),
@@ -32,8 +32,8 @@ def line_chart():
                 ft.LineChartDataPoint(12, 2.6),
                 ft.LineChartDataPoint(13, 3.9),
             ],
-            color=ft.colors.PINK,
-            below_line_bgcolor=ft.colors.with_opacity(0, ft.colors.PINK),
+            color=ft.Colors.PINK,
+            below_line_bgcolor=ft.Colors.with_opacity(0, ft.Colors.PINK),
             stroke_width=8,
             curved=True,
             stroke_cap_round=True,
@@ -46,7 +46,7 @@ def line_chart():
                 ft.LineChartDataPoint(10, 1.3),
                 ft.LineChartDataPoint(13, 2.5),
             ],
-            color=ft.colors.CYAN,
+            color=ft.Colors.CYAN,
             stroke_width=8,
             curved=True,
             stroke_cap_round=True,
@@ -65,7 +65,7 @@ def line_chart():
                 ft.LineChartDataPoint(13, 1.8),
             ],
             stroke_width=4,
-            color=ft.colors.with_opacity(0.5, ft.colors.LIGHT_GREEN),
+            color=ft.Colors.with_opacity(0.5, ft.Colors.LIGHT_GREEN),
             stroke_cap_round=True,
         ),
         ft.LineChartData(
@@ -77,8 +77,8 @@ def line_chart():
                 ft.LineChartDataPoint(12, 2.6),
                 ft.LineChartDataPoint(13, 3.9),
             ],
-            color=ft.colors.with_opacity(0.5, ft.colors.PINK),
-            below_line_bgcolor=ft.colors.with_opacity(0.2, ft.colors.PINK),
+            color=ft.Colors.with_opacity(0.5, ft.Colors.PINK),
+            below_line_bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.PINK),
             stroke_width=4,
             curved=True,
             stroke_cap_round=True,
@@ -91,7 +91,7 @@ def line_chart():
                 ft.LineChartDataPoint(10, 3.3),
                 ft.LineChartDataPoint(13, 4.5),
             ],
-            color=ft.colors.with_opacity(0.5, ft.colors.CYAN),
+            color=ft.Colors.with_opacity(0.5, ft.Colors.CYAN),
             stroke_width=4,
             stroke_cap_round=True,
         ),
@@ -100,7 +100,7 @@ def line_chart():
     chart = ft.LineChart(
         data_series=data_1,
         border=ft.Border(
-            bottom=ft.BorderSide(4, ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE))
+            bottom=ft.BorderSide(4, ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE))
         ),
         left_axis=ft.ChartAxis(
             labels=[
@@ -140,7 +140,7 @@ def line_chart():
                             "SEP",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -152,7 +152,7 @@ def line_chart():
                             "OCT",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -164,7 +164,7 @@ def line_chart():
                             "DEC",
                             size=16,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.with_opacity(0.5, ft.colors.ON_SURFACE),
+                            color=ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE),
                         ),
                         margin=ft.margin.only(top=10),
                     ),
@@ -172,7 +172,7 @@ def line_chart():
             ],
             labels_size=32,
         ),
-        tooltip_bgcolor=ft.colors.with_opacity(0.8, ft.colors.BLUE_GREY),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.8, ft.Colors.BLUE_GREY),
         min_y=0,
         max_y=4,
         min_x=0,
@@ -197,7 +197,7 @@ def line_chart():
         chart.update()
 
     return ft.Column(
-        controls=[ft.IconButton(ft.icons.REFRESH, on_click=toggle_data), chart],
+        controls=[ft.IconButton(ft.Icons.REFRESH, on_click=toggle_data), chart],
     )
 
 
@@ -211,7 +211,7 @@ def bar_chart():
                         from_y=0,
                         to_y=40,
                         width=40,
-                        color=ft.colors.AMBER,
+                        color=ft.Colors.AMBER,
                         tooltip="Apple",
                         border_radius=0,
                     ),
@@ -224,7 +224,7 @@ def bar_chart():
                         from_y=0,
                         to_y=100,
                         width=40,
-                        color=ft.colors.BLUE,
+                        color=ft.Colors.BLUE,
                         tooltip="Blueberry",
                         border_radius=0,
                     ),
@@ -237,7 +237,7 @@ def bar_chart():
                         from_y=0,
                         to_y=30,
                         width=40,
-                        color=ft.colors.RED,
+                        color=ft.Colors.RED,
                         tooltip="Cherry",
                         border_radius=0,
                     ),
@@ -250,14 +250,14 @@ def bar_chart():
                         from_y=0,
                         to_y=60,
                         width=40,
-                        color=ft.colors.ORANGE,
+                        color=ft.Colors.ORANGE,
                         tooltip="Orange",
                         border_radius=0,
                     ),
                 ],
             ),
         ],
-        border=ft.border.all(1, ft.colors.GREY_400),
+        border=ft.border.all(1, ft.Colors.GREY_400),
         left_axis=ft.ChartAxis(
             labels_size=40, title=ft.Text("Fruit supply"), title_size=40
         ),
@@ -279,9 +279,9 @@ def bar_chart():
             labels_size=40,
         ),
         horizontal_grid_lines=ft.ChartGridLines(
-            color=ft.colors.GREY_300, width=1, dash_pattern=[3, 3]
+            color=ft.Colors.GREY_300, width=1, dash_pattern=[3, 3]
         ),
-        tooltip_bgcolor=ft.colors.with_opacity(0.5, ft.colors.GREY_300),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.5, ft.Colors.GREY_300),
         max_y=110,
         interactive=True,
         # expand=True,
@@ -300,13 +300,13 @@ def pie_chart():
     normal_radius = 100
     hover_radius = 110
     normal_title_style = ft.TextStyle(
-        size=12, color=ft.colors.WHITE, weight=ft.FontWeight.BOLD
+        size=12, color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD
     )
     hover_title_style = ft.TextStyle(
         size=16,
-        color=ft.colors.WHITE,
+        color=ft.Colors.WHITE,
         weight=ft.FontWeight.BOLD,
-        shadow=ft.BoxShadow(blur_radius=2, color=ft.colors.BLACK54),
+        shadow=ft.BoxShadow(blur_radius=2, color=ft.Colors.BLACK54),
     )
     normal_badge_size = 40
     hover_badge_size = 50
@@ -316,9 +316,9 @@ def pie_chart():
             ft.Icon(icon),
             width=size,
             height=size,
-            border=ft.border.all(1, ft.colors.BROWN),
+            border=ft.border.all(1, ft.Colors.BROWN),
             border_radius=size / 2,
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
         )
 
     def on_chart_event(e: ft.PieChartEvent):
@@ -337,9 +337,9 @@ def pie_chart():
                 40,
                 title="40%",
                 title_style=normal_title_style,
-                color=ft.colors.BLUE,
+                color=ft.Colors.BLUE,
                 radius=normal_radius,
-                badge=badge(ft.icons.AC_UNIT, normal_badge_size),
+                badge=badge(ft.Icons.AC_UNIT, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -348,7 +348,7 @@ def pie_chart():
                 title_style=normal_title_style,
                 color=ft.colors.YELLOW,
                 radius=normal_radius,
-                badge=badge(ft.icons.ACCESS_ALARM, normal_badge_size),
+                badge=badge(ft.Icons.ACCESS_ALARM, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -357,7 +357,7 @@ def pie_chart():
                 title_style=normal_title_style,
                 color=ft.colors.PURPLE,
                 radius=normal_radius,
-                badge=badge(ft.icons.APPLE, normal_badge_size),
+                badge=badge(ft.Icons.APPLE, normal_badge_size),
                 badge_position=0.98,
             ),
             ft.PieChartSection(
@@ -366,7 +366,7 @@ def pie_chart():
                 title_style=normal_title_style,
                 color=ft.colors.GREEN,
                 radius=normal_radius,
-                badge=badge(ft.icons.PEDAL_BIKE, normal_badge_size),
+                badge=badge(ft.Icons.PEDAL_BIKE, normal_badge_size),
                 badge_position=0.98,
             ),
         ],

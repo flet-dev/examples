@@ -14,15 +14,8 @@ dependencies = [
 
 [tool.uv]
 dev-dependencies = [
-    "flet-audio>=0.2.0.dev0",
-    "flet-video>=0.2.0.dev0",
-    "flet-flashlight>=0.2.0.dev0",
-    "flet-geolocator>=0.2.0.dev0",
-    "flet-ads>=0.2.0.dev0",
-    "flet-rive>=0.2.0.dev0",
     "matplotlib",
     "mplfinance",
     "pandas",
     "plotly"
 ]
-

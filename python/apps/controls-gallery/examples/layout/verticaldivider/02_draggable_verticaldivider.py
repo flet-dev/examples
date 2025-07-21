@@ -15,7 +15,7 @@ def example():
 
     c = ft.Container(
         bgcolor=ft.Colors.ORANGE_300,
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
         width=100,
         # expand=1,
     )
@@ -31,7 +31,7 @@ def example():
             ),
             ft.Container(
                 bgcolor=ft.Colors.BROWN_400,
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
                 expand=1,
             ),
         ],

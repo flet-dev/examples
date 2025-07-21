@@ -48,7 +48,7 @@ class BoardList(ft.Container):
                     value=self.title,
                     width=150,
                     height=40,
-                    content_padding=ft.padding.only(left=10, bottom=10),
+                    content_padding=ft.Padding.only(left=10, bottom=10),
                 ),
                 ft.TextButton(text="Save", on_click=self.save_title),
             ]
@@ -96,7 +96,7 @@ class BoardList(ft.Container):
                             ),
                         ],
                     ),
-                    padding=ft.padding.only(right=-10),
+                    padding=ft.Padding.only(right=-10),
                 ),
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -128,7 +128,7 @@ class BoardList(ft.Container):
             border=ft.border.all(2, ft.Colors.BLACK12),
             border_radius=ft.border_radius.all(5),
             bgcolor=self.color if (self.color != "") else ft.Colors.BACKGROUND,
-            padding=ft.padding.only(bottom=10, right=10, left=10, top=5),
+            padding=ft.Padding.only(bottom=10, right=10, left=10, top=5),
         )
 
         self.view = ft.DragTarget(
