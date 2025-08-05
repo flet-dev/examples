@@ -41,10 +41,10 @@ class OuterContainer(ft.Draggable):
         self.list_ref.current.update()
         self.update()
 
-    def drag_will_accept(self, e):
+    def drag_will_accept(self, e: ft.DragWillAcceptEvent):
         print(f"drag_will_accept outer e: {e}")
-
-        self.outer_container.border = ft.Border.all(8, ft.Colors.BLACK54)
+        if e.accept and e.control != self.parent:
+            self.outer_container.border = ft.Border.all(8, ft.Colors.BLACK54)
         self.update()
 
     def drag_leave(self, e):
@@ -61,6 +61,7 @@ class InnerContainer(ft.Draggable):
 
         self.inner_color = inner_color
         self.id = id
+        self.data = id
         self.inner_icon = ft.Icon(
             ft.Icons.CIRCLE, color=inner_color, size=100, tooltip="drag me!"
         )
@@ -71,6 +72,7 @@ class InnerContainer(ft.Draggable):
             on_accept=self.drag_accept,
             on_leave=self.drag_leave,
             on_will_accept=self.drag_will_accept,
+            data=self.id,
         )
         super().__init__(
             content=self.target, group="inner", max_simultaneous_drags=1, data=self
@@ -82,20 +84,27 @@ class InnerContainer(ft.Draggable):
 
     def drag_accept(self, e: ft.DragTargetEvent):
         print(f"drag_accept inner e: {e}")
-        self.set_color(self.inner_color)
-        control = self.page.get_control(e.src_id)
-        print(f"control: {control}")
+        # self.set_color(self.inner_color)
+        control: InnerContainer = self.page.get_control(e.src_id)
+        # print(f"control: {control}")
         # if self.inner_color == state.color1:
         #     self.set_color(state.color2)
         #     self.state.
 
         # else:
         #     self.set_color(state.color1)
-
-        if self.inner_color == state.color1:
-            state.inner1.set_color
-        state.inner1.set_color(state.inner2.inner_color)
-        state.inner2.set_color(state.inner1.inner_color)
+        if control.inner_color == state.color1:
+            print("Triggered 1")
+            control.set_color(state.color2)
+            self.set_color(state.color1)
+        else:
+            print("Triggered 2")
+            control.set_color(state.color1)
+            self.set_color(state.color2)
+        # if self.inner_color == state.color1:
+        #     state.inner1.set_color(state.inner2.inner_color)
+        # state.inner1.set_color(state.inner2.inner_color)
+        # state.inner2.set_color(state.inner1.inner_color)
 
         # (
         #     self.list_ref.current.controls[0].content.content.content,
@@ -108,9 +117,15 @@ class InnerContainer(ft.Draggable):
         self.update()
         # self.set_color(ft.Colors.WHITE54)
 
-    def drag_will_accept(self, e):
+    def drag_will_accept(self, e: ft.DragWillAcceptEvent):
         print(f"drag_will_accept inner e: {e}")
-        self.set_color(ft.Colors.GREEN_300)
+        # print(
+        #     f"e.accept and e.data = {e.data} and self.id = {self.id} and e.src_id = {e.src_id}"
+        # )
+
+        if e.accept:
+
+            self.set_color(ft.Colors.GREEN_300)
         self.update()
 
     def drag_leave(self, e):
