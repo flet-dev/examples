@@ -4,7 +4,6 @@ from board import Board
 from user import User
 from data_store import DataStore
 from memory_store import InMemoryStore
-from user import User
 
 
 class TrelloApp(AppLayout):
@@ -24,7 +23,7 @@ class TrelloApp(AppLayout):
             leading=ft.Icon(ft.Icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
             title=ft.Text(
-                f"Trolli",
+                "Trolli",
                 font_family="Pacifico",
                 size=32,
                 text_align=ft.TextAlign.START,
@@ -56,7 +55,7 @@ class TrelloApp(AppLayout):
             ft.View(
                 "/",
                 [self.appbar, self],
-                padding=ft.padding.all(0),
+                padding=ft.Padding.all(0),
                 bgcolor=ft.Colors.BLUE_GREY_200,
             )
         )

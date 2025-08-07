@@ -12,28 +12,28 @@ def example():
         controls=[
             ft.Container(
                 ft.Text("Section A"),
-                alignment=ft.Alignment.top_left(),
+                alignment=ft.Alignment.TOP_LEFT,
                 bgcolor=ft.Colors.YELLOW_200,
                 height=100,
                 scroll_key="A",
             ),
             ft.Container(
                 ft.Text("Section B"),
-                alignment=ft.Alignment.top_left(),
+                alignment=ft.Alignment.TOP_LEFT,
                 bgcolor=ft.Colors.GREEN_200,
                 height=100,
                 scroll_key="B",
             ),
             ft.Container(
                 ft.Text("Section C"),
-                alignment=ft.Alignment.top_left(),
+                alignment=ft.Alignment.TOP_LEFT,
                 bgcolor=ft.Colors.BLUE_200,
                 height=100,
                 scroll_key="C",
             ),
             ft.Container(
                 ft.Text("Section D"),
-                alignment=ft.Alignment.top_left(),
+                alignment=ft.Alignment.TOP_LEFT,
                 bgcolor=ft.Colors.PINK_200,
                 height=100,
                 scroll_key="D",

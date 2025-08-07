@@ -11,22 +11,22 @@ class CalcButton(ft.ElevatedButton):
 class DigitButton(CalcButton):
     def __init__(self, text, expand=1):
         CalcButton.__init__(self, text, expand)
-        self.bgcolor = ft.colors.WHITE24
-        self.color = ft.colors.WHITE
+        self.bgcolor = ft.Colors.WHITE24
+        self.color = ft.Colors.WHITE
 
 
 class ActionButton(CalcButton):
     def __init__(self, text):
         CalcButton.__init__(self, text)
-        self.bgcolor = ft.colors.ORANGE
-        self.color = ft.colors.WHITE
+        self.bgcolor = ft.Colors.ORANGE
+        self.color = ft.Colors.WHITE
 
 
 class ExtraActionButton(CalcButton):
     def __init__(self, text):
         CalcButton.__init__(self, text)
-        self.bgcolor = ft.colors.BLUE_GREY_100
-        self.color = ft.colors.BLACK
+        self.bgcolor = ft.Colors.BLUE_GREY_100
+        self.color = ft.Colors.BLACK
 
 
 class CalculatorApp(ft.Container):
@@ -34,9 +34,9 @@ class CalculatorApp(ft.Container):
     def __init__(self):
         super().__init__()
 
-        self.result = ft.Text(value="0", color=ft.colors.WHITE, size=20)
+        self.result = ft.Text(value="0", color=ft.Colors.WHITE, size=20)
         self.width = 350
-        self.bgcolor = ft.colors.BLACK
+        self.bgcolor = ft.Colors.BLACK
         self.border_radius = ft.border_radius.all(20)
         self.padding = 20
         self.content = ft.Column(

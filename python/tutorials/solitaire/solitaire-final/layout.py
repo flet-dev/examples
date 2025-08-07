@@ -1,5 +1,7 @@
 import flet as ft
 from settings import SettingsDialog
+
+
 def create_appbar(page, settings, on_new_game):
 
     def new_game_clicked(e):
@@ -16,15 +18,14 @@ def create_appbar(page, settings, on_new_game):
         page.update()
 
     page.appbar = ft.AppBar(
-        leading=ft.Image(src=f"/images/card.png"),
+        leading=ft.Image(src="/images/card.png"),
         leading_width=30,
         title=ft.Text("Flet solitaire"),
-        bgcolor=ft.colors.SURFACE_VARIANT,
+        bgcolor=ft.Colors.SURFACE_VARIANT,
         actions=[
             ft.TextButton(text="New game", on_click=new_game_clicked),
             ft.TextButton(text="Rules", on_click=show_rules),
-            ft.IconButton(ft.icons.SETTINGS, on_click=show_settings),
-            
+            ft.IconButton(ft.Icons.SETTINGS, on_click=show_settings),
         ],
     )
 
@@ -40,8 +41,11 @@ def create_appbar(page, settings, on_new_game):
     - Turning one card at a time to the waste, with no limit on passes through the deck.
 
     If the player can no longer make any meaningful moves, the game is considered lost.
-        """)
+        """
+    )
 
     rules_dialog = ft.AlertDialog(
-        title=ft.Text("Solitaire rules"), content=rules_md, on_dismiss=lambda e: print("Dialog dismissed!")
+        title=ft.Text("Solitaire rules"),
+        content=rules_md,
+        on_dismiss=lambda e: print("Dialog dismissed!"),
     )

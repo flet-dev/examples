@@ -17,7 +17,7 @@ def example():
             self.counter = ft.Text("0", size=50)
             self.content = ft.Container(
                 content=self.counter,
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
             )
             self.expand = True
 

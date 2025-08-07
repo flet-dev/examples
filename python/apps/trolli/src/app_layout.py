@@ -30,7 +30,7 @@ class AppLayout(ft.Row):
                                 theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM,
                             ),
                             expand=True,
-                            padding=ft.padding.only(top=15),
+                            padding=ft.Padding.only(top=15),
                         ),
                         ft.Container(
                             ft.TextButton(
@@ -49,7 +49,7 @@ class AppLayout(ft.Row):
                                     },
                                 ),
                             ),
-                            padding=ft.padding.only(right=50, top=15),
+                            padding=ft.Padding.only(right=50, top=15),
                         ),
                     ]
                 ),
@@ -58,7 +58,7 @@ class AppLayout(ft.Row):
                         ft.TextField(
                             hint_text="Search all boards",
                             autofocus=False,
-                            content_padding=ft.padding.only(left=10),
+                            content_padding=ft.Padding.only(left=10),
                             width=200,
                             height=40,
                             text_size=12,
@@ -148,7 +148,7 @@ class AppLayout(ft.Row):
                                         ),
                                     ]
                                 ),
-                                padding=ft.padding.only(right=-10),
+                                padding=ft.Padding.only(right=-10),
                                 border_radius=ft.border_radius.all(3),
                             ),
                         ],
@@ -157,7 +157,7 @@ class AppLayout(ft.Row):
                     border=ft.border.all(1, ft.Colors.BLACK38),
                     border_radius=ft.border_radius.all(5),
                     bgcolor=ft.Colors.WHITE60,
-                    padding=ft.padding.all(10),
+                    padding=ft.Padding.all(10),
                     width=250,
                     data=b,
                 )

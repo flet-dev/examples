@@ -7,7 +7,7 @@ def example():
 
     container_1 = ft.Container(
         content=ft.Text("Center"),
-        alignment=ft.Alignment.center(),
+        alignment=ft.Alignment.CENTER,
         bgcolor=ft.Colors.BLUE_GREY_100,
         width=150,
         height=150,
@@ -15,7 +15,7 @@ def example():
 
     container_2 = ft.Container(
         content=ft.Text("Top left"),
-        alignment=ft.Alignment.top_left(),
+        alignment=ft.Alignment.TOP_LEFT,
         bgcolor=ft.Colors.BLUE_GREY_200,
         width=150,
         height=150,

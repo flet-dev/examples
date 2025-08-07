@@ -31,14 +31,14 @@ def main(page: ft.Page):
         ft.Row(
             [
                 ft.IconButton(
-                    ft.icons.REMOVE,
+                    ft.Icons.REMOVE,
                     tooltip="Decrement",
                     on_click=button_click,
                     data="-",
                 ),
                 sem,
                 ft.IconButton(
-                    ft.icons.ADD, tooltip="Increment", on_click=button_click, data="+"
+                    ft.Icons.ADD, tooltip="Increment", on_click=button_click, data="+"
                 ),
             ],
             alignment=ft.MainAxisAlignment.CENTER,

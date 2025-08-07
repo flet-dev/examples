@@ -9,7 +9,7 @@ import requests
 
 
 class Weather(ft.Container):
-    def __init__(self, height=200, width=200, bgcolor=ft.colors.BLUE_200):
+    def __init__(self, height=200, width=200, bgcolor=ft.Colors.BLUE_200):
         super().__init__()
         self.OWM_Endpoint = "https://api.openweathermap.org/data/2.5/weather"
         self._api_key = os.environ.get("OWM_API_KEY")
@@ -78,7 +78,7 @@ class Weather(ft.Container):
 
 
 class WeatherAsync(ft.Container):
-    def __init__(self, height=200, width=200, bgcolor=ft.colors.BLUE_200):
+    def __init__(self, height=200, width=200, bgcolor=ft.Colors.BLUE_200):
         super().__init__()
         self.OWM_Endpoint = "https://api.openweathermap.org/data/2.5/weather"
         self._api_key = os.environ.get("OWM_API_KEY")

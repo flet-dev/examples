@@ -32,7 +32,7 @@ ft.app(main)
 
 ### `color`
 
-Background [color](https://flet.dev/docs/guides/python/colors#hex-value) of the Weather widget. The default value is `ft.colors.BLUE_200`.
+Background [color](https://flet.dev/docs/guides/python/colors#hex-value) of the Weather widget. The default value is `ft.Colors.BLUE_200`.
 
 ### `height`
 

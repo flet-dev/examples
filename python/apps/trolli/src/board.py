@@ -32,7 +32,7 @@ class Board(ft.Container):
             content=self.board_lists,
             data=self,
             margin=ft.margin.all(0),
-            padding=ft.padding.only(top=10, right=0),
+            padding=ft.Padding.only(top=10, right=0),
             height=self.app.page.height,
         )
 
@@ -110,7 +110,7 @@ class Board(ft.Container):
             content=ft.Column(
                 [
                     ft.Container(
-                        content=dialog_text, padding=ft.padding.symmetric(horizontal=5)
+                        content=dialog_text, padding=ft.Padding.symmetric(horizontal=5)
                     ),
                     color_options,
                     ft.Row(
@@ -145,7 +145,7 @@ class Board(ft.Container):
             border_radius=ft.border_radius.all(50),
             height=10,
             width=10,
-            padding=ft.padding.all(5),
+            padding=ft.Padding.all(5),
             alignment=ft.alignment.center,
             data=color,
         )

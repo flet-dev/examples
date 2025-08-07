@@ -3,7 +3,7 @@ from names import NAMES
 
 
 def printer(e):
-    print('Yellow!')
+    print("Yellow!")
 
 
 def main(page: ft.Page):
@@ -11,16 +11,18 @@ def main(page: ft.Page):
 
     def textbox_changed(string):
         str_lower = string.control.value.lower()
-        list_view.controls = [
-            list_items.get(n) for n in NAMES if str_lower in n.lower()
-        ] if str_lower else []
+        list_view.controls = (
+            [list_items.get(n) for n in NAMES if str_lower in n.lower()]
+            if str_lower
+            else []
+        )
         page.update()
 
     list_items = {
         name: ft.ListTile(
             title=ft.Text(name),
-            leading=ft.Icon(ft.icons.ACCESSIBILITY),
-            on_click=printer
+            leading=ft.Icon(ft.Icons.ACCESSIBILITY),
+            on_click=printer,
         )
         for name in NAMES
     }

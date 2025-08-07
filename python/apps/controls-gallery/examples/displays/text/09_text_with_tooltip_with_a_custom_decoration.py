@@ -16,7 +16,7 @@ def example():
             border_radius=10,
             text_style=ft.TextStyle(size=20, color=ft.Colors.WHITE),
             gradient=ft.LinearGradient(
-                begin=ft.Alignment.top_left(),
+                begin=ft.Alignment.TOP_LEFT,
                 end=ft.Alignment(0.8, 1),
                 # end=ft.Alignment.bottom_left(),
                 # colors=[ft.Colors.BLUE, ft.Colors.YELLOW],

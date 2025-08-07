@@ -73,7 +73,7 @@ class Sidebar(ft.Container):
                 ],
                 tight=True,
             ),
-            padding=ft.padding.all(15),
+            padding=ft.Padding.all(15),
             margin=ft.margin.all(0),
             width=250,
             bgcolor=ft.Colors.BLUE_GREY,

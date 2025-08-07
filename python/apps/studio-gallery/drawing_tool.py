@@ -28,7 +28,7 @@ def example(page):
     def color_changed(e):
         state.color = e.control.bgcolor
         for color_button in color_buttons:
-            color_button.border = ft.border.all(1, ft.colors.BLACK12)
+            color_button.border = ft.border.all(1, ft.Colors.BLACK12)
             color_button.update()
         e.control.border = ft.border.all(3)
         e.control.update()
@@ -40,7 +40,7 @@ def example(page):
                 height=30,
                 border_radius=30,
                 bgcolor=color,
-                border=ft.border.all(1, ft.colors.BLACK12),
+                border=ft.border.all(1, ft.Colors.BLACK12),
                 on_click=color_changed,
             )
         )
@@ -70,7 +70,7 @@ def example(page):
 
     cp = cv.Canvas(
         [
-            cv.Fill(ft.Paint(color=ft.colors.WHITE)),
+            cv.Fill(ft.Paint(color=ft.Colors.WHITE)),
         ],
         content=ft.Container(
             ft.GestureDetector(
@@ -79,7 +79,7 @@ def example(page):
                 drag_interval=10,
             ),
             border_radius=5,
-            border=ft.border.all(2, ft.colors.BLACK38),
+            border=ft.border.all(2, ft.Colors.BLACK38),
         ),
         expand=False,
     )

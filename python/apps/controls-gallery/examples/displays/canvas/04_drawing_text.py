@@ -23,7 +23,7 @@ def example():
                         ft.TextStyle(italic=True, color=ft.Colors.GREEN, size=20),
                     )
                 ],
-                alignment=ft.Alignment.top_center(),
+                alignment=ft.Alignment.top_CENTER,
                 rotate=math.pi * 0.15,
             ),
             cv.Circle(400, 100, 2, ft.Paint(color=ft.Colors.RED)),
@@ -32,7 +32,7 @@ def example():
                 100,
                 "Rotated around top_left",
                 ft.TextStyle(size=20),
-                alignment=ft.Alignment.top_left(),
+                alignment=ft.Alignment.TOP_LEFT,
                 rotate=math.pi * -0.15,
             ),
             cv.Circle(600, 200, 2, ft.Paint(color=ft.Colors.RED)),
@@ -41,7 +41,7 @@ def example():
                 200,
                 "Rotated around center",
                 ft.TextStyle(size=20),
-                alignment=ft.Alignment.center(),
+                alignment=ft.Alignment.CENTER,
                 rotate=math.pi / 2,
             ),
             cv.Text(

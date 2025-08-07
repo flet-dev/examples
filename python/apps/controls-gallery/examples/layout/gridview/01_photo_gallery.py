@@ -19,7 +19,7 @@ def example():
         images.controls.append(
             ft.Image(
                 src=f"https://picsum.photos/150/150?{i}",
-                fit=ft.ImageFit.NONE,
+                fit=ft.BoxFit.NONE,
                 repeat=ft.ImageRepeat.NO_REPEAT,
                 border_radius=ft.BorderRadius.all(10),
             )

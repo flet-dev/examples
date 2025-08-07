@@ -12,11 +12,11 @@ def example():
                     src="https://picsum.photos/200/200?1",
                     width=200,
                     height=200,
-                    fit=ft.ImageFit.FILL,
+                    fit=ft.BoxFit.FILL,
                 ),
                 blend_mode=ft.BlendMode.MULTIPLY,
                 shader=ft.RadialGradient(
-                    center=ft.Alignment.center(),
+                    center=ft.Alignment.CENTER,
                     radius=2.0,
                     colors=[ft.Colors.WHITE, ft.Colors.PINK],
                     tile_mode=ft.GradientTileMode.CLAMP,

@@ -20,7 +20,7 @@ def example():
                         selected=True,
                     ),
                     ft.ListTile(
-                        leading=ft.Image(src="/logo.svg", fit=ft.ImageFit.CONTAIN),
+                        leading=ft.Image(src="/logo.svg", fit=ft.BoxFit.CONTAIN),
                         title=ft.Text("One-line with leading control"),
                     ),
                     ft.ListTile(
